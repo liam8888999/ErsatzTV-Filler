@@ -7,7 +7,7 @@ Discord chat: https://discord.gg/x4Nk4sfgSg
 
  To update just follow this again. for now you will need to manually reset the variables however, if anyone has suggestions for updating in a better way or a way to save the variables during updating open an issue to leave your ideas there.
 
- To use you will need to be on linux
+ To use you will need to be on linux and have curl and ffmpeg installed
 
  git clone https://github.com/liam8888999/ErsatzTV-Filler.git
 
