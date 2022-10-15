@@ -8,11 +8,11 @@
 
 output=/home/liam/etv-filler
 city='Austin'
-state='Victoria'
+state='Texas'
 #desired video length e.g. 30 for 30sec -- must be in seconds
-videolength=5
+videolength=30
 #desired background colour around image
-backgroundcolour=blue
+backgroundcolour=black
 
 #advanced user configuration
 #desired video resolution 1280x720
