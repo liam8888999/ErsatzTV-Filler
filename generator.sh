@@ -1,25 +1,7 @@
 #!/bin/bash
 
-
-#user definable configuration
-
-#weather
-#type place name inside '' and it will automatically remove the spaces for you
-
-output=/home/liam/etv-filler
-city='Austin'
-state='Victoria'
-#desired video length e.g. 30 for 30sec -- must be in seconds
-videolength=5
-#desired background colour around image
-backgroundcolour=blue
-
-#advanced user configuration
-#desired video resolution 1280x720
-videoresolution=1280x720
-#non user definable configuration
-
-#setting directory
+# load in configuration variables
+. config.conf
 
 wdir="$PWD"; [ "$PWD" = "/" ] && wdir=""
 case "$0" in
@@ -33,8 +15,12 @@ scriptdir="${scriptdir%/*}"
 stateurl=$(echo $state|sed -e 's/ /%20/g')
 cityurl=$(echo $city|sed -e 's/ /%20/g')
 
-#select audio
+#make sure workdir exists
+if [ ! -d $scriptdir/workdir ]; then
+  mkdir -p $scriptdir/workdir;
+fi
 
+#select audio
 find $scriptdir/audio -name '*.mp3' -print > $scriptdir/workdir/music.txt
 
 awk 'BEGIN{srand()}{print rand(), $0}' $scriptdir/workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
