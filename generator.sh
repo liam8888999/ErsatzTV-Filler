@@ -36,10 +36,6 @@ audio1=$(head -n $randomNumber1 $scriptdir/workdir/music.txt | tail -n 1)
 audio2=$(head -n $randomNumber2 $scriptdir/workdir/music.txt | tail -n 1)
 #General cleanup
 
-echo $audio
-echo $audio1
-echo $audio2
-
 rm -f $scriptdir/weather/v1.png
 rm -f $scriptdir/weather/v2.png
 rm -f $scriptdir/weather/v3.png
