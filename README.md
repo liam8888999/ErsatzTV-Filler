@@ -14,7 +14,7 @@ Linux operating system with ffmpeg and curl installed.
 #### Move into the required folder.
 2. `cd ErsatzTV-Filler`
 #### Allow the script to be executed
-3. `chmod +X generator.sh`
+3. `chmod +x generator.sh`
 #### Copy the configuration sample
 4. `cp sample-config.conf config.conf`
 #### Update the 'output', 'city', 'state' variables to your required locations, replace nano with your favorite text editor.
