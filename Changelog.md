@@ -6,9 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Refactored 
+
+- README.md to include new use of config file/updating and installing
+
 ### Added
 
-
+- support for the usage of a configuration file
+- added gitignore file for generated videos/files
 
 ### Fixed
 
