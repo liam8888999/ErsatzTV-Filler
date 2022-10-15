@@ -6,17 +6,19 @@
 Discord chat: https://discord.gg/x4Nk4sfgSg
 
 ## Requirements
-Linux operating system with ffmpeg and curl installed. 
+Linux operating system with ffmpeg and curl installed.
 
 ## Installation Instructions
 #### Clone the latest version of the repo.
 1. `git clone https://github.com/liam8888999/ErsatzTV-Filler.git`
+#### Move into the required folder.
+2. `cd ErsatzTV-Filler`
 #### Allow the script to be executed
-2. `chmod +X generator.sh`
+3. `chmod +X generator.sh`
 #### Copy the configuration sample
-3. `cp sample-config.conf config.conf`
+4. `cp sample-config.conf config.conf`
 #### Update the 'output', 'city', 'state' variables to your required locations, replace nano with your favorite text editor.
-4. `nano config.conf`
+5. `nano config.conf`
 
 ## Update Instructions
 Make sure your in the ErsatzTV-Filler directory and run the following command:
