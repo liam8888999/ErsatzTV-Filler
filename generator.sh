@@ -3,6 +3,8 @@
 # load in configuration variables
 . config.conf
 
+#retrieve script location
+
 wdir="$PWD"; [ "$PWD" = "/" ] && wdir=""
 case "$0" in
   /*) scriptdir="${0}";;
