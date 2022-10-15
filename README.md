@@ -5,33 +5,30 @@
 
 Discord chat: https://discord.gg/x4Nk4sfgSg
 
- To update just follow this again. for now you will need to manually reset the variables however, if anyone has suggestions for updating in a better way or a way to save the variables during updating open an issue to leave your ideas there.
+## Requirements
+Linux operating system with ffmpeg and curl installed. 
 
- To use you will need to be on linux and have curl and ffmpeg installed
+## Installation Instructions
+#### Clone the latest version of the repo.
+1. `git clone https://github.com/liam8888999/ErsatzTV-Filler.git`
+#### Allow the script to be executed
+2. `chmod +X generator.sh`
+#### Copy the configuration sample
+3. `cp sample-config.conf config.conf`
+#### Update the 'output', 'city', 'state' variables to your required locations, replace nano with your favorite text editor.
+4. `nano config.conf`
 
- git clone https://github.com/liam8888999/ErsatzTV-Filler.git
+## Update Instructions
+Make sure your in the ErsatzTV-Filler directory and run the following command:
+1. `git pull`
 
- to download the files then you will need to
-
- chmod +X generator.sh
-
- after this is done you will need to open generator.sh with your favourite text editor and edit the following lines
-
- output=x
- city=x
- state=x
-
- replace x with your desired location for state and city and output is the path you point ErsatzTV to for filler so the generator.sh will automatically create the files in that location.
-
- you may also want to add it as a cron job to run at your desired interval, to do this you type
-
- sudo crontab -e
-
- when that opens go to the last line and press enter to make a new line, then type something like
-
- 0 * * * * /home/xxx/ErsatzTV-Filler/generator.sh
-
- this will make it run once every hour
+## Setting the script to run automatically
+You may also want to add it as a cron job to run at your desired interval
+#### Edit the crontab file - requires sudo password...
+1. `sudo crontab -e`
+#### Append the following line to the bottom of the file to make it run every hour.
+##### Make sure to replace the path with your local one!
+2. `0 * * * * /home/xxx/ErsatzTV-Filler/generator.sh`
 
 For more information on how to use this with ErsatzTV please visit https://ersatztv.org/user-guide/filler/
 
