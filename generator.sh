@@ -326,7 +326,7 @@ curl $xmltv --output $workdir/xmltv.xml
 tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
 #tv_grep --title news1 --on-after now $workdir/xmltv/968.etv.xml >> $workdir/tempxmltv.xml
 tv_to_text --output $workdir/tempxml2.xml $workdir/xmltv/968.etv.xml
-awk '/news/{p=1}p' $workdir/tempxml2.xml > xmltemp.txt
+awk '/news/{p=1}p' $workdir/tempxml2.xml > $workdirxmltemp.txt
 
 
 
