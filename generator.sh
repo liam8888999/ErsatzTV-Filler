@@ -1,4 +1,5 @@
 #!/bin/bash
+#V0.0.5 - Beta
 
 # load in configuration variables
 . config.conf
@@ -95,9 +96,15 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk '
 randomNumber=$(shuf -i 1-7 -n 1 --repeat)
 randomNumber1=$(shuf -i 1-7 -n 1 --repeat)
 randomNumber2=$(shuf -i 1-7 -n 1 --repeat)
+randomNumber3=$(shuf -i 1-7 -n 1 --repeat)
+randomNumber4=$(shuf -i 1-7 -n 1 --repeat)
+randomNumber5=$(shuf -i 1-7 -n 1 --repeat)
 audio=$(head -n $randomNumber $workdir/music.txt | tail -n 1)
 audio1=$(head -n $randomNumber1 $workdir/music.txt | tail -n 1)
 audio2=$(head -n $randomNumber2 $workdir/music.txt | tail -n 1)
+audio3=$(head -n $randomNumber3 $workdir/music.txt | tail -n 1)
+audio4=$(head -n $randomNumber4 $workdir/music.txt | tail -n 1)
+audio5=$(head -n $randomNumber5 $workdir/music.txt | tail -n 1)
 
 #End Audio
 
@@ -132,9 +139,9 @@ wait
 
 #make video
 
-ffmpeg -f lavfi -i color=$background:$videoresolution:d=$videolength -i $weatherdir/v1.png -stream_loop -1 -i $audio -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v1.mp4
-ffmpeg -f lavfi -i color=$background1:$videoresolution:d=$videolength -i $weatherdir/v2.png -stream_loop -1 -i $audio1 -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v2.mp4
-ffmpeg -f lavfi -i color=$background2:$videoresolution:d=$videolength -i $weatherdir/v3.png -stream_loop -1 -i $audio2 -shortest -filter_complex "[1]scale=iw*0.9:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v3.mp4
+#ffmpeg -f lavfi -i color=$background:$videoresolution:d=$videolength -i $weatherdir/v1.png -stream_loop -1 -i $audio -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v1.mp4
+#ffmpeg -f lavfi -i color=$background1:$videoresolution:d=$videolength -i $weatherdir/v2.png -stream_loop -1 -i $audio1 -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v2.mp4
+#ffmpeg -f lavfi -i color=$background2:$videoresolution:d=$videolength -i $weatherdir/v3.png -stream_loop -1 -i $audio2 -shortest -filter_complex "[1]scale=iw*0.9:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v3.mp4
 
 #end weather
 
@@ -222,7 +229,7 @@ sed 's/^9 //' $workdir/news21.txt >> $workdir/news.txt
 
 # Generate Video
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news1.mp4
+#ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio3 -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news1.mp4
 
 
 
@@ -266,7 +273,7 @@ sed 's/^9 //' $workdir/optional1-news21.txt >> $workdir/optional1-news.txt
 
 # Generate Video
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news2.mp4
+ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio4 -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news2.mp4
 #set variable blank to avoid endless loop
 newsfeed1=""
 done
@@ -310,7 +317,7 @@ sed 's/^9 //' $workdir/optional2-news21.txt >> $workdir/optional2-news.txt
 
 # Generate Video
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news3.mp4
+ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio5 -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news3.mp4
 
 #set variable blank to avoid endless loop
 newsfeed2=""
@@ -346,6 +353,10 @@ sort $workdir/xmlfiles3.txt > $workdir/xmlfiles4.txt
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 
 while [[ ! -z $xmltvloop ]]; do
+
+#randomise audio
+randomNumbernews=$(shuf -i 1-7 -n 1 --repeat)
+echo $randomNumbernews
 tv_to_text --output $workdir/tempxml$xmltvloop.xml $workdir/xmltv/$xmltvloop.xml
 awk '/news/{p=1}p' $workdir/tempxml$xmltvloop.xml > $workdir/xmltemp$xmltvloop.txt
 awk '!/news/' $workdir/xmltemp$xmltvloop.txt > $workdir/xmltemp2$xmltvloop.xml
