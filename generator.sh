@@ -109,7 +109,7 @@ then
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newsbackgroundrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
 #newsbackground=$(head -n $newsbackgroundrandomNumber $workdir/colours.txt | tail -n 1)
-newsbackground=White
+newsbackground="White"
 else
 newsbackground=$newsbackgroundcolour
 fi
@@ -120,7 +120,7 @@ then
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newstextcolourrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
 #newstextcolour=$(head -n $newstextcolourandomNumber $workdir/colours.txt | tail -n 1)
-newstextcolour=Black
+newstextcolour="Black"
 else
 newstextcolour1=$newstextcolour
 fi
@@ -183,7 +183,7 @@ sed 's/^9 //' $workdir/news21.txt >> $newsdir/news.txt
 
 # Generate Video
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news.mp4
+ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news1.mp4
 
 
 
@@ -227,7 +227,7 @@ sed 's/^9 //' $workdir/optional1-news21.txt >> $newsdir/optional1-news.txt
 
 # Generate Video
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news.mp4
+ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news2.mp4
 
 done
 #optional news 2
