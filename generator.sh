@@ -20,11 +20,6 @@ workdir=$scriptdir/workdir
 
 weatherdir=$scriptdir/weather
 
-#fix white spaces for curl
-
-stateurl=$(echo $state|sed -e 's/ /%20/g')
-cityurl=$(echo $city|sed -e 's/ /%20/g')
-
 #make sure workdir exists
 if [ ! -d $workdir ]; then
   mkdir -p $workdir;
@@ -62,6 +57,12 @@ done
 while [[ -z $backgroundcolour ]]; do
 backgroundcolour=random
 done
+
+#fix white spaces for curl
+
+stateurl=$(echo $state|sed -e 's/ /%20/g')
+cityurl=$(echo $city|sed -e 's/ /%20/g')
+
 #General cleanup
 
 rm -f $weatherdir/v1.png
