@@ -129,7 +129,9 @@ background2=$backgroundcolour
 fi
 
 # Retrieve information country code etc.
-curl ipinfo.io >> $workdir/information.txt
+curl ipinfo.io >> $workdir/information.json
+country=($(jq -r 'country' $workdir/information.json))
+echo $country
 
 #weather
 
