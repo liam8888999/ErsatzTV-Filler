@@ -324,3 +324,4 @@ fi
 
 curl $xmltv --output $workdir/xmltv.xml
 tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
+tv_grep --on-after "2022-10-16T14:30:00Z" --on-before "2022-10-17T15:00:00Z" $workdir/xmltv.xml
