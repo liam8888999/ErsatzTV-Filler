@@ -317,4 +317,4 @@ done
 
 #channel Currently offline
 
-curl $xmltv-url --output $workdir/xmltv.xml
+curl $xmltv --output $workdir/xmltv.xml
