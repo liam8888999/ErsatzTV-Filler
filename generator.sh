@@ -194,17 +194,17 @@ sed -i '1,/^$/d' $workdir/newstemp.txt
 awk -v RS='\n\n' -vORS='\n\n' '{print NR " " $0}' $workdir/newstemp.txt > $workdir/news1.txt
 # Copy first 10 arcticles
 sed '/^1 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^2 /,/^\s*$/!d' $workdir/news2.txt >> $workdir/news3.txt
-sed '/^3 /,/^\s*$/!d' $workdir/news3.txt >> $workdir/news4.txt
-sed '/^4 /,/^\s*$/!d' $workdir/news4.txt >> $workdir/news5.txt
-sed '/^5 /,/^\s*$/!d' $workdir/news5.txt >> $workdir/news6.txt
-sed '/^6 /,/^\s*$/!d' $workdir/news6.txt >> $workdir/news7.txt
-sed '/^7 /,/^\s*$/!d' $workdir/news7.txt >> $workdir/news8.txt
-sed '/^8 /,/^\s*$/!d' $workdir/news8.txt >> $workdir/news9.txt
-sed '/^9 /,/^\s*$/!d' $workdir/news9.txt >> $workdir/news10.txt
-sed '/^10 /,/^\s*$/!d' $workdir/news10.txt >> $workdir/news11.txt
+sed '/^2 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^3 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^4 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^5 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^6 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^7 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^8 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^9 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^10 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
 #remove paragraph numbering
-sed 's/^10 //' $workdir/news11.txt >> $workdir/news12.txt
+sed 's/^10 //' $workdir/news2.txt >> $workdir/news12.txt
 sed 's/^0 //' $workdir/news12.txt >> $workdir/news13.txt
 sed 's/^1 //' $workdir/news13.txt >> $workdir/news14.txt
 sed 's/^2 //' $workdir/news14.txt >> $workdir/news15.txt
