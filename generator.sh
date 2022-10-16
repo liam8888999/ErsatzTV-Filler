@@ -317,5 +317,10 @@ done
 
 #channel Currently offline
 
+#make sure workdir/xmltv exists
+if [ ! -d $workdir/xmltv ]; then
+  mkdir -p $workdir/xmltv;
+fi
+
 curl $xmltv --output $workdir/xmltv.xml
 tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
