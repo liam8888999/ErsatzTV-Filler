@@ -27,36 +27,36 @@ fi
 
 # check variables are set. if not set default fallbacks
 
-while [[ -z $videolength ]]; do
-videolength=30
-done
-while [[ -z $state ]]; do
-state='Texas'
-done
-while [[ -z $city ]]; do
-city='Austin'
-done
-while [[ -z $newsduration ]]; do
-newsduration=60
-done
-while [[ -z $textspeed ]]; do
-textspeed=40
-done
-while [[ -z $videoresolution ]]; do
-videoresolution=1280x720
-done
-while [[ -z $newsfeed ]]; do
-newsfeed="https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
-done
-while [[ -z $newstextcolour ]]; do
-newstextcolour=random
-done
-while [[ -z $newsbackgroundcolour ]]; do
-newsbackgroundcolour=random
-done
-while [[ -z $backgroundcolour ]]; do
-backgroundcolour=random
-done
+#while [[ -z $videolength ]]; do
+#videolength=30
+#done
+#while [[ -z $state ]]; do
+#state='Texas'
+#done
+#while [[ -z $city ]]; do
+#city='Austin'
+#done
+#while [[ -z $newsduration ]]; do
+#newsduration=60
+#done
+#while [[ -z $textspeed ]]; do
+#textspeed=40
+#done
+#while [[ -z $videoresolution ]]; do
+#videoresolution=1280x720
+#done
+#while [[ -z $newsfeed ]]; do
+#newsfeed="https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+#done
+#while [[ -z $newstextcolour ]]; do
+#newstextcolour=random
+#done
+#while [[ -z $newsbackgroundcolour ]]; do
+#newsbackgroundcolour=random
+#done
+#while [[ -z $backgroundcolour ]]; do
+#backgroundcolour=random
+#done
 
 #fix white spaces for curl
 
