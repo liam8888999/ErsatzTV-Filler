@@ -128,9 +128,13 @@ background1=$backgroundcolour
 background2=$backgroundcolour
 fi
 
+# Retrieve information country code etc.
+curl ipinfo.io >> $workdir/information.txt
+
 #weather
 
 #retrieve weather data
+
 
 curl wttr.in/${cityurl}.png --output $weatherdir/v1.png
 curl v2.wttr.in/${cityurl}.png --output $weatherdir/v2.png
@@ -229,7 +233,7 @@ sed 's/^9 //' $workdir/news21.txt >> $workdir/news.txt
 
 # Generate Video
 
-#ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio3 -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news1.mp4
+#ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio3 -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news-v1.mp4
 
 
 
@@ -273,7 +277,7 @@ sed 's/^9 //' $workdir/optional1-news21.txt >> $workdir/optional1-news.txt
 
 # Generate Video
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio4 -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news2.mp4
+#ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio4 -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news-v2.mp4
 #set variable blank to avoid endless loop
 newsfeed1=""
 done
@@ -317,7 +321,7 @@ sed 's/^9 //' $workdir/optional2-news21.txt >> $workdir/optional2-news.txt
 
 # Generate Video
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio5 -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news3.mp4
+#ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio5 -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news-v3.mp4
 
 #set variable blank to avoid endless loop
 newsfeed2=""
@@ -336,6 +340,8 @@ fi
 if [ ! -d $output/channel-resuming ]; then
   mkdir -p $output/channel-resuming;
 fi
+
+#retrieve and split xmltv
 
 curl $xmltv --output $workdir/xmltv.xml
 tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
@@ -356,7 +362,6 @@ while [[ ! -z $xmltvloop ]]; do
 
 #randomise audio
 randomNumbernews=$(shuf -i 1-7 -n 1 --repeat)
-echo $randomNumbernews
 tv_to_text --output $workdir/tempxml$xmltvloop.xml $workdir/xmltv/$xmltvloop.xml
 awk '/news/{p=1}p' $workdir/tempxml$xmltvloop.xml > $workdir/xmltemp$xmltvloop.txt
 awk '!/news/' $workdir/xmltemp$xmltvloop.txt > $workdir/xmltemp2$xmltvloop.xml
@@ -377,7 +382,7 @@ echo       Next showing at: $starttime >> $workdir/upnext$xmltvloop.txt
 echo >> $workdir/upnext.txt
 echo    Starting With: $nextshow >> $workdir/upnext$xmltvloop.txt
 
-#ffmpeg -f lavfi -i color=$offlinebackgroundcolour:$videoresolution:d=5 -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/upnext$xmltvloop.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$offlinetextcolour: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/channel-resuming/$xmltvloop.mp4
+#ffmpeg -f lavfi -i color=$offlinebackgroundcolour:$videoresolution:d=5 -stream_loop -1 -i $audio$randomNumbernews -shortest -vf "drawtext=textfile='$workdir/upnext$xmltvloop.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$offlinetextcolour: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/channel-resuming/$xmltvloop.mp4
 
 awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.txt $workdir/xmlfiles4.txt
 
