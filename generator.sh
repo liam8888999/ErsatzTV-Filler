@@ -324,4 +324,4 @@ fi
 
 curl $xmltv --output $workdir/xmltv.xml
 tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
-tv_grep --title news1 --on-after now $workdir/968.etv.xml
+tv_grep --title news1 --on-after now $workdir/xmltv/968.etv.xml
