@@ -23,7 +23,7 @@ Linux operating system with ffmpeg, xsltproc, xmltv-utils and curl installed.
 
 ## For Channel currently offline Filler
 for this to work you need to run the script once
-which will generate placeholder videos titled with the channelnumber.etv
+which will generate placeholder videos titled with the channel number
 you will need to add each of these to its own collection and schedule that collection
 during planned channel offline times
 
