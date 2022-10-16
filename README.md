@@ -6,7 +6,7 @@
 Discord chat: https://discord.gg/x4Nk4sfgSg
 
 ## Requirements
-Linux operating system with ffmpeg, xsltproc, xmltv-utils and curl installed.
+Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed.
 
 ## Installation Instructions
 #### Clone the latest version of the repo.

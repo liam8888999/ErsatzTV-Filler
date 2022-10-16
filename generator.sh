@@ -130,8 +130,8 @@ fi
 
 # Retrieve information country code etc.
 curl ipinfo.io >> $workdir/information.json
-country=($(jq -r 'country' $workdir/information.json))
-echo $country
+country=$(jq -r 'country' $workdir/information.json)
+echo country is $country
 
 #weather
 

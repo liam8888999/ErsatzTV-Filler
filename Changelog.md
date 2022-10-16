@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
+jq must be installed as a requirement in this videoresolution
+
+#Fixed
+
+- Random audio wasnt random
+- naming format for news videos (possible breaking change for some people)
+- get weather in correct format
 
 ## [0.0.4 - Beta] - 2022-10-16
 
