@@ -109,7 +109,7 @@ then
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newsbackgroundrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
 #newsbackground=$(head -n $newsbackgroundrandomNumber $workdir/colours.txt | tail -n 1)
-newsbackground="White"
+newsbackground=White
 else
 newsbackground=$newsbackgroundcolour
 fi
@@ -120,7 +120,7 @@ then
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newstextcolourrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
 #newstextcolour=$(head -n $newstextcolourandomNumber $workdir/colours.txt | tail -n 1)
-newstextcolour="Black"
+newstextcolour1=Black
 else
 newstextcolour1=$newstextcolour
 fi
