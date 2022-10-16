@@ -31,9 +31,6 @@ if [ ! -d $workdir ]; then
 fi
 
 
-echo $newsfeed1
-
-
 #General cleanup
 
 rm -f $weatherdir/v1.png
@@ -192,6 +189,10 @@ ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -strea
 
 #optional news 1
 
+while [[ ! -z $newsfeed1 ]]; do
+
+
+
 
 
 # Generate Results
@@ -228,5 +229,6 @@ sed 's/^9 //' $workdir/optional1-news21.txt >> $newsdir/optional1-news.txt
 
 ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news.mp4
 
+done
 #optional news 2
 #end news
