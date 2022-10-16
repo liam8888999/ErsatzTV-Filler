@@ -332,7 +332,14 @@ awk -F/ '{print $NF}' $workdir/xmlfiles.txt > $workdir/xmlfiles2.txt
 cut -d "." -f 1,2 $workdir/xmlfiles2.txt > $workdir/xmlfiles3.txt
 sort $workdir/xmlfiles3.txt > $workdir/xmlfiles4.txt
 
-tv_to_text --output $workdir/tempxml2.xml $workdir/xmltv/968.etv.xml
+#loop
+
+#set xmltvloop variable
+
+xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
+
+while [[ ! -z $xmltvloop ]]; do
+tv_to_text --output $workdir/tempxml2.xml $workdir/xmltv/$xmltvloop.xml
 awk '/news/{p=1}p' $workdir/tempxml2.xml > $workdir/xmltemp.txt
 awk '!/news/' $workdir/xmltemp.txt > $workdir/xmltemp2.xml
 head -1 $workdir/xmltemp2.xml > $workdir/xmltemp3.txt
@@ -352,9 +359,9 @@ echo       Next showing at: $starttime >> $workdir/upnext.txt
 echo >> $workdir/upnext.txt
 echo    Starting With: $nextshow >> $workdir/upnext.txt
 
-
-
-
-
-
 ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/upnext.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news1.mp4
+
+awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.txt $workdir/xmlfiles4.txt
+
+xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
+done
