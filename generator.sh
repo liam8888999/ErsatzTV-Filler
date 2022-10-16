@@ -31,7 +31,7 @@ if [ ! -d $workdir ]; then
 fi
 
 # check variables
-if [ -z ${videolength+x} ]; then echo "var is unset"; else echo "var is set to '$var'"; fi
+if [ -z ${videolength+x} ]; then echo "var is unset"; else echo "var is set to '$videolenght'"; fi
 
 
 
