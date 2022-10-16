@@ -313,3 +313,8 @@ newsfeed2=""
 done
 
 #end news
+
+
+#channel Currently offline
+
+curl $xmltv-url --output $workdir/xmltv.xml
