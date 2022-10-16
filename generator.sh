@@ -31,11 +31,17 @@ if [ ! -d $workdir ]; then
 fi
 
 # check variables
-if [ -z ${videolength+x} ]; then echo "var is unset"; else echo "var is set to '$videolength'"; fi
-
-
-
-
+if [ -z ${videolength+30} ]; then echo ""; fi
+if [ -z ${backgroundcolour+random} ]; then echo ""; fi
+if [ -z ${newsbackgroundcolour+random} ]; then echo ""; fi
+if [ -z ${newstextcolour+random} ]; then echo ""; fi
+if [ -z ${newsfeed+https://rss.nytimes.com/services/xml/rss/nyt/World.xml} ]; then echo ""; fi
+if [ -z ${videoresolution+1280x720} ]; then echo ""; fi
+if [ -z ${textspeed+40} ]; then echo ""; fi
+if [ -z ${newsduration+60} ]; then echo ""; fi
+if [ -z ${city+'Austin'} ]; then echo ""; fi
+if [ -z ${state+'Texas'} ]; then echo ""; fi
+if [ -z ${output+$scriptdir} ]; then echo $output; fi
 
 #General cleanup
 
