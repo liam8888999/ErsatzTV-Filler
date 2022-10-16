@@ -323,6 +323,28 @@ if [ ! -d $workdir/xmltv ]; then
 fi
 
 curl $xmltv --output $workdir/xmltv.xml
-tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
-tv_grep --title news1 --on-after now $workdir/xmltv/968.etv.xml >> $workdir/tempxmltv.xml
-grep -f $workdir/tempxmltv.xml -oPm1 "(?<=<display-name lang="en">)[^<]+" 
+#tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
+#tv_grep --title news1 --on-after now $workdir/xmltv/968.etv.xml >> $workdir/tempxmltv.xml
+#grep -f $workdir/tempxmltv.xml -oPm1 "(?<=<display-name lang="en">)[^<]+"
+
+XML_FILE=$workdirxmltv.xml
+TMP_FILE="$workdir/xmltv.sh.tmp"
+XML_STR=`sed -n '/<\/channel>/=' $XML_FILE | sed -n '$p'`
+
+
+if [ -f $TMP_FILE ]; then rm $TMP_FILE; fi
+
+echo -e "ID|Channel name|Channel Icon" >> $TMP_FILE
+echo " | | " >> $TMP_FILE
+for i in `head -n $XML_STR $XML_FILE | grep $CS -n 'dis.*>.*'$SEARCH_PATTERN'[^<]*<' | sed 's/:.*//'`; do
+    CHANNEL_NAME=`tail -n +$i $XML_FILE |head -n 1| sed -n 's/^<dis.*>\(.*\)<.*/\1/p'`
+    CHANNEL_ID=`tail -n +$(($i-1)) $XML_FILE |head -n 1|sed -n 's/.*"\(.*\)".*/\1/p'`
+    CHANNEL_ICO=`tail -n +$(($i+1)) $XML_FILE |head -n 1|sed -n 's/.*"\(.*\)".*/\1/p'`
+
+        echo "$CHANNEL_ID|$CHANNEL_NAME|$CHANNEL_ICO" >> $TMP_FILE
+    SUM=$(($SUM+1))
+done
+echo -e "\r"
+cat $TMP_FILE | column -t -s '|'
+echo -e "\nTotal channels: $SUM"
+rm $TMP_FILE
