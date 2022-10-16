@@ -60,6 +60,15 @@ done
 while [[ -z $output ]]; do
 output=~
 done
+while [[ -z $offlinebackgroundcolour ]]; do
+offlinebackgroundcolour=random
+done
+while [[ -z $offlinetextcolour ]]; do
+offlinetextcolour=random
+done
+while [[ -z $xmltv ]]; do
+xmltv="http://127.0.0.1:8409/iptv/xmltv.xml"
+done
 
 #fix white spaces for curl
 
@@ -68,13 +77,8 @@ cityurl=$(echo $city|sed -e 's/ /%20/g')
 
 #General cleanup
 
-rm -f $weatherdir/v1.png
-rm -f $weatherdir/v2.png
-rm -f $weatherdir/v3.png
-rm -f $workdir/colours.txt
-rm -f $workdir/news.txt
-rm -f $workdir/news.xslt
-rm -f $workdir/*.txt
+rm -f $weatherdir/*
+rm -r $workdir/*
 
 #copy colours.txt
 cp $scriptdir/colours.txt $workdir/colours.txt
@@ -121,16 +125,16 @@ fi
 
 #retrieve weather data
 
-#curl wttr.in/${cityurl}.png --output $weatherdir/v1.png
-#curl v2.wttr.in/${cityurl}.png --output $weatherdir/v2.png
-#curl v3.wttr.in/${stateurl}.png --output $weatherdir/v3.png
+curl wttr.in/${cityurl}.png --output $weatherdir/v1.png
+curl v2.wttr.in/${cityurl}.png --output $weatherdir/v2.png
+curl v3.wttr.in/${stateurl}.png --output $weatherdir/v3.png
 wait
 
 #make video
 
-#ffmpeg -f lavfi -i color=$background:$videoresolution:d=$videolength -i $weatherdir/v1.png -stream_loop -1 -i $audio -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v1.mp4
-#ffmpeg -f lavfi -i color=$background1:$videoresolution:d=$videolength -i $weatherdir/v2.png -stream_loop -1 -i $audio1 -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v2.mp4
-#ffmpeg -f lavfi -i color=$background2:$videoresolution:d=$videolength -i $weatherdir/v3.png -stream_loop -1 -i $audio2 -shortest -filter_complex "[1]scale=iw*0.9:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v3.mp4
+ffmpeg -f lavfi -i color=$background:$videoresolution:d=$videolength -i $weatherdir/v1.png -stream_loop -1 -i $audio -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v1.mp4
+ffmpeg -f lavfi -i color=$background1:$videoresolution:d=$videolength -i $weatherdir/v2.png -stream_loop -1 -i $audio1 -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v2.mp4
+ffmpeg -f lavfi -i color=$background2:$videoresolution:d=$videolength -i $weatherdir/v3.png -stream_loop -1 -i $audio2 -shortest -filter_complex "[1]scale=iw*0.9:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy $output/weather-v3.mp4
 
 #end weather
 
@@ -218,7 +222,7 @@ sed 's/^9 //' $workdir/news21.txt >> $workdir/news.txt
 
 # Generate Video
 
-#ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news1.mp4
+ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news1.mp4
 
 
 
