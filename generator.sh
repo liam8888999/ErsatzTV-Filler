@@ -30,6 +30,12 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
+# check variables
+if [ -z ${videolength+x} ]; then echo "var is unset"; else echo "var is set to '$var'"; fi
+
+
+
+
 
 #General cleanup
 
@@ -223,7 +229,7 @@ sed 's/^5 //' $workdir/optional1-news17.txt >> $workdir/optional1-news18.txt
 sed 's/^6 //' $workdir/optional1-news18.txt >> $workdir/optional1-news19.txt
 sed 's/^7 //' $workdir/optional1-news19.txt >> $workdir/optional1-news20.txt
 sed 's/^8 //' $workdir/optional1-news20.txt >> $workdir/optional1-news21.txt
-sed 's/^9 //' $workdir/optional1-news21.txt >> $newsdir/optional1-news.txt
+sed 's/^9 //' $workdir/optional1-news21.txt >> $workdir/optional1-news.txt
 
 # Generate Video
 
@@ -231,4 +237,47 @@ ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -strea
 
 done
 #optional news 2
+
+while [[ ! -z $newsfeed2 ]]; do
+
+
+
+
+
+# Generate Results
+curl -s "$newsfeed2" | xsltproc $newsstyle - | grep -v xml |  man -l - | col -bx > $workdir/newstemp2.txt
+#remove empty line at top of file
+sed -i '1,/^$/d' $workdir/newstemp2.txt
+#add paragraph numbering
+awk -v RS='\n\n' -vORS='\n\n' '{print NR " " $0}' $workdir/newstemp2.txt > $workdir/optional2-news1.txt
+# Copy first 10 arcticles
+sed '/^1 /,/^\s*$/!d' $workdir/optional2-news1.txt >> $workdir/optional2-news2.txt
+sed '/^2 /,/^\s*$/!d' $workdir/optional2-news2.txt >> $workdir/optional2-news3.txt
+sed '/^3 /,/^\s*$/!d' $workdir/optional2-news3.txt >> $workdir/optional2-news4.txt
+sed '/^4 /,/^\s*$/!d' $workdir/optional2-news4.txt >> $workdir/optional2-news5.txt
+sed '/^5 /,/^\s*$/!d' $workdir/optional2-news5.txt >> $workdir/optional2-news6.txt
+sed '/^6 /,/^\s*$/!d' $workdir/optional2-news6.txt >> $workdir/optional2-news7.txt
+sed '/^7 /,/^\s*$/!d' $workdir/optional2-news7.txt >> $workdir/optional2-news8.txt
+sed '/^8 /,/^\s*$/!d' $workdir/optional2-news8.txt >> $workdir/optional2-news9.txt
+sed '/^9 /,/^\s*$/!d' $workdir/optional2-news9.txt >> $workdir/optional2-news10.txt
+sed '/^10 /,/^\s*$/!d' $workdir/optional2-news10.txt >> $workdir/optional2-news11.txt
+#remove paragraph numbering
+sed 's/^10 //' $workdir/optional2-news11.txt >> $workdir/optional2-news12.txt
+sed 's/^0 //' $workdir/optional2-news12.txt >> $workdir/optional2-news13.txt
+sed 's/^1 //' $workdir/optional2-news13.txt >> $workdir/optional2-news14.txt
+sed 's/^2 //' $workdir/optional2-news14.txt >> $workdir/optional2-news15.txt
+sed 's/^3 //' $workdir/optional2-news15.txt >> $workdir/optional2-news16.txt
+sed 's/^4 //' $workdir/optional2-news16.txt >> $workdir/optional2-news17.txt
+sed 's/^5 //' $workdir/optional2-news17.txt >> $workdir/optional2-news18.txt
+sed 's/^6 //' $workdir/optional2-news18.txt >> $workdir/optional2-news19.txt
+sed 's/^7 //' $workdir/optional2-news19.txt >> $workdir/optional2-news20.txt
+sed 's/^8 //' $workdir/optional2-news20.txt >> $workdir/optional2-news21.txt
+sed 's/^9 //' $workdir/optional2-news21.txt >> $workdir/optional2-news.txt
+
+# Generate Video
+
+ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news2.mp4
+
+done
+
 #end news
