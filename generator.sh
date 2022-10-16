@@ -338,9 +338,9 @@ nextshow=`cat $workdir/xmltemp5.txt`
 
 echo    This Channel is Currently offline >> $workdir/upnext.txt
 echo >> $workdir/upnext.txt
-echo       Next showing at: $starttime >> $workdir/upnext.txt
+echo '      Next showing at: $starttime' >> $workdir/upnext.txt
 echo >> $workdir/upnext.txt
-echo    Starting With: $nextshow >> $workdir/upnext.txt
+echo '   Starting With: $nextshow' >> $workdir/upnext.txt
 
 
 
