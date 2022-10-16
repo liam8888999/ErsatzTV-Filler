@@ -9,7 +9,7 @@ Discord chat: https://discord.gg/x4Nk4sfgSg
 Linux operating system with ffmpeg and curl installed.
 
 #### For news to work you will need to install
-'apt install xsltproc'
+`apt install xsltproc`
 
 ## Installation Instructions
 #### Clone the latest version of the repo.
