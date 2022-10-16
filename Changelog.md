@@ -12,6 +12,10 @@ jq must be installed as a requirement in this videoresolution
 - Random audio wasnt random
 - naming format for news videos (possible breaking change for some people)
 
+## added
+
+- version number at the top of generator.sh and sample-config.conf
+
 ## [0.0.4 - Beta] - 2022-10-16
 
 ## Added
