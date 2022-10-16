@@ -327,7 +327,7 @@ curl $xmltv --output $workdir/xmltv.xml
 tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
 
 # List files to txt files
-find $scriptdir/audio -name '*.xml' -print > $workdir/xmlfiles.txt
+find $workdir/xmltv -name '*.xml' -print > $workdir/xmlfiles.txt
 
 
 tv_to_text --output $workdir/tempxml2.xml $workdir/xmltv/968.etv.xml
