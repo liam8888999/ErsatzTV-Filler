@@ -31,7 +31,7 @@ if [ ! -d $workdir ]; then
 fi
 
 
-echo 'newsfeed 1' $newsfeed1
+echo $newsfeed1
 
 
 #General cleanup
