@@ -8,6 +8,9 @@ Discord chat: https://discord.gg/x4Nk4sfgSg
 ## Requirements
 Linux operating system with ffmpeg and curl installed.
 
+#### For news to work you will need to install
+'apt install xsltproc'
+
 ## Installation Instructions
 #### Clone the latest version of the repo.
 1. `git clone https://github.com/liam8888999/ErsatzTV-Filler.git`
@@ -35,8 +38,6 @@ You may also want to add it as a cron job to run at your desired interval
 ##### Make sure to replace the path with your local one!
 2. `0 * * * * /home/xxx/ErsatzTV-Filler/generator.sh`
 
-## For news to work you will need to install
-'sudo apt install xsltproc'
 
 For more information on how to use this with ErsatzTV please visit https://ersatztv.org/user-guide/filler/
 
