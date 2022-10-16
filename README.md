@@ -24,6 +24,9 @@ Linux operating system with ffmpeg and curl installed.
 Make sure your in the ErsatzTV-Filler directory and run the following command:
 1. `git pull`
 
+It is recommended to copy the configuration sample again in order to ensure all new variables are included
+#### Follow step 4 and 5 above
+
 ## Setting the script to run automatically
 You may also want to add it as a cron job to run at your desired interval
 #### Edit the crontab file - requires sudo password...

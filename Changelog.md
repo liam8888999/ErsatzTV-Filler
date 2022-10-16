@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [0.0.3 - Beta] - 2022-10-16
+
+## Added
+
+- support for news articles (users will need to 'sudo apt install xsltproc')
+- fallback variables if they are not filled in in the config.conf file
+
 ## [0.0.2 - Beta] - 2022-10-15
 ### Refactored
 
