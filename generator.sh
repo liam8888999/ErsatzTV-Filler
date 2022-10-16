@@ -335,12 +335,14 @@ date --date="$starttime" +%I:%M%p
 cut -f 2 $workdir/xmltemp3.txt > $workdir/xmltemp45.txt
 cut -d " " -f 1 $workdir/xmltemp45.txt > $workdir/xmltemp5.txt
 nextshow=`cat $workdir/xmltemp5.txt`
+echo $starttime
+echo $nextshow
 
 echo    This Channel is Currently offline >> $workdir/upnext.txt
 echo >> $workdir/upnext.txt
-echo '      Next showing at: $starttime' >> $workdir/upnext.txt
+echo '      Next showing at:' $starttime >> $workdir/upnext.txt
 echo >> $workdir/upnext.txt
-echo '   Starting With: $nextshow' >> $workdir/upnext.txt
+echo '   Starting With:' $nextshow >> $workdir/upnext.txt
 
 
 
