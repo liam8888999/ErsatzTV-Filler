@@ -329,6 +329,7 @@ tv_to_text --output $workdir/tempxml2.xml $workdir/xmltv/968.etv.xml
 awk '/news/{p=1}p' $workdir/tempxml2.xml > $workdir/xmltemp.txt
 awk '!/news/' $workdir/xmltemp.txt > $workdir/xmltemp2.xml
 head -1 $workdir/xmltemp2.xml > $workdir/xmltemp3.txt
+cut -d "-" -f 1 $workdir/xmltemp3.txt > $workdir/xmltemp4.txt
 
 
 
