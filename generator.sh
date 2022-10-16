@@ -41,7 +41,10 @@ if [ -z ${textspeed+40} ]; then echo ""; fi
 if [ -z ${newsduration+60} ]; then echo ""; fi
 if [ -z ${city+'Austin'} ]; then echo ""; fi
 if [ -z ${state+'Texas'} ]; then echo ""; fi
-if [ -z ${output+$scriptdir} ]; then echo ""; fi
+#if [ -z ${output+$scriptdir} ]; then echo ""; fi
+while [[ ! -z $output ]]; do
+output=$scriptdir
+done
 echo $output
 
 #General cleanup
