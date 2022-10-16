@@ -146,7 +146,7 @@ cat << EOF > $newsstyle
 </xsl:stylesheet>
 EOF
 
-echo $newsfeed1
+echo newsfeed 1 $newsfeed1
 # main news
 
 
