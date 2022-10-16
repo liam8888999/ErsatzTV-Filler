@@ -6,10 +6,7 @@
 Discord chat: https://discord.gg/x4Nk4sfgSg
 
 ## Requirements
-Linux operating system with ffmpeg and curl installed.
-
-#### For news to work you will need to install
-`apt install xsltproc`
+Linux operating system with ffmpeg, xsltproc, xmltv-utils and curl installed.
 
 ## Installation Instructions
 #### Clone the latest version of the repo.
@@ -22,6 +19,13 @@ Linux operating system with ffmpeg and curl installed.
 4. `cp sample-config.conf config.conf`
 #### Update the 'output', 'city', 'state' variables to your required locations, replace nano with your favorite text editor.
 5. `nano config.conf`
+
+
+## For Channel currently offline Filler
+for this to work you need to run the script once
+which will generate placeholder videos titled with the channelnumber.etv
+you will need to add each of these to its own collection and schedule that collection
+during planned channel offline times
 
 ## Update Instructions
 Make sure your in the ErsatzTV-Filler directory and run the following command:
