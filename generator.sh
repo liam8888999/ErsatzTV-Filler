@@ -57,6 +57,9 @@ fi
 #while [[ -z $backgroundcolour ]]; do
 #backgroundcolour=random
 #done
+while [[ -z $output ]]; do
+output=~
+done
 
 #fix white spaces for curl
 
