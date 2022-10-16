@@ -328,4 +328,5 @@ tv_grep --title news1 --on-after now $workdir/xmltv/968.etv.xml >> $workdir/temp
 tv_to_text $workdir/tempxmltv.xml >> $workdir/tempxml2.xml
 
 
+
 ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/968-etv.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/968-etv.mp4
