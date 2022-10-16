@@ -306,7 +306,7 @@ sed 's/^9 //' $workdir/optional2-news21.txt >> $workdir/optional2-news.txt
 
 # Generate Video
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news2.mp4
+ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news3.mp4
 
 #set variable blank to avoid endless loop
 newsfeed2=""
@@ -334,8 +334,17 @@ starttime=`cat $workdir/xmltemp4.txt`
 date --date="$starttime" +%I:%M%p
 cut -f 2 $workdir/xmltemp3.txt > $workdir/xmltemp45.txt
 cut -d " " -f 1 $workdir/xmltemp45.txt > $workdir/xmltemp5.txt
+nextshow=`cat $workdir/xmltemp5.txt`
+cat << EOF > $workdir/upnext.txt
+    This Channel is Currently offline
+
+       Next showing at: $starttime
+
+    Starting With: $nextshow
+EOF
 
 
 
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/968-etv.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/968-etv.mp4
+
+ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/upnext.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news.mp4
