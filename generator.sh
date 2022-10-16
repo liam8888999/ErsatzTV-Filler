@@ -318,4 +318,4 @@ done
 #channel Currently offline
 
 curl $xmltv --output $workdir/xmltv.xml
-tv_split --output $workdir/xmltv/%channel.xml xmltv.xml
+tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
