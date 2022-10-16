@@ -333,6 +333,7 @@ cut -d "-" -f 1 $workdir/xmltemp3.txt > $workdir/xmltemp4.txt
 starttime=`cat $workdir/xmltemp4.txt`
 date --date="$starttime" +%I:%M%p
 cut -f 2 $workdir/xmltemp3.txt > $workdir/xmltemp45.txt
+cut -d " " -f 1 $workdir/xmltemp45.txt > $workdir/xmltemp5.txt
 
 
 
