@@ -179,7 +179,7 @@ sed 's/^5 //' $workdir/news17.txt >> $workdir/news18.txt
 sed 's/^6 //' $workdir/news18.txt >> $workdir/news19.txt
 sed 's/^7 //' $workdir/news19.txt >> $workdir/news20.txt
 sed 's/^8 //' $workdir/news20.txt >> $workdir/news21.txt
-sed 's/^9 //' $workdir/news21.txt >> $newsdir/news.txt
+sed 's/^9 //' $workdir/news21.txt >> $workdir/news.txt
 
 # Generate Video
 
