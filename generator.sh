@@ -327,7 +327,7 @@ curl $xmltv --output $workdir/xmltv.xml
 #tv_grep --title news1 --on-after now $workdir/xmltv/968.etv.xml >> $workdir/tempxmltv.xml
 #grep -f $workdir/tempxmltv.xml -oPm1 "(?<=<display-name lang="en">)[^<]+"
 
-XML_FILE=$workdirxmltv.xml
+XML_FILE=$workdir/xmltv.xml
 TMP_FILE="$workdir/xmltv.sh.tmp"
 XML_STR=`sed -n '/<\/channel>/=' $XML_FILE | sed -n '$p'`
 
