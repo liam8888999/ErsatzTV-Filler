@@ -339,7 +339,7 @@ sort $workdir/xmlfiles3.txt > $workdir/xmlfiles4.txt
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 
 while [[ ! -z $xmltvloop ]]; do
-tv_to_text --output $workdir/tempxml2.xml $workdir/xmltv/$xmltvloop.xml
+tv_to_text --output $workdir/tempxml23.xml $workdir/xmltv/$xmltvloop.xml
 awk '/news/{p=1}p' $workdir/tempxml2.xml > $workdir/xmltemp.txt
 awk '!/news/' $workdir/xmltemp.txt > $workdir/xmltemp2.xml
 head -1 $workdir/xmltemp2.xml > $workdir/xmltemp3.txt
