@@ -329,7 +329,7 @@ tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
 # List files to txt files
 find $workdir/xmltv -name '*.xml' -print > $workdir/xmlfiles.txt
 awk -F/ '{print $NF}' $workdir/xmlfiles.txt > $workdir/xmlfiles2.txt
-cut -d "." -f 3 $workdir/xmlfiles2.txt > $workdir/xmlfiles3.txt
+cut -d "." -f 1,2 $workdir/xmlfiles2.txt > $workdir/xmlfiles3.txt
 
 tv_to_text --output $workdir/tempxml2.xml $workdir/xmltv/968.etv.xml
 awk '/news/{p=1}p' $workdir/tempxml2.xml > $workdir/xmltemp.txt
