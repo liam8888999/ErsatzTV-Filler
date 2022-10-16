@@ -339,27 +339,27 @@ sort $workdir/xmlfiles3.txt > $workdir/xmlfiles4.txt
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 
 while [[ ! -z $xmltvloop ]]; do
-tv_to_text --output $workdir/tempxml23.xml $workdir/xmltv/$xmltvloop.xml
-awk '/news/{p=1}p' $workdir/tempxml2.xml > $workdir/xmltemp.txt
-awk '!/news/' $workdir/xmltemp.txt > $workdir/xmltemp2.xml
-head -1 $workdir/xmltemp2.xml > $workdir/xmltemp3.txt
-cut -d "-" -f 1 $workdir/xmltemp3.txt > $workdir/xmltemp4.txt
-starttime=$(cat $workdir/xmltemp4.txt)
+tv_to_text --output $workdir/tempxml$xmltvloop.xml $workdir/xmltv/$xmltvloop.xml
+awk '/news/{p=1}p' $workdir/tempxml$xmltvloop.xml > $workdir/xmltemp$xmltvloop.txt
+awk '!/news/' $workdir/xmltemp$xmltvloop.txt > $workdir/xmltemp2$xmltvloop.xml
+head -1 $workdir/xmltemp2$xmltvloop.xml > $workdir/xmltemp3$xmltvloop.txt
+cut -d "-" -f 1 $workdir/xmltemp3$xmltvloop.txt > $workdir/xmltemp4$xmltvloop.txt
+starttime=$(cat $workdir/xmltemp4$xmltvloop.txt)
 actualstarttime=$(date --date="$starttime" +%I:%M%p)
-cut -f 2 $workdir/xmltemp3.txt > $workdir/xmltemp45.txt
-cut -d " " -f 1 $workdir/xmltemp45.txt > $workdir/xmltemp5.txt
-nextshow=$(cat $workdir/xmltemp5.txt)
-rm -f $workdir/upnext.txt
-echo $actualstarttime
-echo $nextshow
+cut -f 2 $workdir/xmltemp3$xmltvloop.txt > $workdir/xmltemp45$xmltvloop.txt
+cut -d " " -f 1 $workdir/xmltemp45$xmltvloop.txt > $workdir/xmltemp5$xmltvloop.txt
+nextshow=$(cat $workdir/xmltemp5$xmltvloop.txt)
 
-echo    This Channel is Currently offline >> $workdir/upnext.txt
-echo >> $workdir/upnext.txt
-echo       Next showing at: $starttime >> $workdir/upnext.txt
-echo >> $workdir/upnext.txt
-echo    Starting With: $nextshow >> $workdir/upnext.txt
+offlinebackgroundcolour=$newsbackground
+offlinetextcolour=$newstextcolour1
 
-ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/upnext.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news1.mp4
+echo    This Channel is Currently offline >> $workdir/upnext$xmltvloop.txt
+echo >> $workdir/upnext.txt
+echo       Next showing at: $starttime >> $workdir/upnext$xmltvloop.txt
+echo >> $workdir/upnext.txt
+echo    Starting With: $nextshow >> $workdir/upnext$xmltvloop.txt
+
+ffmpeg -f lavfi -i color=$offlinebackgroundcolour:$videoresolution:d=5 -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/upnext$xmltvloop.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$offlinetextcolour: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/$xmltvloop.mp4
 
 awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.txt $workdir/xmlfiles4.txt
 
