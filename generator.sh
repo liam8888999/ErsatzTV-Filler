@@ -30,6 +30,10 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
+
+echo 'newsfeed 1 $newsfeed1'
+
+
 #General cleanup
 
 rm -f $weatherdir/v1.png
@@ -146,7 +150,7 @@ cat << EOF > $newsstyle
 </xsl:stylesheet>
 EOF
 
-echo newsfeed 1 $newsfeed1
+
 # main news
 
 
