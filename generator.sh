@@ -30,23 +30,38 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
-# check variables
-if [ -z ${videolength+30} ]; then echo ""; fi
-if [ -z ${backgroundcolour+random} ]; then echo ""; fi
-if [ -z ${newsbackgroundcolour+random} ]; then echo ""; fi
-if [ -z ${newstextcolour+random} ]; then echo ""; fi
-if [ -z ${newsfeed+https://rss.nytimes.com/services/xml/rss/nyt/World.xml} ]; then echo ""; fi
-if [ -z ${videoresolution+1280x720} ]; then echo ""; fi
-if [ -z ${textspeed+40} ]; then echo ""; fi
-if [ -z ${newsduration+60} ]; then echo ""; fi
-if [ -z ${city+'Austin'} ]; then echo ""; fi
-if [ -z ${state+'Texas'} ]; then echo ""; fi
-#if [ -z ${output+$scriptdir} ]; then echo ""; fi
+# check variables are set. if not set default fallbacks
+
 while [[ -z $videolength ]]; do
 videolength=30
 done
-echo $videolength
-
+while [[ -z $state ]]; do
+state='Texas'
+done
+while [[ -z $city ]]; do
+city='Austin'
+done
+while [[ -z $newsduration ]]; do
+newsduration=60
+done
+while [[ -z $textspeed ]]; do
+textspeed=40
+done
+while [[ -z $videoresolution ]]; do
+videoresolution=1280x720
+done
+while [[ -z $newsfeed ]]; do
+newsfeed="https://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+done
+while [[ -z $newstextcolour ]]; do
+newstextcolour=random
+done
+while [[ -z $newsbackgroundcolour ]]; do
+newsbackgroundcolour=random
+done
+while [[ -z $backgroundcolour ]]; do
+backgroundcolour=random
+done
 #General cleanup
 
 rm -f $weatherdir/v1.png
