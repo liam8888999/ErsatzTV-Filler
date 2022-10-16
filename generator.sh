@@ -263,6 +263,7 @@ sed 's/^9 //' $workdir/optional1-news21.txt >> $workdir/optional1-news.txt
 # Generate Video
 
 ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news2.mp4
+#set variable blank to avoid endless loop
 newsfeed1=""
 done
 #optional news 2
@@ -306,6 +307,8 @@ sed 's/^9 //' $workdir/optional2-news21.txt >> $workdir/optional2-news.txt
 # Generate Video
 
 ffmpeg -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -stream_loop -1 -i $audio -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/news2.mp4
+
+#set variable blank to avoid endless loop
 newsfeed2=""
 done
 
