@@ -16,7 +16,7 @@ else
 echo "exit 0" >> /tmp/ErsatzTV-Filler-autoupdate.sh
 fi
 
-echo "rm $0" >> /tmp/ErsatzTV-Filler-autoupdate.sh
+#echo "rm $0" >> /tmp/ErsatzTV-Filler-autoupdate.sh
 
 chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 
