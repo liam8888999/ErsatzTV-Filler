@@ -1,5 +1,4 @@
-!/bin/bash
-#V0.0.7 - Beta
+##V0.0.7 - Beta
 
 # load in configuration variables
 . config-temp.conf
