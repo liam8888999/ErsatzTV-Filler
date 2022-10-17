@@ -1,6 +1,22 @@
 #!/bin/bash
 #V0.0.10 - Beta
 
+apt=$(command -v apt)
+yum=$(command -v yum)
+
+if [[! -z $apt ]];
+then
+sudo apt install ffmpeg -y
+sudo apt install xsltproc -y
+sudo apt install jq -y
+sudo apt install xmltv-util -y
+sudo apt install curl -y
+fi
+if [[! -z $yum ]];
+then
+  echo autoupdate=yes >> $helperdir/config-temp.conf
+fi
+
 # load in configuration variables
 . config.conf
 
