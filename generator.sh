@@ -26,6 +26,12 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
+#General cleanup
+
+rm -f $weatherdir/*
+rm -r $workdir/*
+
+
 
 # check variables are set. if not set default fallbacks
 
@@ -80,10 +86,7 @@ done
 stateurl=$(echo $state|sed -e 's/ /%20/g')
 cityurl=$(echo $city|sed -e 's/ /%20/g')
 
-#General cleanup
 
-rm -f $weatherdir/*
-rm -r $workdir/*
 
 #copy colours.txt
 cp $scriptdir/colours.txt $workdir/colours.txt
