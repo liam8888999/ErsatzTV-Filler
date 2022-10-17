@@ -1,11 +1,10 @@
 #!/bin/bash
-#V0.0.7 - Beta
+#V0.0.8 - Beta
 # load in configuration variables
 . config-temp.conf
 #test variable run yes/no
 #convert variable to lowercase
 processchanneloffline1=$(echo $processchanneloffline | tr '[:upper:]' '[:lower:]')
-echo startoffline
 
 if [[ $processchanneloffline1 = yes ]]
 then
@@ -30,7 +29,8 @@ find $workdir/xmltv -name '*.xml' -print > $workdir/xmlfiles.txt
 awk -F/ '{print $NF}' $workdir/xmlfiles.txt > $workdir/xmlfiles2.txt
 cut -d "." -f 1,2 $workdir/xmlfiles2.txt > $workdir/xmlfiles3.txt
 sort $workdir/xmlfiles3.txt > $workdir/xmlfiles4.txt
-sed -i '/[0-9]$/ s/$/.etv/' $workdir/xmlfiles4.txt
+#add .etv to end of number files. not needed as etv only supports filenames with 1 decimal as title
+#sed -i '/[0-9]$/ s/$/.etv/' $workdir/xmlfiles4.txt
 
 #loop
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.7 - Beta
+#V0.0.8 - Beta
 
 # load in configuration variables
 . config.conf
