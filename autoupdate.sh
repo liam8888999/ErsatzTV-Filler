@@ -9,8 +9,8 @@ autoupdate1=$(echo $autoupdate | tr '[:upper:]' '[:lower:]')
 autoupdate1=no
 if [[ $autoupdate1 = yes ]]
 then
-echo "#!/bin/bash" >> /tmp/ErsatzTV-Filler-autoupdate.sh
-echo "git pull" >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
 #echo "rm $0" >> /tmp/ErsatzTV-Filler-autoupdate.sh
 
 chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
