@@ -359,7 +359,7 @@ find $workdir/xmltv -name '*.xml' -print > $workdir/xmlfiles.txt
 awk -F/ '{print $NF}' $workdir/xmlfiles.txt > $workdir/xmlfiles2.txt
 cut -d "." -f 1,2 $workdir/xmlfiles2.txt > $workdir/xmlfiles3.txt
 sort $workdir/xmlfiles3.txt > $workdir/xmlfiles4.txt
-sed -i '/1$/ s/$/.etv/' file
+sed -i '/1$/ s/$/.etv/' $workdir/xmlfiles4.txt
 
 #loop
 
