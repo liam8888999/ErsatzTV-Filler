@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.8 - Beata] - 2022-10-17
+
+# Changed
+
+- filler types moved to helper scripts with the user able to set which filler types to create by setting a variable in the config.conf file
+
+# Removed
+
+- previous bug fix with decimals in etv channel numbers as etv only supports titles with 1 decimal not 2
+
+
 ## [0.0.7 - Beata] - 2022-10-17
 
 # Fixed
