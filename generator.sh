@@ -15,7 +15,7 @@ if [[ -z $(command -v jq) ]];
 then
 sudo apt install jq -y
 fi
-if [[ -z $(command -v xmltv-util) ]];
+if [[ -z $(command -v tv_sort) ]];
 then
   sudo apt install xmltv-util -y
 fi
