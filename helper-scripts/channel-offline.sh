@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.9 - Beta
+#V0.0.10 - Beta
 # load in configuration variables
 . config-temp.conf
 #test variable run yes/no
@@ -40,7 +40,7 @@ xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 while [[ ! -z $xmltvloop ]]; do
 
 #randomise audio
-randomNumberoffline=$(shuf -i 1-7 -n 1 --repeat)
+randomNumberoffline=$(shuf -i 1-36 -n 1 --repeat)
 offlineaudio=$(head -n $randomNumberoffline $workdir/music.txt | tail -n 1)
 
 # get and read xmltv data
