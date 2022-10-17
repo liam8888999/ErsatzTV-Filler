@@ -29,6 +29,8 @@ weatherdir=$scriptdir/weather
 #set helperdir
 helperdir=$scriptdir/helper-scripts
 
+helperfiledir=$scriptdir/helper-files
+
 #General cleanup
 
 rm -f $weatherdir/*
@@ -153,7 +155,7 @@ else
 fi
 
 #copy colours.txt
-cp $scriptdir/colours.txt $workdir/colours.txt
+cp $helperfiledir/colours.txt $workdir/colours.txt
 
 #setup audio
 #list audio files

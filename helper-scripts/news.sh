@@ -6,7 +6,6 @@
 #test variable run yes/no
 #convert variable to lowercase
 processnews1=$(echo $processnews | tr '[:upper:]' '[:lower:]')
-processnews1=no
 if [[ $processnews1 = yes ]]
 then
 

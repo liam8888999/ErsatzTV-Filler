@@ -5,7 +5,6 @@
 #test variable run yes/no
 #convert variable to lowercase
 processchanneloffline1=$(echo $processchanneloffline | tr '[:upper:]' '[:lower:]')
-processchanneloffline1=no
 if [[ $processchanneloffline1 = yes ]]
 then
 #channel Currently offline
