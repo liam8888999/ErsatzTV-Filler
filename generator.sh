@@ -21,10 +21,20 @@ workdir=$scriptdir/workdir
 
 weatherdir=$scriptdir/weather
 
+#set helperdir
+helperdir=$scriptdir/helper-scripts
+
+#General cleanup
+
+rm -f $weatherdir/*
+rm -r $workdir/*
+
 # Add directory variables to config-temp.config
-echo $weatherdir >> $workdir/config-temp.config
-echo $workdir >> $workdir/config-temp.config
-echo $scriptdir >> $workdir/config-temp.config
+echo weatherdir=$weatherdir >> $workdir/config-temp.config
+echo workdir=$workdir >> $workdir/config-temp.config
+echo scriptdir=$scriptdir >> $workdir/config-temp.config
+echo helperdir=$helperdir >> $workdir/config-temp.config
+
 
 
 #make sure workdir exists
@@ -32,10 +42,9 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
-#General cleanup
 
-rm -f $weatherdir/*
-rm -r $workdir/*
+
+
 
 # check variables are set. if not set default fallbacks
 
@@ -121,7 +130,25 @@ if [[ -z $xmltv ]];
 then
   echo xmltv="http://127.0.0.1:8409/iptv/xmltv.xml" >> $workdir/config-temp.config
 else
-  echo xmltv= >> $workdir/config-temp.config
+  echo xmltv=$xmltv >> $workdir/config-temp.config
+fi
+if [[ -z $processweather ]];
+then
+  echo processweather=yes >> $workdir/config-temp.config
+else
+  echo processweather=$processweather >> $workdir/config-temp.config
+fi
+if [[ -z $processnews ]];
+then
+  echo processnews=yes >> $workdir/config-temp.config
+else
+  echo processnews=$processnews >> $workdir/config-temp.config
+fi
+if [[ -z $processchanneloffline ]];
+then
+  echo processchanneloffline=yes >> $workdir/config-temp.config
+else
+  echo processchanneloffline=$processchanneloffline >> $workdir/config-temp.config
 fi
 
 #copy colours.txt
@@ -139,3 +166,6 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk '
 curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
 echo $country >> workdir/config-temp.config
+
+#call weather.sh
+exec $helperdir/weather.sh
