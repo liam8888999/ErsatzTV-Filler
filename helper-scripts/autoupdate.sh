@@ -21,7 +21,7 @@ chmod +x ErsatzTV-Filler-autoupdate.sh
 
 rm -f $helperdir/config-temp.conf
 
-exec /ErsatzTV-Filler-autoupdate.sh
+exec ErsatzTV-Filler-autoupdate.sh
 else
 rm -f $helperdir/config-temp.conf
 exit 0
