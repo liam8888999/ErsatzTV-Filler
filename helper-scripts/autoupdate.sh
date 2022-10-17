@@ -3,6 +3,7 @@
 
 # load in configuration variables
 . config-temp.conf
+
 #test variable run yes/no
 #convert variable to lowercase
 autoupdate1=$(echo $autoupdate | tr '[:upper:]' '[:lower:]')
