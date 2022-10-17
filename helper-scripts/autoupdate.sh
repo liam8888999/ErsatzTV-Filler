@@ -6,7 +6,7 @@
 #test variable run yes/no
 #convert variable to lowercase
 autoupdate1=$(echo $autoupdate | tr '[:upper:]' '[:lower:]')
-autoupdate1=no
+autoupdate1=yes
 if [[ $autoupdate1 = yes ]]
 then
 echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
