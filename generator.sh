@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.8 - Beta
+#V0.0.9 - Beta
 
 # load in configuration variables
 . config.conf
@@ -29,12 +29,6 @@ weatherdir=$scriptdir/weather
 #set helperdir
 helperdir=$scriptdir/helper-scripts
 
-#General cleanup
-
-rm -f $weatherdir/*
-rm -r $workdir/*
-rm -f $helperdir/config-temp.conf
-
 # Add directory variables to config-temp.config
 echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
 echo workdir=$workdir >> $helperdir/config-temp.conf
@@ -43,9 +37,15 @@ echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
 
+if [[ -z $autoupdate ]];
+then
+  echo autoupdate=yes >> $helperdir/config-temp.conf
+else
+  echo autoupdate=$autoupdate >> $helperdir/config-temp.conf
+fi
 if [[ -z $videolength ]];
 then
-  echo videolengthr=30 >> $helperdir/config-temp.conf
+  echo videolength=30 >> $helperdir/config-temp.conf
 else
   echo videolength=$videolength >> $helperdir/config-temp.conf
 fi

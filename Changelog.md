@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.9 - Beata] - 2022-10-17
+
+# Changed
+
+- Move cleanup of temp files to end of script instead of start of next run
+
+# added
+
+- automatic update support (default = yes)
+
 ## [0.0.8 - Beata] - 2022-10-17
 
 # Changed

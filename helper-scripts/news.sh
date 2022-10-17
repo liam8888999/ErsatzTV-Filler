@@ -1,12 +1,12 @@
 #!/bin/bash
-#V0.0.8 - Beta
+#V0.0.9 - Beta
 
 # load in configuration variables
 . config-temp.conf
 #test variable run yes/no
 #convert variable to lowercase
-processweather1=$(echo $processnews | tr '[:upper:]' '[:lower:]')
-
+processnews1=$(echo $processnews | tr '[:upper:]' '[:lower:]')
+processnews1=no
 if [[ $processnews1 = yes ]]
 then
 
