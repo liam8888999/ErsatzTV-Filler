@@ -3,7 +3,6 @@
 
 if [[ ! -z $(command -v apt) ]];
 then
-fi
 if [[ ! -z $(command -v ffmpeg) ]];
 then
 sudo apt install ffmpeg -y
