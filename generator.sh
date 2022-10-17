@@ -54,9 +54,9 @@ newstextcolour=random
 done
 if [[ -z $newsbackgroundcolour ]];
 then
-  echo "newsbackgroundcolour=random"
+  echo newsbackgroundcolour is random
 else
-  echo "newsbackgroundcolour=$newsbackgroundcolour"
+  echo newsbackgroundcolour is $newsbackgroundcolour
 fi
 while [[ -z $backgroundcolour ]]; do
 backgroundcolour=random
