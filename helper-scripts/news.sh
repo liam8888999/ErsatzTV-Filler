@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.9 - Beta
+#V0.0.10 - Beta
 
 # load in configuration variables
 . config-temp.conf
@@ -12,9 +12,9 @@ then
 #news
 
 #audio
-randomNumber3=$(shuf -i 1-7 -n 1 --repeat)
-randomNumber4=$(shuf -i 1-7 -n 1 --repeat)
-randomNumber5=$(shuf -i 1-7 -n 1 --repeat)
+randomNumber3=$(shuf -i 1-36 -n 1 --repeat)
+randomNumber4=$(shuf -i 1-36 -n 1 --repeat)
+randomNumber5=$(shuf -i 1-36 -n 1 --repeat)
 audio3=$(head -n $randomNumber3 $workdir/music.txt | tail -n 1)
 audio4=$(head -n $randomNumber4 $workdir/music.txt | tail -n 1)
 audio5=$(head -n $randomNumber5 $workdir/music.txt | tail -n 1)

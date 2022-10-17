@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [0.0.9 - Beata] - 2022-10-17
 
+# Added
+
+- Added more audio files
+
+## [0.0.9 - Beata] - 2022-10-17
+
 # Changed
 
 - Move cleanup of temp files to end of script instead of start of next run

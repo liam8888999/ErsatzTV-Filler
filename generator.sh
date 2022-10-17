@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.9 - Beta
+#V0.0.10 - Beta
 
 # load in configuration variables
 . config.conf
@@ -173,3 +173,4 @@ echo country=$country >> $helperdir/config-temp.conf
 #call weather.sh
 cd $helperdir
 ./weather.sh
+#Music: https://audiotrimmer.com/royalty-free-music/
