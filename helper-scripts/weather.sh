@@ -2,7 +2,7 @@
 #V0.0.7 - Beta
 
 # load in configuration variables
-. ../workdir/config-temp.conf
+. config-temp.conf
 
 #test variable run yes/no
 processweather=yes
