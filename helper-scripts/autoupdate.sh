@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.10 - Beta
+#V0.0.11 - Beta
 
 # load in configuration variables
 . config-temp.conf
@@ -19,9 +19,11 @@ chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 # cleanup
 
 rm -f $helperdir/config-temp.conf
+cd $scriptdir
 
 exec /tmp/ErsatzTV-Filler-autoupdate.sh
 else
 rm -f $helperdir/config-temp.conf
+cd $scriptdir
 exit 0
 fi
