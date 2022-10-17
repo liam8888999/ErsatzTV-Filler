@@ -41,8 +41,8 @@ xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 while [[ ! -z $xmltvloop ]]; do
 
 #randomise audio
-randomNumbernews=$(shuf -i 1-7 -n 1 --repeat)
-offlineaudio=$(head -n $randomNumbernews $workdir/music.txt | tail -n 1)
+randomNumberoffline=$(shuf -i 1-7 -n 1 --repeat)
+offlineaudio=$(head -n $randomNumberoffline $workdir/music.txt | tail -n 1)
 
 # get and read xmltv data
 tv_to_text --output $workdir/tempxml$xmltvloop.xml $workdir/xmltv/$xmltvloop.xml

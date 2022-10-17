@@ -30,9 +30,9 @@ then
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newsbackgroundrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
 #newsbackground=$(head -n $newsbackgroundrandomNumber $workdir/colours.txt | tail -n 1)
-newsbackground=White
+newsbackground=White  >> config-temp.conf
 else
-newsbackground=$newsbackgroundcolour
+newsbackground=$newsbackgroundcolour >> config-temp.conf
 fi
 
 #news text colour
@@ -41,9 +41,9 @@ then
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newstextcolourrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
 #newstextcolour=$(head -n $newstextcolourandomNumber $workdir/colours.txt | tail -n 1)
-newstextcolour1=Black
+newstextcolour1=Black >> config-temp.conf
 else
-newstextcolour1=$newstextcolour
+newstextcolour1=$newstextcolour  >> config-temp.conf
 fi
 
 # The file where we will write out the style sheet, for later use by
