@@ -95,5 +95,5 @@ done
 ./cleanup.sh
 
 else
-./cleanup.sh
+./autoupdate.sh
 fi
