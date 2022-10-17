@@ -2,8 +2,14 @@
 #V0.0.7 - Beta
 
 # load in configuration variables
-. ../workdir/config-temp.conf
+. config-temp.conf
+#test variable run yes/no
+#convert variable to lowercase
+processchanneloffline1=$(echo $processchanneloffline | tr '[:upper:]' '[:lower:]')
+echo $processchanneloffline1
 
+if [[ $processchanneloffline1 = yes ]]
+then
 #channel Currently offline
 
 #make sure workdir/xmltv exists
@@ -67,3 +73,7 @@ awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.tx
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 xmltvloop=""
 done
+
+else
+exit 0
+fi

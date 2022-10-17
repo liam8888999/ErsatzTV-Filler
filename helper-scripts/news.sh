@@ -2,7 +2,14 @@
 #V0.0.7 - Beta
 
 # load in configuration variables
-. ../workdir/config-temp.conf
+. config-temp.conf
+#test variable run yes/no
+#convert variable to lowercase
+processweather1=$(echo $processnews | tr '[:upper:]' '[:lower:]')
+echo $processnews1
+
+if [[ $processnews1 = yes ]]
+then
 
 #news
 
@@ -191,3 +198,8 @@ ffmpeg -y -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -st
 #set variable blank to avoid endless loop
 newsfeed2=""
 done
+
+./channeloffline.sh
+else
+./channeloffline.sh
+fi
