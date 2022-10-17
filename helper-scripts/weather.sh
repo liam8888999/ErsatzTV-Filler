@@ -2,6 +2,6 @@
 #V0.0.7 - Beta
 
 # load in configuration variables
-.. config.conf
+. ../config.conf
 
 echo $videolength
