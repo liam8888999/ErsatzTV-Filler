@@ -8,7 +8,7 @@ processweather=Yes
 processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 echo $processweather1
 
-if [[ $processweather = yes ]]
+if [[ $processweather1 = yes ]]
 then
 
 #weather
