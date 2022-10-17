@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.11 - Beta
+#V0.0.12 - Beta
 # load in configuration variables
 . config-temp.conf
 #test variable run yes/no

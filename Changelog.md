@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.12 - Beata] - 2022-10-18
+
+# Fixed
+
+- dependencies will now automatically detect if they are already installed and if they are not it will try to install them using apt
+
+- Fix major breaking bug in v0.0.11 where workdir wasnt being generated and was causing the script to fail at every step
+
+
 ## [0.0.11 - Beata] - 2022-10-18
 
 # Added
