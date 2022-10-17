@@ -5,7 +5,7 @@
 . config-temp.conf
 
 #test variable run yes/no
-processweather=yes
+processweather=no
 
 if [[ $processweather = yes ]]
 then
