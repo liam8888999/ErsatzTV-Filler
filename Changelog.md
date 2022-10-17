@@ -4,8 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.6 - Beata] - 2022-10-17
+jq must be installed as a requirement in this version
+
+#Fixed
+
+- ffmpeg now automatically overwrites existing video
+
 ## [0.0.5 - Beata] - 2022-10-17
-jq must be installed as a requirement in this videoresolution
+jq must be installed as a requirement in this version
 
 #Fixed
 
