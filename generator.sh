@@ -55,9 +55,9 @@ newstextcolour=random
 done
 if [[ -z $newsbackgroundcolour ]];
 then
-  echo newsbackgroundcolour=random >> '$workdir/config-temp.config'
+  echo newsbackgroundcolour=random >> $scriptdir/helper-scripts/config-temp.config
 else
-  echo newsbackgroundcolour=$newsbackgroundcolour >> '$workdir/config-temp.config'
+  echo newsbackgroundcolour=$newsbackgroundcolour >> $scriptdir/helper-scripts/config-temp.config
 fi
 while [[ -z $backgroundcolour ]]; do
 backgroundcolour=random
