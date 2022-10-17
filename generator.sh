@@ -29,6 +29,12 @@ weatherdir=$scriptdir/weather
 #set helperdir
 helperdir=$scriptdir/helper-scripts
 
+#General cleanup
+
+rm -f $weatherdir/*
+rm -r $workdir/*
+rm -f $helperdir/config-temp.conf
+
 # Add directory variables to config-temp.config
 echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
 echo workdir=$workdir >> $helperdir/config-temp.conf
