@@ -1,6 +1,9 @@
 #!/bin/bash
 #V0.0.13 - Beta
 
+version="V0.0.13 - Beta"
+echo $version
+
 if [[ ! -z $(command -v apt) ]];
 then
 if [[ -z $(command -v ffmpeg) ]];
