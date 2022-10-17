@@ -1,15 +1,29 @@
 #!/bin/bash
 #V0.0.11 - Beta
 
-apt=$(command -v apt)
-
-if [[ ! -z $apt ]];
+if [[ ! -z $(command -v apt) ]];
+then
+fi
+if [[ ! -z $(command -v ffmpeg) ]];
 then
 sudo apt install ffmpeg -y
+fi
+if [[ ! -z $(command -v xsltproc) ]];
+then
 sudo apt install xsltproc -y
+fi
+if [[ ! -z $(command -v jq) ]];
+then
 sudo apt install jq -y
-sudo apt install xmltv-util -y
-sudo apt install curl -y
+fi
+if [[ ! -z $(command -v xmltv-util) ]];
+then
+  sudo apt install xmltv-util -y
+fi
+if [[ ! -z $(command -v curl) ]];
+then
+  sudo apt install curl -y
+fi
 fi
 
 # load in configuration variables
