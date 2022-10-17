@@ -7,7 +7,7 @@
 #test variable run yes/no
 processweather=yes
 
-if [[ "${processweather,,}" = "${yes,,}" ]]
+if [[ "$processweather" = "${yes,,}" ]]
 then
 
 #weather
