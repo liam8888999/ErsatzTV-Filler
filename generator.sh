@@ -13,6 +13,11 @@ case "$0" in
 esac
 scriptdir="${scriptdir%/*}"
 
+#make sure workdir exists
+if [ ! -d $workdir ]; then
+  mkdir -p $workdir;
+fi
+
 #set workdir
 
 workdir=$scriptdir/workdir
@@ -34,17 +39,6 @@ echo weatherdir=$weatherdir >> $workdir/config-temp.config
 echo workdir=$workdir >> $workdir/config-temp.config
 echo scriptdir=$scriptdir >> $workdir/config-temp.config
 echo helperdir=$helperdir >> $workdir/config-temp.config
-
-
-
-#make sure workdir exists
-if [ ! -d $workdir ]; then
-  mkdir -p $workdir;
-fi
-
-
-
-
 
 # check variables are set. if not set default fallbacks
 
