@@ -8,10 +8,9 @@
 autoupdate1=$(echo $autoupdate | tr '[:upper:]' '[:lower:]')
 
 echo "#!/bin/bash" >> /tmp/ErsatzTV-Filler-autoupdate.sh
-if [[ $autoupdate = yes ]]
+if [[ $autoupdate1 = yes ]]
 then
 echo "git pull" >> /tmp/ErsatzTV-Filler-autoupdate.sh
-echo "exit 0" >> /tmp/ErsatzTV-Filler-autoupdate.sh
 else
 echo "exit 0" >> /tmp/ErsatzTV-Filler-autoupdate.sh
 fi
