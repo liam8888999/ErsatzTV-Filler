@@ -35,114 +35,114 @@ rm -f $weatherdir/*
 rm -r $workdir/*
 
 # Add directory variables to config-temp.config
-echo weatherdir=$weatherdir >> $workdir/config-temp.config
-echo workdir=$workdir >> $workdir/config-temp.config
-echo scriptdir=$scriptdir >> $workdir/config-temp.config
-echo helperdir=$helperdir >> $workdir/config-temp.config
+echo weatherdir=$weatherdir >> $workdir/config-temp.conf
+echo workdir=$workdir >> $workdir/config-temp.conf
+echo scriptdir=$scriptdir >> $workdir/config-temp.conf
+echo helperdir=$helperdir >> $workdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
 
 if [[ -z $videolength ]];
 then
-  echo videolengthr=30 >> $workdir/config-temp.config
+  echo videolengthr=30 >> $workdir/config-temp.conf
 else
-  echo videolength=$videolength >> $workdir/config-temp.config
+  echo videolength=$videolength >> $workdir/config-temp.conf
 fi
 if [[ -z $state ]];
 then
-  echo state='Texas' >> $workdir/config-temp.config
+  echo state='Texas' >> $workdir/config-temp.conf
 else
-  echo state=$state >> $workdir/config-temp.config
+  echo state=$state >> $workdir/config-temp.conf
 fi
 if [[ -z $city ]];
 then
-  echo city='Austin' >> $workdir/config-temp.config
+  echo city='Austin' >> $workdir/config-temp.conf
 else
-  echo city=$city >> $workdir/config-temp.config
+  echo city=$city >> $workdir/config-temp.conf
 fi
 if [[ -z $newsduration ]];
 then
-  echo newsduration=60 >> $workdir/config-temp.config
+  echo newsduration=60 >> $workdir/config-temp.conf
 else
-  echo newsduration=$newsduration >> $workdir/config-temp.config
+  echo newsduration=$newsduration >> $workdir/config-temp.conf
 fi
 if [[ -z $textspeed ]];
 then
-  echo textspeed=40 >> $workdir/config-temp.config
+  echo textspeed=40 >> $workdir/config-temp.conf
 else
-  echo textspeed=$ntextspeed >> $workdir/config-temp.config
+  echo textspeed=$ntextspeed >> $workdir/config-temp.conf
 fi
 if [[ -z $videoresolution ]];
 then
-  echo videoresolution=1280x720 >> $workdir/config-temp.config
+  echo videoresolution=1280x720 >> $workdir/config-temp.conf
 else
-  echo videoresolution=$videoresolution >> $workdir/config-temp.config
+  echo videoresolution=$videoresolution >> $workdir/config-temp.conf
 fi
 if [[ -z $newsfeed ]];
 then
-  echo newsfeed="https://rss.nytimes.com/services/xml/rss/nyt/World.xml" >> $workdir/config-temp.config
+  echo newsfeed="https://rss.nytimes.com/services/xml/rss/nyt/World.xml" >> $workdir/config-temp.conf
 else
-  echo newsfeed=$newsfeed >> $workdir/config-temp.config
+  echo newsfeed=$newsfeed >> $workdir/config-temp.conf
 fi
 if [[ -z $newstextcolour ]];
 then
-  echo newstextcolour=random >> $workdir/config-temp.config
+  echo newstextcolour=random >> $workdir/config-temp.conf
 else
-  echo newstextcolour=$newstextcolour >> $workdir/config-temp.config
+  echo newstextcolour=$newstextcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $newsbackgroundcolour ]];
 then
-  echo newsbackgroundcolour=random >> $workdir/config-temp.config
+  echo newsbackgroundcolour=random >> $workdir/config-temp.conf
 else
-  echo newsbackgroundcolour=$newsbackgroundcolour >> $workdir/config-temp.config
+  echo newsbackgroundcolour=$newsbackgroundcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $backgroundcolour ]];
 then
-  echo backgroundcolour=random >> $workdir/config-temp.config
+  echo backgroundcolour=random >> $workdir/config-temp.conf
 else
-  echo backgroundcolour=$backgroundcolour >> $workdir/config-temp.config
+  echo backgroundcolour=$backgroundcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $output ]];
 then
-  echo output=~ >> $workdir/config-temp.config
+  echo output=~ >> $workdir/config-temp.conf
 else
-  echo output=$output >> $workdir/config-temp.config
+  echo output=$output >> $workdir/config-temp.conf
 fi
 if [[ -z $offlinebackgroundcolour ]];
 then
-  echo offlinebackgroundcolour=random >> $workdir/config-temp.config
+  echo offlinebackgroundcolour=random >> $workdir/config-temp.conf
 else
-  echo offlinebackgroundcolour=$offlinebackgroundcolour >> $workdir/config-temp.config
+  echo offlinebackgroundcolour=$offlinebackgroundcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $offlinetextcolour ]];
 then
-  echo offlinetextcolour=random >> $workdir/config-temp.config
+  echo offlinetextcolour=random >> $workdir/config-temp.conf
 else
-  echo offlinetextcolour=$offlinetextcolour >> $workdir/config-temp.config
+  echo offlinetextcolour=$offlinetextcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $xmltv ]];
 then
-  echo xmltv="http://127.0.0.1:8409/iptv/xmltv.xml" >> $workdir/config-temp.config
+  echo xmltv="http://127.0.0.1:8409/iptv/xmltv.xml" >> $workdir/config-temp.conf
 else
-  echo xmltv=$xmltv >> $workdir/config-temp.config
+  echo xmltv=$xmltv >> $workdir/config-temp.conf
 fi
 if [[ -z $processweather ]];
 then
-  echo processweather=yes >> $workdir/config-temp.config
+  echo processweather=yes >> $workdir/config-temp.conf
 else
-  echo processweather=$processweather >> $workdir/config-temp.config
+  echo processweather=$processweather >> $workdir/config-temp.conf
 fi
 if [[ -z $processnews ]];
 then
-  echo processnews=yes >> $workdir/config-temp.config
+  echo processnews=yes >> $workdir/config-temp.conf
 else
-  echo processnews=$processnews >> $workdir/config-temp.config
+  echo processnews=$processnews >> $workdir/config-temp.conf
 fi
 if [[ -z $processchanneloffline ]];
 then
-  echo processchanneloffline=yes >> $workdir/config-temp.config
+  echo processchanneloffline=yes >> $workdir/config-temp.conf
 else
-  echo processchanneloffline=$processchanneloffline >> $workdir/config-temp.config
+  echo processchanneloffline=$processchanneloffline >> $workdir/config-temp.conf
 fi
 
 #copy colours.txt
@@ -159,7 +159,7 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk '
 # Retrieve information country code etc.
 curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
-echo $country >> workdir/config-temp.config
+echo $country >> $workdir/config-temp.conf
 
 #call weather.sh
 exec $helperdir/weather.sh
