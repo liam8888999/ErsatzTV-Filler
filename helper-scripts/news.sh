@@ -197,8 +197,7 @@ ffmpeg -y -f lavfi -i color=$newsbackground:$videoresolution:d=$newsduration -st
 #set variable blank to avoid endless loop
 newsfeed2=""
 done
-
-./channeloffline.sh
+./channel-offline.sh
 else
-./channeloffline.sh
+./channel-offline.sh
 fi
