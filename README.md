@@ -5,6 +5,8 @@
 
 Discord chat: https://discord.gg/x4Nk4sfgSg
 
+Donations are welcome: https://www.paypal.me/liam200333
+
 ## Requirements
 Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed.
 
