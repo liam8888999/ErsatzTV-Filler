@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.6 - Beta
+#V0.0.7 - Beta
 
 # load in configuration variables
 . config.conf
@@ -359,6 +359,7 @@ find $workdir/xmltv -name '*.xml' -print > $workdir/xmlfiles.txt
 awk -F/ '{print $NF}' $workdir/xmlfiles.txt > $workdir/xmlfiles2.txt
 cut -d "." -f 1,2 $workdir/xmlfiles2.txt > $workdir/xmlfiles3.txt
 sort $workdir/xmlfiles3.txt > $workdir/xmlfiles4.txt
+sed -i '/[0-9]$/ s/$/.etv/' $workdir/xmlfiles4.txt
 
 #loop
 
@@ -398,4 +399,5 @@ ffmpeg -y -f lavfi -i color=$offlinebackgroundcolour:$videoresolution:d=5 -strea
 awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.txt $workdir/xmlfiles4.txt
 
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
+xmltvloop=""
 done

@@ -4,10 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.7 - Beata] - 2022-10-17
+
+# Fixed
+
+- fix bug with decimals in etv channel numbers
+
 ## [0.0.6 - Beata] - 2022-10-17
 jq must be installed as a requirement in this version
 
-#Fixed
+# Fixed
 
 - ffmpeg now automatically overwrites existing video
 - fix temperature unit
@@ -15,7 +21,7 @@ jq must be installed as a requirement in this version
 ## [0.0.5 - Beata] - 2022-10-17
 jq must be installed as a requirement in this version
 
-#Fixed
+# Fixed
 
 - Random audio wasnt random
 - naming format for news videos (possible breaking change for some people)
