@@ -3,23 +3,23 @@
 
 if [[ ! -z $(command -v apt) ]];
 then
-if [[ ! -z $(command -v ffmpeg) ]];
+if [[ -z $(command -v ffmpeg) ]];
 then
 sudo apt install ffmpeg -y
 fi
-if [[ ! -z $(command -v xsltproc) ]];
+if [[ -z $(command -v xsltproc) ]];
 then
 sudo apt install xsltproc -y
 fi
-if [[ ! -z $(command -v jq) ]];
+if [[ -z $(command -v jq) ]];
 then
 sudo apt install jq -y
 fi
-if [[ ! -z $(command -v xmltv-util) ]];
+if [[ -z $(command -v xmltv-util) ]];
 then
   sudo apt install xmltv-util -y
 fi
-if [[ ! -z $(command -v curl) ]];
+if [[ -z $(command -v curl) ]];
 then
   sudo apt install curl -y
 fi
