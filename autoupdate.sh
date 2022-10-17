@@ -6,15 +6,11 @@
 #test variable run yes/no
 #convert variable to lowercase
 autoupdate1=$(echo $autoupdate | tr '[:upper:]' '[:lower:]')
-
-echo "#!/bin/bash" >> /tmp/ErsatzTV-Filler-autoupdate.sh
+autoupdate1=no
 if [[ $autoupdate1 = yes ]]
 then
+echo "#!/bin/bash" >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo "git pull" >> /tmp/ErsatzTV-Filler-autoupdate.sh
-else
-echo "exit 0" >> /tmp/ErsatzTV-Filler-autoupdate.sh
-fi
-
 #echo "rm $0" >> /tmp/ErsatzTV-Filler-autoupdate.sh
 
 chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
@@ -24,3 +20,7 @@ chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 rm -f $helperdir/config-temp.conf
 
 exec /tmp/ErsatzTV-Filler-autoupdate.sh
+else
+rm -f $helperdir/config-temp.conf
+exit 0
+fi
