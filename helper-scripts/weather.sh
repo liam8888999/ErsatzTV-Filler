@@ -4,11 +4,54 @@
 # load in configuration variables
 . ../workdir/config.conf
 
-echo $newsbackgroundcolour
-
 #weather
 
+#audio
+randomNumber=$(shuf -i 1-7 -n 1 --repeat)
+randomNumber1=$(shuf -i 1-7 -n 1 --repeat)
+randomNumber2=$(shuf -i 1-7 -n 1 --repeat)
+audio=$(head -n $randomNumber $workdir/music.txt | tail -n 1)
+audio1=$(head -n $randomNumber1 $workdir/music.txt | tail -n 1)
+audio2=$(head -n $randomNumber2 $workdir/music.txt | tail -n 1)
+
+
+#Backgrounds
+
+#background randomisation
+if [[ $backgroundcolour == random ]]
+then
+awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
+backgroundrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
+backgroundrandomNumber1=$(shuf -i 1-140 -n 1 --repeat)
+backgroundrandomNumber2=$(shuf -i 1-140 -n 1 --repeat)
+background=$(head -n $backgroundrandomNumber $workdir/colours.txt | tail -n 1)
+background1=$(head -n $backgroundrandomNumber1 $workdir/colours.txt | tail -n 1)
+background2=$(head -n $backgroundrandomNumber2 $workdir/colours.txt | tail -n 1)
+echo $background
+echo $background1
+else
+background=$backgroundcolour
+background1=$backgroundcolour
+background2=$backgroundcolour
+fi
+
+#set weather celcius or farenheit using country code
+if [[ $country == US ]]
+then
+weathermeasurement=?u
+else
+weathermeasurement=?m
+fi
+
+
+
 #retrieve weather data
+
+#fix white spaces for curl
+
+stateurl=$(echo $state|sed -e 's/ /%20/g')
+cityurl=$(echo $city|sed -e 's/ /%20/g')
+
 
 
 curl wttr.in/${cityurl}.png$weathermeasurement --output $weatherdir/v1.png
