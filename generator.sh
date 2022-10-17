@@ -1,5 +1,16 @@
 #!/bin/bash
-#V0.0.10 - Beta
+#V0.0.11 - Beta
+
+apt=$(command -v apt)
+
+if [[ ! -z $apt ]];
+then
+sudo apt install ffmpeg -y
+sudo apt install xsltproc -y
+sudo apt install jq -y
+sudo apt install xmltv-util -y
+sudo apt install curl -y
+fi
 
 # load in configuration variables
 . config.conf

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.11 - Beata] - 2022-10-18
+
+# Added
+
+- dependencies will now automatically install if running on an operation system that uses apt package manager
+
+# Fixed
+
+- script will now end in ErsatzTV-Filler directory
+
 ## [0.0.10 - Beata] - 2022-10-17
 
 # Added
@@ -52,10 +62,6 @@ jq must be installed as a requirement in this version
 
 - Random audio wasnt random
 - naming format for news videos (possible breaking change for some people)
-
-## added
-
-- version number at the top of generator.sh and sample-config.conf
 
 ## [0.0.4 - Beta] - 2022-10-16
 
