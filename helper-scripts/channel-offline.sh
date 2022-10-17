@@ -55,8 +55,28 @@ cut -f 2 $workdir/xmltemp3$xmltvloop.txt > $workdir/xmltemp45$xmltvloop.txt
 cut -d " " -f 1 $workdir/xmltemp45$xmltvloop.txt > $workdir/xmltemp5$xmltvloop.txt
 nextshow=$(cat $workdir/xmltemp5$xmltvloop.txt)
 
-offlinebackgroundcolour=$newsbackground
-offlinetextcolour=$newstextcolour1
+#news backgound
+#background colour randomiser
+if [[ $nofflinebackgroundcolour == random ]]
+then
+#awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
+#newsbackgroundrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
+#newsbackground=$(head -n $newsbackgroundrandomNumber $workdir/colours.txt | tail -n 1)
+offlinebackground1=White
+else
+offlinebackground1=$offlinebackgroundcolour
+fi
+
+#news text colour
+if [[ $offlinetextcolour == random ]]
+then
+#awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
+#newstextcolourrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
+#newstextcolour=$(head -n $newstextcolourandomNumber $workdir/colours.txt | tail -n 1)
+offlinetextcolour1=Black
+else
+offlinetextcolour1=$offlinetextcolour
+fi
 
 echo    This Channel is Currently offline >> $workdir/upnext$xmltvloop.txt
 echo >> $workdir/upnext.txt
@@ -64,7 +84,7 @@ echo       Next showing at: $starttime >> $workdir/upnext$xmltvloop.txt
 echo >> $workdir/upnext.txt
 echo    Starting With: $nextshow >> $workdir/upnext$xmltvloop.txt
 
-ffmpeg -y -f lavfi -i color=$offlinebackgroundcolour:$videoresolution:d=5 -stream_loop -1 -i $offlineaudio -shortest -vf "drawtext=textfile='$workdir/upnext$xmltvloop.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$offlinetextcolour: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/channel-resuming/$xmltvloop.mp4
+ffmpeg -y -f lavfi -i color=$offlinebackgroundcolour1:$videoresolution:d=5 -stream_loop -1 -i $offlineaudio -shortest -vf "drawtext=textfile='$workdir/upnext$xmltvloop.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$offlinetextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/channel-resuming/$xmltvloop.mp4
 
 awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.txt $workdir/xmlfiles4.txt
 
