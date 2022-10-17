@@ -70,7 +70,7 @@ if [[ -z $textspeed ]];
 then
   echo textspeed=40 >> $workdir/config-temp.conf
 else
-  echo textspeed=$ntextspeed >> $workdir/config-temp.conf
+  echo textspeed=$textspeed >> $workdir/config-temp.conf
 fi
 if [[ -z $videoresolution ]];
 then
@@ -159,7 +159,7 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk '
 # Retrieve information country code etc.
 curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
-echo $country >> $workdir/config-temp.conf
+echo country=$country >> $workdir/config-temp.conf
 
 #call weather.sh
 exec $helperdir/weather.sh
