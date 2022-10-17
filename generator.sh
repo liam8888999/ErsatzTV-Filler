@@ -35,114 +35,114 @@ rm -f $weatherdir/*
 rm -r $workdir/*
 
 # Add directory variables to config-temp.config
-echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
-echo workdir=$workdir >> $helperdir/config-temp.conf
-echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
-echo helperdir=$helperdir >> $helperdir/config-temp.conf
+echo weatherdir=$weatherdir >> $workdir/config-temp.conf
+echo workdir=$workdir >> $workdir/config-temp.conf
+echo scriptdir=$scriptdir >> $workdir/config-temp.conf
+echo helperdir=$helperdir >> $workdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
 
 if [[ -z $videolength ]];
 then
-  echo videolengthr=30 >> $helperdir/config-temp.conf
+  echo videolengthr=30 >> $workdir/config-temp.conf
 else
-  echo videolength=$videolength >> $helperdir/config-temp.conf
+  echo videolength=$videolength >> $workdir/config-temp.conf
 fi
 if [[ -z $state ]];
 then
-  echo state='Texas' >> $helperdir/config-temp.conf
+  echo state='Texas' >> $workdir/config-temp.conf
 else
-  echo state=$state >> $helperdir/config-temp.conf
+  echo state=$state >> $workdir/config-temp.conf
 fi
 if [[ -z $city ]];
 then
-  echo city='Austin' >> $helperdir/config-temp.conf
+  echo city='Austin' >> $workdir/config-temp.conf
 else
-  echo city=$city >> $helperdir/config-temp.conf
+  echo city=$city >> $workdir/config-temp.conf
 fi
 if [[ -z $newsduration ]];
 then
-  echo newsduration=60 >> $helperdir/config-temp.conf
+  echo newsduration=60 >> $workdir/config-temp.conf
 else
-  echo newsduration=$newsduration >> $helperdir/config-temp.conf
+  echo newsduration=$newsduration >> $workdir/config-temp.conf
 fi
 if [[ -z $textspeed ]];
 then
-  echo textspeed=40 >> $helperdir/config-temp.conf
+  echo textspeed=40 >> $workdir/config-temp.conf
 else
-  echo textspeed=$textspeed >> $helperdir/config-temp.conf
+  echo textspeed=$textspeed >> $workdir/config-temp.conf
 fi
 if [[ -z $videoresolution ]];
 then
-  echo videoresolution=1280x720 >> $helperdir/config-temp.conf
+  echo videoresolution=1280x720 >> $workdir/config-temp.conf
 else
-  echo videoresolution=$videoresolution >> $helperdir/config-temp.conf
+  echo videoresolution=$videoresolution >> $workdir/config-temp.conf
 fi
 if [[ -z $newsfeed ]];
 then
-  echo newsfeed="https://rss.nytimes.com/services/xml/rss/nyt/World.xml" >> $helperdir/config-temp.conf
+  echo newsfeed="https://rss.nytimes.com/services/xml/rss/nyt/World.xml" >> $workdir/config-temp.conf
 else
-  echo newsfeed=$newsfeed >> $helperdir/config-temp.conf
+  echo newsfeed=$newsfeed >> $workdir/config-temp.conf
 fi
 if [[ -z $newstextcolour ]];
 then
-  echo newstextcolour=random >> $helperdir/config-temp.conf
+  echo newstextcolour=random >> $workdir/config-temp.conf
 else
-  echo newstextcolour=$newstextcolour >> $helperdir/config-temp.conf
+  echo newstextcolour=$newstextcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $newsbackgroundcolour ]];
 then
-  echo newsbackgroundcolour=random >> $helperdir/config-temp.conf
+  echo newsbackgroundcolour=random >> $workdir/config-temp.conf
 else
-  echo newsbackgroundcolour=$newsbackgroundcolour >> $helperdir/config-temp.conf
+  echo newsbackgroundcolour=$newsbackgroundcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $backgroundcolour ]];
 then
-  echo backgroundcolour=random >> $helperdir/config-temp.conf
+  echo backgroundcolour=random >> $workdir/config-temp.conf
 else
-  echo backgroundcolour=$backgroundcolour >> $helperdir/config-temp.conf
+  echo backgroundcolour=$backgroundcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $output ]];
 then
-  echo output=~ >> $helperdir/config-temp.conf
+  echo output=~ >> $workdir/config-temp.conf
 else
-  echo output=$output >> $helperdir/config-temp.conf
+  echo output=$output >> $workdir/config-temp.conf
 fi
 if [[ -z $offlinebackgroundcolour ]];
 then
-  echo offlinebackgroundcolour=random >> $helperdir/config-temp.conf
+  echo offlinebackgroundcolour=random >> $workdir/config-temp.conf
 else
-  echo offlinebackgroundcolour=$offlinebackgroundcolour >> $helperdir/config-temp.conf
+  echo offlinebackgroundcolour=$offlinebackgroundcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $offlinetextcolour ]];
 then
-  echo offlinetextcolour=random >> $helperdir/config-temp.conf
+  echo offlinetextcolour=random >> $workdir/config-temp.conf
 else
-  echo offlinetextcolour=$offlinetextcolour >> $helperdir/config-temp.conf
+  echo offlinetextcolour=$offlinetextcolour >> $workdir/config-temp.conf
 fi
 if [[ -z $xmltv ]];
 then
-  echo xmltv="http://127.0.0.1:8409/iptv/xmltv.xml" >> $helperdir/config-temp.conf
+  echo xmltv="http://127.0.0.1:8409/iptv/xmltv.xml" >> $workdir/config-temp.conf
 else
-  echo xmltv=$xmltv >> $helperdir/config-temp.conf
+  echo xmltv=$xmltv >> $workdir/config-temp.conf
 fi
 if [[ -z $processweather ]];
 then
-  echo processweather=yes >> $helperdir/config-temp.conf
+  echo processweather=yes >> $workdir/config-temp.conf
 else
-  echo processweather=$processweather >> $helperdir/config-temp.conf
+  echo processweather=$processweather >> $workdir/config-temp.conf
 fi
 if [[ -z $processnews ]];
 then
-  echo processnews=yes >> $helperdir/config-temp.conf
+  echo processnews=yes >> $workdir/config-temp.conf
 else
-  echo processnews=$processnews >> $helperdir/config-temp.conf
+  echo processnews=$processnews >> $workdir/config-temp.conf
 fi
 if [[ -z $processchanneloffline ]];
 then
-  echo processchanneloffline=yes >> $helperdir/config-temp.conf
+  echo processchanneloffline=yes >> $workdir/config-temp.conf
 else
-  echo processchanneloffline=$processchanneloffline >> $helperdir/config-temp.conf
+  echo processchanneloffline=$processchanneloffline >> $workdir/config-temp.conf
 fi
 
 #copy colours.txt
@@ -159,7 +159,7 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk '
 # Retrieve information country code etc.
 curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
-echo country=$country >> $helperdir/config-temp.conf
+echo country=$country >> $workdir/config-temp.conf
 
 #call weather.sh
-./$helperdir/weather.sh
+.$helperdir/weather.sh
