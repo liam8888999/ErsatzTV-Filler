@@ -54,9 +54,9 @@ newstextcolour=random
 done
 if [ ! -z $newsbackgroundcolour ];
 then
-echo newsbackgroundcolour=random >> $workdir/config.conf
+echo newsbackgroundcolour=random
 else
-echo newsbackgroundcolour=$newsbackgroundcolour >> $workdir/config.conf
+echo newsbackgroundcolour=$newsbackgroundcolour
 fi
 while [[ -z $backgroundcolour ]]; do
 backgroundcolour=random
