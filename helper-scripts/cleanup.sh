@@ -8,6 +8,5 @@
 
 rm -f $weatherdir/*
 rm -r $workdir/*
-rm -f $helperdir/config-temp.conf
 
 ./autoupdate.sh

@@ -22,6 +22,6 @@ chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 
 # cleanup
 
-rm -f config-temp.conf
+rm -f $helperdir/config-temp.conf
 
 exec /tmp/ErsatzTV-Filler-autoupdate.sh
