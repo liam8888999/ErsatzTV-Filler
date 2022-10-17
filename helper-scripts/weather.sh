@@ -6,7 +6,6 @@
 #test variable run yes/no
 #convert variable to lowercase
 processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
-echo $processweather1
 
 if [[ $processweather1 = yes ]]
 then
