@@ -10,6 +10,7 @@ jq must be installed as a requirement in this version
 #Fixed
 
 - ffmpeg now automatically overwrites existing video
+- fix temperature unit
 
 ## [0.0.5 - Beata] - 2022-10-17
 jq must be installed as a requirement in this version
