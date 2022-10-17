@@ -2,7 +2,7 @@
 #V0.0.7 - Beta
 
 # load in configuration variables
-. ../workdir/config.conf
+. ../workdir/config-temp.conf
 
 #news
 
