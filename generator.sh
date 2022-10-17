@@ -133,6 +133,13 @@ curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
 echo country is $country
 
+if [[ $country == US ]]
+then
+weathermeasurement=?u
+else
+weathermeasurement=?m
+fi
+echo $weathermeasurement
 #weather
 
 #retrieve weather data
