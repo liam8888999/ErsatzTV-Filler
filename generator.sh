@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.12 - Beta
+#V0.0.13 - Beta
 
 if [[ ! -z $(command -v apt) ]];
 then

@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.12 - Beta
+#V0.0.13 - Beta
 # load in configuration variables
 . config-temp.conf
 #test variable run yes/no
@@ -85,7 +85,7 @@ echo >> $workdir/upnext.txt
 echo    Starting With: $nextshow >> $workdir/upnext$xmltvloop.txt
 
 ffmpeg -y -f lavfi -i color=$offlinebackground1:$videoresolution:d=5 -stream_loop -1 -i $offlineaudio -shortest -vf "drawtext=textfile='$workdir/upnext$xmltvloop.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$offlinetextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy $output/channel-resuming/$xmltvloop.mp4
-
+touch $output/channel-resuming/$xmltvloop.mp4
 awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.txt $workdir/xmlfiles4.txt
 
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
