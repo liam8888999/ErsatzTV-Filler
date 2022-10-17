@@ -52,7 +52,7 @@ done
 while [[ -z $newstextcolour ]]; do
 newstextcolour=random
 done
-if [[ -z $newsbackgroundcolour ]];
+if [[ $newsbackgroundcolour = "" ]];
 then
   echo newsbackgroundcolour is random
 else
