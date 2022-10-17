@@ -1,11 +1,10 @@
 #!/bin/bash
-#V0.0.8 - Beta
+#V0.0.9 - Beta
 # load in configuration variables
 . config-temp.conf
 #test variable run yes/no
 #convert variable to lowercase
 processchanneloffline1=$(echo $processchanneloffline | tr '[:upper:]' '[:lower:]')
-
 if [[ $processchanneloffline1 = yes ]]
 then
 #channel Currently offline
@@ -92,8 +91,8 @@ awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.tx
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 done
 
-exit 0
+./autoupdate.sh
 
 else
-exit 0
+./autoupdate.sh
 fi

@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.8 - Beta
+#V0.0.9 - Beta
 
 # load in configuration variables
 . config.conf
@@ -29,6 +29,8 @@ weatherdir=$scriptdir/weather
 #set helperdir
 helperdir=$scriptdir/helper-scripts
 
+helperfiledir=$scriptdir/helper-files
+
 #General cleanup
 
 rm -f $weatherdir/*
@@ -43,9 +45,15 @@ echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
 
+if [[ -z $autoupdate ]];
+then
+  echo autoupdate=yes >> $helperdir/config-temp.conf
+else
+  echo autoupdate=$autoupdate >> $helperdir/config-temp.conf
+fi
 if [[ -z $videolength ]];
 then
-  echo videolengthr=30 >> $helperdir/config-temp.conf
+  echo videolength=30 >> $helperdir/config-temp.conf
 else
   echo videolength=$videolength >> $helperdir/config-temp.conf
 fi
@@ -147,7 +155,7 @@ else
 fi
 
 #copy colours.txt
-cp $scriptdir/colours.txt $workdir/colours.txt
+cp $helperfiledir/colours.txt $workdir/colours.txt
 
 #setup audio
 #list audio files

@@ -34,6 +34,8 @@ during planned channel offline times.
 Make sure your in the ErsatzTV-Filler directory and run the following command:
 1. `git pull`
 
+#### Automatic updates are now supported by default
+
 It is recommended to copy the configuration sample again in order to ensure all new variables are included
 #### Follow step 4 and 5 above
 
