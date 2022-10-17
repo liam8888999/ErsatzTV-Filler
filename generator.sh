@@ -163,4 +163,5 @@ country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
 
 #call weather.sh
-$helperdir/weather.sh
+cd $helperdir
+./weather.sh
