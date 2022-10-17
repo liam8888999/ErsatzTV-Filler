@@ -26,6 +26,8 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
+echo $workdir
+
 # check variables are set. if not set default fallbacks
 
 while [[ -z $videolength ]]; do
