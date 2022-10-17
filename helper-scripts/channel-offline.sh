@@ -90,8 +90,9 @@ ffmpeg -y -f lavfi -i color=$offlinebackground1:$videoresolution:d=5 -stream_loo
 awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.txt $workdir/xmlfiles4.txt
 
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
-xmltvloop=""
 done
+
+exit 0
 
 else
 exit 0
