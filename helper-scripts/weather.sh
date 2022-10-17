@@ -3,9 +3,10 @@
 
 # load in configuration variables
 . config-temp.conf
-
+processweather=Yes
 #test variable run yes/no
-processweather=no
+processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
+echo $processweather1
 
 if [[ $processweather = yes ]]
 then
