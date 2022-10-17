@@ -24,14 +24,16 @@ case "$0" in
 esac
 scriptdir="${scriptdir%/*}"
 
-#make sure workdir exists
-if [ ! -d $workdir ]; then
-  mkdir -p $workdir;
-fi
+
 
 #set workdir
 
 workdir=$scriptdir/workdir
+
+#make sure workdir exists
+if [ ! -d $workdir ]; then
+  mkdir -p $workdir;
+fi
 
 #set weatherdir
 
