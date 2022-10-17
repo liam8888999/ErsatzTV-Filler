@@ -52,7 +52,7 @@ done
 while [[ -z $newstextcolour ]]; do
 newstextcolour=random
 done
-if [ ! -z $newsbackgroundcolour ];
+if [[ ! -z $newsbackgroundcolour ]];
 then
 echo "newsbackgroundcolour=random" >> $workdir/config.conf
 else
