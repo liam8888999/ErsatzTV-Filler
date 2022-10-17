@@ -5,6 +5,7 @@
 #test variable run yes/no
 #convert variable to lowercase
 processchanneloffline1=$(echo $processchanneloffline | tr '[:upper:]' '[:lower:]')
+echo startoffline
 
 if [[ $processchanneloffline1 = yes ]]
 then
