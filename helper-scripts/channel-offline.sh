@@ -4,6 +4,11 @@
 . config-temp.conf
 #test variable run yes/no
 #convert variable to lowercase
+if [[ ! -z "$ETV_FILLER_DOCKER" ]];
+then
+  output=/output
+fi
+
 processchanneloffline1=$(echo $processchanneloffline | tr '[:upper:]' '[:lower:]')
 if [[ $processchanneloffline1 = yes ]]
 then

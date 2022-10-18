@@ -145,18 +145,11 @@ else
   echo backgroundcolour=$backgroundcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $output ]];
-if [[ ! -z "$ETV_FILLER_DOCKER" ]];
-then
-  echo output=/output >> $helperdir/config-temp.conf
-else
-if [[ -z $output ]];
   then
     echo output=~ >> $helperdir/config-temp.conf
   else
     echo output=$output >> $helperdir/config-temp.conf
   fi
-fi
-fi
 if [[ -z $offlinebackgroundcolour ]];
 then
   echo offlinebackgroundcolour=random >> $helperdir/config-temp.conf

@@ -5,6 +5,11 @@
 . config-temp.conf
 #test variable run yes/no
 #convert variable to lowercase
+if [[ ! -z "$ETV_FILLER_DOCKER" ]];
+then
+  output=/output
+fi
+
 processnews1=$(echo $processnews | tr '[:upper:]' '[:lower:]')
 if [[ $processnews1 = yes ]]
 then
