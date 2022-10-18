@@ -1,6 +1,12 @@
 #!/bin/bash
 #V0.0.13 - Beta
 
+# skip autoupdate in docker
+if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+then
+    return 0 2>/dev/null || exit 0
+fi
+
 # load in configuration variables
 . config-temp.conf
 #for test
