@@ -194,7 +194,7 @@ sed 's/^9 //' $workdir/optional2-news21.txt >> $workdir/optional2-news.txt
 
 # Generate Video
 
-ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i $audio5 -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t 00:00:00 $output/news-v3.mp4
+ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i $audio5 -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t 00:01:00 $output/news-v3.mp4
 touch $output/news-v3.mp4
 #set variable blank to avoid endless loop
 newsfeed2=""
