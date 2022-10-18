@@ -74,7 +74,7 @@ EOF
 
 
 # Generate Results
-curl -s "$newsfeed" | sed 's/\&lt;p&gt;//g' | sed 's/\&lt;/p&gt;//g' | xsltproc $newsstyle - | grep -v xml |  man -l - | col -bx > $workdir/newstemp.txt
+curl -s "$newsfeed" | sed 's/\&lt;p\&gt;//g' | sed 's/\&lt;/p&\gt;//g' | xsltproc $newsstyle - | grep -v xml |  man -l - | col -bx > $workdir/newstemp.txt
 #remove empty line at top of file
 sed -i '1,/^$/d' $workdir/newstemp.txt
 #add paragraph numbering
