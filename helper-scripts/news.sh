@@ -11,6 +11,8 @@ then
 
 #news
 
+echo $output
+
 #audio
 randomNumber3=$(shuf -i 1-36 -n 1 --repeat)
 randomNumber4=$(shuf -i 1-36 -n 1 --repeat)

@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Update first line of readme.md to include newer features
 - Fix video length
 - fix weather where places have a space in their name
+- fix some funny xml strings that i have come across
+- output variable in config.conf now does nothing when using docker
 
 ## [0.0.13 - Beata] - 2022-10-18
 
