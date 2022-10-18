@@ -90,15 +90,17 @@ else
 fi
 if [[ -z $state ]];
 then
-  echo state='Texas' >> $helperdir/config-temp.conf
+  echo stateurl='Texas' >> $helperdir/config-temp.conf
 else
-  echo state=$state >> $helperdir/config-temp.conf
+    stateurl=$(echo $state|sed -e 's/ /%20/g')
+  echo stateurl=$stateurl >> $helperdir/config-temp.conf
 fi
 if [[ -z $city ]];
 then
-  echo city='Austin' >> $helperdir/config-temp.conf
+  echo cityurl='Austin' >> $helperdir/config-temp.conf
 else
-  echo city=$city >> $helperdir/config-temp.conf
+  cityurl=$(echo $city|sed -e 's/ /%20/g')
+  echo cityurl=$cityurl >> $helperdir/config-temp.conf
 fi
 if [[ -z $newsduration ]];
 then
@@ -187,7 +189,7 @@ fi
 
 #set duration correctly
 #ffmpegvideolength=$(date -d@$videolength -u +%H:%M:%S)
-#ffmpegnewsduration=$(date -d@$newsduration -u +%H:%M:%S) 
+#ffmpegnewsduration=$(date -d@$newsduration -u +%H:%M:%S)
 
 #copy colours.txt
 cp $helperfiledir/colours.txt $workdir/colours.txt

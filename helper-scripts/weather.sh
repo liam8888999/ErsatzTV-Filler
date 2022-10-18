@@ -52,10 +52,6 @@ fi
 
 #retrieve weather data
 
-#fix white spaces for curl
-
-stateurl=$(echo $state|sed -e 's/ /%20/g')
-cityurl=$(echo $city|sed -e 's/ /%20/g')
 
 
 

@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Typo which was preventing version number in sample-config.conf from being updated
 - Update first line of readme.md to include newer features
 - Fix video length
+- fix weather where places have a space in their name
 
 ## [0.0.13 - Beata] - 2022-10-18
 
