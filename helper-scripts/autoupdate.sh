@@ -18,7 +18,7 @@ then
 echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo cd $scriptdir
 echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
-echo rm \$0 >> /tmp/ErsatzTV-Filler-autoupdate.sh
+#echo rm \$0 >> /tmp/ErsatzTV-Filler-autoupdate.sh
 
 chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 
