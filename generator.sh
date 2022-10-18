@@ -84,11 +84,9 @@ else
 fi
 if [[ -z $videolength ]];
 then
-  ffmpegvideolength=$(date -d@30 -u +%H:%M:%S)
-  echo videolength=ffmpegvideolength >> $helperdir/config-temp.conf
+  echo videolength=30 >> $helperdir/config-temp.conf
 else
-  ffmpegvideolength=$(date -d@$videolength -u +%H:%M:%S)
-  echo videolength=$ffmpegvideolength >> $helperdir/config-temp.conf
+  echo videolength=$videolength >> $helperdir/config-temp.conf
 fi
 if [[ -z $state ]];
 then
@@ -104,11 +102,9 @@ else
 fi
 if [[ -z $newsduration ]];
 then
-  ffmpegnewsduration=$(date -d@60 -u +%H:%M:%S)
-  echo newsduration=$ffmpegnewsduration >> $helperdir/config-temp.conf
+  echo newsduration=60 >> $helperdir/config-temp.conf
 else
-  ffmpegnewsduration=$(date -d@$newsduration -u +%H:%M:%S)
-  echo newsduration=$ffmpegnewsduration >> $helperdir/config-temp.conf
+  echo newsduration=$newsduration >> $helperdir/config-temp.conf
 fi
 if [[ -z $textspeed ]];
 then
@@ -188,6 +184,10 @@ then
 else
   echo processchanneloffline=$processchanneloffline >> $helperdir/config-temp.conf
 fi
+
+#set duration correctly
+#ffmpegvideolength=$(date -d@$videolength -u +%H:%M:%S)
+#ffmpegnewsduration=$(date -d@$newsduration -u +%H:%M:%S) 
 
 #copy colours.txt
 cp $helperfiledir/colours.txt $workdir/colours.txt
