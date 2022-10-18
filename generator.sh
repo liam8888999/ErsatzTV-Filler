@@ -156,6 +156,7 @@ if [[ -z $output ]];
     echo output=$output >> $helperdir/config-temp.conf
   fi
 fi
+fi
 if [[ -z $offlinebackgroundcolour ]];
 then
   echo offlinebackgroundcolour=random >> $helperdir/config-temp.conf
