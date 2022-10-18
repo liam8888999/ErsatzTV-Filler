@@ -4,6 +4,8 @@
 version="V0.0.13 - Beta"
 echo $version
 
+CONFIG=${1:-config.conf}
+
 if [[ ! -z $(command -v apt) ]];
 then
 if [[ -z $(command -v ffmpeg) ]];
@@ -29,7 +31,7 @@ fi
 fi
 
 # load in configuration variables
-. config.conf
+. "$CONFIG"
 
 #retrieve script location
 
