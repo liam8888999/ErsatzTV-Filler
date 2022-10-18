@@ -84,9 +84,11 @@ else
 fi
 if [[ -z $videolength ]];
 then
-  echo videolength=30 >> $helperdir/config-temp.conf
+  ffmpegvideolength=$(date -d@30 -u +%H:%M:%S)
+  echo videolength=ffmpegvideolength >> $helperdir/config-temp.conf
 else
-  echo videolength=$videolength >> $helperdir/config-temp.conf
+  ffmpegvideolength=$(date -d@$videolength -u +%H:%M:%S)
+  echo videolength=$ffmpegvideolength >> $helperdir/config-temp.conf
 fi
 if [[ -z $state ]];
 then
@@ -102,9 +104,11 @@ else
 fi
 if [[ -z $newsduration ]];
 then
-  echo newsduration=60 >> $helperdir/config-temp.conf
+  ffmpegnewsduration=$(date -d@60 -u +%H:%M:%S)
+  echo newsduration=$ffmpegnewsduration >> $helperdir/config-temp.conf
 else
-  echo newsduration=$newsduration >> $helperdir/config-temp.conf
+  ffmpegnewsduration=$(date -d@$newsduration -u +%H:%M:%S)
+  echo newsduration=$ffmpegnewsduration >> $helperdir/config-temp.conf
 fi
 if [[ -z $textspeed ]];
 then
