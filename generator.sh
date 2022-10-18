@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.13 - Beta
+#V0.0.14 - Beta
 
 version="V0.0.13 - Beta"
 echo $version
@@ -84,9 +84,9 @@ else
 fi
 if [[ -z $videolength ]];
 then
-  echo videolength=30 >> $helperdir/config-temp.conf
+  echo videolength=00:00:30 >> $helperdir/config-temp.conf
 else
-  echo videolength=$videolength >> $helperdir/config-temp.conf
+  echo videolength=$(date -d@$videolength -u +%H:%M:%S) >> $helperdir/config-temp.conf
 fi
 if [[ -z $state ]];
 then
@@ -104,9 +104,9 @@ else
 fi
 if [[ -z $newsduration ]];
 then
-  echo newsduration=60 >> $helperdir/config-temp.conf
+  echo newsduration=00:01:00 >> $helperdir/config-temp.conf
 else
-  echo newsduration=$newsduration >> $helperdir/config-temp.conf
+  echo newsduration=$(date -d@$newsduration -u +%H:%M:%S) >> $helperdir/config-temp.conf
 fi
 if [[ -z $textspeed ]];
 then
