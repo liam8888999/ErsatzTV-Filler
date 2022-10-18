@@ -1,5 +1,5 @@
 # ErsatzTV-Filler
- Currently this script only generates weather forecast filler for ErsatzTV or similar programs.
+ Currently this script  generates weather forecast, news and channel currently offline filler for ErsatzTV or similar programs.
 
  Check back regularly for updates.
 

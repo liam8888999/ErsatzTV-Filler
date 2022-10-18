@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.14 - Beata] - 2022-10-18
+
+# Added
+
+- Docker support
+
+# Fixed
+
+- Typo which was preventing version number in sample-config.conf from being updated
+- Update first line of readme.md to include newer features
+- Fix video length
+
 ## [0.0.13 - Beata] - 2022-10-18
 
 # Fixed
