@@ -74,7 +74,7 @@ EOF
 
 
 # Generate Results
-curl -s "$newsfeed" | xsltproc $newsstyle - | grep -v xml | sed 's/\&lt;p\&gt;//g' | sed 's/\&lt;\/p&\gt;//g' | man -l - | col -bx > $workdir/newstemp.txt
+curl -s "$newsfeed" | xsltproc $newsstyle - | grep -v xml | sed 's/\&lt;p\&gt;//g' | sed 's/\&lt;\/p&\gt;//g' | sed 's/\&lt;br&\gt;//g' | man -l - | col -bx > $workdir/newstemp.txt
 #remove empty line at top of file
 sed -i '1,/^$/d' $workdir/newstemp.txt
 #add paragraph numbering
@@ -102,11 +102,7 @@ sed 's/^6 //' $workdir/news18.txt >> $workdir/news19.txt
 sed 's/^7 //' $workdir/news19.txt >> $workdir/news20.txt
 sed 's/^8 //' $workdir/news20.txt >> $workdir/news21.txt
 sed 's/^9 //' $workdir/news21.txt >> $workdir/news.txt
-#remove special character strings
-#sed -i.bak 's/\&nbsp;/ /g' $workdir/news.txt
-#sed -i.bak 's/\&lt;//g' $workdir/news.txt
-#sed -i.bak 's/\&gt;//g' $workdir/news.txt
-#awk -v RS= '/sun/'
+
 
 
 
