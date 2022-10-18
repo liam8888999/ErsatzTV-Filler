@@ -48,6 +48,20 @@ You may also want to add it as a cron job to run at your desired interval
 2. `0 * * * * /home/xxx/ErsatzTV-Filler/generator.sh`
 
 
+## Docker
+
+### Build
+
+```shell
+docker build -t liam8888999/ersatztv-filler .
+```
+
+### Run
+
+```shell
+docker run --rm -it -v $(pwd):/config -v /media/whatever:/output liam8888999/ersatztv-filler /config/config.conf
+```
+
 For more information on how to use this with ErsatzTV please visit https://ersatztv.org/user-guide/filler/
 
 
