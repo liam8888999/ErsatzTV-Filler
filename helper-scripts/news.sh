@@ -79,7 +79,7 @@ EOF
 
 
 # Generate Results
-  curl -s "http://192.168.0.30/testrss.xml" | xsltproc $newsstyle - | grep -v xml | sed 's/\&lt;p\&gt;//g' | sed 's/\&lt;\/p&\gt;//g' | sed 's/\&lt;br&\gt;//g' | man -l - | col -bx > $workdir/newstemp.txt
+  curl -s "$newsfeed" | xsltproc $newsstyle - | grep -v xml | sed 's/\&lt;p\&gt;//g' | sed 's/\&lt;\/p&\gt;//g' | sed 's/\&lt;br&\gt;//g' | man -l - | col -bx > $workdir/newstemp.txt
 #remove empty line at top of file
 sed -i '1,/^$/d' $workdir/newstemp.txt
 #add paragraph numbering
