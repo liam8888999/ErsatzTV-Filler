@@ -95,6 +95,17 @@ sed '/^7 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
 sed '/^8 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
 sed '/^9 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
 sed '/^10 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+
+#testing
+
+sed '/^11 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^12 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^13 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^14 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^15 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^16 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+sed '/^17 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
+
 #remove paragraph numbering
 sed 's/^10 //' $workdir/news2.txt >> $workdir/news12.txt
 sed 's/^0 //' $workdir/news12.txt >> $workdir/news13.txt
@@ -106,7 +117,20 @@ sed 's/^5 //' $workdir/news17.txt >> $workdir/news18.txt
 sed 's/^6 //' $workdir/news18.txt >> $workdir/news19.txt
 sed 's/^7 //' $workdir/news19.txt >> $workdir/news20.txt
 sed 's/^8 //' $workdir/news20.txt >> $workdir/news21.txt
+
+#testing
+sed 's/^11 //' $workdir/news20.txt >> $workdir/news21.txt
+sed 's/^12 //' $workdir/news20.txt >> $workdir/news21.txt
+sed 's/^13 //' $workdir/news20.txt >> $workdir/news21.txt
+sed 's/^14 //' $workdir/news20.txt >> $workdir/news21.txt
+sed 's/^15 //' $workdir/news20.txt >> $workdir/news21.txt
+sed 's/^16 //' $workdir/news20.txt >> $workdir/news21.txt
+sed 's/^17 //' $workdir/news20.txt >> $workdir/news21.txt
+
+#not testing
 sed 's/^9 //' $workdir/news21.txt >> $workdir/news.txt
+
+
 
 
 
