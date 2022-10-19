@@ -62,7 +62,7 @@ nextshow=$(cat $workdir/xmltemp5$xmltvloop.txt)
 
 #news backgound
 #background colour randomiser
-if [[ $nofflinebackgroundcolour == random ]]
+if [[ $offlinebackgroundcolour == random ]]
 then
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newsbackgroundrandomNumber=$(shuf -i 1-140 -n 1 --repeat)

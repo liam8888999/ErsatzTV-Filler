@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.15 - Beata] - 2022-10-19
+
+# Fixed
+
+- typo that was selecting random colours for channel offline Filler
+- Esacpe some illegal characters in news filler
+
 ## [0.0.14 - Beata] - 2022-10-18
 
 # Fixed
