@@ -128,7 +128,7 @@ sed 's/^18 //' $workdir/news28.txt >> $workdir/news29.txt
 sed 's/^19 //' $workdir/news29.txt >> $workdir/news30.txt
 sed 's/^20 //' $workdir/news30.txt >> $workdir/news31.txt
 #not testing
-sed 's/^9 //' $workdir/news31.txt | sed 's/\%/\\%/g' >> $workdir/news.txt
+sed 's/^9 //' $workdir/news31.txt | sed 's/\%/\\%/g' | sed 's/\!/\\!/g' >> $workdir/news.txt
 
 
 
