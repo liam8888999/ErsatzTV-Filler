@@ -1,7 +1,7 @@
 #!/bin/bash
-#V0.0.14 - Beta
+#V0.0.15 - Beta
 
-version="V0.0.14 - Beta"
+version="V0.0.15 - Beta"
 echo $version
 
 CONFIG=${1:-config.conf}

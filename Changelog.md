@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 # Fixed
 
 - typo that was selecting random colours for channel offline Filler
-- Esacpe some illegal characters in news filler
+- Fix % character in news feed
 
 ## [0.0.14 - Beata] - 2022-10-18
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.14 - Beta
+#V0.0.15 - Beta
 
 # load in configuration variables
 . config-temp.conf
@@ -95,16 +95,6 @@ sed '/^7 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
 sed '/^8 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
 sed '/^9 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
 sed '/^10 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^11 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^12 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^13 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^14 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^15 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^16 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^17 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^18 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^19 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
-sed '/^20 /,/^\s*$/!d' $workdir/news1.txt >> $workdir/news2.txt
 
 #remove paragraph numbering
 sed 's/^10 //' $workdir/news2.txt >> $workdir/news12.txt
@@ -117,19 +107,8 @@ sed 's/^5 //' $workdir/news17.txt >> $workdir/news18.txt
 sed 's/^6 //' $workdir/news18.txt >> $workdir/news19.txt
 sed 's/^7 //' $workdir/news19.txt >> $workdir/news20.txt
 sed 's/^8 //' $workdir/news20.txt >> $workdir/news21.txt
-sed 's/^11 //' $workdir/news21.txt >> $workdir/news22.txt
-sed 's/^12 //' $workdir/news22.txt >> $workdir/news23.txt
-sed 's/^13 //' $workdir/news23.txt >> $workdir/news24.txt
-sed 's/^14 //' $workdir/news24.txt >> $workdir/news25.txt
-sed 's/^15 //' $workdir/news25.txt >> $workdir/news26.txt
-sed 's/^16 //' $workdir/news26.txt >> $workdir/news27.txt
-sed 's/^17 //' $workdir/news27.txt >> $workdir/news28.txt
-sed 's/^18 //' $workdir/news28.txt >> $workdir/news29.txt
-sed 's/^19 //' $workdir/news29.txt >> $workdir/news30.txt
-sed 's/^20 //' $workdir/news30.txt >> $workdir/news31.txt
-#not testing
-sed 's/^9 //' $workdir/news31.txt >> $workdir/news32.txt
-cat $workdir/news32.txt | sed 's/\%/\\%/g' >> $workdir/news.txt
+sed 's/^9 //' $workdir/news21.txt >> $workdir/news22.txt
+cat $workdir/news22.txt | sed 's/\%/\\%/g' >> $workdir/news.txt
 
 
 
@@ -177,7 +156,8 @@ sed 's/^5 //' $workdir/optional1-news17.txt >> $workdir/optional1-news18.txt
 sed 's/^6 //' $workdir/optional1-news18.txt >> $workdir/optional1-news19.txt
 sed 's/^7 //' $workdir/optional1-news19.txt >> $workdir/optional1-news20.txt
 sed 's/^8 //' $workdir/optional1-news20.txt >> $workdir/optional1-news21.txt
-sed 's/^9 //' $workdir/optional1-news21.txt >> $workdir/optional1-news.txt
+sed 's/^9 //' $workdir/optional1-news21.txt >> $workdir/optional1-news22.txt
+cat $workdir/optional1-news22.txt | sed 's/\%/\\%/g' >> $workdir/optional1-news.txt
 
 # Generate Video
 
@@ -223,6 +203,8 @@ sed 's/^6 //' $workdir/optional2-news18.txt >> $workdir/optional2-news19.txt
 sed 's/^7 //' $workdir/optional2-news19.txt >> $workdir/optional2-news20.txt
 sed 's/^8 //' $workdir/optional2-news20.txt >> $workdir/optional2-news21.txt
 sed 's/^9 //' $workdir/optional2-news21.txt >> $workdir/optional2-news.txt
+sed 's/^9 //' $workdir/optional2-news21.txt >> $workdir/optional2-news22.txt
+cat $workdir/optional2-news22.txt | sed 's/\%/\\%/g' >> $workdir/optional2-news.txt
 
 # Generate Video
 
