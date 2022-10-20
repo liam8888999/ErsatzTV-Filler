@@ -96,8 +96,8 @@ awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.tx
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 done
 
-./autoupdate.sh
+./cleanup.sh
 
 else
-./autoupdate.sh
+./cleanup.sh
 fi
