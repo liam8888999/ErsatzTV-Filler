@@ -4,6 +4,22 @@
 version="V0.0.15 - Beta"
 echo $version
 
+#retrieve script location
+
+wdir="$PWD"; [ "$PWD" = "/" ] && wdir=""
+case "$0" in
+  /*) scriptdir="${0}";;
+  *) scriptdir="$wdir/${0#./}";;
+esac
+scriptdir="${scriptdir%/*}"
+
+if [[ -f $scriptdir/running.txt ]];
+then
+  exit 0
+fi
+
+touch $scriptdir/running.txt
+
 CONFIG=${1:-config.conf}
 
 if [[ ! -z $(command -v apt) ]];
@@ -32,16 +48,6 @@ fi
 
 # load in configuration variables
 . "$CONFIG"
-
-#retrieve script location
-
-wdir="$PWD"; [ "$PWD" = "/" ] && wdir=""
-case "$0" in
-  /*) scriptdir="${0}";;
-  *) scriptdir="$wdir/${0#./}";;
-esac
-scriptdir="${scriptdir%/*}"
-
 
 
 #set workdir
