@@ -294,7 +294,7 @@ audioamount=$(wc -l $workdir/music.txt | cut -f 2)
 if [ $audioamount == 1 $workdir/music.txt ]; then
 audionumber=1
 else
-audionumber=echo "\$(shuf -i 1-$audioamount -n 1 --repeat))"
+audionumber=echo "\$(shuf -i 1-$audioamount -n 1 --repeat)"
 fi
 echo $audionumber
 #End Audio
