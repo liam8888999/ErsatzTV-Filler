@@ -278,7 +278,7 @@ cp $helperfiledir/colours.txt $workdir/colours.txt
 #setup audio
 #list audio files
 
-if [ ! -f $scriptdir/*.* ]; then
+if [ ! -f $scriptdir/* ]; then
   echo empty directory
 fi
 
