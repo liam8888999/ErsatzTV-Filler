@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.15 - Beta
+#V0.0.16 - Beta
 
 # skip autoupdate in docker
 if [[ ! -z "$ETV_FILLER_DOCKER" ]]

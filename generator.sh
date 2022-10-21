@@ -1,7 +1,7 @@
 #!/bin/bash
-#V0.0.15 - Beta
+#V0.0.16 - Beta
 
-version="V0.0.15 - Beta"
+version="V0.0.16 - Beta"
 echo $version
 
 #retrieve script location
@@ -83,7 +83,7 @@ rm -f $helperdir/config-temp.conf
 
 cat << EOF > $scriptdir/config.conf
   #weather
-  #V0.0.15 - Beta
+  #V0.0.16 - Beta
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker

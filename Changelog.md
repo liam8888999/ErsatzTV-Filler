@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 # Added
 
 - Prevent more than 1 instance of script running at the same time
+- Auto update config.conf with new variables when available
+- Allow custom audio files (flac or mp3s can be dropped in the custom-audio folder)
 
 ## [0.0.15 - Beata] - 2022-10-19
 
