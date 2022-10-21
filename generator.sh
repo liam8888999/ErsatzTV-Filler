@@ -294,9 +294,9 @@ audioamount=$(wc -l $workdir/music.txt)
 if [ $audioamount == 1 ]; then
 audionumber=1
 else
-audionumber=echo "$(shuf -i 1-$audioamount -n 1 --repeat))"
+audionumber=echo "\$(shuf -i 1-$audioamount -n 1 --repeat))"
 fi
-
+echo $audionumber
 #End Audio
 
 # Retrieve information country code etc.
