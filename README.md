@@ -19,7 +19,7 @@ Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed
 3. `chmod +x generator.sh`
 #### Update the 'output', 'city', 'state' and other variables to your required locations, replace nano with your favorite text editor.
 5. `nano config.conf`
-#### Create custom-audio folder
+#### Create custom-audio folder (place your audio files in here to use)
 6. `mkdir custom-audio`
 
 
