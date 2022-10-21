@@ -294,6 +294,7 @@ fi
 find $scriptdir/audio -name '*.mp3' -print > $workdir/music.txt
 #add number to begining of line for randomisation
 awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
+audioamount=$(wc -l $workdir/music.txt)
 
 #End Audio
 
