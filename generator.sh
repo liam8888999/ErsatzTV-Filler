@@ -285,7 +285,7 @@ cp $helperfiledir/colours.txt $workdir/colours.txt
 
 cd $scriptdir
 
-  if [ "$(ls -A custom-audio)" ]; then
+  if [ ! "$(ls -A custom-audio)" ]; then
   echo empty directory
 fi
 
