@@ -294,9 +294,9 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk '
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 
 if [ $audioamount == 1 ]; then
-audionumber=1
+echo audionumber=1 >> $helperdir/config-temp.conf
 else
-audionumber="\$(shuf -i 1-$audioamount -n 1 --repeat)"
+echo audionumber="\$(shuf -i 1-$audioamount -n 1 --repeat)" >> $helperdir/config-temp.conf
 fi
 echo $audionumber
 #End Audio
