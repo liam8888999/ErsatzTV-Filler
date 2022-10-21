@@ -59,6 +59,11 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
+#make sure custom-audio exists
+if [ ! -d $scriptdir/custom-audio ]; then
+  mkdir -p $scriptdir/custom-audio;
+fi
+
 #set weatherdir
 
 weatherdir=$scriptdir/weather
@@ -278,7 +283,7 @@ cp $helperfiledir/colours.txt $workdir/colours.txt
 #setup audio
 #list audio files
 
-  if [ "$(ls -A $xriptdir/custom-audio)" ]; then
+  if [ "$(ls -A $sriptdir/custom-audio)" ]; then
   echo empty directory
 fi
 

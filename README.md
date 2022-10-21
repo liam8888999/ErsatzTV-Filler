@@ -17,10 +17,10 @@ Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed
 2. `cd ErsatzTV-Filler`
 #### Allow the script to be executed
 3. `chmod +x generator.sh`
-#### Copy the configuration sample
-4. `cp sample-config.conf config.conf`
-#### Update the 'output', 'city', 'state' variables to your required locations, replace nano with your favorite text editor.
+#### Update the 'output', 'city', 'state' and other variables to your required locations, replace nano with your favorite text editor.
 5. `nano config.conf`
+#### Create custom-audio folder
+6. `mkdir custom-audio`
 
 
 ## For Channel currently offline Filler
