@@ -86,39 +86,39 @@ autoupdate=$autoupdate
 
 #choose which filler to create
 #weather
-processweather=yes
+processweather=$processweather
 #news
-processnews=yes
+processnews=$processnews
 #channel offline
-processchanneloffline=yes
+processchanneloffline=$processchanneloffline
 
 #type place name inside '' and it will automatically remove the spaces for you
 #the output is where you want the generated video files to go. this is the location you should point ErsatzTV at.
 #It is suggested to set this to a different location than the generator
 #e.g. if generator.sh is in /home/boy/ErsatzTV-Filler you may want to set it to something like /home/boy/etv-filler-output
 #the output variable now does nothing when run in docker. docker output is always /output
-output=
-city='Austin'
-state='Texas'
+output=$output
+city='$city'
+state='$state'
 #desired video length e.g. 30 for 30sec -- must be in seconds
-videolength=30
+videolength=$videolength
 #desired background colour around image can be set to random for a random colour to be generated for each video
-backgroundcolour=black
+backgroundcolour=$backgroundcolour
 
 #set background colour for news - can be set to random
-newsbackgroundcolour=random
+newsbackgroundcolour=$newsbackgroundcolour
 
 #set text colour for news - can be set to random
-newstextcolour=random
+newstextcolour=$newstextcolour
 
 #set a rss url for your news feed
 newsfeed="$newsfeed"
 
 #set a rss url for an additional news feed (optional)
-newsfeed1=""
+newsfeed1="$newsfeed1"
 
 #set a rss url for an additional news feed (optional)
-newsfeed2=""
+newsfeed2="$newsfeed2"
 
 #channel currently offline filler
 #for this to work you need to run the script once
@@ -127,21 +127,21 @@ newsfeed2=""
 #during planned channel offline times
 
 #ErsatzTV xmltv url - http://ip/:PORT/iptv/xmltv.xml
-xmltv=""
+xmltv="$xmltv"
 
 #set colours for channel currently offline filler
-offlinebackgroundcolour=random
-offlinetextcolour=random
+offlinebackgroundcolour=$offlinebackgroundcolour
+offlinetextcolour=$offlinetextcolour
 
 #advanced user configuration
 
 
 #desired video resolution 1280x720
-videoresolution=1280x720
+videoresolution=$videoresolution
 #set the speed for the scrolling text. Default is 40. Higher is faster
-textspeed=40
+textspeed=$textspeed
 #Adjust the news duration to fit your needs must be in seconds
-newsduration=60
+newsduration=$newsduration
 EOF
 
 
