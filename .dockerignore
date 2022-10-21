@@ -2,6 +2,6 @@
 !/generator.sh
 !/helper-files
 !/helper-scripts
-!/audio
+!/custom-audio
 !/audio-fallback
 !/weather
