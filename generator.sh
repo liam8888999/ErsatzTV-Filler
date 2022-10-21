@@ -114,7 +114,7 @@ newsbackgroundcolour=random
 newstextcolour=random
 
 #set a rss url for your news feed
-newsfeed="$newsfeed"
+newsfeed="$newsfeed"bb
 
 #set a rss url for an additional news feed (optional)
 newsfeed1=""
