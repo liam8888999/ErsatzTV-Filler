@@ -297,6 +297,7 @@ audionumber=1
 else
 audionumber=echo "$(shuf -i 1-$audioamount -n 1 --repeat))"
 fi
+)
 
 #End Audio
 
