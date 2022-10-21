@@ -80,76 +80,74 @@ rm -r $workdir/*
 rm -f $helperdir/config-temp.conf
 
 
-# Write and update config.conf
+
 cat << EOF > $scriptdir/config.conf
-#weather
-#V0.0.15 - Beta
+  #weather
+  #V0.0.15 - Beta
 
-#automatic updates (yes / no)
-# Automatically disabled if running in docker
-autoupdate=$autoupdate
+  #automatic updates (yes / no)
+  # Automatically disabled if running in docker
+  autoupdate=$autoupdate
 
-#choose which filler to create
-#weather
-processweather=$processweather
-#news
-processnews=$processnews
-#channel offline
-processchanneloffline=$processchanneloffline
+  #choose which filler to create
+  #weather
+  processweather=$processweather
+  #news
+  processnews=$processnews
+  #channel offline
+  processchanneloffline=$processchanneloffline
 
-#type place name inside '' and it will automatically remove the spaces for you
-#the output is where you want the generated video files to go. this is the location you should point ErsatzTV at.
-#It is suggested to set this to a different location than the generator
-#e.g. if generator.sh is in /home/boy/ErsatzTV-Filler you may want to set it to something like /home/boy/etv-filler-output
-#the output variable now does nothing when run in docker. docker output is always /output
-output=$output
-city='$city'
-state='$state'
-#desired video length e.g. 30 for 30sec -- must be in seconds
-videolength=$videolength
-#desired background colour around image can be set to random for a random colour to be generated for each video
-backgroundcolour=$backgroundcolour
+  #type place name inside '' and it will automatically remove the spaces for you
+  #the output is where you want the generated video files to go. this is the location you should point ErsatzTV at.
+  #It is suggested to set this to a different location than the generator
+  #e.g. if generator.sh is in /home/boy/ErsatzTV-Filler you may want to set it to something like /home/boy/etv-filler-output
+  #the output variable now does nothing when run in docker. docker output is always /output
+  output=$output
+  city='$city'
+  state='$state'
+  #desired video length e.g. 30 for 30sec -- must be in seconds
+  videolength=$videolength
+  #desired background colour around image can be set to random for a random colour to be generated for each video
+  backgroundcolour=$backgroundcolour
 
-#set background colour for news - can be set to random
-newsbackgroundcolour=$newsbackgroundcolour
+  #set background colour for news - can be set to random
+  newsbackgroundcolour=$newsbackgroundcolour
 
-#set text colour for news - can be set to random
-newstextcolour=$newstextcolour
+  #set text colour for news - can be set to random
+  newstextcolour=$newstextcolour
 
-#set a rss url for your news feed
-newsfeed="$newsfeed"
+  #set a rss url for your news feed
+  newsfeed="$newsfeed"
 
-#set a rss url for an additional news feed (optional)
-newsfeed1="$newsfeed1"
+  #set a rss url for an additional news feed (optional)
+  newsfeed1="$newsfeed1"
 
-#set a rss url for an additional news feed (optional)
-newsfeed2="$newsfeed2"
+  #set a rss url for an additional news feed (optional)
+  newsfeed2="$newsfeed2"
 
-#channel currently offline filler
-#for this to work you need to run the script once
-#which will generate placeholder videos titled with the channel number
-#you will need to add each of these to its own collection and schedule that collection
-#during planned channel offline times
+  #channel currently offline filler
+  #for this to work you need to run the script once
+  #which will generate placeholder videos titled with the channel number
+  #you will need to add each of these to its own collection and schedule that collection
+  #during planned channel offline times
 
-#ErsatzTV xmltv url - http://ip/:PORT/iptv/xmltv.xml
-xmltv="$xmltv"
+  #ErsatzTV xmltv url - http://ip/:PORT/iptv/xmltv.xml
+  xmltv="$xmltv"
 
-#set colours for channel currently offline filler
-offlinebackgroundcolour=$offlinebackgroundcolour
-offlinetextcolour=$offlinetextcolour
+  #set colours for channel currently offline filler
+  offlinebackgroundcolour=$offlinebackgroundcolour
+  offlinetextcolour=$offlinetextcolour
 
-#advanced user configuration
+  #advanced user configuration
 
 
-#desired video resolution 1280x720
-videoresolution=$videoresolution
-#set the speed for the scrolling text. Default is 40. Higher is faster
-textspeed=$textspeed
-#Adjust the news duration to fit your needs must be in seconds
-newsduration=$newsduration
+  #desired video resolution 1280x720
+  videoresolution=$videoresolution
+  #set the speed for the scrolling text. Default is 40. Higher is faster
+  textspeed=$textspeed
+  #Adjust the news duration to fit your needs must be in seconds
+  newsduration=$newsduration
 EOF
-
-
 
 
 
