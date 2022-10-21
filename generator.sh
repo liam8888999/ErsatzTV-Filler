@@ -78,7 +78,7 @@ rm -f $helperdir/config-temp.conf
 if [[ ! -f $scriptdir/config.conf ]];
 then
 # Write config.conf if it doesn't exist
-cat << EOF > $scriptdir/config.conf
+cat << EOF > $scriptdir/config2.conf
 #weather
 #V0.0.15 - Beta
 
