@@ -286,7 +286,7 @@ cp $helperfiledir/colours.txt $workdir/colours.txt
 cd $scriptdir
 
   if [ ! "$(ls -A custom-audio)" ]; then
-find fallback-audio -name '*' -print > $workdir/music.txt
+find audio-fallback -name '*' -print > $workdir/music.txt
 else
   find custom-audio -name '*.mp3' -print > $workdir/music.txt
 fi
