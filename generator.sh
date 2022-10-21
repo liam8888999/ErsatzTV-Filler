@@ -293,7 +293,7 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk '
 
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 
-if [ $audioamount == 1* ]; then
+if [ ! $audioamount == 1* ]; then
 audionumber=1
 else
 audionumber="\$(shuf -i 1-$audioamount -n 1 --repeat)"
