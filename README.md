@@ -21,7 +21,7 @@ Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed
 4. `cp sample-config.conf config.conf`
 #### Update the 'output', 'city', 'state' and other variables to your required locations, replace nano with your favorite text editor.
 5. `nano config.conf`
-#### Create custom-audio folder (place your audio files in here to use)
+#### Create custom-audio folder (place your audio files in here to use - .flac or .mp3 currently supported requests for other file types may be made)
 6. `mkdir custom-audio`
 
 
