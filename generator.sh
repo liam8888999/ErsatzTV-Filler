@@ -75,16 +75,14 @@ rm -r $workdir/*
 rm -f $helperdir/config-temp.conf
 
 
-#if [[ ! -f $scriptdir/config.conf ]];
-#then
-# Write config.conf if it doesn't exist
-cat << EOF > $scriptdir/config2.conf
+# Write and update config.conf
+cat << EOF > $scriptdir/config.conf
 #weather
 #V0.0.15 - Beta
 
 #automatic updates (yes / no)
 # Automatically disabled if running in docker
-autoupdate=
+autoupdate=$autoupdate
 
 #choose which filler to create
 #weather
@@ -114,7 +112,7 @@ newsbackgroundcolour=random
 newstextcolour=random
 
 #set a rss url for your news feed
-newsfeed="$newsfeed"bb
+newsfeed="$newsfeed"
 
 #set a rss url for an additional news feed (optional)
 newsfeed1=""
@@ -145,7 +143,6 @@ textspeed=40
 #Adjust the news duration to fit your needs must be in seconds
 newsduration=60
 EOF
-#fi
 
 
 
