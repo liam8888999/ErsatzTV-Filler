@@ -17,9 +17,9 @@ then
 #news
 
 #audio
-randomNumber3=$(shuf -i 1-$audioamount -n 1 --repeat)
-randomNumber4=$(shuf -i 1-$audioamount -n 1 --repeat)
-randomNumber5=$(shuf -i 1-$audioamount -n 1 --repeat)
+randomNumber3=$audionumber
+randomNumber4=$audionumber
+randomNumber5=$audionumber
 audio3=$(head -n $randomNumber3 $workdir/music.txt | tail -n 1)
 audio4=$(head -n $randomNumber4 $workdir/music.txt | tail -n 1)
 audio5=$(head -n $randomNumber5 $workdir/music.txt | tail -n 1)

@@ -45,7 +45,7 @@ xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 while [[ ! -z $xmltvloop ]]; do
 
 #randomise audio
-randomNumberoffline=$(shuf -i 1-$audioamount -n 1 --repeat)
+randomNumberoffline=$audionumber
 offlineaudio=$(head -n $randomNumberoffline $workdir/music.txt | tail -n 1)
 
 # get and read xmltv data
