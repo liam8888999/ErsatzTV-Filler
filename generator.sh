@@ -75,8 +75,8 @@ rm -r $workdir/*
 rm -f $helperdir/config-temp.conf
 
 
-if [[ ! -f $scriptdir/config.conf ]];
-then
+#if [[ ! -f $scriptdir/config.conf ]];
+#then
 # Write config.conf if it doesn't exist
 cat << EOF > $scriptdir/config2.conf
 #weather
@@ -145,7 +145,7 @@ textspeed=40
 #Adjust the news duration to fit your needs must be in seconds
 newsduration=60
 EOF
-fi
+#fi
 
 
 
