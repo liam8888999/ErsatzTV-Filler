@@ -98,7 +98,7 @@ cat << EOF > $scriptdir/config.conf
   processchanneloffline=$processchanneloffline
 
   # Set custom audio location (This is set by default to /audio when using docker)
-  customaudio=
+  customaudio=$customaudio
 
   #type place name inside '' and it will automatically remove the spaces for you
   #the output is where you want the generated video files to go. this is the location you should point ErsatzTV at.
