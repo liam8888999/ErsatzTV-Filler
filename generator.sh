@@ -97,6 +97,9 @@ cat << EOF > $scriptdir/config.conf
   #channel offline
   processchanneloffline=$processchanneloffline
 
+  # Set custom audio location (This is set by default to /audio when using docker)
+  customaudio=
+
   #type place name inside '' and it will automatically remove the spaces for you
   #the output is where you want the generated video files to go. this is the location you should point ErsatzTV at.
   #It is suggested to set this to a different location than the generator
@@ -283,10 +286,15 @@ cp $helperfiledir/colours.txt $workdir/colours.txt
 
 cd $scriptdir
 
-  if [ ! "$(ls -A custom-audio)" ]; then
+if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+then
+customaudio=/audio
+fi
+
+  if [[ -z $customaudio ]]; then
 find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 else
-find $scriptdir/custom-audio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 fi
 #add number to begining of line for randomisation
 awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
