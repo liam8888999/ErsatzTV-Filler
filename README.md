@@ -59,7 +59,7 @@ docker build -t liam8888999/ersatztv-filler .
 ### Run
 
 ```shell
-docker run --rm -it -v $(pwd):/config -v /media/whatever:/output liam8888999/ersatztv-filler /config/config.conf
+docker run --rm -it -v $(pwd):/config -v /media/audio/whatever:/audio -v /media/whatever:/output liam8888999/ersatztv-filler /config/config.conf
 ```
 
 For more information on how to use this with ErsatzTV please visit https://ersatztv.org/user-guide/filler/

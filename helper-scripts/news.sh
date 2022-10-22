@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.16 - Beta
+#V0.0.17 - Beta
 
 # load in configuration variables
 . config-temp.conf
@@ -116,7 +116,7 @@ cat $workdir/news22.txt | sed 's/\%/\\%/g' >> $workdir/news.txt
 
 # Generate Video
 
-ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i $audio3 -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $output/news-v1.mp4
+ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i "$audio3" -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $output/news-v1.mp4
 touch $output/news-v1.mp4
 
 
@@ -161,7 +161,7 @@ cat $workdir/optional1-news22.txt | sed 's/\%/\\%/g' >> $workdir/optional1-news.
 
 # Generate Video
 
-ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i $audio4 -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $output/news-v2.mp4
+ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i "$audio4" -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $output/news-v2.mp4
 touch $output/news-v2.mp4
 #set variable blank to avoid endless loop
 newsfeed1=""
@@ -208,7 +208,7 @@ cat $workdir/optional2-news22.txt | sed 's/\%/\\%/g' >> $workdir/optional2-news.
 
 # Generate Video
 
-ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i $audio5 -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $output/news-v3.mp4
+ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i "$audio5" -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $output/news-v3.mp4
 touch $output/news-v3.mp4
 #set variable blank to avoid endless loop
 newsfeed2=""

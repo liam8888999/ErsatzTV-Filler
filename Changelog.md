@@ -4,13 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-## [0.0.17 - Beata] - 2022-10-20
+## [0.0.17 - Beta] - 2022-10-20
 
 # Added
 
 - support custom audio location
+- Support audio files with a space in name
 
-## [0.0.16 - Beata] - 2022-10-20
+## [0.0.16 - Beta] - 2022-10-20
 
 # Added
 
@@ -18,14 +19,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Auto update config.conf with new variables when available
 - Allow custom audio files (flac or mp3s can be dropped in the custom-audio folder)
 
-## [0.0.15 - Beata] - 2022-10-19
+## [0.0.15 - Beta] - 2022-10-19
 
 # Fixed
 
 - typo that was selecting random colours for channel offline Filler
 - Fix % character in news feed
 
-## [0.0.14 - Beata] - 2022-10-18
+## [0.0.14 - Beta] - 2022-10-18
 
 # Fixed
 
@@ -36,13 +37,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - fix some funny xml strings that i have come across
 - output variable in config.conf now does nothing when using docker
 
-## [0.0.13 - Beata] - 2022-10-18
+## [0.0.13 - Beta] - 2022-10-18
 
 # Fixed
 
 - Video timestamps are now updated
 
-## [0.0.12 - Beata] - 2022-10-18
+## [0.0.12 - Beta] - 2022-10-18
 
 # Fixed
 
@@ -51,7 +52,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Fix major breaking bug in v0.0.11 where workdir wasnt being generated and was causing the script to fail at every step
 
 
-## [0.0.11 - Beata] - 2022-10-18
+## [0.0.11 - Beta] - 2022-10-18
 
 # Added
 
@@ -61,13 +62,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - script will now end in ErsatzTV-Filler directory
 
-## [0.0.10 - Beata] - 2022-10-17
+## [0.0.10 - Beta] - 2022-10-17
 
 # Added
 
 - Added more audio files
 
-## [0.0.9 - Beata] - 2022-10-17
+## [0.0.9 - Beta] - 2022-10-17
 
 # Changed
 
@@ -77,7 +78,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - automatic update support (default = yes)
 
-## [0.0.8 - Beata] - 2022-10-17
+## [0.0.8 - Beta] - 2022-10-17
 
 # Changed
 
@@ -88,13 +89,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - previous bug fix with decimals in etv channel numbers as etv only supports titles with 1 decimal not 2
 
 
-## [0.0.7 - Beata] - 2022-10-17
+## [0.0.7 - Beta] - 2022-10-17
 
 # Fixed
 
 - fix bug with decimals in etv channel numbers
 
-## [0.0.6 - Beata] - 2022-10-17
+## [0.0.6 - Beta] - 2022-10-17
 jq must be installed as a requirement in this version
 
 # Fixed
@@ -102,7 +103,7 @@ jq must be installed as a requirement in this version
 - ffmpeg now automatically overwrites existing video
 - fix temperature unit
 
-## [0.0.5 - Beata] - 2022-10-17
+## [0.0.5 - Beta] - 2022-10-17
 jq must be installed as a requirement in this version
 
 # Fixed
