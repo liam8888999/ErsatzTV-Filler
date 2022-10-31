@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.17 - Beta 
+#V0.0.17 - Beta
 
 version="V0.0.17 - Beta"
 echo $version
