@@ -235,6 +235,12 @@ then
 else
   echo videolength=$(date -d@$videolength -u +%H:%M:%S) >> $helperdir/config-temp.conf
 fi
+if [[ -z $videolength ]];
+then
+  echo videolength1=30 >> $helperdir/config-temp.conf
+else
+  echo videolength1=$videolength) >> $helperdir/config-temp.conf
+fi
 if [[ -z $state ]];
 then
   echo stateurl='Texas' >> $helperdir/config-temp.conf
