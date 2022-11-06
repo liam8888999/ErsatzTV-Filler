@@ -7,12 +7,12 @@ script_log="/tmp/ErsatzTV-Filler/log_`date +%F`.log"
 version="V0.0.17 - Beta"
 echo $version
 echo this will automatically output to a log file at $script_log
-exec 1 || tee $script_log
+exec 1 | tee $script_log
 echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
-exec 2>&1
+exec 2>&1 | tee $script_log
 
 rm -f /tmp/ErsatzTV-Filler-autoupdate.sh
 
