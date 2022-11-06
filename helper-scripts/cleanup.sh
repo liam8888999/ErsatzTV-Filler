@@ -11,5 +11,6 @@ echo "Starting clean up"
 rm -f $weatherdir/*
 rm -r $workdir/*
 rm -f $scriptdir/running.txt
+rm -f $workdir/update
 echo "Finished cleaning up"
 exit 0

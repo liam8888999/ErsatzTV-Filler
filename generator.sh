@@ -316,7 +316,9 @@ curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
 
-#call weather.sh
+#call autoupdate.sh
 cd $helperdir
 ./autoupdate.sh
+
+fi
 #Music: https://audiotrimmer.com/royalty-free-music/
