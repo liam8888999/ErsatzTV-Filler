@@ -319,6 +319,4 @@ echo country=$country >> $helperdir/config-temp.conf
 #call autoupdate.sh
 cd $helperdir
 ./autoupdate.sh
-
-fi
 #Music: https://audiotrimmer.com/royalty-free-music/
