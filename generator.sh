@@ -26,23 +26,23 @@ if [[ ! -z $(command -v apt) ]];
 then
 if [[ -z $(command -v ffmpeg) ]];
 then
-sudo apt install ffmpeg -y
+echo "sudo apt install ffmpeg -y"
 fi
 if [[ -z $(command -v xsltproc) ]];
 then
-sudo apt install xsltproc -y
+echo "sudo apt install xsltproc -y"
 fi
 if [[ -z $(command -v jq) ]];
 then
-sudo apt install jq -y
+echo "sudo apt install jq -y"
 fi
 if [[ -z $(command -v tv_sort) ]];
 then
-  sudo apt install xmltv-util -y
+echo "sudo apt install xmltv-util -y"
 fi
 if [[ -z $(command -v curl) ]];
 then
-  sudo apt install curl -y
+echo "sudo apt install curl -y"
 fi
 fi
 

@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Audio fade out
 - video fade out
 
+# Fixed
+
+-Added improvements for auto update
+
 ## [0.0.17 - Beta] - 2022-10-20
 
 # Added
