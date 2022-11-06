@@ -5,12 +5,12 @@ CONFIG=${1:-config.conf}
 . "$CONFIG"
 #start logging
 
-if [ ! -d /tmp/ErsatzTV-Filler ]; then
-  mkdir -p /tmp/ErsatzTV-Filler;
+if [ ! -d $log_location ]; then
+  mkdir -p $log_location;
 fi
+chmod 777 $log_location
 version="V0.0.17 - Beta"
 #exec 1>>$script_log
-echo $processweather
 log_file=$("$log_location/log_`date +%F`.log")
 exec > >(tee -a "$log_file") 2>&1
 echo ""
