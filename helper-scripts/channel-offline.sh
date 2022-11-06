@@ -75,6 +75,11 @@ fi
 #news text colour
 if [[ $offlinetextcolour == random ]]
 then
+
+  randomise() {
+      shuf -i 1-$audioamount -n 1 --repeat
+  }
+
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newstextcolourrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
 #newstextcolour=$(head -n $newstextcolourandomNumber $workdir/colours.txt | tail -n 1)

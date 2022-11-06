@@ -14,7 +14,9 @@ processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 if [[ $processweather1 = yes ]]
 then
 
-  echo audionumber is $audionumber
+  randomise() {
+      shuf -i 1-$audioamount -n 1 --repeat
+  }
 
 #weather
 

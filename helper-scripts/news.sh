@@ -14,6 +14,10 @@ processnews1=$(echo $processnews | tr '[:upper:]' '[:lower:]')
 if [[ $processnews1 = yes ]]
 then
 
+  randomise() {
+      shuf -i 1-$audioamount -n 1 --repeat
+  }
+
 #news
 
 #audio
