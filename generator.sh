@@ -8,14 +8,14 @@ if [ ! -d /tmp/ErsatzTV-Filler ]; then
 fi
 version="V0.0.17 - Beta"
 #exec 1>>$script_log
-exec > >(tee -a $log_location) 2>&1
+exec > >(tee -a $log_location/log_`date +%F`.log) 2>&1
 echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
 version="V0.0.17 - Beta"
 echo $version
-echo this will automatically output to a log file at $log_location
+echo this will automatically output to a log file at $log_location/log_`date +%F`.log
 
 #finish logging
 
@@ -287,7 +287,7 @@ else
 fi
 if [[ -z $log_location ]];
 then
-  echo log_location="/tmp/ErsatzTV-Filler/log_`date +%F`.log" >> $helperdir/config-temp.conf
+  echo log_location="/tmp/ErsatzTV-Filler/" >> $helperdir/config-temp.conf
 else
   echo log_location=$log_location >> $helperdir/config-temp.conf
 fi
