@@ -13,12 +13,6 @@ if [[ ! -z "$ETV_FILLER_DOCKER" ]]
 then
     log_location=/tmp/ErsatzTV-Filler/
 fi
-if [[ -z $log_location ]];
-then
-  echo log_location=/tmp/ErsatzTV-Filler >> $helperdir/config-temp.conf
-else
-  echo log_location=$log_location >> $helperdir/config-temp.conf
-fi
 
 version="V0.0.17 - Beta"
 #exec 1>>$script_log
@@ -185,6 +179,12 @@ echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
 echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
+if [[ -z $log_location ]];
+then
+  echo log_location=/tmp/ErsatzTV-Filler >> $helperdir/config-temp.conf
+else
+  echo log_location=$log_location >> $helperdir/config-temp.conf
+fi
 if [[ -z $log_days ]];
 then
   echo log_days=7 >> $helperdir/config-temp.conf
