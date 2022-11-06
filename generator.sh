@@ -122,7 +122,7 @@ cat << EOF > $scriptdir/config.conf
   state='$state'
 
 
-  #weather fade duration
+  #weather fade duration - default is 5 seconds
   weathervideofadeoutduration=$weathervideofadeoutduration
   weathervideofadeinduration=$weathervideofadeinduration
   weatheraudiofadeoutduration=$weatheraudiofadeoutduration
