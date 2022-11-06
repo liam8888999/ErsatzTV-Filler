@@ -19,6 +19,8 @@ echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo cd $scriptdir
 echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo rm \$0 >> /tmp/ErsatzTV-Filler-autoupdate.sh
+rm -f $scriptdir/running.txt >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo exec $scriptdir/generator.sh >> /tmp/ErsatzTV-Filler-autoupdate.sh
 
 chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 
@@ -30,6 +32,7 @@ cd $scriptdir
 exec /tmp/ErsatzTV-Filler-autoupdate.sh
 else
 rm -f $helperdir/config-temp.conf
+rm -f $scriptdir/running.txt
 cd $scriptdir
-exit 0
+./generator.sh
 fi

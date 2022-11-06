@@ -10,4 +10,4 @@ rm -f $weatherdir/*
 rm -r $workdir/*
 rm -f $scriptdir/running.txt
 
-./autoupdate.sh
+exit 0

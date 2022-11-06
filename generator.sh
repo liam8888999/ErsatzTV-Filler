@@ -46,12 +46,12 @@ echo "sudo apt install curl -y"
 fi
 fi
 
-if [[ -z $(git fetch) ]];
+if [[ ! -z $(git fetch) ]];
 then
-echo nothing
+  cd $helperdir
+  ./autoupdate.sh
 else
-  echo something
-fi
+
 
 # load in configuration variables
 . "$CONFIG"
@@ -314,4 +314,6 @@ echo country=$country >> $helperdir/config-temp.conf
 #call weather.sh
 cd $helperdir
 ./weather.sh
+
+fi
 #Music: https://audiotrimmer.com/royalty-free-music/
