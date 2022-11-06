@@ -12,7 +12,7 @@ echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
-exec 2>&1>>$script_log
+exec 2>&1
 tee $script_log
 
 rm -f /tmp/ErsatzTV-Filler-autoupdate.sh
