@@ -17,7 +17,7 @@ fi
 autoupdate1=$(echo $autoupdate | tr '[:upper:]' '[:lower:]')
 if [[ $autoupdate1 = yes ]]
 then
-  echo updater111112
+  echo updater1111
 echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo cd $scriptdir
 #echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
