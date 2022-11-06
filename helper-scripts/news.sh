@@ -15,7 +15,7 @@ if [[ $processnews1 = yes ]]
 then
 
   randomise() {
-      shuf -i 1-$audioamount -n 1 --repeat
+      shuf -i 1-$audionumber -n 1 --repeat
   }
 
 #news
