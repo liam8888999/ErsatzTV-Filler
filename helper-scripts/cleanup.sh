@@ -6,8 +6,10 @@
 
 #General cleanup
 
+echo "Stating clean up"
+
 rm -f $weatherdir/*
 rm -r $workdir/*
 rm -f $scriptdir/running.txt
-
+echo "Finished cleaning up"
 exit 0
