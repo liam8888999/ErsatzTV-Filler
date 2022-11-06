@@ -25,7 +25,7 @@ then
 echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo cd $scriptdir >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
-echo exec $helperdir/weather.sh >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo exec $scriptdir/generator.sh >> /tmp/ErsatzTV-Filler-autoupdate.sh
 
 chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 
