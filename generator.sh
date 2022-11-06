@@ -14,6 +14,10 @@ then
     log_location=/tmp/ErsatzTV-Filler
 fi
 
+if [ ! -d $log_location ]; then
+  mkdir -p $log_location;
+fi
+
 version="0.0.18 - Beta"
 #exec 1>>$script_log
 exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
