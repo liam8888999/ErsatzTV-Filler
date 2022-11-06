@@ -47,6 +47,7 @@ fi
 fi
 
 if [[ -z $(git fetch) ]];
+then
 echo nothing
 else
   echo something
