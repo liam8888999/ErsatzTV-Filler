@@ -3,6 +3,7 @@
 script_log="/tmp/ErsatzTV-Filler/log_`date +%F`.log"
 echo autoupdater
 exec 1>>$script_log
+date
 exec 2>&1
 
 # load in configuration variables
@@ -29,7 +30,7 @@ echo 'echo updating' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo 'exec 2>&1' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo cd $scriptdir >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
-echo rm -f $workdir/update >> /tmp/ErsatzTV-Filler-autoupdate.sh
+#echo rm -f $workdir/update >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo rm -f $scriptdir/running.txt >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo exec $scriptdir/generator.sh >> /tmp/ErsatzTV-Filler-autoupdate.sh
 
