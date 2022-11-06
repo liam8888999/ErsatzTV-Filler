@@ -299,8 +299,6 @@ echo audioamount=$audioamount >> $helperdir/config-temp.conf
 
 if [ $audioamount == 1 ]; then
 echo audionumber=1 >> $helperdir/config-temp.conf
-else
-echo audionumber="\$(randomise)" >> $helperdir/config-temp.conf
 fi
 #End Audio
 
