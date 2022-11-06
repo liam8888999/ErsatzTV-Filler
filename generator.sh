@@ -46,6 +46,12 @@ echo "sudo apt install curl -y"
 fi
 fi
 
+if [[ -z $(git fetch) ]];
+echo nothing
+else
+  echo something
+fi
+
 # load in configuration variables
 . "$CONFIG"
 
@@ -297,9 +303,6 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk '
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 echo audioamount=$audioamount >> $helperdir/config-temp.conf
 
-if [ $audioamount == 1 ]; then
-echo audionumber=1 >> $helperdir/config-temp.conf
-fi
 #End Audio
 
 # Retrieve information country code etc.

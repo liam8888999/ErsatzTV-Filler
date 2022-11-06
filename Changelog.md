@@ -13,7 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 # Fixed
 
--Added improvements for auto update
+- Added improvements for auto update (now runs at the beginning)
+- Issues with randomising audio
 
 ## [0.0.17 - Beta] - 2022-10-20
 
