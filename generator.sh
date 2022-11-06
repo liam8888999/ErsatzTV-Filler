@@ -287,12 +287,12 @@ customaudio=/audio
 fi
 
   if [[ -z $customaudio ]]; then
-find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music1.txt
+find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 else
-find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music1.txt
+find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 fi
 #add number to begining of line for randomisation
-awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music1.txt | sort -n -k 1 | awk 'sub(/\S* /,"")' > $workdir/music.txt
+awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 echo audioamount=$audioamount >> $helperdir/config-temp.conf
