@@ -75,16 +75,6 @@ rm -f $weatherdir/*
 rm -r $workdir/*
 rm -f $helperdir/config-temp.conf
 
-git fetch |& tee $workdir/update
-
-if [[ ! -s $workdir/update ]];
-then
-    cd $helperdir
-    ./autoupdate.sh
-    exit 0
-  else
-    echo generator
-
 
 cat << EOF > $scriptdir/config.conf
   #weather
@@ -313,6 +303,17 @@ echo audioamount=$audioamount >> $helperdir/config-temp.conf
 curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
+
+git fetch |& tee $workdir/update
+
+if [[ ! -s $workdir/update ]];
+then
+    cd $helperdir
+    ./autoupdate.sh
+    exit 0
+  else
+    echo generator
+
 
 #call weather.sh
 cd $helperdir
