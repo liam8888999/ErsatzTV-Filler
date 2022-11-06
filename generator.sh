@@ -30,7 +30,7 @@ then
   exit 0
 fi
 
-touch $scriptdir/running.txt
+touch $scriptdir/running.txt    
 
 CONFIG=${1:-config.conf}
 
