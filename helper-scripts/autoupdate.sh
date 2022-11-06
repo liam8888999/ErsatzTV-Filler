@@ -1,7 +1,9 @@
 #!/bin/bash
 #V0.0.17 - Beta
+script_log="/tmp/ErsatzTV-Filler/log_`date +%F`.log"
 echo autoupdater
-
+exec 1>>$script_log
+exec 2>&1
 
 # load in configuration variables
 . config-temp.conf
