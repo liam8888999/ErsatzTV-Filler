@@ -16,6 +16,8 @@ then
 
 echo audioamount is $audioamount
 
+randomNumber=$(shuf -i 1-$audioamount -n 1 --repeat)
+
 audio=$(head -n $randomNumber $workdir/music.txt | tail -n 1)
 audio1=$(head -n $randomNumber1 $workdir/music.txt | tail -n 1)
 audio2=$(head -n $randomNumber2 $workdir/music.txt | tail -n 1)
