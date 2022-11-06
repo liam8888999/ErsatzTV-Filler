@@ -48,11 +48,16 @@ fi
 
 if [[ ! -z $(git fetch) ]];
 then
-  cd $helperdir
-  ./autoupdate.sh
-  exit 0
-else
-  echo generator
+touch $workdir/update
+fi
+
+if [[ -f $workdir/update ]];
+then
+    cd $helperdir
+    ./autoupdate.sh
+    exit 0
+  else
+    echo generator
 
 
 # load in configuration variables
