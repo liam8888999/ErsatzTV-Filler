@@ -1,6 +1,8 @@
 #!/bin/bash
 #V0.0.178 - Beta
 CONFIG=${1:-config.conf}
+# load in configuration variables
+. "$CONFIG"
 #start logging
 
 if [ ! -d /tmp/ErsatzTV-Filler ]; then
@@ -62,11 +64,6 @@ then
 echo "sudo apt install curl -y"
 fi
 fi
-
-
-# load in configuration variables
-. "$CONFIG"
-
 
 #set workdir
 
