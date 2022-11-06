@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.178 - Beta
+#0.0.188 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -14,14 +14,14 @@ then
     log_location=/tmp/ErsatzTV-Filler/
 fi
 
-version="V0.0.17 - Beta"
+version="0.0.18 - Beta"
 #exec 1>>$script_log
 exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
 echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
-version="V0.0.17 - Beta"
+version="0.0.18 - Beta"
 echo $version
 echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
 
@@ -96,7 +96,7 @@ rm -f $helperdir/config-temp.conf
 
 
 cat << EOF > $scriptdir/config.conf
-  #V0.0.17 - Beta
+  #0.0.18 - Beta
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
@@ -179,7 +179,7 @@ cat << EOF > $scriptdir/config.conf
   newsduration=$newsduration
 
   # Logs
-  # set the log location
+  # set the log location - in docker this defaults to /tmp/ErsatzTV-Filler/
   log_location=$log_location
   # Set the amount of days to keep log files
   log_days=$log_days
