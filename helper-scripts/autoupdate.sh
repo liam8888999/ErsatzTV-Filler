@@ -12,7 +12,7 @@ then
 # skip autoupdate in docker
 if [[ ! -z "$ETV_FILLER_DOCKER" ]]
 then
-    autoupdate1=no
+    autoupdate=no
 fi
 
 
