@@ -12,14 +12,14 @@ chmod 0777 $log_location
 version="V0.0.17 - Beta"
 #exec 1>>$script_log
 log_file=$("$log_location/log_`date +%F`.log")
-exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
+exec > >(tee -a "/tmp/ErsatzTV-Filler/log_`date +%F`.log") 2>&1
 echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
 version="V0.0.17 - Beta"
 echo $version
-echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
+echo this will automatically output to a log file at "/tmp/ErsatzTV-Filler/log_`date +%F`.log"
 
 #finish logging
 
