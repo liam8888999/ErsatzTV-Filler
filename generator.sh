@@ -46,16 +46,6 @@ echo "sudo apt install curl -y"
 fi
 fi
 
-git fetch |& tee $workdir/update
-
-if [[ ! -s $workdir/update ]];
-then
-    cd $helperdir
-    ./autoupdate.sh
-    exit 0
-  else
-    echo generator
-
 
 # load in configuration variables
 . "$CONFIG"
@@ -85,6 +75,15 @@ rm -f $weatherdir/*
 rm -r $workdir/*
 rm -f $helperdir/config-temp.conf
 
+git fetch |& tee $workdir/update
+
+if [[ ! -s $workdir/update ]];
+then
+    cd $helperdir
+    ./autoupdate.sh
+    exit 0
+  else
+    echo generator
 
 
 cat << EOF > $scriptdir/config.conf
