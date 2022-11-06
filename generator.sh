@@ -46,7 +46,9 @@ echo "sudo apt install curl -y"
 fi
 fi
 
-if [[ ! -z $(git fetch) ]];
+gitfetch=$('git fetch')
+
+if [[ ! -z $gitfetch ]];
 then
 echo "update" >> $workdir/update.txt
 fi
