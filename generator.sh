@@ -320,7 +320,7 @@ echo country=$country >> $helperdir/config-temp.conf
 
 git fetch |& tee $workdir/update
 
-if [[ ! -s $workdir/update ]];
+if [[ -s $workdir/update ]];
 then
   cd $helperdir
     exec $helperdir/autoupdate.sh
