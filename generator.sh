@@ -11,7 +11,7 @@ CONFIG=${1:-config.conf}
 #chmod 0777 $log_location
 if [[ ! -z "$ETV_FILLER_DOCKER" ]]
 then
-    log_location=/tmp/ErsatzTV-Filler/
+    log_location=/tmp/ErsatzTV-Filler
 fi
 
 version="0.0.18 - Beta"
