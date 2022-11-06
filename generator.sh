@@ -9,6 +9,17 @@ CONFIG=${1:-config.conf}
 #  mkdir -p $log_location;
 #fi
 #chmod 0777 $log_location
+if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+then
+    log_location=/tmp/ErsatzTV-Filler/
+fi
+if [[ -z $log_location ]];
+then
+  echo log_location=/tmp/ErsatzTV-Filler >> $helperdir/config-temp.conf
+else
+  echo log_location=$log_location >> $helperdir/config-temp.conf
+fi
+
 version="V0.0.17 - Beta"
 #exec 1>>$script_log
 exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
@@ -92,10 +103,6 @@ rm -f $helperdir/config-temp.conf
 cat << EOF > $scriptdir/config.conf
   #V0.0.17 - Beta
 
-  # Logs
-  # set the log location
-  log_location=$log_location
-
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
   autoupdate=$autoupdate
@@ -161,6 +168,12 @@ cat << EOF > $scriptdir/config.conf
   textspeed=$textspeed
   #Adjust the news duration to fit your needs must be in seconds
   newsduration=$newsduration
+
+  # Logs
+  # set the log location
+  log_location=$log_location
+  # Set the amount of days to keep log files
+  log_days=$log_days
 EOF
 
 
@@ -172,7 +185,12 @@ echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
 echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
-
+if [[ -z $log_days ]];
+then
+  echo log_days=7 >> $helperdir/config-temp.conf
+else
+  echo log_days=$log_days >> $helperdir/config-temp.conf
+fi
 if [[ -z $autoupdate ]];
 then
   echo autoupdate=yes >> $helperdir/config-temp.conf
