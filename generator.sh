@@ -296,10 +296,19 @@ awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music1.txt | sort -n -k 1 | awk 
 
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 
+#generate random numbers
+
+# define it
+randomise() {
+    shuf -i 1-$audioamount -n 1 --repeat
+}
+
+audionumber=$(randomise)
+
 if [ $audioamount == 1 ]; then
 echo audionumber=1 >> $helperdir/config-temp.conf
 else
-echo 'audionumber="\$(shuf -i 1-$audioamount -n 1 --repeat)"' >> $helperdir/config-temp.conf
+echo audionumber="$(shuf -i 1-$audioamount -n 1 --repeat)" >> $helperdir/config-temp.conf
 fi
 #End Audio
 
