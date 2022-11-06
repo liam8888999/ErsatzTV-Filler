@@ -92,8 +92,11 @@ rm -f $helperdir/config-temp.conf
 
 
 cat << EOF > $scriptdir/config.conf
-  #weather
   #V0.0.17 - Beta
+
+  # Logs
+  # set the log location
+  log_location=$log_location
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
@@ -281,6 +284,12 @@ then
   echo processchanneloffline=yes >> $helperdir/config-temp.conf
 else
   echo processchanneloffline=$processchanneloffline >> $helperdir/config-temp.conf
+fi
+if [[ -z $log_location ]];
+then
+  echo log_location="/tmp/ErsatzTV-Filler/log_`date +%F`.log" >> $helperdir/config-temp.conf
+else
+  echo log_location=$log_location >> $helperdir/config-temp.conf
 fi
 
 #set duration correctly
