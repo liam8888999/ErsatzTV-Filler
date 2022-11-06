@@ -64,7 +64,7 @@ curl v3.wttr.in/${stateurl}.png$weathermeasurement --output $weatherdir/v3.png
 wait
 
 # Maths for fade
-weatheraudiofadeoutstart=$(echo "$videolength-$weathervideofadeoutduration" | bc)
+weatheraudiofadeoutstart=$(echo `expr $videolength - $weathervideofadeoutduration` | bc)
 echo start $weathervideofadeoutstart
 
 #make video
