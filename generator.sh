@@ -18,7 +18,7 @@ echo ""
 date
 version="V0.0.17 - Beta"
 echo $version
-echo this will automatically output to a log file at "/$log_location/log_`date +%F`.log"
+echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
 
 #finish logging
 
