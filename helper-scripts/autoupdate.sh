@@ -32,7 +32,7 @@ chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 rm -f $helperdir/config-temp.conf
 cd $scriptdir
 
-./tmp/ErsatzTV-Filler-autoupdate.sh
+exec /tmp/ErsatzTV-Filler-autoupdate.sh
 else
 rm -f $helperdir/config-temp.conf
 rm -f $scriptdir/running.txt
