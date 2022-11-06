@@ -30,7 +30,7 @@ then
   exit 0
 fi
 
-touch $scriptdir/running.txt    
+touch $scriptdir/running.txt
 
 CONFIG=${1:-config.conf}
 
@@ -316,23 +316,7 @@ curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
 
-# Auto update
-
-git fetch |& tee $workdir/update
-
-if [[ -s $workdir/update ]];
-then
-  cd $helperdir
-    exec $helperdir/autoupdate.sh
-    exit 0
-  else
-    echo generator
-# end auto update
-
-
 #call weather.sh
 cd $helperdir
-./weather.sh
-
-fi
+./autoupdate.sh
 #Music: https://audiotrimmer.com/royalty-free-music/
