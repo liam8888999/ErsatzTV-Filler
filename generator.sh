@@ -120,6 +120,14 @@ cat << EOF > $scriptdir/config.conf
   output=$output
   city='$city'
   state='$state'
+
+
+  #weather fade duration
+  weathervideofadeoutduration=$weathervideofadeoutduration
+  weathervideofadeinduration=$weathervideofadeinduration
+  weatheraudiofadeoutduration=$weatheraudiofadeoutduration
+  weatheraudiofadeinduration=$weatheraudiofadeinduration
+
   #desired video length e.g. 30 for 30sec -- must be in seconds
   videolength=$videolength
   #desired background colour around image can be set to random for a random colour to be generated for each video
@@ -179,6 +187,30 @@ echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
 echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
+if [[ -z $weatheraudiofadeinduration ]];
+then
+  echo weatheraudiofadeinduration=5 >> $helperdir/config-temp.conf
+else
+  echo weatheraudiofadeinduration=$weatheraudiofadeinduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $weatheraudiofadeoutduration ]];
+then
+  echo weatheraudiofadeoutduration=5 >> $helperdir/config-temp.conf
+else
+  echo weatheraudiofadeoutduration=$weatheraudiofadeoutduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $weathervideofadeinduration ]];
+then
+  echo weathervideofadeinduration=5 >> $helperdir/config-temp.conf
+else
+  echo weathervideofadeinduration=$weathervideofadeinduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $weathervideofadeoutduration ]];
+then
+  echo weathervideofadeoutduration=5 >> $helperdir/config-temp.conf
+else
+  echo weathervideofadeoutduration=$weathervideofadeoutduration >> $helperdir/config-temp.conf
+fi
 if [[ -z $log_location ]];
 then
   echo log_location=/tmp/ErsatzTV-Filler >> $helperdir/config-temp.conf
