@@ -59,11 +59,6 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
-#make sure custom-audio exists
-if [ ! -d $scriptdir/custom-audio ]; then
-  mkdir -p $scriptdir/custom-audio;
-fi
-
 #set weatherdir
 
 weatherdir=$scriptdir/weather
@@ -292,12 +287,12 @@ customaudio=/audio
 fi
 
   if [[ -z $customaudio ]]; then
-find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music1.txt
 else
-find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music1.txt
 fi
 #add number to begining of line for randomisation
-awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
+awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music1.txt | sort -n -k 1 | awk 'sub(/\S* /,"")' > $workdir/music.txt
 
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 
