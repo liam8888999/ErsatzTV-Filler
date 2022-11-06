@@ -239,7 +239,7 @@ if [[ -z $videolength ]];
 then
   echo videolength1=30 >> $helperdir/config-temp.conf
 else
-  echo videolength1=$videolength) >> $helperdir/config-temp.conf
+  echo videolength1=$videolength >> $helperdir/config-temp.conf
 fi
 if [[ -z $state ]];
 then
