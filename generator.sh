@@ -304,6 +304,8 @@ curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
 
+# Auto update
+
 git fetch |& tee $workdir/update
 
 if [[ ! -s $workdir/update ]];
@@ -313,6 +315,7 @@ then
     exit 0
   else
     echo generator
+# end auto update
 
 
 #call weather.sh
