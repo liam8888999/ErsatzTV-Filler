@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.18 - Beta] - 2022-11-06
+
+# Added
+
+- Audio fade out
+- video fade out
+
 ## [0.0.17 - Beta] - 2022-10-20
 
 # Added
