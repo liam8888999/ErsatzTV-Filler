@@ -318,7 +318,7 @@ echo country=$country >> $helperdir/config-temp.conf
 
 # Auto update
 
-git fetch |& tee $scriptdir/update
+git fetch |& tee $workdir/update
 
 if [[ ! -s $workdir/update ]];
 then
