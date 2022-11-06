@@ -48,7 +48,7 @@ fi
 
 if [[ ! -z $(git fetch) ]];
 then
-touch $workdir/update
+echo "update" >> $workdir/update
 fi
 
 if [[ -f $workdir/update ]];
