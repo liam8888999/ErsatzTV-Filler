@@ -67,7 +67,7 @@ wait
 
 #make video
 
-ffmpeg -y -f lavfi -i color=$background:$videoresolution -i $weatherdir/v1.png -stream_loop -1 -i "$audio" -shortest -af "afade=t=out:st=5:d=5" -vf "fade=t=out:st=10:d=5" -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $output/weather-v1.mp4
+ffmpeg -y -f lavfi -i color=$background:$videoresolution -i $weatherdir/v1.png -stream_loop -1 -i "$audio" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2,fade=type=out:duration=2:start_time=6;afade=type=out:duration=2:start_time=6" -pix_fmt yuv420p -c:a copy -t $videolength $output/weather-v1.mp4
 touch $output/weather-v1.mp4
 ffmpeg -y -f lavfi -i color=$background1:$videoresolution -i $weatherdir/v2.png -stream_loop -1 -i "$audio1" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $output/weather-v2.mp4
 touch $output/weather-v2.mp4
