@@ -5,7 +5,7 @@ echo autoupdater
 exec 1>>$script_log
 date
 exec 2>&1
-c
+
 # load in configuration variables
 . config-temp.conf
 
@@ -22,9 +22,12 @@ fi
 autoupdate1=$(echo $autoupdate | tr '[:upper:]' '[:lower:]')
 if [[ $autoupdate1 = yes ]]
 then
-  echo updater1111
 echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
-echo cd $scriptdir
+echo script_log="/tmp/ErsatzTV-Filler/log_`date +%F`.log" >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo exec 1>>$script_log >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo date >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo exec 2>&1 >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo cd $scriptdir >> /tmp/ErsatzTV-Filler-autoupdate.sh
 #echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo rm \$0 >> /tmp/ErsatzTV-Filler-autoupdate.sh
 rm -f $scriptdir/running.txt >> /tmp/ErsatzTV-Filler-autoupdate.sh
