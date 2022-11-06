@@ -14,8 +14,6 @@ processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 if [[ $processweather1 = yes ]]
 then
 
-echo audioamount is $audioamount
-
 randomNumber=$(shuf -i 1-$audioamount -n 1 --repeat)
 randomNumber1=$(shuf -i 1-$audioamount -n 1 --repeat)
 randomNumber2=$(shuf -i 1-$audioamount -n 1 --repeat)
@@ -76,9 +74,6 @@ touch $output/weather-v2.mp4
 ffmpeg -y -f lavfi -i color=$background2:$videoresolution -i $weatherdir/v3.png -stream_loop -1 -i "$audio2" -shortest -filter_complex "[1]scale=iw*0.9:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weather-v3.mp4
 ffmpeg -y -i $workdir/weather-v3.mp4 -vf "fade=t=out:st=25:d=5" -af "afade=t=out:st=20:d=10" $output/weather-v3.mp4
 touch $output/weather-v3.mp4
-echo "$audio"
-echo "$audio1"
-echo "$audio2"
 #end weather
 ./news.sh
 else
