@@ -381,12 +381,7 @@ then
 else
   echo processchanneloffline=$processchanneloffline >> $helperdir/config-temp.conf
 fi
-if [[ -z $log_location ]];
-then
-  echo log_location="/tmp/ErsatzTV-Filler/" >> $helperdir/config-temp.conf
-else
-  echo log_location=$log_location >> $helperdir/config-temp.conf
-fi
+
 
 #set duration correctly
 #ffmpegvideolength=$(date -d@$videolength -u +%H:%M:%S)
@@ -400,15 +395,17 @@ cp $helperfiledir/colours.txt $workdir/colours.txt
 
 cd $scriptdir
 
-if [[ ! -z "$ETV_FILLER_DOCKER" ]]
-then
-customaudio=/audio
-fi
 
   if [[ -z $customaudio ]]; then
 find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 else
+  if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+  then
+  customaudio=/audio
+  find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+else
 find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+fi
 fi
 #add number to begining of line for randomisation
 awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
