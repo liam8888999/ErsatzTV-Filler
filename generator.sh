@@ -306,7 +306,7 @@ echo audionumber=1 >> $helperdir/config-temp.conf
 else
 echo audionumber="\$(shuf -i 1-$audioamount -n 1 --repeat)" >> $helperdir/config-temp.conf
 fi
-echo $audionumber
+echo audionumber is $audionumber
 #End Audio
 
 # Retrieve information country code etc.
