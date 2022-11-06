@@ -14,9 +14,16 @@ processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 if [[ $processweather1 = yes ]]
 then
 
-randomNumber=$(shuf -i 1-$audioamount -n 1 --repeat)
-randomNumber1=$(shuf -i 1-$audioamount -n 1 --repeat)
-randomNumber2=$(shuf -i 1-$audioamount -n 1 --repeat)
+  if [[ $audioamount = 1 ]]
+  then
+randomNumber=1
+randomNumber1=1
+randomNumber2=1
+else
+  randomNumber=$(shuf -i 1-$audioamount -n 1 --repeat)
+  randomNumber1=$(shuf -i 1-$audioamount -n 1 --repeat)
+  randomNumber2=$(shuf -i 1-$audioamount -n 1 --repeat)
+fi
 
 audio=$(head -n $randomNumber $workdir/music.txt | tail -n 1)
 audio1=$(head -n $randomNumber1 $workdir/music.txt | tail -n 1)
