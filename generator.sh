@@ -8,7 +8,7 @@ CONFIG=${1:-config.conf}
 if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
-chmod 777 $log_location
+chmod 0777 $log_location
 version="V0.0.17 - Beta"
 #exec 1>>$script_log
 log_file=$("$log_location/log_`date +%F`.log")
