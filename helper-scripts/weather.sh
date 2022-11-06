@@ -14,6 +14,8 @@ processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 if [[ $processweather1 = yes ]]
 then
 
+  echo audionumber is $audionumber
+
 #weather
 
 #audio
