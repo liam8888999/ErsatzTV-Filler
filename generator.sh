@@ -40,6 +40,7 @@ scriptdir="${scriptdir%/*}"
 
 if [[ -f $scriptdir/running.txt ]];
 then
+  echo There is already an instance of this generator running. This instance will stop now.
   exit 0
 fi
 

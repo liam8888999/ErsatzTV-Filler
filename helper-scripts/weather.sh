@@ -65,8 +65,6 @@ wait
 
 # Maths for fade
 weathervideofadeoutstart=$(echo `expr $videolength1 - $weathervideofadeoutduration` | bc)
-echo start $weathervideofadeoutstart
-
 #make video
 
 ffmpeg -y -f lavfi -i color=$background:$videoresolution -i $weatherdir/v1.png -stream_loop -1 -i "$audio" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weather-v1.mp4
