@@ -14,14 +14,15 @@ processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 if [[ $processweather1 = yes ]]
 then
 
-randomise () {
+function randomise () {
       randomNumber=$(shuf -i 1-$audioamount -n 1 --repeat)
       randomNumber1=$(shuf -i 1-$audioamount -n 1 --repeat)
       randomNumber2=$(shuf -i 1-$audioamount -n 1 --repeat)
   }
 
 #weather
-randomise ()
+randomise
+
 echo $randomNumber
 
 audio=$(head -n $randomNumber $workdir/music.txt | tail -n 1)
