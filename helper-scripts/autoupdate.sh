@@ -23,7 +23,7 @@ echo cd $scriptdir
 #echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo rm \$0 >> /tmp/ErsatzTV-Filler-autoupdate.sh
 rm -f $scriptdir/running.txt >> /tmp/ErsatzTV-Filler-autoupdate.sh
-#echo ..$scriptdir/generator.sh >> /tmp/ErsatzTV-Filler-autoupdate.sh
+#echo .$scriptdir/generator.sh >> /tmp/ErsatzTV-Filler-autoupdate.sh
 
 chmod +x /tmp/ErsatzTV-Filler-autoupdate.sh
 
