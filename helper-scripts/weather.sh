@@ -14,7 +14,7 @@ processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 if [[ $processweather1 = yes ]]
 then
 
-  randomise() {
+randomise () {
       randomNumber=$(shuf -i 1-$audioamount -n 1 --repeat)
       randomNumber1=$(shuf -i 1-$audioamount -n 1 --repeat)
       randomNumber2=$(shuf -i 1-$audioamount -n 1 --repeat)
