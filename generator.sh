@@ -11,6 +11,8 @@ exec 1>>$script_log
 date
 exec 2>&1
 
+rm -f /tmp/ErsatzTV-Filler-autoupdate.sh
+
 version="V0.0.17 - Beta"
 echo $version
 
