@@ -295,7 +295,7 @@ fi
 awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music1.txt | sort -n -k 1 | awk 'sub(/\S* /,"")' > $workdir/music.txt
 
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
-echo audioamount=$audioamount
+echo audioamount=$audioamount >> $helperdir/config-temp.conf
 
 if [ $audioamount == 1 ]; then
 echo audionumber=1 >> $helperdir/config-temp.conf
