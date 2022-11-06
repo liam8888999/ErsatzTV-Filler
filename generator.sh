@@ -129,6 +129,12 @@ cat << EOF > $scriptdir/config.conf
   weatheraudiofadeoutduration=$weatheraudiofadeoutduration
   weatheraudiofadeinduration=$weatheraudiofadeinduration
 
+  #news fade duration - default is 5 seconds
+  newsvideofadeoutduration=$newsvideofadeoutduration
+  newsvideofadeinduration=$newsvideofadeinduration
+  newsaudiofadeoutduration=$newsaudiofadeoutduration
+  newsaudiofadeinduration=$newsaudiofadeinduration
+
   #desired video length e.g. 30 for 30sec -- must be in seconds
   videolength=$videolength
   #desired background colour around image can be set to random for a random colour to be generated for each video
@@ -188,6 +194,31 @@ echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
 echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
+if [[ -z $newsaudiofadeinduration ]];
+then
+  echo newsaudiofadeinduration=5 >> $helperdir/config-temp.conf
+else
+  echo newsaudiofadeinduration=$weatheraudiofadeinduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $newsaudiofadeoutduration ]];
+then
+  echo newsaudiofadeoutduration=5 >> $helperdir/config-temp.conf
+else
+  echo newsaudiofadeoutduration=$weatheraudiofadeoutduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $newsvideofadeinduration ]];
+then
+  echo newsvideofadeinduration=5 >> $helperdir/config-temp.conf
+else
+  echo newsvideofadeinduration=$weathervideofadeinduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $newsvideofadeoutduration ]];
+then
+  echo newsvideofadeoutduration=5 >> $helperdir/config-temp.conf
+else
+  echo newsvideofadeoutduration=$weathervideofadeoutduration >> $helperdir/config-temp.conf
+fi
+
 if [[ -z $weatheraudiofadeinduration ]];
 then
   echo weatheraudiofadeinduration=5 >> $helperdir/config-temp.conf
