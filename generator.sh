@@ -1,5 +1,12 @@
 #!/bin/bash
 #V0.0.17 - Beta
+if [ ! -d /tmp/ErsatzTV-Filler ]; then
+  mkdir -p /tmp/ErsatzTV-Filler;
+fi
+script_log="/tmp/ErsatzTV-Filler/log_`date +%F`.log"
+exec 1>>$script_log
+exec 2>&1
+datee
 
 version="V0.0.17 - Beta"
 echo $version
@@ -311,7 +318,7 @@ git fetch |& tee $workdir/update
 if [[ ! -s $workdir/update ]];
 then
     cd $helperdir
-    ./autoupdate.sh
+    exec autoupdate.sh
     exit 0
   else
     echo generator
