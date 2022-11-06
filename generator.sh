@@ -317,7 +317,7 @@ echo country=$country >> $helperdir/config-temp.conf
 
 git fetch |& tee $scriptdir/update
 
-if [[ ! -s $scriptdir/update ]];
+if [[ ! -s $scripttdir/update ]];
 then
   cd $helperdir
     exec $helperdir/autoupdate.sh
