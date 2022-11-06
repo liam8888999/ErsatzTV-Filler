@@ -1,6 +1,9 @@
 #!/bin/bash
 #V0.0.17 - Beta
 
+# load in configuration variables
+. config-temp.conf
+
 # skip autoupdate in docker
 if [[ ! -z "$ETV_FILLER_DOCKER" ]]
 then
@@ -9,8 +12,6 @@ fi
 
 echo updater
 
-# load in configuration variables
-. config-temp.conf
 #for test
 #test variable run yes/no
 #convert variable to lowercase
