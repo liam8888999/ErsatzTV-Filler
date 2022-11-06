@@ -46,7 +46,7 @@ echo "sudo apt install curl -y"
 fi
 fi
 
-gitfetch=$(git fetch)
+gitfetch=$(ggit fetch)
 
 if [[ ! -z $gitfetch ]];
 then
