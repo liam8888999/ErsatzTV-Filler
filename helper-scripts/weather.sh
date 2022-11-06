@@ -21,9 +21,9 @@ then
 #weather
 
 #audio
-randomNumber=$audionumber
-randomNumber1=$audionumber
-randomNumber2=$audionumber
+randomNumber=$randomise
+randomNumber1=$randomise
+randomNumber2=$randomise
 audio=$(head -n $randomNumber $workdir/music.txt | tail -n 1)
 audio1=$(head -n $randomNumber1 $workdir/music.txt | tail -n 1)
 audio2=$(head -n $randomNumber2 $workdir/music.txt | tail -n 1)

@@ -299,7 +299,7 @@ audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 if [ $audioamount == 1 ]; then
 echo audionumber=1 >> $helperdir/config-temp.conf
 else
-echo audionumber="\$(randomise)" >> $helperdir/config-temp.conf
+echo audionumber="\$(randomise())" >> $helperdir/config-temp.conf
 fi
 #End Audio
 
