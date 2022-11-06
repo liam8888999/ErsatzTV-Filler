@@ -6,7 +6,7 @@
 
 #General cleanup
 
-echo "Stating clean up"
+echo "Starting clean up"
 
 rm -f $weatherdir/*
 rm -r $workdir/*
