@@ -9,7 +9,7 @@ echo $version
 echo this will automatically output to a log file at $script_log
 exec 1>>$script_log
 date
-#exec 2>&1
+exec 2>&1
 
 version="V0.0.17 - Beta"
 echo $version
