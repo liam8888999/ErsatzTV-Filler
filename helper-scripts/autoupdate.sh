@@ -47,4 +47,3 @@ rm -f $scriptdir/running.txt
 cd $scriptdir
 #./generator.sh
 fi
-c
