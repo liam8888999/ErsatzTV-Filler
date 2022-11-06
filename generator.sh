@@ -46,14 +46,9 @@ echo "sudo apt install curl -y"
 fi
 fi
 
-gitfetch=$(gfgit fetch)
+git fetch |& tee $workdir/update
 
-if [[ ! -z $gitfetch ]];
-then
-echo "update" >> $workdir/update.txt
-fi
-
-if [[ -f $workdir/update ]];
+if [[ ! -s $workdir/update ]];
 then
     cd $helperdir
     ./autoupdate.sh
