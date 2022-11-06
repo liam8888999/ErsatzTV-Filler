@@ -46,7 +46,7 @@ echo "sudo apt install curl -y"
 fi
 fi
 
-if [[ ! -z $("git fetch") ]];
+if [[ ! -z $(git fetch) ]];
 then
   cd $helperdir
   ./autoupdate.sh
