@@ -319,6 +319,7 @@ git fetch |& tee $workdir/update
 
 if [[ ! -s $workdir/update ]];
 then
+  cd $helperdir
     exec $helperdir/autoupdate.sh
     exit 0
   else
