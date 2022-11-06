@@ -21,7 +21,7 @@ randomise () {
   }
 
 #weather
-randomise
+randomise ()
 echo $randomNumber
 
 audio=$(head -n $randomNumber $workdir/music.txt | tail -n 1)
