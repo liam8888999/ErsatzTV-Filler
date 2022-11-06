@@ -319,8 +319,7 @@ git fetch |& tee $workdir/update
 
 if [[ ! -s $workdir/update ]];
 then
-    cd $helperdir
-    exec autoupdate.sh
+    exec $helperdir/autoupdate.sh
     exit 0
   else
     echo generator
