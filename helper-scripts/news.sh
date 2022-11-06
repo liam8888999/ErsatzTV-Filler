@@ -112,8 +112,8 @@ cat $workdir/news22.txt | sed 's/\%/\\%/g' >> $workdir/news.txt
 
 
 # Maths for fade
-newsvideofadeoutstart=$(echo `expr $videolength1 - $newsvideofadeoutduration` | bc)
-newsaudiofadeoutstart=$(echo `expr $videolength1 - $newsaudiofadeoutduration` | bc)
+newsvideofadeoutstart=$(echo `expr $newsduration1 - $newsvideofadeoutduration` | bc)
+newsaudiofadeoutstart=$(echo `expr $newsduration1 - $newsaudiofadeoutduration` | bc)
 
 # Generate Video
 

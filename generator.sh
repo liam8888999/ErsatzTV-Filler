@@ -297,7 +297,7 @@ if [[ -z $newsduration ]];
 then
   echo newsduration1=60 >> $helperdir/config-temp.conf
 else
-  echo newsduration=$newsduration >> $helperdir/config-temp.conf
+  echo newsduration1=$newsduration >> $helperdir/config-temp.conf
 fi
 if [[ -z $textspeed ]];
 then
