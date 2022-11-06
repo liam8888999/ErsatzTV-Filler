@@ -26,6 +26,7 @@ echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo script_log="/tmp/ErsatzTV-Filler/log_`date +%F`.log" >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo 'exec 1>>$script_log' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo date >> /tmp/ErsatzTV-Filler-autoupdate.sh
+echo 'echo updating' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo 'exec 2>&1' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo cd $scriptdir >> /tmp/ErsatzTV-Filler-autoupdate.sh
 #echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
@@ -47,4 +48,3 @@ rm -f $scriptdir/running.txt
 cd $scriptdir
 #./generator.sh
 fi
-c 
