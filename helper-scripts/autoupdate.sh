@@ -5,7 +5,7 @@ echo autoupdater
 exec 1>>$script_log
 date
 exec 2>&1
-
+c
 # load in configuration variables
 . config-temp.conf
 
