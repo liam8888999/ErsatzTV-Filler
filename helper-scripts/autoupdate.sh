@@ -7,6 +7,8 @@ then
     return 0 2>/dev/null || exit 0
 fi
 
+echo updater
+
 # load in configuration variables
 . config-temp.conf
 #for test
