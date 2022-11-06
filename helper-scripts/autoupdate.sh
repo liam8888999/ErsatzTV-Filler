@@ -10,7 +10,6 @@ then
     return 0 2>/dev/null || exit 0
 fi
 
-echo updater
 
 #for test
 #test variable run yes/no
@@ -18,6 +17,7 @@ echo updater
 autoupdate1=$(echo $autoupdate | tr '[:upper:]' '[:lower:]')
 if [[ $autoupdate1 = yes ]]
 then
+  echo updater
 echo '#!/bin/bash' >> /tmp/ErsatzTV-Filler-autoupdate.sh
 echo cd $scriptdir
 echo git pull >> /tmp/ErsatzTV-Filler-autoupdate.sh
