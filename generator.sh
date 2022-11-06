@@ -8,7 +8,7 @@ if [ ! -d /tmp/ErsatzTV-Filler ]; then
 fi
 version="V0.0.17 - Beta"
 #exec 1>>$script_log
-echo $log_location
+echo $processweather
 log_file=$("$log_location/log_`date +%F`.log")
 exec > >(tee -a "$log_file") 2>&1
 echo ""
