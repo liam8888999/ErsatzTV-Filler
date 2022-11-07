@@ -1,5 +1,7 @@
 #!/bin/bash
-#V0.0.18 - Beta
+#V0.0.19 - Beta
+
+echo starting news.sh
 
 # load in configuration variables
 . config-temp.conf
@@ -13,7 +15,10 @@ fi
 processnews1=$(echo $processnews | tr '[:upper:]' '[:lower:]')
 if [[ $processnews1 = yes ]]
 then
+  echo news will be processed.
 #news
+
+echo selecting random audio
 
 #audio
 if [[ $audioamount = 1 ]]
@@ -33,6 +38,8 @@ audio5=$(head -n $randomNumber5 $workdir/music.txt | tail -n 1)
 
 #news
 
+echo setting background colour.
+
 #news backgound
 #background colour randomiser
 if [[ $newsbackgroundcolour == random ]]
@@ -47,6 +54,8 @@ newsbackground1=$newsbackgroundcolour
 newsbackground1=$newsbackgroundcolour >> $helperdir/config-temp.conf
 fi
 
+echo setting text colour.
+
 #news text colour
 if [[ $newstextcolour == random ]]
 then
@@ -57,6 +66,8 @@ newstextcolour1=Black >> config-temp.conf
 else
 newstextcolour1=$newstextcolour  >> config-temp.conf
 fi
+
+echo writing the stylesheet.
 
 # The file where we will write out the style sheet, for later use by
 #  xsltprc
@@ -83,6 +94,7 @@ EOF
 
 # main news
 
+echo generating the news feed
 
 # Generate Results
   curl -s "$newsfeed" | xsltproc $newsstyle - | grep -v xml | sed 's/\&lt;p\&gt;//g' | sed 's/\&lt;\/p&\gt;//g' | sed 's/\&lt;br&\gt;//g' | man -l - | col -bx > $workdir/newstemp.txt
@@ -116,13 +128,15 @@ sed 's/^8 //' $workdir/news20.txt >> $workdir/news21.txt
 sed 's/^9 //' $workdir/news21.txt >> $workdir/news22.txt
 cat $workdir/news22.txt | sed 's/\%/\\%/g' >> $workdir/news.txt
 
-
+echo calculating fade duration
 
 # Maths for fade
 newsvideofadeoutstart=$(echo `expr $newsduration1 - $newsvideofadeoutduration` | bc)
 newsaudiofadeoutstart=$(echo `expr $newsduration1 - $newsaudiofadeoutduration` | bc)
 
 # Generate Video
+
+echo generating the video
 
 ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i "$audio3" -shortest -vf "drawtext=textfile='$workdir/news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $workdir/news-v1.mp4
 ffmpeg -y -i $workdir/news-v1.mp4 -vf "fade=t=in:st=0:d=$newsvideofadeinduration,fade=t=out:st=$newsvideofadeoutstart:d=$newsvideofadeoutduration" -af "afade=t=in:st=0:d=$newsaudiofadeinduration,afade=t=out:st=$newsaudiofadeoutstart:d=$newsaudiofadeoutduration" $output/news-v1.mp4
@@ -134,8 +148,9 @@ touch $output/news-v1.mp4
 while [[ ! -z $newsfeed1 ]]; do
 
 
+echo starting news-v2.
 
-
+echo generating news feed.
 
 # Generate Results
 curl -s "$newsfeed1" | xsltproc $newsstyle - | grep -v xml |  man -l - | col -bx > $workdir/newstemp1.txt
@@ -168,6 +183,8 @@ sed 's/^8 //' $workdir/optional1-news20.txt >> $workdir/optional1-news21.txt
 sed 's/^9 //' $workdir/optional1-news21.txt >> $workdir/optional1-news22.txt
 cat $workdir/optional1-news22.txt | sed 's/\%/\\%/g' >> $workdir/optional1-news.txt
 
+
+echo generating the video
 # Generate Video
 
 ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i "$audio4" -shortest -vf "drawtext=textfile='$workdir/optional1-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $workdir/news-v2.mp4
@@ -180,9 +197,9 @@ done
 
 while [[ ! -z $newsfeed2 ]]; do
 
+echo starting news-v3
 
-
-
+echo generating newsfeed
 
 # Generate Results
 curl -s "$newsfeed2" | xsltproc $newsstyle - | grep -v xml |  man -l - | col -bx > $workdir/newstemp2.txt
@@ -218,13 +235,19 @@ cat $workdir/optional2-news22.txt | sed 's/\%/\\%/g' >> $workdir/optional2-news.
 
 # Generate Video
 
+echo generating video
+
 ffmpeg -y -f lavfi -i color=$newsbackground1:$videoresolution -stream_loop -1 -i "$audio5" -shortest -vf "drawtext=textfile='$workdir/optional2-news.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=h-$textspeed*t: fontcolor=$newstextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t $newsduration $wirkdir/news-v3.mp4
 ffmpeg -y -i $workdir/news-v3.mp4 -vf "fade=t=in:st=0:d=$newsvideofadeinduration,fade=t=out:st=$newsvideofadeoutstart:d=$newsvideofadeoutduration" -af "afade=t=in:st=0:d=$newsaudiofadeinduration,afade=t=out:st=$newsaudiofadeoutstart:d=$newsaudiofadeoutduration" $output/news-v3.mp4
 touch $output/news-v3.mp4
 #set variable blank to avoid endless loop
 newsfeed2=""
 done
+echo finished processing news feed.
+echo moving to channel-offline.sh
 ./channel-offline.sh
 else
+  echo news feed will not be processed
+  echo moving to channel-offline.sh
 ./channel-offline.sh
 fi

@@ -1,12 +1,12 @@
 #!/bin/bash
-#V0.0.18 - Beta
-
+#V0.0.19 - Beta
+echo starting cleanup.sh
 # load in configuration variables
 . config-temp.conf
 
 #General cleanup
 
-echo "Starting clean up"
+echo "Starting to clean up"
 
 rm -f $weatherdir/*
 rm -r $workdir/*

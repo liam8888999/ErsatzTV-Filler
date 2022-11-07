@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.18 - Beta
+#V0.0.19 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -18,14 +18,13 @@ if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
 
-version="V0.0.18 - Beta"
+version="V0.0.19 - Beta"
 #exec 1>>$script_log
 exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
 echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
-version="V0.0.18 - Beta"
 echo $version
 echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
 
@@ -100,7 +99,7 @@ rm -f $helperdir/config-temp.conf
 
 
 cat << EOF > $scriptdir/config.conf
-  #V0.0.18 - Beta
+  #V0.0.19 - Beta
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
@@ -395,6 +394,8 @@ cp $helperfiledir/colours.txt $workdir/colours.txt
 
 cd $scriptdir
 
+echo creating music.txt
+
 
   if [[ -z $customaudio ]]; then
 find $scriptdir/audio-fallback \( -not -path '*/[@.]*' -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
@@ -415,10 +416,14 @@ fi
 #add number to begining of line for randomisation
 awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 
+echo counting audio files
+
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 echo audioamount=$audioamount >> $helperdir/config-temp.conf
 
 #End Audio
+
+echo getting country info for setting various things in the script
 
 # Retrieve information country code etc.
 curl ipinfo.io | jq >> $workdir/information.json
@@ -428,9 +433,11 @@ echo country=$country >> $helperdir/config-temp.conf
 #call autoupdate.sh
 if [[ ! -z "$ETV_FILLER_DOCKER" ]]
 then
+  echo Switching to weather.sh
   cd $helperdir
   ./weather.sh
 else
+    echo Switching to autoupdate.sh
   cd $helperdir
   ./autoupdate.sh
 fi

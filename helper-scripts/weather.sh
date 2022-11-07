@@ -1,6 +1,8 @@
 #!/bin/bash
 #V0.0.16 - Beta
 
+echo starting weather.sh
+
 # load in configuration variables
 . config-temp.conf
 #test variable run yes/no
@@ -13,6 +15,10 @@ fi
 processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 if [[ $processweather1 = yes ]]
 then
+
+  echo weather will be processed.
+
+  echo selecting random audio
 
   if [[ $audioamount = 1 ]]
   then
@@ -29,6 +35,7 @@ audio=$(head -n $randomNumber $workdir/music.txt | tail -n 1)
 audio1=$(head -n $randomNumber1 $workdir/music.txt | tail -n 1)
 audio2=$(head -n $randomNumber2 $workdir/music.txt | tail -n 1)
 
+echo selecting backgound colour.
 
 #Backgrounds
 
@@ -50,6 +57,8 @@ background1=$backgroundcolour
 background2=$backgroundcolour
 fi
 
+echo setting weather format.
+
 #set weather celcius or farenheit using country code
 if [[ $country == US ]]
 then
@@ -63,17 +72,21 @@ fi
 #retrieve weather data
 
 
-
+echo retrieving weather data
 
 curl wttr.in/${cityurl}.png$weathermeasurement --output $weatherdir/v1.png
 curl v2.wttr.in/${cityurl}.png$weathermeasurement --output $weatherdir/v2.png
 curl v3.wttr.in/${stateurl}.png$weathermeasurement --output $weatherdir/v3.png
 wait
 
+echo calculating fade out times.
+
 # Maths for fade
 weathervideofadeoutstart=$(echo `expr $videolength1 - $weathervideofadeoutduration` | bc)
 weatheraudiofadeoutstart=$(echo `expr $videolength1 - $weatheraudiofadeoutduration` | bc)
 #make video
+
+echo making the videos.
 
 ffmpeg -y -f lavfi -i color=$background:$videoresolution -i $weatherdir/v1.png -stream_loop -1 -i "$audio" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weather-v1.mp4
 ffmpeg -y -i $workdir/weather-v1.mp4 -vf "fade=t=in:st=0:d=$weathervideofadeinduration,fade=t=out:st=$weathervideofadeoutstart:d=$weathervideofadeoutduration" -af "afade=t=in:st=0:d=$weatheraudiofadeinduration,afade=t=out:st=$weatheraudiofadeoutstart:d=$weatheraudiofadeoutduration" $output/weather-v1.mp4
@@ -85,7 +98,10 @@ ffmpeg -y -f lavfi -i color=$background2:$videoresolution -i $weatherdir/v3.png 
 ffmpeg -y -i $workdir/weather-v3.mp4 -vf "fade=t=in:st=0:d=$weathervideofadeinduration,fade=t=out:st=$weathervideofadeoutstart:d=$weathervideofadeoutduration" -af "afade=t=in:st=0:d=$weatheraudiofadeinduration,afade=t=out:st=$weatheraudiofadeoutstart:d=$weatheraudiofadeoutduration" $output/weather-v3.mp4
 touch $output/weather-v3.mp4
 #end weather
+echo moving to news.sh
 ./news.sh
 else
+  echo weather will not be processed.
+  echo moving to news.sh
 ./news.sh
 fi

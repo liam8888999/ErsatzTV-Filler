@@ -1,6 +1,8 @@
 #!/bin/bash
-#V0.0.18 - Beta
+#V0.0.19 - Beta
 # load in configuration variables
+
+echo starting channel-offline.sh
 . config-temp.conf
 #test variable run yes/no
 #convert variable to lowercase
@@ -12,6 +14,8 @@ fi
 processchanneloffline1=$(echo $processchanneloffline | tr '[:upper:]' '[:lower:]')
 if [[ $processchanneloffline1 = yes ]]
 then
+
+  echo starting to process channel offline filler
 #channel Currently offline
 
 #make sure workdir/xmltv exists
@@ -24,6 +28,8 @@ if [ ! -d $output/channel-resuming ]; then
 fi
 
 #retrieve and split xmltv
+
+echo do magic with xmltv files
 
 curl $xmltv --output $workdir/xmltv.xml
 tv_split --output $workdir/xmltv/%channel.xml $workdir/xmltv.xml
@@ -44,6 +50,10 @@ xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 
 while [[ ! -z $xmltvloop ]]; do
 
+  echo starting to loop the generator
+
+  echo select random audio
+
 #randomise audio
 if [[ $audioamount = 1 ]]
 then
@@ -52,6 +62,8 @@ else
   randomNumberoffline=$(shuf -i 1-$audioamount -n 1 --repeat)
 fi
 offlineaudio=$(head -n $randomNumberoffline $workdir/music.txt | tail -n 1)
+
+echo do more magic with xmltv files
 
 # get and read xmltv data
 tv_to_text --output $workdir/tempxml$xmltvloop.xml $workdir/xmltv/$xmltvloop.xml
@@ -65,6 +77,8 @@ cut -f 2 $workdir/xmltemp3$xmltvloop.txt > $workdir/xmltemp45$xmltvloop.txt
 cut -d " " -f 1 $workdir/xmltemp45$xmltvloop.txt > $workdir/xmltemp5$xmltvloop.txt
 nextshow=$(cat $workdir/xmltemp5$xmltvloop.txt)
 
+
+echo setting backgound colour
 #news backgound
 #background colour randomiser
 if [[ $offlinebackgroundcolour == random ]]
@@ -76,6 +90,8 @@ offlinebackground1=White
 else
 offlinebackground1=$offlinebackgroundcolour
 fi
+
+echo setting text colour
 
 #news text colour
 if [[ $offlinetextcolour == random ]]
@@ -89,11 +105,15 @@ else
 offlinetextcolour1=$offlinetextcolour
 fi
 
+echo creating text file
+
 echo    This Channel is Currently offline >> $workdir/upnext$xmltvloop.txt
 echo >> $workdir/upnext.txt
 echo       Next showing at: $starttime >> $workdir/upnext$xmltvloop.txt
 echo >> $workdir/upnext.txt
 echo    Starting With: $nextshow >> $workdir/upnext$xmltvloop.txt
+
+echo creating video
 
 ffmpeg -y -f lavfi -i color=$offlinebackground1:$videoresolution -stream_loop -1 -i "$offlineaudio" -shortest -vf "drawtext=textfile='$workdir/upnext$xmltvloop.txt': fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: x=(w-text_w)/2:y=(h-text_h)/2: fontcolor=$offlinetextcolour1: fontsize=W/40:"  -pix_fmt yuv420p -c:a copy -t 00:00:05.000 $output/channel-resuming/$xmltvloop.mp4
 touch $output/channel-resuming/$xmltvloop.mp4
@@ -101,9 +121,12 @@ awk 'NR>1' $workdir/xmlfiles4.txt > $workdir/xmllll.txt && mv $workdir/xmllll.tx
 
 xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 done
-
+echo finished generating channel offline filler
+echo moving to cleanup.sh
 ./cleanup.sh
 
 else
+  echo channel offline filler will not be processed
+  echo moving to cleanup.sh
 ./cleanup.sh
 fi
