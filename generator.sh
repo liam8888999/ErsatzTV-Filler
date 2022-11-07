@@ -421,6 +421,13 @@ country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
 
 #call autoupdate.sh
-cd $helperdir
-./autoupdate.sh
+if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+then
+  cd $helperdir
+  ./weather.sh
+else
+  cd $helperdir
+  ./autoupdate.sh
+fi
+
 #Music: https://audiotrimmer.com/royalty-free-music/
