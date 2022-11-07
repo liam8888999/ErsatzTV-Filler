@@ -4,16 +4,17 @@
 # load in configuration variables
 . config-temp.conf
 
+# skip autoupdate in docker
+if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+then
+  cd $helperdir
+  ./weather.sh
+fi
+
 git fetch |& tee $workdir/update
 
 if [[ -s $workdir/update ]];
 then
-
-# skip autoupdate in docker
-if [[ ! -z "$ETV_FILLER_DOCKER" ]]
-then
-    autoupdate=no
-fi
 
 
 #for test
