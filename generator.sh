@@ -407,7 +407,7 @@ else
 find $customaudio \( -not -path '*/[@.]*' -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 fi
 fi
-if [[ ! -s $workdir/update ]];
+if [[ ! -s $workdir/music.txt ]];
 then
   echo no audio files found in the location
   find $scriptdir/audio-fallback \( -not -path '*/[@.]*' -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
