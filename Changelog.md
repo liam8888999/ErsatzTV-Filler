@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [0.0.18 - Beta] - 2022-11-07
 
+# Fixed
+- A few under the hood issues with random audio again
+- Better logging sections
+
+## [0.0.18 - Beta] - 2022-11-07
+
 # Added
 
 - Audio fade in/out

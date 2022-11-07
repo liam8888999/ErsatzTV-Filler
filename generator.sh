@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.188 - Beta
+#V0.0.18 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -397,20 +397,20 @@ cd $scriptdir
 
 
   if [[ -z $customaudio ]]; then
-find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+find $scriptdir/audio-fallback \( -not -path '*/[@.]*' -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 else
   if [[ ! -z "$ETV_FILLER_DOCKER" ]]
   then
   customaudio=/audio
-  find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+  find $customaudio \( -not -path '*/[@.]*' -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 else
-find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+find $customaudio \( -not -path '*/[@.]*' -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 fi
 fi
 if [[ ! -s $workdir/update ]];
 then
   echo no audio files found in the location
-  find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+  find $scriptdir/audio-fallback \( -not -path '*/[@.]*' -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 fi
 #add number to begining of line for randomisation
 awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
