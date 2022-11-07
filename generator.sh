@@ -1,5 +1,5 @@
 #!/bin/bash
-#0.0.188 - Beta
+#V0.0.188 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -18,14 +18,14 @@ if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
 
-version="0.0.18 - Beta"
+version="V0.0.18 - Beta"
 #exec 1>>$script_log
 exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
 echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
-version="0.0.18 - Beta"
+version="V0.0.18 - Beta"
 echo $version
 echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
 
@@ -100,7 +100,7 @@ rm -f $helperdir/config-temp.conf
 
 
 cat << EOF > $scriptdir/config.conf
-  #0.0.18 - Beta
+  #V0.0.18 - Beta
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
