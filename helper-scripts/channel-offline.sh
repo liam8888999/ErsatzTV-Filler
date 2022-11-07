@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.17 - Beta
+#V0.0.18 - Beta
 # load in configuration variables
 . config-temp.conf
 #test variable run yes/no
@@ -45,7 +45,12 @@ xmltvloop=$(head -n 1 $workdir/xmlfiles4.txt)
 while [[ ! -z $xmltvloop ]]; do
 
 #randomise audio
-randomNumberoffline=$audionumber
+if [[ $audioamount = 1 ]]
+then
+randomNumberoffline=1
+else
+  randomNumberoffline=$(shuf -i 1-$audioamount -n 1 --repeat)
+fi
 offlineaudio=$(head -n $randomNumberoffline $workdir/music.txt | tail -n 1)
 
 # get and read xmltv data
@@ -75,6 +80,7 @@ fi
 #news text colour
 if [[ $offlinetextcolour == random ]]
 then
+
 #awk 'BEGIN{srand()}{print rand(), $0}' $workdir/colours.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 #newstextcolourrandomNumber=$(shuf -i 1-140 -n 1 --repeat)
 #newstextcolour=$(head -n $newstextcolourandomNumber $workdir/colours.txt | tail -n 1)

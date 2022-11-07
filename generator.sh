@@ -1,8 +1,37 @@
 #!/bin/bash
-#V0.0.17 - Beta
+#V0.0.188 - Beta
+CONFIG=${1:-config.conf}
+# load in configuration variables
+. "$CONFIG"
+#start logging
 
-version="V0.0.17 - Beta"
+#if [ ! -d $log_location ]; then
+#  mkdir -p $log_location;
+#fi
+#chmod 0777 $log_location
+if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+then
+    log_location=/tmp/ErsatzTV-Filler
+fi
+
+if [ ! -d $log_location ]; then
+  mkdir -p $log_location;
+fi
+
+version="V0.0.18 - Beta"
+#exec 1>>$script_log
+exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
+echo ""
+echo '-----------------------------------------------------------------------------------------------'
+echo ""
+date
+version="V0.0.18 - Beta"
 echo $version
+echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
+
+#finish logging
+
+rm -f /tmp/ErsatzTV-Filler-autoupdate.sh
 
 #retrieve script location
 
@@ -15,40 +44,35 @@ scriptdir="${scriptdir%/*}"
 
 if [[ -f $scriptdir/running.txt ]];
 then
+  echo There is already an instance of this generator running. This instance will stop now.
   exit 0
 fi
 
 touch $scriptdir/running.txt
 
-CONFIG=${1:-config.conf}
-
 if [[ ! -z $(command -v apt) ]];
 then
 if [[ -z $(command -v ffmpeg) ]];
 then
-sudo apt install ffmpeg -y
+echo "sudo apt install ffmpeg -y"
 fi
 if [[ -z $(command -v xsltproc) ]];
 then
-sudo apt install xsltproc -y
+echo "sudo apt install xsltproc -y"
 fi
 if [[ -z $(command -v jq) ]];
 then
-sudo apt install jq -y
+echo "sudo apt install jq -y"
 fi
 if [[ -z $(command -v tv_sort) ]];
 then
-  sudo apt install xmltv-util -y
+echo "sudo apt install xmltv-util -y"
 fi
 if [[ -z $(command -v curl) ]];
 then
-  sudo apt install curl -y
+echo "sudo apt install curl -y"
 fi
 fi
-
-# load in configuration variables
-. "$CONFIG"
-
 
 #set workdir
 
@@ -57,11 +81,6 @@ workdir=$scriptdir/workdir
 #make sure workdir exists
 if [ ! -d $workdir ]; then
   mkdir -p $workdir;
-fi
-
-#make sure custom-audio exists
-if [ ! -d $scriptdir/custom-audio ]; then
-  mkdir -p $scriptdir/custom-audio;
 fi
 
 #set weatherdir
@@ -80,10 +99,8 @@ rm -r $workdir/*
 rm -f $helperdir/config-temp.conf
 
 
-
 cat << EOF > $scriptdir/config.conf
-  #weather
-  #V0.0.17 - Beta
+  #V0.0.18 - Beta
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
@@ -108,6 +125,20 @@ cat << EOF > $scriptdir/config.conf
   output=$output
   city='$city'
   state='$state'
+
+
+  #weather fade duration - default is 5 seconds
+  weathervideofadeoutduration=$weathervideofadeoutduration
+  weathervideofadeinduration=$weathervideofadeinduration
+  weatheraudiofadeoutduration=$weatheraudiofadeoutduration
+  weatheraudiofadeinduration=$weatheraudiofadeinduration
+
+  #news fade duration - default is 5 seconds
+  newsvideofadeoutduration=$newsvideofadeoutduration
+  newsvideofadeinduration=$newsvideofadeinduration
+  newsaudiofadeoutduration=$newsaudiofadeoutduration
+  newsaudiofadeinduration=$newsaudiofadeinduration
+
   #desired video length e.g. 30 for 30sec -- must be in seconds
   videolength=$videolength
   #desired background colour around image can be set to random for a random colour to be generated for each video
@@ -150,6 +181,12 @@ cat << EOF > $scriptdir/config.conf
   textspeed=$textspeed
   #Adjust the news duration to fit your needs must be in seconds
   newsduration=$newsduration
+
+  # Logs
+  # set the log location - in docker this defaults to /tmp/ErsatzTV-Filler/
+  log_location=$log_location
+  # Set the amount of days to keep log files
+  log_days=$log_days
 EOF
 
 
@@ -161,7 +198,67 @@ echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
 echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
+if [[ -z $newsaudiofadeinduration ]];
+then
+  echo newsaudiofadeinduration=5 >> $helperdir/config-temp.conf
+else
+  echo newsaudiofadeinduration=$newsaudiofadeinduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $newsaudiofadeoutduration ]];
+then
+  echo newsaudiofadeoutduration=5 >> $helperdir/config-temp.conf
+else
+  echo newsaudiofadeoutduration=$newsaudiofadeoutduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $newsvideofadeinduration ]];
+then
+  echo newsvideofadeinduration=5 >> $helperdir/config-temp.conf
+else
+  echo newsvideofadeinduration=$newsvideofadeinduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $newsvideofadeoutduration ]];
+then
+  echo newsvideofadeoutduration=5 >> $helperdir/config-temp.conf
+else
+  echo newsvideofadeoutduration=$newsvideofadeoutduration >> $helperdir/config-temp.conf
+fi
 
+if [[ -z $weatheraudiofadeinduration ]];
+then
+  echo weatheraudiofadeinduration=5 >> $helperdir/config-temp.conf
+else
+  echo weatheraudiofadeinduration=$weatheraudiofadeinduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $weatheraudiofadeoutduration ]];
+then
+  echo weatheraudiofadeoutduration=5 >> $helperdir/config-temp.conf
+else
+  echo weatheraudiofadeoutduration=$weatheraudiofadeoutduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $weathervideofadeinduration ]];
+then
+  echo weathervideofadeinduration=5 >> $helperdir/config-temp.conf
+else
+  echo weathervideofadeinduration=$weathervideofadeinduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $weathervideofadeoutduration ]];
+then
+  echo weathervideofadeoutduration=5 >> $helperdir/config-temp.conf
+else
+  echo weathervideofadeoutduration=$weathervideofadeoutduration >> $helperdir/config-temp.conf
+fi
+if [[ -z $log_location ]];
+then
+  echo log_location=/tmp/ErsatzTV-Filler >> $helperdir/config-temp.conf
+else
+  echo log_location=$log_location >> $helperdir/config-temp.conf
+fi
+if [[ -z $log_days ]];
+then
+  echo log_days=7 >> $helperdir/config-temp.conf
+else
+  echo log_days=$log_days >> $helperdir/config-temp.conf
+fi
 if [[ -z $autoupdate ]];
 then
   echo autoupdate=yes >> $helperdir/config-temp.conf
@@ -173,6 +270,12 @@ then
   echo videolength=00:00:30 >> $helperdir/config-temp.conf
 else
   echo videolength=$(date -d@$videolength -u +%H:%M:%S) >> $helperdir/config-temp.conf
+fi
+if [[ -z $videolength ]];
+then
+  echo videolength1=30 >> $helperdir/config-temp.conf
+else
+  echo videolength1=$videolength >> $helperdir/config-temp.conf
 fi
 if [[ -z $state ]];
 then
@@ -193,6 +296,12 @@ then
   echo newsduration=00:01:00 >> $helperdir/config-temp.conf
 else
   echo newsduration=$(date -d@$newsduration -u +%H:%M:%S) >> $helperdir/config-temp.conf
+fi
+if [[ -z $newsduration ]];
+then
+  echo newsduration1=60 >> $helperdir/config-temp.conf
+else
+  echo newsduration1=$newsduration >> $helperdir/config-temp.conf
 fi
 if [[ -z $textspeed ]];
 then
@@ -286,27 +395,29 @@ cp $helperfiledir/colours.txt $workdir/colours.txt
 
 cd $scriptdir
 
-if [[ ! -z "$ETV_FILLER_DOCKER" ]]
-then
-customaudio=/audio
-fi
 
   if [[ -z $customaudio ]]; then
 find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 else
+  if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+  then
+  customaudio=/audio
+  find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+else
 find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+fi
+fi
+if [[ ! -s $workdir/update ]];
+then
+  echo no audio files found in the location
+  find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 fi
 #add number to begining of line for randomisation
 awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 
 audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
+echo audioamount=$audioamount >> $helperdir/config-temp.conf
 
-if [ $audioamount == 1 ]; then
-echo audionumber=1 >> $helperdir/config-temp.conf
-else
-echo audionumber="\$(shuf -i 1-$audioamount -n 1 --repeat)" >> $helperdir/config-temp.conf
-fi
-echo $audionumber
 #End Audio
 
 # Retrieve information country code etc.
@@ -314,7 +425,14 @@ curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
 
-#call weather.sh
-cd $helperdir
-./weather.sh
+#call autoupdate.sh
+if [[ ! -z "$ETV_FILLER_DOCKER" ]]
+then
+  cd $helperdir
+  ./weather.sh
+else
+  cd $helperdir
+  ./autoupdate.sh
+fi
+
 #Music: https://audiotrimmer.com/royalty-free-music/

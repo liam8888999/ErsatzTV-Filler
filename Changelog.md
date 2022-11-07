@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.18 - Beta] - 2022-11-07
+
+# Added
+
+- Audio fade out
+- video fade out
+- Added logging
+
+# Fixed
+
+- Added improvements for auto update (now runs at the beginning)
+- Issues with randomising audio
+
+# Note
+- There is now a dependency on the bc package
+- The docker command has slightly changed to include the log location
+
+
 ## [0.0.17 - Beta] - 2022-10-20
 
 # Added
