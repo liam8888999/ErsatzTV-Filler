@@ -202,25 +202,25 @@ if [[ -z $newsaudiofadeinduration ]];
 then
   echo newsaudiofadeinduration=5 >> $helperdir/config-temp.conf
 else
-  echo newsaudiofadeinduration=$weatheraudiofadeinduration >> $helperdir/config-temp.conf
+  echo newsaudiofadeinduration=$newsaudiofadeinduration >> $helperdir/config-temp.conf
 fi
 if [[ -z $newsaudiofadeoutduration ]];
 then
   echo newsaudiofadeoutduration=5 >> $helperdir/config-temp.conf
 else
-  echo newsaudiofadeoutduration=$weatheraudiofadeoutduration >> $helperdir/config-temp.conf
+  echo newsaudiofadeoutduration=$newsaudiofadeoutduration >> $helperdir/config-temp.conf
 fi
 if [[ -z $newsvideofadeinduration ]];
 then
   echo newsvideofadeinduration=5 >> $helperdir/config-temp.conf
 else
-  echo newsvideofadeinduration=$weathervideofadeinduration >> $helperdir/config-temp.conf
+  echo newsvideofadeinduration=$newsvideofadeinduration >> $helperdir/config-temp.conf
 fi
 if [[ -z $newsvideofadeoutduration ]];
 then
   echo newsvideofadeoutduration=5 >> $helperdir/config-temp.conf
 else
-  echo newsvideofadeoutduration=$weathervideofadeoutduration >> $helperdir/config-temp.conf
+  echo newsvideofadeoutduration=$newsvideofadeoutduration >> $helperdir/config-temp.conf
 fi
 
 if [[ -z $weatheraudiofadeinduration ]];
@@ -409,6 +409,7 @@ fi
 fi
 if [[ ! -s $workdir/update ]];
 then
+  echo no audio files found in the location
   find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 fi
 #add number to begining of line for randomisation
