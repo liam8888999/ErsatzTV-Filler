@@ -8,8 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 # Added
 
-- Audio fade out
-- video fade out
+- Audio fade in/out
+- video fade in/out
 - Added logging
 
 # Fixed
