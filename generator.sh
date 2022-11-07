@@ -407,6 +407,10 @@ else
 find $customaudio \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
 fi
 fi
+if [[ ! -s $workdir/update ]];
+then
+  find $scriptdir/audio-fallback \( -name "*.mp3" -o -name "*.flac" \) -print > $workdir/music.txt
+fi
 #add number to begining of line for randomisation
 awk 'BEGIN{srand()}{print rand(), $0}' $workdir/music.txt | sort -n -k 1 | awk 'sub(/\S* /,"")'
 
