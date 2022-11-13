@@ -13,9 +13,8 @@ fi
 
 if [[ -f $workdir/update-run ]];
 then
-processchanneloffline=no
+  processchanneloffline=no
 fi
-
 processchanneloffline1=$(echo $processchanneloffline | tr '[:upper:]' '[:lower:]')
 if [[ $processchanneloffline1 = yes ]]
 then
