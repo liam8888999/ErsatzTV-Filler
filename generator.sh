@@ -20,7 +20,7 @@ fi
 
 version="V0.0.19 - Beta"
 
-Log_per_run1=$(echo $log_per_run | tr '[:upper:]' '[:lower:]')
+log_per_run1=$(echo $log_per_run | tr '[:upper:]' '[:lower:]')
 if [[ $log_per_run1 = yes ]]
 then
 exec > >(tee -a "$log_location/log_`date +%F%H:%M`.log") 2>&1
@@ -39,7 +39,7 @@ else
   echo $version
   echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
 fi
-
+echo $logperr
 
 #finish logging
 if [[ -f $workdir/update-run ]];
