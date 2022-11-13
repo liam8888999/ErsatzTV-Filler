@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.19 - Beta
+#V0.0.19 - Beta 
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
