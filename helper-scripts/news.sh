@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.19 - Beta
+#V0.0.20 - Beta
 
 echo starting news.sh
 
