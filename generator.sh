@@ -213,7 +213,7 @@ cat << EOF > $scriptdir/config.conf
   # Set the amount of days to keep log files
   log_days=$log_days
   #Use smaller log files generated for each run instead of each day - yes/no (default no)
-  log_per_run=
+  log_per_run=$log_per_run
 EOF
 
 
