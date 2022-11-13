@@ -456,13 +456,15 @@ audioamount=$(wc -l $workdir/music.txt | cut -d " " -f 1)
 echo audioamount=$audioamount >> $helperdir/config-temp.conf
 
 #End Audio
-
+if [[ ! -f $workdir/update-run ]];
+then
 echo getting country info for setting various things in the script
 
 # Retrieve information country code etc.
 curl ipinfo.io | jq >> $workdir/information.json
 country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
+fi
 
 #call autoupdate.sh
 if [[ ! -z "$ETV_FILLER_DOCKER" ]]
