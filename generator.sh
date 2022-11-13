@@ -18,12 +18,6 @@ if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
 
-if [[ -z $log_per_run ]];
-then
-log_per_run=no
-else
-log_per_run=$log_per_run
-fi
 version="V0.0.19 - Beta"
 
 Log_per_run1=$(echo $log_per_run | tr '[:upper:]' '[:lower:]')
