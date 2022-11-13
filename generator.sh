@@ -20,9 +20,9 @@ fi
 
 if [[ -z $log_per_run ]];
 then
-  echo log_per_run=no >> $helperdir/config-temp.conf
+log_per_run=no
 else
-  echo log_per_run=$log_per_run >> $helperdir/config-temp.conf
+log_per_run=$log_per_run
 fi
 version="V0.0.19 - Beta"
 
