@@ -35,9 +35,9 @@ echo '--------------------------------------------------------------------------
 echo ""
 date
 echo $version
-echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
+echo this will automatically output to a log file at "$log_location/log_`date +%F%H:%M`.log"
 else
-  exec > >(tee -a "$log_location/log_`date +%F%H:%M`.log") 2>&1
+  exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
   echo ""
   echo '-----------------------------------------------------------------------------------------------'
   echo ""
