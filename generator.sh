@@ -17,15 +17,34 @@ fi
 if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
+
+if [[ -z $log_per_run ]];
+then
+  echo log_per_run=no >> $helperdir/config-temp.conf
+else
+  echo log_per_run=$log_per_run >> $helperdir/config-temp.conf
+fi
 version="V0.0.19 - Beta"
 
-exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
+Log_per_run1=$(echo $log_per_run | tr '[:upper:]' '[:lower:]')
+if [[ $log_per_run1 = yes ]]
+then
+exec > >(tee -a "$log_location/log_`date +%F%H:%M`.log") 2>&1
 echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
 echo $version
-echo this will automatically output to a log file at "$log_location/log_`date +%F%H:%M`.log"
+echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
+else
+  exec > >(tee -a "$log_location/log_`date +%F%H:%M`.log") 2>&1
+  echo ""
+  echo '-----------------------------------------------------------------------------------------------'
+  echo ""
+  date
+  echo $version
+  echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
+fi
 
 
 #finish logging
@@ -98,7 +117,10 @@ helperfiledir=$scriptdir/helper-files
 #General cleanup
 
 rm -f $weatherdir/*
+if [[ ! -f $workdir/update-run ]];
+then
 rm -r $workdir/*
+fi
 rm -f $helperdir/config-temp.conf
 
 
