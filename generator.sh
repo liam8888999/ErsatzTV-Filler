@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.19 - Beta 
+#V0.0.19 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -121,7 +121,7 @@ if [[ ! -f $workdir/update-run ]];
 then
 rm -r $workdir/*
 fi
-rm -f $helperdir/config-temp.conf
+#rm -f $helperdir/config-temp.conf
 
 
 cat << EOF > $scriptdir/config.conf

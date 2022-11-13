@@ -9,7 +9,7 @@ echo starting cleanup.sh
 echo "Starting to clean up"
 
 rm -f $weatherdir/*
-#rm -r $workdir/*
+rm -r $workdir/*
 rm -f $scriptdir/running.txt
 rm -f $workdir/update
 find $log_location -mtime +$log_days -exec rm -f {} \;
