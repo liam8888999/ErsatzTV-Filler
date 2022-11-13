@@ -121,7 +121,7 @@ if [[ ! -f $workdir/update-run ]];
 then
 rm -r $workdir/*
 fi
-#rm -f $helperdir/config-temp.conf
+rm -f $helperdir/config-temp.conf
 
 
 cat << EOF > $scriptdir/config.conf
