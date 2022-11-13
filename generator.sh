@@ -132,6 +132,11 @@ cat << EOF > $scriptdir/config.conf
   weatheraudiofadeoutduration=$weatheraudiofadeoutduration
   weatheraudiofadeinduration=$weatheraudiofadeinduration
 
+
+
+
+  #just a test
+
   #news fade duration - default is 5 seconds
   newsvideofadeoutduration=$newsvideofadeoutduration
   newsvideofadeinduration=$newsvideofadeinduration
