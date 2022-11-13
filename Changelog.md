@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.0.20 - Beta] - 2022-11-13
+
+# Fixed
+- No longer generates filler with old variables after auto update. the script will need to be run again
+- Add option to use smaller log files per run
+
 ## [0.0.19 - Beta] - 2022-11-07
 
 # Fixed

@@ -12,6 +12,11 @@ then
   output=/output
 fi
 
+if [[ -f $workdir/update-run ]];
+then
+processnews=no
+fi
+
 processnews1=$(echo $processnews | tr '[:upper:]' '[:lower:]')
 if [[ $processnews1 = yes ]]
 then

@@ -17,18 +17,22 @@ fi
 if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
-
 version="V0.0.19 - Beta"
-#exec 1>>$script_log
+
 exec > >(tee -a "$log_location/log_`date +%F`.log") 2>&1
 echo ""
 echo '-----------------------------------------------------------------------------------------------'
 echo ""
 date
 echo $version
-echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
+echo this will automatically output to a log file at "$log_location/log_`date +%F%H:%M`.log"
+
 
 #finish logging
+if [[ -f $workdir/update-run ]];
+then
+echo no files will be generated. you will need to run the script again with the updated variables
+fi
 
 rm -f /tmp/ErsatzTV-Filler-autoupdate.sh
 
@@ -132,11 +136,6 @@ cat << EOF > $scriptdir/config.conf
   weatheraudiofadeoutduration=$weatheraudiofadeoutduration
   weatheraudiofadeinduration=$weatheraudiofadeinduration
 
-
-
-
-  #just a test
-
   #news fade duration - default is 5 seconds
   newsvideofadeoutduration=$newsvideofadeoutduration
   newsvideofadeinduration=$newsvideofadeinduration
@@ -191,6 +190,8 @@ cat << EOF > $scriptdir/config.conf
   log_location=$log_location
   # Set the amount of days to keep log files
   log_days=$log_days
+  #Use smaller log files generated for each run instead of each day - yes/no (default no)
+  log_per_run=
 EOF
 
 
@@ -202,6 +203,12 @@ echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
 echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
+if [[ -z $log_per_run ]];
+then
+  echo log_per_run=no >> $helperdir/config-temp.conf
+else
+  echo log_per_run=$log_per_run >> $helperdir/config-temp.conf
+fi
 if [[ -z $newsaudiofadeinduration ]];
 then
   echo newsaudiofadeinduration=5 >> $helperdir/config-temp.conf

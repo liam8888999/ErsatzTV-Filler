@@ -12,6 +12,11 @@ then
   output=/output
 fi
 
+if [[ -f $workdir/update-run ]];
+then
+processweather=no
+fi
+
 processweather1=$(echo $processweather | tr '[:upper:]' '[:lower:]')
 if [[ $processweather1 = yes ]]
 then
