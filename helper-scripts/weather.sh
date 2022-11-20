@@ -123,7 +123,7 @@ then
   ffmpeg -y -f lavfi -i color=$background1:$videoresolution -i $weatherdir/v2.png -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weatherv4/v2.mp4
   ffmpeg -y -f lavfi -i color=$background2:$videoresolution -i $weatherdir/v3.png -filter_complex "[1]scale=iw*0.9:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weatherv4/v3.mp4
   find $workdir/weatherv4/ -name "*.mp4" -print > $workdir/v4.txt
-  ffmpeg -y concat -i $workdir/v4.txt -c $workdir/weather-v4.mp4
+  ffmpeg -y concat -i $workdir/v4.txt -c copy $workdir/weather-v4.mp4
   ffmpeg -y -i $workdir/weather-v4.mp4 -vf "fade=t=in:st=0:d=$weathervideofadeinduration,fade=t=out:st=$weathervideofadeoutstart2:d=$weathervideofadeoutduration" -af "afade=t=in:st=0:d=$weatheraudiofadeinduration,afade=t=out:st=$weatheraudiofadeoutstart2:d=$weatheraudiofadeoutduration" $output/weather-v4.mp4
   fi
 #end weather
