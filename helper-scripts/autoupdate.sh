@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.20 - Beta
+#V0.0.21 - Beta
 
 echo starting autoupdate
 

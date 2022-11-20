@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 # Added
 - Weather V4 which is a combination of all other weather versions in 1 file
+- Weather V4 can be shuffled
 
 ## [0.0.20 - Beta] - 2022-11-13
 
