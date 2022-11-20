@@ -93,6 +93,8 @@ weatheraudiofadeoutstart=$(echo `expr $videolength1 - $weatheraudiofadeoutdurati
 
 echo making the videos.
 
+
+
 ffmpeg -y -f lavfi -i color=$background:$videoresolution -i $weatherdir/v1.png -stream_loop -1 -i "$audio" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weather-v1.mp4
 ffmpeg -y -i $workdir/weather-v1.mp4 -vf "fade=t=in:st=0:d=$weathervideofadeinduration,fade=t=out:st=$weathervideofadeoutstart:d=$weathervideofadeoutduration" -af "afade=t=in:st=0:d=$weatheraudiofadeinduration,afade=t=out:st=$weatheraudiofadeoutstart:d=$weatheraudiofadeoutduration" $output/weather-v1.mp4
 touch $output/weather-v1.mp4
@@ -102,6 +104,21 @@ touch $output/weather-v2.mp4
 ffmpeg -y -f lavfi -i color=$background2:$videoresolution -i $weatherdir/v3.png -stream_loop -1 -i "$audio2" -shortest -filter_complex "[1]scale=iw*0.9:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weather-v3.mp4
 ffmpeg -y -i $workdir/weather-v3.mp4 -vf "fade=t=in:st=0:d=$weathervideofadeinduration,fade=t=out:st=$weathervideofadeoutstart:d=$weathervideofadeoutduration" -af "afade=t=in:st=0:d=$weatheraudiofadeinduration,afade=t=out:st=$weatheraudiofadeoutstart:d=$weatheraudiofadeoutduration" $output/weather-v3.mp4
 touch $output/weather-v3.mp4
+
+generate_weatherv4_1=$(echo $generate_weatherv4 | tr '[:upper:]' '[:lower:]')
+if [[ $generate_weatherv4_1 = yes ]]
+then
+  videolength2=$(echo `expr $videolength1*3` | bc)
+  weathervideofadeoutstart2=$(echo `expr $videolength2 - $weathervideofadeoutduration` | bc)
+  weatheraudiofadeoutstart2=$(echo `expr $videolength2 - $weatheraudiofadeoutduration` | bc)
+
+  echo generating weather v4
+  ffmpeg -y -f lavfi -i color=$background:$videoresolution -i $weatherdir/v1.png -stream_loop -1 -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weatherv4-v1.mp4
+  ffmpeg -y -f lavfi -i color=$background1:$videoresolution -i $weatherdir/v2.png -stream_loop -1 -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weatherv4-v2.mp4
+  ffmpeg -y -f lavfi -i color=$background2:$videoresolution -i $weatherdir/v3.png -stream_loop -1 -filter_complex "[1]scale=iw*0.9:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t $videolength $workdir/weatherv4-v3.mp4
+  ffmpeg -y -f lavfi -i $workdir/weatherv4-v1.mp4 -i $workdir/weatherv4-v2.mp4 -i $workdir/weatherv4-v3.mp4 -i "$audio1" -shortest -pix_fmt yuv420p -c:a copy -t $videolength2 $workdir/weather-v4.mp4
+  ffmpeg -y -i $workdir/weather-v4.mp4 -vf "fade=t=in:st=0:d=$weathervideofadeinduration,fade=t=out:st=$weathervideofadeoutstart2:d=$weathervideofadeoutduration" -af "afade=t=in:st=0:d=$weatheraudiofadeinduration,afade=t=out:st=$weatheraudiofadeoutstart2:d=$weatheraudiofadeoutduration" $output/weather-v4.mp4
+  fi
 #end weather
 echo moving to news.sh
 ./news.sh

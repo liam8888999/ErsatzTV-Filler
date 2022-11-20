@@ -145,6 +145,9 @@ cat << EOF > $scriptdir/config.conf
   city='$city'
   state='$state'
 
+  # Would you like to generate weather v4. Weather v4 is a mix of all the other weather versions in 1 video. Default is no.
+  generate_weatherv4=$generate_weatherv4
+
 
   #weather fade duration - default is 5 seconds
   weathervideofadeoutduration=$weathervideofadeoutduration
@@ -224,6 +227,12 @@ then
   echo log_per_run=no >> $helperdir/config-temp.conf
 else
   echo log_per_run=$log_per_run >> $helperdir/config-temp.conf
+fi
+if [[ -z $generate_weatherv4 ]];
+then
+  echo generate_weatherv4=no >> $helperdir/config-temp.conf
+else
+  echo generate_weatherv4=$generate_weatherv4 >> $helperdir/config-temp.conf
 fi
 if [[ -z $newsaudiofadeinduration ]];
 then
