@@ -147,6 +147,8 @@ cat << EOF > $scriptdir/config.conf
 
   # Would you like to generate weather v4. Weather v4 is a mix of all the other weather versions in 1 video. Default is no.
   generate_weatherv4=$generate_weatherv4
+  #would you like to shuffle the videos. Default is no
+  shuffle_v4=$shuffle_v4
 
 
   #weather fade duration - default is 5 seconds
@@ -417,6 +419,13 @@ then
 else
   echo processchanneloffline=$processchanneloffline >> $helperdir/config-temp.conf
 fi
+if [[ -z $shuffle_v4 ]];
+then
+  echo shuffle_v4=no >> $helperdir/config-temp.conf
+else
+  echo shuffle_v4=$shuffle_v4 >> $helperdir/config-temp.conf
+fi
+
 
 
 #set duration correctly
