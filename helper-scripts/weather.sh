@@ -126,7 +126,7 @@ then
   for f in *.mp4; do echo "file '$workdir/weatherv4/$f'" >> $workdir/v4.txt; done
   cd $helperdir
   cat $workdir/v4.txt
-  ffmpeg -y -f concat -i $workdir/v4.txt -c copy $workdir/weather-v4.mp4
+  ffmpeg -y -f concat -safe 0 -i $workdir/v4.txt -c copy $workdir/weather-v4.mp4
   ffmpeg -y -i $workdir/weather-v4.mp4 -i "$audio3" -shortest -vf "fade=t=in:st=0:d=$weathervideofadeinduration,fade=t=out:st=$weathervideofadeoutstart2:d=$weathervideofadeoutduration" -af "afade=t=in:st=0:d=$weatheraudiofadeinduration,afade=t=out:st=$weatheraudiofadeoutstart2:d=$weatheraudiofadeoutduration" $output/weather-v4.mp4
   fi
 #end weather
