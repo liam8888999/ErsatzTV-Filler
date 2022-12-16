@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.21 - Beta
+#V0.0.22 - Beta
 
 echo starting news.sh
 
@@ -136,7 +136,7 @@ cat $workdir/news22.txt | sed 's/\%/\\%/g' >> $workdir/news.txt
 echo calculating fade duration
 
 # Maths for fade
-newsvideofadeoutstart=$(echo `expr $newsduration1 - $newsvideofadeoutduration` | bc)
+newsvideofadeoutstart=$(echo `expr $newsduration1 - $newsvideofadeoutduration` | bc) &
 newsaudiofadeoutstart=$(echo `expr $newsduration1 - $newsaudiofadeoutduration` | bc)
 
 # Generate Video

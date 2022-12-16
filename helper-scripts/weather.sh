@@ -82,15 +82,15 @@ fi
 
 echo retrieving weather data
 
-curl wttr.in/${cityurl}.png$weathermeasurement --output $weatherdir/v1.png
-curl v2.wttr.in/${cityurl}.png$weathermeasurement --output $weatherdir/v2.png
-curl v3.wttr.in/${stateurl}.png$weathermeasurement --output $weatherdir/v3.png
+curl wttr.in/${cityurl}.png$weathermeasurement --output $weatherdir/v1.png &
+curl v2.wttr.in/${cityurl}.png$weathermeasurement --output $weatherdir/v2.png &
+curl v3.wttr.in/${stateurl}.png$weathermeasurement --output $weatherdir/v3.png &
 wait
 
 echo calculating fade out times.
 
 # Maths for fade
-weathervideofadeoutstart=$(echo `expr $videolength1 - $weathervideofadeoutduration` | bc)
+weathervideofadeoutstart=$(echo `expr $videolength1 - $weathervideofadeoutduration` | bc) &
 weatheraudiofadeoutstart=$(echo `expr $videolength1 - $weatheraudiofadeoutduration` | bc)
 #make video
 
