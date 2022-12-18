@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.22 - Beta
+#V0.0.23 - Beta
 echo starting cleanup.sh
 # load in configuration variables
 . config-temp.conf

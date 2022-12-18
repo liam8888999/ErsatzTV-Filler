@@ -90,7 +90,7 @@ wait
 echo calculating fade out times.
 
 # Maths for fade
-weathervideofadeoutstart=$(echo `expr $videolength1 - $weathervideofadeoutduration` | bc) &
+weathervideofadeoutstart=$(echo `expr $videolength1 - $weathervideofadeoutduration` | bc)
 weatheraudiofadeoutstart=$(echo `expr $videolength1 - $weatheraudiofadeoutduration` | bc)
 #make video
 
