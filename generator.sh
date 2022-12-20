@@ -220,9 +220,9 @@ cat << EOF > $scriptdir/config.conf
 EOF
 
 
-if [[ ! -f $themedirdir/default.theme ]];
+if [[ ! -f $themedir/default.theme ]];
 then
-cat << EOF > $themedirdir/default.theme
+cat << EOF > $themedir/default.theme
   #V0.0.23 - Beta
 
   #desired background colour around image can be set to random for a random colour to be generated for each video
