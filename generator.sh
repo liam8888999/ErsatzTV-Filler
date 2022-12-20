@@ -223,8 +223,8 @@ EOF
 
 echo 3
 
-#if [[ ! -f $themedirdir/default.theme ]];
-#then
+if [[ ! -f $themedirdir/default.theme ]];
+then
 cat << EOF > $themedirdir/default.theme
   #V0.0.23 - Beta
 
@@ -241,6 +241,7 @@ cat << EOF > $themedirdir/default.theme
   offlinebackgroundcolour=random
   offlinetextcolour=random
 EOF
+fi
 echo 4
 
 . $themedir/"$theme".theme
