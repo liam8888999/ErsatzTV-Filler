@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.23 - Beta
+#V0.0.24 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -18,7 +18,7 @@ if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
 
-version="V0.0.23 - Beta"
+version="V0.0.21 - Beta"
 
 log_per_run1=$(echo $log_per_run | tr '[:upper:]' '[:lower:]')
 if [[ $log_per_run1 = yes ]]
@@ -90,6 +90,14 @@ echo "sudo apt install curl -y"
 fi
 fi
 
+if [[ -z $theme ]];
+then
+  theme=default
+else
+  theme=$theme
+fi
+echo theme is $theme
+
 #set workdir
 
 workdir=$scriptdir/workdir
@@ -98,6 +106,19 @@ workdir=$scriptdir/workdir
 if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
+
+
+if [[ ! -z "$ETV_FILLER_DOCKER" ]];
+then
+  themedir=/themes
+else
+  themedir=$scriptdir/themes
+fi
+
+if [ ! -d $themedir ]; then
+  mkdir -p $themedir;
+fi
+
 
 #set weatherdir
 
@@ -117,9 +138,12 @@ rm -r $workdir/*
 fi
 rm -f $helperdir/config-temp.conf
 
-
 cat << EOF > $scriptdir/config.conf
-  #V0.0.23 - Beta
+  #V0.0.24 - Beta
+
+  # set theme name
+
+  theme=$theme
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
@@ -165,14 +189,6 @@ cat << EOF > $scriptdir/config.conf
 
   #desired video length e.g. 30 for 30sec -- must be in seconds
   videolength=$videolength
-  #desired background colour around image can be set to random for a random colour to be generated for each video
-  backgroundcolour=$backgroundcolour
-
-  #set background colour for news - can be set to random
-  newsbackgroundcolour=$newsbackgroundcolour
-
-  #set text colour for news - can be set to random
-  newstextcolour=$newstextcolour
 
   #set a rss url for your news feed
   newsfeed="$newsfeed"
@@ -191,10 +207,6 @@ cat << EOF > $scriptdir/config.conf
 
   #ErsatzTV xmltv url - http://ip/:PORT/iptv/xmltv.xml
   xmltv="$xmltv"
-
-  #set colours for channel currently offline filler
-  offlinebackgroundcolour=$offlinebackgroundcolour
-  offlinetextcolour=$offlinetextcolour
 
   #advanced user configuration
 
@@ -215,6 +227,36 @@ cat << EOF > $scriptdir/config.conf
   log_per_run=$log_per_run
 EOF
 
+
+if [[ ! -f $themedir/default.theme ]];
+then
+cat << EOF > $themedir/default.theme
+  #V0.0.24 - Beta
+
+  #desired background colour around image can be set to random for a random colour to be generated for each video
+  backgroundcolour=black
+
+  #set background colour for news - can be set to random
+  newsbackgroundcolour=random
+
+  #set text colour for news - can be set to random
+  newstextcolour=random
+
+  #set colours for channel currently offline filler
+  offlinebackgroundcolour=random
+  offlinetextcolour=random
+EOF
+fi
+
+if [[ -z $theme ]];
+then
+  theme=default.theme
+else
+  theme="$theme.theme"
+fi
+
+
+. $themedir/$theme
 
 
 # Add directory variables to config-temp.config
