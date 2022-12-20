@@ -90,6 +90,12 @@ echo "sudo apt install curl -y"
 fi
 fi
 
+if [[ -z $theme ]];
+then
+  theme=default
+else
+  theme=$theme
+fi
 echo theme is $theme
 
 #set workdir
@@ -249,7 +255,10 @@ else
   theme="$theme.theme"
 fi
 
+echo $theme
+
 . $themedir/$theme
+
 
 # Add directory variables to config-temp.config
 echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
