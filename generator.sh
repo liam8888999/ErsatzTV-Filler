@@ -64,7 +64,7 @@ then
   exit 0
 fi
 
-#touch $scriptdir/running.txt
+touch $scriptdir/running.txt
 
 if [[ ! -z $(command -v apt) ]];
 then
@@ -393,10 +393,14 @@ else
 fi
 if [[ -z $newstextcolour ]];
 then
+  echo newstextcolour=random >> $helperdir/config-temp.conf
+else
   echo newstextcolour=$newstextcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $newsbackgroundcolour ]];
 then
+  echo newsbackgroundcolour=random >> $helperdir/config-temp.conf
+else
   echo newsbackgroundcolour=$newsbackgroundcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $backgroundcolour ]];
