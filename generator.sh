@@ -240,7 +240,7 @@ then
   offlinetextcolour=random
 EOF
 
-. $themedir/"$theme".theme
+#. $themedir/"$theme".theme
 
 # Add directory variables to config-temp.config
 echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
