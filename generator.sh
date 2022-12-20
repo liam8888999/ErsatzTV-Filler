@@ -223,8 +223,8 @@ EOF
 
 echo 3
 
-if [[ ! -f $themedirdir/default.theme ]];
-then
+#if [[ ! -f $themedirdir/default.theme ]];
+#then
 cat << EOF > $themedirdir/default.theme
   #V0.0.23 - Beta
 
