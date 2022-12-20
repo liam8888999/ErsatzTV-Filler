@@ -240,6 +240,13 @@ cat << EOF > $themedirdir/default.theme
 EOF
 fi
 
+if [[ -z $theme ]];
+then
+  echo theme=default
+else
+  echo theme=$theme
+fi
+
 . $themedir/"$theme".theme
 
 echo 5
@@ -251,12 +258,6 @@ echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
 echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
-if [[ -z $theme_name ]];
-then
-  echo theme=default >> $helperdir/config-temp.conf
-else
-  echo theme=$theme >> $helperdir/config-temp.conf
-fi
 if [[ -z $log_per_run ]];
 then
   echo log_per_run=no >> $helperdir/config-temp.conf
