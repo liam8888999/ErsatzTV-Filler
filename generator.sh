@@ -247,7 +247,7 @@ else
   echo theme=$theme.theme
 fi
 
-. ""$themedir/$theme"
+. "$themedir/$theme"
 
 # Add directory variables to config-temp.config
 echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
