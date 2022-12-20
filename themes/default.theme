@@ -1,0 +1,14 @@
+#V0.0.23 - Beta
+
+#desired background colour around image can be set to random for a random colour to be generated for each video
+backgroundcolour=black
+
+#set background colour for news - can be set to random
+newsbackgroundcolour=random
+
+#set text colour for news - can be set to random
+newstextcolour=random
+
+#set colours for channel currently offline filler
+offlinebackgroundcolour=random
+offlinetextcolour=random

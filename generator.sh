@@ -99,6 +99,13 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
+themedir=$scriptdir/themes
+
+if [ ! -d $themedir ]; then
+  mkdir -p $themedir;
+fi
+
+
 #set weatherdir
 
 weatherdir=$scriptdir/weather
@@ -120,6 +127,10 @@ rm -f $helperdir/config-temp.conf
 
 cat << EOF > $scriptdir/config.conf
   #V0.0.21 - Beta
+
+  # set theme name
+
+  theme=$theme
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
@@ -165,14 +176,6 @@ cat << EOF > $scriptdir/config.conf
 
   #desired video length e.g. 30 for 30sec -- must be in seconds
   videolength=$videolength
-  #desired background colour around image can be set to random for a random colour to be generated for each video
-  backgroundcolour=$backgroundcolour
-
-  #set background colour for news - can be set to random
-  newsbackgroundcolour=$newsbackgroundcolour
-
-  #set text colour for news - can be set to random
-  newstextcolour=$newstextcolour
 
   #set a rss url for your news feed
   newsfeed="$newsfeed"
@@ -191,10 +194,6 @@ cat << EOF > $scriptdir/config.conf
 
   #ErsatzTV xmltv url - http://ip/:PORT/iptv/xmltv.xml
   xmltv="$xmltv"
-
-  #set colours for channel currently offline filler
-  offlinebackgroundcolour=$offlinebackgroundcolour
-  offlinetextcolour=$offlinetextcolour
 
   #advanced user configuration
 
@@ -215,6 +214,25 @@ cat << EOF > $scriptdir/config.conf
   log_per_run=$log_per_run
 EOF
 
+if [[ ! -f $themedirdir/default.theme ]];
+then
+  cat << EOF > $scriptdir/config.conf
+  #V0.0.23 - Beta
+
+  #desired background colour around image can be set to random for a random colour to be generated for each video
+  backgroundcolour=black
+
+  #set background colour for news - can be set to random
+  newsbackgroundcolour=random
+
+  #set text colour for news - can be set to random
+  newstextcolour=random
+
+  #set colours for channel currently offline filler
+  offlinebackgroundcolour=random
+  offlinetextcolour=random
+EOF
+
 
 
 # Add directory variables to config-temp.config
@@ -224,6 +242,12 @@ echo scriptdir=$scriptdir >> $helperdir/config-temp.conf
 echo helperdir=$helperdir >> $helperdir/config-temp.conf
 
 # check variables are set. if not set default fallbacks
+if [[ -z $theme_name ]];
+then
+  echo theme=default >> $helperdir/config-temp.conf
+else
+  echo theme=$theme >> $helperdir/config-temp.conf
+fi
 if [[ -z $log_per_run ]];
 then
   echo log_per_run=no >> $helperdir/config-temp.conf

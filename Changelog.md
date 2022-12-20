@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+<<<<<<< Updated upstream
+=======
+## [0.0.24 - Beta] - 2022-12-20
+
+# Added
+themeability
+
+## [0.0.23 - Beta] - 2022-12-18
+
+# Fixed
+- Bug fixes
+
+## [0.0.22 - Beta] - 2022-12-16
+
+# Added
+- Speed improvements
+
+>>>>>>> Stashed changes
 ## [0.0.21 - Beta] - 2022-11-20
 
 # Added
