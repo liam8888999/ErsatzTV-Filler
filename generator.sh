@@ -110,7 +110,6 @@ fi
 if [ ! -d $themedir ]; then
   mkdir -p $themedir;
 fi
-echo 1
 
 
 #set weatherdir
@@ -131,7 +130,6 @@ rm -r $workdir/*
 fi
 rm -f $helperdir/config-temp.conf
 
-echo 2
 cat << EOF > $scriptdir/config.conf
   #V0.0.21 - Beta
 
@@ -221,7 +219,6 @@ cat << EOF > $scriptdir/config.conf
   log_per_run=$log_per_run
 EOF
 
-echo 3
 
 if [[ ! -f $themedirdir/default.theme ]];
 then
@@ -242,7 +239,6 @@ cat << EOF > $themedirdir/default.theme
   offlinetextcolour=random
 EOF
 fi
-echo 4
 
 . $themedir/"$theme".theme
 
