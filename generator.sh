@@ -99,11 +99,18 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
-themedir=$scriptdir/themes
+if [[ ! -z "$ETV_FILLER_DOCKER" ]];
+then
+  themedir=/themes
+else
+  themedir=$scriptdir/themes
+fi
+
 
 if [ ! -d $themedir ]; then
   mkdir -p $themedir;
 fi
+
 
 
 #set weatherdir
@@ -233,7 +240,7 @@ then
   offlinetextcolour=random
 EOF
 
-
+. $themedir/"$theme".theme
 
 # Add directory variables to config-temp.config
 echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
@@ -385,20 +392,14 @@ else
 fi
 if [[ -z $newstextcolour ]];
 then
-  echo newstextcolour=random >> $helperdir/config-temp.conf
-else
   echo newstextcolour=$newstextcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $newsbackgroundcolour ]];
 then
-  echo newsbackgroundcolour=random >> $helperdir/config-temp.conf
-else
   echo newsbackgroundcolour=$newsbackgroundcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $backgroundcolour ]];
 then
-  echo backgroundcolour=random >> $helperdir/config-temp.conf
-else
   echo backgroundcolour=$backgroundcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $output ]];
@@ -409,16 +410,13 @@ if [[ -z $output ]];
   fi
 if [[ -z $offlinebackgroundcolour ]];
 then
-  echo offlinebackgroundcolour=random >> $helperdir/config-temp.conf
-else
   echo offlinebackgroundcolour=$offlinebackgroundcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $offlinetextcolour ]];
 then
-  echo offlinetextcolour=random >> $helperdir/config-temp.conf
-else
   echo offlinetextcolour=$offlinetextcolour >> $helperdir/config-temp.conf
 fi
+echo offline colour is $offlinetextcolour
 if [[ -z $xmltv ]];
 then
   echo xmltv="http://127.0.0.1:8409/iptv/xmltv.xml" >> $helperdir/config-temp.conf
