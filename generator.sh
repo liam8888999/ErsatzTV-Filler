@@ -223,7 +223,7 @@ EOF
 
 if [[ ! -f $themedirdir/default.theme ]];
 then
-  cat << EOF > $scriptdir/config.conf
+  cat << EOF > $themedirdir/default.theme
   #V0.0.23 - Beta
 
   #desired background colour around image can be set to random for a random colour to be generated for each video
@@ -240,7 +240,7 @@ then
   offlinetextcolour=random
 EOF
 
-#. $themedir/"$theme".theme
+. $themedir/"$theme".theme
 
 # Add directory variables to config-temp.config
 echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
