@@ -9,7 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.0.24 - Beta] - 2022-12-20
 
 # Added
-themeability
+- themeability
+Themes can be added by copying the default.theme file in the themes subfolder or /themes for docker to xxx.theme and editing the variables then changing the theme in config.conf
 
 ## [0.0.23 - Beta] - 2022-12-18
 

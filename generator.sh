@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.21 - Beta
+#V0.0.24 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -139,7 +139,7 @@ fi
 rm -f $helperdir/config-temp.conf
 
 cat << EOF > $scriptdir/config.conf
-  #V0.0.21 - Beta
+  #V0.0.24 - Beta
 
   # set theme name
 
@@ -231,7 +231,7 @@ EOF
 if [[ ! -f $themedir/default.theme ]];
 then
 cat << EOF > $themedir/default.theme
-  #V0.0.23 - Beta
+  #V0.0.24 - Beta
 
   #desired background colour around image can be set to random for a random colour to be generated for each video
   backgroundcolour=black
@@ -255,7 +255,6 @@ else
   theme="$theme.theme"
 fi
 
-echo $theme
 
 . $themedir/$theme
 
@@ -416,6 +415,8 @@ else
 fi
 if [[ -z $backgroundcolour ]];
 then
+  echo backgroundcolour=random >> $helperdir/config-temp.conf
+else
   echo backgroundcolour=$backgroundcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $output ]];
@@ -426,13 +427,16 @@ if [[ -z $output ]];
   fi
 if [[ -z $offlinebackgroundcolour ]];
 then
+  echo offlinebackgroundcolour=random >> $helperdir/config-temp.conf
+else
   echo offlinebackgroundcolour=$offlinebackgroundcolour >> $helperdir/config-temp.conf
 fi
 if [[ -z $offlinetextcolour ]];
 then
+  echo offlinetextcolour=random >> $helperdir/config-temp.conf
+else
   echo offlinetextcolour=$offlinetextcolour >> $helperdir/config-temp.conf
 fi
-echo offline colour is $offlinetextcolour
 if [[ -z $xmltv ]];
 then
   echo xmltv="http://127.0.0.1:8409/iptv/xmltv.xml" >> $helperdir/config-temp.conf
