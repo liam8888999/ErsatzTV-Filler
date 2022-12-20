@@ -64,7 +64,7 @@ then
   exit 0
 fi
 
-touch $scriptdir/running.txt
+#touch $scriptdir/running.txt
 
 if [[ ! -z $(command -v apt) ]];
 then
@@ -99,7 +99,6 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
-echo 2
 
 if [[ ! -z "$ETV_FILLER_DOCKER" ]];
 then
@@ -107,12 +106,11 @@ then
 else
   themedir=$scriptdir/themes
 fi
- echo 1
 
 if [ ! -d $themedir ]; then
   mkdir -p $themedir;
 fi
-
+echo 1
 
 
 #set weatherdir
@@ -133,7 +131,7 @@ rm -r $workdir/*
 fi
 rm -f $helperdir/config-temp.conf
 
-
+echo 2
 cat << EOF > $scriptdir/config.conf
   #V0.0.21 - Beta
 
@@ -222,6 +220,8 @@ cat << EOF > $scriptdir/config.conf
   #Use smaller log files generated for each run instead of each day - yes/no (default no)
   log_per_run=$log_per_run
 EOF
+
+echo 3
 
 if [[ ! -f $themedirdir/default.theme ]];
 then
