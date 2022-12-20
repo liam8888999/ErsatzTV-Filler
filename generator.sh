@@ -242,12 +242,12 @@ fi
 
 if [[ -z $theme ]];
 then
-  echo theme=default
+  echo theme=default.theme
 else
-  echo theme=$theme
+  echo theme=$theme.theme
 fi
 
-. $themedir/$theme.theme
+. $themedir/$theme
 
 # Add directory variables to config-temp.config
 echo weatherdir=$weatherdir >> $helperdir/config-temp.conf
