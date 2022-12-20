@@ -99,13 +99,15 @@ if [ ! -d $workdir ]; then
   mkdir -p $workdir;
 fi
 
+echo 2
+
 if [[ ! -z "$ETV_FILLER_DOCKER" ]];
 then
   themedir=/themes
 else
   themedir=$scriptdir/themes
 fi
-
+ echo 1
 
 if [ ! -d $themedir ]; then
   mkdir -p $themedir;
