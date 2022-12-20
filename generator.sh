@@ -242,9 +242,9 @@ fi
 
 if [[ -z $theme ]];
 then
-  echo theme=default.theme
+  theme=default.theme
 else
-  echo theme="$theme.theme"
+  theme="$theme.theme"
 fi
 
 . $themedir/$theme
