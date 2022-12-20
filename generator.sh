@@ -90,6 +90,8 @@ echo "sudo apt install curl -y"
 fi
 fi
 
+echo theme is $theme
+
 #set workdir
 
 workdir=$scriptdir/workdir
