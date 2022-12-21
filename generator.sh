@@ -226,10 +226,9 @@ cat << EOF > $scriptdir/config.conf
 EOF
 
 
-if [[ ! -f $themedir/default.theme ]];
-then
 cat << EOF > $themedir/default.theme
   #ErsatzTV-Filler-Theme
+  #Creator: liam8888999
 
   #desired background colour around image can be set to random for a random colour to be generated for each video
   backgroundcolour=black
@@ -244,7 +243,6 @@ cat << EOF > $themedir/default.theme
   offlinebackgroundcolour=random
   offlinetextcolour=random
 EOF
-fi
 
 if [[ -z $theme ]];
 then
