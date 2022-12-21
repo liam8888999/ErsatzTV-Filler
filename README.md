@@ -7,6 +7,11 @@ Discord chat: https://discord.gg/x4Nk4sfgSg
 
 Donations are welcome: https://www.paypal.me/liam200333
 
+## Themes
+ErsatzTV-Filler uses theme files to adjust the look of the ouput video files.
+These themes can be found at https://github.com/liam8888999/ErsatzTV-Filler-Themes
+
+
 ## Requirements
 Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed.
 
