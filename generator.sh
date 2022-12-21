@@ -229,7 +229,7 @@ EOF
 if [[ ! -f $themedir/default.theme ]];
 then
 cat << EOF > $themedir/default.theme
-  #V0.0.24 - Beta
+  #ErsatzTV-Filler-Theme
 
   #desired background colour around image can be set to random for a random colour to be generated for each video
   backgroundcolour=black
