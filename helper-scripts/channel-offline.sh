@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.24 - Beta
+#V0.0.25 - Beta
 # load in configuration variables
 
 echo starting channel-offline.sh

@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.24 - Beta
+#V0.0.25 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -18,7 +18,7 @@ if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
 
-version="V0.0.24 - Beta"
+version="V0.0.25 - Beta"
 
 log_per_run1=$(echo $log_per_run | tr '[:upper:]' '[:lower:]')
 if [[ $log_per_run1 = yes ]]
@@ -137,7 +137,7 @@ fi
 rm -f $helperdir/config-temp.conf
 
 cat << EOF > $scriptdir/config.conf
-  #V0.0.24 - Beta
+  #V0.0.25 - Beta
 
   # set theme name
 
