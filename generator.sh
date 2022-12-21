@@ -18,7 +18,7 @@ if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
 
-version="V0.0.21 - Beta"
+version="V0.0.24 - Beta"
 
 log_per_run1=$(echo $log_per_run | tr '[:upper:]' '[:lower:]')
 if [[ $log_per_run1 = yes ]]
