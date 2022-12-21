@@ -39,8 +39,6 @@ else
   echo $version
   echo this will automatically output to a log file at "$log_location/log_`date +%F`.log"
 fi
-echo $logperr
-
 #finish logging
 if [[ -f $workdir/update-run ]];
 then
