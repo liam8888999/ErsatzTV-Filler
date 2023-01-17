@@ -17,6 +17,17 @@ body {
   box-sizing: border-box;
 }
 
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
 
 .text-muted {
   color: #8492a6 !important;
@@ -83,6 +94,9 @@ body {
       </a>
     </div>
 
+    <div class="row">
+  <div class="column"
+
     <div class="container">
             <div class="col-lg-8 col-md-10 col-12">
 
@@ -117,6 +131,15 @@ body {
 
             </div><!--end col-->
         </div><!--end row-->
+
+
+
+      </div>
+      <div class="column" style="background-color:#bbb;">
+   <h2>Column 2</h2>
+   <p>Some text..</p>
+ </div>
+</div>
 
 
     <script>
