@@ -17,10 +17,20 @@ body {
   box-sizing: border-box;
 }
 
-/* Create two equal columns that floats next to each other */
+
+/* Create two unequal columns that floats next to each other */
 .column {
   float: left;
-  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 60%;
+}
+
+.right {
+  width: 40%;
 }
 
 /* Clear floats after the columns */
@@ -103,7 +113,7 @@ body {
     </div>
 
     <div class="row">
-      <div class="column">
+      <div class="column left">
 
     <div class="container">
         <div class="row justify-content-center">
@@ -141,7 +151,9 @@ body {
             </div><!--end col-->
         </div><!--end row-->
     </div>
-
+  </div>
+  <div class="column right">
+njhhjh
 
 
   </div>
