@@ -13,6 +13,33 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
 .text-muted {
   color: #8492a6 !important;
 }
@@ -78,6 +105,9 @@ body {
       </a>
     </div>
 
+    <div class="row">
+  <div class="column">
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10 col-12">
@@ -111,12 +141,14 @@ body {
                 </ul>
 
 
-                <div class="mt-4">
-                    <a href="#" class="btn btn-primary">Purchase Now</a>
-                </div>
             </div><!--end col-->
         </div><!--end row-->
     </div>
+  </div>
+  <div class="row">
+  <div class="column">
+  </div>
+</div>
 
     <script>
 function myFunction() {
