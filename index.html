@@ -74,7 +74,7 @@ body {
       </a>
     </div>
 
-    <div id="release-notes"></div>
+    <div id="changelog"></div>
 
     <script>
 function myFunction() {
@@ -87,11 +87,27 @@ function myFunction() {
 }
 </script>
 <script>
-  $(document).ready(function(){
-    $.get('Changelog.md', function (data) {
-      $('#release-notes').append(data);
+
+$(document).ready(function() {
+    $.get('changelog.md', function(data) {
+        let current_version = "v0.0.24";
+        let lines = data.split('\n');
+        let current_version_lines = [];
+        let in_current_version = false;
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+            if (line.startsWith(current_version)) {
+                in_current_version = true;
+            } else if (line.startsWith("#")) {
+                in_current_version = false;
+            }
+            if (in_current_version) {
+                current_version_lines.push(line);
+            }
+        }
+        $('#changelog').html(current_version_lines.join('<br>'));
     });
-  })
+});
 </script>
 
   </body>
