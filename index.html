@@ -21,8 +21,8 @@ body {
 /* Create two unequal columns that floats next to each other */
 .column {
   float: right;
-  padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
+  padding-right: 10px;
+
 }
 
 .left {
@@ -37,7 +37,7 @@ body {
 .row:after {
   content: "";
   display: table;
-  clear: none;
+  clear: both;
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
