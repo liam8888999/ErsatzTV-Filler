@@ -67,23 +67,26 @@ body {
   }
 }
 
-* {
-  box-sizing: border-box;
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 75%;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Float four columns side by side */
-.column {
+/* Right column */
+.rightcolumn {
   float: left;
   width: 25%;
-  padding: 0 10px;
+  padding-left: 20px;
 }
 
-/* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
+/* Add a card effect for articles */
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
 
 /* Clear floats after the columns */
 .row:after {
@@ -92,20 +95,11 @@ body {
   clear: both;
 }
 
-/* Style the counter cards */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-  padding: 16px;
-  text-align: center;
-  background-color: #f1f1f1;
-}
-
-/* Responsive columns - one column layout (vertical) on small screens */
-@media screen and (max-width: 600px) {
-  .column {
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
     width: 100%;
-    display: block;
-    margin-bottom: 20px;
+    padding: 0;
   }
 }
 </style>
@@ -121,19 +115,22 @@ body {
     </div>
 
     <div class="row">
-      <div class="column">
-        <div class="card">..</div>
+      <div class="leftcolumn">
+        <div class="card">
+          <h2>TITLE HEADING</h2>
+          <h5>Title description, Dec 7, 2017</h5>
+          <div class="fakeimg" style="height:200px;">Image</div>
+          <p>Some text..</p>
+          <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        </div>
+        <div class="card">
+          <h2>TITLE HEADING</h2>
+          <h5>Title description, Sep 2, 2017</h5>
+          <div class="fakeimg" style="height:200px;">Image</div>
+          <p>Some text..</p>
+          <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        </div>
       </div>
-      <div class="column">
-        <div class="card">..</div>
-      </div>
-      <div class="column">
-        <div class="card">..</div>
-      </div>
-      <div class="column">
-        <div class="card">..</div>
-      </div>
-    </div>
 
     <div>
             <div class="col-lg-8 col-md-10 col-12">
