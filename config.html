@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ErsatzTV-Filler</title>
+    <title>Edit config</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -66,15 +66,44 @@ body {
   </head>
   <body>
     <div class="topnav" id="myTopnav">
-      <a href="index.html" class="active">Home</a>
-      <a href="config.html>Config</a>
-      <a href="themes.html">Themes</a>
+      <a href="#home" class="active">Home</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
       <a href="#about">About</a>
       <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
       </a>
     </div>
-
+    <div class="container">
+      <h1>Edit config</h1>
+      <form method="post" action="/" id="config-form">
+        <div id="variables"></div>
+        <input type="submit" value="Save" class="btn btn-primary">
+      </form>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $.get('config.conf', function (data) {
+          let current_variables = data.split('\n');
+          current_variables.forEach(variable => {
+            if (!variable.startsWith("#") && variable != "") {
+              let variable_parts = variable.split('=');
+              $('#variables').append(`
+                <div class="form-group">
+                  <label> ${variable_parts[0]} </label>
+                  <input type="text" class="form-control" name="${variable_parts[0]}" value="${variable_parts[1]}">
+                </div>
+              `);
+            } else if (variable.startsWith("#")) {
+        variable = variable.replace("#", "");
+        $('#variables').append(`
+            <p>${variable}</p>
+        `);
+    }
+          });
+        });
+      });
+    </script>
     <script>
 function myFunction() {
   var x = document.getElementById("myTopnav");
