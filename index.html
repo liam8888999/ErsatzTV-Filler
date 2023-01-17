@@ -75,7 +75,10 @@ body {
     </div>
 
     <div id="changelog">
-  <!-- changelog content -->
+      ## [0.1.0 - Beta] - 2023-01-
+
+      # Added
+      - Basic Web Configuration page
 </div>
 
     <script>
@@ -88,25 +91,7 @@ function myFunction() {
   }
 }
 </script>
-<script>
-// Select the first h2 heading and its following siblings
-const latestChangelog = document.querySelector("#changelog h2:first-of-type").nextSibling;
-// Remove all other child elements from the changelog container
-Array.from(latestChangelog.parentNode.children).forEach(child => {
-  if (child !== latestChangelog) child.remove();
-});
-</script>
-<script>
-window.onload = function() {
-  fetch("Changelog.md")
-    .then(response => response.text())
-    .then(data => {
-      // Format the data to display it neatly on the HTML page
-      let changelogs = document.getElementById("changelogs");
-      changelogs.innerHTML = data;
-    });
-}
-</script>
+
 
   </body>
 </html>
