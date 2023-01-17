@@ -64,7 +64,7 @@ body {
 }
 </style>
   </head>
-  <body>
+  <body onload="loadChangelogs()">
     <div class="topnav" id="myTopnav">
       <a href="index.html" class="active">Home</a>
       <a href="config.html">Config</a>
@@ -74,7 +74,9 @@ body {
       </a>
     </div>
 
-    <div id="changelog"></div>
+    <div id="changelog">
+  <!-- changelog content -->
+</div>
 
     <script>
 function myFunction() {
@@ -87,27 +89,23 @@ function myFunction() {
 }
 </script>
 <script>
-
-$(document).ready(function() {
-    $.get('Changelog.md', function(data) {
-        let current_version = "v0.0.24";
-        let lines = data.split('\n');
-        let current_version_lines = [];
-        let in_current_version = false;
-        for (let i = 0; i < lines.length; i++) {
-            let line = lines[i];
-            if (line.startsWith(current_version)) {
-                in_current_version = true;
-            } else if (line.startsWith("#")) {
-                in_current_version = false;
-            }
-            if (in_current_version) {
-                current_version_lines.push(line);
-            }
-        }
-        $('#changelog').html(current_version_lines.join('<br>'));
-    });
+// Select the first h2 heading and its following siblings
+const latestChangelog = document.querySelector("#changelog h2:first-of-type").nextSibling;
+// Remove all other child elements from the changelog container
+Array.from(latestChangelog.parentNode.children).forEach(child => {
+  if (child !== latestChangelog) child.remove();
 });
+</script>
+<script>
+window.onload = function() {
+  fetch("Changelog.md")
+    .then(response => response.text())
+    .then(data => {
+      // Format the data to display it neatly on the HTML page
+      let changelogs = document.getElementById("changelogs");
+      changelogs.innerHTML = data;
+    });
+}
 </script>
 
   </body>
