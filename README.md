@@ -13,7 +13,7 @@ These themes can be found at https://github.com/liam8888999/ErsatzTV-Filler-Them
 
 
 ## Requirements
-Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed.
+Linux operating system with nodejs, ffmpeg, xsltproc, jq, xmltv-utils and curl installed.
 
 ## Installation Instructions
 #### Clone the latest version of the repo.
@@ -26,6 +26,16 @@ Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed
 4. `cp sample-config.conf config.conf`
 #### Update the 'output', 'city', 'state' and other variables to your required locations, replace nano with your favorite text editor.
 5. `nano config.conf`
+
+## WEB Config Page Instructions (currently not compatible with docker)
+#### Install nodejs
+1. `apt install nodejs`
+#### Install npm
+2. `apt install npm`
+#### Install dependencies
+3. `npm install express fs`
+#### Run the node Server
+4. `node web.js`
 
 
 ## For Channel currently offline Filler
