@@ -67,6 +67,31 @@ body {
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
 
 </style>
   </head>
@@ -111,7 +136,10 @@ body {
                 <ul class="list-unstyled mt-3">
                     <li class="text-muted ml-3"><i class="mdi mdi-circle-medium mr-2"></i>Initial Released</li>
                 </ul>
-
+                <div class="row">
+                  <div class="column"></div>
+                  <div class="column"></div>
+                </div>
     <script>
 function myFunction() {
   var x = document.getElementById("myTopnav");
