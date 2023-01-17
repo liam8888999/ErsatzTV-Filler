@@ -74,6 +74,8 @@ body {
       </a>
     </div>
 
+    <div id="release-notes"></div>
+
     <script>
 function myFunction() {
   var x = document.getElementById("myTopnav");
@@ -83,6 +85,13 @@ function myFunction() {
     x.className = "topnav";
   }
 }
+</script>
+<script>
+  $(document).ready(function(){
+    $.get('changelog.md', function (data) {
+      $('#release-notes').append(data);
+    });
+  })
 </script>
 
   </body>
