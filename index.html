@@ -67,41 +67,7 @@ body {
   }
 }
 
-/* Create two unequal columns that floats next to each other */
-/* Left column */
-.leftcolumn {
-  float: left;
-  width: 75%;
-}
 
-/* Right column */
-.rightcolumn {
-  float: left;
-  width: 25%;
-  padding-left: 20px;
-}
-
-/* Add a card effect for articles */
-.card {
-   background-color: white;
-   padding: 20px;
-   margin-top: 20px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
-  .leftcolumn, .rightcolumn {
-    width: 100%;
-    padding: 0;
-  }
-}
 </style>
   </head>
   <body>
@@ -114,18 +80,9 @@ body {
       </a>
     </div>
 
-    <div class="row">
-      <div class="leftcolumn">
-        <div class="card">
-          <h2>TITLE HEADING</h2>
-          <h5>Title description, Dec 7, 2017</h5>
-          <div class="fakeimg" style="height:200px;">Image</div>
-          <p>Some text..</p>
-          <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-        </div>
 
-    <div class="rightcolumn">
-       <div class="card">
+
+
             <div class="col-lg-8 col-md-10 col-12">
 
                 <h5 class="mt-4"> <span class="p-2 bg-light shadow rounded text-success"> Version 1.3.8</span> - 4th Jun 2020</h5>
@@ -158,9 +115,6 @@ body {
 
 
             </div><!--end col-->
-        </div><!--end row-->
-      </div>
-
     <script>
 function myFunction() {
   var x = document.getElementById("myTopnav");
