@@ -197,7 +197,6 @@ jq must be installed as a requirement in this version
 - support for the usage of a configuration file
 - added gitignore file for generated videos/files
 
-### Fixed
 
 
 
