@@ -29,11 +29,11 @@ Linux operating system with nodejs, ffmpeg, xsltproc, jq, xmltv-utils and curl i
 
 ## WEB Config Page Instructions (currently not compatible with docker)
 #### Install nodejs
-1. `apt install nodejs`
+1. `sudo apt install nodejs`
 #### Install npm
-2. `apt install npm`
+2. `sudo apt install npm`
 #### Install dependencies
-3. `npm install express fs`
+3. `npm ci`
 #### Run the node Server
 4. `node web.js`
 
