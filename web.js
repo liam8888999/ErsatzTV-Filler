@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.post('/', (req, res) => {
+app.post('/config.html', (req, res) => {
     fs.readFile('config.conf', 'utf8', function(err, data) {
         if (err) return res.send(`Error: ${err.message}`);
         let lines = data.split('\n');
@@ -24,7 +24,7 @@ app.post('/', (req, res) => {
         }
         fs.writeFile('config.conf', newLines.join('\n'), 'utf8', function (err) {
             if (err) return res.send(`Error: ${err.message}`);
-            res.sendFile(__dirname + '/index.html');
+            res.sendFile(__dirname + '/config.html');
      });
     });
 });
