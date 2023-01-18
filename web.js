@@ -3,8 +3,8 @@ const app = express();
 const fs = require('fs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+app.get('/config.html', (req, res) => {
+    res.sendFile(__dirname + '/config.html');
 });
 
 app.post('/config.html', (req, res) => {
