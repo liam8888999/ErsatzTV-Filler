@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
     // Render the specific ejs template view
     res.render(PAGES_FOLDER + "home", {
         layout: DEFAULT_LAYOUT, //Just registering which layout to use for each view
-        page: "Home" //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links.
+        page: "Home" //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
     });
 });
 
