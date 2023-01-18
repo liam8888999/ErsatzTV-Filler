@@ -3,8 +3,11 @@ const app = express();
 const fs = require('fs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
-
 app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/config.html');
+});
+
+app.post('/config.html', (req, res) => {
     fs.readFile('config.conf', 'utf8', function(err, data) {
         if (err) return res.send(`Error: ${err.message}`);
         let lines = data.split('\n');
