@@ -81,6 +81,7 @@ body {
       </form>
     </div>
     <script>
+    <!--split variables and insert them -->
       $(document).ready(function(){
         $.get('config.conf', function (data) {
           let current_variables = data.split('\n');
