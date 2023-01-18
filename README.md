@@ -28,14 +28,15 @@ Linux operating system with nodejs, ffmpeg, xsltproc, jq, xmltv-utils and curl i
 5. `nano config.conf`
 
 ## WEB Config Page Instructions (currently not compatible with docker)
+### Current W.I.P, early days a lot may change...
 #### Install nodejs
 1. `sudo apt install nodejs`
 #### Install npm
 2. `sudo apt install npm`
 #### Install dependencies
 3. `npm ci`
-#### Run the node Server
-4. `node web.js`
+#### Run the node dev server
+4. `npm run dev`
 
 
 ## For Channel currently offline Filler

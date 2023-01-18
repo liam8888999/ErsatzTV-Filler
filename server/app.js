@@ -11,9 +11,19 @@ app.use(expressLayouts);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
+
+// Home Route
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/config.html');
 });
+
+// Config Route
+
+// Themes Route
+
+// Update Route
+
+// TODO: API Routes
 
 app.post('/config.html', (req, res) => {
     fs.readFile('config.conf', 'utf8', function(err, data) {

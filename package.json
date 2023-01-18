@@ -2,8 +2,9 @@
   "name": "ersatztv-filler",
   "version": "0.0.15",
   "description": "Currently this script  generates weather forecast, news and channel currently offline filler for ErsatzTV or similar programs.",
-  "main": "web.js",
+  "main": "server/app.js",
   "scripts": {
+    "dev": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
