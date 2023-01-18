@@ -4,13 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-## [ what would you like in here? ]
+## [0.1.0 - Beta] - 2023-01-## [0.1.0 - Beta] - 2023-01-
 
 # Refactor
 - package json file to control dependencies
 - Web server to utilise ejs layout templates
-
-## [0.1.0 - Beta] - 2023-01-
 
 # Added
 - Basic Web Configuration page
