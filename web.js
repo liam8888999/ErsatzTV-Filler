@@ -4,8 +4,7 @@ const fs = require('fs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
-
-app.get('/config.html', (req, res) => {
+app.get('/', (req, res) => {
     fs.readFile('config.conf', 'utf8', function(err, data) {
         if (err) return res.send(`Error: ${err.message}`);
         let lines = data.split('\n');
