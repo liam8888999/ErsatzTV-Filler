@@ -3,7 +3,7 @@ const expressLayouts = require('express-ejs-layouts');
 const app = express();
 const fs = require('fs');
 
-const PATH_CONSTANTS = require("../constants/path.constants");
+const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { loadPageRoutes } = require("../routes/page.routes")
 
 
@@ -29,7 +29,7 @@ const startWebServer = () => {
  *
  */
 const injectMiddleware = () => {
-    app.set('views', PATH_CONSTANTS().TEMPLATES_FOLDER);
+    app.set('views', TEMPLATE_CONSTANTS().TEMPLATES_FOLDER);
     app.set('view engine', 'ejs');
     app.use(expressLayouts);
 
