@@ -1,15 +1,22 @@
 const { createWebServer, startWebServer } = require("../server/modules/web-server.module");
+const { setupConfigurationFile } = require("../server/modules/config-loader.module");
 
-// Very basic splitting up of concerns, now we can use this entry point app and create and manage our modules for configs.
 
-try {
-    createWebServer();
+//This is called a self executing function. It allows us to create an application context for our app, and also start it asynchronously
+(async function(){
+    // Very basic splitting up of concerns, now we can use this entry point app and create and manage our modules for configs.
+    // Also very basic global error caching for the entire application, might still completely stall if not careful but can be improved at a later date.
 
-    startWebServer();
-} catch(e){
-    console.error("Fatal error occurred!", e)
-}
+    try {
+        await setupConfigurationFile();
 
+        createWebServer();
+
+        startWebServer();
+    } catch(e){
+        console.error("Fatal error occurred!", e)
+    }
+})()
 
 // TODO: API Routes
 // app.post('api/config.html', (req, res) => {

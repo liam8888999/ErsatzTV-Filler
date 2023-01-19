@@ -30,5 +30,6 @@ const CONFIG_CONSTANTS = () => {
 }
 
 module.exports = {
-    TEMPLATE_CONSTANTS
+    TEMPLATE_CONSTANTS,
+    CONFIG_CONSTANTS
 };
