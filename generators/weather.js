@@ -73,16 +73,16 @@ function downloadImage(url, filepath) {
 /**
 *set variables
 */
-const weathervideolength = 10;
-const weathervideofadeduration = 50;
-const weatheraudeofadeduration = 50;
+const weathervideolength = retrieveCurrentConfiguration().weathervideolength;
+const weathervideofadeduration = retrieveCurrentConfiguration().weathervideofadeduration;
+const weatheraudiofadeduration = retrieveCurrentConfiguration().weatheraudeofadeduration;
 
 /**
 *set fade time
 */
 
 const weathervideofadeoutstart = weathervideolength - weathervideofadeduration;
-const weatheraudeofadeduration = weathervideolenght - weatheraudeofadeduration;
+const weatheraudeofadeduration = weathervideolength - weatheraudiofadeduration;
 
 /**
 *make the videos
