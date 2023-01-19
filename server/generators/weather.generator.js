@@ -2,6 +2,17 @@
 *Generate Weather
 *V0.0.25 - Beta
 */
+const { randomAudioGenerator } = require("../modules/generators.module.js");
+const { imageDownloader } = require("../modules/generators.module.js");
+
+
+
+
+
+
+
+
+
 import { exec } from 'child_process';
 const fs = require('fs');
 const client = require('https');
