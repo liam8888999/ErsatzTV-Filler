@@ -15,6 +15,7 @@ const loadFileContentsIntoMemory = async (path) => {
  * @param path
  * @returns {Promise<*>}
  */
+
 const doesFileExist = async (path) => {
     let result;
     try{

@@ -18,12 +18,14 @@ const setupConfigurationFile = async () => {
 }
 
 const parseConfigurationFileContents = async (path) => {
-    console.log(parseConfigurationFile(path).parsed)
     CURRENT_CONFIG = parseConfigurationFile(path).parsed;
-    console.log(CURRENT_CONFIG)
+}
+
+const retrieveCurrentConfiguration = () => {
+    return CURRENT_CONFIG
 }
 
 module.exports = {
     setupConfigurationFile,
-    CURRENT_CONFIG
+    retrieveCurrentConfiguration
 }
