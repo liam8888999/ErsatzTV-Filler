@@ -1,5 +1,9 @@
 <div class="container">
     <h1>Edit config</h1>
+    <% console.log(CURRENT_CONFIG) %>
+    <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+    <%- CURRENT_CONFIG[key] %> //key will city the output will be 'Tev Aviv'
+    <% }); %>
     <form method="post" action="/config.html" id="config-form">
         <div id="variables"></div>
         <input type="submit" value="Save" class="btn btn-primary">
