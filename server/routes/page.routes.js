@@ -2,9 +2,6 @@ const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 const loadPageRoutes = (app) => {
-    /**
-     *
-     */
     app.get('/', (req, res) => {
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
@@ -13,9 +10,6 @@ const loadPageRoutes = (app) => {
         });
     });
 
-    /**
-     *
-     */
     app.get('/config', (req, res) => {
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "config", {
@@ -25,9 +19,6 @@ const loadPageRoutes = (app) => {
         });
     });
 
-    /**
-     *
-     */
     app.get('/themes', (req, res) => {
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {
@@ -36,9 +27,6 @@ const loadPageRoutes = (app) => {
         });
     });
 
-    /**
-     *
-     */
     app.get('/updates', (req, res) => {
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "update", {

@@ -1,4 +1,9 @@
-function stringifyDotEnv(obj) {
+/**
+ * Stringify an object specifically for our config
+ * @param obj
+ * @returns {string}
+ */
+function stringifyJavaScriptObjectToConfigFormat(obj) {
     let result = "";
     for (const [key, value] of Object.entries(obj)) {
         if (key) {
@@ -10,5 +15,5 @@ function stringifyDotEnv(obj) {
 }
 
 module.exports = {
-    stringifyDotEnv
+    stringifyJavaScriptObjectToConfigFormat
 }

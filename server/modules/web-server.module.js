@@ -9,7 +9,7 @@ const { loadApiRoutes } = require("../routes/config.api")
 
 
 /**
- *
+ *  Create the express webserver
  * @returns {*|Express}
  */
 const createWebServer = () => {
@@ -19,7 +19,7 @@ const createWebServer = () => {
     return app;
 }
 /**
- *
+ * Starts the express webserver on port 3000
  */
 const startWebServer = () => {
     app.listen(3000, () => {
@@ -27,7 +27,7 @@ const startWebServer = () => {
     });
 }
 /**
- *
+ * Inject all common middleware into express server
  */
 const injectMiddleware = () => {
     app.set('views', TEMPLATE_CONSTANTS().TEMPLATES_FOLDER);

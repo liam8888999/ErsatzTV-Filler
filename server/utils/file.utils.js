@@ -35,6 +35,12 @@ const createNewUserConfigFromDefault = async () => {
   console.log('A new user config file was generated from the default file');
 }
 
+/**
+ * Overwrite the contents of an existing file... currently easiest way I know of updating the local file with changes.
+ * @param path
+ * @param fileContents
+ * @returns {Promise<void>}
+ */
 const overWriteFileContents = async (path, fileContents) => {
     try{
         await writeFile(path, fileContents);
