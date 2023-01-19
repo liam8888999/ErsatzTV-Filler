@@ -1,0 +1,27 @@
+{
+  "name": "ersatztv-filler",
+  "version": "0.0.15",
+  "description": "Currently this script  generates weather forecast, news and channel currently offline filler for ErsatzTV or similar programs.",
+  "main": "server/app.js",
+  "scripts": {
+    "dev": "node server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liam8888999/ErsatzTV-Filler"
+  },
+  "author": "liam8888999",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NotExpectedYet/ErsatzTV-Filler/issues"
+  },
+  "homepage": "https://github.com/NotExpectedYet/ErsatzTV-Filler#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "marked": "^4.2.12"
+  }
+}

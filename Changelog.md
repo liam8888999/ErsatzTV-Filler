@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [0.1.0 - Beta] - 2023-01-## [0.1.0 - Beta] - 2023-01-
+
+# Refactor
+- package json file to control dependencies
+- Web server to utilise ejs layout templates
+
+# Added
+- Basic Web Configuration page
+
 ## [0.0.25 - Beta] - 2022-12-21
 
 # Fixed
@@ -192,7 +201,6 @@ jq must be installed as a requirement in this version
 - support for the usage of a configuration file
 - added gitignore file for generated videos/files
 
-### Fixed
 
 
 

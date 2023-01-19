@@ -1,0 +1,29 @@
+<% let CONFIG_AVAILABLE = false %>
+<% if(typeof CURRENT_CONFIG !== "undefined"){ %>
+    <% CONFIG_AVAILABLE = true; %>
+<% } %>
+
+<% const base = "../elements" %>
+<% const text_input = base + "/text-input.ejs" %>
+
+
+<div class="container">
+    <h1>Edit config</h1>
+    <p>Change your configuration file below! The form below will automatically update as you fill it in.</p>
+    <% if(CONFIG_AVAILABLE){ %>
+        <form method="post" action="/config.html" id="config-form">
+            <div id="variables">
+                <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                    <%- include(text_input, {
+                        key,
+                        label: CURRENT_CONFIG[key]
+                    }) %>
+                <% }); %>
+            </div>
+        </form>
+    <% }else{ %>
+        <h1> Error loading configuration file... please check the server logs! </h1>
+    <% } %>
+</div>
+</body>
+</html>
