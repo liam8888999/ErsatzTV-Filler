@@ -1,5 +1,5 @@
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
-const { CURRENT_CONFIG } = require("../modules/config-loader.module");
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 const loadPageRoutes = (app) => {
     /**
@@ -18,11 +18,10 @@ const loadPageRoutes = (app) => {
      */
     app.get('/config', (req, res) => {
         // Render the specific ejs template view
-        console.log(CURRENT_CONFIG)
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "config", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Config",
-            CURRENT_CONFIG //sending the current configuration to the ejs template.
+            CURRENT_CONFIG: retrieveCurrentConfiguration() //sending the current configuration to the ejs template.
         });
     });
 

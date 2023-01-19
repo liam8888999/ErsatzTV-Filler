@@ -1,49 +1,29 @@
+<% let CONFIG_AVAILABLE = false %>
+<% if(typeof CURRENT_CONFIG !== "undefined"){ %>
+    <% CONFIG_AVAILABLE = true; %>
+<% } %>
+
+<% const base = "../elements" %>
+<% const text_input = base + "/text-input.ejs" %>
+
+
 <div class="container">
     <h1>Edit config</h1>
-    <% console.log(CURRENT_CONFIG) %>
-    <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-    <%- CURRENT_CONFIG[key] %> //key will city the output will be 'Tev Aviv'
-    <% }); %>
-    <form method="post" action="/config.html" id="config-form">
-        <div id="variables"></div>
-        <input type="submit" value="Save" class="btn btn-primary">
-    </form>
+    <% if(CONFIG_AVAILABLE){ %>
+        <form method="post" action="/config.html" id="config-form">
+            <div id="variables">
+                <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                    <%- include(text_input, {
+                        key,
+                        label: CURRENT_CONFIG[key]
+                    }) %>
+                <% }); %>
+            </div>
+            <input type="submit" value="Save" class="btn btn-primary">
+        </form>
+    <% }else{ %>
+        <h1> Error loading configuration file... please check the server logs! </h1>
+    <% } %>
 </div>
-<script>
-    <!--split variables and insert them -->
-    $(document).ready(function(){
-        //TODO, ah this is where I broke it
-        $.get('config.conf', function (data) {
-            let current_variables = data.split('\n');
-            current_variables.forEach(variable => {
-                if (!variable.startsWith("#") && variable != "") {
-                    let variable_parts = variable.split('=');
-                    $('#variables').append(`
-                <div class="form-group">
-                  <label> ${variable_parts[0]} </label>
-                  <input type="text" class="form-control" name="${variable_parts[0]}" value="${variable_parts[1]}">
-                </div>
-              `);
-                } else if (variable.startsWith("#")) {
-                    variable = variable.replace("#", "");
-                    $('#variables').append(`
-            <p>${variable}</p>
-        `);
-                }
-            });
-        });
-    });
-</script>
-<script>
-    function myFunction() {
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-        } else {
-            x.className = "topnav";
-        }
-    }
-</script>
-
 </body>
 </html>
