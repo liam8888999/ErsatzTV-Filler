@@ -1,4 +1,4 @@
-const { readFile, stat, copyFile } = require('fs').promises; //Loads the asynchronous version of fs
+const { readFile, stat, copyFile, writeFile } = require('fs').promises; //Loads the asynchronous version of fs
 const { CONFIG_CONSTANTS } = require("../constants/path.constants")
 
 /**
@@ -35,8 +35,18 @@ const createNewUserConfigFromDefault = async () => {
   console.log('A new user config file was generated from the default file');
 }
 
+const overWriteFileContents = async (path, fileContents) => {
+    try{
+        await writeFile(path, fileContents);
+    }catch(e){
+        console.error(e)
+    }
+
+}
+
 module.exports = {
     doesFileExist,
     loadFileContentsIntoMemory,
-    createNewUserConfigFromDefault
+    createNewUserConfigFromDefault,
+    overWriteFileContents
 }

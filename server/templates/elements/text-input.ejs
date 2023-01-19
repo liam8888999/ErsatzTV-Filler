@@ -12,15 +12,24 @@
         const set_invalid = () => {}
 
         const save_changes = async (evt) => {
+            console.log(JSON.stringify({
+                key: evt.srcElement.id,
+                value: evt.srcElement.value
+            }))
             try{
-                const res = await fetch('/config/edit', {
+                const res = await fetch('/api/config/edit', {
                     method: "PATCH",
                     headers: {
                         "Content-type": "application/json; charset=UTF-8"
-                    }
+                    },
+                    body: JSON.stringify({
+                        key: evt.srcElement.id,
+                        value: evt.srcElement.value
+                    })
                 })
                 if(res.ok){
-                    const jsonResponse = res.json();
+                    const jsonResponse = await res.json();
+                    console.log(jsonResponse)
                     // Validate the response
                 }
             }catch(e){
