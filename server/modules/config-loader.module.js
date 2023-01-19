@@ -1,5 +1,5 @@
 const { CONFIG_CONSTANTS } = require("../constants/path.constants");
-const { doesFileExist, loadFileContentsIntoMemory, createNewUserConfigFromDefault } = require("../utils/file.utils");
+const { doesFileExist, createNewUserConfigFromDefault } = require("../utils/file.utils");
 const { parseConfigurationFile } = require("../utils/config.utils");
 
 let CURRENT_CONFIG = {}; //In memory store for config data

@@ -28,8 +28,8 @@ const doesFileExist = async (path) => {
 /**
 * Copy sample-config.conf if config.conf does not exist
 */
-const createNewUserConfigFromDefault = async (path) ==> {
-  copyFile(CONFIG_CONSTANTS().DEFAULT_CONFIG, CONFIG_CONSTANTS().USER_CONFIG);
+const createNewUserConfigFromDefault = async () => {
+  await copyFile(CONFIG_CONSTANTS().DEFAULT_CONFIG, CONFIG_CONSTANTS().USER_CONFIG);
   console.log('A new user config file was generated from the default file');
 }
 
