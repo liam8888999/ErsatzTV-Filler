@@ -1,5 +1,5 @@
 const { CONFIG_CONSTANTS } = require("../constants/path.constants");
-const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
+const { doesFileExist, loadFileContentsIntoMemory, createNewUserConfigFromDefault } = require("../utils/file.utils");
 const { parseConfigurationFile } = require("../utils/config.utils");
 
 let CURRENT_CONFIG = {}; //In memory store for config data
@@ -10,6 +10,7 @@ const setupConfigurationFile = async () => {
     if(!HAVE_USER_CONFIG){
         console.warn("Can not find a user configuration file... loading default...")
         await parseConfigurationFileContents(CONFIG_CONSTANTS().DEFAULT_CONFIG)
+        await createNewUserConfigFromDefault();
     }else{
         console.log("Found a user configuration file... loading...")
         await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG)
@@ -17,14 +18,12 @@ const setupConfigurationFile = async () => {
 }
 
 const parseConfigurationFileContents = async (path) => {
+    console.log(parseConfigurationFile(path).parsed)
     CURRENT_CONFIG = parseConfigurationFile(path).parsed;
-}
-
-const retrieveCurrentConfiguration = () => {
-    return CURRENT_CONFIG
+    console.log(CURRENT_CONFIG)
 }
 
 module.exports = {
     setupConfigurationFile,
-    retrieveCurrentConfiguration
+    CURRENT_CONFIG
 }

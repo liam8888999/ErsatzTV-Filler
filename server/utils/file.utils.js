@@ -1,4 +1,5 @@
-const { readFile, stat } = require('fs').promises; //Loads the asynchronous version of fs
+const { readFile, stat, copyFile } = require('fs').promises; //Loads the asynchronous version of fs
+const { CONFIG_CONSTANTS } = require("../constants/path.constants")
 
 /**
  * Returns the contents of a file from the local system. Requires a relative path passing through!
@@ -24,7 +25,16 @@ const doesFileExist = async (path) => {
     return result;
 }
 
+/**
+* Copy sample-config.conf if config.conf does not exist
+*/
+const createNewUserConfigFromDefault = async (path) ==> {
+  copyFile(CONFIG_CONSTANTS().DEFAULT_CONFIG, CONFIG_CONSTANTS().USER_CONFIG);
+  console.log('A new user config file was generated from the default file');
+}
+
 module.exports = {
     doesFileExist,
-    loadFileContentsIntoMemory
+    loadFileContentsIntoMemory,
+    createNewUserConfigFromDefault
 }
