@@ -17,7 +17,7 @@ const setupConfigurationFile = async () => {
 }
 
 const parseConfigurationFileContents = async (path) => {
-    CURRENT_CONFIG = parseConfigurationFile(path);
+    CURRENT_CONFIG = parseConfigurationFile(path).parsed;
 }
 
 module.exports = {
