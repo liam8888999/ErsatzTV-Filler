@@ -1,31 +1,25 @@
-const { CONFIG_CONSTANTS } = require("../constants/path.constants");
-const { doesFileExist, createNewUserConfigFromDefault } = require("../utils/file.utils");
-const { parseConfigurationFile } = require("../utils/config.utils");
-
-let CURRENT_CONFIG = {}; //In memory store for config data
-
-const setupConfigurationFile = async () => {
-    //For now, check exists and just load the user one over the default one... can be expanded to control your variable updating, and it will always run on server boot.
-    const HAVE_USER_CONFIG = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-    if(!HAVE_USER_CONFIG){
-        console.warn("Can not find a user configuration file... loading default...")
-        await parseConfigurationFileContents(CONFIG_CONSTANTS().DEFAULT_CONFIG)
-        await createNewUserConfigFromDefault();
-    }else{
-        console.log("Found a user configuration file... loading...")
-        await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG)
-    }
-}
-
-const parseConfigurationFileContents = async (path) => {
+const randomAudioGenerator = async => {
     CURRENT_CONFIG = parseConfigurationFile(path).parsed;
 }
 
-const retrieveCurrentConfiguration = () => {
-    return CURRENT_CONFIG
+function downloadImage(url, filepath) {
+    return new Promise((resolve, reject) => {
+        client.get(url, (res) => {
+            if (res.statusCode === 200) {
+                res.pipe(fs.createWriteStream(filepath))
+                    .on('error', reject)
+                    .once('close', () => resolve(filepath));
+            } else {
+                // Consume response data to free up memory
+                res.resume();
+                reject(new Error(`Request Failed With a Status Code: ${res.statusCode}`));
+
+            }
+        });
+    });
 }
 
 module.exports = {
-    setupConfigurationFile,
-    retrieveCurrentConfiguration
+    randomAudioGenerator,
+    downloadImage
 }
