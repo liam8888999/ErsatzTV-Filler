@@ -3,7 +3,7 @@
 *V0.0.25 - Beta
 */
 const { randomAudioGenerator } = require("../modules/generators.module");
-const { imageDownloader } = require("../modules/generators.module"); //unsure about this one
+const { downloadImage } = require("../modules/generators.module"); //unsure about this one
 const { GENERATOR_CONSTANTS } = require("../constants/generators-path.constants");
 
 
