@@ -2,7 +2,7 @@
 *Generate Weather
 *V0.0.25 - Beta
 */
-const { randomAudioGenerator } = require("../modules/generators.module");
+const { selectRandomAudioFile } = require("utils/randomaudio.utils");
 const { downloadImage } = require("../utils/downloadimage.utils"); //unsure about this one
 const { GENERATOR_CONSTANTS } = require("../constants/path.constants");
 
@@ -34,10 +34,10 @@ console.log("processing weather")
 */
 
 console.log("choosing random audio")
-const randomaudioweather1 = await randomaudio()
-const randomaudioweather2 = await randomaudio()
-const randomaudioweather3 = await randomaudio()
-const randomaudioweather4 = await randomaudio()
+const randomaudioweather1 = await selectRandomAudioFile()
+const randomaudioweather2 = await selectRandomAudioFile()
+const randomaudioweather3 = await selectRandomAudioFile()
+const randomaudioweather4 = await selectRandomAudioFile()
 
 
 /**
@@ -59,15 +59,15 @@ const randomaudioweather4 = await randomaudio()
 
 console.log("Downloading weather images")
 
-    downloadImage('wttr.in/${retrieveCurrentConfiguration().cityurl}.png$weathermeasurement', '$weatherdir/v1.png')
+    downloadImage(`wttr.in/${retrieveCurrentConfiguration().cityurl}.png$weathermeasurement`, WEATHERDIR/v1.png)
     .then(console.log)
     .catch(console.error);
 
-    downloadImage('v2.wttr.in/${retrieveCurrentConfiguration().cityurl}.png$weathermeasurement', '$weatherdir/v2.png')
+    downloadImage(`v2.wttr.in/${retrieveCurrentConfiguration().cityurl}.png$weathermeasurement`, WEATHERDIR/v2.png)
     .then(console.log)
     .catch(console.error);
 
-    downloadImage('v3.wttr.in/${retrieveCurrentConfiguration().stateurl}.png$weathermeasurement', '$weatherdir/v3.png')
+    downloadImage(`v3.wttr.in/${retrieveCurrentConfiguration().stateurl}.png$weathermeasurement`, WEATHERDIR/v3.png)
     .then(console.log)
     .catch(console.error);
 
@@ -79,7 +79,7 @@ console.log("calculating fade times")
 *set variables
 */
 const weathervideofadeoutstart = retrieveCurrentConfiguration().weathervideofadeoutduration;
-const weatheraudiofadeoutstart = retrieveCurrentConfiguration().weatheraudeofadeoutduration;
+const weatheraudiofadeoutstart = retrieveCurrentConfiguration().weatheraudiofadeoutduration;
 
 /**
 *set fade time
@@ -92,12 +92,12 @@ const weatheraudeofadeduration = weathervideolength - weatheraudiofadeduration;
 *make the videos
 */
 console.log("creating videos")
-exec('ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v1.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather1}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${retrieveCurrentConfiguration().workdir}/weather-v1.mp4')
-exec('ffmpeg -y -i ${retrieveCurrentConfiguration().workdir}/weather-v1.mp4 -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstart}:d=${retrieveCurrentConfiguration().weatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v1.mp4')
-exec('ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v2.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather2}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${retrieveCurrentConfiguration().workdir}/weather-v2.mp4')
-exec('ffmpeg -y -i ${retrieveCurrentConfiguration().workdir}/weather-v2.mp4 -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstart}:d=${retrieveCurrentConfiguration().weatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v2.mp4')
-exec('ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v1.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather3}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${retrieveCurrentConfiguration().workdir}/weather-v3.mp4')
-exec('ffmpeg -y -i ${retrieveCurrentConfiguration().workdir}/weather-v3.mp4 -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstart}:d=${retrieveCurrentConfiguration().weatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v3.mp4')
+exec(`ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v1.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather1}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${WORKDIR}/weather-v1.mp4`)
+exec(`ffmpeg -y -i ${WORKDIR}/weather-v1.mp4 -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstart}:d=${retrieveCurrentConfiguration().weatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v1.mp4`)
+exec(`ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v2.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather2}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${workdir}/weather-v2.mp4`)
+exec(`ffmpeg -y -i ${WORKDIR}/weather-v2.mp4 -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstart}:d=${retrieveCurrentConfiguration().weatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v2.mp4`)
+exec(`ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v1.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather3}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${retrieveCurrentConfiguration().workdir}/weather-v3.mp4`)
+exec(`ffmpeg -y -i ${WORKDIR}/weather-v3.mp4 -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstart}:d=${retrieveCurrentConfiguration().weatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v3.mp4`)
 
 /**
 *check if v4 should be generated
@@ -119,9 +119,9 @@ const weatheraudiofadeoutstartv4 = weatherv4videolength2 - $weatheraudiofadeoutd
 */
 
 console.log("Generate weather v1-3 without fade")
-exec('ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v1.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather1}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${retrieveCurrentConfiguration().workdir}/weatherv4/weather-v1.mp4')
-exec('ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v2.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather2}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${retrieveCurrentConfiguration().workdir}/weatherv4/weather-v2.mp4')
-exec('ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v3.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather3}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${retrieveCurrentConfiguration().workdir}/weatherv4/weather-v3.mp4')
+exec(`ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v1.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather1}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${WORKDIR}/weatherv4/weather-v1.mp4`)
+exec(`ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v2.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather2}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${WORKDIR}/weatherv4/weather-v2.mp4`)
+exec(`ffmpeg -y -f lavfi -i color=${retrieveCurrentConfiguration().backgroundcolour}:${retrieveCurrentConfiguration().videoresolution} -i ${retrieveCurrentConfiguration().weatherdir}/v3.png -stream_loop -1 -i "${retrieveCurrentConfiguration().randomaudioweather3}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${retrieveCurrentConfiguration().weathervideolength} ${WORKDIR}/weatherv4/weather-v3.mp4`)
 
 /**
 *check if weather v4 should be shuffled (add later)
@@ -138,7 +138,7 @@ console.log("adding all files to a txt file for concat")
 *add all files to a text file for concat
 */
 // list all files in the directory
-fs.readdir(${retrieveCurrentConfiguration().workdir}/weatherv4/, (err, files) => {
+fs.readdir(`${WORKDIR}/weatherv4/`, (err, files) => {
   if (err) {
     throw err
   }
@@ -146,13 +146,11 @@ fs.readdir(${retrieveCurrentConfiguration().workdir}/weatherv4/, (err, files) =>
   // files object contains all files names
   // log them on console
   files.forEach(file => {
-    fs.writeFile("${retrieveCurrentConfiguration().workdir/weatherv4/weatherv4.txt}", file, (err) => {
+    fs.writeFile(`${WORKDIR}/weatherv4/weatherv4.txt`, file, (err) => {
   if (err)
     console.log(err);
   else {
     console.log("File written successfully\n");
-    console.log("The written has the following contents:");
-    console.log(fs.readFileSync("books.txt", "utf8"));
   }
 });
     console.log(file)
@@ -167,5 +165,5 @@ fs.readdir(${retrieveCurrentConfiguration().workdir}/weatherv4/, (err, files) =>
 
 console.log("generate weatherv4")
 
-exec('ffmpeg -y -f concat -safe 0 -i ${retrieveCurrentConfiguration().workdir}/weatherv4/weatherv4.txt -c copy {retrieveCurrentConfiguration().workdir}/weather-v4.mp4')
-exec('ffmpeg -y -i ${retrieveCurrentConfiguration().workdir}/weather-v4.mp4 -i "${retrieveCurrentConfiguration().randomaudioweather4}" -shortest -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstartv4}:d=${retrieveCurrentConfiguration().eatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v4.mp4')
+exec(`ffmpeg -y -f concat -safe 0 -i ${retrieveCurrentConfiguration().workdir}/weatherv4/weatherv4.txt -c copy ${WORKDIR}/weather-v4.mp4`)
+exec(`ffmpeg -y -i ${WORKDIR}/weather-v4.mp4 -i "${retrieveCurrentConfiguration().randomaudioweather4}" -shortest -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstartv4}:d=${retrieveCurrentConfiguration().eatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v4.mp4')
