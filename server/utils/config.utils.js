@@ -25,11 +25,11 @@ const writeValueToConfigurationFile = async (key, value) => {
 
     const newDotEnv = {
         ...latestDotEnvConfig.parsed,
-        [key]: value
     };
+    newDotEnv[key] = value;
 
-    const newDotEnv[key] = value;
-    await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  newDotEnv[key])
+    const dotEnvResult = stringifyJavaScriptObjectToConfigFormat(newDotEnv);
+    await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
 
 
 }
