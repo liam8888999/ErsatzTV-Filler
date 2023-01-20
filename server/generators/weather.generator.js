@@ -60,15 +60,15 @@ const randomaudioweather4 = selectRandomAudioFile()
 
 console.log("Downloading weather images")
 
-    downloadImage(`wttr.in/${retrieveCurrentConfiguration().cityurl}.png$weathermeasurement`, WEATHERDIR/v1.png)
+    downloadImage(`wttr.in/${retrieveCurrentConfiguration().cityurl}.png$weathermeasurement`, WORKDIR/v1.png)
     .then(console.log)
     .catch(console.error);
 
-    downloadImage(`v2.wttr.in/${retrieveCurrentConfiguration().cityurl}.png$weathermeasurement`, WEATHERDIR/v2.png)
+    downloadImage(`v2.wttr.in/${retrieveCurrentConfiguration().cityurl}.png$weathermeasurement`, WORKDIR/v2.png)
     .then(console.log)
     .catch(console.error);
 
-    downloadImage(`v3.wttr.in/${retrieveCurrentConfiguration().stateurl}.png$weathermeasurement`, WEATHERDIR/v3.png)
+    downloadImage(`v3.wttr.in/${retrieveCurrentConfiguration().stateurl}.png$weathermeasurement`, WORKDIR/v3.png)
     .then(console.log)
     .catch(console.error);
 
