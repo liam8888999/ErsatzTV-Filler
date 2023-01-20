@@ -1,19 +1,11 @@
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
-const { marked } = require('marked');
-const {fs, readFile} = require('fs')
-const changelog = "../../Changelog.md"
+const { generateChangelog } = require("../utils/markdown.utils")
 
 const loadPageRoutes = (app) => {
-    app.get('/', (req, res) => {
-      fs.readFile(`changelog`, 'utf8', (err, data) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-});
-  console.log(data);
-    const html = marked.parse(data);
+    app.get('/', async (req, res) => {
+  const html = await generateChangelog()
+    console.log(html)
     res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
       markdown: html,
       layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view

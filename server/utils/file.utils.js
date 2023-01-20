@@ -1,6 +1,8 @@
 const { readFile, stat, copyFile, writeFile } = require('fs').promises; //Loads the asynchronous version of fs
 const { CONFIG_CONSTANTS } = require("../constants/path.constants")
 
+
+
 /**
  * Returns the contents of a file from the local system. Requires a relative path passing through!
  * @param path
@@ -50,9 +52,11 @@ const overWriteFileContents = async (path, fileContents) => {
 
 }
 
+
+
 module.exports = {
     doesFileExist,
     loadFileContentsIntoMemory,
     createNewUserConfigFromDefault,
-    overWriteFileContents
+    overWriteFileContents,
 }
