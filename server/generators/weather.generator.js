@@ -4,15 +4,12 @@
 */
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const { downloadImage } = require("../utils/downloadimage.utils"); //unsure about this one
-const { GENERATOR_CONSTANTS } = require("../constants/path.constants");
+const { WORKDIR } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 
 
 
-
-
-const WORKDIR = "server/workdir/"
 
 
 const { exec } = require("child_process")
