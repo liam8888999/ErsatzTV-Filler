@@ -118,9 +118,9 @@ console.log("starting weatherv4")
 
 console.log("calculating fade times")
 
-const weatherv4videolength = weathervideolength * 3
-const weathervideofadeoutstartv4 = weatherv4videolength - $weathervideofadeoutduration
-const weatheraudiofadeoutstartv4 = weatherv4videolength2 - $weatheraudiofadeoutduration
+const weatherv4videolength = retrieveCurrentConfiguration().weathervideolength * 3
+const weathervideofadeoutstartv4 = retrieveCurrentConfiguration().weatherv4videolength - retrieveCurrentConfiguration().weathervideofadeoutduration
+const weatheraudiofadeoutstartv4 = retrieveCurrentConfiguration().weatherv4videolength2 - retrieveCurrentConfiguration().weatheraudiofadeoutduration
 
 /**
 *generate v1 to v4 without fade
