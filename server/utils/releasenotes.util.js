@@ -4,6 +4,8 @@ async function content(path) {
   return await readFile(path, 'utf8')
 }
 
-const text = await content('./existing-file.txt')
+const releaseNotes = async () => {
+await content('./releasenotes.util.js')
+}
 
 console.log(`${text}`)
