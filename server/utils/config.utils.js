@@ -2,7 +2,6 @@ const dotenv = require('dotenv')
 const {CONFIG_CONSTANTS} = require("../constants/path.constants");
 const {overWriteFileContents} = require("../utils/file.utils");
 const {stringifyJavaScriptObjectToConfigFormat} = require("../utils/string.utils")
-const { USER_CONFIG } = require("../constants/path.constants");
 
 /**
  * Parse the configuration file with given path
@@ -20,7 +19,7 @@ const parseConfigurationFile = (path) => {
  * @returns {Promise<void>}
  */
 const writeValueToConfigurationFile = async (key, value) => {
-    const latestDotEnvConfig = parseConfigurationFile(`${USER_CONFIG}`)
+    const latestDotEnvConfig = parseConfigurationFile(`${CONFIG_CONSTANTS().USER_CONFIG}`)
 
     console.log(`${latestDotEnvConfig.parsed}`)
 
