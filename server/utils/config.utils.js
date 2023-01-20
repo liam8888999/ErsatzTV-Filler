@@ -22,7 +22,7 @@ const writeValueToConfigurationFile = async (key, value) => {
     const latestDotEnvConfig = parseConfigurationFile(CONFIG_CONSTANTS().USER_CONFIG)
 
     console.log(`${latestDotEnvConfig.parsed}`)
-    console.log(parseConfigurationFile(path).parsed)
+    console.log(latestDotEnvConfig)
 
     const newDotEnv = {
         ...latestDotEnvConfig.parsed,
