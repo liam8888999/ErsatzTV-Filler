@@ -34,10 +34,10 @@ console.log("processing weather")
 */
 
 console.log("choosing random audio")
-const randomaudioweather1 = await selectRandomAudioFile()
-const randomaudioweather2 = await selectRandomAudioFile()
-const randomaudioweather3 = await selectRandomAudioFile()
-const randomaudioweather4 = await selectRandomAudioFile()
+const randomaudioweather1 = selectRandomAudioFile()
+const randomaudioweather2 = selectRandomAudioFile()
+const randomaudioweather3 = selectRandomAudioFile()
+const randomaudioweather4 = selectRandomAudioFile()
 
 
 /**
