@@ -63,7 +63,9 @@ await selectRandomAudioFile()
 *image downloading
 */
 
-
+const city = null
+const state = null
+const weathermeasurement = null
 
 console.log("Downloading weather images")
 
