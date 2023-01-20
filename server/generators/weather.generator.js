@@ -66,7 +66,6 @@ await selectRandomAudioFile()
 
 
 console.log("Downloading weather images")
-console.log(WORKDIR)
 
     downloadImage(`wttr.in/${retrieveCurrentConfiguration().city}.png${retrieveCurrentConfiguration().weathermeasurement}`, `${WORKDIR}/v1.png`)
     .then(console.log)
