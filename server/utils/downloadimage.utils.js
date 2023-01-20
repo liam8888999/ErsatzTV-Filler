@@ -1,8 +1,8 @@
 const http = require('http');
+const client = http.createClient(80, url);
 
 function downloadImage(url, filepath) {
     return new Promise((resolve, reject) => {
-      const client = http.createClient(80, url);
         client.get(url, (res) => {
             if (res.statusCode === 200) {
                 res.pipe(fs.createWriteStream(filepath))
