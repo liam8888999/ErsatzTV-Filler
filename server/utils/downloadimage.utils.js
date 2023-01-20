@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const url = 'https://www.shutterstock.com/image-photo/surreal-image-african-elephant-wearing-260nw-1365289022.jpg'
 
-function downloadImage(url, filepath) {
+function downloadImage(url, filepath){
     return fetch(url)
         .then(res => {
             if (res.status !== 200) {
