@@ -21,10 +21,11 @@ const parseConfigurationFile = (path) => {
 const writeValueToConfigurationFile = async (key, value) => {
     const latestDotEnvConfig = parseConfigurationFile(CONFIG_CONSTANTS().USER_CONFIG)
 
+    console.log(`${latestDotEnvConfig.parsed}`)
+
     const newDotEnv = {
         ...latestDotEnvConfig.parsed,
         [key]: value
-        console.log(`${latestDotEnvConfig.parsed}`)
     };
 
     const dotEnvResult = stringifyJavaScriptObjectToConfigFormat(newDotEnv);
