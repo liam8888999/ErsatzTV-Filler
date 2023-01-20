@@ -93,8 +93,8 @@ const weatheraudiofadeoutduration = retrieveCurrentConfiguration().weatheraudiof
 *set fade time
 */
 
-const weathervideofadeoutstart = weathervideolength - weathervideofadeduration;
-const weatheraudeofadeduration = weathervideolength - weatheraudiofadeduration;
+const weathervideofadeoutstart = retrieveCurrentConfiguration().weathervideolength - retrieveCurrentConfiguration().weathervideofadeduration;
+const weatheraudeofadeduration = retrieveCurrentConfiguration().weathervideolength - retrieveCurrentConfiguration().weatheraudiofadeduration;
 
 /**
 *make the videos
