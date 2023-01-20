@@ -4,7 +4,7 @@ const PAGES_FOLDER = "pages/";
 const THEMES_FOLDER = "themes/"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
-const WORKDIR = "server/workdir/";
+const WORKDIR = "server/workdir/"
 
 const DEFAULT_CONFIG = "sample-config.conf"
 const USER_CONFIG = "config.conf"
