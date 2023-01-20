@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import('node-fetch');
 const fs = require('fs');
 
 function downloadImage(url, filepath) {
