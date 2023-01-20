@@ -17,3 +17,7 @@ function downloadImage(url, filepath){
             });
         });
 }
+
+module.exports = {
+    downloadImage
+}
