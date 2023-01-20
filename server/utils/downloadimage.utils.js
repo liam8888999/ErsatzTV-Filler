@@ -1,5 +1,5 @@
 const http = require('http');
-const client = http.createClient(80, url);
+const client = http.createClient(80, 'example.com');
 
 function downloadImage(url, filepath) {
     return new Promise((resolve, reject) => {
