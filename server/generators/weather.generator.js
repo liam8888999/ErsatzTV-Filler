@@ -5,6 +5,7 @@
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const { downloadImage } = require("../utils/downloadimage.utils"); //unsure about this one
 const { GENERATOR_CONSTANTS } = require("../constants/path.constants");
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 
 
