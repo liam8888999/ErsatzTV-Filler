@@ -2,7 +2,7 @@
 *Generate Weather
 *V0.0.25 - Beta
 */
-const { selectRandomAudioFile } = require("/utils/randomaudio.utils");
+const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const { downloadImage } = require("../utils/downloadimage.utils"); //unsure about this one
 const { GENERATOR_CONSTANTS } = require("../constants/path.constants");
 
