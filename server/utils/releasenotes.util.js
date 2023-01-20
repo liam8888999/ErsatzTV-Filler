@@ -8,4 +8,4 @@ const releaseNotes = async () => {
 await content('./releasenotes.util.js')
 }
 
-console.log(`${text}`)
+console.log(`${releaseNotes}`)
