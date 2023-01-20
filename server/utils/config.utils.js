@@ -9,10 +9,9 @@ const {stringifyJavaScriptObjectToConfigFormat} = require("../utils/string.utils
  * @returns {DotenvConfigOutput}
  */
 const parseConfigurationFile = (path) => {
-    return dotenv.config({path})
+    return dotenv.config(`${path}`)
 }
 
-console.log(parseConfigurationFileContents)
 
 /**
  * Write a key, value pair to the configuration file
