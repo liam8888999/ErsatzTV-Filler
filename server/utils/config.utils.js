@@ -28,8 +28,8 @@ const writeValueToConfigurationFile = async (key, value) => {
         [key]: value
     };
 
-    const dotEnvResult = stringifyJavaScriptObjectToConfigFormat(newDotEnv);
-    await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
+    const newDotEnv[key] = value;
+    await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  newDotEnv[key])
 
 
 }
