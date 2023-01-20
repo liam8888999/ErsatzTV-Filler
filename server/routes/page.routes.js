@@ -1,14 +1,25 @@
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
+const { marked } = require('marked');
+const {fs, readFile} = require('fs')
+const changelog = "../../Changelog.md"
 
 const loadPageRoutes = (app) => {
     app.get('/', (req, res) => {
-        // Render the specific ejs template view
-        res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
-            layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
-            page: "Home" //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
-        });
-    });
+      fs.readFile(`changelog`, 'utf8', (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+});
+  console.log(data);
+    const html = marked.parse(data);
+    res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
+      markdown: html,
+      layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
+      page: "Home" //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
+ });
+  });
 
     app.get('/config', (req, res) => {
         // Render the specific ejs template view
