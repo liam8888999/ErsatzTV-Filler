@@ -14,7 +14,7 @@ const { GENERATOR_CONSTANTS } = require("../constants/path.constants");
 
 
 
-import { exec } from 'child_process';
+const { exec } = require("child_process")
 const fs = require('fs');
 const client = require('https');
 
