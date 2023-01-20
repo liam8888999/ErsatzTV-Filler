@@ -12,7 +12,7 @@ const { retrieveCurrentConfiguration } = require("../modules/config-loader.modul
 
 
 
-
+const WORKDIR = "server/workdir/"
 
 
 const { exec } = require("child_process")
