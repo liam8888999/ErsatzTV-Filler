@@ -1,5 +1,7 @@
-const fetch = require('node-fetch')
+import('node-fetch');
 const fs = require('fs');
+
+const url = 'https://www.shutterstock.com/image-photo/surreal-image-african-elephant-wearing-260nw-1365289022.jpg'
 
 function downloadImage(url, filepath) {
     return fetch(url)
