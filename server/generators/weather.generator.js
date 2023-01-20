@@ -78,8 +78,8 @@ console.log("calculating fade times")
 /**
 *set variables
 */
-const weathervideofadeoutstart = retrieveCurrentConfiguration().weathervideofadeoutduration;
-const weatheraudiofadeoutstart = retrieveCurrentConfiguration().weatheraudiofadeoutduration;
+const weathervideofadeoutduration = retrieveCurrentConfiguration().weathervideofadeoutduration;
+const weatheraudiofadeoutduration = retrieveCurrentConfiguration().weatheraudiofadeoutduration;
 
 /**
 *set fade time
