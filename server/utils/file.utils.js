@@ -35,8 +35,21 @@ const createNewUserConfigFromDefault = async () => {
   console.log('A new user config file was generated from the default file');
 }
 
+function listFilesindir(dir) {
+  return new Promise((resolve, reject) => {
+    fs.readdir(dir, (err, files) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(files);
+      }
+    });
+  });
+}
+
 module.exports = {
     doesFileExist,
     loadFileContentsIntoMemory,
-    createNewUserConfigFromDefault
+    createNewUserConfigFromDefault,
+    listFilesindir
 }
