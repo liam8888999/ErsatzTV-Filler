@@ -1,20 +1,17 @@
 const { listFilesindir } = require("../../utils/file.utils")
+const { randomNumber } = require("../../utils/randomnumber.utils")
 
-function downloadImage(){}
+function randomaudio(){
+const fileList = await listFiles('${retrieveCurrentConfiguration().customaudio}')
+const selectRandomAudioFile = async (path) => {
+  //gra the array of files
+  const fileList = await listFiles(path)
+  //generate a random number from array 0 to length
+  const randomIndex = randomNumber(fileList.length);
 
-const filesList = await readdir("${retrieveCurrentConfiguration().customaudio}")
-
-listFiles('path/to/directory')
-  .then(files => {
-    console.log(files);
-  })
-  .catch(err => {
-    console.error(err);
-  });
-
-  const randomNum = Math.floor(Math.random() * (${filesList.Length} - 1 + 1) + 1);
-console.log(randomNum);
-
+  // Return the chosen random file path
+  return fileList[randomIndex].path
+}
 }
 
 module.exports = {
