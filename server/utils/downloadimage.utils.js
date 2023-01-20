@@ -1,21 +1,17 @@
-const axios = require('axios');
+const fetch = require('node-fetch');
+const fs = require('fs');
+
 function downloadImage(url, filepath) {
-    return new Promise((resolve, reject) => {
-        client.get(url, (res) => {
-            if (res.statusCode === 200) {
-                res.pipe(fs.createWriteStream(filepath))
-                    .on('error', reject)
-                    .once('close', () => resolve(filepath));
-            } else {
-                // Consume response data to free up memory
-                res.resume();
-                reject(new Error(`Request Failed With a Status Code: ${res.statusCode}`));
-
+    return fetch(url)
+        .then(res => {
+            if (res.status !== 200) {
+                throw new Error(`Failed to fetch image with status code ${res.status}`);
             }
+            return new Promise((resolve, reject) => {
+                res.body
+                    .pipe(fs.createWriteStream(filepath))
+                    .on('error', reject)
+                    .on('close', () => resolve(filepath));
+            });
         });
-    });
-}
-
-module.exports = {
-    downloadImage
 }
