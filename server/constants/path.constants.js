@@ -4,6 +4,9 @@ const PAGES_FOLDER = "pages/";
 const THEMES_FOLDER = "themes/"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
+const WORKDIR = "server/workdir/";
+const WEATHERDIR = "server/weatherdir/";
+
 const DEFAULT_CONFIG = "sample-config.conf"
 const USER_CONFIG = "config.conf"
 /**
@@ -28,7 +31,15 @@ const CONFIG_CONSTANTS = () => {
     }
 }
 
+
+const GENERATOR_CONSTANTS = () => {
+    return {
+        WORKDIR, WEATHERDIR
+    }
+}
+
 module.exports = {
     TEMPLATE_CONSTANTS,
-    CONFIG_CONSTANTS
+    CONFIG_CONSTANTS,
+    GENERATOR_CONSTANTS
 };

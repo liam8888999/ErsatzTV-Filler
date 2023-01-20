@@ -4,7 +4,7 @@
 */
 const { randomAudioGenerator } = require("../modules/generators.module");
 const { downloadImage } = require("../modules/generators.module"); //unsure about this one
-const { GENERATOR_CONSTANTS } = require("../constants/generators-path.constants");
+const { GENERATOR_CONSTANTS } = require("../constants/path.constants");
 
 
 
