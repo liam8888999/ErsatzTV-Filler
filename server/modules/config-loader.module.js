@@ -28,6 +28,7 @@ const setupConfigurationFile = async () => {
  */
 const parseConfigurationFileContents = async (path) => {
     CURRENT_CONFIG = parseConfigurationFile(path).parsed;
+    console.log(parseConfigurationFile(path).parsed)
 }
 
 /**
