@@ -67,15 +67,15 @@ await selectRandomAudioFile()
 
 console.log("Downloading weather images")
 
-    downloadImage(`wttr.in/${retrieveCurrentConfiguration().cityurl}.png${retrieveCurrentConfiguration().weathermeasurement}`, `${WORKDIR}/v1.png`)
+    downloadImage(`wttr.in/${retrieveCurrentConfiguration().city}.png${retrieveCurrentConfiguration().weathermeasurement}`, `${WORKDIR}/v1.png`)
     .then(console.log)
     .catch(console.error);
 
-    downloadImage(`v2.wttr.in/${retrieveCurrentConfiguration().cityurl}.png${retrieveCurrentConfiguration().weathermeasurement}`, `${WORKDIR}/v2.png`)
+    downloadImage(`v2.wttr.in/${retrieveCurrentConfiguration().city}.png${retrieveCurrentConfiguration().weathermeasurement}`, `${WORKDIR}/v2.png`)
     .then(console.log)
     .catch(console.error);
 
-    downloadImage(`v3.wttr.in/${retrieveCurrentConfiguration().stateurl}.png${retrieveCurrentConfiguration().weathermeasurement}`, `${WORKDIR}/v3.png`)
+    downloadImage(`v3.wttr.in/${retrieveCurrentConfiguration().state}.png${retrieveCurrentConfiguration().weathermeasurement}`, `${WORKDIR}/v3.png`)
     .then(console.log)
     .catch(console.error);
 
