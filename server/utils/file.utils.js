@@ -1,4 +1,4 @@
-const { readFile, stat, copyFile } = require('fs').promises; //Loads the asynchronous version of fs
+const { readFile, stat, copyFile, writeFile } = require('fs').promises; //Loads the asynchronous version of fs
 const { CONFIG_CONSTANTS } = require("../constants/path.constants")
 
 /**
@@ -35,21 +35,24 @@ const createNewUserConfigFromDefault = async () => {
   console.log('A new user config file was generated from the default file');
 }
 
-function listFilesindir(dir) {
-  return new Promise((resolve, reject) => {
-    fs.readdir(dir, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files);
-      }
-    });
-  });
+/**
+ * Overwrite the contents of an existing file... currently easiest way I know of updating the local file with changes.
+ * @param path
+ * @param fileContents
+ * @returns {Promise<void>}
+ */
+const overWriteFileContents = async (path, fileContents) => {
+    try{
+        await writeFile(path, fileContents);
+    }catch(e){
+        console.error(e)
+    }
+
 }
 
 module.exports = {
     doesFileExist,
     loadFileContentsIntoMemory,
     createNewUserConfigFromDefault,
-    listFilesindir
+    overWriteFileContents
 }

@@ -1,13 +1,13 @@
 <div class="topnav" id="myTopnav">
     <a href="/" class="<%= page === 'Home' && 'active' %>">Home</a>
     <a href="/config" class="<%= page === 'Config' && 'active' %>">Config</a>
-    <a href="/themes" class="<%= page === 'Themes' && 'active' %>">Themes</a>
-    <a style="display: none;" href="/themes" class="<%= page === 'Updates' && 'active' %>">Updates</a>
+    <a class="d-none" href="/themes" class="<%= page === 'Themes' && 'active' %>">Themes</a>
+    <a class="d-none" href="/updates" class="<%= page === 'Updates' && 'active' %>">Updates</a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
     </a>
+    <a class="float-end">V0.1.0 - Beta</a>
 </div>
-<p style=float:right;padding-right:10px;>V0.1.0 - Beta</p>
 <script>
     function myFunction() {
         var x = document.getElementById("myTopnav");

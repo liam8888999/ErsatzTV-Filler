@@ -1,5 +1,53 @@
 <div class="form-group">
-    <label> <%= key %> </label>
-    <input id="<%= key %>" type="text" class="form-control" name="<%= key %>" value="<%= label %>">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"><%= key %></span>
+        <input input id="<%= key %>" type name="<%= key %>" type="text" class="form-control" aria-label="<%= key %>" aria-describedby="<%= key %>" value="<%= label %>">
+    </div>
 </div>
 
+<script>
+    (async function(){
+        const validate_response = () => {}
+        const set_valid = () => {}
+        const set_invalid = () => {}
+
+        const save_changes = async (evt) => {
+            console.log(JSON.stringify({
+                key: evt.srcElement.id,
+                value: evt.srcElement.value
+            }))
+            try{
+                const res = await fetch('/api/config/edit', {
+                    method: "PATCH",
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    },
+                    body: JSON.stringify({
+                        key: evt.srcElement.id,
+                        value: evt.srcElement.value
+                    })
+                })
+                if(res.ok){
+                    const jsonResponse = await res.json();
+                    console.log(jsonResponse)
+                    // Validate the response
+                }
+            }catch(e){
+                //TODO: update this when we make the validation side on the server. Needs to catch 400 errors automatically for validation.
+                console.error(e)
+            }
+        }
+
+        // Set listeners for focus out and key up events. Setting will be saved via either of those actions.
+        const input_id = document.getElementById("<%- key %>")
+        input_id.addEventListener("focusout", async (evt) => {
+            await save_changes(evt)
+        });
+        input_id.addEventListener("keyup", async (evt) => {
+            //keyCode is legacy support, doubt it's needed anymore
+            if (evt.key === 'Enter' || evt.keyCode === 13) {
+                await save_changes(evt)
+            }
+        });
+    })()
+</script>
