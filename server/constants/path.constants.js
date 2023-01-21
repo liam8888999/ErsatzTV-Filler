@@ -9,7 +9,7 @@ const WORKDIR = "server/workdir/"
 const DEFAULT_CONFIG = "sample-config.conf"
 const USER_CONFIG = "config.conf"
 
-const CHANGELOG = "server/Changelog.md"
+const CHANGELOG = "Changelog.md"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
