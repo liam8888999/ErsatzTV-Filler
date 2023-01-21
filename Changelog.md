@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [0.1.0 - Beta] - 2023-01-
 
-### Refactor
+### Refactored
 - package json file to control dependencies
 - Web server to utilise ejs layout templates
 
@@ -140,7 +140,7 @@ Themes can be added by copying the default.theme file in the themes subfolder or
 
 - Move cleanup of temp files to end of script instead of start of next run
 
-### added
+### Added
 
 - automatic update support (default = yes)
 
