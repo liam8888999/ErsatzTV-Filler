@@ -30,8 +30,6 @@ const writeValueToConfigurationFile = async (key, value) => {
 
     const dotEnvResult = stringifyJavaScriptObjectToConfigFormat(newDotEnv);
     await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
-
-
 }
 
 
