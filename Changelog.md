@@ -1,6 +1,6 @@
 # Changelog
 
-## [[0.0.26]  - 2023-01-23]
+## [Unreleased]
 
 ### Refactored
 - package json file to control dependencies
