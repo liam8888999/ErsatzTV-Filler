@@ -4,12 +4,12 @@ const PAGES_FOLDER = "pages/";
 const THEMES_FOLDER = "themes/"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
-const WORKDIR = "server/workdir/"
-
 const DEFAULT_CONFIG = "sample-config.conf"
 const USER_CONFIG = "config.conf"
 
 const CHANGELOG = "Changelog.md"
+
+const WORKDIR = "server/workdir/"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
