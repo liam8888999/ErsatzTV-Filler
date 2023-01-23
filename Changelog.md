@@ -1,31 +1,3 @@
-
-
-* chore: remove dry-run option from release-it command (69731bd)
-* chore: remove --commit-message from release-it command (3052e75)
-* changed: the categories that appear in changelog.md (c03ec1b)
-* chore: small changes (aa8330f)
-* chore: fix changelogs still (c7b6294)
-* changed: release commit message (d14201c)
-* chore: fix changelogs (65fae18)
-* changed: reorder path constants (50f22da)
-* chore: fix changelog (c82fc16)
-* chore: try to fix changelog not being filled in (bd0c83e)
-* feat: navbar edit (219786d)
-* chore: some updates to release-it (b07597f)
-* changed: small change to commit message (3bb7d07)
-* changed: re-add correct changelog.md file (4004f38)
-* chore: remove dry-run from release-it (5d53a3d)
-* chore: add dry run to release-it (46ace05)
-* chore: enable verbose release-it (87d716f)
-* chore: small changes (7635e21)
-* test: remove changelog.md to try and generate a new one (c699f79)
-* chore: commitlint changes (909f44c)
-* feature: auto update version number (558a290)
-* chore: fix failed dry run (9491d23)
-* chore: fix failed dry run (4109fd7)
-* chore: small changes in release-it config and version numbers (e6edab6)
-* chore: update changelog version (e3a41d8)
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
