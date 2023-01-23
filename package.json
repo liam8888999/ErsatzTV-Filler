@@ -45,7 +45,7 @@
     },
     "plugins": {
       "@release-it/keep-a-changelog": {
-        "infile": "Changelog.md",
+        "filename": "CHANGELOG.md",
         "preset": {
           "name": "conventionalcommits",
           "types": [
