@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.26](https://github.com/liam8888999/ErsatzTV-Filler/compare/0.2.0...0.0.26) (2023-01-23)
+
+
+### Fixed
+
+* fix version number being too close to the word version by moving it further away ([2f220c4](https://github.com/liam8888999/ErsatzTV-Filler/commit/2f220c4fb7f5d14caecb84afd8e4e8734c581097))
 
 ## [Unreleased]
 
