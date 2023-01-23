@@ -77,7 +77,8 @@
          {
            "type": "test",
            "hidden": true
-         }
+         },
+         {}
       ]
     }
   }
