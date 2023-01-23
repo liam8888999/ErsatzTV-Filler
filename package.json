@@ -1,6 +1,6 @@
 {
   "name": "ersatztv-filler",
-  "version": "0.0.26",
+  "version": "0.0.25",
   "description": "Currently this script  generates weather forecast, news and channel currently offline filler for ErsatzTV or similar programs.",
   "main": "server/app.js",
   "scripts": {
@@ -44,44 +44,44 @@
       "publish": false
     },
     "plugins": {
-      "@release-it/conventional-changelog": {
-        "infile": "Changelog.md",
-        "header": "# Changelog",
-        "preset": {
-          "name": "conventionalcommits",
-          "types": [
-            {
-              "type": "added",
-              "section": "Added"
-            },
-            {
-              "type": "fix",
-              "section": "Fixed"
-            },
-            {
-              "type": "removed",
-              "section": "Removed"
-            },
-            {
-              "type": "changed",
-              "section": "Changed"
-            },
-            {
-              "type": "note",
-              "section": "Note"
-            },
-            {
-              "type": "chore",
-              "hidden": true
-            },
-            {
-              "type": "test",
-              "hidden": true
-            },
-            {}
-          ]
-        }
-      }
+  "@release-it/conventional-changelog": {
+    "infile": "Changelog.md",
+    "header": "# Changelog",
+    "preset": {
+      "name": "conventionalcommits",
+      "types": [
+        {
+          "type": "added",
+          "section": "Added"
+        },
+        {
+          "type": "fix",
+          "section": "Fixed"
+        },
+        {
+          "type": "removed",
+          "section": "Removed"
+        },
+        {
+          "type": "changed",
+          "section": "Changed"
+        },
+        {
+          "type": "note",
+          "section": "Note"
+        },
+         {
+           "type": "chore",
+           "hidden": true
+         },
+         {
+           "type": "test",
+           "hidden": true
+         },
+         {}
+      ]
+    }
+  }
     }
   }
 }
