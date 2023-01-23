@@ -45,6 +45,7 @@
     "plugins": {
   "@release-it/conventional-changelog": {
     "infile": "Changelog.md",
+    "header": "# Changelog",
     "preset": {
       "name": "conventionalcommits",
       "types": [
@@ -67,7 +68,15 @@
         {
           "type": "note",
           "section": "Note"
-        }
+        },
+         {
+           "type": "chore",
+           "hidden": true
+         },
+         {
+           "type": "test",
+           "hidden": true
+         }
       ]
     }
   }
