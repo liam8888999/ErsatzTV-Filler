@@ -1,16 +1,5 @@
 
 
-## [0.2.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/0.1.0...0.2.0) (2023-01-23)
-
-
-### Changed
-
-* re-add correct changelog.md file ([4004f38](https://github.com/liam8888999/ErsatzTV-Filler/commit/4004f384a464512ab9b9ffa536ec48785a8d112e))
-* release commit message ([d14201c](https://github.com/liam8888999/ErsatzTV-Filler/commit/d14201c47dece70a5a4c9c2326d8ef510017674d))
-* reorder path constants ([50f22da](https://github.com/liam8888999/ErsatzTV-Filler/commit/50f22da51ea855d0dc504b0dfc0636462ea76d43))
-* small change to commit message ([3bb7d07](https://github.com/liam8888999/ErsatzTV-Filler/commit/3bb7d079dc41c67a13f53b09bce38e65692b2531))
-* the categories that appear in changelog.md ([c03ec1b](https://github.com/liam8888999/ErsatzTV-Filler/commit/c03ec1b779c28316e31d27bad1d65d0031c650f0))
-
 * chore: remove dry-run option from release-it command (69731bd)
 * chore: remove --commit-message from release-it command (3052e75)
 * changed: the categories that appear in changelog.md (c03ec1b)
