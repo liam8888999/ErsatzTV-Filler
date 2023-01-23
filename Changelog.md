@@ -1,7 +1,13 @@
 # Changelog
 
-* test: remove unreleased from changelog (a67f0d7)
-* Revert "chore: release v0.0.26" (ef5daf8)
+## [[0.0.26]  - 2023-01-23]
+
+### Refactored
+- package json file to control dependencies
+- Web server to utilise ejs layout templates
+
+### Added
+- Basic Web Configuration page
 
 ## [0.0.25] - Beta - 2022-12-21
 
