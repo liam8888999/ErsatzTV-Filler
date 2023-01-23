@@ -2,6 +2,7 @@ const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { generateChangelog } = require("../utils/markdown.utils")
 const cheerio = require('cheerio');
+const { version } = require('../../package.json');
 
 const loadPageRoutes = (app) => {
   app.get('/', async (req, res) => {
@@ -14,11 +15,11 @@ const parent = $('h3').eq(1).parent();
 const content = parent.find('h3').eq(1).addClass('expand-button hidden').nextAll();
 content.addBack().wrapAll('<div class="expand-content hidden"></div>');
 
-
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         markdown: $.html(),
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
-        page: "Home" //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
+        page: "Home", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
+        version: version
    });
 
   });
@@ -28,7 +29,8 @@ content.addBack().wrapAll('<div class="expand-content hidden"></div>');
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "config", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Config",
-            CURRENT_CONFIG: retrieveCurrentConfiguration() //sending the current configuration to the ejs template.
+            CURRENT_CONFIG: retrieveCurrentConfiguration(),
+            version: version //sending the current configuration to the ejs template.
         });
     });
 
@@ -36,7 +38,8 @@ content.addBack().wrapAll('<div class="expand-content hidden"></div>');
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
-            page: "Themes"
+            page: "Themes",
+            version: version
         });
     });
 
@@ -44,7 +47,8 @@ content.addBack().wrapAll('<div class="expand-content hidden"></div>');
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "update", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
-            page: "Updates"
+            page: "Updates",
+            version: version
         });
     });
 }
