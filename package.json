@@ -34,7 +34,7 @@
   },
   "release-it": {
     "git": {
-      "commitMessage": "chore: release version${version}"
+      "commitMessage": "chore: release v${version}"
     },
     "github": {
       "release": true
