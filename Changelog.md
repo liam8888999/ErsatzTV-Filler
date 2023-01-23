@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.27](https://github.com/liam8888999/ErsatzTV-Filler/compare/0.0.26...0.0.27) (2023-01-23)
+
+
+### Changed
+
+* make release-it verbose ([091513c](https://github.com/liam8888999/ErsatzTV-Filler/commit/091513cdcaeb4b9a33b608dddc924590c970c70e))
+
 ## [[0.0.26]  - 2023-01-23]
 
 ### Refactored
