@@ -50,7 +50,7 @@
           "name": "conventionalcommits",
           "types": [
             {
-              "type": "feat",
+              "type": "feature",
               "section": "New Features"
             },
             {
