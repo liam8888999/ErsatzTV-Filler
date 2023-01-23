@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Basic Web Configuration page
 
-## [0.0.25 - Beta] - 2022-12-21
+## [0.0.25] - 2022-12-21
 
 ### Fixed
 - This version includes small bug fixes
