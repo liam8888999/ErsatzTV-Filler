@@ -5,7 +5,8 @@
   "main": "server/app.js",
   "scripts": {
     "dev": "node server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -18,13 +19,48 @@
   },
   "homepage": "https://github.com/NotExpectedYet/ErsatzTV-Filler#readme",
   "dependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@release-it/keep-a-changelog": "^3.1.0",
     "body-parser": "^1.20.1",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
+    "husky": "^8.0.3",
     "marked": "^4.2.12",
-    "node-fetch": "^3.3.0"
+    "node-fetch": "^3.3.0",
+    "release-it": "^15.6.0"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    },
+    "plugins": {
+      "@release-it/keep-a-changelog": {
+        "infile": "Changelog.md",
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {}
+          ]
+        }
+      }
+    }
   }
 }
