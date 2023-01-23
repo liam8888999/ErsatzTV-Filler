@@ -9,7 +9,7 @@ module.exports = {
         'added',
         'refactor',
         'test',
-        'breaking',
+        'note',
         'removed',
         'changed',
         'chore',

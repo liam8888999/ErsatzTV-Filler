@@ -56,7 +56,18 @@
           "type": "fix",
           "section": "Bug Fixes"
         },
-        {}
+        {
+          "type": "removed",
+          "section": "Removed"
+        },
+        {
+          "type": "changed",
+          "section": "Changed"
+        },
+        {
+          "type": "note",
+          "section": "Note"
+        }
       ]
     }
   }
