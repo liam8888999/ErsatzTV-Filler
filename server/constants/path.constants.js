@@ -8,6 +8,7 @@ const DEFAULT_CONFIG = "sample-config.conf"
 const USER_CONFIG = "config.conf"
 
 const CHANGELOG = "Changelog.md"
+const DOCUMENTATION = "README.md"
 
 const WORKDIR = "server/workdir/"
 /**
@@ -43,5 +44,6 @@ module.exports = {
     TEMPLATE_CONSTANTS,
     CONFIG_CONSTANTS,
     GENERATOR_CONSTANTS,
-    CHANGELOG
+    CHANGELOG,
+    DOCUMENTATION
 };

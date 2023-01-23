@@ -1,6 +1,7 @@
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { generateChangelog } = require("../utils/markdown.utils")
+const { generateReadMe } = require("../utils/markdown.utils")
 const cheerio = require('cheerio');
 const { version } = require('../../package.json');
 
@@ -13,6 +14,10 @@ const loadPageRoutes = (app) => {
 const parent = $('h3').eq(1).parent();
 const content = parent.find('h3').eq(1).addClass('expand-button').nextAll();
 content.addBack().wrapAll('<div class="expand-content"></div>');
+
+
+let test = await generateReadMe()
+console.log(test)
 
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         markdown: $.html(),
@@ -49,6 +54,18 @@ content.addBack().wrapAll('<div class="expand-content"></div>');
             page: "Updates",
             version: version
         });
+    });
+
+    app.get('/documentation', async (req, res) => {
+let documentation = await generateReadMe()
+
+        res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "documentation", {
+          documentation: documentation,
+          layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
+          page: "Documentation", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
+          version: version
+     });
+
     });
 }
 
