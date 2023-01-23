@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "release-it --dry-run"
+    "release": "release-it --dry-run --commit-message"
   },
   "repository": {
     "type": "git",
@@ -50,12 +50,12 @@
           "name": "conventionalcommits",
           "types": [
             {
-              "type": "feat",
-              "section": "New Features"
+              "type": "added",
+              "section": "Added"
             },
             {
               "type": "fix",
-              "section": "Bug Fixes"
+              "section": "Fixed"
             },
             {
               "type": "note",
