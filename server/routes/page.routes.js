@@ -15,10 +15,6 @@ const parent = $('h3').eq(1).parent();
 const content = parent.find('h3').eq(1).addClass('expand-button').nextAll();
 content.addBack().wrapAll('<div class="expand-content"></div>');
 
-
-let test = await generateReadMe()
-console.log(test)
-
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         markdown: $.html(),
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
