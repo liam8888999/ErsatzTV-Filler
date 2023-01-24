@@ -78,6 +78,14 @@ docker build -t liam8888999/ersatztv-filler .
 docker run --rm -it -v $(pwd):/config -v /media/audio/whatever:/audio -v /media/whatever:/output -v /media/audio/whatever:/tmp/ErsatzTV-Filler liam8888999/ersatztv-filler /config/config.conf
 ```
 
+## Development
+Do not manually update the changelog
+#### To update the changelog and release number run the command
+1. npm run release
+#### And follow the prompts
+
+
+
 For more information on how to use this with ErsatzTV please visit https://ersatztv.org/user-guide/filler/
 
 
