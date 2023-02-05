@@ -16,6 +16,10 @@ These themes can be found at https://github.com/liam8888999/ErsatzTV-Filler-Them
 Linux operating system with ffmpeg, xsltproc, jq, xmltv-utils and curl installed.
 
 ## Installation Instructions
+
+### Docker image available at:
+https://hub.docker.com/r/liam2003/ersatztv-filler
+
 #### Clone the latest version of the repo.
 1. `git clone https://github.com/liam8888999/ErsatzTV-Filler.git`
 #### Move into the required folder.
