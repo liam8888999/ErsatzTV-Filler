@@ -1,4 +1,5 @@
-/**
+const WEATHER = {
+  /**
 *Generate Weather
 *V0.0.25 - Beta
 */
@@ -174,3 +175,7 @@ console.log("generate weatherv4")
 
 exec(`ffmpeg -y -f concat -safe 0 -i ${retrieveCurrentConfiguration().workdir}/weatherv4/weatherv4.txt -c copy ${WORKDIR}/weather-v4.mp4`)
 exec(`ffmpeg -y -i ${WORKDIR}/weather-v4.mp4 -i "${retrieveCurrentConfiguration().randomaudioweather4}" -shortest -vf "fade=t=in:st=0:d=${retrieveCurrentConfiguration().weathervideofadeinduration},fade=t=out:st=${retrieveCurrentConfiguration().weathervideofadeoutstart}:d=${retrieveCurrentConfiguration().weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${retrieveCurrentConfiguration().weatheraudiofadeinduration},afade=t=out:st=${retrieveCurrentConfiguration().weatheraudiofadeoutstartv4}:d=${retrieveCurrentConfiguration().eatheraudiofadeoutduration}" ${retrieveCurrentConfiguration().output}/weather-v4.mp4`)
+}
+module.exports = {
+    WEATHER
+}
