@@ -1,7 +1,7 @@
 const { createWebServer, startWebServer } = require("../server/modules/web-server.module");
 const { setupConfigurationFile } = require("../server/modules/config-loader.module");
 
-const { WEATHER } = require("../generators/weather.generator");
+const { WEATHER } = require("../server/generators/weather.generator");
 
 
 //This is called a self executing function. It allows us to create an application context for our app, and also start it asynchronously
