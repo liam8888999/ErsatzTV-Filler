@@ -17,7 +17,7 @@ const { exec } = require("child_process")
 const fs = require('fs');
 const client = require('https');
 
-const WEATHER = {
+const WEATHER = async () => {
 
 console.log("starting weather")
 
