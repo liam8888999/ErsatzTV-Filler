@@ -16,7 +16,7 @@ const { retrieveCurrentConfiguration } = require("../modules/config-loader.modul
 const { exec } = require("child_process")
 const fs = require('fs');
 const client = require('https');
-
+retrieveCurrentConfiguration()
 const WEATHER = async () => {
 
 console.log("starting weather")
@@ -44,7 +44,6 @@ await selectRandomAudioFile()
 }
 const randomaudioweather4 = async () => {
 await selectRandomAudioFile()
-console.log(selectRandomAudioFile())
 }
 
 
