@@ -44,6 +44,7 @@ await selectRandomAudioFile()
 }
 const randomaudioweather4 = async () => {
 await selectRandomAudioFile()
+console.log(selectRandomAudioFile())
 }
 
 
