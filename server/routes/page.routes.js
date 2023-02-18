@@ -4,7 +4,6 @@ const { generateChangelog } = require("../utils/markdown.utils")
 const { generateReadMe } = require("../utils/markdown.utils")
 const cheerio = require('cheerio');
 const { version } = require('../../package.json');
-const { WEATHER } = require("../generators/weather.generator");
 
 
 const loadPageRoutes = (app) => {
@@ -67,6 +66,6 @@ let documentation = await generateReadMe()
     });
 }
 
-WEATHER()
+
 
 module.exports = { loadPageRoutes }

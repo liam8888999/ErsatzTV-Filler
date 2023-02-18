@@ -18,7 +18,7 @@ const fs = require('fs');
 const client = require('https');
 
 const WEATHER = async () => {
-
+retrieveCurrentConfiguration()
 console.log("starting weather")
 
 /**
