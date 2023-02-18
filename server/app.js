@@ -41,4 +41,4 @@ const { WEATHER } = require("../server/generators/weather.generator")
 //      });
 //     });
 // });
-WEATHER{}
+WEATHER()
