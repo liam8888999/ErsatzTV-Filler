@@ -1,0 +1,16 @@
+#ErsatzTV-Filler-Theme
+#Theme Name: MoRBiD_MaNGLeR-BlueWhite
+#Creator: MoRBiD_MaNGLeR
+
+#desired background colour around image can be set to random for a random colour to be generated for each video
+backgroundcolour=blue
+
+#set background colour for news - can be set to random
+newsbackgroundcolour=blue
+
+#set text colour for news - can be set to random
+newstextcolour=white
+
+#set colours for channel currently offline filler
+offlinebackgroundcolour=blue
+offlinetextcolour=white

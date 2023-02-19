@@ -1,0 +1,16 @@
+#ErsatzTV-Filler-Theme
+#Theme Name: MoRBiD_MaNGLeR-Dark
+#Creator: MoRBiD_MaNGLeR
+
+#desired background colour around image can be set to random for a random colour to be generated for each video
+backgroundcolour=black
+
+#set background colour for news - can be set to random
+newsbackgroundcolour=black
+
+#set text colour for news - can be set to random
+newstextcolour=yellow
+
+#set colours for channel currently offline filler
+offlinebackgroundcolour=black
+offlinetextcolour=yellow

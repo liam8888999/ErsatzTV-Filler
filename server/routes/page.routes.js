@@ -4,6 +4,7 @@ const { generateChangelog } = require("../utils/markdown.utils")
 const { generateReadMe } = require("../utils/markdown.utils")
 const cheerio = require('cheerio');
 const { version } = require('../../package.json');
+const fs = require('fs');
 
 
 const loadPageRoutes = (app) => {
@@ -36,7 +37,6 @@ content.addBack().wrapAll('<div class="expand-content"></div>');
     });
 
     app.get('/themes', (req, res) => {
-        // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Themes",
