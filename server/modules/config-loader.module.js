@@ -1,6 +1,7 @@
 const { CONFIG_CONSTANTS } = require("../constants/path.constants");
 const { doesFileExist, createNewUserConfigFromDefault } = require("../utils/file.utils");
 const { parseConfigurationFile } = require("../utils/config.utils");
+const fs = require('fs');
 
 let CURRENT_CONFIG = {}; //In memory store for config data
 
@@ -19,6 +20,7 @@ const setupConfigurationFile = async () => {
         console.log("Found a user configuration file... loading...")
         await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG)
     }
+            jsonifyCurrentConfiguration();
 }
 
 /**
@@ -28,7 +30,9 @@ const setupConfigurationFile = async () => {
  */
 const parseConfigurationFileContents = async (path) => {
     CURRENT_CONFIG = parseConfigurationFile(path).parsed;
+    console.log(CURRENT_CONFIG)
 }
+
 
 /**
  * Return the current configuration as a object
@@ -36,6 +40,19 @@ const parseConfigurationFileContents = async (path) => {
  */
 const retrieveCurrentConfiguration = () => {
     return CURRENT_CONFIG
+}
+
+const jsonifyCurrentConfiguration = () => {
+const config = retrieveCurrentConfiguration();
+
+// Convert the JSON object to a string with each key-value pair on a single line
+const jsonString = JSON.stringify(config, null, 2);
+
+// Write the JSON string to a file named "output.json"
+fs.writeFile('output.json', jsonString, (err) => {
+  if (err) throw err;
+  console.log('JSON data written to file!');
+});
 }
 
 module.exports = {
