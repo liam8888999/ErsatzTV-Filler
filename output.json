@@ -26,5 +26,7 @@
   "newsduration": "60",
   "log_location": "/tmp/ErsatzTV-Filler",
   "log_days": "7",
-  "log_per_run": "no"
+  "log_per_run": "no",
+  "key": "autoupdate",
+  "value": "no"
 }

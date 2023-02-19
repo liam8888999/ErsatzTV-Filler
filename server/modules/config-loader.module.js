@@ -43,13 +43,15 @@ const retrieveCurrentConfiguration = () => {
 }
 
 const jsonifyCurrentConfiguration = () => {
+
+  // convert config.conf to config.json  -- Delete config.conf totally in future versions
 const config = retrieveCurrentConfiguration();
 
 // Convert the JSON object to a string with each key-value pair on a single line
 const jsonString = JSON.stringify(config, null, 2);
 
 // Write the JSON string to a file named "output.json"
-fs.writeFile('output.json', jsonString, (err) => {
+fs.writeFile('config.json', jsonString, (err) => {
   if (err) throw err;
   console.log('JSON data written to file!');
 });
