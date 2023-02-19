@@ -1,23 +1,23 @@
-import('node-fetch');
+const https = require('https');
 const fs = require('fs');
 
-const url = 'https://www.shutterstock.com/image-photo/surreal-image-african-elephant-wearing-260nw-1365289022.jpg'
-
-function downloadImage(url, filepath){
-    return fetch(url)
-        .then(res => {
-            if (res.status !== 200) {
-                throw new Error(`Failed to fetch image with status code ${res.status}`);
-            }
-            return new Promise((resolve, reject) => {
-                res.body
-                    .pipe(fs.createWriteStream(filepath))
-                    .on('error', reject)
-                    .on('close', () => resolve(filepath));
-            });
+function downloadImage(url, filepath) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (response) => {
+      if (response.statusCode !== 200) {
+        reject(new Error(`Failed to fetch image with status code ${response.statusCode}`));
+      }
+      const fileStream = fs.createWriteStream(filepath);
+      response.pipe(fileStream);
+      fileStream.on('finish', () => {
+        fileStream.close(() => {
+          resolve(filepath);
         });
+      });
+    }).on('error', (error) => {
+      reject(new Error(`Failed to download image: ${error.message}`));
+    });
+  });
 }
 
-module.exports = {
-    downloadImage
-}
+module.exports = { downloadImage };

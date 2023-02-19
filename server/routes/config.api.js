@@ -1,5 +1,6 @@
 const {ROUTE_CONSTANTS} = require("../constants/route.constants");
 const { writeValueToConfigurationFile } = require("../utils/config.utils.js");
+const { downloadImage } = require("../utils/downloadimage.utils");
 
 const loadApiRoutes = (app) => {
     /**
@@ -12,6 +13,21 @@ const loadApiRoutes = (app) => {
 
         res.send({ result: "success" })
     });
+
+    app.get('/api/themes/download', (req, res) => {
+    const url = req.query.url;
+    const filepath = `themes/${req.query.filepath}`;
+    console.log(req.query.filepath)
+
+    // use the url and path variables to download the image
+    downloadImage(url, filepath)
+      .then(() => {
+        res.status(200).send('Image downloaded successfully.');
+      })
+      .catch((error) => {
+        res.status(500).send(`Error downloading image: ${error.message}`);
+      });
+  });
 
 }
 

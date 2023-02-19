@@ -39,7 +39,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button>Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="makeRequest('https://wttr.in/melbourne.png', '1.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button>Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -89,7 +89,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button>Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="makeRequest('https://wttr.in/melbourne.png', '1.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button>Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -138,7 +138,7 @@
   </div>
 <br>
 <div style="padding-left:55%;">
-<button>Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="makeRequest('https://wttr.in/melbourne.png', '1.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button>Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -187,7 +187,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button>Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="makeRequest('https://wttr.in/melbourne.png', '1.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button>Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -240,7 +240,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button>Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="makeRequest('https://wttr.in/melbourne.png', '1.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button>Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -290,7 +290,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button>Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="makeRequest('https://wttr.in/melbourne.png', '1.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button>Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -341,7 +341,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button>Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="makeRequest('https://wttr.in/melbourne.png', '1.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button>Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -387,4 +387,20 @@ function showSlides(n, no) {
   }
   x[slideIndex[no]-1].style.display = "block";
 }
+</script>
+
+<script>
+
+  // download theme files
+  function makeRequest(url, filepath) {
+    const xhr = new XMLHttpRequest();
+    const endpointUrl = `http://127.0.0.1:3000/api/themes/download?url=${url}&filepath=${filepath}`;
+    xhr.open('GET', endpointUrl, true);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        console.log(this.responseText);
+      }
+    };
+    xhr.send();
+  }
 </script>

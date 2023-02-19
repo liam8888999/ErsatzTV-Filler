@@ -11,7 +11,7 @@
     <h1>Edit config</h1>
     <p>Change your configuration file below! The form below will automatically update as you fill it in.</p>
     <% if(CONFIG_AVAILABLE){ %>
-        <form method="post" action="/config.html" id="config-form">
+        <form method="post" action="/config" id="config-form">
             <div id="variables">
                 <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
                     <%- include(text_input, {

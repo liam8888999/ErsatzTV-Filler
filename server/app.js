@@ -15,8 +15,6 @@ const { WEATHER } = require("../server/generators/weather.generator");
         createWebServer();
 
         startWebServer();
-
-        WEATHER();
     } catch(e){
         console.error("Fatal error occurred!", e)
     }

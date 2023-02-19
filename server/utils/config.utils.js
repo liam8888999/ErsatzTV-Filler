@@ -12,7 +12,6 @@ const parseConfigurationFile = (path) => {
     return dotenv.config({path})
 }
 
-
 /**
  * Write a key, value pair to the configuration file
  * @param key
@@ -21,7 +20,7 @@ const parseConfigurationFile = (path) => {
  */
 const writeValueToConfigurationFile = async (key, value) => {
     const latestDotEnvConfig = parseConfigurationFile(CONFIG_CONSTANTS().USER_CONFIG)
-
+    console.log(key)
 
     const newDotEnv = {
         ...latestDotEnvConfig.parsed,
@@ -31,7 +30,6 @@ const writeValueToConfigurationFile = async (key, value) => {
     const dotEnvResult = stringifyJavaScriptObjectToConfigFormat(newDotEnv);
     await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
 }
-
 
 module.exports = {
     parseConfigurationFile,

@@ -18,7 +18,6 @@ const fs = require('fs');
 const client = require('https');
 
 const WEATHER = async () => {
-retrieveCurrentConfiguration()
 console.log("starting weather")
 
 /**
@@ -36,6 +35,7 @@ console.log("choosing random audio")
 const randomaudioweather1 = async () => {
 await selectRandomAudioFile()
 }
+console.log(`${randomaudioweather1}`)
 const randomaudioweather2 = async () => {
 await selectRandomAudioFile()
 }
