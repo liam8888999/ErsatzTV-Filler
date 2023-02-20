@@ -9,3 +9,4 @@ v3.png
 .DS_Store
 /node_modules
 output.json
+config.json

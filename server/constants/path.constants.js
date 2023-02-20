@@ -10,7 +10,7 @@ const USER_CONFIG = "config.conf"
 const CHANGELOG = "Changelog.md"
 const DOCUMENTATION = "README.md"
 
-const WORKDIR = "server/workdir/"
+const WORKDIR = "/Users/liam/Documents/GitHub/ErsatzTV-Filler/workdir"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -34,16 +34,10 @@ const CONFIG_CONSTANTS = () => {
 }
 
 
-const GENERATOR_CONSTANTS = () => {
-    return {
-        WORKDIR
-    }
-}
-
 module.exports = {
     TEMPLATE_CONSTANTS,
     CONFIG_CONSTANTS,
-    GENERATOR_CONSTANTS,
     CHANGELOG,
-    DOCUMENTATION
+    DOCUMENTATION,
+    WORKDIR
 };

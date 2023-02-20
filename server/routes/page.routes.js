@@ -1,5 +1,5 @@
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
-const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
+const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 const { generateChangelog } = require("../utils/markdown.utils")
 const { generateReadMe } = require("../utils/markdown.utils")
 const cheerio = require('cheerio');
@@ -26,12 +26,13 @@ content.addBack().wrapAll('<div class="expand-content"></div>');
 
   });
 
-    app.get('/config', (req, res) => {
+    app.get('/config', async (req, res) => {
+      let config_current = await retrieveCurrentConfiguration()
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "config", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Config",
-            CURRENT_CONFIG: retrieveCurrentConfiguration(),
+            CURRENT_CONFIG: config_current,
             version: version //sending the current configuration to the ejs template.
         });
     });

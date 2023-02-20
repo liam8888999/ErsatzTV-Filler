@@ -1,5 +1,5 @@
 const { CONFIG_CONSTANTS } = require("../constants/path.constants");
-const { doesFileExist, createNewUserConfigFromDefault } = require("../utils/file.utils");
+const { doesFileExist, createNewUserConfigFromDefault, loadFileContentsIntoMemory } = require("../utils/file.utils");
 const { parseConfigurationFile } = require("../utils/config.utils");
 const fs = require('fs');
 
@@ -38,26 +38,40 @@ const parseConfigurationFileContents = async (path) => {
  * Return the current configuration as a object
  * @returns {{}}
  */
-const retrieveCurrentConfiguration = () => {
+const retrieveCurrentConfiguration2 = () => {
     return CURRENT_CONFIG
 }
 
-const jsonifyCurrentConfiguration = () => {
+const jsonifyCurrentConfiguration = async () => {
 
   // convert config.conf to config.json  -- Delete config.conf totally in future versions
-const config = retrieveCurrentConfiguration();
+const config = retrieveCurrentConfiguration2();
+const FILE_EXISTS = await doesFileExist("config.json")
+if (!FILE_EXISTS) {
+  console.log('The config.json file does not exist.');
+  // Convert the JSON object to a string with each key-value pair on a single line
+  const jsonString = JSON.stringify(config, null, 2);
 
-// Convert the JSON object to a string with each key-value pair on a single line
-const jsonString = JSON.stringify(config, null, 2);
-
-// Write the JSON string to a file named "output.json"
-fs.writeFile('config.json', jsonString, (err) => {
-  if (err) throw err;
-  console.log('JSON data written to file!');
-});
+  // Write the JSON string to a file named "output.json"
+  fs.writeFile('config.json', jsonString, (err) => {
+    if (err) throw err;
+    console.log('Created config.json file');
+  });
 }
+
+await retrieveCurrentConfiguration()
+}
+
+const retrieveCurrentConfiguration = async () => {
+
+    const data = await loadFileContentsIntoMemory('config.json')
+return JSON.parse(data)
+}
+
+//async log
+(async () => { const config = await retrieveCurrentConfiguration(); console.log(config)})()
 
 module.exports = {
     setupConfigurationFile,
-    retrieveCurrentConfiguration
+    retrieveCurrentConfiguration,
 }
