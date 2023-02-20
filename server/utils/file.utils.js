@@ -1,5 +1,7 @@
 const { readFile, stat, copyFile, writeFile, readdir } = require('fs').promises; //Loads the asynchronous version of fs
-const { CONFIG_CONSTANTS } = require("../constants/path.constants")
+const { CONFIG_CONSTANTS } = require("../constants/path.constants");
+const path = require('path')
+const fs = require('fs')
 
 
 
@@ -52,18 +54,22 @@ const overWriteFileContents = async (path, fileContents) => {
 
 }
 
-function listFilesInDir(directoryPath) {
-  return new Promise((resolve, reject) => {
-    fs.readdir(directoryPath, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files);
-      }
-    });
-  });
-}
+function listFilesInDir(dir) {
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+  let fileList = [];
 
+  files.forEach(file => {
+    const filePath = path.join(dir, file.name);
+
+    if (file.isDirectory()) {
+      fileList = fileList.concat(listFiles(filePath));
+    } else {
+      fileList.push(filePath);
+    }
+  });
+console.log(fileList)
+  return fileList;
+}
 
 
 module.exports = {
