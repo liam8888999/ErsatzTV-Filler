@@ -1,5 +1,5 @@
 const { createWebServer, startWebServer } = require("../server/modules/web-server.module");
-const { setupConfigurationFile } = require("../server/modules/config-loader.module");
+const { setupConfigurationFile, retrieveCurrentConfiguration } = require("../server/modules/config-loader.module");
 
 const { WEATHER } = require("../server/generators/weather.generator");
 
@@ -10,13 +10,14 @@ const { WEATHER } = require("../server/generators/weather.generator");
     // Also very basic global error caching for the entire application, might still completely stall if not careful but can be improved at a later date.
 
     try {
-        await setupConfigurationFile();
+        setupConfigurationFile();
 
-        createWebServer();
+
+       createWebServer();
 
         startWebServer();
 
-        WEATHER();
+    //    WEATHER();
     } catch(e){
         console.error("Fatal error occurred!", e)
     }

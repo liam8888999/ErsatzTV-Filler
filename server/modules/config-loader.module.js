@@ -20,7 +20,7 @@ const setupConfigurationFile = async () => {
         console.log("Found a user configuration file... loading...")
         await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG)
     }
-            jsonifyCurrentConfiguration();
+    await jsonifyCurrentConfiguration();
 }
 
 /**
@@ -58,8 +58,7 @@ if (!FILE_EXISTS) {
     console.log('Created config.json file');
   });
 }
-
-await retrieveCurrentConfiguration()
+  await retrieveCurrentConfiguration()
 }
 
 const retrieveCurrentConfiguration = async () => {
