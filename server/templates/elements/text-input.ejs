@@ -12,10 +12,6 @@
         const set_invalid = () => {}
 
         const save_changes = async (evt) => {
-            console.log(JSON.stringify({
-                key: evt.srcElement.id,
-                value: evt.srcElement.value
-            }))
             try{
                 const res = await fetch('/api/config/edit', {
                     method: "PATCH",

@@ -49,6 +49,8 @@ const config = retrieveCurrentConfiguration2();
 const FILE_EXISTS = await doesFileExist("config.json")
 if (!FILE_EXISTS) {
   console.log('The config.json file does not exist.');
+// Delete autoupdate key-value pair from json before writing to file
+    delete config.autoupdate;
   // Convert the JSON object to a string with each key-value pair on a single line
   const jsonString = JSON.stringify(config, null, 2);
 
@@ -68,7 +70,7 @@ return JSON.parse(data)
 }
 
 //async log
-(async () => { const config = await retrieveCurrentConfiguration(); console.log(config)})()
+//(async () => { const config = await retrieveCurrentConfiguration(); console.log(config)})()
 
 
 module.exports = {
