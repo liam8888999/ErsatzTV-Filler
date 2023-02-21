@@ -58,7 +58,7 @@ if (!FILE_EXISTS) {
     console.log('Created config.json file');
   });
 }
-  await retrieveCurrentConfiguration()
+
 }
 
 const retrieveCurrentConfiguration = async () => {
@@ -69,6 +69,7 @@ return JSON.parse(data)
 
 //async log
 (async () => { const config = await retrieveCurrentConfiguration(); console.log(config)})()
+
 
 module.exports = {
     setupConfigurationFile,
