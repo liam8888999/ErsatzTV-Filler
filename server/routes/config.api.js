@@ -32,7 +32,7 @@ const loadApiRoutes = (app) => {
   app.get('/api/themes/settheme', async (req, res) => {
   const theme = req.query.theme;
   console.log(req.query.theme)
-await settheme()
+  await settheme(theme)
   // use the url and path variables to set the theme
 
 });

@@ -3,6 +3,7 @@ const {CONFIG_CONSTANTS} = require("../constants/path.constants");
 const {overWriteFileContents} = require("../utils/file.utils");
 const {stringifyJavaScriptObjectToConfigFormat} = require("../utils/string.utils")
 const fs = require("fs")
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module")
 
 /**
  * Parse the configuration file with given path
@@ -40,36 +41,20 @@ const writeValueToConfigurationFile = async (key, value) => {
 
 }
 
-const settheme = () => {
 
 
+async function settheme(theme) {
   try {
-    // Read the JSON file into memory
-    let jsonString = fs.readFileSync('config.json');
-  console.log('File read successfully!');
-} catch (error) {
-  console.error('Error Reading file:', error);
+    const fileData = await fs.promises.readFile("config.json");
+    const json = JSON.parse(fileData);
+    json.theme = theme;
+    await fs.promises.writeFile("config.json", JSON.stringify(json, null, 2));
+    console.log(`Successfully updated theme to '${theme}' in config.conf`);
+  } catch (err) {
+    console.error(`Error updating theme to '${theme}' in config.json: ${err}`);
+  }
 }
 
-// Parse the JSON string into a JavaScript object
-let data = JSON.parse(jsonString);
-
-// Modify the value
-theme.name = '123';
-
-// Convert the JavaScript object back into a JSON string
-jsonString = JSON.stringify(data);
-
-// Write the updated JSON back to the file
-try {
-  // Read the JSON file into memory
-  fs.writeFileSync('config.json', jsonString);
-console.log('File write successfully!');
-} catch (error) {
-console.error('Error writing file:', error);
-}
-
-}
 
 module.exports = {
     parseConfigurationFile,

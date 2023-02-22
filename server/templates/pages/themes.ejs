@@ -40,7 +40,7 @@
 <br>
 <div style="padding-left:55%;">
 <button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Light-Theme/light.theme', 'light.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button>Use This Theme <i class="fa">&#x2713;</i></button>
+<button onclick="settheme('light')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -90,7 +90,7 @@
 <br>
 <div style="padding-left:55%;">
 <button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Dark-Theme/dark.theme', 'dark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button>Use This Theme <i class="fa">&#x2713;</i></button>
+<button onclick="settheme('dark')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -139,7 +139,7 @@
 <br>
 <div style="padding-left:55%;">
 <button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/StopandGo-Theme/stopandgo.theme', 'stopandgo.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button>Use This Theme <i class="fa">&#x2713;</i></button>
+<button onclick="settheme('stopandgo')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -188,7 +188,7 @@
 <br>
 <div style="padding-left:55%;">
 <button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Candycane-Theme/Candycane.theme', 'Candycane.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button>Use This Theme <i class="fa">&#x2713;</i></button>
+<button onclick="settheme('Candycane')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -241,7 +241,7 @@
 <br>
 <div style="padding-left:55%;">
 <button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-Dark-theme/MoRBiD_MaNGLeR-Dark.theme', 'MoRBiD_MaNGLeR-Dark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button>Use This Theme <i class="fa">&#x2713;</i></button>
+<button onclick="settheme('MoRBiD_MaNGLeR-Dark')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -291,7 +291,7 @@
 <br>
 <div style="padding-left:55%;">
 <button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-C64-theme/MoRBiD_MaNGLeR-C64.theme', 'MoRBiD_MaNGLeR-C64.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button>Use This Theme <i class="fa">&#x2713;</i></button>
+<button onclick="settheme('MoRBiD_MaNGLeR-C64')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -341,8 +341,8 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button id="button1" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR-BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button id="button2">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="my-button" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR-BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="settheme('MoRBiD_MaNGLeR-BlueWhite')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -391,6 +391,23 @@ function showSlides(n, no) {
   function makeRequest(url, filepath) {
     const xhr = new XMLHttpRequest();
     const endpointUrl = `http://127.0.0.1:3000/api/themes/download?url=${url}&filepath=${filepath}`;
+    xhr.open('GET', endpointUrl, true);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        console.log(this.responseText);
+      }
+    };
+    xhr.send();
+  }
+</script>
+
+<script>
+
+  // set theme
+  function settheme(theme) {
+    const xhr = new XMLHttpRequest();
+    const endpointUrl = `http://127.0.0.1:3000/api/themes/settheme?theme=${theme}`;
+    console.log(theme)
     xhr.open('GET', endpointUrl, true);
     xhr.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
