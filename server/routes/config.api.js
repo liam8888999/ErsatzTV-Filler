@@ -1,5 +1,5 @@
 const {ROUTE_CONSTANTS} = require("../constants/route.constants");
-const { writeValueToConfigurationFile } = require("../utils/config.utils.js");
+const { writeValueToConfigurationFile, settheme } = require("../utils/config.utils.js");
 const { downloadImage } = require("../utils/downloadimage.utils");
 
 const loadApiRoutes = (app) => {
@@ -28,6 +28,14 @@ const loadApiRoutes = (app) => {
         res.status(500).send(`Error downloading image: ${error.message}`);
       });
   });
+
+  app.get('/api/themes/settheme', async (req, res) => {
+  const theme = req.query.theme;
+  console.log(req.query.theme)
+await settheme()
+  // use the url and path variables to set the theme
+
+});
 
 }
 
