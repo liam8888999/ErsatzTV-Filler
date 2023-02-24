@@ -41,23 +41,17 @@ const writeValueToConfigurationFile = async (key, value) => {
 
 }
 
-
-
-async function settheme(theme) {
-  try {
-    const fileData = await fs.promises.readFile("config.json");
-    const json = JSON.parse(fileData);
-    json.theme = theme;
-    await fs.promises.writeFile("config.json", JSON.stringify(json, null, 2));
-    console.log(`Successfully updated theme to '${theme}' in config.conf`);
-  } catch (err) {
-    console.error(`Error updating theme to '${theme}' in config.json: ${err}`);
-  }
+/**
+ * Copy sample-config.conf if config.conf does not exist
+ * @returns {Promise<void>}
+ */
+const createNewUserConfigFromDefault = async () => {
+  await copyFile(CONFIG_CONSTANTS().DEFAULT_CONFIG, CONFIG_CONSTANTS().USER_CONFIG);
+  console.log('A new user config file was generated from the default file');
 }
-
 
 module.exports = {
     parseConfigurationFile,
     writeValueToConfigurationFile,
-    settheme
+    createNewUserConfigFromDefault
 }

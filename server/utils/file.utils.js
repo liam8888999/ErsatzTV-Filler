@@ -30,14 +30,6 @@ const doesFileExist = async (path) => {
     return result;
 }
 
-/**
- * Copy sample-config.conf if config.conf does not exist
- * @returns {Promise<void>}
- */
-const createNewUserConfigFromDefault = async () => {
-  await copyFile(CONFIG_CONSTANTS().DEFAULT_CONFIG, CONFIG_CONSTANTS().USER_CONFIG);
-  console.log('A new user config file was generated from the default file');
-}
 
 /**
  * Overwrite the contents of an existing file... currently easiest way I know of updating the local file with changes.
@@ -75,7 +67,6 @@ console.log(fileList)
 module.exports = {
     doesFileExist,
     loadFileContentsIntoMemory,
-    createNewUserConfigFromDefault,
     overWriteFileContents,
     listFilesInDir
 }

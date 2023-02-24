@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
-const { loadPageRoutes } = require("../routes/page.routes")
-const { loadApiRoutes } = require("../routes/config.api")
+const { loadPageRoutes } = require("../routes/page.routes");
+const { loadApiConfigRoutes } = require("../routes/config.api");
+const { loadApiThemeRoutes } = require("../routes/themes.api")
 
 
 /**
@@ -15,7 +16,8 @@ const { loadApiRoutes } = require("../routes/config.api")
 const createWebServer = () => {
     injectMiddleware();
     loadPageRoutes(app);
-    loadApiRoutes(app);
+    loadApiConfigRoutes(app);
+    loadApiThemeRoutes(app);
     return app;
 }
 /**

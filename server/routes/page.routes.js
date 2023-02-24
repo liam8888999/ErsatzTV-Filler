@@ -1,22 +1,17 @@
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
-const { generateChangelog } = require("../utils/markdown.utils")
-const { generateReadMe } = require("../utils/markdown.utils")
-const cheerio = require('cheerio');
+const { generateReadMe, changelogReplace } = require("../utils/markdown.utils")
 const { version } = require('../../package.json');
 const fs = require('fs');
-
+const cheerio = require('cheerio')
 
 const loadPageRoutes = (app) => {
   app.get('/', async (req, res) => {
-    let html = await generateChangelog()
-  html = html.replace(/<h3/g,"<h4").replace(/<\/h3>/g,"</h4>").replace(/<h2/g,"<h3").replace(/<\/h2>/g,"</h3>").replace(/ id=\"[^"]*\"/g, "").replace(/<h4>Fixed<\/h4>/g, "<h4 style='color: blue;'>Fixed</h4>").replace(/<h4>Added<\/h4>/g, "<h4 style='color: green;'>Added</h4>").replace(/<h4>Note<\/h4>/g, "<h4 style='color: purple;'>Note</h4>").replace(/<h4>Removed<\/h4>/g, "<h4 style='color: red;'>Removed</h4>").replace(/<h4>Changed<\/h4>/g, "<h4 style='color: orange;'>Changed</h4>").replace(/<h4>Refactored<\/h4>/g, "<h4 style='color: gold;'>Refactored</h4>").replace(/<h3>/g, "<h3 style='color: brown;'>").replace(/<li>/g, "<li style='color: DimGray;'>");
-
-      const $ = cheerio.load(html);
-const parent = $('h3').eq(1).parent();
-const content = parent.find('h3').eq(1).addClass('expand-button').nextAll();
-content.addBack().wrapAll('<div class="expand-content hidden"></div>');
-
+    let html = await changelogGenerator()
+    const $ = cheerio.load(html);
+  const parent = $('h3').eq(1).parent();
+  const content = parent.find('h3').eq(1).addClass('expand-button').nextAll();
+  content.addBack().wrapAll('<div class="expand-content hidden"></div>');
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         markdown: $.html(),
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
