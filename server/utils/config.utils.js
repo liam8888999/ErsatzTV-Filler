@@ -3,7 +3,6 @@ const {CONFIG_CONSTANTS} = require("../constants/path.constants");
 const {overWriteFileContents} = require("../utils/file.utils");
 const {stringifyJavaScriptObjectToConfigFormat} = require("../utils/string.utils")
 const fs = require("fs")
-const { retrieveCurrentConfiguration } = require("../modules/config-loader.module")
 
 /**
  * Parse the configuration file with given path
