@@ -33,10 +33,15 @@ const writeValueToConfigurationFile = async (key, value) => {
 
     const data = fs.readFileSync('config.json');
   const json = JSON.parse(data);
-    json[key] = value;
+
+    const newConfigvar = {
+        ...json,
+        key: value
+    }
+
 
       // Write updated object back to file
-      fs.writeFileSync('config.json', JSON.stringify(json, null, 2));
+      fs.writeFileSync('config.json', JSON.stringify(newConfigvar));
 
 }
 
