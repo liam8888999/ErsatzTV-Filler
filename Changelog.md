@@ -2,12 +2,7 @@
 
 ## [Unreleased]
 
-### Refactored
-- package json file to control dependencies
-- Web server to utilise ejs layout templates
-
-### Added
-- Basic Web Configuration page
+### Fixed
 
 ## [0.0.25] - Beta - 2022-12-21
 

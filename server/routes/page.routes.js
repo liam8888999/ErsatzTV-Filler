@@ -1,13 +1,13 @@
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
-const { generateReadMe, changelogReplace } = require("../utils/markdown.utils")
+const { generateReadMe, changelogReplace, generateChangelog } = require("../utils/markdown.utils")
 const { version } = require('../../package.json');
 const fs = require('fs');
 const cheerio = require('cheerio')
 
 const loadPageRoutes = (app) => {
   app.get('/', async (req, res) => {
-    let html = await changelogGenerator()
+    let html = await changelogReplace()
     const $ = cheerio.load(html);
   const parent = $('h3').eq(1).parent();
   const content = parent.find('h3').eq(1).addClass('expand-button').nextAll();
