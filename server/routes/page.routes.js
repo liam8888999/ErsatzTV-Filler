@@ -32,11 +32,13 @@ const loadPageRoutes = (app) => {
         });
     });
 
-    app.get('/themes', (req, res) => {
+    app.get('/themes', async (req, res) => {
+      let config_current = await retrieveCurrentConfiguration()
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Themes",
-            version: version
+            version: version,
+            theme: config_current.theme
         });
     });
 

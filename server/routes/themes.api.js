@@ -7,7 +7,7 @@ const loadApiThemeRoutes = (app) => {
 // download theme api
     app.get('/api/themes/download', (req, res) => {
     const url = req.query.url;
-    const filepath = `themes/${req.query.filepath}`;
+    const filepath = `themes/system/${req.query.filepath}`;
     console.log(req.query.filepath)
 
     // use the url and path variables to download the image

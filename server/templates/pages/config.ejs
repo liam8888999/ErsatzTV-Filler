@@ -14,10 +14,12 @@
         <form method="post" action="/config" id="config-form">
             <div id="variables">
                 <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                  <% if(key !== 'theme'){ %>
                     <%- include(text_input, {
                         key,
                         label: CURRENT_CONFIG[key]
                     }) %>
+                     <% } %>
                 <% }); %>
             </div>
         </form>

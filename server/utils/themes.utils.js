@@ -12,6 +12,28 @@ const settheme = async (theme) => {
   }
 }
 
+const userThemesList => {
+
+const folderPath = 'themes/';
+
+fs.readdir(folderPath, (err, files) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  const fileList = [];
+
+  files.forEach(file => {
+    fileList.push(file);
+  });
+
+  // Do something with the fileList constant here
+  console.log(fileList);
+});
+}
+
 module.exports = {
     settheme
+    userThemesList
 }
