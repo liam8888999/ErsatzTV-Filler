@@ -31,12 +31,13 @@ const writeValueToConfigurationFile = async (key, value) => {
     //const dotEnvResult = stringifyJavaScriptObjectToConfigFormat(newDotEnv);
     //await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
 
+
     const data = fs.readFileSync('config.json');
   const json = JSON.parse(data);
 
     const newConfigvar = {
         ...json,
-        key: value
+        [key]: value
     }
 
 
