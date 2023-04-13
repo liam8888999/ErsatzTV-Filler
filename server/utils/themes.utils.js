@@ -1,12 +1,12 @@
-const {fs} = require("fs")
+const fs = require("fs")
 
-async function settheme(theme) {
+const settheme = async (theme) => {
   try {
-    const fileData = await fs.promises.readFile("config.json");
+    const fileData = await fs.readFileSync("config.json");
     const json = JSON.parse(fileData);
     json.theme = theme;
-    await fs.promises.writeFile("config.json", JSON.stringify(json, null, 2));
-    console.log(`Successfully updated theme to '${theme}' in config.conf`);
+    await fs.writeFileSync("config.json", JSON.stringify(json, null, 2));
+    console.log(`Successfully updated theme to '${theme}' in config.json`);
   } catch (err) {
     console.error(`Error updating theme to '${theme}' in config.json: ${err}`);
   }
