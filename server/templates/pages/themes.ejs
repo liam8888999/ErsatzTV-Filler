@@ -3,7 +3,7 @@
   <div id="loading-message"></div>
 </div>
 <!-- set downloaded themes list -->
-<div id="downloadedThemes"><%- downloadedthemeslist %></div>
+<div id="downloadedThemes" style="display: none;"><%- downloadedthemeslist %></div>
 
 <h1 style="text-align:center;"> Themes </h1>
 <br>
@@ -519,8 +519,6 @@ var theme = themefilepath.replace(".theme", "");
         themeButton.disabled = false;
       }
     });
-
-
 
 
   };
