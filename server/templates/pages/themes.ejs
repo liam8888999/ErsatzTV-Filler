@@ -2,41 +2,43 @@
   <div id="overlay">
   <div id="loading-message"></div>
 </div>
+<!-- set downloaded themes list -->
+<div id="downloadedThemes"><%- downloadedthemeslist %></div>
 
 <h1 style="text-align:center;"> Themes </h1>
 <br>
 <p><b>Note:</b> Only System themes are currently available. User created themes will be reenabled in the future, for now if you would like your theme included please submit a pull request to <a href="https://github.com/liam8888999/ErsatzTV-Filler-Themes" target=”_blank”>ErsatzTV-Filler-Themes Github</a></p>
 <h3 style="text-align:center;">Current theme is: <%- theme %></h3>
-<h4 style="text-align:center;color:brown;">Light Theme (Default)</h4>
+<h4 style="text-align:center;color:brown;">System Light Theme (Default)</h4>
 <div class="slideshow-container">
   <div class="mySlides1">
-    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Light-Theme/images/channel-offline.png?raw=true" style="width:100%">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/channel-offline.png?raw=true" style="width:100%">
     <div class="numbertext">1 / 5</div>
 <div class="text" style="padding-top: 20px;">Channel-offline</div>
   </div>
 
 
   <div class="mySlides1">
-    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Light-Theme/images/news.png?raw=true" style="width:100%">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/news.png?raw=true" style="width:100%">
     <div class="numbertext">2 / 5</div>
 <div class="text" style="padding-top: 20px;">News</div>
   </div>
 
 
   <div class="mySlides1">
-    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Light-Theme/images/weather-v1.png?raw=true" style="width:100%">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/weather-v1.png?raw=true" style="width:100%">
     <div class="numbertext">3 / 5</div>
 <div class="text" style="padding-top: 20px;">Weather-V1</div>
   </div>
 
   <div class="mySlides1">
-    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Light-Theme/images/weather-v2.png?raw=true" style="width:100%">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/weather-v2.png?raw=true" style="width:100%">
     <div class="numbertext">4 / 5</div>
 <div class="text" style="padding-top: 20px;">Weather-V2</div>
   </div>
 
   <div class="mySlides1">
-    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Light-Theme/images/weather-v3.png?raw=true" style="width:100%">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/weather-v3.png?raw=true" style="width:100%">
     <div class="numbertext">5 / 5</div>
 <div class="text" style="padding-top: 20px;">Weather-V3</div>
   </div>
@@ -46,8 +48,8 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Light-Theme/light.theme', 'light.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('light')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="SystemLightdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'Light.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="settheme('Light')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -58,35 +60,35 @@
 <br>
 <br>
 <hr class="solid">
-<h4 style="text-align:center;color:brown;">Dark Theme</h4>
+<h4 style="text-align:center;color:brown;">System Dark Theme</h4>
 <div class="slideshow-container">
   <div class="mySlides2">
-  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Dark-Theme/images/channel-offline.png?raw=true" style="width:100%">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/channel-offline.png?raw=true" style="width:100%">
 
 <div class="numbertext">1 / 5</div>
 <div class="text" style="padding-top: 20px;">Channel-offline</div>
 </div>
 
   <div class="mySlides2">
-  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Dark-Theme/images/news.png?raw=true" style="width:100%">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/news.png?raw=true" style="width:100%">
   <div class="numbertext">2 / 5</div>
 <div class="text" style="padding-top: 20px;">News</div>
   </div>
 
   <div class="mySlides2">
-  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Dark-Theme/images/weather-v1.png?raw=true" style="width:100%">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/weather-v1.png?raw=true" style="width:100%">
   <div class="numbertext">3 / 5</div>
 <div class="text" style="padding-top: 20px;">Weather-V1</div>
   </div>
 
   <div class="mySlides2">
-  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Dark-Theme/images/weather-v2.png?raw=true" style="width:100%">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/weather-v2.png?raw=true" style="width:100%">
   <div class="numbertext">4 / 5</div>
 <div class="text" style="padding-top: 20px;">Weather-V2</div>
   </div>
 
   <div class="mySlides2">
-  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Dark-Theme/images/weather-v3.png?raw=true" style="width:100%">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/weather-v3.png?raw=true" style="width:100%">
   <div class="numbertext">5 / 5</div>
 <div class="text" style="padding-top: 20px;">Weather-V3</div>
   </div>
@@ -96,8 +98,8 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Dark-Theme/dark.theme', 'dark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('dark')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="SystemDarkdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemDark-Theme/SystemDark.theme', 'SystemDark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button onclick="settheme('SystemDark')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -145,7 +147,7 @@
   </div>
 <br>
 <div style="padding-left:55%;">
-<button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/StopandGo-Theme/stopandgo.theme', 'stopandgo.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="stopandgodownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/StopandGo-Theme/stopandgo.theme', 'stopandgo.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button onclick="settheme('stopandgo')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -194,7 +196,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Candycane-Theme/Candycane.theme', 'Candycane.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="CandyycanedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Candycane-Theme/Candycane.theme', 'Candycane.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button onclick="settheme('Candycane')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -247,7 +249,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-Dark-theme/MoRBiD_MaNGLeR-Dark.theme', 'MoRBiD_MaNGLeR-Dark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="MoRBiD_MaNGLeRDarkdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-Dark-theme/MoRBiD_MaNGLeR-Dark.theme', 'MoRBiD_MaNGLeR-Dark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button onclick="settheme('MoRBiD_MaNGLeR-Dark')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -297,7 +299,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-C64-theme/MoRBiD_MaNGLeR-C64.theme', 'MoRBiD_MaNGLeR-C64.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="MoRBiD_MaNGLeRC64downloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-C64-theme/MoRBiD_MaNGLeR-C64.theme', 'MoRBiD_MaNGLeR-C64.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button onclick="settheme('MoRBiD_MaNGLeR-C64')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -348,7 +350,7 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button id="my-button" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR-BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="MoRBiD_MaNGLeRBlueWhitedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR-BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button onclick="settheme('MoRBiD_MaNGLeR-BlueWhite')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
@@ -452,4 +454,37 @@ var theme = themefilepath.replace(".theme", "");
   reloadPageWithDelay(1500); // Refresh after 2 seconds (2000 milliseconds)
 
   }
+</script>
+<script>
+  //disable download button if already downloaded
+  window.onload = function() {
+    var statusDiv = document.getElementById('downloadedThemes');
+
+    // Define the theme buttons and their corresponding IDs
+    var themeButtons = [
+      { id: 'SystemLightdownloadButton', theme: 'Light.theme' },
+      { id: 'SystemDarkdownloadButton', theme: 'SystemDark.theme' },
+      { id: 'stopandgodownloadButton', theme: 'stopandgo.theme' },
+      { id: 'CandycanedownloadButton', theme: 'Candycane.theme' },
+      { id: 'MoRBiD_MaNGLeRDarkdownloadButton', theme: 'MoRBiD_MaNGLeR-Dark.theme' },
+      { id: 'MoRBiD_MaNGLeRC64downloadButton', theme: 'MoRBiD_MaNGLeR-C64.theme' },
+      { id: 'MoRBiD_MaNGLeRBlueWhite', theme: 'MORBiD_MaNGLeR-BlueWhite.theme' }
+    ];
+
+    // Get the downloaded themes as a comma-separated string
+    var downloadedThemesText = statusDiv.innerText;
+    var downloadedThemesArray = downloadedThemesText.split(',');
+
+    // Iterate over the theme buttons array
+    themeButtons.forEach(function(button) {
+      var themeButton = document.getElementById(button.id);
+      if (downloadedThemesArray.includes(button.theme)) {
+        themeButton.disabled = true;
+        themeButton.style.backgroundColor = 'lightgray';
+        themeButton.style.textDecoration = 'line-through';
+      } else {
+        themeButton.disabled = false;
+      }
+    });
+  };
 </script>

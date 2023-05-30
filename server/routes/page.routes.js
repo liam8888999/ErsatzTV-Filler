@@ -1,6 +1,7 @@
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 const { generateReadMe, changelogReplace, generateChangelog } = require("../utils/markdown.utils")
+const { listFilesInDir } = require("../utils/file.utils")
 const { version } = require('../../package.json');
 const fs = require('fs');
 const cheerio = require('cheerio')
@@ -41,6 +42,10 @@ const loadPageRoutes = (app) => {
 
     app.get('/themes', async (req, res) => {
       let config_current = await retrieveCurrentConfiguration()
+      let filesinthemesdir = await listFilesInDir("themes/system")
+  .catch(error => {
+    console.error(`Error: ${error}`);
+  });
       let ersatz = config_current.xmltv
       let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {
@@ -48,7 +53,8 @@ const loadPageRoutes = (app) => {
             page: "Themes",
             version: version,
             theme: config_current.theme,
-            ErsatzTVURL: ErsatzTVURL
+            ErsatzTVURL: ErsatzTVURL,
+            downloadedthemeslist: filesinthemesdir
         });
     });
 

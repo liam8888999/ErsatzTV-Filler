@@ -46,21 +46,14 @@ const overWriteFileContents = async (path, fileContents) => {
 
 }
 
-function listFilesInDir(dir) {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-  let fileList = [];
-
-  files.forEach(file => {
-    const filePath = path.join(dir, file.name);
-
-    if (file.isDirectory()) {
-      fileList = fileList.concat(listFiles(filePath));
-    } else {
-      fileList.push(filePath);
-    }
-  });
-console.log(fileList)
-  return fileList;
+async function listFilesInDir(directoryPath) {
+  try {
+    const files = await fs.promises.readdir(directoryPath);
+    return files;
+  } catch (error) {
+    console.error(`Error reading directory: ${error}`);
+    return [];
+  }
 }
 
 
