@@ -1,6 +1,11 @@
 <div class="container" style="margin: auto; width: 75%;">
+  <div id="overlay">
+  <div id="loading-message"></div>
+</div>
+
 <h1 style="text-align:center;"> Themes </h1>
 <br>
+<p>Note: Only System themes are currently available. User created themes will be reenabled in the future, for now if you would like your theme included please submit a pull request to <a href="https://github.com/liam8888999/ErsatzTV-Filler-Themes" target=”_blank”>ErsatzTV-Filler-Themes Github</a></p>
 <h3 style="text-align:center;">Current theme is: <%- theme %></h3>
 <h4 style="text-align:center;color:brown;">Light Theme (Default)</h4>
 <div class="slideshow-container">
@@ -400,6 +405,23 @@ function showSlides(n, no) {
       }
     };
     xhr.send();
+    function showLoadingOverlay() {
+      var myDiv = document.getElementById('loading-message');
+      var text = `${filepath}`;
+var modifiedText = text.replace(".theme", "");
+    myDiv.textContent = "New Theme (" + `${modifiedText}` + ") has been set successfully. Please wait...";
+    document.getElementById('overlay').style.display = 'block';
+  }
+
+  function reloadPageWithDelay(delay) {
+    showLoadingOverlay();
+    setTimeout(function() {
+      location.reload();
+    }, delay);
+  }
+
+  // Call the reloadPageWithDelay function with a specified delay (in milliseconds)
+  reloadPageWithDelay(1500); // Refresh after 2 seconds (2000 milliseconds)
   }
 </script>
 
@@ -417,5 +439,21 @@ function showSlides(n, no) {
       }
     };
     xhr.send();
+    function showLoadingOverlay() {
+      var myDiv = document.getElementById('loading-message');
+    myDiv.textContent = "New Theme (" + `${theme}` + ") has been set successfully. Please wait...";
+    document.getElementById('overlay').style.display = 'block';
+  }
+
+  function reloadPageWithDelay(delay) {
+    showLoadingOverlay();
+    setTimeout(function() {
+      location.reload();
+    }, delay);
+  }
+
+  // Call the reloadPageWithDelay function with a specified delay (in milliseconds)
+  reloadPageWithDelay(1500); // Refresh after 2 seconds (2000 milliseconds)
+
   }
 </script>
