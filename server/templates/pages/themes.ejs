@@ -8,7 +8,7 @@
 <h1 style="text-align:center;"> Themes </h1>
 <br>
 <p><b>Note:</b> Only System themes are currently available. User created themes will be reenabled in the future, for now if you would like your theme included please submit a pull request to <a href="https://github.com/liam8888999/ErsatzTV-Filler-Themes" target=”_blank”>ErsatzTV-Filler-Themes Github</a></p>
-<h3 style="text-align:center;">Current theme is: <%- theme %></h3>
+<h3 style="text-align:center;">Current theme is: <span id="currentTheme"><%- theme %></span></h3>
 <h4 style="text-align:center;color:brown;">System Light Theme (Default)</h4>
 <div class="slideshow-container">
   <div class="mySlides1">
@@ -49,7 +49,7 @@
 <br>
 <div style="padding-left:55%;">
 <button id="SystemLightdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'Light.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('Light')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="SystemLightsetthemeButton" onclick="settheme('Light')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -99,7 +99,7 @@
 <br>
 <div style="padding-left:55%;">
 <button id="SystemDarkdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemDark-Theme/SystemDark.theme', 'SystemDark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('SystemDark')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="SystemDarksetthemeButton" onclick="settheme('SystemDark')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -148,7 +148,7 @@
 <br>
 <div style="padding-left:55%;">
 <button id="stopandgodownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/StopandGo-Theme/stopandgo.theme', 'stopandgo.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('stopandgo')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="stopandgosetthemeButton" onclick="settheme('stopandgo')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -196,8 +196,8 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button id="CandyycanedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Candycane-Theme/Candycane.theme', 'Candycane.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('Candycane')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="CandycanedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Candycane-Theme/Candycane.theme', 'Candycane.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="CandycanesetthemeButton" onclick="settheme('Candycane')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -250,7 +250,7 @@
 <br>
 <div style="padding-left:55%;">
 <button id="MoRBiD_MaNGLeRDarkdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-Dark-theme/MoRBiD_MaNGLeR-Dark.theme', 'MoRBiD_MaNGLeR-Dark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('MoRBiD_MaNGLeR-Dark')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="MoRBiD_MaNGLeRDarksetthemeButton" onclick="settheme('MoRBiD_MaNGLeR-Dark')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -300,7 +300,7 @@
 <br>
 <div style="padding-left:55%;">
 <button id="MoRBiD_MaNGLeRC64downloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-C64-theme/MoRBiD_MaNGLeR-C64.theme', 'MoRBiD_MaNGLeR-C64.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('MoRBiD_MaNGLeR-C64')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="MoRBiD_MaNGLeRC64setthemeButton" onclick="settheme('MoRBiD_MaNGLeR-C64')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -351,7 +351,7 @@
 <br>
 <div style="padding-left:55%;">
 <button id="MoRBiD_MaNGLeRBlueWhitedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR-BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button onclick="settheme('MoRBiD_MaNGLeR-BlueWhite')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="MoRBiD_MaNGLeRBlueWhitesetthemeButton"onclick="settheme('MoRBiD_MaNGLeR-BlueWhite')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -456,8 +456,41 @@ var theme = themefilepath.replace(".theme", "");
   }
 </script>
 <script>
-  //disable download button if already downloaded
+
   window.onload = function() {
+
+
+    //disable set theme button if already set
+      var statusDiv1 = document.getElementById('currentTheme');
+
+      // Define the theme buttons and their corresponding IDs
+      var themeButtons1 = [
+        { id1: 'SystemLightsetthemeButton', theme1: 'Light' },
+        { id1: 'SystemDarksetthemeButton', theme1: 'SystemDark' },
+        { id1: 'stopandgosetthemeButton', theme1: 'stopandgo' },
+        { id1: 'CandycanesetthemeButton', theme1: 'Candycane' },
+        { id1: 'MoRBiD_MaNGLeRDarksetthemeButton', theme1: 'MoRBiD_MaNGLeR-Dark' },
+        { id1: 'MoRBiD_MaNGLeRC64setthemeButton', theme1: 'MoRBiD_MaNGLeR-C64' },
+        { id1: 'MoRBiD_MaNGLeRBlueWhitesetthemeButton', theme1: 'MORBiD_MaNGLeR-BlueWhite' }
+      ];
+
+  var currentThemesText = statusDiv1.innerText;
+      // Iterate over the theme buttons array
+      themeButtons1.forEach(function(button) {
+        var themeButton1 = document.getElementById(button.id1);
+        if (currentThemesText.includes(button.theme1)) {
+          themeButton1.disabled = true;
+          themeButton1.style.backgroundColor = 'lightgray';
+          themeButton1.style.textDecoration = 'line-through';
+        } else {
+    themeButton1.disabled = false;
+        }
+      });
+
+
+
+  //disable download button if already downloaded
+
     var statusDiv = document.getElementById('downloadedThemes');
 
     // Define the theme buttons and their corresponding IDs
@@ -468,7 +501,7 @@ var theme = themefilepath.replace(".theme", "");
       { id: 'CandycanedownloadButton', theme: 'Candycane.theme' },
       { id: 'MoRBiD_MaNGLeRDarkdownloadButton', theme: 'MoRBiD_MaNGLeR-Dark.theme' },
       { id: 'MoRBiD_MaNGLeRC64downloadButton', theme: 'MoRBiD_MaNGLeR-C64.theme' },
-      { id: 'MoRBiD_MaNGLeRBlueWhite', theme: 'MORBiD_MaNGLeR-BlueWhite.theme' }
+      { id: 'MoRBiD_MaNGLeRBlueWhitedownloadButton', theme: 'MORBiD_MaNGLeR-BlueWhite.theme' }
     ];
 
     // Get the downloaded themes as a comma-separated string
@@ -486,5 +519,9 @@ var theme = themefilepath.replace(".theme", "");
         themeButton.disabled = false;
       }
     });
+
+
+
+
   };
 </script>
