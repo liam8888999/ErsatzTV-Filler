@@ -109,33 +109,32 @@ const createWeatherV1 = async () => {
     //part1
     const commandv1part1 = `ffmpeg -y -f lavfi -i color=black:${config_current.videoresolution} -i ${WORKDIR}/v1.png -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WORKDIR}/weather-v1.mp4`;
     console.log(commandv1part1);
-    logger.info('This is an informational message.');
-    logger.warn('This is a warning message.');
-    logger.error('This is an error message.');
+    logger.ffmpeg(`commandv1part1 is ${commandv1part1}`);
 
     exec(commandv1part1, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error: ${error.message}`);
         return;
       }
-    //  if (stderr) {
-  //      console.error(`stderr: ${stderr}`);
-    //    return;
-    //  }
+      if (stderr) {
+        logger.ffmpeg(`stderr: ${stderr}`);
+        return;
+     }
       console.log('Weather v1 part 1 created successfully.');
 
       //part2
       const commandv1 = `ffmpeg -y -i ${WORKDIR}/weather-v1.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v1.mp4`;
 console.log(commandv1);
+    logger.ffmpeg(`commandv1 is ${commandv1}`);
       exec(commandv1, (error, stdout, stderr) => {
         if (error) {
           console.error(`Error: ${error.message}`);
           return;
         }
-      //  if (stderr) {
-      //    console.error(`stderr: ${stderr}`);
-        //  return;
-      //  }
+        if (stderr) {
+          logger.ffmpeg(`stderr: ${stderr}`);
+          return;
+        }
         console.log('Weather v1 created successfully.');
       });
     });

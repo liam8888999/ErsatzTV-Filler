@@ -11,3 +11,5 @@ v3.png
 output.json
 config.json
 config-old.json
+*.log
+*.log
