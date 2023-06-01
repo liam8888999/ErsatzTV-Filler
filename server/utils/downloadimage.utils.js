@@ -1,6 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 const logger = require("../utils/logger.utils");
+const moment = require('moment-timezone');
 
 function downloadImage(url, filepath) {
   return new Promise((resolve, reject) => {

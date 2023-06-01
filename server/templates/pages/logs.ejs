@@ -1,0 +1,29 @@
+<div id="output" style="margin: auto; width: 75%;">
+<center><h1>Logs</h1></center>
+<div id="logContainer"></div>
+
+<script>
+  // Function to load and display logs in real-time
+  function loadLogs() {
+    const logContainer = document.getElementById('logContainer');
+    const logRequest = new XMLHttpRequest();
+
+    logRequest.onreadystatechange = function () {
+      if (logRequest.readyState === 3 && logRequest.status === 200) {
+        logContainer.innerHTML = logRequest.responseText;
+        logContainer.scrollTop = logContainer.scrollHeight;
+      }
+    };
+
+    logRequest.open('GET', '/logsload', true);
+    logRequest.send();
+
+    setTimeout(loadLogs, 1000); // Refresh logs every second
+  }
+
+  // Start loading logs when the page is ready
+  document.addEventListener('DOMContentLoaded', function () {
+    loadLogs();
+  });
+</script>
+</div>

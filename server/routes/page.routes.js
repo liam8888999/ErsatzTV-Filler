@@ -6,6 +6,9 @@ const { version } = require('../../package.json');
 const fs = require('fs');
 const cheerio = require('cheerio');
 const logger = require("../utils/logger.utils");
+const readline = require('readline');
+const moment = require('moment-timezone');
+
 
 const loadPageRoutes = (app) => {
   app.get('/', async (req, res) => {
@@ -71,6 +74,85 @@ const loadPageRoutes = (app) => {
             ErsatzTVURL: ErsatzTVURL
         });
     });
+
+
+
+//start logs page
+    app.get('/logs', async (req, res) => {
+      let config_current = await retrieveCurrentConfiguration()
+      let ersatz = config_current.xmltv
+      let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+        // Render the specific ejs template view
+        res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "logs", {
+            layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
+            page: "Logs",
+            version: version,
+            ErsatzTVURL: ErsatzTVURL
+        });
+    });
+// Define a route to stream the logs in real-time
+app.get('/logsload', (req, res) => {
+  try {
+    const logFile = getLatestLogFile();
+
+    if (!fs.existsSync(logFile)) {
+      res.status(404).send('Log file not found');
+      return;
+    }
+
+    const logStream = fs.createReadStream(logFile);
+
+    // Handle error event for logStream
+    logStream.on('error', (error) => {
+      res.status(500).send('Error reading log file');
+      logger.error(error);
+    });
+
+    const rl = readline.createInterface({
+      input: logStream,
+      terminal: false
+    });
+
+    // Add "line" event listener
+    rl.on('line', (line) => {
+      try {
+        res.write(`<p>${line}</p>\n`);
+      } catch (err) {
+        console.error('An error occurred while processing a line:', err);
+        // Handle the error as needed
+      }
+    });
+
+    // Add "error" event listener
+    rl.on('error', (err) => {
+      console.error('An error occurred in the readline interface:', err);
+      // Handle the error as needed
+    });
+
+    // End the response when reading is complete
+    rl.on('close', () => {
+      res.end();
+    });
+  } catch (error) {
+    res.status(500).send('Error getting log file');
+    logger.error(error);
+  }
+});
+
+function getLatestLogFile() {
+  try {
+    const today = new Date().toISOString().slice(0, 10);
+    const logFile = `ersatztv-filler-${today}.log`;
+    return logFile;
+  } catch (error) {
+    throw new Error('Error getting log file');
+  }
+}
+
+
+//end logs page
+
+
 
     app.get('/documentation', async (req, res) => {
 let documentation = await generateReadMe()

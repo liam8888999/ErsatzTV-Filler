@@ -1,6 +1,7 @@
 const winston = require('winston');
 const { format } = winston;
 const DailyRotateFile = require('winston-daily-rotate-file');
+const moment = require('moment-timezone');
 
 // Define your custom log levels
 const customLevels = {

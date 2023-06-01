@@ -85,6 +85,7 @@
     }
   },
   "devDependencies": {
+    "moment-timezone": "^0.5.43",
     "socket.io": "^4.6.2",
     "winston": "^3.9.0",
     "winston-daily-rotate-file": "^4.7.1"

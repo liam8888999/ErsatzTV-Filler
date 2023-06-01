@@ -2,6 +2,10 @@ const { createWebServer, startWebServer } = require("../server/modules/web-serve
 const { setupConfigurationFile } = require("../server/modules/config-loader.module");
 const { selectRandomAudioFile } = require("../server/generators/utils/randomaudio.utils");
 const logger = require("../server/utils/logger.utils");
+const moment = require('moment-timezone');
+
+// Set the desired time zone
+const timeZone = 'Australia/Melbourne'; // Replace with the appropriate time zone, e.g., 'America/New_York'
 
 const { WEATHER } = require("../server/generators/weather.generator");
 
@@ -13,6 +17,9 @@ const { WEATHER } = require("../server/generators/weather.generator");
 
     try {
         await setupConfigurationFile();
+
+        // Set the time zone globally for the application
+        moment.tz.setDefault(timeZone);
 
        createWebServer();
 
