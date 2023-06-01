@@ -1,5 +1,6 @@
 const { createWebServer, startWebServer } = require("../server/modules/web-server.module");
 const { setupConfigurationFile } = require("../server/modules/config-loader.module");
+const { selectRandomAudioFile } = require("../server/generators/utils/randomaudio.utils");
 
 const { WEATHER } = require("../server/generators/weather.generator");
 
@@ -15,8 +16,8 @@ const { WEATHER } = require("../server/generators/weather.generator");
        createWebServer();
 
         startWebServer();
-
-    //    WEATHER();
+//selectRandomAudioFile("/Users/liam/Music/Converted by MediaHuman/Music/Aerosmith/Pump");
+       WEATHER();
     } catch(e){
         console.error("Fatal error occurred!", e)
     }

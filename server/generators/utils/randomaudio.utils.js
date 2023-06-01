@@ -3,18 +3,17 @@ const { randomNumber } = require("../../utils/randomnumber.utils")
 
 const selectRandomAudioFile = async (path) => {
   //gra the array of files
-  const fileList = listFilesInDir("audio-fallback")
-  console.log(fileList)
-console.log(fileList.length)
+  const fileList = await listFilesInDir(path)
+  //console.log(fileList)
   //generate a random number from array 0 to length
 
   const randomIndex = randomNumber(fileList.length);
-  console.log(randomIndex)
+  //console.log(randomIndex)
 
 const listFile = await fileList[randomIndex]
   // Return the chosen random file path
+  //  console.log(listFile)
   return listFile
-  console.log(listFile)
 }
 
 module.exports = {
