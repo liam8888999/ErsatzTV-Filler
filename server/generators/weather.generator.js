@@ -7,6 +7,7 @@ const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const { downloadImage } = require("../utils/downloadimage.utils"); //unsure about this one
 const { WORKDIR } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
+const logger = require("../utils/logger.utils");
 
 
 
@@ -19,6 +20,7 @@ const client = require('https');
 
 const WEATHER = async () => {
 console.log("starting weather")
+
 
 let config_current = await retrieveCurrentConfiguration()
 
@@ -107,6 +109,9 @@ const createWeatherV1 = async () => {
     //part1
     const commandv1part1 = `ffmpeg -y -f lavfi -i color=black:${config_current.videoresolution} -i ${WORKDIR}/v1.png -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WORKDIR}/weather-v1.mp4`;
     console.log(commandv1part1);
+    logger.info('This is an informational message.');
+    logger.warn('This is a warning message.');
+    logger.error('This is an error message.');
 
     exec(commandv1part1, (error, stdout, stderr) => {
       if (error) {
@@ -220,7 +225,7 @@ console.log(commandv3);
 
 
 console.log("creating videos")
-//createWeatherV1();
+createWeatherV1();
 //createWeatherV2();
 //createWeatherV3();
 
