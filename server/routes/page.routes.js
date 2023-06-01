@@ -4,7 +4,8 @@ const { generateReadMe, changelogReplace, generateChangelog } = require("../util
 const { listFilesInDir } = require("../utils/file.utils")
 const { version } = require('../../package.json');
 const fs = require('fs');
-const cheerio = require('cheerio')
+const cheerio = require('cheerio');
+const logger = require("../utils/logger.utils");
 
 const loadPageRoutes = (app) => {
   app.get('/', async (req, res) => {
@@ -44,7 +45,7 @@ const loadPageRoutes = (app) => {
       let config_current = await retrieveCurrentConfiguration()
       let filesinthemesdir = await listFilesInDir("themes/system")
   .catch(error => {
-    console.error(`Error: ${error}`);
+    logger.error(`Error: ${error}`);
   });
       let ersatz = config_current.xmltv
       let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");

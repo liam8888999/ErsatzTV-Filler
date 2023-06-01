@@ -1,3 +1,5 @@
+const logger = require("../utils/logger.utils");
+
 /**
  * Stringify an object specifically for our config
  * @param obj

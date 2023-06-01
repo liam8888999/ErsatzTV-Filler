@@ -2,6 +2,7 @@ const dotenv = require('dotenv')
 const {CONFIG_CONSTANTS} = require("../constants/path.constants");
 const {overWriteFileContents} = require("../utils/file.utils");
 const {stringifyJavaScriptObjectToConfigFormat} = require("../utils/string.utils")
+const logger = require("../utils/logger.utils");
 const fs = require("fs")
 
 /**

@@ -1,4 +1,5 @@
 const fs = require("fs")
+const logger = require("../utils/logger.utils");
 
 const settheme = async (theme) => {
   try {
@@ -8,7 +9,7 @@ const settheme = async (theme) => {
     await fs.writeFileSync("config.json", JSON.stringify(json, null, 2));
     console.log(`Successfully updated theme to '${theme}' in config.json`);
   } catch (err) {
-    console.error(`Error updating theme to '${theme}' in config.json: ${err}`);
+    logger.error(`Error updating theme to '${theme}' in config.json: ${err}`);
   }
 }
 

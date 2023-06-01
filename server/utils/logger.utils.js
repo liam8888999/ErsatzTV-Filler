@@ -5,10 +5,10 @@ const DailyRotateFile = require('winston-daily-rotate-file');
 // Define your custom log levels
 const customLevels = {
   success: 0,
-  debug: 1,
-  info: 2,
-  warn: 3,
-  error: 4,
+  info: 1,
+  warn: 2,
+  error: 3,
+  debug: 4,
   ffmpeg: 5
 };
 

@@ -2,6 +2,7 @@ const { CONFIG_CONSTANTS } = require("../constants/path.constants");
 const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
 const { parseConfigurationFile, createNewUserConfigFromDefault } = require("../utils/config.utils");
 const fs = require('fs');
+const logger = require("../utils/logger.utils");
 
 let CURRENT_CONFIG = {}; //In memory store for config data
 
@@ -56,7 +57,10 @@ if (!FILE_EXISTS) {
 
   // Write the JSON string to a file named "output.json"
   fs.writeFile('config.json', jsonString, (err) => {
-    if (err) throw err;
+    //see how it goes with the logger
+    if (err) { throw err;
+     logger.error(err);
+   }
     console.log('Created config.json file');
   });
 }

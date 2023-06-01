@@ -1,6 +1,7 @@
 const {ROUTE_CONSTANTS} = require("../constants/route.constants");
 const { settheme } = require("../utils/themes.utils.js");
 const { downloadImage } = require("../utils/downloadimage.utils");
+const logger = require("../utils/logger.utils");
 
 const loadApiThemeRoutes = (app) => {
 
@@ -17,6 +18,7 @@ const loadApiThemeRoutes = (app) => {
       })
       .catch((error) => {
         res.status(500).send(`Error downloading image: ${error.message}`);
+        logger.error(`Error downloading image: ${error.message}`)
       });
   });
 

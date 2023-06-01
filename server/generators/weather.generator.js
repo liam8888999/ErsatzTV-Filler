@@ -68,16 +68,16 @@ console.log(`${config_current.city}`)
 console.log(`${WORKDIR}`)
 
 await downloadImage(`https://wttr.in/${config_current.city}.png`, `${WORKDIR}/v1.png`)
-    .then(console.log)
-    .catch(console.error);
+    .then(logger.success)
+    .catch(logger.error);
 
 await downloadImage(`https://v2.wttr.in/${await config_current.city}.png`, `${WORKDIR}/v2.png`)
-    .then(console.log)
-    .catch(console.error);
+    .then(logger.success)
+    .catch(logger.error);
 
 await downloadImage(`https://v3.wttr.in/${await config_current.state}.png`, `${WORKDIR}/v3.png`)
-    .then(console.log)
-    .catch(console.error);
+    .then(logger.success)
+    .catch(logger.error);
 
 /**
 *calculate fade times
@@ -113,14 +113,14 @@ const createWeatherV1 = async () => {
 
     exec(commandv1part1, (error, stdout, stderr) => {
       if (error) {
-        console.error(`Error: ${error.message}`);
+        logger.error(`Error: ${error.message}`);
         return;
       }
       if (stderr) {
         logger.ffmpeg(`stderr: ${stderr}`);
         return;
      }
-      console.log('Weather v1 part 1 created successfully.');
+      logger.success('Weather v1 part 1 created successfully.');
 
       //part2
       const commandv1 = `ffmpeg -y -i ${WORKDIR}/weather-v1.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v1.mp4`;
@@ -128,18 +128,18 @@ console.log(commandv1);
     logger.ffmpeg(`commandv1 is ${commandv1}`);
       exec(commandv1, (error, stdout, stderr) => {
         if (error) {
-          console.error(`Error: ${error.message}`);
+          logger.error(`Error: ${error.message}`);
           return;
         }
         if (stderr) {
           logger.ffmpeg(`stderr: ${stderr}`);
           return;
         }
-        console.log('Weather v1 created successfully.');
+        logger.success('Weather v1 created successfully.');
       });
     });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
   }
 };
 
@@ -153,32 +153,32 @@ const createWeatherV2 = async () => {
 
     exec(commandv2part1, (error, stdout, stderr) => {
       if (error) {
-        console.error(`Error: ${error.message}`);
+        logger.error(`Error: ${error.message}`);
         return;
       }
-    //  if (stderr) {
-  //      console.error(`stderr: ${stderr}`);
-    //    return;
-    //  }
-      console.log('Weather v2 part 1 created successfully.');
+      if (stderr) {
+        logger.ffmpeg(`stderr: ${stderr}`);
+        return;
+     }
+      logger.success('Weather v2 part 1 created successfully.');
 
       //part2
       const commandv2 = `ffmpeg -y -i ${WORKDIR}/weather-v2.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v2.mp4`;
 console.log(commandv2);
       exec(commandv2, (error, stdout, stderr) => {
         if (error) {
-          console.error(`Error: ${error.message}`);
+          logger.error(`Error: ${error.message}`);
           return;
         }
-      //  if (stderr) {
-      //    console.error(`stderr: ${stderr}`);
-        //  return;
-      //  }
-        console.log('Weather v2 created successfully.');
+        if (stderr) {
+          logger.ffmpeg(`stderr: ${stderr}`);
+          return;
+        }
+        logger.success('Weather v2 created successfully.');
       });
     });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
   }
 };
 
@@ -193,32 +193,32 @@ const createWeatherV3 = async () => {
 
     exec(commandv3part1, (error, stdout, stderr) => {
       if (error) {
-        console.error(`Error: ${error.message}`);
+        logger.error(`Error: ${error.message}`);
         return;
       }
-    //  if (stderr) {
-  //      console.error(`stderr: ${stderr}`);
-    //    return;
-    //  }
-      console.log('Weather v3 part 1 created successfully.');
+      if (stderr) {
+        logger.ffmpeg(`stderr: ${stderr}`);
+        return;
+      }
+      logger.success('Weather v3 part 1 created successfully.');
 
       //part2
       const commandv3 = `ffmpeg -y -i ${WORKDIR}/weather-v3.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v3.mp4`;
 console.log(commandv3);
       exec(commandv3, (error, stdout, stderr) => {
         if (error) {
-          console.error(`Error: ${error.message}`);
+          logger.error(`Error: ${error.message}`);
           return;
         }
-      //  if (stderr) {
-      //    console.error(`stderr: ${stderr}`);
-        //  return;
-      //  }
-        console.log('Weather v3 created successfully.');
+        if (stderr) {
+          logger.ffmpeg(`stderr: ${stderr}`);
+          return;
+        }
+        logger.success('Weather v3 created successfully.');
       });
     });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
   }
 };
 
@@ -275,7 +275,7 @@ const weatheraudiofadeoutstartv4 = `${weatherv4videolength}` - await config_curr
 // list all files in the directory
 //fs.readdir(`${WORKDIR}/weatherv4/`, (err, files) => {
   //if (err) {
-    //throw err
+    //logger.error(err)
   //}
 
   // files object contains all files names
@@ -283,7 +283,7 @@ const weatheraudiofadeoutstartv4 = `${weatherv4videolength}` - await config_curr
   //files.forEach(file => {
     //fs.writeFile(`${WORKDIR}/weatherv4/weatherv4.txt`, file, (err) => {
   //if (err)
-    //console.log(err);
+    //logger.log(err);
   //else {
     //console.log("File written successfully\n");
   //}

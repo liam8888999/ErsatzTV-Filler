@@ -2,6 +2,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const app = express();
+const logger = require("../utils/logger.utils");
 
 const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { loadPageRoutes } = require("../routes/page.routes");

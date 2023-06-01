@@ -2,6 +2,7 @@ const { readFile, stat, copyFile, writeFile, readdir } = require('fs').promises;
 const { CONFIG_CONSTANTS } = require("../constants/path.constants");
 const path = require('path')
 const fs = require('fs')
+const logger = require("../utils/logger.utils");
 
 
 
@@ -41,7 +42,7 @@ const overWriteFileContents = async (path, fileContents) => {
     try{
         await writeFile(path, fileContents);
     }catch(e){
-        console.error(e)
+        logger.error(e)
     }
 
 }
@@ -51,7 +52,7 @@ async function listFilesInDir(directoryPath) {
     const files = await fs.promises.readdir(directoryPath);
     return files;
   } catch (error) {
-    console.error(`Error reading directory: ${error}`);
+    logger.error(`Error reading directory: ${error}`);
     return [];
   }
 }
