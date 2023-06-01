@@ -245,9 +245,6 @@ const weatherv4videolength = await config_current.videolength * 3
 const weathervideofadeoutstartv4 = `${weatherv4videolength}` - await config_current.weathervideofadeoutduration
 const weatheraudiofadeoutstartv4 = `${weatherv4videolength}` - await config_current.weatheraudiofadeoutduration
 
-console.log(weatherv4videolength)
-console.log(weatheraudiofadeoutstartv4)
-console.log(weatheraudiofadeoutstartv4)
 /**
 *generate v1 to v4 without fade
 */
