@@ -8,6 +8,7 @@ const cheerio = require('cheerio');
 const logger = require("../utils/logger.utils");
 const readline = require('readline');
 const moment = require('moment-timezone');
+const { checkForUpdates } = require('../utils/update.utils')
 
 
 const loadPageRoutes = (app) => {
@@ -66,12 +67,14 @@ const loadPageRoutes = (app) => {
       let config_current = await retrieveCurrentConfiguration()
       let ersatz = config_current.xmltv
       let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+      let UPDATESTATUS = await checkForUpdates();
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "update", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Updates",
             version: version,
-            ErsatzTVURL: ErsatzTVURL
+            ErsatzTVURL: ErsatzTVURL,
+            updatestatus: UPDATESTATUS
         });
     });
 

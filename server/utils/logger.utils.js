@@ -6,10 +6,11 @@ const DailyRotateFile = require('winston-daily-rotate-file');
 const customLevels = {
   success: 0,
   info: 1,
-  warn: 2,
-  error: 3,
-  debug: 4,
-  ffmpeg: 5
+  updates: 2,
+  warn: 3,
+  error: 4,
+  debug: 5,
+  ffmpeg: 6
 };
 
 // Define colors for the custom log levels
@@ -17,6 +18,7 @@ const customLevelColors = {
   success: 'green',
   debug: 'blue',
   info: 'cyan',
+  updates: 'purple',
   warn: 'yellow',
   error: 'red',
   ffmpeg: 'orange'
