@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": ".799a3c5eae328e12538d00563b34f5b0368c0b07-audit.json",
+    "files": [
+        {
+            "date": 1685712709922,
+            "name": "ersatztv-filler-ffmpeg-${fileDatePattern}.log.2023-06-02",
+            "hash": "38072dad908e34a8646f4346810300aba5e5aab539232bbdb6e2dee04af0926a"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -141,8 +141,18 @@ app.get('/logsload', (req, res) => {
 
 function getLatestLogFile() {
   try {
-    const today = new Date().toISOString().slice(0, 10);
-    const logFile = `ersatztv-filler-${today}.log`;
+    const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+const day = String(currentDate.getDate()).padStart(2, '0');
+
+const formattedDate = `${year}-${month}-${day}`;
+
+
+console.log(`${formattedDate}`);
+
+//console.log(formattedDate)
+    const logFile = `ersatztv-filler-${formattedDate}.log`;
     return logFile;
   } catch (error) {
     throw new Error('Error getting log file');
