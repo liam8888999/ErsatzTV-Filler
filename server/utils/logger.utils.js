@@ -35,7 +35,7 @@ const hours = String(date.getHours()).padStart(2, '0');
 const minutes = String(date.getMinutes()).padStart(2, '0');
 const seconds = String(date.getSeconds()).padStart(2, '0');
 
-return formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;   
+return formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
 // Define the log format
@@ -58,7 +58,7 @@ const logger = winston.createLogger({
      datePattern: 'YYYY-MM-DD',
      maxFiles: '7d', // Keep logs for 7 days
      maxSize: '900m', // Rotate logs if the file size exceeds 20MB
-     level: 'info'
+     level: 'debug'
    }),
    new DailyRotateFile({
     filename: 'ersatztv-filler-ffmpeg-%DATE%.log',

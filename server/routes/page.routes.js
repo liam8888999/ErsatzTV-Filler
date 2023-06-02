@@ -95,10 +95,12 @@ app.get('/logsload', (req, res) => {
   try {
     const logFile = getLatestLogFile();
 
-    if (!fs.existsSync(logFile)) {
-      res.status(404).send('Log file not found');
-      return;
-    }
+      if (!fs.existsSync(logFile)) {
+        res.status(404).send('Log file not found');
+        logger.error('Log file not found');
+
+ return;
+}
 
     const logStream = fs.createReadStream(logFile);
 
@@ -118,14 +120,14 @@ app.get('/logsload', (req, res) => {
       try {
         res.write(`<p>${line}</p>\n`);
       } catch (err) {
-        console.error('An error occurred while processing a line:', err);
+        logger.error('An error occurred while processing a line:', err);
         // Handle the error as needed
       }
     });
 
     // Add "error" event listener
     rl.on('error', (err) => {
-      console.error('An error occurred in the readline interface:', err);
+      logger.error('An error occurred in the readline interface:', err);
       // Handle the error as needed
     });
 
@@ -135,7 +137,7 @@ app.get('/logsload', (req, res) => {
     });
   } catch (error) {
     res.status(500).send('Error getting log file');
-    logger.error(error);
+    logger.error(error.message);
   }
 });
 
@@ -149,13 +151,12 @@ const day = String(currentDate.getDate()).padStart(2, '0');
 const formattedDate = `${year}-${month}-${day}`;
 
 
-console.log(`${formattedDate}`);
-
 //console.log(formattedDate)
     const logFile = `ersatztv-filler-${formattedDate}.log`;
     return logFile;
   } catch (error) {
-    throw new Error('Error getting log file');
+    console.error('Error getting log file', error.message);
+ throw new Error('Error getting log file');
   }
 }
 
