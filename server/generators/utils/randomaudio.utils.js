@@ -6,15 +6,15 @@ const moment = require('moment-timezone');
 const selectRandomAudioFile = async (path) => {
   //gra the array of files
   const fileList = await listFilesInDir(path)
-  //console.log(fileList)
+  //logger.info(fileList)
   //generate a random number from array 0 to length
 
   const randomIndex = randomNumber(fileList.length);
-  //console.log(randomIndex)
+  //logger.info(randomIndex)
 
 const listFile = await fileList[randomIndex]
   // Return the chosen random file path
-  //  console.log(listFile)
+  //  logger.info(listFile)
   return listFile
 }
 

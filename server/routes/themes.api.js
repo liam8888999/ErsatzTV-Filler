@@ -10,7 +10,7 @@ const loadApiThemeRoutes = (app) => {
     app.get('/api/themes/download', (req, res) => {
     const url = req.query.url;
     const filepath = `themes/system/${req.query.filepath}`;
-    console.log(req.query.filepath)
+    logger.info(req.query.filepath)
 
     // use the url and path variables to download the image
     downloadImage(url, filepath)
@@ -27,7 +27,7 @@ const loadApiThemeRoutes = (app) => {
 
   app.get('/api/themes/settheme', async (req, res) => {
   const theme = req.query.theme;
-  console.log(req.query.theme)
+  logger.info(req.query.theme)
   await settheme(theme)
   // use the url and path variables to set the theme
 

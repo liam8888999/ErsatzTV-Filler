@@ -403,7 +403,7 @@ function showSlides(n, no) {
     xhr.open('GET', endpointUrl, true);
     xhr.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
-        console.log(this.responseText);
+        loger.info(this.responseText);
       }
     };
     xhr.send();
@@ -431,11 +431,11 @@ var theme = themefilepath.replace(".theme", "");
   function settheme(theme) {
     const xhr = new XMLHttpRequest();
     const endpointUrl = `http://127.0.0.1:3000/api/themes/settheme?theme=${theme}`;
-    console.log(theme)
+    logger.info(theme)
     xhr.open('GET', endpointUrl, true);
     xhr.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
-        console.log(this.responseText);
+        logger.info(this.responseText);
       }
     };
     xhr.send();

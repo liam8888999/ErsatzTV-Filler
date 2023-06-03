@@ -23,7 +23,7 @@ const parseConfigurationFile = (path) => {
  */
 const writeValueToConfigurationFile = async (key, value) => {
     //const latestDotEnvConfig = parseConfigurationFile(CONFIG_CONSTANTS().USER_CONFIG)
-    //console.log(key)
+    //logger.info(key)
 
     //const newDotEnv = {
       //  ...latestDotEnvConfig.parsed,
@@ -53,7 +53,7 @@ const writeValueToConfigurationFile = async (key, value) => {
  */
 const createNewUserConfigFromDefault = async () => {
   await fs.promises.copyFile(CONFIG_CONSTANTS().DEFAULT_CONFIG, CONFIG_CONSTANTS().USER_CONFIG);
-  console.log('A new user config file was generated from the default file');
+  logger.success('A new user config file was generated from the default file');
 }
 
 module.exports = {

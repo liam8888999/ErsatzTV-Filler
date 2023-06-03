@@ -162,7 +162,7 @@ const day = String(currentDate.getDate()).padStart(2, '0');
 const formattedDate = `${year}-${month}-${day}`;
 
 
-//console.log(formattedDate)
+//logger.info(formattedDate)
     const logFile = `ersatztv-filler-${formattedDate}.log`;
     return logFile;
   } catch (error) {

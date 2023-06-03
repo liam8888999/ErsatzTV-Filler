@@ -8,7 +8,7 @@ const settheme = async (theme) => {
     const json = JSON.parse(fileData);
     json.theme = theme;
     await fs.writeFileSync("config.json", JSON.stringify(json, null, 2));
-    console.log(`Successfully updated theme to '${theme}' in config.json`);
+    logger.success(`Successfully updated theme to '${theme}' in config.json`);
   } catch (err) {
     logger.error(`Error updating theme to '${theme}' in config.json: ${err}`);
   }

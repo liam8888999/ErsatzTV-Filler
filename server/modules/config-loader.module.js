@@ -15,11 +15,11 @@ const setupConfigurationFile = async () => {
     //For now, check exists and just load the user one over the default one... can be expanded to control your variable updating, and it will always run on server boot.
     const HAVE_USER_CONFIG = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
     if(!HAVE_USER_CONFIG){
-        console.warn("Can not find a user configuration file... loading default...")
+        logger.warn("Can not find a user configuration file... loading default...")
         await parseConfigurationFileContents(CONFIG_CONSTANTS().DEFAULT_CONFIG)
         await createNewUserConfigFromDefault();
     }else{
-        console.log("Found a user configuration file... loading...")
+        logger.success("Found a user configuration file... loading...")
         await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG)
     }
     await jsonifyCurrentConfiguration();
@@ -32,7 +32,7 @@ const setupConfigurationFile = async () => {
  */
 const parseConfigurationFileContents = async (path) => {
     CURRENT_CONFIG = parseConfigurationFile(path).parsed;
-    console.log(CURRENT_CONFIG)
+  //  logger.info(CURRENT_CONFIG)
 }
 
 
@@ -50,12 +50,12 @@ const jsonifyCurrentConfiguration = async () => {
 const config = retrieveCurrentConfiguration2();
 const FILE_EXISTS = await doesFileExist("config.json")
 if (!FILE_EXISTS) {
-  console.log('The config.json file does not exist.');
+  logger.error('The config.json file does not exist.');
 // Delete autoupdate key-value pair from json before writing to file
 delete config.log_per_run;
-console.log(config);
+//logger.info(config);
 delete config.autoupdate;
-console.log(config);
+//logger.info(config);
   // Convert the JSON object to a string with each key-value pair on a single line
   const jsonString = JSON.stringify(config, null, 2);
 
@@ -65,7 +65,7 @@ console.log(config);
     if (err) { throw err;
      logger.error(err);
    }
-    console.log('Created config.json file');
+    logger.success('Created config.json file');
   });
 }
 
@@ -88,7 +88,7 @@ const retrieveCurrentConfiguration = async () => {
 };
 
 //async log
-//(async () => { const config = await retrieveCurrentConfiguration(); console.log(config)})()
+//(async () => { const config = await retrieveCurrentConfiguration(); logger.info(config)})()
 
 
 module.exports = {

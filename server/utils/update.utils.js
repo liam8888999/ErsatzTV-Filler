@@ -35,8 +35,8 @@ async function checkForUpdates() {
 
     // Check if the latest version is different from the installed version
     const currentVersion = `${version}`; // Implement this function to get the current version
-    console.log(currentVersion)
-    console.log(latestVersion)
+    logger.info(`current version is ${currentVersion}`)
+    logger.info(`latest version is ${latestVersion}`)
     if (currentVersion === latestVersion) {
         logger.updates('Application is already up to date.')
       return 'Application is already up to date.';

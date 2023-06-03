@@ -11,7 +11,7 @@ const loadApiConfigRoutes = (app) => {
      */
     app.patch(ROUTE_CONSTANTS().CONFIG_ROUTE_EDIT, async (req, res) => {
     const values = Object.entries(req.body);
-    console.log(Object.entries(req.body))
+    logger.info(Object.entries(req.body))
 
     const arr = values;
 const obj = {};
@@ -20,12 +20,12 @@ arr.forEach(([key, value]) => {
   obj[key] = value;
 });
 
-console.log(obj); // Output: { key: 'theme', value: 'button1fff' }
+logger.info(obj); // Output: { key: 'theme', value: 'button1fff' }
 
 const { key, value } = obj;
 
-console.log(key);
-console.log(value);
+logger.info(key);
+logger.info(value);
 
 
 
