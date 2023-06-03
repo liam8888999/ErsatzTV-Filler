@@ -10,6 +10,8 @@ const { loadPageRoutes } = require("../routes/page.routes");
 const { loadApiConfigRoutes } = require("../routes/config.api");
 const { loadApiThemeRoutes } = require("../routes/themes.api")
 
+const os = require('os');
+
 
 /**
  *  Create the express webserver
@@ -20,6 +22,21 @@ const createWebServer = () => {
     loadPageRoutes(app);
     loadApiConfigRoutes(app);
     loadApiThemeRoutes(app);
+
+    // Log system information
+    const systemInfo = {
+      platform: os.platform(),
+      hostname: os.hostname(),
+      totalMemory: os.totalmem(),
+      freeMemory: os.freemem(),
+      cpus: os.cpus(),
+      loadAverage: os.loadavg()
+    };
+
+logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
+
+
+
     return app;
 }
 /**
