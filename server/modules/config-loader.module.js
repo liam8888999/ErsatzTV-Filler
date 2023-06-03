@@ -72,10 +72,20 @@ console.log(config);
 }
 
 const retrieveCurrentConfiguration = async () => {
+  let data = null; // Define data variable with a default value
+  const FILE_EXISTS = await doesFileExist("config.json");
 
-    const data = await loadFileContentsIntoMemory('config.json')
-return JSON.parse(data)
-}
+  if (!FILE_EXISTS) {
+    logger.error("Config file is missing... Generating a new copy");
+    await setupConfigurationFile();
+    data = await loadFileContentsIntoMemory('config.json');
+  } else {
+    logger.info("Found a user configuration file... loading...");
+    data = await loadFileContentsIntoMemory('config.json');
+  }
+
+  return JSON.parse(data);
+};
 
 //async log
 //(async () => { const config = await retrieveCurrentConfiguration(); console.log(config)})()
