@@ -72,20 +72,29 @@ delete config.autoupdate;
 }
 
 const retrieveCurrentConfiguration = async () => {
-  let data = null; // Define data variable with a default value
-  const FILE_EXISTS = await doesFileExist("config.json");
+  const configFileExists = await doesFileExist("config.json");
+  const defaultConfigFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
 
-  if (!FILE_EXISTS) {
-    logger.error("Config file is missing... Generating a new copy");
-    await setupConfigurationFile();
-    data = await loadFileContentsIntoMemory('config.json');
+  if (!configFileExists && defaultConfigFileExists) {
+    logger.warn("config.json file is missing... Generating a new copy");
+    await jsonifyCurrentConfiguration();
+  } else if (!configFileExists && !defaultConfigFileExists) {
+    logger.warn("Both config.json and default configuration file are missing. Building new config.json");
+  await setupConfigurationFile(); // Create new config.json from default configuration
+  } else if (configFileExists && !defaultConfigFileExists) {
+    logger.warn("Both config.json and default configuration file are missing. Building new config.json");
+    await createNewUserConfigFromDefault(); // Create new config.json from default configuration
   } else {
     logger.info("Found a user configuration file... loading...");
-    data = await loadFileContentsIntoMemory('config.json');
+    await retrieveCurrentConfiguration2()
   }
 
-  return JSON.parse(data);
+    const data = await loadFileContentsIntoMemory('config.json');
+   return JSON.parse(data)
 };
+
+
+
 
 //async log
 //(async () => { const config = await retrieveCurrentConfiguration(); logger.info(config)})()
