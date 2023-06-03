@@ -3,7 +3,7 @@ const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.uti
 const { parseConfigurationFile, createNewUserConfigFromDefault } = require("../utils/config.utils");
 const fs = require('fs');
 const logger = require("../utils/logger.utils");
-const moment = require('moment-timezone');
+
 
 let CURRENT_CONFIG = {}; //In memory store for config data
 
@@ -52,7 +52,10 @@ const FILE_EXISTS = await doesFileExist("config.json")
 if (!FILE_EXISTS) {
   console.log('The config.json file does not exist.');
 // Delete autoupdate key-value pair from json before writing to file
-    delete config.autoupdate;
+delete config.log_per_run;
+console.log(config);
+delete config.autoupdate;
+console.log(config);
   // Convert the JSON object to a string with each key-value pair on a single line
   const jsonString = JSON.stringify(config, null, 2);
 

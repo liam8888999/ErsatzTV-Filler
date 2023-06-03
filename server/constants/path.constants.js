@@ -4,8 +4,8 @@ const PAGES_FOLDER = "pages/";
 const THEMES_FOLDER = "themes/"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
-const DEFAULT_CONFIG = "sample-config.conf"
-const USER_CONFIG = "config.conf"
+const DEFAULT_CONFIG = "/Users/liam/Documents/GitHub/ErsatzTV-Filler/sample-config.conf"
+const USER_CONFIG = "/Users/liam/Documents/GitHub/ErsatzTV-Filler/config.conf"
 
 const CHANGELOG = "Changelog.md"
 const DOCUMENTATION = "README.md"
