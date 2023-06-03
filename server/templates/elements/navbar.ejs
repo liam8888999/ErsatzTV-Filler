@@ -3,11 +3,27 @@
     <a href="/config" class="<%= page === 'Config' && 'active' %>">Config</a>
     <a href="/themes" class="<%= page === 'Themes' && 'active' %>">Themes</a>
     <a href="/logs" class="<%= page === 'Logs' && 'active' %>">Logs</a>
-    <a href="/updates" class="<%= page === 'Updates' && 'active' %>">Updates</a>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
     </a>
-    <a class="float-end notactive" style="background-color:darkgreen;">      Version: <%- version %></a>
+    <a href="/updates" class="<%= page === 'Updates' %> float-end" style="background-color: darkgreen; display: inline-block;">
+  <div style="display: flex; align-items: center;">
+    <div style="margin-right: 5px;">
+      Version: <%- version %>
+    </div>
+    <% if (updatestatus.startsWith('Newer version is available:')) { %>
+      <div style="position: relative;">
+        <i class="icon-updated"></i>
+        <span class="notification-badge">1</span>
+      </div>
+    <% } else { %>
+      <div style="font-size: 10px;">
+        <%= updatestatus %>
+      </div>
+    <% } %>
+  </div>
+</a>
+
     <a href="https://discord.gg/x4Nk4sfgSg" target="_blank" class="float-end"><iconify-icon icon="ion:logo-discord" style="font-size: 18px;"></iconify-icon></a>
     <a href="/documentation" class="<%= page === 'Documentation' && 'active' %> float-end"><i class="fa" style="font-size:20px; color:white;">&#128214;</i></a>
     <a href="https://github.com/liam8888999/ErsatzTV-Filler" target="_blank" class="float-end"><i class="fa" style="font-size:20px; color:white;">&#xf09b;</i></a>

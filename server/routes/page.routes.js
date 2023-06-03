@@ -13,6 +13,7 @@ const { checkForUpdates } = require('../utils/update.utils')
 
 const loadPageRoutes = (app) => {
   app.get('/', async (req, res) => {
+    let UPDATESTATUS = await checkForUpdates();
     let html = await changelogReplace()
     const $ = cheerio.load(html);
   const parent = $('h3').eq(1).parent();
@@ -26,12 +27,14 @@ const loadPageRoutes = (app) => {
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
         page: "Home", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
         version: version,
-        ErsatzTVURL: ErsatzTVURL
+        ErsatzTVURL: ErsatzTVURL,
+        updatestatus: UPDATESTATUS
    });
 
   });
 
     app.get('/config', async (req, res) => {
+      let UPDATESTATUS = await checkForUpdates();
       let config_current = await retrieveCurrentConfiguration()
       let ersatz = config_current.xmltv
       let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
@@ -41,7 +44,8 @@ const loadPageRoutes = (app) => {
             page: "Config",
             CURRENT_CONFIG: config_current,
             version: version, //sending the current configuration to the ejs template.
-            ErsatzTVURL: ErsatzTVURL
+            ErsatzTVURL: ErsatzTVURL,
+            updatestatus: UPDATESTATUS
         });
     });
 
@@ -52,6 +56,7 @@ const loadPageRoutes = (app) => {
     logger.error(`Error: ${error}`);
   });
       let ersatz = config_current.xmltv
+      let UPDATESTATUS = await checkForUpdates();
       let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
@@ -59,7 +64,8 @@ const loadPageRoutes = (app) => {
             version: version,
             theme: config_current.theme,
             ErsatzTVURL: ErsatzTVURL,
-            downloadedthemeslist: filesinthemesdir
+            downloadedthemeslist: filesinthemesdir,
+            updatestatus: UPDATESTATUS
         });
     });
 
@@ -83,6 +89,7 @@ const loadPageRoutes = (app) => {
 //start logs page
     app.get('/logs', async (req, res) => {
       let config_current = await retrieveCurrentConfiguration()
+      let UPDATESTATUS = await checkForUpdates();
       let ersatz = config_current.xmltv
       let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
         // Render the specific ejs template view
@@ -90,7 +97,8 @@ const loadPageRoutes = (app) => {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Logs",
             version: version,
-            ErsatzTVURL: ErsatzTVURL
+            ErsatzTVURL: ErsatzTVURL,
+            updatestatus: UPDATESTATUS
         });
     });
 // Define a route to stream the logs in real-time
@@ -169,6 +177,7 @@ const formattedDate = `${year}-${month}-${day}`;
 
 
     app.get('/documentation', async (req, res) => {
+      let UPDATESTATUS = await checkForUpdates();
 let documentation = await generateReadMe()
 let config_current = await retrieveCurrentConfiguration()
 let ersatz = config_current.xmltv
@@ -178,7 +187,8 @@ let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
           layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
           page: "Documentation", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
           version: version,
-          ErsatzTVURL: ErsatzTVURL
+          ErsatzTVURL: ErsatzTVURL,
+          updatestatus: UPDATESTATUS
      });
 
     });

@@ -31,7 +31,7 @@ async function checkForUpdates() {
       });
     });
 
-    const latestVersion = response.tag_name.replace(/^V/, '');
+    const latestVersion = response.tag_name//.replace(/^V/, '');
 
     // Check if the latest version is different from the installed version
     const currentVersion = `${version}`; // Implement this function to get the current version
