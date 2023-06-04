@@ -2,7 +2,7 @@ const {ROUTE_CONSTANTS} = require("../constants/route.constants");
 const { writeValueToConfigurationFile } = require("../utils/config.utils.js");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
-
+const { readFile } = require('fs');
 const { downloadImage } = require("../utils/downloadimage.utils");
 
 const loadApiConfigRoutes = (app) => {
@@ -33,6 +33,21 @@ logger.info(value);
 
         res.send({ status: 'OK', result: "success" })
     });
+    // show theme json
+
+    app.get('/api/config/readconfigjson', async (req, res) => {
+      const filepath = `config.json`;
+      readFile(`${filepath}`, 'utf8', (err, data) => {
+          if (err) {
+            console.error(err);
+            res.status(500).send('Error reading data file');
+            return;
+          }
+          console.log(JSON.parse(data))
+          res.json(JSON.parse(data));
+        });
+      });
+
 
 }
 

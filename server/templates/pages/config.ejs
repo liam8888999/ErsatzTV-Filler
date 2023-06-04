@@ -6,7 +6,64 @@
 <% const base = "../elements" %>
 <% const text_input = base + "/text-input.ejs" %>
 
+<!-- JSON Popup -->
+<div id="jsonPopup" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3 id="jsonfileheading" style="padding-left: 10px; margin: auto;"></h3>
+    <br>
+    <pre id="jsonContent" style="padding-left: 10px; margin: auto;"></pre>
+    <br>
+  </div>
+</div>
+<script>
+  //start json popup functions
+  function returnJson() {
+    const xhr = new XMLHttpRequest();
+    const endpointUrl = `/api/config/readconfigjson`;
 
+    xhr.open('GET', endpointUrl, true);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        const jsonData = JSON.parse(this.responseText);
+        // Display the JSON data in a modal popup
+        showJsonPopup(jsonData);
+      }
+    };
+    xhr.send();
+  }
+
+  // Function to display the JSON popup
+  function showJsonPopup(content, theme) {
+    const jsonString = JSON.stringify(content, null, 2);
+      var popup = document.getElementById("jsonPopup");
+      var jsonContent = document.getElementById("jsonContent");
+      jsonContent.textContent = jsonString;
+      var jsonfileheading = document.getElementById("jsonfileheading");
+      jsonfileheading.textContent = `Config.json file`;
+      popup.style.display = "flex";
+      document.body.classList.add('modal-open');
+  }
+
+  // Function to close the JSON popup
+  // Function to close the modal
+  function closeModal() {
+    var modal = document.getElementById("jsonPopup");
+    modal.style.display = "none";
+    document.body.classList.remove('modal-open');
+  }
+
+  // Close the modal when the user clicks outside of it
+  window.onclick = function(event) {
+    var modal = document.getElementById("jsonPopup");
+    if (event.target == modal) {
+      modal.style.display = "none";
+      document.body.classList.remove('modal-open');
+    }
+  }
+
+  //end json popup function
+  </script>
   <script>
     function openTab(event, tabName) {
       var i, tabcontent, tablinks;
@@ -36,12 +93,14 @@
   <div class="tab-container">
     <center>
     <div class="tab-links">
-      <button class="tab-link active" onclick="openTab(event, 'tab1')">General</button>
-      <button class="tab-link" onclick="openTab(event, 'tab2')">Weather</button>
-      <button class="tab-link" onclick="openTab(event, 'tab3')">News</button>
-      <button class="tab-link" onclick="openTab(event, 'tab4')">Channel Offline</button>
+      <button class="tab-link active" onclick="openTab(event, 'tab1')">General Settings</button>
+      <button class="tab-link" onclick="openTab(event, 'tab2')">Weather Settings</button>
+      <button class="tab-link" onclick="openTab(event, 'tab3')">News Settings</button>
+      <button class="tab-link" onclick="openTab(event, 'tab4')">Channel Offline Settings</button>
     <!--  <button class="tab-link" onclick="openTab(event, 'tab5')">Interface</button> -->
     </div>
+    <br>
+    <button onclick="returnJson()" style="margin-top:10px;">Show config.json file</button>
     </center>
     <div id="tab1" class="tab" style="display: block;">
       <br>

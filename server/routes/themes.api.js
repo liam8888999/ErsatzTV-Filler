@@ -3,6 +3,7 @@ const { settheme } = require("../utils/themes.utils.js");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
+const { readFile } = require('fs');
 
 const loadApiThemeRoutes = (app) => {
 
@@ -33,7 +34,27 @@ const loadApiThemeRoutes = (app) => {
 
 });
 
-}
+// show theme json
+
+app.get('/api/themes/readthemejson', async (req, res) => {
+  const filepath = `themes/system/${req.query.filepath}`;
+  readFile(`${filepath}`, 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error reading data file');
+        return;
+      }
+      console.log(JSON.parse(data))
+      res.json(JSON.parse(data));
+    });
+  });
+
+
+};
+
+
+
+
 
 module.exports = {
     loadApiThemeRoutes

@@ -1,3 +1,14 @@
+<!-- JSON Popup -->
+<div id="jsonPopup" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3 id="jsonfileheading" style="padding-left: 10px; margin: auto;"></h3>
+    <br>
+    <pre id="jsonContent" style="padding-left: 10px; margin: auto;"></pre>
+    <br>
+  </div>
+</div>
+
 <div class="container">
   <div id="overlay">
   <div id="loading-message"></div>
@@ -10,6 +21,7 @@
 <p><b>Note:</b> Only System themes are currently available. User created themes will be reenabled in the future, for now if you would like your theme included please submit a pull request to <a href="https://github.com/liam8888999/ErsatzTV-Filler-Themes" target=”_blank”>ErsatzTV-Filler-Themes Github</a></p>
 <h3 style="text-align:center;">Current theme is: <span id="currentTheme"><%- theme %></span></h3>
 <h4 style="text-align:center;color:brown;">System Light Theme (Default)</h4>
+
 <div class="slideshow-container">
   <div class="mySlides1">
     <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/channel-offline.png?raw=true" style="width:100%">
@@ -48,13 +60,16 @@
 </div>
 <br>
 <div style="padding-left:55%;">
-<button id="SystemLightdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'Light.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+  <button id="SystemLightdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'Light.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button id="SystemLightsetthemeButton" onclick="settheme('Light')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
 <p style="color:blue;padding-left:55%;">The Light theme includes white backgrounds and black text.</p>
 <br>
+<div style="padding-left:55%;">
+  <button onclick="returnJson('Light')">Show theme json file</button>
+</div>
 <br>
 <br>
 <br>
@@ -105,6 +120,9 @@
 <br>
 <p style="color:blue;padding-left:55%;">The Dark theme includes black backgrounds and white text.</p>
 <br>
+<div style="padding-left:55%;">
+  <button onclick="returnJson('SystemDark')">Show theme json file</button>
+</div>
 <br>
 <br>
 <br>
@@ -154,6 +172,9 @@
 <br>
 <p style="color:blue;padding-left:55%;">The StopandGo theme includes lightgreen backgrounds and red text.</p>
 <br>
+<div style="padding-left:55%;">
+  <button onclick="returnJson('stopandgo')">Show theme json file</button>
+</div>
 <br>
 <br>
 <br>
@@ -203,6 +224,9 @@
 <br>
 <p style="color:blue;padding-left:55%;">The Candycane theme includes red backgrounds and white text.</p>
 <br>
+<div style="padding-left:55%;">
+  <button onclick="returnJson('Candycane')">Show theme json file</button>
+</div>
 <br>
 <br>
 <br>
@@ -257,6 +281,9 @@
 <p style="color:blue;padding-left:55%;">The MoRBiD_MaNGLeR-Dark theme includes black backgrounds and yellow text.</p>
 <p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
 <br>
+<div style="padding-left:55%;">
+  <button onclick="returnJson('MoRBiD_MaNGLeR-Dark')">Show theme json file</button>
+</div>
 <br>
 <br>
 <br>
@@ -307,6 +334,9 @@
 <p style="color:blue;padding-left:55%;">The MoRBiD_MaNGLeR-C64 theme includes blue backgrounds and cyan text.</p>
 <p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
 <br>
+<div style="padding-left:55%;">
+  <button onclick="returnJson('MoRBiD_MaNGLeR-C64')">Show theme json file</button>
+</div>
 <br>
 <br>
 <br>
@@ -358,6 +388,9 @@
 <p style="color:blue;padding-left:55%;">The MoRBiD_MaNGLeR-BlueWhite theme includes blue backgrounds and white text.</p>
 <p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
 <br>
+<div style="padding-left:55%;">
+  <button onclick="returnJson('MoRBiD_MaNGLeR-BlueWhite')">Show theme json file</button>
+</div>
 <br>
 <br>
 <br>
@@ -522,4 +555,52 @@ var theme = themefilepath.replace(".theme", "");
 
   };
   //end button display functions
+
+  //start json popup functions
+  function returnJson(theme) {
+    const xhr = new XMLHttpRequest();
+    const filepath = `${theme}.theme`
+    const endpointUrl = `/api/themes/readthemejson?filepath=${filepath}`;
+
+    xhr.open('GET', endpointUrl, true);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        const jsonData = JSON.parse(this.responseText);
+        // Display the JSON data in a modal popup
+        showJsonPopup(jsonData, theme);
+      }
+    };
+    xhr.send();
+  }
+
+  // Function to display the JSON popup
+  function showJsonPopup(content, theme) {
+    const jsonString = JSON.stringify(content, null, 2);
+      var popup = document.getElementById("jsonPopup");
+      var jsonContent = document.getElementById("jsonContent");
+      jsonContent.textContent = jsonString;
+      var jsonfileheading = document.getElementById("jsonfileheading");
+      jsonfileheading.textContent = `${theme} Theme JSON`;
+      popup.style.display = "flex";
+      document.body.classList.add('modal-open');
+  }
+
+  // Function to close the JSON popup
+  // Function to close the modal
+  function closeModal() {
+    var modal = document.getElementById("jsonPopup");
+    modal.style.display = "none";
+    document.body.classList.remove('modal-open');
+  }
+
+  // Close the modal when the user clicks outside of it
+  window.onclick = function(event) {
+    var modal = document.getElementById("jsonPopup");
+    if (event.target == modal) {
+      modal.style.display = "none";
+      document.body.classList.remove('modal-open');
+    }
+  }
+
+  //end json popup function
 </script>

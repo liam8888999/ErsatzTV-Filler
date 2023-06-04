@@ -9,11 +9,12 @@
 <div class="home-page-container">
   <div class="home-page-box">
   <center><h1>News</h1></center>
-  <p>There is currently no important news</p>
+  <center><p>There is currently no important news</p></center>
 </div>
   <div class="home-page-box">
-  <center><h1>Health</h1></center>
+  <center><h1>Health Checks</h1></center>
   <p>Health Api Status: <span id="healthapistatus"></span></p>
+  <p>FFmpeg installation Status: <span id="ffmpeginstallationstatus"></span></p>
 
   <h4>Operating System Information</h4>
   <p>Platform: <span id="platform"></span></p>
@@ -27,6 +28,7 @@
     const hostnameElement = document.getElementById('hostname');
     const totalMemoryElement = document.getElementById('totalMemory');
     const freeMemoryElement = document.getElementById('freeMemory');
+    const ffmpeginstallationstatusElement = document.getElementById('ffmpeginstallationstatus');
 
     fetch('/api/health')
       .then(response => {
@@ -42,6 +44,7 @@
         hostnameElement.innerText = data.os.hostname;
         totalMemoryElement.innerText = data.os.totalMemory;
         freeMemoryElement.innerText = data.os.freeMemory;
+        ffmpeginstallationstatusElement.innerText = data.os.ffmpeg;
       })
       .catch(error => {
         healthapistatusElement.innerText = 'Failed';
