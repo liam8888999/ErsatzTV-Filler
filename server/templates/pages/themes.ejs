@@ -68,7 +68,7 @@
 <p style="color:blue;padding-left:55%;">The Light theme includes white backgrounds and black text.</p>
 <br>
 <div style="padding-left:55%;">
-  <button onclick="returnJson('Light')">Show theme json file</button>
+  <button id="SystemLightjsonButton" onclick="returnJson('Light')">Show theme json file</button>
 </div>
 <br>
 <br>
@@ -121,7 +121,7 @@
 <p style="color:blue;padding-left:55%;">The Dark theme includes black backgrounds and white text.</p>
 <br>
 <div style="padding-left:55%;">
-  <button onclick="returnJson('SystemDark')">Show theme json file</button>
+  <button id="SystemDarkjsonButton" onclick="returnJson('SystemDark')">Show theme json file</button>
 </div>
 <br>
 <br>
@@ -173,7 +173,7 @@
 <p style="color:blue;padding-left:55%;">The StopandGo theme includes lightgreen backgrounds and red text.</p>
 <br>
 <div style="padding-left:55%;">
-  <button onclick="returnJson('stopandgo')">Show theme json file</button>
+  <button id="stopandgojsonButton" onclick="returnJson('stopandgo')">Show theme json file</button>
 </div>
 <br>
 <br>
@@ -225,7 +225,7 @@
 <p style="color:blue;padding-left:55%;">The Candycane theme includes red backgrounds and white text.</p>
 <br>
 <div style="padding-left:55%;">
-  <button onclick="returnJson('Candycane')">Show theme json file</button>
+  <button id="CandycanejsonButton" onclick="returnJson('Candycane')">Show theme json file</button>
 </div>
 <br>
 <br>
@@ -282,7 +282,7 @@
 <p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
 <br>
 <div style="padding-left:55%;">
-  <button onclick="returnJson('MoRBiD_MaNGLeR-Dark')">Show theme json file</button>
+  <button id="MoRBiD_MaNGLeRDarkjsonButton" onclick="returnJson('MoRBiD_MaNGLeR-Dark')">Show theme json file</button>
 </div>
 <br>
 <br>
@@ -335,7 +335,7 @@
 <p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
 <br>
 <div style="padding-left:55%;">
-  <button onclick="returnJson('MoRBiD_MaNGLeR-C64')">Show theme json file</button>
+  <button id="MoRBiD_MaNGLeRC64jsonButton" onclick="returnJson('MoRBiD_MaNGLeR-C64')">Show theme json file</button>
 </div>
 <br>
 <br>
@@ -389,7 +389,7 @@
 <p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
 <br>
 <div style="padding-left:55%;">
-  <button onclick="returnJson('MoRBiD_MaNGLeR-BlueWhite')">Show theme json file</button>
+  <button id="MoRBiD_MaNGLeRBlueWhitejsonButton" onclick="returnJson('MoRBiD_MaNGLeR-BlueWhite')">Show theme json file &#xf15b;</button>
 </div>
 <br>
 <br>
@@ -549,6 +549,38 @@ var theme = themefilepath.replace(".theme", "");
         themeButton.style.textDecoration = 'line-through';
       } else {
         themeButton.disabled = false;
+      }
+    });
+
+
+  //disable show json button if not downloaded
+
+    var jsonstatusDiv = document.getElementById('downloadedThemes');
+
+    // Define the theme buttons and their corresponding IDs
+    var jsonButtons = [
+      { id: 'SystemLightjsonButton', theme: 'Light.theme' },
+      { id: 'SystemDarkjsonButton', theme: 'SystemDark.theme' },
+      { id: 'stopandgojsonButton', theme: 'stopandgo.theme' },
+      { id: 'CandycanejsonButton', theme: 'Candycane.theme' },
+      { id: 'MoRBiD_MaNGLeRDarkjsonButton', theme: 'MoRBiD_MaNGLeR-Dark.theme' },
+      { id: 'MoRBiD_MaNGLeRC64jsonButton', theme: 'MoRBiD_MaNGLeR-C64.theme' },
+      { id: 'MoRBiD_MaNGLeRBlueWhitejsonButton', theme: 'MORBiD_MaNGLeR-BlueWhite.theme' }
+    ];
+
+    // Get the downloaded themes as a comma-separated string
+    var downloadedjsonText = jsonstatusDiv.innerText;
+    var downloadedjosnArray = downloadedjsonText.split(',');
+
+    // Iterate over the theme buttons array
+    jsonButtons.forEach(function(button) {
+      var jsonButton = document.getElementById(button.id);
+      if (!downloadedThemesArray.includes(button.theme)) {
+        jsonButton.disabled = true;
+        jsonButton.style.backgroundColor = 'grey';
+        jsonButton.style.textDecoration = 'line-through';
+      } else {
+        jsonButton.disabled = false;
       }
     });
 
