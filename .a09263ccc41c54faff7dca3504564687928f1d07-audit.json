@@ -19,6 +19,11 @@
             "date": 1685801131106,
             "name": "ersatztv-filler-ffmpeg-2023-06-04.log",
             "hash": "0e6c7e653c7224081039b31a4f4b9c5e11f0f02635b536e78ad3938d39f7ad2d"
+        },
+        {
+            "date": 1685887361206,
+            "name": "ersatztv-filler-ffmpeg-2023-06-05.log",
+            "hash": "f9cf551bc0414cc1834eec2b5ebf2e6307aab4e3a8d8d87f4cc92e79863bdfd5"
         }
     ],
     "hashType": "sha256"
