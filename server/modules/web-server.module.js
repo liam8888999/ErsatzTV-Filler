@@ -9,6 +9,7 @@ const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
 const { loadPageRoutes } = require("../routes/page.routes");
 const { loadApiConfigRoutes } = require("../routes/config.api");
 const { loadApiThemeRoutes } = require("../routes/themes.api")
+const { loadApirunRoutes } = require("../routes/run.api")
 
 const os = require('os');
 
@@ -22,6 +23,7 @@ const createWebServer = () => {
     loadPageRoutes(app);
     loadApiConfigRoutes(app);
     loadApiThemeRoutes(app);
+    loadApirunRoutes(app);
 
     // Log system information
     const systemInfo = {

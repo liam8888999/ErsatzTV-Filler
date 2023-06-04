@@ -1,3 +1,34 @@
-  <div id="output">
-<center><h1>Nothing Here Yet</h1></center>
-  </div>
+<div id="output">
+  <center><h1>Nothing Here Yet</h1></center>
+  <button onclick="runFor('weather')">Run Weather Generator Manually</button>
+  <button onclick="runFor('news')">Run News Generator Manually</button>
+  <button onclick="runFor('channel-offline')">Run Channel-Offline Generator Manually</button>
+</div>
+
+<script>
+  function runFor(option) {
+
+    const url = `http://127.0.0.1:3000/api/run/${option}`; // Provide the correct URL for your weather API
+    // Set up the request options
+    const options = {
+      method: "GET", // Adjust the method based on your API requirements
+      headers: {
+        'Content-Type': 'application/json' // Adjust the Content-Type header based on your API requirements
+      }
+    };
+
+    // Send the request
+    fetch(url, options)
+      .then(response => {
+        if (response.ok) {
+          console.log('Request succeeded');
+        } else {
+          console.error('Request failed');
+        }
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error('Error:', error);
+      });
+  }
+</script>

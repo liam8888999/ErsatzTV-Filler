@@ -3,13 +3,13 @@ const { settheme } = require("../utils/themes.utils.js");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
-const { WEATHER } = require("../server/generators/weather.generator");
+const { WEATHER } = require("../generators/weather.generator");
 
-const loadApiThemeRoutes = (app) => {
+const loadApirunRoutes = (app) => {
 
 // run weather function
 app.get('/api/run/weather', async () => {
-logger.info("running weather function")
+console.log("running weather function")
 await WEATHER();
 // use the url and path variables to set the theme
 
@@ -19,7 +19,7 @@ await WEATHER();
 
   app.get('/api/run/news', async () => {
   logger.info("running news function")
-  await settheme();
+//  await News();
   // use the url and path variables to set the theme
 
 });
@@ -27,7 +27,7 @@ await WEATHER();
 // run channel-offline function
 app.get('/api/run/channel-offline', async () => {
 logger.info("running channel-offline function")
-await settheme();
+//await ChannelOffline();
 // use the url and path variables to set the theme
 
 });
@@ -35,5 +35,5 @@ await settheme();
 }
 
 module.exports = {
-    runApiThemeRoutes
+    loadApirunRoutes
 }
