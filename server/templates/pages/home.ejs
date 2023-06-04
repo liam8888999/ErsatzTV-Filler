@@ -13,7 +13,43 @@
 </div>
   <div class="home-page-box">
   <center><h1>Health</h1></center>
-  <p>test</p>
+  <p>Status: <span id="status"></span></p>
+
+  <h2>Operating System Information</h2>
+  <p>Platform: <span id="platform"></span></p>
+  <p>Hostname: <span id="hostname"></span></p>
+  <p>Release: <span id="release"></span></p>
+  <p>Total Memory: <span id="totalMemory"></span> bytes</p>
+  <p>Free Memory: <span id="freeMemory"></span> bytes</p>
+
+  <script>
+    const statusElement = document.getElementById('status');
+    const platformElement = document.getElementById('platform');
+    const hostnameElement = document.getElementById('hostname');
+    const releaseElement = document.getElementById('release');
+    const totalMemoryElement = document.getElementById('totalMemory');
+    const freeMemoryElement = document.getElementById('freeMemory');
+
+    fetch('http://127.0.0.1:3000/api/health')
+      .then(response => {
+        if (response.ok) {
+          statusElement.innerText = 'OK';
+          return response.json();
+        } else {
+          statusElement.innerText = 'Failed';
+        }
+      })
+      .then(data => {
+        platformElement.innerText = data.os.platform;
+        hostnameElement.innerText = data.os.hostname;
+        releaseElement.innerText = data.os.release;
+        totalMemoryElement.innerText = data.os.totalMemory;
+        freeMemoryElement.innerText = data.os.freeMemory;
+      })
+      .catch(error => {
+        statusElement.innerText = 'Failed';
+      });
+  </script>
 </div>
 </div>
 
