@@ -13,17 +13,11 @@ const { checkForUpdates } = require('../utils/update.utils')
 
 const loadPageRoutes = (app) => {
   app.get('/', async (req, res) => {
+    let config_current = await retrieveCurrentConfiguration()
+    let ersatz = config_current.xmltv
     let UPDATESTATUS = await checkForUpdates();
-    let html = await changelogReplace()
-    const $ = cheerio.load(html);
-  const parent = $('h3').eq(1).parent();
-  const content = parent.find('h3').eq(1).addClass('expand-button').nextAll();
-  content.addBack().wrapAll('<div class="expand-content hidden"></div>');
-  let config_current = await retrieveCurrentConfiguration()
-  let ersatz = config_current.xmltv
   let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
-        markdown: $.html(),
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
         page: "Home", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
         version: version,
@@ -74,8 +68,14 @@ const loadPageRoutes = (app) => {
       let ersatz = config_current.xmltv
       let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
       let UPDATESTATUS = await checkForUpdates();
+      let html = await changelogReplace()
+      const $ = cheerio.load(html);
+    const parent = $('h3').eq(1).parent();
+    const content = parent.find('h3').eq(1).addClass('expand-button').nextAll();
+    content.addBack().wrapAll('<div class="expand-content hidden"></div>');
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "update", {
+          markdown: $.html(),
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Updates",
             version: version,

@@ -7,5 +7,23 @@
     <div style="background-color: #5bc0de; color: #fff; padding: 5px 10px; border-radius: 3px;  display: inline-block;">
         <h2 style="font-size: 18px; margin: 0;"><%= updatestatus %></h2>
       </div>
+      <h6>* Please Note there is currently no update mechanism built in</h6>
       </center>
+<br>
+      <%- markdown %>
+      <button class="show-content-button" style="width: 100%; border: none; color: black; border-top: 5px solid dimgray; background-image: linear-gradient(dimgray, white)">Show older Changelogs</button>
+
+
 </div>
+
+<script>
+  const button = document.querySelector('.show-content-button');
+  const expandContent = document.querySelector('.expand-content');
+  let isContentHidden = true;
+
+  button.addEventListener('click', function() {
+      expandContent.classList.toggle('hidden');
+      isContentHidden = !isContentHidden;
+      button.textContent = isContentHidden ? 'Show older Changelogs' : 'Hide older Changelogs';
+  });
+  </script>
