@@ -44,7 +44,7 @@ const loadPageRoutes = (app) => {
     });
 
     app.get('/themes', async (req, res) => {
-      let config_current = await retrieveCurrentConfiguration()
+      let config_current = await retrieveCurrentConfiguration();
       let filesinthemesdir = await listFilesInDir("themes/system")
   .catch(error => {
     logger.error(`Error: ${error}`);

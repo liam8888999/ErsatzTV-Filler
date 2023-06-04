@@ -351,7 +351,7 @@
 <br>
 <div style="padding-left:55%;">
 <button id="MoRBiD_MaNGLeRBlueWhitedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR-BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Download Theme <i class="fa">&#xf019;</i></button>
-<button id="MoRBiD_MaNGLeRBlueWhitesetthemeButton"onclick="settheme('MoRBiD_MaNGLeR-BlueWhite')">Use This Theme <i class="fa">&#x2713;</i></button>
+<button id="MoRBiD_MaNGLeRBlueWhitesetthemeButton" onclick="settheme('MoRBiD_MaNGLeR-BlueWhite')">Use This Theme <i class="fa">&#x2713;</i></button>
 </div>
 <br>
 <br>
@@ -368,6 +368,7 @@
 </div>
 
 <script>
+  //slideshow start
 let slideIndex = [1,1,1,1,1,1,1];
 let slideId = ["mySlides1", "mySlides2", "mySlides3", "mySlides4", "mySlides5", "mySlides6", "mySlides7"]
 showSlides(1, 0);
@@ -392,9 +393,37 @@ function showSlides(n, no) {
   }
   x[slideIndex[no]-1].style.display = "block";
 }
-</script>
+//end slideshow
 
-<script>
+
+      // set theme
+      function settheme(theme) {
+        const xhr = new XMLHttpRequest();
+        const endpointUrl = `http://127.0.0.1:3000/api/themes/settheme?theme=${theme}`;
+        xhr.open('GET', endpointUrl, true);
+        xhr.onreadystatechange = function() {
+          if (this.readyState === 4 && this.status === 200) {
+            logger.info(this.responseText);
+          }
+        };
+        xhr.send();
+        function showLoadingOverlay() {
+          var myDiv = document.getElementById('loading-message');
+        myDiv.textContent = "New Theme (" + `${theme}` + ") has been set successfully. Please wait...";
+        document.getElementById('overlay').style.display = 'block';
+      }
+      function reloadPageWithDelay(delay) {
+        showLoadingOverlay();
+        setTimeout(function() {
+          location.reload();
+        }, delay);
+      }
+      // Call the reloadPageWithDelay function with a specified delay (in milliseconds)
+      reloadPageWithDelay(1500); // Refresh after 2 seconds (2000 milliseconds)
+
+      }
+
+      //end set theme
 
   // download theme files
   function makeRequest(url, filepath) {
@@ -423,39 +452,9 @@ var theme = themefilepath.replace(".theme", "");
   // Call the reloadPageWithDelay function with a specified delay (in milliseconds)
   reloadPageWithDelay(1500); // Refresh after 2 seconds (2000 milliseconds)
   }
-</script>
+//end download theme files
 
-<script>
-
-  // set theme
-  function settheme(theme) {
-    const xhr = new XMLHttpRequest();
-    const endpointUrl = `http://127.0.0.1:3000/api/themes/settheme?theme=${theme}`;
-    logger.info(theme)
-    xhr.open('GET', endpointUrl, true);
-    xhr.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        logger.info(this.responseText);
-      }
-    };
-    xhr.send();
-    function showLoadingOverlay() {
-      var myDiv = document.getElementById('loading-message');
-    myDiv.textContent = "New Theme (" + `${theme}` + ") has been set successfully. Please wait...";
-    document.getElementById('overlay').style.display = 'block';
-  }
-  function reloadPageWithDelay(delay) {
-    showLoadingOverlay();
-    setTimeout(function() {
-      location.reload();
-    }, delay);
-  }
-  // Call the reloadPageWithDelay function with a specified delay (in milliseconds)
-  reloadPageWithDelay(1500); // Refresh after 2 seconds (2000 milliseconds)
-
-  }
-</script>
-<script>
+//button display functions
 
   window.onload = function() {
 
@@ -522,4 +521,5 @@ var theme = themefilepath.replace(".theme", "");
 
 
   };
+  //end button display functions
 </script>
