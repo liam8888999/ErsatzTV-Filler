@@ -114,7 +114,7 @@
             display: none;
         }
 
-        @media screen and (max-width: 767px) {
+        @media screen and (max-width: 680px) {
             .topnav a:not(:first-child) {display: none;}
             .topnav a.icon {
                 float: right;
@@ -122,7 +122,7 @@
             }
         }
 
-        @media screen and (max-width: 767px) {
+        @media screen and (max-width: 680px) {
             .topnav.responsive {position: relative;}
             .topnav.responsive .icon {
                 position: absolute;
@@ -269,6 +269,31 @@ img {vertical-align: middle;}
   border-radius: 50%;
 }
 
+.home-page-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.home-page-box {
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.home-page-box + .home-page-box {
+   border-left: 1px solid #000;
+   padding-left: 20px;
+ }
+
+ @media (max-width: 770px) {
+   .home-page-box {
+     width: 100%;
+   }
+
+   .home-page-box + .home-page-box {
+     border-left: none;
+     border-top: none;
+   }
+ }
     </style>
 </head>
 <body>
