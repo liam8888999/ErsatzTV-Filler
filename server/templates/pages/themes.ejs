@@ -480,7 +480,7 @@ var theme = themefilepath.replace(".theme", "");
         var themeButton1 = document.getElementById(button.id1);
         if (currentThemesText.includes(button.theme1)) {
           themeButton1.disabled = true;
-          themeButton1.style.backgroundColor = 'lightgray';
+          themeButton1.style.backgroundColor = 'grey';
           themeButton1.style.textDecoration = 'line-through';
         } else {
     themeButton1.disabled = false;
@@ -513,7 +513,7 @@ var theme = themefilepath.replace(".theme", "");
       var themeButton = document.getElementById(button.id);
       if (downloadedThemesArray.includes(button.theme)) {
         themeButton.disabled = true;
-        themeButton.style.backgroundColor = 'lightgray';
+        themeButton.style.backgroundColor = 'grey';
         themeButton.style.textDecoration = 'line-through';
       } else {
         themeButton.disabled = false;

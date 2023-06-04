@@ -14,6 +14,31 @@
     .tab {
       display: none;
     }
+
+    .tab-links {
+   display: inline-flex;
+ }
+
+ .tab-link {
+   /* Add your desired styling here */
+   background-color: #f1f1f1;
+    color: #333;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   margin-right: 1px; /* Adjust the spacing between buttons */
+   border: 2px solid #333;
+ }
+
+ .tab-link:last-child {
+   margin-right: 0; /* Remove right margin for the last button */
+ }
+
+ .active {
+   /* Add your desired styling for the active state here */
+   background-color: grey;
+   color: white;
+ }
   </style>
   <script>
     function openTab(event, tabName) {
@@ -53,6 +78,7 @@
     </div>
     </center>
     <div id="tab1" class="tab" style="display: block;">
+      <br>
     <center>  <h2>General Settings</h2></center>
       <% if(CONFIG_AVAILABLE){ %>
           <form method="post" action="/config" id="config-form">
@@ -72,6 +98,7 @@
       <% } %>
     </div>
     <div id="tab2" class="tab">
+      <br>
     <center>  <h2>Weather Settings</h2></center>
       <% if(CONFIG_AVAILABLE){ %>
           <form method="post" action="/config" id="config-form">
@@ -91,6 +118,7 @@
       <% } %>
     </div>
     <div id="tab3" class="tab">
+      <br>
     <center>  <h2>News Settings</h2></center>
       <% if(CONFIG_AVAILABLE){ %>
           <form method="post" action="/config" id="config-form">
@@ -110,6 +138,7 @@
       <% } %>
     </div>
     <div id="tab4" class="tab">
+      <br>
     <center>  <h2>Channel Offline Settings</h2></center>
       <% if(CONFIG_AVAILABLE){ %>
           <form method="post" action="/config" id="config-form">
