@@ -399,7 +399,7 @@ function showSlides(n, no) {
       // set theme
       function settheme(theme) {
         const xhr = new XMLHttpRequest();
-        const endpointUrl = `http://127.0.0.1:3000/api/themes/settheme?theme=${theme}`;
+        const endpointUrl = `/api/themes/settheme?theme=${theme}`;
         xhr.open('GET', endpointUrl, true);
         xhr.onreadystatechange = function() {
           if (this.readyState === 4 && this.status === 200) {
@@ -428,7 +428,7 @@ function showSlides(n, no) {
   // download theme files
   function makeRequest(url, filepath) {
     const xhr = new XMLHttpRequest();
-    const endpointUrl = `http://127.0.0.1:3000/api/themes/download?url=${url}&filepath=${filepath}`;
+    const endpointUrl = `/api/themes/download?url=${url}&filepath=${filepath}`;
     xhr.open('GET', endpointUrl, true);
     xhr.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {

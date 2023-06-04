@@ -13,42 +13,40 @@
 </div>
   <div class="home-page-box">
   <center><h1>Health</h1></center>
-  <p>Status: <span id="status"></span></p>
+  <p>Health Api Status: <span id="healthapistatus"></span></p>
 
-  <h2>Operating System Information</h2>
+  <h4>Operating System Information</h4>
   <p>Platform: <span id="platform"></span></p>
   <p>Hostname: <span id="hostname"></span></p>
-  <p>Release: <span id="release"></span></p>
   <p>Total Memory: <span id="totalMemory"></span> bytes</p>
   <p>Free Memory: <span id="freeMemory"></span> bytes</p>
 
   <script>
-    const statusElement = document.getElementById('status');
+    const healthapistatusElement = document.getElementById('healthapistatus');
     const platformElement = document.getElementById('platform');
     const hostnameElement = document.getElementById('hostname');
-    const releaseElement = document.getElementById('release');
     const totalMemoryElement = document.getElementById('totalMemory');
     const freeMemoryElement = document.getElementById('freeMemory');
 
-    fetch('http://127.0.0.1:3000/api/health')
+    fetch('/api/health')
       .then(response => {
         if (response.ok) {
-          statusElement.innerText = 'OK';
+          healthapistatusElement.innerText = 'OK';
           return response.json();
         } else {
-          statusElement.innerText = 'Failed';
+          healthapistatusElement.innerText = 'Failed';
         }
       })
       .then(data => {
         platformElement.innerText = data.os.platform;
         hostnameElement.innerText = data.os.hostname;
-        releaseElement.innerText = data.os.release;
         totalMemoryElement.innerText = data.os.totalMemory;
         freeMemoryElement.innerText = data.os.freeMemory;
       })
       .catch(error => {
-        statusElement.innerText = 'Failed';
+        healthapistatusElement.innerText = 'Failed';
       });
+
   </script>
 </div>
 </div>
@@ -56,7 +54,7 @@
 <script>
   function runFor(option) {
 
-    const url = `http://127.0.0.1:3000/api/run/${option}`; // Provide the correct URL for your weather API
+    const url = `/api/run/${option}`; // Provide the correct URL for your weather API
     // Set up the request options
     const options = {
       method: "GET", // Adjust the method based on your API requirements

@@ -31,7 +31,7 @@ logger.info(value);
 
   await writeValueToConfigurationFile(key, value)
 
-        res.send({ result: "success" })
+        res.send({ status: 'OK', result: "success" })
     });
 
 }
