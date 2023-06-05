@@ -56,8 +56,21 @@ const createNewUserConfigFromDefault = async () => {
   logger.success('A new user config file was generated from the default file');
 }
 
+const setwebtheme = async (theme) => {
+  try {
+    const fileData = await fs.readFileSync("config.json");
+    const json = JSON.parse(fileData);
+    json.webtheme = theme;
+    await fs.writeFileSync("config.json", JSON.stringify(json, null, 2));
+    logger.success(`Successfully updated webtheme to '${theme}' in config.json`);
+  } catch (err) {
+    logger.error(`Error updating webtheme to '${theme}' in config.json: ${err}`);
+  }
+}
+
 module.exports = {
     parseConfigurationFile,
     writeValueToConfigurationFile,
-    createNewUserConfigFromDefault
+    createNewUserConfigFromDefault,
+    setwebtheme
 }

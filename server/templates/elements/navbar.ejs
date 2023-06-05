@@ -25,6 +25,7 @@
     <a href="https://github.com/liam8888999/ErsatzTV-Filler" target="_blank" class="float-end"><i class="fa" style="font-size:20px; color:white;">&#xf09b;</i></a>
     <a href="<%- ErsatzTVURL %>" target="_blank" class="float-end"><img src="https://ersatztv.org/images/ersatztv-square-logo.png" alt="ErsatzTV" style="height:20px;"></img></a>
 </div>
+<button id="theme-toggle" onclick="toggleTheme()" style="float: right; font-size: 26px; width: 50px; margin-right: 25px;"></button>
 
 
 
@@ -39,4 +40,76 @@
             x.className = "topnav";
         }
     }
+</script>
+<script>
+// Function to toggle between light and dark mode
+function toggleTheme() {
+
+  const body = document.body;
+  const isDarkMode = body.classList.contains('dark-mode');
+
+  body.classList.toggle('dark-mode');
+
+  // Save the selected mode to a JSON file
+  const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+  saveThemeToJSON(theme);
+
+  var button = document.getElementById("theme-toggle");
+
+    // Disable the button
+    button.disabled = true;
+    button.style.backgroundColor = 'grey';
+    button.style.textDecoration = 'line-through underline overline';
+
+    // Set a timeout to re-enable the button after 5 seconds (5000 milliseconds)
+    setTimeout(function() {
+      button.disabled = false;
+      button.style.backgroundColor = '';
+      button.style.textDecoration = 'none';
+      if (document.body.classList.contains('dark-mode')) {
+        button.innerHTML = '&#x263e;';
+      } else {
+        button.innerHTML = '&#9788;';
+      }
+      //loadThemePreference()
+    }, 2000);
+}
+
+// Function to save the theme to a JSON file
+function saveThemeToJSON(theme) {
+  const xhr = new XMLHttpRequest();
+  const endpointUrl = `/api/config/webtheme/set?theme=${theme}&timestamp=${Date.now()}`;
+  xhr.open('GET', endpointUrl, true);
+  xhr.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      logger.info(this.responseText);
+    }
+  };
+  xhr.send();
+}
+
+// Function to load the theme preference from the JSON file and set the theme
+async function loadThemePreference() {
+  try {
+    const response = await fetch('/api/config/webtheme/load');
+    const data = await response.json();
+    const theme = data.theme;
+    if (theme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+
+    // Set the initial innerHTML of the theme toggle button
+    const themeToggleButton = document.getElementById('theme-toggle');
+    if (document.body.classList.contains('dark-mode')) {
+      themeToggleButton.innerHTML = '&#x263e;';
+    } else {
+      themeToggleButton.innerHTML = '&#9788;';
+    }
+  } catch (error) {
+    console.error('Failed to load the theme preference:', error);
+  }
+}
+
+// Load the theme preference when the page loads
+document.addEventListener('DOMContentLoaded', loadThemePreference);
 </script>

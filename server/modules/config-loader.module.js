@@ -5,6 +5,7 @@ const fs = require('fs');
 const logger = require("../utils/logger.utils");
 
 
+
 let CURRENT_CONFIG = {}; //In memory store for config data
 
 /**
@@ -55,7 +56,8 @@ if (!FILE_EXISTS) {
 delete config.log_per_run;
 //logger.info(config);
 delete config.autoupdate;
-config.webport = 8408;
+config.webport = '8408';
+config.webtheme = 'light';
 //logger.info(config);
   // Convert the JSON object to a string with each key-value pair on a single line
   const jsonString = JSON.stringify(config, null, 2);
