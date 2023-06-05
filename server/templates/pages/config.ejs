@@ -129,7 +129,7 @@
           <form method="post" action="/config" id="config-form">
               <div id="variables">
                   <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                    <% if(key !== 'theme' && !['processnews', 'processchanneloffline', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength'].includes(key)){ %>
+                    <% if(key !== 'theme' && !['webport', 'processnews', 'processchanneloffline', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength'].includes(key)){ %>
                       <%- include(text_input, {
                           key,
                           label: CURRENT_CONFIG[key]
@@ -149,7 +149,7 @@
           <form method="post" action="/config" id="config-form">
               <div id="variables">
                   <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                    <% if(key !== 'theme' && !['processweather', 'processchanneloffline', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength', 'weatheraudiofadeinduration', 'weatheraudiofadeoutduration', 'weathervideofadeinduration', 'weathervideofadeoutduration', 'generate_weatherv4', 'videolength'].includes(key)){ %>
+                    <% if(key !== 'theme' && !['webport', 'processweather', 'processchanneloffline', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength', 'weatheraudiofadeinduration', 'weatheraudiofadeoutduration', 'weathervideofadeinduration', 'weathervideofadeoutduration', 'generate_weatherv4', 'videolength'].includes(key)){ %>
                       <%- include(text_input, {
                           key,
                           label: CURRENT_CONFIG[key]
@@ -169,7 +169,7 @@
           <form method="post" action="/config" id="config-form">
               <div id="variables">
                   <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                  <% if(key !== 'theme' && !['processnews', 'processweather', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration'].includes(key)){ %>
+                  <% if(key !== 'theme' && !['webport', 'processnews', 'processweather', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration'].includes(key)){ %>
                       <%- include(text_input, {
                           key,
                           label: CURRENT_CONFIG[key]

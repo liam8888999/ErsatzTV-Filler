@@ -12,6 +12,7 @@ const { loadApiThemeRoutes } = require("../routes/themes.api")
 const { loadApirunRoutes } = require("../routes/run.api");
 const { loadApihealthRoutes } = require("../routes/health.api");
 const os = require('os');
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 
 /**
@@ -45,11 +46,13 @@ logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
 /**
  * Starts the express webserver on port 3000
  */
-const startWebServer = () => {
-    app.listen(3000, () => {
-        logger.info('Server started on port 3000');
-    });
-}
+ const startWebServer = async () => {
+   let config_current = await retrieveCurrentConfiguration()
+   const port = await config_current.webport;
+   app.listen(`${port}`, () => {
+     logger.info(`Server started on port ${port}`);
+   });
+ };
 /**
  * Inject all common middleware into express server
  */

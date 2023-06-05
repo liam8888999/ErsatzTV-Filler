@@ -19,6 +19,11 @@
             "date": 1685887361204,
             "name": "ersatztv-filler-2023-06-05.log",
             "hash": "a71cc5f67dd737f014ad926eee44495aa0cc1e9875c078b5b9ae186ec6bc82d4"
+        },
+        {
+            "date": 1685978410496,
+            "name": "ersatztv-filler-2023-06-06.log",
+            "hash": "4549e4f4372c9dddd102d74745a78ef536b561f6966ed404a0e3630173200583"
         }
     ],
     "hashType": "sha256"
