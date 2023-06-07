@@ -518,7 +518,16 @@ input:checked + .slider:before {
 <body>
 
 <%- include(navbar) %>
-<div class="page-container" style="margin: auto; width: 75%; padding-top: 60px;">
+<div style="padding-top:60px;">
+    <span style="float: right; margin-top: 8px; margin-right: 25px; font-size: 20px;">&#9788;</span>
+<label class="switch" style="float: right; margin-right: 5px;">
+  <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+  <span class="slider"></span>
+</label>
+    <span style="float: right; margin-top: 8px; margin-right: 5px; font-size: 20px;">&#x263e;</span>
+</div>
+
+<div class="page-container" style="margin: auto; width: 75%; padding-top: 10px;">
   <!-- JSON Popup -->
   <div id="jsonPopup" class="modal" style="padding-top: 60px;">
     <div class="modal-content">
@@ -531,6 +540,7 @@ input:checked + .slider:before {
   </div>
     <%- body %>
 </div>
+
 
 </body>
 </html>
