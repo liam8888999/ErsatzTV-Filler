@@ -7,8 +7,9 @@ const fs = require('fs');
 const cheerio = require('cheerio');
 const logger = require("../utils/logger.utils");
 const readline = require('readline');
-const moment = require('moment-timezone');
-const { checkForUpdates } = require('../utils/update.utils')
+const { checkForUpdates } = require('../utils/update.utils');
+const path = require('path');
+
 
 
 const loadPageRoutes = (app) => {
@@ -26,6 +27,24 @@ const loadPageRoutes = (app) => {
    });
 
   });
+
+
+    app.get('/output', async (req, res) => {
+      let config_current = await retrieveCurrentConfiguration()
+      let ersatz = config_current.xmltv
+      let UPDATESTATUS = await checkForUpdates();
+    let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+        res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "output", {
+          layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
+          page: "Output", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
+          version: version,
+          ErsatzTVURL: ErsatzTVURL,
+          updatestatus: UPDATESTATUS
+     });
+
+    });
+
+
 
     app.get('/config', async (req, res) => {
       let UPDATESTATUS = await checkForUpdates();

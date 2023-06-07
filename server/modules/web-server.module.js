@@ -11,6 +11,7 @@ const { loadApiConfigRoutes } = require("../routes/config.api");
 const { loadApiThemeRoutes } = require("../routes/themes.api")
 const { loadApirunRoutes } = require("../routes/run.api");
 const { loadApihealthRoutes } = require("../routes/health.api");
+const { loadApimediaRoutes } = require("../routes/media.api");
 const os = require('os');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
@@ -26,6 +27,7 @@ const createWebServer = () => {
     loadApiThemeRoutes(app);
     loadApirunRoutes(app);
     loadApihealthRoutes(app);
+    loadApimediaRoutes(app);
 
     // Log system information
     const systemInfo = {
