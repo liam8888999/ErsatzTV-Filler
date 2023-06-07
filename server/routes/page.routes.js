@@ -34,12 +34,19 @@ const loadPageRoutes = (app) => {
       let ersatz = config_current.xmltv
       let UPDATESTATUS = await checkForUpdates();
     let ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const url = req.originalUrl;
+    const port = config_current.webport;
+
+    const fullUrl = `${protocol}://${host}:${port}`
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "output", {
           layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
           page: "Output", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
           version: version,
           ErsatzTVURL: ErsatzTVURL,
-          updatestatus: UPDATESTATUS
+          updatestatus: UPDATESTATUS,
+          currenturl: fullUrl
      });
 
     });

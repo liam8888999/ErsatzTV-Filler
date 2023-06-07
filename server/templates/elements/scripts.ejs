@@ -482,3 +482,35 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
         button.textContent = isContentHidden ? 'Show older Changelogs' : 'Hide older Changelogs';
     });
     </script>
+
+
+
+    <script>
+      function copySrc(copyItem) {
+        // Get the image element
+        var image = document.getElementById(copyItem);
+
+        // Get the src attribute value
+        var src = image.src;
+
+        // Create a temporary input element
+        var tempInput = document.createElement("input");
+        tempInput.value = src;
+
+        // Append the input element to the document
+        document.body.appendChild(tempInput);
+
+        // Select the text inside the input
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text to the clipboard
+        document.execCommand("copy");
+
+        // Remove the temporary input element
+        document.body.removeChild(tempInput);
+
+        // Alert the user
+        alert("Image src copied: " + src);
+      }
+    </script>
