@@ -1,0 +1,484 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+<script>
+// Function to toggle between light and dark mode
+function toggleTheme() {
+
+  const body = document.body;
+  const isDarkMode = body.classList.contains('dark-mode');
+
+  body.classList.toggle('dark-mode');
+
+  // Save the selected mode to a JSON file
+  const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+  saveThemeToJSON(theme);
+
+  var button = document.getElementById("theme-toggle");
+
+    // Disable the button
+    button.disabled = true;
+
+    // Set a timeout to re-enable the button after 2 seconds (2000 milliseconds)
+    // would like to change this to some sort of on/off switch if possible that takes the same amount of time to animate change
+    setTimeout(function() {
+      button.disabled = false;
+      //
+    }, 3500);
+}
+
+// Function to save the theme to a JSON file
+function saveThemeToJSON(theme) {
+  const xhr = new XMLHttpRequest();
+  const endpointUrl = `/api/config/webtheme/set?theme=${theme}&timestamp=${Date.now()}`;
+  xhr.open('GET', endpointUrl, true);
+  xhr.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      logger.info(this.responseText);
+    }
+  };
+  xhr.send();
+}
+
+// Function to load the theme preference from the JSON file and set the theme
+async function loadThemePreference() {
+  try {
+    const response = await fetch('/api/config/webtheme/load');
+    const data = await response.json();
+    const theme = data.theme;
+    if (theme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+
+    // Set the initial state and position of the theme toggle switch
+     const themeToggleButton = document.getElementById('theme-toggle');
+     const themeToggleSlider = themeToggleButton.nextElementSibling;
+
+     if (document.body.classList.contains('dark-mode')) {
+      themeToggleButton.checked = false;
+
+     } else {
+       themeToggleButton.checked = true;
+     }
+   } catch (error) {
+     console.error('Failed to load the theme preference:', error);
+   }
+}
+
+// Load the theme preference when the page loads
+document.addEventListener('DOMContentLoaded', loadThemePreference)
+</script>
+<script>
+  //start json popup functions
+  function returnConfigJson() {
+    const xhr = new XMLHttpRequest();
+    const endpointUrl = `/api/config/readconfigjson`;
+
+    xhr.open('GET', endpointUrl, true);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        const jsonData = JSON.parse(this.responseText);
+        // Display the JSON data in a modal popup
+        showConfigJsonPopup(jsonData);
+      }
+    };
+    xhr.send();
+  }
+
+  // Function to display the JSON popup
+  function showConfigJsonPopup(content, theme) {
+    const jsonString = JSON.stringify(content, null, 2);
+      var popup = document.getElementById("jsonPopup");
+      var jsonContent = document.getElementById("jsonContent");
+      jsonContent.textContent = jsonString;
+      var jsonfileheading = document.getElementById("jsonfileheading");
+      jsonfileheading.textContent = `Config.json file`;
+      popup.style.display = "flex";
+      document.body.classList.add('modal-open');
+  }
+
+  // Function to close the JSON popup
+  // Function to close the modal
+  function closeModal() {
+    var modal = document.getElementById("jsonPopup");
+    modal.style.display = "none";
+    document.body.classList.remove('modal-open');
+  }
+
+  // Close the modal when the user clicks outside of it
+  window.onclick = function(event) {
+    var modal = document.getElementById("jsonPopup");
+    if (event.target == modal) {
+      modal.style.display = "none";
+      document.body.classList.remove('modal-open');
+    }
+  }
+
+  //end json popup function
+  </script>
+  <script>
+    function openTab(event, tabName) {
+      var i, tabcontent, tablinks;
+
+      // Hide all tab content
+      tabcontent = document.getElementsByClassName("tab");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Remove 'active' class from all tab links
+      tablinks = document.getElementsByClassName("tab-link");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab and add 'active' class to the clicked tab link
+      document.getElementById(tabName).style.display = "block";
+      event.currentTarget.className += " active";
+    }
+  </script>
+  <script>
+    const healthapistatusElement = document.getElementById('healthapistatus');
+    const platformElement = document.getElementById('platform');
+    const hostnameElement = document.getElementById('hostname');
+    const totalMemoryElement = document.getElementById('totalMemory');
+    const freeMemoryElement = document.getElementById('freeMemory');
+    const ffmpeginstallationstatusElement = document.getElementById('ffmpeginstallationstatus');
+
+    fetch('/api/health')
+      .then(response => {
+        if (response.ok) {
+          healthapistatusElement.innerText = 'OK';
+          return response.json();
+        } else {
+          healthapistatusElement.innerText = 'Failed';
+        }
+      })
+      .then(data => {
+        platformElement.innerText = data.os.platform;
+        hostnameElement.innerText = data.os.hostname;
+        totalMemoryElement.innerText = data.os.totalMemory;
+        freeMemoryElement.innerText = data.os.freeMemory;
+        ffmpeginstallationstatusElement.innerText = data.os.ffmpeg;
+      })
+      .catch(error => {
+        healthapistatusElement.innerText = 'Failed';
+      });
+
+  </script>
+  <script>
+    function runFor(option) {
+
+      const url = `/api/run/${option}`; // Provide the correct URL for your weather API
+      // Set up the request options
+      const options = {
+        method: "GET", // Adjust the method based on your API requirements
+        headers: {
+          'Content-Type': 'application/json' // Adjust the Content-Type header based on your API requirements
+        }
+      };
+
+      // Send the request
+      fetch(url, options)
+        .then(response => {
+          if (response.ok) {
+            console.log('Request succeeded');
+          } else {
+            console.error('Request failed');
+          }
+        })
+        .catch(error => {
+          // Handle any errors
+          console.error('Error:', error);
+        });
+    }
+  </script>
+  <script>
+    // Function to load and display logs in real-time
+    function loadLogs() {
+      const logContainer = document.getElementById('logContainer');
+      const logRequest = new XMLHttpRequest();
+
+      logRequest.onreadystatechange = function() {
+        if (logRequest.readyState === 4 && logRequest.status === 200) {
+          const newLogs = logRequest.responseText.split('\n').reverse().join('\n');
+          const currentLogs = logContainer.innerHTML;
+
+          // Check if the new logs are different from the current logs
+          if (newLogs !== currentLogs) {
+            logContainer.innerHTML = newLogs; // Update logs
+          //  logContainer.scrollTop = 0; // Scroll to the top of the container
+          }
+        }
+      };
+
+      logRequest.open('GET', '/logsload', true);
+      logRequest.send();
+    }
+
+    // Start loading logs when the page is ready
+    window.addEventListener('load', function() {
+      loadLogs();
+      setInterval(loadLogs, 1000);
+    });
+  </script>
+  <script>
+    //slideshow start
+  let slideIndex = [1,1,1,1,1,1,1];
+  let slideId = ["mySlides1", "mySlides2", "mySlides3", "mySlides4", "mySlides5", "mySlides6", "mySlides7"]
+  showSlides(1, 0);
+  showSlides(1, 1);
+  showSlides(1, 2);
+  showSlides(1, 3);
+  showSlides(1, 4);
+  showSlides(1, 5);
+  showSlides(1, 6);
+
+  function plusSlides(n, no) {
+    showSlides(slideIndex[no] += n, no);
+  }
+
+  function showSlides(n, no) {
+    let i;
+    let x = document.getElementsByClassName(slideId[no]);
+    if (n > x.length) {slideIndex[no] = 1}
+    if (n < 1) {slideIndex[no] = x.length}
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    x[slideIndex[no]-1].style.display = "block";
+  }
+  //end slideshow
+
+
+        // set theme
+        function settheme(theme) {
+          const xhr = new XMLHttpRequest();
+          const endpointUrl = `/api/themes/settheme?theme=${theme}`;
+          xhr.open('GET', endpointUrl, true);
+          xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+              logger.info(this.responseText);
+            }
+          };
+          xhr.send();
+          function showLoadingOverlay() {
+            var myDiv = document.getElementById('loading-message');
+          myDiv.textContent = "New Theme (" + `${theme}` + ") has been set successfully. Please wait...";
+          document.getElementById('overlay').style.display = 'block';
+        }
+        function reloadPageWithDelay(delay) {
+          showLoadingOverlay();
+          setTimeout(function() {
+            location.reload();
+          }, delay);
+        }
+        // Call the reloadPageWithDelay function with a specified delay (in milliseconds)
+        reloadPageWithDelay(1500); // Refresh after 2 seconds (2000 milliseconds)
+
+        }
+
+        //end set theme
+
+    // download theme files
+    function makeRequest(url, filepath) {
+      const xhr = new XMLHttpRequest();
+      const endpointUrl = `/api/themes/download?url=${url}&filepath=${filepath}`;
+      xhr.open('GET', endpointUrl, true);
+      xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+          loger.info(this.responseText);
+        }
+      };
+      xhr.send();
+      function showLoadingOverlay() {
+        var myDiv = document.getElementById('loading-message');
+        var themefilepath = `${filepath}`;
+  var theme = themefilepath.replace(".theme", "");
+      myDiv.textContent = "New Theme (" + `${theme}` + ") has been downloaded successfully. Please wait...";
+      document.getElementById('overlay').style.display = 'block';
+    }
+    function reloadPageWithDelay(delay) {
+      showLoadingOverlay();
+      setTimeout(function() {
+        location.reload();
+      }, delay);
+    }
+    // Call the reloadPageWithDelay function with a specified delay (in milliseconds)
+    reloadPageWithDelay(1500); // Refresh after 2 seconds (2000 milliseconds)
+    }
+  //end download theme files
+
+  //button display functions
+
+    window.onload = function() {
+
+
+      //disable set theme button if already set
+        var statusDiv1 = document.getElementById('currentTheme');
+
+        // Define the theme buttons and their corresponding IDs
+        var themeButtons1 = [
+          { id1: 'SystemLightsetthemeButton', theme1: 'Light' },
+          { id1: 'SystemDarksetthemeButton', theme1: 'SystemDark' },
+          { id1: 'stopandgosetthemeButton', theme1: 'stopandgo' },
+          { id1: 'CandycanesetthemeButton', theme1: 'Candycane' },
+          { id1: 'MoRBiD_MaNGLeRDarksetthemeButton', theme1: 'MoRBiD_MaNGLeR-Dark' },
+          { id1: 'MoRBiD_MaNGLeRC64setthemeButton', theme1: 'MoRBiD_MaNGLeR-C64' },
+          { id1: 'MoRBiD_MaNGLeRBlueWhitesetthemeButton', theme1: 'MORBiD_MaNGLeR-BlueWhite' }
+        ];
+
+    var currentThemesText = statusDiv1.innerText;
+        // Iterate over the theme buttons array
+        themeButtons1.forEach(function(button) {
+          var themeButton1 = document.getElementById(button.id1);
+          if (currentThemesText.includes(button.theme1)) {
+            themeButton1.disabled = true;
+            themeButton1.style.backgroundColor = '#d9d9d9';
+            themeButton1.style.textDecoration = 'line-through';
+            themeButton1.style.cursor = 'no-drop';
+          } else {
+      themeButton1.disabled = false;
+          }
+        });
+
+
+
+    //disable download button if already downloaded
+
+      var statusDiv = document.getElementById('downloadedThemes');
+
+      // Define the theme buttons and their corresponding IDs
+      var themeButtons = [
+        { id: 'SystemLightdownloadButton', theme: 'Light.theme' },
+        { id: 'SystemDarkdownloadButton', theme: 'SystemDark.theme' },
+        { id: 'stopandgodownloadButton', theme: 'stopandgo.theme' },
+        { id: 'CandycanedownloadButton', theme: 'Candycane.theme' },
+        { id: 'MoRBiD_MaNGLeRDarkdownloadButton', theme: 'MoRBiD_MaNGLeR-Dark.theme' },
+        { id: 'MoRBiD_MaNGLeRC64downloadButton', theme: 'MoRBiD_MaNGLeR-C64.theme' },
+        { id: 'MoRBiD_MaNGLeRBlueWhitedownloadButton', theme: 'MORBiD_MaNGLeR-BlueWhite.theme' }
+      ];
+
+      // Get the downloaded themes as a comma-separated string
+      var downloadedThemesText = statusDiv.innerText;
+      var downloadedThemesArray = downloadedThemesText.split(',');
+
+      // Iterate over the theme buttons array
+      themeButtons.forEach(function(button) {
+        var themeButton = document.getElementById(button.id);
+        if (downloadedThemesArray.includes(button.theme)) {
+          themeButton.disabled = true;
+          themeButton.style.backgroundColor = '#d9d9d9';
+          themeButton.style.textDecoration = 'line-through';
+          themeButton.style.cursor = 'no-drop';
+        } else {
+          themeButton.disabled = false;
+        }
+      });
+
+
+    //disable show json button if not downloaded
+
+      var jsonstatusDiv = document.getElementById('downloadedThemes');
+
+      // Define the theme buttons and their corresponding IDs
+      var jsonButtons = [
+        { id: 'SystemLightjsonButton', theme: 'Light.theme' },
+        { id: 'SystemDarkjsonButton', theme: 'SystemDark.theme' },
+        { id: 'stopandgojsonButton', theme: 'stopandgo.theme' },
+        { id: 'CandycanejsonButton', theme: 'Candycane.theme' },
+        { id: 'MoRBiD_MaNGLeRDarkjsonButton', theme: 'MoRBiD_MaNGLeR-Dark.theme' },
+        { id: 'MoRBiD_MaNGLeRC64jsonButton', theme: 'MoRBiD_MaNGLeR-C64.theme' },
+        { id: 'MoRBiD_MaNGLeRBlueWhitejsonButton', theme: 'MORBiD_MaNGLeR-BlueWhite.theme' }
+      ];
+
+      // Get the downloaded themes as a comma-separated string
+      var downloadedjsonText = jsonstatusDiv.innerText;
+      var downloadedjosnArray = downloadedjsonText.split(',');
+
+      // Iterate over the theme buttons array
+      jsonButtons.forEach(function(button) {
+        var jsonButton = document.getElementById(button.id);
+        if (!downloadedThemesArray.includes(button.theme)) {
+          jsonButton.disabled = true;
+          jsonButton.style.backgroundColor = '#d9d9d9';
+          jsonButton.style.textDecoration = 'line-through';
+          jsonButton.style.cursor = 'no-drop';
+        } else {
+          jsonButton.disabled = false;
+        }
+      });
+
+
+    };
+    //end button display functions
+
+    //start json popup functions
+    function returnJson(theme) {
+      const xhr = new XMLHttpRequest();
+      const filepath = `${theme}.theme`
+      const endpointUrl = `/api/themes/readthemejson?filepath=${filepath}`;
+
+      xhr.open('GET', endpointUrl, true);
+      xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+          const jsonData = JSON.parse(this.responseText);
+          // Display the JSON data in a modal popup
+          showJsonPopup(jsonData, theme);
+        }
+      };
+      xhr.send();
+    }
+
+    // Function to display the JSON popup
+    function showJsonPopup(content, theme) {
+      const jsonString = JSON.stringify(content, null, 2);
+        var popup = document.getElementById("jsonPopup");
+        var jsonContent = document.getElementById("jsonContent");
+        jsonContent.textContent = jsonString;
+        var jsonfileheading = document.getElementById("jsonfileheading");
+        jsonfileheading.textContent = `${theme} Theme JSON`;
+        popup.style.display = "flex";
+        document.body.classList.add('modal-open');
+    }
+
+    // Function to close the JSON popup
+    // Function to close the modal
+    function closeModal() {
+      var modal = document.getElementById("jsonPopup");
+      modal.style.display = "none";
+      document.body.classList.remove('modal-open');
+    }
+
+    // Close the modal when the user clicks outside of it
+    window.onclick = function(event) {
+      var modal = document.getElementById("jsonPopup");
+      if (event.target == modal) {
+        modal.style.display = "none";
+        document.body.classList.remove('modal-open');
+      }
+    }
+
+    //end json popup function
+  </script>
+  <script>
+    const button = document.querySelector('.show-content-button');
+    const expandContent = document.querySelector('.expand-content');
+    let isContentHidden = true;
+
+    button.addEventListener('click', function() {
+        expandContent.classList.toggle('hidden');
+        isContentHidden = !isContentHidden;
+        button.textContent = isContentHidden ? 'Show older Changelogs' : 'Hide older Changelogs';
+    });
+    </script>

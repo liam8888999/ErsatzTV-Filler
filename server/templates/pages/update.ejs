@@ -16,15 +16,3 @@
 
 
 </div>
-
-<script>
-  const button = document.querySelector('.show-content-button');
-  const expandContent = document.querySelector('.expand-content');
-  let isContentHidden = true;
-
-  button.addEventListener('click', function() {
-      expandContent.classList.toggle('hidden');
-      isContentHidden = !isContentHidden;
-      button.textContent = isContentHidden ? 'Show older Changelogs' : 'Hide older Changelogs';
-  });
-  </script>

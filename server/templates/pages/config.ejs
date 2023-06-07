@@ -7,76 +7,6 @@
 <% const text_input = base + "/text-input.ejs" %>
 
 
-<script>
-  //start json popup functions
-  function returnJson() {
-    const xhr = new XMLHttpRequest();
-    const endpointUrl = `/api/config/readconfigjson`;
-
-    xhr.open('GET', endpointUrl, true);
-    xhr.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        const jsonData = JSON.parse(this.responseText);
-        // Display the JSON data in a modal popup
-        showJsonPopup(jsonData);
-      }
-    };
-    xhr.send();
-  }
-
-  // Function to display the JSON popup
-  function showJsonPopup(content, theme) {
-    const jsonString = JSON.stringify(content, null, 2);
-      var popup = document.getElementById("jsonPopup");
-      var jsonContent = document.getElementById("jsonContent");
-      jsonContent.textContent = jsonString;
-      var jsonfileheading = document.getElementById("jsonfileheading");
-      jsonfileheading.textContent = `Config.json file`;
-      popup.style.display = "flex";
-      document.body.classList.add('modal-open');
-  }
-
-  // Function to close the JSON popup
-  // Function to close the modal
-  function closeModal() {
-    var modal = document.getElementById("jsonPopup");
-    modal.style.display = "none";
-    document.body.classList.remove('modal-open');
-  }
-
-  // Close the modal when the user clicks outside of it
-  window.onclick = function(event) {
-    var modal = document.getElementById("jsonPopup");
-    if (event.target == modal) {
-      modal.style.display = "none";
-      document.body.classList.remove('modal-open');
-    }
-  }
-
-  //end json popup function
-  </script>
-  <script>
-    function openTab(event, tabName) {
-      var i, tabcontent, tablinks;
-
-      // Hide all tab content
-      tabcontent = document.getElementsByClassName("tab");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-
-      // Remove 'active' class from all tab links
-      tablinks = document.getElementsByClassName("tab-link");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-
-      // Show the current tab and add 'active' class to the clicked tab link
-      document.getElementById(tabName).style.display = "block";
-      event.currentTarget.className += " active";
-    }
-  </script>
-
   <div class="container">
     <center>  <h1>Edit config</h1>
       <p>Change your configuration file below!</p> <p>The form below will automatically update as you fill it in.</p>
@@ -91,7 +21,7 @@
     <!--  <button class="tab-link" onclick="openTab(event, 'tab5')">Interface</button> -->
     </div>
     <br>
-    <button onclick="returnJson()" style="margin-top:10px;">Show config.json file</button>
+    <button onclick="returnConfigJson()" style="margin-top:10px;">Show config.json file</button>
     </center>
     <div id="tab1" class="tab" style="display: block;">
       <br>

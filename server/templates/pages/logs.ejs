@@ -26,33 +26,4 @@
   </center>
   <div id="logContainer" style="padding-top:10px;"></div>
 
-  <script>
-    // Function to load and display logs in real-time
-    function loadLogs() {
-      const logContainer = document.getElementById('logContainer');
-      const logRequest = new XMLHttpRequest();
-
-      logRequest.onreadystatechange = function() {
-        if (logRequest.readyState === 4 && logRequest.status === 200) {
-          const newLogs = logRequest.responseText.split('\n').reverse().join('\n');
-          const currentLogs = logContainer.innerHTML;
-
-          // Check if the new logs are different from the current logs
-          if (newLogs !== currentLogs) {
-            logContainer.innerHTML = newLogs; // Update logs
-          //  logContainer.scrollTop = 0; // Scroll to the top of the container
-          }
-        }
-      };
-
-      logRequest.open('GET', '/logsload', true);
-      logRequest.send();
-    }
-
-    // Start loading logs when the page is ready
-    window.addEventListener('load', function() {
-      loadLogs();
-      setInterval(loadLogs, 1000);
-    });
-  </script>
 </div>

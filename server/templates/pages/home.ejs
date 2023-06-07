@@ -21,63 +21,6 @@
   <p>Hostname: <span id="hostname"></span></p>
   <p>Total Memory: <span id="totalMemory"></span> bytes</p>
   <p>Free Memory: <span id="freeMemory"></span> bytes</p>
-
-  <script>
-    const healthapistatusElement = document.getElementById('healthapistatus');
-    const platformElement = document.getElementById('platform');
-    const hostnameElement = document.getElementById('hostname');
-    const totalMemoryElement = document.getElementById('totalMemory');
-    const freeMemoryElement = document.getElementById('freeMemory');
-    const ffmpeginstallationstatusElement = document.getElementById('ffmpeginstallationstatus');
-
-    fetch('/api/health')
-      .then(response => {
-        if (response.ok) {
-          healthapistatusElement.innerText = 'OK';
-          return response.json();
-        } else {
-          healthapistatusElement.innerText = 'Failed';
-        }
-      })
-      .then(data => {
-        platformElement.innerText = data.os.platform;
-        hostnameElement.innerText = data.os.hostname;
-        totalMemoryElement.innerText = data.os.totalMemory;
-        freeMemoryElement.innerText = data.os.freeMemory;
-        ffmpeginstallationstatusElement.innerText = data.os.ffmpeg;
-      })
-      .catch(error => {
-        healthapistatusElement.innerText = 'Failed';
-      });
-
-  </script>
+  
 </div>
 </div>
-
-<script>
-  function runFor(option) {
-
-    const url = `/api/run/${option}`; // Provide the correct URL for your weather API
-    // Set up the request options
-    const options = {
-      method: "GET", // Adjust the method based on your API requirements
-      headers: {
-        'Content-Type': 'application/json' // Adjust the Content-Type header based on your API requirements
-      }
-    };
-
-    // Send the request
-    fetch(url, options)
-      .then(response => {
-        if (response.ok) {
-          console.log('Request succeeded');
-        } else {
-          console.error('Request failed');
-        }
-      })
-      .catch(error => {
-        // Handle any errors
-        console.error('Error:', error);
-      });
-  }
-</script>
