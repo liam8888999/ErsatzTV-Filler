@@ -512,7 +512,7 @@ var theme = themefilepath.replace(".theme", "");
         var themeButton1 = document.getElementById(button.id1);
         if (currentThemesText.includes(button.theme1)) {
           themeButton1.disabled = true;
-          themeButton1.style.backgroundColor = 'grey';
+          themeButton1.style.backgroundColor = '#d9d9d9';
           themeButton1.style.textDecoration = 'line-through';
           themeButton1.style.cursor = 'no-drop';
         } else {
@@ -546,7 +546,7 @@ var theme = themefilepath.replace(".theme", "");
       var themeButton = document.getElementById(button.id);
       if (downloadedThemesArray.includes(button.theme)) {
         themeButton.disabled = true;
-        themeButton.style.backgroundColor = 'grey';
+        themeButton.style.backgroundColor = '#d9d9d9';
         themeButton.style.textDecoration = 'line-through';
         themeButton.style.cursor = 'no-drop';
       } else {
@@ -579,7 +579,7 @@ var theme = themefilepath.replace(".theme", "");
       var jsonButton = document.getElementById(button.id);
       if (!downloadedThemesArray.includes(button.theme)) {
         jsonButton.disabled = true;
-        jsonButton.style.backgroundColor = 'grey';
+        jsonButton.style.backgroundColor = '#d9d9d9';
         jsonButton.style.textDecoration = 'line-through';
         jsonButton.style.cursor = 'no-drop';
       } else {
