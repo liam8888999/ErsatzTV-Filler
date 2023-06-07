@@ -61,7 +61,8 @@ function toggleTheme() {
     button.style.backgroundColor = 'grey';
     button.style.textDecoration = 'line-through underline overline';
 
-    // Set a timeout to re-enable the button after 5 seconds (5000 milliseconds)
+    // Set a timeout to re-enable the button after 2 seconds (2000 milliseconds)
+    // would like to change this to some sort of on/off switch if possible that takes the same amount of time to animate change
     setTimeout(function() {
       button.disabled = false;
       button.style.backgroundColor = '';
