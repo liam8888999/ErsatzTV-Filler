@@ -25,9 +25,14 @@
     <a href="https://github.com/liam8888999/ErsatzTV-Filler" target="_blank" class="float-end"><i class="fa" style="font-size:20px; color:white;">&#xf09b;</i></a>
     <a href="<%- ErsatzTVURL %>" target="_blank" class="float-end"><img src="https://ersatztv.org/images/ersatztv-square-logo.png" alt="ErsatzTV" style="height:20px;"></img></a>
 </div>
-<button id="theme-toggle" onclick="toggleTheme()" style="float: right; font-size: 26px; width: 50px; margin-right: 25px;"></button>
-
-
+<div>
+    <span style="float: right; margin-top: 8px; margin-right: 25px; font-size: 20px;">&#9788;</span>
+<label class="switch" style="float: right; margin-right: 5px;">
+  <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+  <span class="slider"></span>
+</label>
+    <span style="float: right; margin-top: 8px; margin-right: 5px; font-size: 20px;">&#x263e;</span>
+</div>
 
 
 
@@ -58,22 +63,13 @@ function toggleTheme() {
 
     // Disable the button
     button.disabled = true;
-    button.style.backgroundColor = 'grey';
-    button.style.textDecoration = 'line-through underline overline';
 
     // Set a timeout to re-enable the button after 2 seconds (2000 milliseconds)
     // would like to change this to some sort of on/off switch if possible that takes the same amount of time to animate change
     setTimeout(function() {
       button.disabled = false;
-      button.style.backgroundColor = '';
-      button.style.textDecoration = 'none';
-      if (document.body.classList.contains('dark-mode')) {
-        button.innerHTML = '&#x263e;';
-      } else {
-        button.innerHTML = '&#9788;';
-      }
-      //loadThemePreference()
-    }, 2000);
+      //
+    }, 3500);
 }
 
 // Function to save the theme to a JSON file
@@ -99,18 +95,21 @@ async function loadThemePreference() {
       document.body.classList.add('dark-mode');
     }
 
-    // Set the initial innerHTML of the theme toggle button
-    const themeToggleButton = document.getElementById('theme-toggle');
-    if (document.body.classList.contains('dark-mode')) {
-      themeToggleButton.innerHTML = '&#x263e;';
-    } else {
-      themeToggleButton.innerHTML = '&#9788;';
-    }
-  } catch (error) {
-    console.error('Failed to load the theme preference:', error);
-  }
+    // Set the initial state and position of the theme toggle switch
+     const themeToggleButton = document.getElementById('theme-toggle');
+     const themeToggleSlider = themeToggleButton.nextElementSibling;
+
+     if (document.body.classList.contains('dark-mode')) {
+      themeToggleButton.checked = false;
+
+     } else {
+       themeToggleButton.checked = true;
+     }
+   } catch (error) {
+     console.error('Failed to load the theme preference:', error);
+   }
 }
 
 // Load the theme preference when the page loads
-document.addEventListener('DOMContentLoaded', loadThemePreference);
+document.addEventListener('DOMContentLoaded', loadThemePreference)
 </script>

@@ -9,7 +9,6 @@ const { setwebtheme } = require("../utils/config.utils.js");
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 
 const loadApiConfigRoutes = async (app) => {
-  let config_current = await retrieveCurrentConfiguration();
     /**
      * Patch route to receive updates to the configuration file.
      */
@@ -63,6 +62,7 @@ logger.info(value);
 
 
       app.get('/api/config/webtheme/load', async (req, res) => {
+        const config_current = await retrieveCurrentConfiguration();
     try {
 const theme = config_current.webtheme;
       // Replace the code below with your logic to fetch the theme preference from a data source (e.g., a database)
