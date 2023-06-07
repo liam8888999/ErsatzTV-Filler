@@ -445,10 +445,10 @@ input:checked + .slider:before {
        font-size: 1rem;
        font-weight: 400;
        line-height: 1.5;
-       color: #495057;
-       text-align: center;
+       color: #333;
+       text-align: left;
        white-space: nowrap;
-       background-color: #e9ecef;
+       background-color: #bfbfbf;
        border: 1px solid #ced4da;
        border-radius: 0.25rem 0 0 0.25rem;
        min-width: 250px;
@@ -465,16 +465,48 @@ input:checked + .slider:before {
        font-weight: 400;
        line-height: 1.5;
        color: #495057;
-       background-color: #fff;
+       background-color: #d9d9d9;
        background-clip: padding-box;
        border: 1px solid #ced4da;
        border-radius: 0 0.25rem 0.25rem 0;
        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
    }
 
-   .basicaddon1 {
-     width: 5px;
+
+  body.dark-mode .input-group .input-group-text {
+       display: block;
+       align-items: center;
+       padding: 0.375rem 0.75rem;
+       margin-bottom: 0;
+       font-size: 1rem;
+       font-weight: 400;
+       line-height: 1.5;
+       color: white;
+       white-space: nowrap;
+       background-color: #4d4d4d;
+       border: 1px solid #ced4da;
+       border-radius: 0.25rem 0 0 0.25rem;
+       min-width: 250px;
+       max-width: 30%;
    }
+
+  body.dark-mode .input-group .form-control {
+       display: block;
+       max-width: 70%;
+       min-width: 15%;
+       height: calc(1.5em + 0.75rem + 2px);
+       padding: 0.375rem 0.75rem;
+       font-size: 1rem;
+       font-weight: 400;
+       line-height: 1.5;
+       color: white;
+       background-color: #636363;
+       background-clip: padding-box;
+       border: 1px solid #ced4da;
+       border-radius: 0 0.25rem 0.25rem 0;
+       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+   }
+
     </style>
 </head>
 <body>
