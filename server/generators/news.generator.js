@@ -95,12 +95,13 @@ const wrappedText = wordwrap(0, maxLinesPerFrame)(inputText);
 fs.writeFileSync(`${WORKDIR}/news.txt`, wrappedText, 'utf8');
 
       // Adjust the fontsize parameter to fit the text within the video width
-      const videoWidth = 480;
-      const textWidth = Math.floor(videoWidth / 40);
+      const resolution = config_current.videoresolution;
+const width = resolution.split("x")[0];
+      const textWidth = Math.floor(width / 40);
+console.log(width)
 
 
-
-      const command = `ffmpeg -y -f lavfi -i color=white:${videoWidth}x360 -stream_loop -1 -i "/Users/liam/Documents/GitHub/ErsatzTV-Filler/audio-fallback/2.mp3" -shortest -vf "drawtext=textfile='${WORKDIR}/news.txt':x=(w-text_w)/2:y=h-40*t:fontcolor=black:fontsize=${textWidth}:box=1:boxcolor=white:boxborderw=5:line_spacing=6" -pix_fmt yuv420p -c:a copy -t 90 ${WORKDIR}/news-v1.mp4
+      const command = `ffmpeg -y -f lavfi -i color=black:${config_current.videoresolution} -stream_loop -1 -i "/Users/liam/Documents/GitHub/ErsatzTV-Filler/audio-fallback/2.mp3" -shortest -vf "drawtext=textfile='${WORKDIR}/news.txt':x=(w-text_w)/2:y=h-40*t:fontcolor=black:fontsize=${textWidth}:box=1:boxcolor=white:boxborderw=5:line_spacing=6" -pix_fmt yuv420p -c:a copy -t 90 ${WORKDIR}/news-v1.mp4
 `;
 
       logger.info(command);

@@ -4,6 +4,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 const { WEATHER } = require("../generators/weather.generator");
+const { NEWS } = require("../generators/news.generator");
 
 const loadApirunRoutes = (app) => {
 
@@ -19,7 +20,7 @@ await WEATHER();
 
   app.get('/api/run/news', async () => {
   logger.info("running news function")
-  await News();
+  await NEWS();
   // use the url and path variables to set the theme
 
 });
