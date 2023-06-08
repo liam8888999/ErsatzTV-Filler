@@ -23,7 +23,7 @@ const { NEWS } = require("../server/generators/news.generator");
         startWebServer();
 //selectRandomAudioFile("/Users/liam/Music/Converted by MediaHuman/Music/Aerosmith/Pump");
     //   WEATHER();
-    NEWS();
+  //  NEWS();
     } catch(e){
         logger.error("Fatal error occurred!", e)
     }

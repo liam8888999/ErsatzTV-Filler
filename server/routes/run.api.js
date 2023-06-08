@@ -19,7 +19,7 @@ await WEATHER();
 
   app.get('/api/run/news', async () => {
   logger.info("running news function")
-//  await News();
+  await News();
   // use the url and path variables to set the theme
 
 });
