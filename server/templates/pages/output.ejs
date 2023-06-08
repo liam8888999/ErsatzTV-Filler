@@ -1,6 +1,4 @@
 <center><h1>Outputs</h1></center>
-<br>
-<center><h2>Weather</h2></center>
 <style>
   img.output {width: 80%;}
   video {width: 80%;}
@@ -12,6 +10,23 @@
   body.dark-mode input {background-color: #636363;
   color: white;}
   </style>
+  <br>
+
+
+
+<center><p><b>*Note: </b>Filler Generators must be run at least once for the output to show up here</p></center>
+<br>
+<div class="tab-container">
+  <center>
+  <div class="tab-links">
+    <button class="tab-link active" onclick="openTab(event, 'tab1')">Weather Output</button>
+    <button class="tab-link" onclick="openTab(event, 'tab2')">News Output</button>
+    <button class="tab-link" onclick="openTab(event, 'tab3')">Channel-Offline Output</button>
+  </div>
+  </center>
+  <div id="tab1" class="tab" style="display: block;">
+    <br>
+  <center>  <h2>Weather Output</h2></center>
   <br>
   <div class="home-page-container">
     <div class="home-page-box">
@@ -55,39 +70,64 @@
   <source src="/media/weather-v1.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-<input type="text" value="<%- currenturl %>/media/v3.png" id="myInput" readonly>
+<input type="text" value="<%- currenturl %>/media/v1.mp4" id="weatherv1-video" readonly>
 <br>
-<button onclick="copySrc('weatherv3-image')">Copy Image Src</button>
+<button onclick="copySrc('weatherv1-video')">Copy Image Src</button>
 </center>
 </div>
   <div class="home-page-box">
+    <center>
 <h4>Weather-v2 (Video)</h4>
 <video controls class="output">
   <source src="/media/weather-v2.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 <br>
-<input type="text" value="<%- currenturl %>/media/v3.png" id="myInput" readonly>
+<input type="text" value="<%- currenturl %>/media/v2.mp4" id="weatherv2-video" readonly>
 <br>
-<button onclick="copySrc('weatherv3-image')">Copy Image Src</button>
+<button onclick="copySrc('weatherv2-video')">Copy Image Src</button>
+</center>
 </div>
 </div>
+<div class="home-page-container">
+  <div class="home-page-box">
+    <center>
 <h4>Weather-v3 (Video)</h4>
 <video controls class="output">
   <source src="/media/weather-v3.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+<input type="text" value="<%- currenturl %>/media/v3.mp4" id="weatherv3-video" readonly>
 <br>
-<input type="text" value="<%- currenturl %>/media/v3.png" id="myInput" readonly>
-<br>
-<button onclick="copySrc('weatherv3-image')">Copy Image Src</button>
-<br>
-<h4>Weather-v4 (Video)</h4>
+<button onclick="copySrc('weatherv3-video')">Copy Image Src</button>
+</center>
+</div>
+  <div class="home-page-box">
+    <center>
+<h4>Weather-v2 (Video)</h4>
 <video controls class="output">
   <source src="/media/weather-v4.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 <br>
-<input type="text" value="<%- currenturl %>/media/v3.png" id="myInput" readonly>
+<input type="text" value="<%- currenturl %>/media/v5.mp4" id="weatherv4-video" readonly>
 <br>
-<button onclick="copySrc('weatherv3-image')">Copy Image Src</button>
+<button onclick="copySrc('weatherv4-video')">Copy Image Src</button>
+</center>
+</div>
+</div>
+  <div id="tab2" class="tab">
+    <br>
+  <center>  <h2>News Output</h2></center>
+  <br>
+
+  </div>
+  <div id="tab3" class="tab">
+    <br>
+  <center>  <h2>Channel-Offline Output</h2></center>
+  <br>
+
+  </div>
+
+
+</div>
