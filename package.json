@@ -29,7 +29,9 @@
     "husky": "^8.0.3",
     "marked": "^4.2.12",
     "node-fetch": "^3.3.0",
-    "release-it": "^15.6.0"
+    "release-it": "^15.6.0",
+    "save-dev": "^0.0.1-security",
+    "wordwrap": "^1.0.0"
   },
   "release-it": {
     "git": {

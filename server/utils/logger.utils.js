@@ -48,7 +48,7 @@ const logFormat = winston.format.printf(({ level, message, timestamp }) => {
 // Create the logger
 const logger = winston.createLogger({
   levels: customLevels,
-  level: 'info',
+  level: 'ffmpeg',
   format: winston.format.combine(
     winston.format.timestamp({ format: customTimestamp }),
     logFormat

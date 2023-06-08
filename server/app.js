@@ -6,6 +6,7 @@ const moment = require('moment-timezone');
 
 
 const { WEATHER } = require("../server/generators/weather.generator");
+const { NEWS } = require("../server/generators/news.generator");
 
 
 //This is called a self executing function. It allows us to create an application context for our app, and also start it asynchronously
@@ -22,6 +23,7 @@ const { WEATHER } = require("../server/generators/weather.generator");
         startWebServer();
 //selectRandomAudioFile("/Users/liam/Music/Converted by MediaHuman/Music/Aerosmith/Pump");
     //   WEATHER();
+    NEWS();
     } catch(e){
         logger.error("Fatal error occurred!", e)
     }
