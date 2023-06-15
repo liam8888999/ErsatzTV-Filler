@@ -58,6 +58,7 @@ delete config.log_per_run;
 delete config.autoupdate;
 config.webport = '8408';
 config.webtheme = 'light';
+config.fontfile = 'fonts/Verdana.tff'
 //logger.info(config);
   // Convert the JSON object to a string with each key-value pair on a single line
   const jsonString = JSON.stringify(config, null, 2);
