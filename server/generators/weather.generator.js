@@ -22,8 +22,7 @@ const client = require('https');
 const WEATHER = async () => {
 logger.info("starting weather")
 
-
-let config_current = await retrieveCurrentConfiguration()
+const config_current = await retrieveCurrentConfiguration()
 
 const WORKING = WORKDIR
 

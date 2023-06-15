@@ -11,7 +11,7 @@ const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const path = require('path');
 
 const NEWS = async () => {
-  let config_current = await retrieveCurrentConfiguration();
+  const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const fontFilePath = path.resolve(__dirname, `${config_current.fontfile}`);
 
