@@ -9,6 +9,28 @@ const { WEATHER } = require("../server/generators/weather.generator");
 const { NEWS } = require("../server/generators/news.generator");
 
 
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  // Perform any necessary cleanup or logging here
+logger.info(error)
+  // Terminate the process (optional)
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection:', reason);
+  // Perform any necessary cleanup or logging here
+  logger.info(reason);
+
+  // Terminate the process (optional)
+  process.exit(1);
+});
+
+// Rest of your Node.js application code...
+
+
 //This is called a self executing function. It allows us to create an application context for our app, and also start it asynchronously
 (async function(){
     // Very basic splitting up of concerns, now we can use this entry point app and create and manage our modules for configs.
