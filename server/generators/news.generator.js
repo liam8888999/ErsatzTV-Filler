@@ -99,8 +99,31 @@ console.log(lines)
       const subtitleDuration = 4; // Duration in seconds
 
       // Calculate the start and end time for each subtitle
-      let startTime = 1; // Start time adjusted by 2 seconds
-      let endTime = 90 + subtitleDuration;
+      let startTime = 0; // Start time adjusted by 2 seconds
+      let endTime = `${config_current.newsduration}`;
+
+      // Define the font size and line spacing
+      const fontSize = 32;
+      const lineSpacing = 1;
+
+      // Split the subtitle into individual lines
+      const lines2 = inputText.split('\n');
+
+      // Calculate the total height of the subtitle
+      const subtitleHeight = lines2.length * fontSize * lineSpacing + 80;
+      console.log(subtitleHeight)
+
+      // Calculate the y-coordinate for the move effect
+      const y1 = 720 + subtitleHeight;
+      const y2 = 0 + subtitleHeight;
+
+      // Create the move effect string
+      const moveEffect = `{\\move(640,${y1},640,${y2})}`;
+
+      // Combine the move effect with the subtitle text
+      const subtitle = `${moveEffect}${lines}`;
+
+
       let assText = `[Script Info]
 Title: Scrolling Text Example
 ScriptType: v4.00+
@@ -114,7 +137,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, 0, ,{\\move(640,-120,640,0)}${lines}`
+Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, 0, ,${subtitle}`
 ;
     //  for (let i = 0; i < lines.length; i++) {
       //  const line = lines[i];
