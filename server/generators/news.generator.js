@@ -8,10 +8,12 @@ const logger = require("../utils/logger.utils");
 const { exec } = require('child_process');
 const wordwrap = require('wordwrap');
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
+const path = require('path');
 
 const NEWS = async () => {
   let config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
+  const fontFilePath = path.resolve(__dirname, `${config_current.fontfile}`);
 
   const newsstyle = `${WORKDIR}/news.xslt`;
 
@@ -102,7 +104,7 @@ const width = resolution.split("x")[0];
       const textWidth = Math.floor(width / 40);
 console.log(width)
 
-      const command = `ffmpeg -y -f lavfi -i color=black:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "drawtext=textfile='${WORKDIR}/news.txt':x=(w-text_w)/2:y=h-40*t:fontcolor=black:fontsize=${textWidth}:box=1:boxcolor=white:boxborderw=5:line_spacing=6:fontfile=${config_current.fontfile}" -pix_fmt yuv420p -c:a copy -t 90 ${WORKDIR}/news-v1.mp4
+      const command = `ffmpeg -y -f lavfi -i color=black:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "drawtext=textfile='${WORKDIR}/news.txt':x=(w-text_w)/2:y=h-40*t:fontcolor=black:fontsize=${textWidth}:box=1:boxcolor=white:boxborderw=5:line_spacing=6:fontfile=${fontFilePath}" -pix_fmt yuv420p -c:a copy -t 90 ${WORKDIR}/news-v1.mp4
 `;
 
       logger.info(command);
