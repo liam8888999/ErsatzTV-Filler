@@ -59,8 +59,9 @@ const NEWS = async () => {
       const newstempContent = fs.readFileSync(`${WORKDIR}/newstemp.txt`, 'utf8');
 
       // Add paragraph numbering
-      const news1Content = newstempContent.replace(/(.+?\n\n)/g, (match, p1, offset) => `${offset / 4 + 1} ${p1}`);
+    //  const news1Content = newstempContent.replace(/(.+?\n\n)/g, (match, p1, offset) => `${offset / 4 + 1} ${p1}`);
 
+const news1Content = newstempContent
       // Copy first 10 articles
       const news2Content = news1Content.split('\n\n').slice(0, 10).join('\n\n');
 
@@ -102,7 +103,6 @@ fs.writeFileSync(`${WORKDIR}/news.txt`, wrappedText, 'utf8');
       const resolution = config_current.videoresolution;
 const width = resolution.split("x")[0];
       const textWidth = Math.floor(width / 40);
-console.log(width)
 
       const command = `ffmpeg -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "drawtext=textfile='${WORKDIR}/news.txt':x=(w-text_w)/2:y=h-40*t:fontcolor=black:fontsize=${textWidth}:line_spacing=6:fontfile=${fontFilePath}" -pix_fmt yuv420p -c:a copy -t 90 ${WORKDIR}/news-v1.mp4
 `;
