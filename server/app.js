@@ -1,12 +1,10 @@
 const { createWebServer, startWebServer } = require("../server/modules/web-server.module");
 const { setupConfigurationFile } = require("../server/modules/config-loader.module");
 const { selectRandomAudioFile } = require("../server/generators/utils/randomaudio.utils");
+const { GENERATION } = require("../server/modules/generators.module");
 const logger = require("../server/utils/logger.utils");
 const moment = require('moment-timezone');
 
-
-const { WEATHER } = require("../server/generators/weather.generator");
-const { NEWS } = require("../server/generators/news.generator");
 
 
 // Handle uncaught exceptions
@@ -43,9 +41,9 @@ process.on('unhandledRejection', (reason, promise) => {
        createWebServer();
 
         startWebServer();
-//selectRandomAudioFile("/Users/liam/Music/Converted by MediaHuman/Music/Aerosmith/Pump");
-    //   WEATHER();
-  //  NEWS();
+
+        GENERATION();
+
     } catch(e){
         logger.error("Fatal error occurred!", e)
     }
