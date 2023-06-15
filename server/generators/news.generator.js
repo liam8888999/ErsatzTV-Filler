@@ -58,8 +58,6 @@ const NEWS = async () => {
       // Read the newstemp.txt file
       const newstempContent = fs.readFileSync(`${WORKDIR}/newstemp.txt`, 'utf8');
 
-      // Add paragraph numbering
-    //  const news1Content = newstempContent.replace(/(.+?\n\n)/g, (match, p1, offset) => `${offset / 4 + 1} ${p1}`);
 
 const news1Content = newstempContent
       // Copy first 10 articles
@@ -84,28 +82,64 @@ const news1Content = newstempContent
       // Save the final result to news.txt
       fs.writeFileSync(`${WORKDIR}/news-temp.txt`, newsContent);
 
-
-
-
       // Set the maximum number of lines per frame
       const maxLinesPerFrame = 70;
 
-// Read the input file
-const inputText = fs.readFileSync(`${WORKDIR}/news-temp.txt`, 'utf8');
+      // Read the input file
+      const inputText = fs.readFileSync(`${WORKDIR}/news-temp.txt`, 'utf8');
 
-// Wrap the text to the desired number of lines
-const wrappedText = wordwrap(0, maxLinesPerFrame)(inputText);
+      // Split the inputText into separate lines
+      const lines = inputText.split('\n');
+
+      // Calculate the duration for each subtitle
+      const subtitleDuration = 2; // Duration in seconds
+
+      // Calculate the start and end time for each subtitle
+      let startTime = 2; // Start time adjusted by 2 seconds
+      let endTime = startTime + subtitleDuration;
+      let assText = `[Script Info]
+      Title: Scrolling Text Example
+      ScriptType: v4.00+
+      WrapStyle: 0
+      PlayResX: 1280
+      PlayResY: 720
+
+      [V4+ Styles]
+      Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+      Style: Default, Arial, 30, &H00FFFFFF, &H00000000, &H00000000, &H00000000, 0, 0, 0, 0, 100, 100, 0, 0, 1, 1, 1, 2, 30, 30, 30, 0
+
+      [Events]
+      Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text`;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+
+        // Add the start and end time for each subtitle
+        assText += `\nDialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:90.00, Default, ScrollText, 0, 0, 0, ,{\\move(640,720,640,0)}${line}`;
+
+        // Increment the start and end time for the next subtitle
+        startTime += subtitleDuration;
+        endTime += subtitleDuration;
+      }
+
+
+      // Save the ASS text to a file
+      fs.writeFileSync(`${WORKDIR}/news.ass`, assText);
+
+
+
+
+
 
 // Write the wrapped text to the output file
-fs.writeFileSync(`${WORKDIR}/news.txt`, wrappedText, 'utf8');
+//fs.writeFileSync(`${WORKDIR}/news.txt`, wrappedText, 'utf8');
 
       // Adjust the fontsize parameter to fit the text within the video width
       const resolution = config_current.videoresolution;
 const width = resolution.split("x")[0];
       const textWidth = Math.floor(width / 40);
 
-      const command = `ffmpeg -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "drawtext=textfile='${WORKDIR}/news.txt':x=(w-text_w)/2:y=h-40*t:fontcolor=black:fontsize=${textWidth}:line_spacing=6:fontfile=${fontFilePath}" -pix_fmt yuv420p -c:a copy -t 90 ${WORKDIR}/news-v1.mp4
-`;
+      const command = `ffmpeg -y -i ${WORKDIR}/news-v1.mp4 -vf "ass=${WORKDIR}/news.ass" -c:a copy ${WORKDIR}/output.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);
