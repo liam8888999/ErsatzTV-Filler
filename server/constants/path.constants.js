@@ -4,13 +4,13 @@ const PAGES_FOLDER = "pages/";
 const THEMES_FOLDER = "themes/"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
-const DEFAULT_CONFIG = "/Users/liam/Documents/GitHub/ErsatzTV-Filler/sample-config.conf"
-const USER_CONFIG = "/Users/liam/Documents/GitHub/ErsatzTV-Filler/config.conf"
+const DEFAULT_CONFIG = "sample-config.conf"
+const USER_CONFIG = "config.conf"
 
 const CHANGELOG = "Changelog.md"
 const DOCUMENTATION = "README.md"
 
-const WORKDIR = "/Users/liam/Documents/GitHub/ErsatzTV-Filler/workdir"
+const WORKDIR = "workdir"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
