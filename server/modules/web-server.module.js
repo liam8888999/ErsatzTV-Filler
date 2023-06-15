@@ -5,7 +5,7 @@ const app = express();
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 
-const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
+const { TEMPLATE_CONSTANTS, WORKDIR } = require("../constants/path.constants");
 const { loadPageRoutes } = require("../routes/page.routes");
 const { loadApiConfigRoutes } = require("../routes/config.api");
 const { loadApiThemeRoutes } = require("../routes/themes.api")
@@ -14,6 +14,7 @@ const { loadApihealthRoutes } = require("../routes/health.api");
 const { loadApimediaRoutes } = require("../routes/media.api");
 const os = require('os');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
+const { createDirectoryIfNotExists } =require("../utils/file.utils")
 
 
 /**
@@ -28,6 +29,7 @@ const createWebServer = () => {
     loadApirunRoutes(app);
     loadApihealthRoutes(app);
     loadApimediaRoutes(app);
+    createDirectoryIfNotExists(WORKDIR);
 
     // Log system information
     const systemInfo = {
