@@ -12,7 +12,5 @@ output.json
 config.json
 config-old.json
 *.log
-*.log
 logs.log
-.45d7867f0a7701f0877923f96b63db6b737a6750-audit.json
-.a09263ccc41c54faff7dca3504564687928f1d07-audit.json
+*-audit.json
