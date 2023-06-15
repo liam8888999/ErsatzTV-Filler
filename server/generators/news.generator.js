@@ -115,7 +115,7 @@ const news1Content = newstempContent
         const line = lines[i];
 
         // Add the start and end time for each subtitle
-        assText += `\nDialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:90.00, Default, ScrollText, 0, 0, 0, ,{\\move(640,720,640,0)}${line}`;
+        assText += `\nDialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, 0, ,{\\move(640,720,640,0)}${line}`;
 
         // Increment the start and end time for the next subtitle
         startTime += subtitleDuration;
