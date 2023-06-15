@@ -96,7 +96,7 @@ const lines = inputText.replace(/\n/g, '\\N');
 console.log(lines)
 
       // Calculate the duration for each subtitle
-      const subtitleDuration = 4; // Duration in seconds
+      const subtitleDuration = 0; // Duration in seconds
 
       // Calculate the start and end time for each subtitle
       let startTime = 0; // Start time adjusted by 2 seconds
@@ -115,7 +115,7 @@ console.log(lines)
 
       // Calculate the y-coordinate for the move effect
       const y1 = 720 + subtitleHeight;
-      const y2 = 0 + subtitleHeight;
+      const y2 = 0;
 
       // Create the move effect string
       const moveEffect = `{\\move(640,${y1},640,${y2})}`;
@@ -167,7 +167,7 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 const width = resolution.split("x")[0];
       const textWidth = Math.floor(width / 40);
 
-      const command = `ffmpeg -y -i ${WORKDIR}/news-v1.mp4 -vf "ass=${WORKDIR}/news.ass" -c:a copy ${WORKDIR}/output.mp4`;
+      const command = `ffmpeg -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "ass=${WORKDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${WORKDIR}/output.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);
