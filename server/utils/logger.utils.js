@@ -42,7 +42,7 @@ return formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 // Define the log format
 const logFormat = winston.format.printf(({ level, message, timestamp }) => {
-  return `${timestamp} ${level}: ${message}`;
+  return `${timestamp} | ${level}: ${message}`;
 });
 
 // Create the logger
