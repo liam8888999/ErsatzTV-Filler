@@ -56,9 +56,11 @@ if (!FILE_EXISTS) {
 delete config.log_per_run;
 //logger.info(config);
 delete config.autoupdate;
+delete config.textspeed;
 config.webport = '8408';
 config.webtheme = 'light';
-config.fontfile = 'fonts/Verdana.tff'
+config.fontfile = 'fonts/Verdana.tff';
+config.newsarticles = '10';
 //logger.info(config);
   // Convert the JSON object to a string with each key-value pair on a single line
   const jsonString = JSON.stringify(config, null, 2);

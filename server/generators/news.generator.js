@@ -61,23 +61,11 @@ const NEWS = async () => {
 
 const news1Content = newstempContent
       // Copy first 10 articles
-      const news2Content = news1Content.split('\n\n').slice(0, 10).join('\n\n');
+      const news2Content = news1Content.split('\n\n').slice(0, `${config_current.newsarticles}`).join('\n\n');
 
-      // Remove paragraph numbering
-      const news12Content = news2Content.replace(/^10 /gm, '');
-      const news13Content = news12Content.replace(/^0 /gm, '');
-      const news14Content = news13Content.replace(/^1 /gm, '');
-      const news15Content = news14Content.replace(/^2 /gm, '');
-      const news16Content = news15Content.replace(/^3 /gm, '');
-      const news17Content = news16Content.replace(/^4 /gm, '');
-      const news18Content = news17Content.replace(/^5 /gm, '');
-      const news19Content = news18Content.replace(/^6 /gm, '');
-      const news20Content = news19Content.replace(/^7 /gm, '');
-      const news21Content = news20Content.replace(/^8 /gm, '');
-      const news22Content = news21Content.replace(/^9 /gm, '');
 
       // Replace '%' with '\%'
-      const newsContent = news22Content.replace(/%/g, '\\%');
+      const newsContent = news2Content.replace(/%/g, '\\%');
 
       // Save the final result to news.txt
       fs.writeFileSync(`${WORKDIR}/news-temp.txt`, newsContent);
