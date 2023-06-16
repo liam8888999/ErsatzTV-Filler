@@ -2,7 +2,7 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 const cheerio = require('cheerio');
-const { WORKDIR } = require("../constants/path.constants");
+const { WORKDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const logger = require("../utils/logger.utils");
 const { exec } = require('child_process');
@@ -155,7 +155,7 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 const width = resolution.split("x")[0];
       const textWidth = Math.floor(width / 40);
 
-      const command = `ffmpeg -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "ass=${WORKDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${WORKDIR}/output.mp4`;
+      const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "ass=${WORKDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${WORKDIR}/output.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);

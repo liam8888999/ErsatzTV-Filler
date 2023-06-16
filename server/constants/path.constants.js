@@ -1,3 +1,9 @@
+const os = require('os');
+
+
+
+
+
 const TEMPLATES_FOLDER = "server/templates/"; // Have to do this because it expects the layout in the top level directory.
 const LAYOUTS_FOLDER = "layouts/";
 const PAGES_FOLDER = "pages/";
@@ -34,10 +40,19 @@ const CONFIG_CONSTANTS = () => {
 }
 
 
+let FFMPEGCOMMAND;
+if (os.platform() === 'win32') {
+  FFMPEGCOMMAND = 'ffmpeg.exe';
+} else {
+  FFMPEGCOMMAND = 'ffmpeg';
+}
+
+
 module.exports = {
     TEMPLATE_CONSTANTS,
     CONFIG_CONSTANTS,
     CHANGELOG,
     DOCUMENTATION,
-    WORKDIR
+    WORKDIR,
+    FFMPEGCOMMAND
 };
