@@ -9,6 +9,21 @@ const { setwebtheme } = require("../utils/config.utils.js");
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 
 const loadApiConfigRoutes = async (app) => {
+
+
+  // Middleware to handle errors
+  app.use((err, req, res, next) => {
+    logger.error(err); // Log the error for debugging purposes
+
+    // Set a default error status and message
+    const status = err.status || 500;
+    const message = err.message || 'Internal Server Error';
+
+    // Send an error response to the client
+    res.status(status).json({ error: message });
+  });
+
+  
     /**
      * Patch route to receive updates to the configuration file.
      */

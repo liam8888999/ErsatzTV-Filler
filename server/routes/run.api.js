@@ -8,6 +8,19 @@ const { NEWS } = require("../generators/news.generator");
 
 const loadApirunRoutes = (app) => {
 
+
+  // Middleware to handle errors
+  app.use((err, req, res, next) => {
+    logger.error(err); // Log the error for debugging purposes
+
+    // Set a default error status and message
+    const status = err.status || 500;
+    const message = err.message || 'Internal Server Error';
+
+    // Send an error response to the client
+    res.status(status).json({ error: message });
+  });
+
 // run weather function
 app.get('/api/run/weather', async () => {
 logger.info("running weather function")
