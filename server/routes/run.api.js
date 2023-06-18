@@ -10,7 +10,7 @@ const loadApirunRoutes = (app) => {
 
 // run weather function
 app.get('/api/run/weather', async () => {
-console.log("running weather function")
+logger.info("running weather function")
 await WEATHER();
 // use the url and path variables to set the theme
 

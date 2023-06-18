@@ -29,7 +29,7 @@ const NEWS = async () => {
 
   fs.writeFileSync(newsstyle, stylesheetContent);
 
-  console.log('Generating the news feed');
+  logger.info('Generating the news feed');
 
   const newsfeed = `${config_current.newsfeed}`;
 
@@ -81,7 +81,7 @@ const news1Content = newstempContent
 
     // Replace line breaks with \N
 const lines = inputText.replace(/\n/g, '\\N');
-console.log(lines)
+logger.info(lines)
 
       // Calculate the duration for each subtitle
       const subtitleDuration = 0; // Duration in seconds
@@ -99,7 +99,7 @@ console.log(lines)
 
       // Calculate the total height of the subtitle
       const subtitleHeight = lines2.length * fontSize * lineSpacing + 80;
-      console.log(subtitleHeight)
+      logger.info(subtitleHeight)
 
       // Calculate the y-coordinate for the move effect
       const y1 = 720 + subtitleHeight;
@@ -169,7 +169,7 @@ const width = resolution.split("x")[0];
           logger.ffmpeg(`stderr: ${stderr}`);
           return;
         }
-        console.log("end generate newsfeed");
+        logger.info("end generate newsfeed");
       });
     });
   });

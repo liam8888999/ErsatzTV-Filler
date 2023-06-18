@@ -30,10 +30,10 @@ app.get('/api/health', async (req, res) => {
 
   checkFFmpegInstallation()
   .then(message => {
-    console.log(message.status);
+    logger.info(message.status);
     return message.status;
   })
-  .catch(error => console.error(error));
+  .catch(error => logger.error(error));
 
 const osInfo = {
   platform: os.platform(),
@@ -46,7 +46,7 @@ const osInfo = {
 };
 
 res.json({ status: 'OK', os: osInfo });
-console.log(osInfo);
+logger.info(osInfo);
 });
 
 

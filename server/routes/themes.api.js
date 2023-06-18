@@ -40,11 +40,11 @@ app.get('/api/themes/readthemejson', async (req, res) => {
   const filepath = `themes/system/${req.query.filepath}`;
   readFile(`${filepath}`, 'utf8', (err, data) => {
       if (err) {
-        console.error(err);
+        logger.error(err);
         res.status(500).send('Error reading data file');
         return;
       }
-      console.log(JSON.parse(data))
+      logger.info(JSON.parse(data))
       res.json(JSON.parse(data));
     });
   });

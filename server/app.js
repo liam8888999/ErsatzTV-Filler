@@ -9,18 +9,16 @@ const moment = require('moment-timezone');
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
+  logger.error('Uncaught Exception:', error);
   // Perform any necessary cleanup or logging here
-logger.info(error)
   // Terminate the process (optional)
   process.exit(1);
 });
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection:', reason);
+  logger.error('Unhandled Rejection:', reason);
   // Perform any necessary cleanup or logging here
-  logger.info(reason);
 
   // Terminate the process (optional)
   process.exit(1);

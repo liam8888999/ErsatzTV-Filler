@@ -189,7 +189,7 @@ const formattedDate = `${year}-${month}-${day}`;
     const logFile = `ersatztv-filler-${formattedDate}.log`;
     return logFile;
   } catch (error) {
-    console.error('Error getting log file', error.message);
+    logger.error('Error getting log file', error.message);
  throw new Error('Error getting log file');
   }
 }

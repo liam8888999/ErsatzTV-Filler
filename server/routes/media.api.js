@@ -13,7 +13,7 @@ const loadApimediaRoutes = (app) => {
 app.get('/media/:filename', (req, res) => {
   const { filename } = req.params;
   const filePath = path.join('workdir', filename);
-  console.log(filePath)
+  logger.info(filePath)
 
   // Check if the file exists
   if (!fs.existsSync(filePath)) {

@@ -42,18 +42,18 @@ logger.info(value);
       const filepath = `config.json`;
       readFile(`${filepath}`, 'utf8', (err, data) => {
           if (err) {
-            console.error(err);
+            logger.error(err);
             res.status(500).send('Error reading data file');
             return;
           }
-          console.log(JSON.parse(data))
+          logger.info(JSON.parse(data))
           res.json(JSON.parse(data));
         });
       });
 
       app.get('/api/config/webtheme/set', async (req, res) => {
         const theme = req.query.theme;
-        console.log(theme)
+        logger.info(theme)
         logger.info(req.query.theme)
         await setwebtheme(theme)
         // use the url and path variables to set the theme
@@ -67,10 +67,10 @@ logger.info(value);
 const theme = config_current.webtheme;
       // Replace the code below with your logic to fetch the theme preference from a data source (e.g., a database)
       //const theme = 'dark'; // Replace with your desired theme value
-console.log(theme)
+logger.info(theme)
       res.json({ theme });
     } catch (error) {
-      console.error('Failed to load the theme preference:', error);
+      logger.error('Failed to load the theme preference:', error);
       res.status(500).json({ error: 'Failed to load the theme preference' });
     }
   });
