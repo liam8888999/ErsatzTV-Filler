@@ -17,6 +17,9 @@ const CHANGELOG = "Changelog.md"
 const DOCUMENTATION = "README.md"
 
 const WORKDIR = "workdir"
+const NEWSDIR = "workdir/News"
+const WEATHERDIR = "workdir/Weather"
+const CHANNEL_OFFLINEDIR = "workdir/Channel-offline"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -25,6 +28,12 @@ const WORKDIR = "workdir"
 const TEMPLATE_CONSTANTS = () => {
     return {
         TEMPLATES_FOLDER, LAYOUTS_FOLDER, PAGES_FOLDER, DEFAULT_LAYOUT
+    }
+}
+
+const WORKDIRS = () => {
+    return {
+        WORKDIR, NEWSDIR, WEATHERDIR, CHANNEL_OFFLINEDIR
     }
 }
 /**
@@ -53,6 +62,6 @@ module.exports = {
     CONFIG_CONSTANTS,
     CHANGELOG,
     DOCUMENTATION,
-    WORKDIR,
+    WORKDIRS,
     FFMPEGCOMMAND
 };

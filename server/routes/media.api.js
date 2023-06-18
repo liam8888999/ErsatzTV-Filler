@@ -25,7 +25,7 @@ const loadApimediaRoutes = (app) => {
 // Define an API endpoint to retrieve a media file
 app.get('/media/:filename', (req, res) => {
   const { filename } = req.params;
-  const filePath = path.join('workdir', filename);
+  const filePath = path.join(WORKDIR, filename);
   logger.info(filePath)
 
   // Check if the file exists

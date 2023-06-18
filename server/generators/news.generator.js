@@ -2,20 +2,23 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 const cheerio = require('cheerio');
-const { WORKDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
+const { WORKDIRS, FFMPEGCOMMAND } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const logger = require("../utils/logger.utils");
 const { exec } = require('child_process');
 const wordwrap = require('wordwrap');
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const path = require('path');
+  const { createDirectoryIfNotExists } =require("../utils/file.utils")
 
 const NEWS = async () => {
+
+    createDirectoryIfNotExists(NEWSDIR);
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const fontFilePath = path.resolve(__dirname, `${config_current.fontfile}`);
 
-  const newsstyle = `${WORKDIR}/news.xslt`;
+  const newsstyle = `${NEWSDIR}/news.xslt`;
 
   // Write the (simple) stylesheet to a convenient file -- we will edit it in place later
   const stylesheetContent = `<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -53,10 +56,10 @@ const NEWS = async () => {
         newsFeed += `${title}\n${description}\n\n`;
       });
 
-      fs.writeFileSync(`${WORKDIR}/newstemp.txt`, newsFeed);
+      fs.writeFileSync(`${NEWSDIR}/newstemp.txt`, newsFeed);
 
       // Read the newstemp.txt file
-      const newstempContent = fs.readFileSync(`${WORKDIR}/newstemp.txt`, 'utf8');
+      const newstempContent = fs.readFileSync(`${NEWSDIR}/newstemp.txt`, 'utf8');
 
 
 const news1Content = newstempContent
@@ -68,13 +71,13 @@ const news1Content = newstempContent
       const newsContent = news2Content.replace(/%/g, '\\%');
 
       // Save the final result to news.txt
-      fs.writeFileSync(`${WORKDIR}/news-temp.txt`, newsContent);
+      fs.writeFileSync(`${NEWSDIR}/news-temp.txt`, newsContent);
 
       // Set the maximum number of lines per frame
       const maxLinesPerFrame = 70;
 
       // Read the input file
-      const inputText = fs.readFileSync(`${WORKDIR}/news-temp.txt`, 'utf8');
+      const inputText = fs.readFileSync(`${NEWSDIR}/news-temp.txt`, 'utf8');
 
       // Split the inputText into separate lines
     //  const lines = inputText.split('\n');
@@ -140,7 +143,7 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 
 
       // Save the ASS text to a file
-      fs.writeFileSync(`${WORKDIR}/news.ass`, assText);
+      fs.writeFileSync(`${NEWSDIR}/news.ass`, assText);
 
 
 
@@ -148,14 +151,14 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 
 
 // Write the wrapped text to the output file
-//fs.writeFileSync(`${WORKDIR}/news.txt`, wrappedText, 'utf8');
+//fs.writeFileSync(`${NEWSDIR}/news.txt`, wrappedText, 'utf8');
 
       // Adjust the fontsize parameter to fit the text within the video width
       const resolution = config_current.videoresolution;
 const width = resolution.split("x")[0];
       const textWidth = Math.floor(width / 40);
 
-      const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "ass=${WORKDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${WORKDIR}/output.mp4`;
+      const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${NEWSDIR}/output.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);
