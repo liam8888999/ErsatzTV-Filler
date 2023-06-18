@@ -5,6 +5,7 @@ const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 const { WEATHER } = require("../generators/weather.generator");
 const { NEWS } = require("../generators/news.generator");
+const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 
 const loadApirunRoutes = (app) => {
 
@@ -42,6 +43,14 @@ await WEATHER();
 app.get('/api/run/channel-offline', async () => {
 logger.info("running channel-offline function")
 //await ChannelOffline();
+// use the url and path variables to set the theme
+
+});
+
+// run xmltvmerger function
+app.get('/api/run/xmltvmerger', async () => {
+logger.info("xmltvmerger function")
+//await XMLTVPARSE();
 // use the url and path variables to set the theme
 
 });

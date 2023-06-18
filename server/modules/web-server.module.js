@@ -13,6 +13,7 @@ const { loadApirunRoutes } = require("../routes/run.api");
 const { loadApihealthRoutes } = require("../routes/health.api");
 const { loadApimediaRoutes } = require("../routes/media.api");
 const { loadApilogsRoutes } = require("../routes/logs.api");
+const { loadApixmltvmergeRoutes } = require("../routes/xmltvmerge.api");
 const os = require('os');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { createDirectoryIfNotExists } =require("../utils/file.utils")
@@ -31,6 +32,7 @@ const createWebServer = () => {
     loadApihealthRoutes(app);
     loadApimediaRoutes(app);
     loadApilogsRoutes(app);
+    loadApixmltvmergeRoutes(app);
     createDirectoryIfNotExists(WORKDIR);
 
     // Log system information

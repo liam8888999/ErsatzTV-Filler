@@ -61,6 +61,7 @@ config.webport = '8408';
 config.webtheme = 'light';
 config.fontfile = 'fonts/Verdana.tff';
 config.newsarticles = '10';
+config.processxmltvmerger = 'no';
 config.epg1 = '';
 config.epg2 = '';
 //logger.info(config);

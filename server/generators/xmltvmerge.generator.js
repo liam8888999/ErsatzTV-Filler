@@ -14,18 +14,18 @@ const XMLTVPARSE = async () => {
 
 const config_current = await retrieveCurrentConfiguration()
 
-await downloadImage(`${config_current.epg1}`, `${WORKDIR}/epg1.xml`)
+await downloadImage(`${config_current.epg1}`, `${XMLTVMERGEDIR}/epg1.xml`)
 .then(logger.success)
 .catch(logger.error);
 
-await downloadImage(`${config_current.epg2}`, `${WORKDIR}/epg2.xml`)
+await downloadImage(`${config_current.epg2}`, `${XMLTVMERGEDIR}/epg2.xml`)
     .then(logger.success)
     .catch(logger.error);
 
 
 
-const epg1 = await fs.readFileSync('epg1.xml', { encoding: 'utf-8' })
-const epg2 = await fs.readFileSync('epg2.xml', { encoding: 'utf-8' })
+const epg1 = await fs.readFileSync(`${XMLTVMERGEDIR}/epg1.xml`, { encoding: 'utf-8' })
+const epg2 = await fs.readFileSync(`${XMLTVMERGEDIR}/epg2.xml`, { encoding: 'utf-8' })
 const object1 = parser.parse(await epg1)
 const object2 = parser.parse(await epg2)
 
@@ -83,7 +83,7 @@ const mergedObject = {
   const xmlString = xml.end({ pretty: true });
 
   // Save the XML string to a file
-  fs.writeFileSync('mergedxmltv.xml', xmlString, 'utf8');
+  fs.writeFileSync(`${XMLTVMERGEDIR}/mergedxmltv.xml`, xmlString, 'utf8');
 
   logger.success('XMLTV file created successfully.');
 

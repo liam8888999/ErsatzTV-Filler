@@ -20,6 +20,7 @@ const WORKDIR = "workdir"
 const NEWSDIR = "workdir/News"
 const WEATHERDIR = "workdir/Weather"
 const CHANNEL_OFFLINEDIR = "workdir/Channel-offline"
+const XMLTVMERGEDIR = "workdir/xmltvmerge"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -61,5 +62,6 @@ module.exports = {
     WEATHERDIR,
     NEWSDIR,
     CHANNEL_OFFLINEDIR,
-    FFMPEGCOMMAND
+    FFMPEGCOMMAND,
+    XMLTVMERGEDIR
 };
