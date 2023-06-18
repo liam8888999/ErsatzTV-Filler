@@ -31,11 +31,6 @@ const TEMPLATE_CONSTANTS = () => {
     }
 }
 
-const WORKDIRS = () => {
-    return {
-        WORKDIR, NEWSDIR, WEATHERDIR, CHANNEL_OFFLINEDIR
-    }
-}
 /**
  * Returns the path constants for our script config
  * @returns {{USER_CONFIG: string, DEFAULT_CONFIG: string}}
@@ -62,6 +57,9 @@ module.exports = {
     CONFIG_CONSTANTS,
     CHANGELOG,
     DOCUMENTATION,
-    WORKDIRS,
+    WORKDIR,
+    WEATHERDIR,
+    NEWSDIR,
+    CHANNEL_OFFLINEDIR,
     FFMPEGCOMMAND
 };

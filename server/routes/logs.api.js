@@ -88,7 +88,7 @@ const loadApilogsRoutes = (app) => {
 
 
   //logger.info(formattedDate)
-      const logFile = `ersatztv-filler-${formattedDate}.log`;
+      const logFile = `logs/ersatztv-filler-${formattedDate}.log`;
       return logFile;
     } catch (error) {
       logger.error('Error getting log file', error.message);
