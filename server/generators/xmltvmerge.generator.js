@@ -1,18 +1,24 @@
 const fs = require('fs');
 const parser = require('epg-parser');
-const { WORKDIR } = require("../constants/path.constants");
+const { XMLTVMERGEDIR } = require("../constants/path.constants");
 const { create, node } = require('xmlbuilder2');
 const builder = require('xmlbuilder');
 const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
+const { createDirectoryIfNotExists } =require("../utils/file.utils");
 
 const XMLTVPARSE = async () => {
 
-await downloadImage('http://xmltv.net/xml_files/Melbourne.xml', `${WORKDIR}/epg1.xml`)
+  createDirectoryIfNotExists(XMLTVMERGEDIR);
+
+const config_current = await retrieveCurrentConfiguration()
+
+await downloadImage(`${config_current.epg1}`, `${WORKDIR}/epg1.xml`)
 .then(logger.success)
 .catch(logger.error);
 
-await downloadImage(`http://xmltv.net/xml_files/Riverland.xml`, `${WORKDIR}/epg2.xml`)
+await downloadImage(`${config_current.epg2}`, `${WORKDIR}/epg2.xml`)
     .then(logger.success)
     .catch(logger.error);
 

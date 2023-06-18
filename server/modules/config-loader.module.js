@@ -61,6 +61,8 @@ config.webport = '8408';
 config.webtheme = 'light';
 config.fontfile = 'fonts/Verdana.tff';
 config.newsarticles = '10';
+config.epg1 = '';
+config.epg2 = '';
 //logger.info(config);
   // Convert the JSON object to a string with each key-value pair on a single line
   const jsonString = JSON.stringify(config, null, 2);
