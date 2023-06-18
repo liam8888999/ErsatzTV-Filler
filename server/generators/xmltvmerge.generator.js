@@ -1,12 +1,89 @@
-import fs from 'fs'
-import parser from 'epg-parser'
+const fs = require('fs');
+const parser = require('epg-parser');
+const { WORKDIR } = require("../constants/path.constants");
+const { create, node } = require('xmlbuilder2');
+const builder = require('xmlbuilder');
+const { downloadImage } = require("../utils/downloadimage.utils");
+const logger = require("../utils/logger.utils");
 
 const XMLTVPARSE = async () => {
-const epg = fs.readFileSync('Melbourne.xml', { encoding: 'utf-8' })
-const result = parser.parse(epg)
 
-console.log(result)
-}
+await downloadImage('http://xmltv.net/xml_files/Melbourne.xml', `${WORKDIR}/epg1.xml`)
+.then(logger.success)
+.catch(logger.error);
+
+await downloadImage(`http://xmltv.net/xml_files/Riverland.xml`, `${WORKDIR}/epg2.xml`)
+    .then(logger.success)
+    .catch(logger.error);
+
+
+
+const epg1 = await fs.readFileSync('epg1.xml', { encoding: 'utf-8' })
+const epg2 = await fs.readFileSync('epg2.xml', { encoding: 'utf-8' })
+const object1 = parser.parse(await epg1)
+const object2 = parser.parse(await epg2)
+
+//console.log(await result)
+
+
+
+const mergedObject = {
+  channels: [...object1.channels, ...object2.channels],
+  programs: [...object1.programs, ...object2.programs]
+};
+
+//console.log(mergedObject);
+
+
+
+
+    // Write updated object back to file
+    //fs.writeFileSync(`${WORKDIR}/parsed.txt`, JSON.stringify(mergedObject, null, 2));
+
+
+  const data = mergedObject;
+
+
+  // Create the root element of the XML document
+  const xml = builder.create('tv', { version: '1.0', encoding: 'UTF-8' });
+
+  // Add channels to the XML document
+  data.channels.forEach(channel => {
+    const channelElem = xml.ele('channel', { id: channel.id });
+    channel.name.forEach(name => channelElem.ele('display-name', name.value));
+    channel.icon.forEach(icon => channelElem.ele('icon', { src: icon }));
+  });
+
+  // Add programs to the XML document
+  data.programs.forEach(program => {
+    const programElem = xml.ele('programme', {
+      start: program.start,
+      stop: program.stop,
+      channel: program.channel
+    });
+
+    program.title.forEach(title => programElem.ele('title', title.value));
+    program.desc.forEach(desc => programElem.ele('desc', desc.value));
+    program.category.forEach(category => programElem.ele('category', category.value));
+
+    program.episodeNum.forEach(episodeNum => {
+      programElem.ele('episode-num', { system: episodeNum.system }, episodeNum.value);
+    });
+
+    program.icon.forEach(icon => programElem.ele('icon', { src: icon }));
+  });
+
+  // Convert the XML document to string
+  const xmlString = xml.end({ pretty: true });
+
+  // Save the XML string to a file
+  fs.writeFileSync('mergedxmltv.xml', xmlString, 'utf8');
+
+  logger.success('XMLTV file created successfully.');
+
+
+
+};
 
 
 module.exports = {

@@ -4,7 +4,7 @@
 *V0.0.25 - Beta
 */
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
-const { downloadImage } = require("../utils/downloadimage.utils"); //unsure about this one
+const { downloadImage } = require("../utils/downloadimage.utils");
 const { WEATHERDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const logger = require("../utils/logger.utils");
