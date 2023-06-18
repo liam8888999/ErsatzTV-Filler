@@ -23,35 +23,10 @@
 <div>
   <center>
     <h1>Logs</h1>
+        <button onclick="handleZip()">Download Log Files</button>
+        <br>
   </center>
-  <h1>Directory Zipper</h1>
-    <button onclick="handleZip()">Zip and Download</button>
 
   <div id="logContainer" style="padding-top:10px;"></div>
 
 </div>
-
-<script>
-    function handleZip() {
-      fetch('/zip')
-        .then(response => {
-          if (response.ok) {
-            return response.blob();
-          } else {
-            throw new Error('Error creating zip file.');
-          }
-        })
-        .then(blob => {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'directory.zip';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
-  </script>

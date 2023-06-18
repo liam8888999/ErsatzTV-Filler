@@ -66,14 +66,14 @@ app.get('/zip', (req, res) => {
     // Download the zip file
     res.download(zipPath, (err) => {
       if (err) {
-        console.error('Error occurred while downloading:', err);
+        logger.error('Error occurred while downloading:', err);
       } else {
-        // Delete the zip file
+         Delete the zip file
         fs.unlink(zipPath, (unlinkErr) => {
           if (unlinkErr) {
-            console.error('Error occurred while deleting the zip file:', unlinkErr);
+          logger.error('Error occurred while deleting the zip file:', unlinkErr);
           } else {
-            console.log('Zip file deleted successfully.');
+            logger.info('Zip file deleted successfully.');
           }
         });
       }
