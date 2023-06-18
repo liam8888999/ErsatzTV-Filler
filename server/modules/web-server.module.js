@@ -12,6 +12,7 @@ const { loadApiThemeRoutes } = require("../routes/themes.api")
 const { loadApirunRoutes } = require("../routes/run.api");
 const { loadApihealthRoutes } = require("../routes/health.api");
 const { loadApimediaRoutes } = require("../routes/media.api");
+const { loadApilogsRoutes } = require("../routes/logs.api");
 const os = require('os');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { createDirectoryIfNotExists } =require("../utils/file.utils")
@@ -29,6 +30,7 @@ const createWebServer = () => {
     loadApirunRoutes(app);
     loadApihealthRoutes(app);
     loadApimediaRoutes(app);
+    loadApilogsRoutes(app);
     createDirectoryIfNotExists(WORKDIR);
 
     // Log system information

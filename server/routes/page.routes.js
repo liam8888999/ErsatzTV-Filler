@@ -110,7 +110,6 @@ const config_current = await retrieveCurrentConfiguration();
 
 
 
-//start logs page
     app.get('/logs', async (req, res) => {
       let UPDATESTATUS = await checkForUpdates();
       const ersatz = config_current.xmltv
@@ -124,78 +123,7 @@ const config_current = await retrieveCurrentConfiguration();
             updatestatus: UPDATESTATUS
         });
     });
-// Define a route to stream the logs in real-time
-app.get('/logsload', (req, res) => {
-  try {
-    const logFile = getLatestLogFile();
 
-      if (!fs.existsSync(logFile)) {
-        res.status(404).send('Log file not found');
-        logger.error('Log file not found');
-
- return;
-}
-
-    const logStream = fs.createReadStream(logFile);
-
-    // Handle error event for logStream
-    logStream.on('error', (error) => {
-      res.status(500).send('Error reading log file');
-      logger.error(error);
-    });
-
-    const rl = readline.createInterface({
-      input: logStream,
-      terminal: false
-    });
-
-    // Add "line" event listener
-    rl.on('line', (line) => {
-      try {
-        res.write(`<p>${line}</p>\n`);
-      } catch (err) {
-        logger.error('An error occurred while processing a line:', err);
-        // Handle the error as needed
-      }
-    });
-
-    // Add "error" event listener
-    rl.on('error', (err) => {
-      logger.error('An error occurred in the readline interface:', err);
-      // Handle the error as needed
-    });
-
-    // End the response when reading is complete
-    rl.on('close', () => {
-      res.end();
-    });
-  } catch (error) {
-    res.status(500).send('Error getting log file');
-    logger.error(error.message);
-  }
-});
-
-function getLatestLogFile() {
-  try {
-    const currentDate = new Date();
-const year = currentDate.getFullYear();
-const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-const day = String(currentDate.getDate()).padStart(2, '0');
-
-const formattedDate = `${year}-${month}-${day}`;
-
-
-//logger.info(formattedDate)
-    const logFile = `ersatztv-filler-${formattedDate}.log`;
-    return logFile;
-  } catch (error) {
-    logger.error('Error getting log file', error.message);
- throw new Error('Error getting log file');
-  }
-}
-
-
-//end logs page
 
 
 

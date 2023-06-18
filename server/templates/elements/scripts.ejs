@@ -517,7 +517,7 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
 
     <script>
         function handleZip() {
-          fetch('/zip')
+          fetch('/zip/logs')
             .then(response => {
               if (response.ok) {
                 return response.blob();
