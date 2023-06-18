@@ -14,18 +14,28 @@ const XMLTVPARSE = async () => {
 
 const config_current = await retrieveCurrentConfiguration()
 
+let epg1;
+if (config_current.epg1.startsWith("http")) {
 await downloadImage(`${config_current.epg1}`, `${XMLTVMERGEDIR}/epg1.xml`)
 .then(logger.success)
 .catch(logger.error);
 
+epg1 = await fs.readFileSync(`${XMLTVMERGEDIR}/epg1.xml`, { encoding: 'utf-8' })
+} else {
+epg1 = await fs.readFileSync(`${config_current.epg1}`, { encoding: 'utf-8' })
+};
+
+let epg2;
+if (config_current.epg2.startsWith("http")) {
 await downloadImage(`${config_current.epg2}`, `${XMLTVMERGEDIR}/epg2.xml`)
     .then(logger.success)
     .catch(logger.error);
 
+epg2 = await fs.readFileSync(`${XMLTVMERGEDIR}/epg2.xml`, { encoding: 'utf-8' })
+} else {
+epg2 = await fs.readFileSync(`${config_current.epg2}`, { encoding: 'utf-8' })
+};
 
-
-const epg1 = await fs.readFileSync(`${XMLTVMERGEDIR}/epg1.xml`, { encoding: 'utf-8' })
-const epg2 = await fs.readFileSync(`${XMLTVMERGEDIR}/epg2.xml`, { encoding: 'utf-8' })
 const object1 = parser.parse(await epg1)
 const object2 = parser.parse(await epg2)
 

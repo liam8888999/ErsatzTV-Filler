@@ -8,7 +8,7 @@ const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const GENERATION = async () => {
 //   WEATHER();
 //  NEWS();
-// XMLTVPARSE()
+//  XMLTVPARSE()
 }
 
 module.exports = {

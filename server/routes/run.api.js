@@ -50,7 +50,7 @@ logger.info("running channel-offline function")
 // run xmltvmerger function
 app.get('/api/run/xmltvmerger', async () => {
 logger.info("xmltvmerger function")
-//await XMLTVPARSE();
+await XMLTVPARSE();
 // use the url and path variables to set the theme
 
 });
