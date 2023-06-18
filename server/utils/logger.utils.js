@@ -56,14 +56,14 @@ const logger = winston.createLogger({
   transports: [
     new winston.transports.Console(),
     new DailyRotateFile({
-     filename: 'ersatztv-filler-%DATE%.log',
+     filename: 'logs/ersatztv-filler-%DATE%.log',
      datePattern: 'YYYY-MM-DD',
      maxFiles: '7d', // Keep logs for 7 days
      maxSize: '900m', // Rotate logs if the file size exceeds 20MB
      level: 'debug'
    }),
    new DailyRotateFile({
-    filename: 'ersatztv-filler-ffmpeg-%DATE%.log',
+    filename: 'logs/ersatztv-filler-ffmpeg-%DATE%.log',
     datePattern: 'YYYY-MM-DD',
     maxFiles: '7d', // Keep logs for 7 days
     maxSize: '900m', // Rotate logs if the file size exceeds 20MB
