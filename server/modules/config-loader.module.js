@@ -62,8 +62,7 @@ config.webtheme = 'light';
 config.fontfile = 'fonts/Verdana.tff';
 config.newsarticles = '10';
 config.processxmltvmerger = 'no';
-config.epg1 = '';
-config.epg2 = '';
+config.epgfiles = 'example1.xml example2.xml';
 //logger.info(config);
   // Convert the JSON object to a string with each key-value pair on a single line
   const jsonString = JSON.stringify(config, null, 2);
