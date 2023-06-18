@@ -5,7 +5,9 @@ const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 const { WEATHER } = require("../generators/weather.generator");
 const os = require('os');
+const fs = require('fs');
 const { exec } = require('child_process');
+const archiver = require('archiver');
 
 
 const loadApihealthRoutes = (app) => {
@@ -47,7 +49,46 @@ res.json({ status: 'OK', os: osInfo });
 console.log(osInfo);
 });
 
+
+
+
+
+// Endpoint to handle directory zipping and download
+app.get('/zip', (req, res) => {
+  const directoryPath = 'logs'; // Replace with the path to the directory you want to zip
+
+  // Create a new zip file
+  const zipPath = `${directoryPath}.zip`;
+  const output = fs.createWriteStream(zipPath);
+  const archive = archiver('zip', { zlib: { level: 9 } });
+
+  output.on('close', () => {
+    // Download the zip file
+    res.download(zipPath, (err) => {
+      if (err) {
+        console.error('Error occurred while downloading:', err);
+      } else {
+        // Delete the zip file
+        fs.unlink(zipPath, (unlinkErr) => {
+          if (unlinkErr) {
+            console.error('Error occurred while deleting the zip file:', unlinkErr);
+          } else {
+            console.log('Zip file deleted successfully.');
+          }
+        });
+      }
+    });
+  });
+
+  archive.pipe(output);
+  archive.directory(directoryPath, false);
+  archive.finalize();
+});
+
+
+
 }
+
 
 module.exports = {
     loadApihealthRoutes
