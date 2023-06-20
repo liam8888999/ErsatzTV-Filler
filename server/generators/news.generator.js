@@ -24,13 +24,13 @@ const NEWS = async () => {
   const stylesheetContent = `<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="/rss/channel">
       <xsl:for-each select="item">
-        <b><xsl:value-of select="title"/></b><br/>
-        <xsl:value-of select="description"/>
+        <xsl:value-of select="title"/><br/>
+      <xsl:value-of select="description"/>
       </xsl:for-each>
     </xsl:template>
   </xsl:stylesheet>`;
 
-  fs.writeFileSync(newsstyle, stylesheetContent);
+  fs.writeFileSync(`${NEWSDIR}/newsstyle.txt`, stylesheetContent);
 
   logger.info('Generating the news feed');
 
@@ -53,7 +53,11 @@ const NEWS = async () => {
         const title = $(element).find('title').text();
         const description = $(element).find('description').text();
 
-        newsFeed += `${title}\n${description}\n\n`;
+        //theme work needed for this to work correctly
+        const titlecolor = 'FF0000'
+        const descriptioncolor = ''
+
+        newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
       });
 
       fs.writeFileSync(`${NEWSDIR}/newstemp.txt`, newsFeed);
