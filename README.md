@@ -6,6 +6,7 @@
 Discord chat: https://discord.gg/x4Nk4sfgSg
 
 Donations are welcome: https://www.paypal.me/liam200333
+                       [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E4MI8T5)
 
 ## Themes
 ErsatzTV-Filler uses theme files to adjust the look of the ouput video files.
