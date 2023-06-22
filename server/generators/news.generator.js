@@ -115,8 +115,10 @@ logger.info(lines)
       // Create the move effect string
       const moveEffect = `{\\move(640,${y1},640,${y2})}`;
 
+      const isfreetext = '\\N\\N\\N\\N{\\c&HBBGGRR&} Created with ErsatzTV-Filler'
+
       // Combine the move effect with the subtitle text
-      const subtitle = `${moveEffect}${lines}`;
+      const subtitle = `${moveEffect}${lines}${isfreetext}`;
 
 
       let assText = `[Script Info]
@@ -161,6 +163,12 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
       const resolution = config_current.videoresolution;
 const width = resolution.split("x")[0];
       const textWidth = Math.floor(width / 40);
+
+
+
+
+
+
 
       const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${NEWSDIR}/output.mp4`;
 
