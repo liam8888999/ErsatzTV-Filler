@@ -118,7 +118,8 @@ logger.info(lines)
       const isfreetext =  //'\\N\\N\\N\\N{\\c&HBBGGRR&} Created with ErsatzTV-Filler'
 
       // Combine the move effect with the subtitle text
-      const subtitle = `${moveEffect}${lines}${isfreetext}`;
+      //const subtitle = `${moveEffect}${lines}${isfreetext}`;
+      const subtitle = `${moveEffect}${lines}`;
 
 
       let assText = `[Script Info]
