@@ -48,7 +48,7 @@ app.get('/api/health', async (req, res) => {
           resolve({ status: 'FFmpeg is installed. libass is not compiled in. The News generator will not work.' });
         }
           } else {
-        resolve({ status: `FFmpeg is installed, but the required version ${requiredVersion} or higher is not available. Some function may not work` });
+        resolve({ status: `FFmpeg is installed, but the required version ${requiredVersion} or higher is not available. Some functions may not work` });
       }
     });
   });
