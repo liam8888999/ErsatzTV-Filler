@@ -29,23 +29,30 @@ const loadApihealthRoutes = (app) => {
 // run weather function
 app.get('/api/health', async (req, res) => {
 
+
   function checkFFmpegInstallation() {
+  const requiredVersion = '6.0'; // Specify the required FFmpeg version here
 
-    return new Promise((resolve, reject) => {
-      exec(`${FFMPEGCOMMAND} -version`, (error, stdout, stderr) => {
-        if (error) {
-          reject(new Error('FFmpeg is not installed. Please install it to create filler video files.'));
-          return;
-        }
+  return new Promise((resolve, reject) => {
+    exec(`${FFMPEGCOMMAND} -version`, (error, stdout, stderr) => {
+      if (error) {
+        reject(new Error('FFmpeg is not installed. Please install it to create filler video files.'));
+        return;
+      }
 
+      const versionMatch = stdout.match(/version\s(\d+\.\d+)/);
+      if (versionMatch && versionMatch[1] >= requiredVersion) {
         if (stdout.includes('libass')) {
-          resolve({ status: 'FFmpeg is installed. libass is compiled in. Everything will work.' });
+          resolve({ status: 'FFmpeg is installed. Everything will work.' });
         } else {
           resolve({ status: 'FFmpeg is installed. libass is not compiled in. The News generator will not work.' });
         }
-      });
+          } else {
+        resolve({ status: `FFmpeg is installed, but the required version ${requiredVersion} or higher is not available. Some function may not work` });
+      }
     });
-  }
+  });
+}
 
   checkFFmpegInstallation()
     .then(message => {
