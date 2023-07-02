@@ -6,6 +6,7 @@ const moment = require('moment-timezone');
 const { WEATHER } = require("../generators/weather.generator");
 const { NEWS } = require("../generators/news.generator");
 const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
+const { CHANNEL_OFFLINE } = require("../generators/channel-offline.generator");
 
 const loadApirunRoutes = (app) => {
 
@@ -42,7 +43,7 @@ await WEATHER();
 // run channel-offline function
 app.get('/api/run/channel-offline', async () => {
 logger.info("running channel-offline function")
-//await ChannelOffline();
+await CHANNEL_OFFLINE();
 // use the url and path variables to set the theme
 
 });
