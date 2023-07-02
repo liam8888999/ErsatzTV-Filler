@@ -51,12 +51,23 @@ const overWriteFileContents = async (path, fileContents) => {
 async function listFilesInDir(directoryPath) {
   try {
     const files = await fs.promises.readdir(directoryPath);
-    return files;
+    const filePromises = files.map(async (file) => {
+      const filePath = `${directoryPath}/${file}`;
+      const stat = await fs.promises.stat(filePath);
+      if (stat.isDirectory()) {
+        const subFiles = await listFilesInDir(filePath); // Recursive call
+        return subFiles;
+      }
+      return filePath;
+    });
+    const results = await Promise.all(filePromises);
+    return results.flat();
   } catch (error) {
-    logger.error(`Error reading directory: ${error}`);
+    console.error(`Error reading directory: ${error}`);
     return [];
   }
 }
+
 
 const createDirectoryIfNotExists = (directoryPath) => {
   if (!fs.existsSync(directoryPath)) {

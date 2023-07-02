@@ -171,7 +171,7 @@ const width = resolution.split("x")[0];
 
 
 
-      const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${config_current.customaudio}/${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${NEWSDIR}/output.mp4`;
+      const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${NEWSDIR}/output.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);
