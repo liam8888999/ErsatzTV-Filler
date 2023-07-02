@@ -73,35 +73,39 @@ const CHANNEL_OFFLINE = async () => {
         }
 
         // Extract the show start time
-        const showName = 'Vietnamese'; // Replace with the name of the show you're looking for
+        const showName = 'Channel-Offline'; // Replace with the name of the show you're looking for
 
         const programme = result.tv.programme.find(program => program.title[0] === showName);
 
         if (programme) {
-          const startTimeString = programme.$.start;
-          console.log('Start Time:', formatTime(startTimeString));
+          const startTimeString = programme.$.stop;
+          const year = startTimeString.substring(0, 4);
+        const month = startTimeString.substring(4, 6);
+        const day = startTimeString.substring(6, 8);
+        const hours24 = startTimeString.substring(8, 10);
+        const minutes = startTimeString.substring(10, 12);
+        const seconds = startTimeString.substring(12, 14);
 
-          // Calculate the end time based on the start time and duration
-          const duration = programme.$.duration;
-          const startTime = new Date(startTimeString);
-          const endTime = new Date(startTime.getTime() + duration * 1000);
-          console.log('End Time:', formatTime(endTime));
+        let hours12 = parseInt(hours24);
+        let ampm = 'AM';
+
+        if (hours12 >= 12) {
+          hours12 = hours12 % 12;
+          ampm = 'PM';
+        }
+
+        if (hours12 === 0) {
+          hours12 = 12;
+        }
+
+        const startTime = new Date(`${year}-${month}-${day}T${hours12.toString().padStart(2, '0')}:${minutes}:${seconds}`);
+        const formattedTime = startTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+
+        console.log('Start time:', formattedTime);
         } else {
-          console.log('Show not found.');
+          console.log('Show not found in the schedule.');
         }
       });
-
-      function formatTime(date) {
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let ampm = hours >= 12 ? 'PM' : 'AM';
-
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-
-        return hours + ':' + minutes + ' ' + ampm;
-      }
     });
   }
 
