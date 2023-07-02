@@ -1,23 +1,45 @@
-const { listFilesInDir } = require("../../utils/file.utils")
-const { randomNumber } = require("../../utils/randomnumber.utils")
+const { listFilesInDir } = require("../../utils/file.utils");
+const { randomNumber } = require("../../utils/randomnumber.utils");
 const logger = require("../../utils/logger.utils");
 const moment = require('moment-timezone');
 
+const audioExtensions = ['mp3', 'wav', 'flac', 'aac', 'ogg', 'wma', 'm4a', 'opus', 'amr', 'webm', 'amr', 'ape', 'mid', 'midi', 'ac3', 'aiff', 'aif', 'au', 'raw', 'mp2', 'ra', 'rm', 'dsf', 'dts', 'caf'];
+
 const selectRandomAudioFile = async (path) => {
-  //gra the array of files
-  const fileList = await listFilesInDir(path)
-  //logger.info(fileList)
-  //generate a random number from array 0 to length
+  // Get the list of files in the specified directory
+  let fileList = await listFilesInDir(path);
+  logger.info(fileList);
 
+  // Filter out non-audio files
+  fileList = fileList.filter((file) => {
+    const extension = file.split('.').pop();
+    return audioExtensions.includes(extension.toLowerCase());
+  });
+
+  // Check if the directory is empty after filtering for audio files
+  if (fileList.length === 0) {
+    console.log("File list is empty");
+    // If the directory is empty, retrieve the list of files from the backup directory
+    fileList = await listFilesInDir('audio-fallback');
+
+    // Filter out non-audio files from the backup directory
+    fileList = fileList.filter((file) => {
+      const extension = file.split('.').pop();
+      return audioExtensions.includes(extension.toLowerCase());
+    });
+  }
+
+  logger.info(fileList);
+
+  // Generate a random number from 0 to length-1
   const randomIndex = randomNumber(fileList.length);
-  //logger.info(randomIndex)
 
-const listFile = await fileList[randomIndex]
+  const chosenFile = fileList[randomIndex];
+
   // Return the chosen random file path
-  //  logger.info(listFile)
-  return listFile
-}
+  return chosenFile;
+};
 
 module.exports = {
-    selectRandomAudioFile
-}
+  selectRandomAudioFile
+};

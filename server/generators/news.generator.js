@@ -15,7 +15,7 @@ const NEWS = async () => {
 
     createDirectoryIfNotExists(NEWSDIR);
   const config_current = await retrieveCurrentConfiguration();
-  const audioFile = await selectRandomAudioFile(config_current.customaudio) || 'audio-fallback';
+  const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const fontFilePath = path.resolve(__dirname, `${config_current.fontfile}`);
 
   const newsstyle = `${NEWSDIR}/news.xslt`;
