@@ -20,7 +20,7 @@ const selectRandomAudioFile = async (path) => {
 
   // Check if the directory is empty after filtering for audio files
   if (fileList.length === 0) {
-    console.log("File list is empty");
+    logger.info("File list is empty");
     // If the directory is empty, retrieve the list of files from the backup directory
     fileList = await listFilesInDir('audio-fallback')
 

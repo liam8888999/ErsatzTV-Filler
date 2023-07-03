@@ -40,15 +40,15 @@
         })
         .then(response => {
           // Handle the response from the server
-          console.log("Upload successful");
+          logger.info("Upload successful");
         })
         .catch(error => {
           // Handle any errors
-          console.error("Upload failed:", error);
+          logger.error("Upload failed:", error);
         });
       } else {
         // Handle case where no file is selected
-        console.error("No file selected");
+        logger.error("No file selected");
       }
     });
   </script>

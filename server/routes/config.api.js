@@ -110,7 +110,7 @@ const config_current = await retrieveCurrentConfiguration();
   // Read the file contents
   fs.readFile('workdir/config.conf', 'utf8', (err, data) => {
     if (err) {
-      console.error('Error reading file:', err);
+      logger.error('Error reading file:', err);
       res.sendStatus(500);
       return;
     }
@@ -144,18 +144,18 @@ lines.forEach(line => {
     // Convert the JSON object to a string
   //  const jsonString = JSON.stringify(json, null, 2);
     //jsonString1 = jsonString.replace(/'/g, '').replace(/"/g, '')
-      // console.log(json)
+      // logger.info(json)
 
     // Write the JSON string to a file
   //  fs.writeFile('config1.json', jsonString1, 'utf8', err => {
     //  if (err) {
-      //  console.error('Error writing JSON file:', err);
+      //  logger.error('Error writing JSON file:', err);
         //res.sendStatus(500);
       //  return;
   //    }
 //    })
 
-      console.log('File converted to JSON successfully');
+      logger.info('File converted to JSON successfully');
 
 // To add: migrate config to current format
 
@@ -190,16 +190,16 @@ if (Object.keys(json).length !== 0) {
 
 // Step 4: Convert the updated object back to a JSON string
 const updatedJsonString = JSON.stringify(config_current, null, 2);
-console.log(updatedJsonString)
+logger.info(updatedJsonString)
 
 // Write the updated JSON string back to the file
 fs.writeFile('config.json', updatedJsonString, 'utf8', (err) => {
   if (err) {
-    console.error(err);
+    logger.error(err);
     return;
   }
 
-  console.log('JSON file has been updated.');
+  logger.info('JSON file has been updated.');
 
 
 

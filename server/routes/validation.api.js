@@ -16,7 +16,7 @@ app.get('/license-keys', (req, res) => {
 
 // Start the server
 app.listen(3000, () => {
-  console.log('Remote API is running on http://localhost:3000');
+  logger.info('Remote API is running on http://localhost:3000');
 });
 
 
@@ -61,7 +61,7 @@ app.post('/license-keys', (req, res) => {
 
 // Start the server
 app.listen(3000, () => {
-  console.log('Remote API is running on http://localhost:3000');
+  logger.info('Remote API is running on http://localhost:3000');
 });
 
 

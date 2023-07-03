@@ -15,14 +15,14 @@ const CHANNEL_OFFLINE = async () => {
   function splitXMLTVByChannel(xmltvFilePath, callback) {
     fs.readFile(xmltvFilePath, 'utf8', (err, xmlData) => {
       if (err) {
-        console.error('Error reading XMLTV file:', err);
+        logger.error('Error reading XMLTV file:', err);
         callback(err);
         return;
       }
 
       xml2js.parseString(xmlData, (parseErr, result) => {
         if (parseErr) {
-          console.error('Error parsing XML:', parseErr);
+          logger.error('Error parsing XML:', parseErr);
           callback(parseErr);
           return;
         }
@@ -48,10 +48,10 @@ const CHANNEL_OFFLINE = async () => {
           const channelFilePath = `${WORKDIR}/Channel-offline/${channelId}.xml`;
           fs.writeFile(channelFilePath, channelXMLString, 'utf8', writeErr => {
             if (writeErr) {
-              console.error(`Error writing channel file (${channelFilePath}):`, writeErr);
+              logger.error(`Error writing channel file (${channelFilePath}):`, writeErr);
               return;
             }
-            console.log(`Channel file saved: ${channelFilePath}`);
+            logger.info(`Channel file saved: ${channelFilePath}`);
           });
 
           // Check if this is the last channel
@@ -69,14 +69,14 @@ const CHANNEL_OFFLINE = async () => {
     // Read the XML file
     fs.readFile('workdir/Channel-offline/968.1.etv.xml', 'utf-8', (err, data) => {
       if (err) {
-        console.error('Error reading XML file:', err);
+        logger.error('Error reading XML file:', err);
         return;
       }
 
       // Parse the XML
       xml2js.parseString(data, (parseErr, result) => {
         if (parseErr) {
-          console.error('Error parsing XML:', parseErr);
+          logger.error('Error parsing XML:', parseErr);
           return;
         }
 
@@ -104,7 +104,7 @@ if (index !== -1 && index < result.tv.programme.length - 1) {
     }
   }
 }
-console.log(nextStartTime)
+logger.info(nextStartTime)
 // Extract the time portion from the nextStartTime string
 const time = nextStartTime.substr(8, 6);
 
@@ -121,7 +121,7 @@ formattedHours = (formattedHours % 12) || 12;
 const nextShowStartTime = `${formattedHours}:${minutes} ${formattedHours >= 12 ? 'PM' : 'AM'}`;
 
 
-console.log(nextShowStartTime)
+logger.info(nextShowStartTime)
 
           // Calculate the duration for each subtitle
           const subtitleDuration = 0; // Duration in seconds
@@ -148,7 +148,7 @@ console.log(nextShowStartTime)
           const newsFeed = `{\\r}{\\b1}{\\c&H${titlecolor}&}This Channel is Currently offline\n\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}Next showing at: ${nextShowStartTime}\n\nStarting With: ${nextShowName}`;
           const lines = newsFeed.replace(/\n/g, '\\N');
       //    let lines = newsFeed;
-          console.log(lines)
+          logger.info(lines)
 
           // Combine the move effect with the subtitle text
           const subtitle = `${moveEffect}${lines}`;
