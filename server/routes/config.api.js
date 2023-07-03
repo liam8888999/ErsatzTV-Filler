@@ -104,9 +104,9 @@ logger.info(theme)
 
   const uploadoldmodeltheme = multer({ storage });
 
-app.post('/uploadoldmodeltheme', uploadoldmodeltheme.single('file'), (req, res) => {
+app.post('/uploadoldmodeltheme', uploadoldmodeltheme.single('file'), async (req, res) => {
   const file = req.file;
-
+const config_current = await retrieveCurrentConfiguration();
   // Read the file contents
   fs.readFile('workdir/config.conf', 'utf8', (err, data) => {
     if (err) {
@@ -114,7 +114,7 @@ app.post('/uploadoldmodeltheme', uploadoldmodeltheme.single('file'), (req, res) 
       res.sendStatus(500);
       return;
     }
-console.log(data)
+
 
 const lines = data.split('\n');
 
@@ -132,29 +132,74 @@ lines.forEach(line => {
   const value = values.join('=');
 
   // Trim whitespace and remove quotes from the value
-  const trimmedKey = key.trim();
-  const trimmedValue = value.trim().replace(/'/g, '');
+  const trimmedKey = key.trim().replace(/'/g, '').replace(/"/g, '');
+  const trimmedValue = value.trim().replace(/'/g, '').replace(/"/g, '');
+//  const trimmedValue2 = value.strip
 
   // Add the key-value pair to the JSON object
   json[trimmedKey] = trimmedValue;
+
 });
 
     // Convert the JSON object to a string
-    const jsonString = JSON.stringify(json, null, 2);
+  //  const jsonString = JSON.stringify(json, null, 2);
+    //jsonString1 = jsonString.replace(/'/g, '').replace(/"/g, '')
+      // console.log(json)
 
     // Write the JSON string to a file
-    fs.writeFile('converted_file.json', jsonString, 'utf8', err => {
-      if (err) {
-        console.error('Error writing JSON file:', err);
-        res.sendStatus(500);
-        return;
-      }
+  //  fs.writeFile('config1.json', jsonString1, 'utf8', err => {
+    //  if (err) {
+      //  console.error('Error writing JSON file:', err);
+        //res.sendStatus(500);
+      //  return;
+  //    }
+//    })
 
       console.log('File converted to JSON successfully');
 
 // To add: migrate config to current format
 
+// Step 3: Update the desired value in the JavaScript object
+if (Object.keys(json).length !== 0) {
+  config_current.theme = json.theme || config_current.theme;
+  config_current.processweather = json.processweather || config_current.processweather;
+  config_current.processnews = json.processnews || config_current.processnews;
+  config_current.processchanneloffline = json.processchanneloffline || config_current.processchanneloffline;
+  config_current.customaudio = json.customaudio || config_current.customaudio;
+  config_current.output = json.output || config_current.output;
+  config_current.city = json.city || config_current.city;
+  config_current.state = json.state || config_current.state;
+  config_current.generate_weatherv4 = json.generate_weatherv4 || config_current.generate_weatherv4;
+  config_current.weathervideofadeoutduration = json.weathervideofadeoutduration || config_current.weathervideofadeoutduration;
+  config_current.weathervideofadeinduration = json.weathervideofadeinduration || config_current.weathervideofadeinduration;
+  config_current.weatheraudiofadeoutduration = json.weatheraudiofadeoutduration || config_current.weatheraudiofadeoutduration;
+  config_current.weatheraudiofadeinduration = json.weatheraudiofadeinduration || config_current.weatheraudiofadeinduration;
+  config_current.newsvideofadeoutduration = json.newsvideofadeoutduration || config_current.newsvideofadeoutduration;
+  config_current.newsvideofadeinduration = json.newsvideofadeinduration || config_current.newsvideofadeinduration;
+  config_current.newsaudiofadeoutduration = json.newsaudiofadeoutduration || config_current.newsaudiofadeoutduration;
+  config_current.newsaudiofadeinduration = json.newsaudiofadeinduration || config_current.newsaudiofadeinduration;
+  config_current.videolength = json.videolength || config_current.videolength;
+  config_current.newsfeed = json.newsfeed || config_current.newsfeed;
+  config_current.newsfeed1 = json.newsfeed1 || config_current.newsfeed1;
+  config_current.newsfeed2 = json.newsfeed2 || config_current.newsfeed2;
+  config_current.xmltv = json.xmltv || config_current.xmltv;
+  config_current.videoresolution = json.videoresolution || config_current.videoresolution;
+  config_current.newsduration = json.newsduration || config_current.newsduration;
+}
 
+
+// Step 4: Convert the updated object back to a JSON string
+const updatedJsonString = JSON.stringify(config_current, null, 2);
+console.log(updatedJsonString)
+
+// Write the updated JSON string back to the file
+fs.writeFile('config.json', updatedJsonString, 'utf8', (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log('JSON file has been updated.');
 
 
 
