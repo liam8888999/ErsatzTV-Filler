@@ -5,6 +5,8 @@ const moment = require('moment-timezone');
 const { readFile } = require('fs');
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { setwebtheme } = require("../utils/config.utils.js");
+const multer = require('multer');
+const fs = require('fs');
 
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 
@@ -23,7 +25,7 @@ const loadApiConfigRoutes = async (app) => {
     res.status(status).json({ error: message });
   });
 
-  
+
     /**
      * Patch route to receive updates to the configuration file.
      */
@@ -89,6 +91,71 @@ logger.info(theme)
       res.status(500).json({ error: 'Failed to load the theme preference' });
     }
   });
+
+
+
+
+  const storage = multer.diskStorage({
+    destination: 'workdir/',
+    filename: (req, file, cb) => {
+      cb(null, file.originalname); // Preserve the original file name
+    }
+  });
+
+  const uploadoldmodeltheme = multer({ storage });
+
+app.post('/uploadoldmodeltheme', uploadoldmodeltheme.single('file'), (req, res) => {
+  const file = req.file;
+
+  // Read the file contents
+  fs.readFile('workdir/config.conf', 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      res.sendStatus(500);
+      return;
+    }
+console.log(data)
+
+const lines = data.split('\n');
+
+const json = {};
+lines.forEach(line => {
+  // Ignore empty lines and comments
+  if (line.trim() === '' || line.trim().startsWith('#')) {
+    return;
+  }
+
+  // Split the line into key and value
+  const [key, ...values] = line.split('=');
+
+  // Join the remaining values in case the value itself contains the '=' character
+  const value = values.join('=');
+
+  // Trim whitespace and remove quotes from the value
+  const trimmedKey = key.trim();
+  const trimmedValue = value.trim().replace(/'/g, '');
+
+  // Add the key-value pair to the JSON object
+  json[trimmedKey] = trimmedValue;
+});
+
+    // Convert the JSON object to a string
+    const jsonString = JSON.stringify(json, null, 2);
+
+    // Write the JSON string to a file
+    fs.writeFile('converted_file.json', jsonString, 'utf8', err => {
+      if (err) {
+        console.error('Error writing JSON file:', err);
+        res.sendStatus(500);
+        return;
+      }
+
+      console.log('File converted to JSON successfully');
+      res.json({ message: 'File uploaded and converted to JSON successfully' });
+    });
+  });
+});
+
 
 
 }
