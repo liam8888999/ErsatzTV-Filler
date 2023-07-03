@@ -11,7 +11,7 @@ const THEMES_FOLDER = "themes/"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
 const DEFAULT_CONFIG = {
-  "theme": "",
+  "theme": "SystemLight",
   "processweather": "yes",
   "processnews": "yes",
   "processchanneloffline": "yes",
@@ -42,7 +42,7 @@ const DEFAULT_CONFIG = {
   "fontfile": "fonts/Verdana.tff",
   "newsarticles": "10",
   "processxmltvmerger": "no",
-  "epgfiles": "example1.xml example2.xml"
+  "epgfiles": ""
 }
 const USER_CONFIG = "config.json"
 
