@@ -51,10 +51,15 @@ const writeValueToConfigurationFile = async (key, value) => {
  * Copy sample-config.conf if config.conf does not exist
  * @returns {Promise<void>}
  */
-const createNewUserConfigFromDefault = async () => {
-  await fs.promises.copyFile(CONFIG_CONSTANTS().DEFAULT_CONFIG, CONFIG_CONSTANTS().USER_CONFIG);
-  logger.success('A new user config file was generated from the default file');
-}
+ const createNewUserConfigFromDefault = async () => {
+   await fs.writeFile(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(CONFIG_CONSTANTS().DEFAULT_CONFIG, null, 2), (err) => {
+     if (err) {
+       logger.error('Error creating user config file:', err);
+     } else {
+       logger.success('A new user config file was generated from the default file');
+     }
+   });
+ };
 
 const setwebtheme = async (theme) => {
   try {

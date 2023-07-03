@@ -10,8 +10,41 @@ const PAGES_FOLDER = "pages/";
 const THEMES_FOLDER = "themes/"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
-const DEFAULT_CONFIG = "sample-config.conf"
-const USER_CONFIG = "config.conf"
+const DEFAULT_CONFIG = {
+  "theme": "",
+  "processweather": "yes",
+  "processnews": "yes",
+  "processchanneloffline": "yes",
+  "customaudio": "audio-fallback",
+  "output": "/output",
+  "city": "Austin",
+  "state": "Texas",
+  "generate_weatherv4": "no",
+  "weathervideofadeoutduration": "5",
+  "weathervideofadeinduration": "5",
+  "weatheraudiofadeoutduration": "5",
+  "weatheraudiofadeinduration": "5",
+  "newsvideofadeoutduration": "5",
+  "newsvideofadeinduration": "5",
+  "newsaudiofadeoutduration": "5",
+  "newsaudiofadeinduration": "5",
+  "videolength": "30",
+  "newsfeed": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+  "newsfeed1": "",
+  "newsfeed2": "",
+  "xmltv": "http://127.0.0.1:8409/iptv/xmltv.xml",
+  "videoresolution": "1280x720",
+  "newsduration": "60",
+  "log_location": "/tmp/ErsatzTV-Filler",
+  "log_days": "7",
+  "webport": "8408",
+  "webtheme": "light",
+  "fontfile": "fonts/Verdana.tff",
+  "newsarticles": "10",
+  "processxmltvmerger": "no",
+  "epgfiles": "example1.xml example2.xml"
+}
+const USER_CONFIG = "config.json"
 
 const CHANGELOG = "Changelog.md"
 const DOCUMENTATION = "README.md"

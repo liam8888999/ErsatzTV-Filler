@@ -17,7 +17,6 @@ const setupConfigurationFile = async () => {
     const HAVE_USER_CONFIG = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
     if(!HAVE_USER_CONFIG){
         logger.warn("Can not find a user configuration file... loading default...")
-        await parseConfigurationFileContents(CONFIG_CONSTANTS().DEFAULT_CONFIG)
         await createNewUserConfigFromDefault();
     }else{
         logger.success("Found a user configuration file... loading...")
@@ -52,47 +51,24 @@ const config = retrieveCurrentConfiguration2();
 const FILE_EXISTS = await doesFileExist("config.json")
 if (!FILE_EXISTS) {
   logger.error('The config.json file does not exist.');
-// Delete autoupdate key-value pair from json before writing to file
-delete config.log_per_run;
-//logger.info(config);
-delete config.autoupdate;
-delete config.textspeed;
-config.webport = '8408';
-config.webtheme = 'light';
-config.fontfile = 'fonts/Verdana.tff';
-config.newsarticles = '10';
-config.processxmltvmerger = 'no';
-config.epgfiles = 'example1.xml example2.xml';
-//logger.info(config);
-  // Convert the JSON object to a string with each key-value pair on a single line
-  const jsonString = JSON.stringify(config, null, 2);
-
-  // Write the JSON string to a file named "output.json"
-  fs.writeFile('config.json', jsonString, (err) => {
-    //see how it goes with the logger
-    if (err) { throw err;
-     logger.error(err);
-   }
+  await fs.writeFile(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(CONFIG_CONSTANTS().DEFAULT_CONFIG, null, 2), (err) => {
+    if (err) {
+      logger.error('Error creating user config file:', err);
+    } else {
     logger.success('Created config.json file');
-  });
+  };
+});
 }
-
 }
 
 const retrieveCurrentConfiguration = async () => {
   const configFileExists = await doesFileExist("config.json");
   const defaultConfigFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
 
-  if (!configFileExists && defaultConfigFileExists) {
+  if (!configFileExists) {
     logger.warn("config.json file is missing... Generating a new copy");
     await jsonifyCurrentConfiguration();
-  } else if (!configFileExists && !defaultConfigFileExists) {
-    logger.warn("Both config.json and default configuration file are missing. Building new config.json");
-  await setupConfigurationFile(); // Create new config.json from default configuration
-  } else if (configFileExists && !defaultConfigFileExists) {
-    logger.warn("Both config.json and default configuration file are missing. Building new config.json");
-    await createNewUserConfigFromDefault(); // Create new config.json from default configuration
-  } else {
+} else {
     logger.info("Found a user configuration file... loading...");
     await retrieveCurrentConfiguration2()
   }
