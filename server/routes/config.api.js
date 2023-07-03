@@ -151,6 +151,13 @@ lines.forEach(line => {
       }
 
       console.log('File converted to JSON successfully');
+
+// To add: migrate config to current format
+
+
+
+
+
       res.json({ message: 'File uploaded and converted to JSON successfully' });
     });
   });
