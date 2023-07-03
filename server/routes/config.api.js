@@ -96,7 +96,7 @@ logger.info(theme)
 
 
   const storage = multer.diskStorage({
-    destination: 'workdir/',
+    destination: 'workdir/configconf',
     filename: (req, file, cb) => {
       cb(null, file.originalname); // Preserve the original file name
     }
@@ -108,7 +108,7 @@ app.post('/uploadoldmodeltheme', uploadoldmodeltheme.single('file'), async (req,
   const file = req.file;
 const config_current = await retrieveCurrentConfiguration();
   // Read the file contents
-  fs.readFile('workdir/config.conf', 'utf8', (err, data) => {
+  fs.readFile('workdir/configconf/config.conf', 'utf8', (err, data) => {
     if (err) {
       logger.error('Error reading file:', err);
       res.sendStatus(500);
