@@ -47,7 +47,8 @@ const DEFAULT_CONFIG = {
 const USER_CONFIG = "config.json"
 
 const CHANGELOG = "Changelog.md"
-const DOCUMENTATION = "README.md"
+const DOCUMENTATION = "Docs.md"
+const README = "README.md"
 
 const WORKDIR = "workdir"
 const NEWSDIR = "workdir/News"
@@ -96,5 +97,6 @@ module.exports = {
     NEWSDIR,
     CHANNEL_OFFLINEDIR,
     FFMPEGCOMMAND,
-    XMLTVMERGEDIR
+    XMLTVMERGEDIR,
+    README
 };
