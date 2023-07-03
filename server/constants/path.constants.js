@@ -38,7 +38,7 @@ const DEFAULT_CONFIG = {
   "log_location": "/tmp/ErsatzTV-Filler",
   "log_days": "7",
   "webport": "8408",
-  "webtheme": "light",
+  "webtheme": "dark",
   "fontfile": "fonts/Verdana.tff",
   "newsarticles": "10",
   "processxmltvmerger": "no",
