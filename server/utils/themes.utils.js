@@ -14,6 +14,28 @@ const settheme = async (theme) => {
   }
 }
 
+
+const themecolourdecoder = (colour) => {
+
+//  const colour = `${colourin}`;
+
+  // Extracting individual color components
+  const red = parseInt(colour.substring(0, 2), 16);
+  const green = parseInt(colour.substring(2, 4), 16);
+  const blue = parseInt(colour.substring(4, 6), 16);
+
+  // Creating the RGB color code
+  const themeColour = `${blue.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${red.toString(16).padStart(2, '0')}`;
+
+
+  console.log(themeColour);
+
+
+
+     return themeColour
+ }
+
 module.exports = {
-    settheme
+    settheme,
+    themecolourdecoder
 }

@@ -6,6 +6,7 @@ const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
+const {themecolourdecoder} = require("../utils/themes.utils");
 
 const CHANNEL_OFFLINE = async () => {
   const config_current = await retrieveCurrentConfiguration();
@@ -142,8 +143,10 @@ logger.info(nextShowStartTime)
           // Create the move effect string
           const moveEffect = ''//`{\\move(0,0,0,0)}`;
 
-          const titlecolor = 'FF0000'
-          const descriptioncolor = 'FF0000'
+          const titlecolor = themecolourdecoder('ffba00');
+          const descriptioncolor = themecolourdecoder('ffbabb');
+          console.log(titlecolor)
+          console.log(descriptioncolor)
 
           const newsFeed = `{\\r}{\\b1}{\\c&H${titlecolor}&}This Channel is Currently offline\n\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}Next showing at: ${nextShowStartTime}\n\nStarting With: ${nextShowName}`;
           const lines = newsFeed.replace(/\n/g, '\\N');

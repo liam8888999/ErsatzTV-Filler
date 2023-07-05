@@ -9,7 +9,8 @@ const { exec } = require('child_process');
 const wordwrap = require('wordwrap');
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const path = require('path');
-  const { createDirectoryIfNotExists } =require("../utils/file.utils")
+const { createDirectoryIfNotExists } =require("../utils/file.utils");
+const {themecolourdecoder} = require("../utils/themes.utils");
 
 const NEWS = async () => {
 
@@ -54,8 +55,10 @@ const NEWS = async () => {
         const description = $(element).find('description').text();
 
         //theme work needed for this to work correctly
-        const titlecolor = 'FF0000'
-        const descriptioncolor = ''
+        const titlecolor = themecolourdecoder('ffba00');
+        const descriptioncolor = themecolourdecoder('ffbabb');
+        console.log(titlecolor)
+        console.log(descriptioncolor)
 
         newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
       });
