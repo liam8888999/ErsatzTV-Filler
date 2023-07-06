@@ -147,6 +147,7 @@ logger.info(nextShowStartTime)
           const titlecolor = themecolourdecoder(`${current_theme.Offline.offlinetitlecolour}`);
       // const titlecolor = themecolourdecoder('FFBF00');
           const descriptioncolor = themecolourdecoder(`${current_theme.Offline.offlinetextcolour}`);
+          const offlinebackgroundcolour = themecolourdecoder(`${current_theme.Offline.offlinebackgroundcolour}`);
           console.log(titlecolor)
           console.log(descriptioncolor)
 
@@ -181,7 +182,7 @@ logger.info(nextShowStartTime)
 
           fs.writeFileSync(`${WORKDIR}/Channel-offline/offline.ass`, assText);
 
-          const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${current_theme.Offline.offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${WORKDIR}/Channel-offline/offline.ass" -c:a copy -t 5 ${WORKDIR}/Channel-offline/output.mp4`;
+          const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${WORKDIR}/Channel-offline/offline.ass" -c:a copy -t 5 ${WORKDIR}/Channel-offline/output.mp4`;
 
           logger.info(command);
           logger.ffmpeg(`command is ${command}`);
