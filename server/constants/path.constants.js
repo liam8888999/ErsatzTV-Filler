@@ -16,7 +16,7 @@ const DEFAULT_CONFIG = {
   "processnews": "yes",
   "processchanneloffline": "yes",
   "customaudio": "audio-fallback",
-  "output": "/output",
+  "output": "workdir",
   "city": "Austin",
   "state": "Texas",
   "generate_weatherv4": "no",
