@@ -25,47 +25,14 @@ const WEATHER = async () => {
       createDirectoryIfNotExists(WEATHERDIR);
 logger.info("starting weather")
 
-const config_current = await retrieveCurrentConfiguration()
+const config_current = await retrieveCurrentConfiguration();
 const current_theme = await retrieveCurrentTheme();
-
-
-/**
-*Check if weather should be run
-*/
-
-if (await config_current.processweather === "yes")
-
-logger.info("processing weather")
-/**
-*Choose random audio file from audio folder
-*/
-
-//logger.info("choosing random audio")
-//const randomaudioweather1 = async () => {
-//await selectRandomAudioFile()
-//}
-//logger.info(await selectRandomAudioFile(`${config_current.customaudio}`));
+const weatherbackgroundcolour = themecolourdecoder(`${current_theme.Weather.weatherbackgroundcolour}`);
 
 
 
-/**
-*randomise background (for the future)
-*/
 
-
-/**
-*set country (unneeded)
-*/
-
-/**
-*download images
-*/
-
-/**
-*image downloading
-*/
-
-
+const downloadimages = async () => {
 logger.info("Downloading weather images")
 logger.info(`${config_current.city}`)
 logger.info(`${WEATHERDIR}`)
@@ -81,34 +48,31 @@ await downloadImage(`https://v2.wttr.in/${await config_current.city}.png`, `${WE
 await downloadImage(`https://v3.wttr.in/${await config_current.state}.png`, `${WEATHERDIR}/v3.png`)
     .then(logger.success)
     .catch(logger.error);
+  }
 
-/**
-*calculate fade times
-*/
-logger.info("calculating fade times")
-/**
-*set variables
-*/
-//const weathervideofadeoutduration = await config_current.weathervideofadeoutduration;
-//const weatheraudiofadeoutduration = await config_current.weatheraudiofadeoutduration;
 
-/**
-*set fade time
-*/
+  const weathercalculations = async () => {
+    const weathervideofadeoutstart = config_current.videolength - config_current.weathervideofadeoutduration;
+    console.log(weathervideofadeoutstart)
+    const weatheraudiofadeoutstart = config_current.videolength - config_current.weatheraudiofadeoutduration;
+    console.log(weatheraudiofadeoutstart)
+    const weatherv4videolength = config_current.videolength * 3;
+    const weathervideofadeoutstartv4 = weatherv4videolength - config_current.weathervideofadeoutduration;
+    const weatheraudiofadeoutstartv4 = weatherv4videolength - config_current.weatheraudiofadeoutduration;
+    return {
+      weathervideofadeoutstart,
+      weatheraudiofadeoutstart,
+      weatherv4videolength,
+      weathervideofadeoutstartv4,
+      weatheraudiofadeoutstartv4
+    };
+  };
 
-const weathervideofadeoutstart = await config_current.videolength - await config_current.weathervideofadeoutduration;
-const weatheraudiofadeoutstart = await config_current.videolength - await config_current.weatheraudiofadeoutduration;
-logger.info(weatheraudiofadeoutstart);
-logger.info(await config_current.videolength - await config_current.weatheraudiofadeoutduration)
-
-/**
-*make the videos
-*/
-
-const weatherbackgroundcolour = themecolourdecoder(`${current_theme.Weather.weatherbackgroundcolour}`);
+  const weatherCalculationsResult = await weathercalculations();
 
 const createWeatherV1 = async () => {
   try {
+    console.log(weatherCalculationsResult.weathervideofadeoutstart)
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
@@ -123,12 +87,11 @@ const createWeatherV1 = async () => {
       }
       if (stderr) {
         logger.ffmpeg(`stderr: ${stderr}`);
-        return;
      }
       logger.success('Weather v1 part 1 created successfully.');
 
       //part2
-      const commandv1 = `${FFMPEGCOMMAND} -y -i ${WEATHERDIR}/weather-v1.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v1.mp4`;
+      const commandv1 = `${FFMPEGCOMMAND} -y -i ${WEATHERDIR}/weather-v1.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v1.mp4`;
 logger.info(commandv1);
     logger.ffmpeg(`commandv1 is ${commandv1}`);
       exec(commandv1, (error, stdout, stderr) => {
@@ -138,7 +101,6 @@ logger.info(commandv1);
         }
         if (stderr) {
           logger.ffmpeg(`stderr: ${stderr}`);
-          return;
         }
         logger.success('Weather v1 created successfully.');
       });
@@ -163,12 +125,11 @@ const createWeatherV2 = async () => {
       }
       if (stderr) {
         logger.ffmpeg(`stderr: ${stderr}`);
-        return;
      }
       logger.success('Weather v2 part 1 created successfully.');
 
       //part2
-      const commandv2 = `${FFMPEGCOMMAND} -y -i ${WEATHERDIR}/weather-v2.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v2.mp4`;
+      const commandv2 = `${FFMPEGCOMMAND} -y -i ${WEATHERDIR}/weather-v2.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v2.mp4`;
 logger.info(commandv2);
       exec(commandv2, (error, stdout, stderr) => {
         if (error) {
@@ -177,7 +138,6 @@ logger.info(commandv2);
         }
         if (stderr) {
           logger.ffmpeg(`stderr: ${stderr}`);
-          return;
         }
         logger.success('Weather v2 created successfully.');
       });
@@ -203,13 +163,12 @@ const createWeatherV3 = async () => {
       }
       if (stderr) {
         logger.ffmpeg(`stderr: ${stderr}`);
-        return;
       }
       logger.success('Weather v3 part 1 created successfully.');
 
       //part2
-      const commandv3 = `${FFMPEGCOMMAND} -y -i ${WEATHERDIR}/weather-v3.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v3.mp4`;
-logger.info(commandv3);
+      const commandv3 = `${FFMPEGCOMMAND} -y -i ${WEATHERDIR}/weather-v3.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" ${config_current.output}/weather-v3.mp4`;
+logger.info(`command3: ${commandv3}`);
       exec(commandv3, (error, stdout, stderr) => {
         if (error) {
           logger.error(`Error: ${error.message}`);
@@ -217,7 +176,6 @@ logger.info(commandv3);
         }
         if (stderr) {
           logger.ffmpeg(`stderr: ${stderr}`);
-          return;
         }
         logger.success('Weather v3 created successfully.');
       });
@@ -228,41 +186,22 @@ logger.info(commandv3);
 };
 
 
-logger.info("creating videos")
-createWeatherV1();
-//createWeatherV2();
-//createWeatherV3();
+await downloadimages();
+await createWeatherV1();
+await createWeatherV2();
+await createWeatherV3();
+//createWeatherV4();
 
 
 
 
 
 
-
-/**
-*check if v4 should be generated
-*/
-
-//logger.info("Checking if weatherv4 should be generated")
-
-//if (config_current.generate_weatherv4 === "yes")
-//logger.info("starting weatherv4")
-
-//logger.info("calculating fade times")
-
-const weatherv4videolength = await config_current.videolength * 3
-const weathervideofadeoutstartv4 = `${weatherv4videolength}` - await config_current.weathervideofadeoutduration
-const weatheraudiofadeoutstartv4 = `${weatherv4videolength}` - await config_current.weatheraudiofadeoutduration
-
-/**
-*generate v1 to v4 without fade
-*/
-
-//logger.info("Generate weather v1-3 without fade")
+//const v4basecreation = async () => {
 //exec(`${FFMPEGCOMMAND} -y -f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v1.png -stream_loop -1 -i "${config_current.randomaudioweather1}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v1.mp4`)
 //exec(`${FFMPEGCOMMAND} -y -f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v2.png -stream_loop -1 -i "${config_current.randomaudioweather2}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v2.mp4`)
 //exec(`${FFMPEGCOMMAND} -y -f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v3.png -stream_loop -1 -i "${config_current.randomaudioweather3}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v3.mp4`)
-
+//}
 /**
 *check if weather v4 should be shuffled (add later)
 */
