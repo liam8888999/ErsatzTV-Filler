@@ -12,7 +12,7 @@ const CHANNEL_OFFLINE = async () => {
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const current_theme = await retrieveCurrentTheme();
-  console.log(`current theme is: ${current_theme.offlinetitlecolour}`);
+  console.log(`current theme is: ${current_theme.ErsatzTVFillerTheme.ThemeName}`);
 
   // Function to split XMLTV by channel
 function splitXMLTVByChannel(xmltvFilePath, callback) {
@@ -144,9 +144,9 @@ logger.info(nextShowStartTime)
 
           // Create the move effect string
           const moveEffect = ''//`{\\move(0,0,0,0)}`;
-          const titlecolor = themecolourdecoder(`${current_theme.offlinetitlecolour}`);
+          const titlecolor = themecolourdecoder(`${current_theme.Offline.offlinetitlecolour}`);
       // const titlecolor = themecolourdecoder('FFBF00');
-          const descriptioncolor = themecolourdecoder('ffbabb');
+          const descriptioncolor = themecolourdecoder(`${current_theme.Offline.offlinetextcolour}`);
           console.log(titlecolor)
           console.log(descriptioncolor)
 
@@ -181,7 +181,7 @@ logger.info(nextShowStartTime)
 
           fs.writeFileSync(`${WORKDIR}/Channel-offline/offline.ass`, assText);
 
-          const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=white:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${WORKDIR}/Channel-offline/offline.ass" -c:a copy -t 5 ${WORKDIR}/Channel-offline/output.mp4`;
+          const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${current_theme.Offline.offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${WORKDIR}/Channel-offline/offline.ass" -c:a copy -t 5 ${WORKDIR}/Channel-offline/output.mp4`;
 
           logger.info(command);
           logger.ffmpeg(`command is ${command}`);
