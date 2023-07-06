@@ -8,8 +8,12 @@
   "offlinetitlecolour": "000000",
   "offlinebackgroundcolour": "ffffff"
   },
-  "backgroundcolour": "white",
-  "newsbackgroundcolour": "white",
-  "newstextcolour": "black",
-  "offlinebackgroundcolour": "white"
+  "News": {
+  "newstextcolour": "404040",
+  "newstitlecolour": "000000",
+  "newsbackgroundcolour": "ffffff"
+  },
+  "Weather": {
+  "weatherbackgroundcolour": "000000"
+  }
 }

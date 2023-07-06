@@ -9,7 +9,8 @@ const { WEATHERDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
-const { createDirectoryIfNotExists } =require("../utils/file.utils")
+const { createDirectoryIfNotExists } =require("../utils/file.utils");
+const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
 
 
 
@@ -25,6 +26,7 @@ const WEATHER = async () => {
 logger.info("starting weather")
 
 const config_current = await retrieveCurrentConfiguration()
+const current_theme = await retrieveCurrentTheme();
 
 
 /**
@@ -103,12 +105,14 @@ logger.info(await config_current.videolength - await config_current.weatheraudio
 *make the videos
 */
 
+const weatherbackgroundcolour = themecolourdecoder(`${current_theme.Weather.weatherbackgroundcolour}`);
+
 const createWeatherV1 = async () => {
   try {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv1part1 = `${FFMPEGCOMMAND} -y -f lavfi -i color=black:${config_current.videoresolution} -i ${WEATHERDIR}/v1.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v1.mp4`;
+    const commandv1part1 = `${FFMPEGCOMMAND} -y -f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v1.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v1.mp4`;
     logger.info(commandv1part1);
     logger.ffmpeg(`commandv1part1 is ${commandv1part1}`);
 
@@ -149,7 +153,7 @@ const createWeatherV2 = async () => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv2part1 = `${FFMPEGCOMMAND} -y -f lavfi -i color=black:${config_current.videoresolution} -i ${WEATHERDIR}/v2.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v2.mp4`;
+    const commandv2part1 = `${FFMPEGCOMMAND} -y -f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v2.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v2.mp4`;
     logger.info(commandv2part1);
 
     exec(commandv2part1, (error, stdout, stderr) => {
@@ -189,7 +193,7 @@ const createWeatherV3 = async () => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv3part1 = `${FFMPEGCOMMAND} -y -f lavfi -i color=black:${config_current.videoresolution} -i ${WEATHERDIR}/v3.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v3.mp4`;
+    const commandv3part1 = `${FFMPEGCOMMAND} -y -f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v3.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v3.mp4`;
     logger.info(commandv3part1);
 
     exec(commandv3part1, (error, stdout, stderr) => {

@@ -10,7 +10,7 @@ const wordwrap = require('wordwrap');
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const path = require('path');
 const { createDirectoryIfNotExists } =require("../utils/file.utils");
-const {themecolourdecoder} = require("../utils/themes.utils");
+const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
 
 const NEWS = async () => {
 
@@ -18,6 +18,7 @@ const NEWS = async () => {
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const fontFilePath = path.resolve(__dirname, `${config_current.fontfile}`);
+  const current_theme = await retrieveCurrentTheme();
 
   const newsstyle = `${NEWSDIR}/news.xslt`;
 
