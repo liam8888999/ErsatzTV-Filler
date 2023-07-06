@@ -57,7 +57,7 @@ const themecolourdecoder = (colour) => {
 
  const retrieveTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
-   const data = fs.readFileSync(`themes/system/SystemLight.theme`);
+   const data = fs.readFileSync(`themes/system/${config_current.theme}.theme`);
    console.log(JSON.parse(data))
     return JSON.parse(data)
  }
