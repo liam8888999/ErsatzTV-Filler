@@ -1,6 +1,10 @@
 const fs = require("fs")
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
+const { downloadImage } = require("../utils/downloadimage.utils");
+const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
+
 
 const settheme = async (theme) => {
   try {
@@ -35,7 +39,41 @@ const themecolourdecoder = (colour) => {
      return themeColour
  }
 
+
+ const retrieveCurrentTheme = async () => {
+   const config_current = await retrieveCurrentConfiguration();
+   const themeFileExists = await doesFileExist(`themes/system/${config_current.theme}.theme`);
+
+   let usetheme = ''
+
+   if (!themeFileExists) {
+     logger.warn(`${config_current.theme}.json file is missing... Falling back to the SystemLight (Default) theme.`);
+  return await themeDoesNotExist();
+ } else {
+     logger.info("Found the user selected theme file... loading...");
+     return await retrieveTheme();
+   }
+ };
+
+ const retrieveTheme = async () => {
+   const config_current = await retrieveCurrentConfiguration();
+   const data = fs.readFileSync(`themes/system/SystemLight.theme`);
+   console.log(JSON.parse(data))
+    return JSON.parse(data)
+ }
+
+ const themeDoesNotExist = async () => {
+   try {
+     await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'themes/system/SystemLight.theme');
+   } catch (error) {
+     logger.error(`Error downloading image: ${error.message}`);
+   }
+  await settheme('SystemLight');
+    return await retrieveTheme();
+ };
+
 module.exports = {
     settheme,
-    themecolourdecoder
+    themecolourdecoder,
+    retrieveCurrentTheme
 }

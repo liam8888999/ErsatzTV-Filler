@@ -6,14 +6,16 @@ const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
-const {themecolourdecoder} = require("../utils/themes.utils");
+const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
 
 const CHANNEL_OFFLINE = async () => {
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
+  const current_theme = await retrieveCurrentTheme();
+  console.log(`current theme is: ${current_theme.offlinetitlecolour}`);
 
   // Function to split XMLTV by channel
-  function splitXMLTVByChannel(xmltvFilePath, callback) {
+function splitXMLTVByChannel(xmltvFilePath, callback) {
     fs.readFile(xmltvFilePath, 'utf8', (err, xmlData) => {
       if (err) {
         logger.error('Error reading XMLTV file:', err);
@@ -142,8 +144,8 @@ logger.info(nextShowStartTime)
 
           // Create the move effect string
           const moveEffect = ''//`{\\move(0,0,0,0)}`;
-
-          const titlecolor = themecolourdecoder('ffba00');
+          const titlecolor = themecolourdecoder(`${current_theme.offlinetitlecolour}`);
+      // const titlecolor = themecolourdecoder('FFBF00');
           const descriptioncolor = themecolourdecoder('ffbabb');
           console.log(titlecolor)
           console.log(descriptioncolor)

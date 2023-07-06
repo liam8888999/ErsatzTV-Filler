@@ -7,5 +7,6 @@
   "newsbackgroundcolour": "white",
   "newstextcolour": "black",
   "offlinebackgroundcolour": "white",
-  "offlinetextcolour": "black"
+  "offlinetextcolour": "black",
+  "offlinetitlecolour": "ffbf00"
 }
