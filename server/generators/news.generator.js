@@ -123,6 +123,8 @@ const generateNewsVideo = async (config_current, audioFile) => {
   exec(command, (error, stdout, stderr) => {
     if (error) {
       logger.error(`Error: ${error.message}`);
+
+      logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
       return;
     }
     if (stderr) {

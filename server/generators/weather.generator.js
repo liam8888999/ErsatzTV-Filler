@@ -83,6 +83,8 @@ const createWeatherV1 = async () => {
     exec(commandv1part1, (error, stdout, stderr) => {
       if (error) {
         logger.error(`Error: ${error.message}`);
+
+        logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
         return;
       }
       if (stderr) {
@@ -97,6 +99,8 @@ logger.info(commandv1);
       exec(commandv1, (error, stdout, stderr) => {
         if (error) {
           logger.error(`Error: ${error.message}`);
+
+          logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
           return;
         }
         if (stderr) {
@@ -121,6 +125,8 @@ const createWeatherV2 = async () => {
     exec(commandv2part1, (error, stdout, stderr) => {
       if (error) {
         logger.error(`Error: ${error.message}`);
+
+        logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
         return;
       }
       if (stderr) {
@@ -134,6 +140,7 @@ logger.info(commandv2);
       exec(commandv2, (error, stdout, stderr) => {
         if (error) {
           logger.error(`Error: ${error.message}`);
+          logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
           return;
         }
         if (stderr) {
@@ -159,6 +166,7 @@ const createWeatherV3 = async () => {
     exec(commandv3part1, (error, stdout, stderr) => {
       if (error) {
         logger.error(`Error: ${error.message}`);
+        logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
         return;
       }
       if (stderr) {
@@ -172,6 +180,7 @@ logger.info(`command3: ${commandv3}`);
       exec(commandv3, (error, stdout, stderr) => {
         if (error) {
           logger.error(`Error: ${error.message}`);
+          logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
           return;
         }
         if (stderr) {
