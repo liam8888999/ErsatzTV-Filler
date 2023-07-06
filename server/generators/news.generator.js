@@ -9,124 +9,88 @@ const { exec } = require('child_process');
 const wordwrap = require('wordwrap');
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const path = require('path');
-const { createDirectoryIfNotExists } =require("../utils/file.utils");
-const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
+const { createDirectoryIfNotExists } = require("../utils/file.utils");
+const { themecolourdecoder, retrieveCurrentTheme } = require("../utils/themes.utils");
 
 const NEWS = async () => {
+const config_current = await retrieveCurrentConfiguration();
+const audioFile = await selectRandomAudioFile(config_current.customaudio);
+const current_theme = await retrieveCurrentTheme();
 
-    createDirectoryIfNotExists(NEWSDIR);
-  const config_current = await retrieveCurrentConfiguration();
-  const audioFile = await selectRandomAudioFile(config_current.customaudio);
-  const fontFilePath = path.resolve(__dirname, `${config_current.fontfile}`);
-  const current_theme = await retrieveCurrentTheme();
 
-  const newsstyle = `${NEWSDIR}/news.xslt`;
+// Step 5: Generate the news feed
+const generateNewsFeed = async (config_current, audioFile, current_theme) => {
+  console.log('1');
+  const newsfeed = config_current.newsfeed;
 
-  // Write the (simple) stylesheet to a convenient file -- we will edit it in place later
-  const stylesheetContent = `<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:template match="/rss/channel">
-      <xsl:for-each select="item">
-        <xsl:value-of select="title"/><br/>
-      <xsl:value-of select="description"/>
-      </xsl:for-each>
-    </xsl:template>
-  </xsl:stylesheet>`;
+  await new Promise((resolve, reject) => {
+    https.get(newsfeed, (response) => {
+      let xmlData = '';
 
-  fs.writeFileSync(`${NEWSDIR}/newsstyle.txt`, stylesheetContent);
-
-  logger.info('Generating the news feed');
-
-  const newsfeed = `${config_current.newsfeed}`;
-
-  // Generate Results
-  https.get(newsfeed, (response) => {
-    let xmlData = '';
-
-    response.on('data', (chunk) => {
-      xmlData += chunk;
-    });
-
-    response.on('end', () => {
-      const $ = cheerio.load(xmlData, { xmlMode: true });
-
-      let newsFeed = '';
-
-      $('rss > channel > item').each((index, element) => {
-        const title = $(element).find('title').text();
-        const description = $(element).find('description').text();
-
-        //theme work needed for this to work correctly
-        const titlecolor = themecolourdecoder(`${current_theme.News.newstitlecolour}`);
-        const descriptioncolor = themecolourdecoder(`${current_theme.News.newstextcolour}`);
-        console.log(titlecolor)
-        console.log(descriptioncolor)
-
-        newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
+      response.on('data', (chunk) => {
+        xmlData += chunk;
       });
 
-      fs.writeFileSync(`${NEWSDIR}/newstemp.txt`, newsFeed);
+      response.on('end', () => {
+        const $ = cheerio.load(xmlData, { xmlMode: true });
 
-      // Read the newstemp.txt file
-      const newstempContent = fs.readFileSync(`${NEWSDIR}/newstemp.txt`, 'utf8');
+        let newsFeed = '';
+        console.log(xmlData);
 
+        $('rss > channel > item').each((index, element) => {
+          const title = $(element).find('title').text();
+          const description = $(element).find('description').text();
 
-const news1Content = newstempContent
-      // Copy first 10 articles
-      const news2Content = news1Content.split('\n\n').slice(0, `${config_current.newsarticles}`).join('\n\n');
+          const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
+          const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
 
+          newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
+        });
 
-      // Replace '%' with '\%'
-      const newsContent = news2Content.replace(/%/g, '\\%');
+        fs.writeFileSync(`${NEWSDIR}/newstemp.txt`, newsFeed);
 
-      // Save the final result to news.txt
-      fs.writeFileSync(`${NEWSDIR}/news-temp.txt`, newsContent);
+        resolve(); // Resolve the promise when the operation is complete
+      });
 
-      // Set the maximum number of lines per frame
-      const maxLinesPerFrame = 70;
-
-      // Read the input file
-      const inputText = fs.readFileSync(`${NEWSDIR}/news-temp.txt`, 'utf8');
-
-      // Split the inputText into separate lines
-    //  const lines = inputText.split('\n');
-
-    // Replace line breaks with \N
-const lines = inputText.replace(/\n/g, '\\N');
-logger.info(lines)
-
-      // Calculate the duration for each subtitle
-      const subtitleDuration = 0; // Duration in seconds
-
-      // Calculate the start and end time for each subtitle
-      let startTime = 0; // Start time adjusted by 2 seconds
-      let endTime = `${config_current.newsduration}`;
-
-      // Define the font size and line spacing
-      const fontSize = 32;
-      const lineSpacing = 1;
-
-      // Split the subtitle into individual lines
-      const lines2 = inputText.split('\n');
-
-      // Calculate the total height of the subtitle
-      const subtitleHeight = lines2.length * fontSize * lineSpacing + 80;
-      logger.info(subtitleHeight)
-
-      // Calculate the y-coordinate for the move effect
-      const y1 = 720 + subtitleHeight;
-      const y2 = 0;
-
-      // Create the move effect string
-      const moveEffect = `{\\move(640,${y1},640,${y2})}`;
-
-    //  const isfreetext =  //'\\N\\N\\N\\N{\\c&HBBGGRR&} Created with ErsatzTV-Filler'
-
-      // Combine the move effect with the subtitle text
-      //const subtitle = `${moveEffect}${lines}${isfreetext}`;
-      const subtitle = `${moveEffect}${lines}`;
+      response.on('error', (error) => {
+        reject(error); // Reject the promise if there's an error
+      });
+    });
+  });
+};
 
 
-      let assText = `[Script Info]
+// Step 6: Prepare the news content
+const prepareNewsContent = async (config_current) => {
+  console.log('2')
+  const newstempContent = await fs.readFileSync(`${NEWSDIR}/newstemp.txt`, 'utf8');
+
+  const news1Content = newstempContent;
+  const news2Content = news1Content.split('\n\n').slice(0, config_current.newsarticles).join('\n\n');
+  const newsContent = news2Content.replace(/%/g, '\\%');
+console.log('2')
+  await fs.writeFileSync(`${NEWSDIR}/news-temp.txt`, newsContent);
+};
+
+// Step 7: Prepare the ASS subtitle text
+const prepareSubtitleText = async (config_current) => {
+  const inputText = await fs.readFileSync(`${NEWSDIR}/news-temp.txt`, 'utf8');
+  const lines = inputText.replace(/\n/g, '\\N');
+console.log('3')
+  const maxLinesPerFrame = 70;
+  const subtitleDuration = 0;
+  let startTime = 0;
+  let endTime = config_current.newsduration;
+  const fontSize = 32;
+  const lineSpacing = 1;
+  const lines2 = inputText.split('\n');
+  const subtitleHeight = lines2.length * fontSize * lineSpacing + 80;
+  const y1 = 720 + subtitleHeight;
+  const y2 = 0;
+  const moveEffect = `{\\move(640,${y1},640,${y2})}`;
+  const subtitle = `${moveEffect}${lines}`;
+
+  let assText = `[Script Info]
 Title: Scrolling Text Example
 ScriptType: v4.00+
 WrapStyle: 0
@@ -139,60 +103,43 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, 0, ,${subtitle}`
-;
-    //  for (let i = 0; i < lines.length; i++) {
-      //  const line = lines[i];
+Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, 0, ,${subtitle}`;
 
-        // Add the start and end time for each subtitle
-        //assText += `\nDialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, 0, ,{\\move(640,720,640,0)}${line}`;
+  await fs.writeFileSync(`${NEWSDIR}/news.ass`, assText);
+};
 
-        // Increment the start and end time for the next subtitle
-        //startTime += subtitleDuration;
-        //endTime += subtitleDuration;
-    //  }
+// Step 8: Generate the news video
+const generateNewsVideo = async (config_current, audioFile) => {
+  const resolution = config_current.videoresolution;
+  console.log('4')
+  const width = resolution.split("x")[0];
+  const textWidth = Math.floor(width / 40);
+  const backgroundcolour = themecolourdecoder(current_theme.News.newsbackgroundcolour);
+  const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${NEWSDIR}/output.mp4`;
 
+  logger.info(command);
+  logger.ffmpeg(`command is ${command}`);
 
-      // Save the ASS text to a file
-      fs.writeFileSync(`${NEWSDIR}/news.ass`, assText);
-
-
-
-
-
-
-// Write the wrapped text to the output file
-//fs.writeFileSync(`${NEWSDIR}/news.txt`, wrappedText, 'utf8');
-
-      // Adjust the fontsize parameter to fit the text within the video width
-      const resolution = config_current.videoresolution;
-const width = resolution.split("x")[0];
-      const textWidth = Math.floor(width / 40);
-
-
-
-
-const backgroundcolour = themecolourdecoder(`${current_theme.News.newsbackgroundcolour}`);
-
-
-      const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${NEWSDIR}/output.mp4`;
-
-      logger.info(command);
-      logger.ffmpeg(`command is ${command}`);
-
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          logger.error(`Error: ${error.message}`);
-          return;
-        }
-        if (stderr) {
-          logger.ffmpeg(`stderr: ${stderr}`);
-          return;
-        }
-        logger.info("end generate newsfeed");
-      });
-    });
+  exec(command, (error, stdout, stderr) => {
+    if (error) {
+      logger.error(`Error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      logger.ffmpeg(`stderr: ${stderr}`);
+    }
+    logger.info("End generate newsfeed");
   });
+};
+
+// Step 9: Call all the functions in order
+
+  createDirectoryIfNotExists(NEWSDIR);
+
+  await generateNewsFeed(config_current, audioFile, current_theme);
+  await prepareNewsContent(config_current);
+  await prepareSubtitleText(config_current);
+  await generateNewsVideo(config_current, audioFile);
 };
 
 module.exports = {
