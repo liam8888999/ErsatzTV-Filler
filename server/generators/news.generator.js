@@ -58,7 +58,6 @@ const NEWS = async () => {
         //theme work needed for this to work correctly
         const titlecolor = themecolourdecoder(`${current_theme.News.newstitlecolour}`);
         const descriptioncolor = themecolourdecoder(`${current_theme.News.newstextcolour}`);
-        const backgroundcolour = themecolourdecoder(`${current_theme.News.newsbackgroundcolour}`);
         console.log(titlecolor)
         console.log(descriptioncolor)
 
@@ -173,7 +172,7 @@ const width = resolution.split("x")[0];
 
 
 
-
+const backgroundcolour = themecolourdecoder(`${current_theme.News.newsbackgroundcolour}`);
 
 
       const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:a copy -t ${config_current.newsduration} ${NEWSDIR}/output.mp4`;
