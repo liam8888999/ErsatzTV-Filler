@@ -1,3 +1,7 @@
+// TODO: Fix issue when there are no programmes on a channel which will crash the app, also fix unknown issue where it doesnt move on after donwloading xmltv bu twill work if files are already there
+
+
+
 const fs = require('fs');
 const xml2js = require('xml2js');
 const { WORKDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
@@ -7,6 +11,9 @@ const exec = promisify(require('child_process').exec);
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
+const path = require('path');
+const { listFilesInDir } = require("../utils/file.utils");
+const http = require('http')
 
 const CHANNEL_OFFLINE = async () => {
   const config_current = await retrieveCurrentConfiguration();
@@ -14,14 +21,44 @@ const CHANNEL_OFFLINE = async () => {
   const current_theme = await retrieveCurrentTheme();
   console.log(`current theme is: ${current_theme.ErsatzTVFillerTheme.ThemeName}`);
 
+
+
+
+
+
+
+function downloadXmltv(xmltvFilePath) {
+  return new Promise((resolve, reject) => {
+    http.get(xmltvFilePath, (response) => {
+      let data = '';
+
+      // Concatenate the received data
+      response.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      // Resolve the promise with the complete data when the request is finished
+      response.on('end', () => {
+        resolve(data);
+        console.log(data)
+        fs.writeFileSync(`workdir/Channel-offline/xmltv.xmltv`, data);
+      });
+    }).on('error', (error) => {
+      // Reject the promise if an error occurs
+      reject(error);
+    });
+  });
+}
   // Function to split XMLTV by channel
-function splitXMLTVByChannel(xmltvFilePath, callback) {
-    fs.readFile(xmltvFilePath, 'utf8', (err, xmlData) => {
+const splitXMLTVByChannel = async () => {
+
+
+    fs.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8', (err, xmlData) => {
       if (err) {
         logger.error('Error reading XMLTV file:', err);
         callback(err);
         return;
-      }
+      };
 
       xml2js.parseString(xmlData, (parseErr, result) => {
         if (parseErr) {
@@ -56,21 +93,16 @@ function splitXMLTVByChannel(xmltvFilePath, callback) {
             }
             logger.info(`Channel file saved: ${channelFilePath}`);
           });
-
-          // Check if this is the last channel
-          if (channel === channels[channels.length - 1]) {
-            // Invoke the callback once the last channel is processed
-            callback();
-          }
         });
       });
     });
   }
 
   // Function to find start time
-  const startTimefind = async () => {
+  const startTimefind = async (eachxmltvfile) => {
+    console.log(eachxmltvfile)
     // Read the XML file
-    fs.readFile('workdir/Channel-offline/968.1.etv.xml', 'utf-8', (err, data) => {
+    await fs.readFile(`${eachxmltvfile}`, 'utf-8', (err, data) => {
       if (err) {
         logger.error('Error reading XML file:', err);
         return;
@@ -86,13 +118,15 @@ function splitXMLTVByChannel(xmltvFilePath, callback) {
 
         // Extract the show start time
         const showName = 'Channel-Offline'; // Replace with the name of the show you're looking for
+        console.log('123')
 
         const programme = result.tv.programme.find(program => program.title[0]._ === showName);
 
+console.log(programme)
+console.log('456')
 
-
-          let nextShowName = null;
-          let nextStartTime = null;
+          let nextShowName = '';
+          let nextStartTime = '';
 const index = result.tv.programme.findIndex(program => program.title[0]._ === showName);
 
 if (index !== -1 && index < result.tv.programme.length - 1) {
@@ -118,10 +152,11 @@ const seconds = time.substr(4, 2);
 
 // Convert hours to 12-hour format
 let formattedHours = parseInt(hours);
-formattedHours = (formattedHours % 12) || 12;
+formattedHours = formattedHours !== NaN ? (formattedHours % 12) || 12 : '';
 
 // Create the formatted time string
-const nextShowStartTime = `${formattedHours}:${minutes} ${formattedHours >= 12 ? 'PM' : 'AM'}`;
+const nextShowStartTime = formattedHours && minutes ? `${formattedHours}:${minutes} ${formattedHours >= 12 ? 'PM' : 'AM'}` : '';
+
 
 
 logger.info(nextShowStartTime)
@@ -179,10 +214,10 @@ logger.info(nextShowStartTime)
             [Events]
             Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
+console.log(assText)
+          fs.writeFileSync(`${eachxmltvfile}.ass`, assText);
 
-          fs.writeFileSync(`${WORKDIR}/Channel-offline/offline.ass`, assText);
-
-          const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${WORKDIR}/Channel-offline/offline.ass" -c:a copy -t 5 ${WORKDIR}/Channel-offline/output.mp4`;
+          const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${eachxmltvfile}.ass" -c:a copy -t 5 ${eachxmltvfile}.mp4`;
 
           logger.info(command);
           logger.ffmpeg(`command is ${command}`);
@@ -204,9 +239,30 @@ logger.info(nextShowStartTime)
 
   // Usage
   const xmltvFilePath = `${WORKDIR}/Channel-offline/xmltv.xml`;
-  splitXMLTVByChannel(xmltvFilePath, () => {
-    startTimefind(); // Call the startTimefind function after splitting the XMLTV file
+  await downloadXmltv(`${config_current.xmltv}`)
+  await splitXMLTVByChannel();
+const runnersT = async () => {
+
+
+    const folderPath = 'workdir/Channel-offline'; // Replace with the actual folder path
+    let fileList = await listFilesInDir(folderPath)
+
+    logger.info(fileList);
+
+    fileList.forEach(file => {
+      if (path.extname(file) === '.xml') {
+
+        console.log(file)
+
+    const filePath = `${file}`
+    console.log(filePath)
+
+      // Assuming startTimefind function is defined elsewhere
+      startTimefind(filePath);
+    }
   });
+  };
+    await runnersT();
 };
 
 module.exports = {
