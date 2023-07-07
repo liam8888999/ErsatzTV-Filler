@@ -6,56 +6,100 @@ const { retrieveCurrentConfiguration } = require("../modules/config-loader.modul
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const http = require('http');
 const https = require('https');
+const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
+const { FFMPEGCOMMAND } = require("../constants/path.constants");
+const { exec } = require("child_process")
 
 // Future todo. add option to add episode number/episode title to main description for clients without support
 
 const VANITYCARDS = async () => {
-  // URL of the Chuck Lorre website
-  // URL of the JSON file
-const url = 'http://chucklorre.com/card-json.php';
 
-// Download the JSON file
-http.get(url, (response) => {
-  let data = '';
+  const config_current = await retrieveCurrentConfiguration();
+  const audioFile = await selectRandomAudioFile(config_current.customaudio);
 
-  response.on('data', (chunk) => {
-    data += chunk;
-  });
 
-  response.on('end', () => {
-    try {
-      // Parse the JSON data
-      const json = JSON.parse(data);
+  const getVanityCard = async () => {
+    return new Promise((resolve, reject) => {
+      // URL of the Chuck Lorre website
+      const url = 'http://chucklorre.com/card-json.php';
 
-      // Get all the image filenames
-      const imageFilenames = Object.values(json).map((entry) => entry.img);
-console.log(imageFilenames)
-      // Select a random image
-      const randomImageFilename = imageFilenames[Math.floor(Math.random() * imageFilenames.length)];
-console.log(randomImageFilename)
-      // Download the random image
-      const imageUrl = `http://chucklorre.com/images/cards/${randomImageFilename}`;
-      http.get(imageUrl, (imageResponse) => {
+      // Download the JSON file
+      http.get(url, (response) => {
+        let data = '';
 
-        const imagePath = `workdir/vanitycard/vanitycard.jpg`;
-
-        // Save the image to disk
-        const fileStream = fs.createWriteStream(imagePath);
-        imageResponse.pipe(fileStream);
-
-        fileStream.on('finish', () => {
-          console.log(`Image downloaded: ${imagePath}`);
+        response.on('data', (chunk) => {
+          data += chunk;
         });
+
+        response.on('end', () => {
+          try {
+            // Parse the JSON data
+            const json = JSON.parse(data);
+
+            // Get all the image filenames
+            const imageFilenames = Object.values(json).map((entry) => entry.img);
+
+            // Select a random image
+            const randomImageFilename = imageFilenames[Math.floor(Math.random() * imageFilenames.length)];
+
+            // Download the random image
+            const imageUrl = `http://chucklorre.com/images/cards/${randomImageFilename}`;
+            http.get(imageUrl, (imageResponse) => {
+              const imagePath = 'workdir/vanitycard/vanitycard.jpg';
+
+              // Save the image to disk
+              const fileStream = fs.createWriteStream(imagePath);
+              imageResponse.pipe(fileStream);
+
+              fileStream.on('finish', () => {
+                console.log(`Image downloaded: ${imagePath}`);
+                resolve(); // Resolve the promise when image download is complete
+              });
+
+              fileStream.on('error', (error) => {
+                reject(error); // Reject the promise if there's an error downloading the image
+              });
+            });
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+            reject(error); // Reject the promise if there's an error parsing the JSON
+          }
+        });
+      }).on('error', (error) => {
+        console.error('Error downloading JSON:', error);
+        reject(error); // Reject the promise if there's an error downloading the JSON
       });
-    } catch (error) {
-      console.error('Error parsing JSON:', error);
-    }
-  });
-}).on('error', (error) => {
-  console.error('Error downloading JSON:', error);
-});
+    });
+  };
+
+const createvanitycard = async () => {
+  try {
+    // add theme information
+    // part1
+    const commandvanitycard = `${FFMPEGCOMMAND} -y -f lavfi -i color=black:${config_current.videoresolution} -i workdir/vanitycard/vanitycard.jpg -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${config_current.output}/vanitycard.mp4`;
+    logger.info(commandvanitycard);
+    logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
+
+    exec(commandvanitycard, (error, stdout, stderr) => {
+      if (error) {
+        logger.error(`Error: ${error.message}`);
+        logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
+        return;
+      }
+      if (stderr) {
+        logger.ffmpeg(`stderr: ${stderr}`);
+      }
+      logger.success('Vanity Card created successfully.');
+    });
+  } catch (err) {
+    logger.error(err);
+  }
+};
 
 
+
+await getVanityCard();
+await createvanitycard();
 
 };
 
