@@ -50,7 +50,7 @@ function downloadXmltv(xmltvFilePath) {
   });
 }
   // Function to split XMLTV by channel
-const splitXMLTVByChannel = async () => {
+function splitXMLTVByChannel() {
 
 
     fs.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8', (err, xmlData) => {
