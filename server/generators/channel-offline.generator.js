@@ -27,7 +27,7 @@ const CHANNEL_OFFLINE = async () => {
 
 
 
-function downloadXmltv(xmltvFilePath) {
+async function downloadXmltv(xmltvFilePath) {
   return new Promise((resolve, reject) => {
     http.get(xmltvFilePath, (response) => {
       let data = '';
@@ -50,20 +50,18 @@ function downloadXmltv(xmltvFilePath) {
   });
 }
   // Function to split XMLTV by channel
-function splitXMLTVByChannel() {
+const splitXMLTVByChannel = async () => {
 
 
-    fs.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8', (err, xmlData) => {
+    await fs.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8', (err, xmlData) => {
       if (err) {
         logger.error('Error reading XMLTV file:', err);
-        callback(err);
         return;
       };
 
       xml2js.parseString(xmlData, (parseErr, result) => {
         if (parseErr) {
           logger.error('Error parsing XML:', parseErr);
-          callback(parseErr);
           return;
         }
 
@@ -237,32 +235,28 @@ console.log(assText)
     });
   };
 
+  const runnersT = async () => {
+
+
+      const folderPath = 'workdir/Channel-offline'; // Replace with the actual folder path
+      let fileList = await listFilesInDir(folderPath)
+
+      logger.info(fileList);
+
+      for (const file of fileList) {
+          if (path.extname(file) === '.xml') {
+            console.log(file);
+            const filePath = `${file}`;
+            console.log(filePath);
+            await startTimefind(filePath);
+          }
+        }
+      }
+
   // Usage
-  const xmltvFilePath = `${WORKDIR}/Channel-offline/xmltv.xml`;
-  await downloadXmltv(`${config_current.xmltv}`)
+  await downloadXmltv(`${config_current.xmltv}`);
   await splitXMLTVByChannel();
-const runnersT = async () => {
-
-
-    const folderPath = 'workdir/Channel-offline'; // Replace with the actual folder path
-    let fileList = await listFilesInDir(folderPath)
-
-    logger.info(fileList);
-
-    fileList.forEach(file => {
-      if (path.extname(file) === '.xml') {
-
-        console.log(file)
-
-    const filePath = `${file}`
-    console.log(filePath)
-
-      // Assuming startTimefind function is defined elsewhere
-      startTimefind(filePath);
-    }
-  });
-  };
-    await runnersT();
+//  await runnersT();
 };
 
 module.exports = {
