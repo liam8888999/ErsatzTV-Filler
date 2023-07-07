@@ -7,6 +7,7 @@ const { WEATHER } = require("../generators/weather.generator");
 const { NEWS } = require("../generators/news.generator");
 const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const { CHANNEL_OFFLINE } = require("../generators/channel-offline.generator");
+const { VANITYCARDS } = require("../generators/vanitycards.generator");
 
 const loadApirunRoutes = (app) => {
 
@@ -52,6 +53,14 @@ await CHANNEL_OFFLINE();
 app.get('/api/run/xmltvmerger', async () => {
 logger.info("xmltvmerger function")
 await XMLTVPARSE();
+// use the url and path variables to set the theme
+
+});
+
+// run xmltvmerger function
+app.get('/api/run/vanitycard', async () => {
+logger.info("Vanity Cards function")
+await VANITYCARDS();
 // use the url and path variables to set the theme
 
 });
