@@ -8,6 +8,8 @@ const logger = require("../utils/logger.utils");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
+// Future todo. add option to add episode number/episode title to main description for clients without support
+
 const XMLTVPARSE = async () => {
   createDirectoryIfNotExists(XMLTVMERGEDIR);
 
