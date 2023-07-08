@@ -18,7 +18,8 @@ const VANITYCARDS = async () => {
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
 
 
-  const getVanityCard = async () => {
+  const getVanityCard = async (filenumber) => {
+      console.log('1')
     return new Promise((resolve, reject) => {
       // URL of the Chuck Lorre website
       const url = 'http://chucklorre.com/card-json.php';
@@ -45,7 +46,7 @@ const VANITYCARDS = async () => {
             // Download the random image
             const imageUrl = `http://chucklorre.com/images/cards/${randomImageFilename}`;
             http.get(imageUrl, (imageResponse) => {
-              const imagePath = 'workdir/vanitycard/vanitycard.jpg';
+              const imagePath = `workdir/vanitycard/vanitycard-${filenumber}.jpg`;
 
               // Save the image to disk
               const fileStream = fs.createWriteStream(imagePath);
@@ -72,11 +73,12 @@ const VANITYCARDS = async () => {
     });
   };
 
-const createvanitycard = async () => {
+const createVanityCard = async (filenumber) => {
   try {
     // add theme information
     // part1
-    const commandvanitycard = `${FFMPEGCOMMAND} -y -f lavfi -i color=black:${config_current.videoresolution} -i workdir/vanitycard/vanitycard.jpg -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${config_current.output}/vanitycard.mp4`;
+    console.log('2')
+    const commandvanitycard = `${FFMPEGCOMMAND} -y -f lavfi -i color=white:${config_current.videoresolution} -i workdir/vanitycard/vanitycard-${filenumber}.jpg -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${config_current.output}/vanitycard-${filenumber}.mp4`;
     logger.info(commandvanitycard);
     logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
 
@@ -98,8 +100,15 @@ const createvanitycard = async () => {
 
 
 
-await getVanityCard();
-await createvanitycard();
+async function processVanityCards() {
+  for (let filenumber = 1; filenumber <= config_current.amountvanitycards; filenumber++) {
+    await getVanityCard(filenumber);
+    await createVanityCard(filenumber);
+  }
+}
+
+// Assuming you're in an async function or using the `async` keyword somewhere
+await processVanityCards();
 
 };
 

@@ -42,7 +42,8 @@ const DEFAULT_CONFIG = {
   "fontfile": "fonts/Verdana.tff",
   "newsarticles": "10",
   "processxmltvmerger": "no",
-  "epgfiles": ""
+  "epgfiles": "",
+  "amountvanitycards": "5"
 }
 const USER_CONFIG = "config.json"
 
