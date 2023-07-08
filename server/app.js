@@ -40,7 +40,7 @@ process.on('unhandledRejection', (reason, promise) => {
 
         await startWebServer();
 
-        await GENERATION();
+       await GENERATION();
 
     } catch(e){
         logger.error("Fatal error occurred!", e)

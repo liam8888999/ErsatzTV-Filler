@@ -35,20 +35,21 @@ const GENERATION = async () => {
 
 
 const config_current = await retrieveCurrentConfiguration();
-console.log(config_current)
 
 //let generatorInterval = config_current.interval || '*/3 * * * *'; // Initial cron interval
 const manager = new CronJobManager();
 
 const startCronJob = async (interval) => {
-  console.log(config_current)
+  console.log(config_current);
   manager.add('generation', interval, async () => {
     console.log(`Running generation at ${new Date()}`);
     console.log(`${manager}`)
     await GENERATIONN();
     console.log(`Generation completed at ${new Date()}`);
     manager.deleteJob('generation'); // Delete the existing job
-    startCronJob('*/3 * * * *'); // Start a new job with updated interval
+    startCronJob(`${config_current.interval}`); // Start a new job with updated interval
+    console.log(config_current);
+    console.log(`${manager}`)
   });
   manager.start('generation')
 };
