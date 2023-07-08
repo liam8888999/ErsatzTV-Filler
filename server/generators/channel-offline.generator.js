@@ -205,7 +205,7 @@ logger.info(nextShowStartTime)
 console.log(assText)
           fs.writeFileSync(`${eachxmltvfile}.ass`, assText);
 
-          const command = `${FFMPEGCOMMAND} -y -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${eachxmltvfile}.ass" -c:a copy -t 5 ${eachxmltvfile}.mp4`;
+          const command = `${FFMPEGCOMMAND} -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${eachxmltvfile}.ass" -c:a copy -t 5 ${eachxmltvfile}.mp4`;
 
           logger.info(command);
           logger.ffmpeg(`command is ${command}`);

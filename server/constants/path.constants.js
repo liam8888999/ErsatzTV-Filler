@@ -82,9 +82,9 @@ const CONFIG_CONSTANTS = () => {
 
 let FFMPEGCOMMAND;
 if (os.platform() === 'win32') {
-  FFMPEGCOMMAND = 'ffmpeg.exe';
+  FFMPEGCOMMAND = 'ffmpeg.exe -y';
 } else {
-  FFMPEGCOMMAND = 'ffmpeg';
+  FFMPEGCOMMAND = 'ffmpeg -y';
 }
 
 
