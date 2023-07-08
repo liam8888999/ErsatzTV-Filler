@@ -101,7 +101,9 @@ const createVanityCard = async (filenumber) => {
 
 
 async function processVanityCards() {
-  for (let filenumber = 1; filenumber <= config_current.amountvanitycards; filenumber++) {
+  console.log(config_current.amountvanitycards)
+  const maxIterations = config_current.amountvanitycards || 5;
+  for (let filenumber = 1; filenumber <= maxIterations; filenumber++) {
     await getVanityCard(filenumber);
     await createVanityCard(filenumber);
   }
