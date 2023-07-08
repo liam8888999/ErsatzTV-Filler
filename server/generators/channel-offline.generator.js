@@ -1,4 +1,4 @@
-// TODO: Fix issue when there are no programmes on a channel which will crash the app, also fix unknown issue where it doesnt move on after donwloading xmltv bu twill work if files are already there
+// TODO: Fix issue when there are no programmes on a channel which will crash the app
 
 
 
@@ -50,61 +50,51 @@ async function downloadXmltv(xmltvFilePath) {
   });
 }
   // Function to split XMLTV by channel
-const splitXMLTVByChannel = async () => {
+  const splitXMLTVByChannel = async () => {
+    console.log('1')
+    const xmlData = await fs.promises.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8')
+console.log('2')
+        xml2js.parseString(xmlData, (parseErr, result) => {
+          if (parseErr) {
+            logger.error('Error parsing XML:', parseErr);
+            reject(parseErr);
+            return;
+          }
 
+          const channels = result.tv.channel;
 
-    await fs.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8', (err, xmlData) => {
-      if (err) {
-        logger.error('Error reading XMLTV file:', err);
-        return;
-      };
+          channels.forEach(async (channel) => {
+            const channelId = channel.$.id;
 
-      xml2js.parseString(xmlData, (parseErr, result) => {
-        if (parseErr) {
-          logger.error('Error parsing XML:', parseErr);
-          return;
-        }
+            const programs = result.tv.programme.filter(program => program.$.channel === channelId);
 
-        const channels = result.tv.channel;
+            const builder = new xml2js.Builder();
 
-        channels.forEach(channel => {
-          const channelId = channel.$.id;
+            const channelXMLData = {
+              tv: {
+                channel: [channel],
+                programme: programs
+              }
+            };
 
-          const programs = result.tv.programme.filter(program => program.$.channel === channelId);
-
-          const builder = new xml2js.Builder();
-
-          const channelXMLData = {
-            tv: {
-              channel: [channel],
-              programme: programs
-            }
-          };
-
-          const channelXMLString = builder.buildObject(channelXMLData);
-
-          const channelFilePath = `${WORKDIR}/Channel-offline/${channelId}.xml`;
-          fs.writeFile(channelFilePath, channelXMLString, 'utf8', writeErr => {
-            if (writeErr) {
-              logger.error(`Error writing channel file (${channelFilePath}):`, writeErr);
-              return;
-            }
+            const channelXMLString = builder.buildObject(channelXMLData);
+console.log('3')
+            const channelFilePath = `${WORKDIR}/Channel-offline/${channelId}.xml`;
+            console.log(channelFilePath)
+            await fs.promises.writeFile(channelFilePath, channelXMLString);
+            console.log('3.5')
             logger.info(`Channel file saved: ${channelFilePath}`);
+            console.log('4')
           });
         });
-      });
-    });
-  }
+  };
 
   // Function to find start time
   const startTimefind = async (eachxmltvfile) => {
+    console.log('5')
     console.log(eachxmltvfile)
     // Read the XML file
-    await fs.readFile(`${eachxmltvfile}`, 'utf-8', (err, data) => {
-      if (err) {
-        logger.error('Error reading XML file:', err);
-        return;
-      }
+  const data = await fs.promises.readFile(`${eachxmltvfile}.xml`, 'utf-8')
 
       // Parse the XML
       xml2js.parseString(data, (parseErr, result) => {
@@ -232,7 +222,6 @@ console.log(assText)
             }
           });
       });
-    });
   };
 
   const runnersT = async () => {
@@ -246,17 +235,20 @@ console.log(assText)
       for (const file of fileList) {
           if (path.extname(file) === '.xml') {
             console.log(file);
-            const filePath = `${file}`;
+            const filename = `${file}`;
+const filePath = filename.replace(/\.xml$/, "");
+
             console.log(filePath);
             await startTimefind(filePath);
           }
         }
+        console.log('complete generation of channel-offline filler')
       }
 
   // Usage
   await downloadXmltv(`${config_current.xmltv}`);
   await splitXMLTVByChannel();
-//  await runnersT();
+  await runnersT();
 };
 
 module.exports = {
