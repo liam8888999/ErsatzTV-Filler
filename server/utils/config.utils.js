@@ -34,7 +34,7 @@ const writeValueToConfigurationFile = async (key, value) => {
     //await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
 
 
-    const data = fs.readFileSync('config.json');
+    const data = await fs.readFileSync('config.json');
   const json = JSON.parse(data);
 
     const newConfigvar = {
@@ -43,7 +43,7 @@ const writeValueToConfigurationFile = async (key, value) => {
     }
 
       // Write updated object back to file
-      fs.writeFileSync('config.json', JSON.stringify(newConfigvar, null, 2));
+      await fs.writeFileSync('config.json', JSON.stringify(newConfigvar, null, 2));
 
 }
 

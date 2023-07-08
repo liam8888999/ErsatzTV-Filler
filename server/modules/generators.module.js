@@ -48,7 +48,7 @@ const startCronJob = async (interval) => {
     await GENERATIONN();
     console.log(`Generation completed at ${new Date()}`);
     manager.deleteJob('generation'); // Delete the existing job
-    startCronJob(`${config_current.interval}`); // Start a new job with updated interval
+    startCronJob('*/3 * * * *'); // Start a new job with updated interval
   });
   manager.start('generation')
 };

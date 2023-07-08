@@ -31,7 +31,7 @@ const setupConfigurationFile = async () => {
  * @returns {Promise<void>}
  */
 const parseConfigurationFileContents = async (path) => {
-    CURRENT_CONFIG = parseConfigurationFile(path).parsed;
+    CURRENT_CONFIG = await parseConfigurationFile(path).parsed;
   //  logger.info(CURRENT_CONFIG)
 }
 
