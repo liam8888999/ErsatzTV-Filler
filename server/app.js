@@ -36,11 +36,11 @@ process.on('unhandledRejection', (reason, promise) => {
         await setupConfigurationFile();
 
 
-       createWebServer();
+       await createWebServer();
 
-        startWebServer();
+        await startWebServer();
 
-        GENERATION();
+        await GENERATION();
 
     } catch(e){
         logger.error("Fatal error occurred!", e)
