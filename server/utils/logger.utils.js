@@ -1,7 +1,6 @@
 const winston = require('winston');
 const { format } = winston;
 const DailyRotateFile = require('winston-daily-rotate-file');
-const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 // Define your custom log levels
 const customLevels = {
