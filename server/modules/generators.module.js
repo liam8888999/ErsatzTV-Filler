@@ -20,7 +20,7 @@ const GENERATION = async () => {
       await VANITYCARDS();
       // Update the interval
       const config_current = await retrieveCurrentConfiguration();
-      interval = config_current.vanityinterval || ;
+      interval = `*/${config_current.vanityinterval} * * * *` || '*/10 * * * *';
       // Restart the cron job with the updated interval
       manager.update('vanity', interval)
       console.log(`Vanity Cards Generation completed at ${new Date()}`);
@@ -35,7 +35,7 @@ const GENERATION = async () => {
       await WEATHER();
       // Update the interval
       const config_current = await retrieveCurrentConfiguration();
-      interval = config_current.weatherinterval || ;
+      interval = `*/${config_current.weatherinterval} * * * *` || '*/10 * * * *';
       // Restart the cron job with the updated interval
       manager.update('weather', interval)
       console.log(`Weather Generation completed at ${new Date()}`);
@@ -50,7 +50,7 @@ const GENERATION = async () => {
       await NEWS();
       // Update the interval
       const config_current = await retrieveCurrentConfiguration();
-      interval = config_current.newsinterval || ;
+      interval = `*/${config_current.newsinterval} * * * *` || '*/30 * * * *';
       // Restart the cron job with the updated interval
       manager.update('news', interval)
       console.log(`News Generation completed at ${new Date()}`);
@@ -65,7 +65,7 @@ const GENERATION = async () => {
       await CHANNEL_OFFLINE();
       // Update the interval
       const config_current = await retrieveCurrentConfiguration();
-      interval = config_current.offlineinterval || ;
+      interval = `*/${config_current.offlineinterval} * * * *` || '*/5 * * * *';
       // Restart the cron job with the updated interval
       manager.update('offline', interval)
       console.log(`Channel-Offline Generation completed at ${new Date()}`);
@@ -80,7 +80,7 @@ const GENERATION = async () => {
       await XMLTVPARSE();
       // Update the interval
       const config_current = await retrieveCurrentConfiguration();
-      interval = config_current.xmltvmergeinterval || ;
+      interval = `*/${config_current.xmltvmergeinterval} * * * *` || '*/20 * * * *';
       // Restart the cron job with the updated interval
       manager.update('merge', interval)
       console.log(`XMLTV Merge Generation completed at ${new Date()}`);
@@ -88,12 +88,14 @@ const GENERATION = async () => {
     manager.start('merge');
   };
 
+
+
   // Start the initial cron job
-  await startCronVanity(config_current.vanityinterval);
-  await startCronWeather(config_current.weatherinterval);
-  await startCronNews(config_current.newsinterval);
-  await startCronOffline(config_current.offlineinterval);
-  await startCronmerge(config_current.xmltvmergeinterval);
+  await startCronVanity(`*/${config_current.vanityinterval} * * * *`);
+  await startCronWeather(`*/${config_current.weatherinterval} * * * *`);
+  await startCronNews(`*/${config_current.newsinterval} * * * *`);
+  await startCronOffline(`*/${config_current.offlineinterval} * * * *`);
+  await startCronmerge(`*/${config_current.xmltvmergeinterval} * * * *`);
 };
 
 module.exports = {
