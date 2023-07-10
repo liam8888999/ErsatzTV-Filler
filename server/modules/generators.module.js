@@ -5,10 +5,6 @@ const { NEWS } = require("../generators/news.generator");
 const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const { CHANNEL_OFFLINE } = require("../generators/channel-offline.generator");
 const { VANITYCARDS } = require("../generators/vanitycards.generator");
-const { NEWS } = require("../generators/news.generator");
-const { WEATHER } = require("../generators/weather.generator");
-const { CHANNEL_OFFLINE } = require("../generators/channel-offline.generator");
-const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const CronJobManager = require('cron-job-manager');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
