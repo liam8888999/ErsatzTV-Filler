@@ -67,6 +67,7 @@ logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
 const injectMiddleware = () => {
     app.set('views', TEMPLATE_CONSTANTS().TEMPLATES_FOLDER);
     app.set('view engine', 'ejs');
+    app.set('view cache', false);
     app.use(expressLayouts);
     app.use(express.json())
 }

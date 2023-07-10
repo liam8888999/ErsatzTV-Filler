@@ -26,10 +26,9 @@ const loadPageRoutes = async (app) => {
     res.status(status).json({ error: message });
   });
 
-const config_current = await retrieveCurrentConfiguration();
 
   app.get('/', async (req, res) => {
-  //  let config_current = await retrieveCurrentConfiguration()
+    const config_current = await retrieveCurrentConfiguration();
     const ersatz = config_current.xmltv
     let UPDATESTATUS = await checkForUpdates();
   const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
@@ -45,6 +44,7 @@ const config_current = await retrieveCurrentConfiguration();
 
 
     app.get('/output', async (req, res) => {
+      const config_current = await retrieveCurrentConfiguration();
       const ersatz = config_current.xmltv
       let UPDATESTATUS = await checkForUpdates();
     const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
@@ -68,6 +68,7 @@ const config_current = await retrieveCurrentConfiguration();
 
 
     app.get('/config', async (req, res) => {
+      const config_current = await retrieveCurrentConfiguration();
       let UPDATESTATUS = await checkForUpdates();
       const ersatz = config_current.xmltv
       const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
@@ -83,6 +84,7 @@ const config_current = await retrieveCurrentConfiguration();
     });
 
     app.get('/themes', async (req, res) => {
+      const config_current = await retrieveCurrentConfiguration();
       let filesinthemesdir = await listFilesInDir("themes/system")
   .catch(error => {
     logger.error(`Error: ${error}`);
@@ -102,6 +104,7 @@ const config_current = await retrieveCurrentConfiguration();
     });
 
     app.get('/updates', async (req, res) => {
+      const config_current = await retrieveCurrentConfiguration();
       const ersatz = config_current.xmltv
       const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
       let UPDATESTATUS = await checkForUpdates();
@@ -124,6 +127,7 @@ const config_current = await retrieveCurrentConfiguration();
 
 
     app.get('/logs', async (req, res) => {
+      const config_current = await retrieveCurrentConfiguration();
       let UPDATESTATUS = await checkForUpdates();
       const ersatz = config_current.xmltv
       const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
@@ -141,6 +145,7 @@ const config_current = await retrieveCurrentConfiguration();
 
 
     app.get('/documentation', async (req, res) => {
+      const config_current = await retrieveCurrentConfiguration();
       let UPDATESTATUS = await checkForUpdates();
 let documentation = await generateReadMe()
 const ersatz = config_current.xmltv
