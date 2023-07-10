@@ -1,6 +1,7 @@
 const winston = require('winston');
 const { format } = winston;
 const DailyRotateFile = require('winston-daily-rotate-file');
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 // Define your custom log levels
 const customLevels = {
@@ -46,31 +47,32 @@ const logFormat = winston.format.printf(({ level, message, timestamp }) => {
 });
 
 // Create the logger
-const logger = winston.createLogger({
-  levels: customLevels,
-  level: 'ffmpeg',
-  format: winston.format.combine(
-    winston.format.timestamp({ format: customTimestamp }),
-    logFormat
-  ),
-  transports: [
-    new winston.transports.Console(),
-    new DailyRotateFile({
-     filename: 'logs/ersatztv-filler-%DATE%.log',
-     datePattern: 'YYYY-MM-DD',
-     maxFiles: '7d', // Keep logs for 7 days
-     maxSize: '900m', // Rotate logs if the file size exceeds 20MB
-     level: 'debug'
-   }),
-   new DailyRotateFile({
-    filename: 'logs/ersatztv-filler-ffmpeg-%DATE%.log',
-    datePattern: 'YYYY-MM-DD',
-    maxFiles: '7d', // Keep logs for 7 days
-    maxSize: '900m', // Rotate logs if the file size exceeds 20MB
-    level: 'ffmpeg'
-  })
-  ]
-});
+  const logger = winston.createLogger({
+    levels: customLevels,
+    level: 'ffmpeg',
+    format: winston.format.combine(
+      winston.format.timestamp({ format: customTimestamp }),
+      logFormat
+    ),
+    transports: [
+      new winston.transports.Console(),
+      new DailyRotateFile({
+        filename: 'logs/ersatztv-filler-%DATE%.log',
+        datePattern: 'YYYY-MM-DD',
+        maxFiles: '7d', // Keep logs for 7 days
+        maxSize: '900m', // Rotate logs if the file size exceeds 20MB
+        level: 'debug'
+      }),
+      new DailyRotateFile({
+        filename: 'logs/ersatztv-filler-ffmpeg-%DATE%.log',
+        datePattern: 'YYYY-MM-DD',
+        maxFiles: '7d', // Keep logs for 7 days
+        maxSize: '900m', // Rotate logs if the file size exceeds 20MB
+        level: 'ffmpeg'
+      })
+    ]
+  });
+
 
 
 

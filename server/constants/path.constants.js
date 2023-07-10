@@ -35,8 +35,6 @@ const DEFAULT_CONFIG = {
   "xmltv": "http://127.0.0.1:8409/iptv/xmltv.xml",
   "videoresolution": "1280x720",
   "newsduration": "60",
-  "log_location": "/tmp/ErsatzTV-Filler",
-  "log_days": "7",
   "webport": "8408",
   "webtheme": "dark",
   "fontfile": "fonts/Verdana.tff",
