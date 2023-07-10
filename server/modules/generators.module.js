@@ -23,7 +23,7 @@ const GENERATION = async () => {
       interval = `*/${config_current.vanityinterval} * * * *` || '*/10 * * * *';
       // Restart the cron job with the updated interval
       manager.update('vanity', interval)
-      console.log(`Vanity Cards Generation completed at ${new Date()}`);
+      logger.success(`Vanity Cards Generation completed at ${new Date()}`);
     });
     manager.start('vanity');
   };
@@ -38,7 +38,7 @@ const GENERATION = async () => {
       interval = `*/${config_current.weatherinterval} * * * *` || '*/10 * * * *';
       // Restart the cron job with the updated interval
       manager.update('weather', interval)
-      console.log(`Weather Generation completed at ${new Date()}`);
+      logger.success(`Weather Generation completed at ${new Date()}`);
     });
     manager.start('weather');
   };
@@ -53,7 +53,7 @@ const GENERATION = async () => {
       interval = `*/${config_current.newsinterval} * * * *` || '*/30 * * * *';
       // Restart the cron job with the updated interval
       manager.update('news', interval)
-      console.log(`News Generation completed at ${new Date()}`);
+      logger.success(`News Generation completed at ${new Date()}`);
     });
     manager.start('news');
   };
@@ -68,7 +68,7 @@ const GENERATION = async () => {
       interval = `*/${config_current.offlineinterval} * * * *` || '*/5 * * * *';
       // Restart the cron job with the updated interval
       manager.update('offline', interval)
-      console.log(`Channel-Offline Generation completed at ${new Date()}`);
+      logger.success(`Channel-Offline Generation completed at ${new Date()}`);
     });
     manager.start('offline');
   };
@@ -83,7 +83,7 @@ const GENERATION = async () => {
       interval = `*/${config_current.xmltvmergeinterval} * * * *` || '*/20 * * * *';
       // Restart the cron job with the updated interval
       manager.update('merge', interval)
-      console.log(`XMLTV Merge Generation completed at ${new Date()}`);
+      logger.success(`XMLTV Merge Generation completed at ${new Date()}`);
     });
     manager.start('merge');
   };

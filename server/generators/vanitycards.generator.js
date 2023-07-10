@@ -19,7 +19,6 @@ const VANITYCARDS = async () => {
 
 
   const getVanityCard = async (filenumber) => {
-      console.log('1')
     return new Promise((resolve, reject) => {
       // URL of the Chuck Lorre website
       const url = 'http://chucklorre.com/card-json.php';
@@ -53,7 +52,7 @@ const VANITYCARDS = async () => {
               imageResponse.pipe(fileStream);
 
               fileStream.on('finish', () => {
-                console.log(`Image downloaded: ${imagePath}`);
+                logger.success(`Image downloaded: ${imagePath}`);
                 resolve(); // Resolve the promise when image download is complete
               });
 
@@ -77,7 +76,6 @@ const createVanityCard = async (filenumber) => {
   try {
     // add theme information
     // part1
-    console.log('2')
     const commandvanitycard = `${FFMPEGCOMMAND} -f lavfi -i color=white:${config_current.videoresolution} -i workdir/vanitycard/vanitycard-${filenumber}.jpg -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${config_current.output}/vanitycard-${filenumber}.mp4`;
     logger.info(commandvanitycard);
     logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
@@ -101,7 +99,7 @@ const createVanityCard = async (filenumber) => {
 
 
 async function processVanityCards() {
-  console.log(config_current.amountvanitycards)
+  logger.info(config_current.amountvanitycards)
   const maxIterations = config_current.amountvanitycards || 5;
   for (let filenumber = 1; filenumber <= maxIterations; filenumber++) {
     await getVanityCard(filenumber);

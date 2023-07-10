@@ -19,7 +19,7 @@ const CHANNEL_OFFLINE = async () => {
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const current_theme = await retrieveCurrentTheme();
-  console.log(`current theme is: ${current_theme.ErsatzTVFillerTheme.ThemeName}`);
+  logger.info(`current theme is: ${current_theme.ErsatzTVFillerTheme.ThemeName}`);
 
 
 
@@ -40,7 +40,7 @@ async function downloadXmltv(xmltvFilePath) {
       // Resolve the promise with the complete data when the request is finished
       response.on('end', () => {
         resolve(data);
-        console.log(data)
+        logger.info(data)
         fs.writeFileSync(`workdir/Channel-offline/xmltv.xmltv`, data);
       });
     }).on('error', (error) => {
@@ -51,9 +51,7 @@ async function downloadXmltv(xmltvFilePath) {
 }
   // Function to split XMLTV by channel
   const splitXMLTVByChannel = async () => {
-    console.log('1')
     const xmlData = await fs.promises.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8')
-console.log('2')
         xml2js.parseString(xmlData, (parseErr, result) => {
           if (parseErr) {
             logger.error('Error parsing XML:', parseErr);
@@ -78,21 +76,17 @@ console.log('2')
             };
 
             const channelXMLString = builder.buildObject(channelXMLData);
-console.log('3')
             const channelFilePath = `${WORKDIR}/Channel-offline/${channelId}.xml`;
-            console.log(channelFilePath)
+            logger.info(channelFilePath)
             await fs.promises.writeFile(channelFilePath, channelXMLString);
-            console.log('3.5')
             logger.info(`Channel file saved: ${channelFilePath}`);
-            console.log('4')
           });
         });
   };
 
   // Function to find start time
   const startTimefind = async (eachxmltvfile) => {
-    console.log('5')
-    console.log(eachxmltvfile)
+    logger.info(eachxmltvfile)
     // Read the XML file
   const data = await fs.promises.readFile(`${eachxmltvfile}.xml`, 'utf-8')
 
@@ -106,12 +100,10 @@ console.log('3')
 
         // Extract the show start time
         const showName = 'Channel-Offline'; // Replace with the name of the show you're looking for
-        console.log('123')
 
         const programme = result.tv.programme.find(program => program.title[0]._ === showName);
 
-console.log(programme)
-console.log('456')
+logger.info(programme)
 
           let nextShowName = '';
           let nextStartTime = '';
@@ -171,8 +163,8 @@ logger.info(nextShowStartTime)
       // const titlecolor = themecolourdecoder('FFBF00');
           const descriptioncolor = themecolourdecoder(`${current_theme.Offline.offlinetextcolour}`);
           const offlinebackgroundcolour = themecolourdecoder(`${current_theme.Offline.offlinebackgroundcolour}`);
-          console.log(titlecolor)
-          console.log(descriptioncolor)
+          logger.info(titlecolor)
+          logger.info(descriptioncolor)
 
           const newsFeed = `{\\r}{\\b1}{\\c&H${titlecolor}&}This Channel is Currently offline\n\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}Next showing at: ${nextShowStartTime}\n\nStarting With: ${nextShowName}`;
           const lines = newsFeed.replace(/\n/g, '\\N');
@@ -202,7 +194,7 @@ logger.info(nextShowStartTime)
             [Events]
             Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
-console.log(assText)
+logger.info(assText)
           fs.writeFileSync(`${eachxmltvfile}.ass`, assText);
 
           const command = `${FFMPEGCOMMAND} -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${eachxmltvfile}.ass" -c:a copy -t 5 ${eachxmltvfile}.mp4`;
@@ -234,15 +226,15 @@ console.log(assText)
 
       for (const file of fileList) {
           if (path.extname(file) === '.xml') {
-            console.log(file);
+            logger.info(file);
             const filename = `${file}`;
 const filePath = filename.replace(/\.xml$/, "");
 
-            console.log(filePath);
+            logger.info(filePath);
             await startTimefind(filePath);
           }
         }
-        console.log('complete generation of channel-offline filler')
+        logger.success('complete generation of channel-offline filler')
       }
 
   // Usage

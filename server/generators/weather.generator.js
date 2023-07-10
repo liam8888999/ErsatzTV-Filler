@@ -53,9 +53,9 @@ await downloadImage(`https://v3.wttr.in/${await config_current.state}.png`, `${W
 
   const weathercalculations = async () => {
     const weathervideofadeoutstart = config_current.videolength - config_current.weathervideofadeoutduration;
-    console.log(weathervideofadeoutstart)
+    logger.info(weathervideofadeoutstart)
     const weatheraudiofadeoutstart = config_current.videolength - config_current.weatheraudiofadeoutduration;
-    console.log(weatheraudiofadeoutstart)
+    logger.info(weatheraudiofadeoutstart)
     const weatherv4videolength = config_current.videolength * 3;
     const weathervideofadeoutstartv4 = weatherv4videolength - config_current.weathervideofadeoutduration;
     const weatheraudiofadeoutstartv4 = weatherv4videolength - config_current.weatheraudiofadeoutduration;
@@ -72,7 +72,7 @@ await downloadImage(`https://v3.wttr.in/${await config_current.state}.png`, `${W
 
 const createWeatherV1 = async () => {
   try {
-    console.log(weatherCalculationsResult.weathervideofadeoutstart)
+    logger.info(weatherCalculationsResult.weathervideofadeoutstart)
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1

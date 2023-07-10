@@ -75,7 +75,7 @@ const retrieveCurrentConfiguration = async () => {
 
     const data = await fs.readFileSync('config.json');
     CURRENT_CONFIG = JSON.parse(data);
-console.log(CURRENT_CONFIG);
+logger.info(CURRENT_CONFIG);
 return CURRENT_CONFIG;
 };
 

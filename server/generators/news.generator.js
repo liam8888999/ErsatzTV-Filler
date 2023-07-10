@@ -20,7 +20,6 @@ const current_theme = await retrieveCurrentTheme();
 
 // Step 5: Generate the news feed
 const generateNewsFeed = async (config_current, audioFile, current_theme) => {
-  console.log('1');
   const newsfeed = config_current.newsfeed;
 
   await new Promise((resolve, reject) => {
@@ -35,7 +34,7 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
         const $ = cheerio.load(xmlData, { xmlMode: true });
 
         let newsFeed = '';
-        console.log(xmlData);
+        logger.info(xmlData);
 
         $('rss > channel > item').each((index, element) => {
           const title = $(element).find('title').text();
@@ -62,13 +61,11 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
 
 // Step 6: Prepare the news content
 const prepareNewsContent = async (config_current) => {
-  console.log('2')
   const newstempContent = await fs.readFileSync(`${NEWSDIR}/newstemp.txt`, 'utf8');
 
   const news1Content = newstempContent;
   const news2Content = news1Content.split('\n\n').slice(0, config_current.newsarticles).join('\n\n');
   const newsContent = news2Content.replace(/%/g, '\\%');
-console.log('2')
   await fs.writeFileSync(`${NEWSDIR}/news-temp.txt`, newsContent);
 };
 
@@ -76,7 +73,6 @@ console.log('2')
 const prepareSubtitleText = async (config_current) => {
   const inputText = await fs.readFileSync(`${NEWSDIR}/news-temp.txt`, 'utf8');
   const lines = inputText.replace(/\n/g, '\\N');
-console.log('3')
   const maxLinesPerFrame = 70;
   const subtitleDuration = 0;
   let startTime = 0;
@@ -111,7 +107,6 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 // Step 8: Generate the news video
 const generateNewsVideo = async (config_current, audioFile) => {
   const resolution = config_current.videoresolution;
-  console.log('4')
   const width = resolution.split("x")[0];
   const textWidth = Math.floor(width / 40);
   const backgroundcolour = themecolourdecoder(current_theme.News.newsbackgroundcolour);
