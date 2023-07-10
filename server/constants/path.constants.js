@@ -43,7 +43,12 @@ const DEFAULT_CONFIG = {
   "newsarticles": "10",
   "processxmltvmerger": "no",
   "epgfiles": "",
-  "amountvanitycards": "5"
+  "amountvanitycards": "5",
+  "xmltvmergeinterval": "20",
+  "vanityinterval": "10",
+  "weatherinterval": "10",
+  "newsinterval": "30",
+  "offlineinterval": "5",
 }
 const USER_CONFIG = "config.json"
 
