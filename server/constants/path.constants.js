@@ -41,7 +41,6 @@ const DEFAULT_CONFIG = {
   "webtheme": "dark",
   "fontfile": "fonts/Verdana.tff",
   "newsarticles": "10",
-  "processxmltvmerger": "no",
   "epgfiles": "",
   "amountvanitycards": "5",
   "xmltvmergeinterval": "20",
