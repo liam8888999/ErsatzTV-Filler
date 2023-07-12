@@ -17,9 +17,13 @@ const GENERATION = async () => {
     manager.add('vanity', interval, async () => {
       logger.info(`Running Vanity Cards generation at ${new Date()}`);
       logger.info(`${await manager}`)
-      await VANITYCARDS();
-      // Update the interval
       const config_current = await retrieveCurrentConfiguration();
+      if (config_current.processvanitycards === 'yes') {
+      await VANITYCARDS();
+    } else {
+      logger.info('Not running vanity cards')
+    }
+      // Update the interval
       interval = `*/${config_current.vanityinterval} * * * *` || '*/10 * * * *';
       // Restart the cron job with the updated interval
       manager.update('vanity', interval)
@@ -32,9 +36,13 @@ const GENERATION = async () => {
     manager.add('weather', interval, async () => {
       logger.info(`Running Weather generation at ${new Date()}`);
       logger.info(`${await manager}`)
-      await WEATHER();
-      // Update the interval
       const config_current = await retrieveCurrentConfiguration();
+      if (config_current.processweather === 'yes') {
+      await WEATHER();
+    } else {
+      logger.info('Not running WEATHER')
+    }
+      // Update the interval
       interval = `*/${config_current.weatherinterval} * * * *` || '*/10 * * * *';
       // Restart the cron job with the updated interval
       manager.update('weather', interval)
@@ -47,9 +55,13 @@ const GENERATION = async () => {
     manager.add('news', interval, async () => {
       logger.info(`Running News generation at ${new Date()}`);
       logger.info(`${await manager}`)
-      await NEWS();
-      // Update the interval
       const config_current = await retrieveCurrentConfiguration();
+      if (config_current.processnews === 'yes') {
+      await NEWS();
+    } else {
+      logger.info('Not running News')
+    }
+      // Update the interval
       interval = `*/${config_current.newsinterval} * * * *` || '*/30 * * * *';
       // Restart the cron job with the updated interval
       manager.update('news', interval)
@@ -62,9 +74,13 @@ const GENERATION = async () => {
     manager.add('offline', interval, async () => {
       logger.info(`Running Channel-Offline generation at ${new Date()}`);
       logger.info(`${await manager}`)
-      await CHANNEL_OFFLINE();
-      // Update the interval
       const config_current = await retrieveCurrentConfiguration();
+      if (config_current.processchanneloffline === 'yes') {
+      await CHANNEL_OFFLINE();
+    } else {
+      logger.info('Not running Channel Offline')
+    }
+      // Update the interval
       interval = `*/${config_current.offlineinterval} * * * *` || '*/5 * * * *';
       // Restart the cron job with the updated interval
       manager.update('offline', interval)
@@ -77,9 +93,13 @@ const GENERATION = async () => {
     manager.add('merge', interval, async () => {
       logger.info(`Running XMLTV Merge generation at ${new Date()}`);
       logger.info(`${await manager}`)
-      await XMLTVPARSE();
-      // Update the interval
       const config_current = await retrieveCurrentConfiguration();
+      if (config_current.processxmltvmerger === 'yes') {
+      await XMLTVPARSE();
+    } else {
+      logger.info('Not running XMLTV Merge')
+    }
+      // Update the interval
       interval = `*/${config_current.xmltvmergeinterval} * * * *` || '*/20 * * * *';
       // Restart the cron job with the updated interval
       manager.update('merge', interval)

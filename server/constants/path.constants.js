@@ -15,6 +15,8 @@ const DEFAULT_CONFIG = {
   "processweather": "yes",
   "processnews": "yes",
   "processchanneloffline": "yes",
+  "processvanitycards": "yes",
+  "processxmltvmerger": "yes",
   "customaudio": "audio-fallback",
   "output": "workdir",
   "city": "Austin",
