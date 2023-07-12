@@ -95,7 +95,9 @@ const GENERATION = async () => {
       logger.info(`${await manager}`)
       const config_current = await retrieveCurrentConfiguration();
       if (config_current.processxmltvmerger === 'yes') {
+          if (typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null') {
       await XMLTVPARSE();
+    }
     } else {
       logger.info('Not running XMLTV Merge')
     }

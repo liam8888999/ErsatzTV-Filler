@@ -8,6 +8,7 @@ const { NEWS } = require("../generators/news.generator");
 const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const { CHANNEL_OFFLINE } = require("../generators/channel-offline.generator");
 const { VANITYCARDS } = require("../generators/vanitycards.generator");
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 const loadApirunRoutes = (app) => {
 
@@ -52,8 +53,12 @@ await CHANNEL_OFFLINE();
 // run xmltvmerger function
 app.get('/api/run/xmltvmerger', async () => {
 logger.info("xmltvmerger function")
+const config_current = await retrieveCurrentConfiguration
+if (!(typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null')) {
 await XMLTVPARSE();
-// use the url and path variables to set the theme
+} else {
+  logger.info('no epg files set so merger not running')
+}// use the url and path variables to set the theme
 
 });
 
