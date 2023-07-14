@@ -3,7 +3,6 @@ const cheerio = require('cheerio');
 const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
-const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const http = require('http');
 const https = require('https');
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");

@@ -4,8 +4,8 @@ const { selectRandomAudioFile } = require("../server/generators/utils/randomaudi
 const { GENERATION } = require("../server/modules/generators.module");
 const logger = require("../server/utils/logger.utils");
 const moment = require('moment-timezone');
-const { WORKDIR } = require("../constants/path.constants");
-const { createDirectoryIfNotExists } = require("../utils/file.utils");
+const { WORKDIR } = require("../server/constants/path.constants");
+const { createDirectoryIfNotExists } = require("../server/utils/file.utils");
 
 
 
