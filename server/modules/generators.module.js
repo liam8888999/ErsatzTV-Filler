@@ -111,7 +111,7 @@ const GENERATION = async () => {
   };
 
 
-console.log('Starting Generator Jobs')
+logger.success('Starting Generator Jobs')
   // Start the initial cron job
   await startCronVanity(`*/${config_current.vanityinterval} * * * *`);
   await startCronWeather(`*/${config_current.weatherinterval} * * * *`);

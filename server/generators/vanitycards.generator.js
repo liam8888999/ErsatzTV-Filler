@@ -62,12 +62,12 @@ const VANITYCARDS = async () => {
               });
             });
           } catch (error) {
-            console.error('Error parsing JSON:', error);
+            logger.error('Error parsing JSON:', error);
             reject(error); // Reject the promise if there's an error parsing the JSON
           }
         });
       }).on('error', (error) => {
-        console.error('Error downloading JSON:', error);
+        logger.error('Error downloading JSON:', error);
         reject(error); // Reject the promise if there's an error downloading the JSON
       });
     });

@@ -126,10 +126,10 @@ const CHANNEL_OFFLINE = async () => {
   try {
     const downloadedData = await downloadXmltv('http://127.0.0.1:8409/xmltv');
     // Handle the downloaded data
-    console.log('XMLTV downloaded successfully:', downloadedData);
+    logger.success('XMLTV downloaded successfully:', downloadedData);
   } catch (error) {
     // Handle the connection error
-    console.error('Error downloading or processing XMLTV:', error);
+    logger.error('Error downloading or processing XMLTV:', error);
     // Stop further execution by throwing the error
     return
   }
