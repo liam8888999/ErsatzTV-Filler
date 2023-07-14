@@ -11,17 +11,18 @@ const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 const { createDirectoryIfNotExists } =require("../utils/file.utils");
 const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
-
-
-
-
-
 const { exec } = require("child_process")
 const fs = require('fs');
 const client = require('https');
 
-const WEATHER = async () => {
+let isFunctionRunning = false;
 
+const WEATHER = async () => {
+  if (isFunctionRunning) {
+    logger.error('Weather Generator is already running.');
+    return;
+  }
+isFunctionRunning = true;
       createDirectoryIfNotExists(WEATHERDIR);
 logger.info("starting weather")
 
@@ -255,6 +256,7 @@ await createWeatherV3();
 
 //exec(`${FFMPEGCOMMAND} -f concat -safe 0 -i ${config_current.WEATHERDIR}/weatherv4/weatherv4.txt -c copy ${WEATHERDIR}/weather-v4.mp4`)
 //exec(`${FFMPEGCOMMAND} -i ${WEATHERDIR}/weather-v4.mp4 -i "${config_current.randomaudioweather4}" -shortest -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${config_current.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${config_current.weatheraudiofadeoutstartv4}:d=${config_current.eatheraudiofadeoutduration}" ${config_current.output}/weather-v4.mp4`)
+isFunctionRunning = false;
 }
 module.exports = {
     WEATHER

@@ -11,8 +11,14 @@ const { exec } = require("child_process")
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 // Future todo. add option to add episode number/episode title to main description for clients without support
-
+let isFunctionRunning = false;
 const VANITYCARDS = async () => {
+if (isFunctionRunning) {
+  logger.error('Vanity Cards Generator is already running.');
+  return;
+}
+
+isFunctionRunning = true;
 
   createDirectoryIfNotExists(VANITYCARDDIR);
   const config_current = await retrieveCurrentConfiguration();
@@ -110,6 +116,8 @@ async function processVanityCards() {
 
 // Assuming you're in an async function or using the `async` keyword somewhere
 await processVanityCards();
+ isFunctionRunning = false;
+
 
 };
 

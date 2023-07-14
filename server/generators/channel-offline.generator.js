@@ -12,7 +12,13 @@ const { listFilesInDir } = require("../utils/file.utils");
 const http = require('http')
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
+let isFunctionRunning = false;
 const CHANNEL_OFFLINE = async () => {
+  if (isFunctionRunning) {
+  logger.error('Channel Offline Generator is already running.');
+    return;
+  }
+  isFunctionRunning = true;
   createDirectoryIfNotExists(CHANNEL_OFFLINEDIR);
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
@@ -135,6 +141,7 @@ const CHANNEL_OFFLINE = async () => {
   }
   await splitXMLTVByChannel();
   await runnersT();
+  isFunctionRunning = false;
 };
 
 module.exports = {

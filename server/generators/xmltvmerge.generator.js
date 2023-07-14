@@ -10,7 +10,14 @@ const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 // Future todo. add option to add episode number/episode title to main description for clients without support
 
+let isFunctionRunning = false;
+
 const XMLTVPARSE = async () => {
+  if (isFunctionRunning) {
+    logger.error('XMLTV Merger is already running.');
+    return;
+  }
+  isFunctionRunning = true;
   createDirectoryIfNotExists(XMLTVMERGEDIR);
 
   const config_current = await retrieveCurrentConfiguration();
@@ -72,6 +79,7 @@ const XMLTVPARSE = async () => {
   fs.writeFileSync(`${XMLTVMERGEDIR}/mergedxmltv.xml`, xmlString, 'utf8');
 
   logger.success('XMLTV file created successfully.');
+  isFunctionRunning = true;
 };
 
 module.exports = {

@@ -12,7 +12,13 @@ const path = require('path');
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const { themecolourdecoder, retrieveCurrentTheme } = require("../utils/themes.utils");
 
+let isFunctionRunning = false;
 const NEWS = async () => {
+  if (isFunctionRunning) {
+    logger.error('News Generator is already running.');
+    return;
+  }
+  isFunctionRunning = true;
 const config_current = await retrieveCurrentConfiguration();
 const audioFile = await selectRandomAudioFile(config_current.customaudio);
 const current_theme = await retrieveCurrentTheme();
@@ -137,6 +143,7 @@ const generateNewsVideo = async (config_current, audioFile) => {
   await prepareNewsContent(config_current);
   await prepareSubtitleText(config_current);
   await generateNewsVideo(config_current, audioFile);
+  isFunctionRunning = false;
 };
 
 module.exports = {
