@@ -22,6 +22,7 @@ const GENERATION = async () => {
   const startCronVanity = async (interval) => {
     manager.add('vanity', interval, async () => {
       logger.info(`Running Vanity Cards generation at ${new Date()}`);
+      logger.info(`${await manager}`)
 
       while (weatherRunning || newsRunning || offlineRunning || mergeRunning) {
         const runningGenerators = [];
@@ -54,6 +55,7 @@ const GENERATION = async () => {
   const startCronWeather = async (interval) => {
     manager.add('weather', interval, async () => {
       logger.info(`Running Weather generation at ${new Date()}`);
+      logger.info(`${await manager}`)
 
       while (vanityRunning || newsRunning || offlineRunning || mergeRunning) {
         const runningGenerators = [];
@@ -86,6 +88,7 @@ const GENERATION = async () => {
   const startCronNews = async (interval) => {
     manager.add('news', interval, async () => {
       logger.info(`Running News generation at ${new Date()}`);
+      logger.info(`${await manager}`)
       
 
       while (vanityRunning || weatherRunning || offlineRunning || mergeRunning) {
@@ -119,6 +122,7 @@ const GENERATION = async () => {
   const startCronOffline = async (interval) => {
     manager.add('offline', interval, async () => {
       logger.info(`Running Channel-Offline generation at ${new Date()}`);
+      logger.info(`${await manager}`)
 
       while (vanityRunning || weatherRunning || newsRunning || mergeRunning) {
         const runningGenerators = [];
@@ -151,6 +155,7 @@ const GENERATION = async () => {
   const startCronmerge = async (interval) => {
     manager.add('merge', interval, async () => {
       logger.info(`Running XMLTV Merge generation at ${new Date()}`);
+      logger.info(`${await manager}`)
       
 
       while (vanityRunning || weatherRunning || newsRunning || offlineRunning) {
