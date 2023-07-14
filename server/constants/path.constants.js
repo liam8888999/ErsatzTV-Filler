@@ -60,6 +60,8 @@ const NEWSDIR = "workdir/News"
 const WEATHERDIR = "workdir/Weather"
 const CHANNEL_OFFLINEDIR = "workdir/Channel-offline"
 const XMLTVMERGEDIR = "workdir/xmltvmerge"
+const VANITYCARDDIR = "workdir/vanitycard"
+const CONFIGCONFDIR = "workdir/configconf"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -103,5 +105,7 @@ module.exports = {
     CHANNEL_OFFLINEDIR,
     FFMPEGCOMMAND,
     XMLTVMERGEDIR,
-    README
+    README,
+    VANITYCARDDIR,
+    CONFIGCONFDIR = "workdir/configconf"
 };
