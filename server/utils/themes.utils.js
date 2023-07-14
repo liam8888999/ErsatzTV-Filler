@@ -59,13 +59,14 @@ const themecolourdecoder = (colour) => {
 
  const retrieveTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
-   const data = fs.readFileSync(`themes/system/${config_current.theme}.theme`);
+   const data = await fs.readFileSync(`themes/system/${config_current.theme}.theme`);
    logger.info(JSON.parse(data))
     return JSON.parse(data)
  }
 
  const themeDoesNotExist = async () => {
-   await createDirectoryIfNotExists(THEMES_FOLDER);
+   await createDirectoryIfNotExists('themes');
+   await createDirectoryIfNotExists('themes/system')
    try {
      await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'themes/system/SystemLight.theme');
    } catch (error) {

@@ -14,7 +14,7 @@ process.on('uncaughtException', (error) => {
   logger.error('Uncaught Exception:', error);
   // Perform any necessary cleanup or logging here
   // Terminate the process (optional)
-  process.exit(1);
+  //process.exit(1);
 });
 
 // Handle unhandled promise rejections
@@ -23,7 +23,7 @@ process.on('unhandledRejection', (reason, promise) => {
   // Perform any necessary cleanup or logging here
 
   // Terminate the process (optional)
-  process.exit(1);
+  //process.exit(1);
 });
 
 // Rest of your Node.js application code...
@@ -44,7 +44,7 @@ process.on('unhandledRejection', (reason, promise) => {
 
         await createDirectoryIfNotExists(WORKDIR);
 
-       await GENERATION();
+      await GENERATION();
 
     } catch(e){
         logger.error("Fatal error occurred!", e)

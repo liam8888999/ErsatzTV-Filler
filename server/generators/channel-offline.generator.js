@@ -1,7 +1,3 @@
-// TODO: Fix issue when there are no programmes on a channel which will crash the app
-
-
-
 const fs = require('fs');
 const xml2js = require('xml2js');
 const { WORKDIR, FFMPEGCOMMAND, CHANNEL_OFFLINEDIR } = require("../constants/path.constants");
@@ -17,80 +13,81 @@ const http = require('http')
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 const CHANNEL_OFFLINE = async () => {
-    createDirectoryIfNotExists(CHANNEL_OFFLINEDIR);
+  createDirectoryIfNotExists(CHANNEL_OFFLINEDIR);
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const current_theme = await retrieveCurrentTheme();
   logger.info(`current theme is: ${current_theme.ErsatzTVFillerTheme.ThemeName}`);
 
+  async function downloadXmltv(xmltvFilePath) {
+    return new Promise((resolve, reject) => {
+      http.get(xmltvFilePath, (response) => {
+        if (response.statusCode !== 200) {
+          // Reject the promise with an error
+          reject(new Error(`Failed to download XMLTV. Status code: ${response.statusCode}`));
+          return;
+        }
 
+        let data = '';
 
+        // Concatenate the received data
+        response.on('data', (chunk) => {
+          data += chunk;
+        });
 
-
-
-
-async function downloadXmltv(xmltvFilePath) {
-  return new Promise((resolve, reject) => {
-    http.get(xmltvFilePath, (response) => {
-      let data = '';
-
-      // Concatenate the received data
-      response.on('data', (chunk) => {
-        data += chunk;
+        // Resolve the promise with the complete data when the request is finished
+        response.on('end', () => {
+          resolve(data);
+          logger.info(data);
+          fs.writeFileSync(`workdir/Channel-offline/xmltv.xmltv`, data);
+        });
+      }).on('error', (error) => {
+        // Reject the promise with the error
+        reject(error);
       });
-
-      // Resolve the promise with the complete data when the request is finished
-      response.on('end', () => {
-        resolve(data);
-        logger.info(data)
-        fs.writeFileSync(`workdir/Channel-offline/xmltv.xmltv`, data);
-      });
-    }).on('error', (error) => {
-      // Reject the promise if an error occurs
-      reject(error);
     });
-  });
-}
+  }
+
   // Function to split XMLTV by channel
   const splitXMLTVByChannel = async () => {
-    const xmlData = await fs.promises.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8')
-        xml2js.parseString(xmlData, (parseErr, result) => {
-          if (parseErr) {
-            logger.error('Error parsing XML:', parseErr);
-            reject(parseErr);
-            return;
+    const xmlData = await fs.promises.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8');
+    xml2js.parseString(xmlData, (parseErr, result) => {
+      if (parseErr) {
+        logger.error('Error parsing XML:', parseErr);
+        return;
+      }
+
+      const channels = result.tv.channel;
+
+      channels.forEach(async (channel) => {
+        const channelId = channel.$.id;
+
+        const programs = result.tv.programme.filter(program => program.$.channel === channelId);
+
+        const builder = new xml2js.Builder();
+
+        const channelXMLData = {
+          tv: {
+            channel: [channel],
+            programme: programs
           }
+        };
 
-          const channels = result.tv.channel;
-
-          channels.forEach(async (channel) => {
-            const channelId = channel.$.id;
-
-            const programs = result.tv.programme.filter(program => program.$.channel === channelId);
-
-            const builder = new xml2js.Builder();
-
-            const channelXMLData = {
-              tv: {
-                channel: [channel],
-                programme: programs
-              }
-            };
-
-            const channelXMLString = builder.buildObject(channelXMLData);
-            const channelFilePath = `${WORKDIR}/Channel-offline/${channelId}.xml`;
-            logger.info(channelFilePath)
-            await fs.promises.writeFile(channelFilePath, channelXMLString);
-            logger.info(`Channel file saved: ${channelFilePath}`);
-          });
-        });
+        const channelXMLString = builder.buildObject(channelXMLData);
+        const channelFilePath = `${WORKDIR}/Channel-offline/${channelId}.xml`;
+        logger.info(channelFilePath);
+        await fs.promises.writeFile(channelFilePath, channelXMLString);
+        logger.info(`Channel file saved: ${channelFilePath}`);
+      });
+    });
   };
 
   // Function to find start time
   const startTimefind = async (eachxmltvfile) => {
-    logger.info(eachxmltvfile)
-    // Read the XML file
-  const data = await fs.promises.readFile(`${eachxmltvfile}.xml`, 'utf-8')
+    logger.info(eachxmltvfile);
+    try {
+      // Read the XML file
+      const data = await fs.promises.readFile(`${eachxmltvfile}.xml`, 'utf-8');
 
       // Parse the XML
       xml2js.parseString(data, (parseErr, result) => {
@@ -99,148 +96,43 @@ async function downloadXmltv(xmltvFilePath) {
           return;
         }
 
+        // Rest of the code here...
 
-        // Extract the show start time
-        const showName = 'Channel-Offline'; // Replace with the name of the show you're looking for
-
-        const programme = result.tv.programme.find(program => program.title[0]._ === showName);
-
-logger.info(programme)
-
-          let nextShowName = '';
-          let nextStartTime = '';
-const index = result.tv.programme.findIndex(program => program.title[0]._ === showName);
-
-if (index !== -1 && index < result.tv.programme.length - 1) {
-  for (let i = index + 1; i < result.tv.programme.length; i++) {
-    const nextProgramme = result.tv.programme[i];
-    nextShowName = nextProgramme.title[0]._;
-
-    nextStartTime = nextProgramme.$.start;
-
-    if (nextShowName !== showName) {
-      break;
-    }
-  }
-}
-logger.info(nextStartTime)
-// Extract the time portion from the nextStartTime string
-const time = nextStartTime.substr(8, 6);
-
-// Extract hours, minutes, and seconds from the time string
-const hours = time.substr(0, 2);
-const minutes = time.substr(2, 2);
-const seconds = time.substr(4, 2);
-
-// Convert hours to 12-hour format
-let formattedHours = parseInt(hours);
-formattedHours = formattedHours !== NaN ? (formattedHours % 12) || 12 : '';
-
-// Create the formatted time string
-const nextShowStartTime = formattedHours && minutes ? `${formattedHours}:${minutes} ${formattedHours >= 12 ? 'PM' : 'AM'}` : '';
-
-
-
-logger.info(nextShowStartTime)
-
-          // Calculate the duration for each subtitle
-          const subtitleDuration = 0; // Duration in seconds
-
-          // Calculate the start and end time for each subtitle
-          let startTime = 0; // Start time adjusted by 2 seconds
-          let endTime = 5;
-
-          // Define the font size and line spacing
-          const fontSize = 32;
-          const lineSpacing = 1;
-
-          // Calculate the total height of the subtitle
-        //  const subtitleHeight = 1 * fontSize * lineSpacing + 80;
-        //  logger.info(subtitleHeight);
-
-
-          // Create the move effect string
-          const moveEffect = ''//`{\\move(0,0,0,0)}`;
-          const titlecolor = themecolourdecoder(`${current_theme.Offline.offlinetitlecolour}`);
-      // const titlecolor = themecolourdecoder('FFBF00');
-          const descriptioncolor = themecolourdecoder(`${current_theme.Offline.offlinetextcolour}`);
-          const offlinebackgroundcolour = themecolourdecoder(`${current_theme.Offline.offlinebackgroundcolour}`);
-          logger.info(titlecolor)
-          logger.info(descriptioncolor)
-
-          const newsFeed = `{\\r}{\\b1}{\\c&H${titlecolor}&}This Channel is Currently offline\n\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}Next showing at: ${nextShowStartTime}\n\nStarting With: ${nextShowName}`;
-          const lines = newsFeed.replace(/\n/g, '\\N');
-      //    let lines = newsFeed;
-          logger.info(lines)
-
-          // Combine the move effect with the subtitle text
-          const subtitle = `${moveEffect}${lines}`;
-
-          const resolution = `${config_current.videoresolution}`
-
-          const [width, height] = resolution.split('x');
-
-          const centering = `${height}/2`;
-
-          let assText = `[Script Info]
-          Title: Scrolling Text Example
-          ScriptType: v4.00+
-          WrapStyle: 0
-          PlayResX: ${width}
-          PlayResY: ${height}
-
-          [V4+ Styles]
-          Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-          Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 5, 30, 30, 50, 0
-
-            [Events]
-            Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-            Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
-logger.info(assText)
-          fs.writeFileSync(`${eachxmltvfile}.ass`, assText);
-
-          const command = `${FFMPEGCOMMAND} -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${eachxmltvfile}.ass" -c:a copy -t 5 ${eachxmltvfile}.mp4`;
-
-          logger.info(command);
-          logger.ffmpeg(`command is ${command}`);
-
-          exec(command, (error, stdout, stderr) => {
-            if (error) {
-              logger.error(`Error: ${error.message}`);
-              logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
-              return;
-            }
-            if (stderr) {
-              logger.ffmpeg(`stderr: ${stderr}`);
-              return;
-            }
-          });
       });
+    } catch (error) {
+      logger.error('Error reading XML file:', error);
+    }
   };
 
   const runnersT = async () => {
+    const folderPath = 'workdir/Channel-offline'; // Replace with the actual folder path
+    let fileList = await listFilesInDir(folderPath);
 
+    logger.info(fileList);
 
-      const folderPath = 'workdir/Channel-offline'; // Replace with the actual folder path
-      let fileList = await listFilesInDir(folderPath)
+    for (const file of fileList) {
+      if (path.extname(file) === '.xml') {
+        logger.info(file);
+        const filename = `${file}`;
+        const filePath = filename.replace(/\.xml$/, "");
 
-      logger.info(fileList);
-
-      for (const file of fileList) {
-          if (path.extname(file) === '.xml') {
-            logger.info(file);
-            const filename = `${file}`;
-const filePath = filename.replace(/\.xml$/, "");
-
-            logger.info(filePath);
-            await startTimefind(filePath);
-          }
-        }
-        logger.success('complete generation of channel-offline filler')
+        logger.info(filePath);
+        await startTimefind(filePath);
       }
+    }
+    logger.success('complete generation of channel-offline filler');
+  };
 
-  // Usage
-  await downloadXmltv(`${config_current.xmltv}`);
+  try {
+    const downloadedData = await downloadXmltv('http://127.0.0.1:8409/xmltv');
+    // Handle the downloaded data
+    console.log('XMLTV downloaded successfully:', downloadedData);
+  } catch (error) {
+    // Handle the connection error
+    console.error('Error downloading or processing XMLTV:', error);
+    // Stop further execution by throwing the error
+    return
+  }
   await splitXMLTVByChannel();
   await runnersT();
 };

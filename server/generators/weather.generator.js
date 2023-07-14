@@ -41,11 +41,11 @@ await downloadImage(`https://wttr.in/${config_current.city}.png`, `${WEATHERDIR}
     .then(logger.success)
     .catch(logger.error);
 
-await downloadImage(`https://v2.wttr.in/${await config_current.city}.png`, `${WEATHERDIR}/v2.png`)
+await downloadImage(`https://v2.wttr.in/${config_current.city}.png`, `${WEATHERDIR}/v2.png`)
     .then(logger.success)
     .catch(logger.error);
 
-await downloadImage(`https://v3.wttr.in/${await config_current.state}.png`, `${WEATHERDIR}/v3.png`)
+await downloadImage(`https://v3.wttr.in/${config_current.state}.png`, `${WEATHERDIR}/v3.png`)
     .then(logger.success)
     .catch(logger.error);
   }
