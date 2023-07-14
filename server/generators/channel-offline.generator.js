@@ -4,7 +4,7 @@
 
 const fs = require('fs');
 const xml2js = require('xml2js');
-const { WORKDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
+const { WORKDIR, FFMPEGCOMMAND, CHANNEL_OFFLINEDIR } = require("../constants/path.constants");
 const logger = require("../utils/logger.utils");
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
@@ -14,8 +14,10 @@ const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.util
 const path = require('path');
 const { listFilesInDir } = require("../utils/file.utils");
 const http = require('http')
+const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 const CHANNEL_OFFLINE = async () => {
+    createDirectoryIfNotExists(CHANNEL_OFFLINEDIR);
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const current_theme = await retrieveCurrentTheme();

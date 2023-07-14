@@ -107,5 +107,5 @@ module.exports = {
     XMLTVMERGEDIR,
     README,
     VANITYCARDDIR,
-    CONFIGCONFDIR = "workdir/configconf"
-};
+    CONFIGCONFDIR
+  };

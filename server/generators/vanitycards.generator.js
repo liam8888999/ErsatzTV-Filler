@@ -7,13 +7,15 @@ const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const http = require('http');
 const https = require('https');
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
-const { FFMPEGCOMMAND } = require("../constants/path.constants");
+const { FFMPEGCOMMAND, VANITYCARDDIR } = require("../constants/path.constants");
 const { exec } = require("child_process")
+const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 // Future todo. add option to add episode number/episode title to main description for clients without support
 
 const VANITYCARDS = async () => {
 
+  createDirectoryIfNotExists(VANITYCARDDIR);
   const config_current = await retrieveCurrentConfiguration();
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
 
