@@ -7,7 +7,7 @@ const os = require('os');
 const TEMPLATES_FOLDER = "server/templates/"; // Have to do this because it expects the layout in the top level directory.
 const LAYOUTS_FOLDER = "layouts/";
 const PAGES_FOLDER = "pages/";
-const THEMES_FOLDER = "themes/"
+const THEMES_FOLDER = "themes/system"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
 const DEFAULT_CONFIG = {
@@ -107,5 +107,6 @@ module.exports = {
     XMLTVMERGEDIR,
     README,
     VANITYCARDDIR,
-    CONFIGCONFDIR
+    CONFIGCONFDIR,
+    THEMES_FOLDER
   };

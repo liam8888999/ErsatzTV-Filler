@@ -4,6 +4,8 @@ const moment = require('moment-timezone');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
+const { THEMES_FOLDER } = require("../constants/path.constants");
+const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 
 const settheme = async (theme) => {
@@ -63,6 +65,7 @@ const themecolourdecoder = (colour) => {
  }
 
  const themeDoesNotExist = async () => {
+   await createDirectoryIfNotExists(THEMES_FOLDER);
    try {
      await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'themes/system/SystemLight.theme');
    } catch (error) {
