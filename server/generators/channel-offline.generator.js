@@ -230,6 +230,9 @@ logger.info(assText)
 
     logger.info(fileList);
 
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  async function processFiles() {
     for (const file of fileList) {
       if (path.extname(file) === '.xml') {
         logger.info(file);
@@ -238,8 +241,15 @@ logger.info(assText)
 
         logger.info(filePath);
         await startTimefind(filePath);
+
+        // Introduce a delay of 1 second before processing the next file
+        await delay(5000);
       }
     }
+  }
+
+  // Call the function to start processing the files
+  processFiles();
     logger.success('complete generation of channel-offline filler');
   };
 
