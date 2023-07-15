@@ -45,7 +45,7 @@ const CHANNEL_OFFLINE = async () => {
         response.on('end', () => {
           resolve(data);
           logger.info(data);
-          fs.writeFileSync(`workdir/Channel-offline/xmltv.xmltv`, data);
+          fs.writeFileSync(`${CHANNEL_OFFLINEDIR}//xmltv.xmltv`, data);
         });
       }).on('error', (error) => {
         // Reject the promise with the error
@@ -56,7 +56,7 @@ const CHANNEL_OFFLINE = async () => {
 
   // Function to split XMLTV by channel
   const splitXMLTVByChannel = async () => {
-    const xmlData = await fs.promises.readFile(`workdir/Channel-offline/xmltv.xmltv`, 'utf8');
+    const xmlData = await fs.promises.readFile(`${CHANNEL_OFFLINEDIR}//xmltv.xmltv`, 'utf8');
     xml2js.parseString(xmlData, (parseErr, result) => {
       if (parseErr) {
         logger.error('Error parsing XML:', parseErr);
@@ -80,7 +80,7 @@ const CHANNEL_OFFLINE = async () => {
         };
 
         const channelXMLString = builder.buildObject(channelXMLData);
-        const channelFilePath = `${WORKDIR}/Channel-offline/${channelId}.xml`;
+        const channelFilePath = `${CHANNEL_OFFLINEDIR}//${channelId}.xml`;
         logger.info(channelFilePath);
         await fs.promises.writeFile(channelFilePath, channelXMLString);
         logger.info(`Channel file saved: ${channelFilePath}`);
@@ -93,7 +93,7 @@ const CHANNEL_OFFLINE = async () => {
     logger.info(eachxmltvfile);
     try {
       // Read the XML file
-      const data = await fs.promises.readFile(`${eachxmltvfile}.xml`, 'utf-8');
+      const data = await fs.promises.readFile(`${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.xml`, 'utf-8');
 
       // Parse the XML
       xml2js.parseString(data, (parseErr, result) => {
@@ -199,9 +199,9 @@ logger.info(nextShowStartTime)
         Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
 logger.info(assText)
-      fs.writeFileSync(`${eachxmltvfile}.ass`, assText);
+      fs.writeFileSync(`${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass`, assText);
 
-      const command = `${FFMPEGCOMMAND} -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${eachxmltvfile}.ass" -c:a copy -t 5 ${eachxmltvfile}.mp4`;
+      const command = `${FFMPEGCOMMAND} -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);
@@ -225,8 +225,7 @@ logger.info(assText)
   };
 
   const runnersT = async () => {
-    const folderPath = 'workdir/Channel-offline'; // Replace with the actual folder path
-    let fileList = await listFilesInDir(folderPath);
+    let fileList = await listFilesInDir(CHANNEL_OFFLINEDIR);
 
     logger.info(fileList);
 
@@ -237,9 +236,10 @@ logger.info(assText)
       if (path.extname(file) === '.xml') {
         logger.info(file);
         const filename = `${file}`;
-        const filePath = filename.replace(/\.xml$/, "");
+        logger.info(filename)
+        const filePath = filename.replace(/\.xml$/, "").replace("workdir\/Channel\-offline\/", "");
 
-        logger.info(filePath);
+        logger.info(`file path is ${filePath}`);
         await startTimefind(filePath);
 
         // Introduce a delay of 1 second before processing the next file
