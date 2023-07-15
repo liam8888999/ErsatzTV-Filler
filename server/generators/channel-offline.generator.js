@@ -88,6 +88,9 @@ const CHANNEL_OFFLINE = async () => {
 
   // Function to find start time
   const startTimefind = async (eachxmltvfile) => {
+
+    const audioFile = await selectRandomAudioFile(config_current.customaudio);
+    const current_theme = await retrieveCurrentTheme();
     logger.info(eachxmltvfile);
     try {
       // Read the XML file
@@ -201,10 +204,6 @@ logger.info(assText)
 
 
 
-      const audioFile = await selectRandomAudioFile(config_current.customaudio);
-      const current_theme = await retrieveCurrentTheme();
-
-      
       const command = `${FFMPEGCOMMAND} -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
 
       logger.info(command);
