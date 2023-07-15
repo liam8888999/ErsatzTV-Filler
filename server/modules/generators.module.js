@@ -37,7 +37,13 @@ const GENERATION = async () => {
 
       const config_current = await retrieveCurrentConfiguration();
       if (config_current.processvanitycards === 'yes') {
-        await VANITYCARDS(); // TODO: Set Running to false if an error is encountered in this await function
+        try {
+        await VANITYCARDS();
+      } catch (error) {
+              // Handle the error encountered in VANITYCARDS()
+              logger.error('Error encountered in VANITYCARDS:', error);
+              vanityRunning = false; // Set running to false if an error is encountered
+              return;
       } else {
         logger.info('Not running vanity cards');
       }
@@ -70,8 +76,14 @@ const GENERATION = async () => {
 
       const config_current = await retrieveCurrentConfiguration();
       if (config_current.processweather === 'yes') {
-        await WEATHER(); // TODO: Set Running to false if an error is encountered in this await function
-      } else {
+        try {
+        await WEATHER(); 
+      } catch (error) {
+              // Handle the error encountered in VANITYCARDS()
+              logger.error('Error encountered in WEATHER:', error);
+              weatherRunning = false; // Set running to false if an error is encountered
+              return;
+            } else {
         logger.info('Not running WEATHER');
       }
 
@@ -89,7 +101,7 @@ const GENERATION = async () => {
     manager.add('news', interval, async () => {
       logger.info(`Running News generation at ${new Date()}`);
       logger.info(`${await manager}`)
-      
+
 
       while (vanityRunning || weatherRunning || offlineRunning || mergeRunning) {
         const runningGenerators = [];
@@ -104,8 +116,14 @@ const GENERATION = async () => {
 
       const config_current = await retrieveCurrentConfiguration();
       if (config_current.processnews === 'yes') {
-        await NEWS(); // TODO: Set Running to false if an error is encountered in this await function
-      } else {
+        try {
+        await NEWS();
+      } catch (error) {
+              // Handle the error encountered in VANITYCARDS()
+              logger.error('Error encountered in NEWS:', error);
+              newsRunning = false; // Set running to false if an error is encountered
+              return;
+            } else {
         logger.info('Not running News');
       }
 
@@ -137,8 +155,14 @@ const GENERATION = async () => {
 
       const config_current = await retrieveCurrentConfiguration();
       if (config_current.processchanneloffline === 'yes') {
+        try {
         await CHANNEL_OFFLINE(); // TODO: Set Running to false if an error is encountered in this await function
-      } else {
+      } catch (error) {
+              // Handle the error encountered in VANITYCARDS()
+              logger.error('Error encountered in CHANNEL_OFFLINE:', error);
+              offlineRunning = false;
+              return;
+            } else {
         logger.info('Not running Channel Offline');
       }
 
@@ -156,7 +180,7 @@ const GENERATION = async () => {
     manager.add('merge', interval, async () => {
       logger.info(`Running XMLTV Merge generation at ${new Date()}`);
       logger.info(`${await manager}`)
-      
+
 
       while (vanityRunning || weatherRunning || newsRunning || offlineRunning) {
         const runningGenerators = [];
@@ -172,7 +196,13 @@ const GENERATION = async () => {
       const config_current = await retrieveCurrentConfiguration();
       if (config_current.processxmltvmerger === 'yes') {
         if (typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null') {
-          await XMLTVPARSE(); // TODO: Set Running to false if an error is encountered in this await function
+          try {
+          await XMLTVPARSE();
+        } catch (error) {
+                // Handle the error encountered in VANITYCARDS()
+                logger.error('Error encountered in XMLTVMERGE:', error);
+                mergeRunning = false; // Set running to false if an error is encountered
+                return;
         }
       } else {
         logger.info('Not running XMLTV Merge');
