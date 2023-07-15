@@ -21,8 +21,6 @@ const CHANNEL_OFFLINE = async () => {
   isFunctionRunning = true;
   createDirectoryIfNotExists(CHANNEL_OFFLINEDIR);
   const config_current = await retrieveCurrentConfiguration();
-  const audioFile = await selectRandomAudioFile(config_current.customaudio);
-  const current_theme = await retrieveCurrentTheme();
   logger.info(`current theme is: ${current_theme.ErsatzTVFillerTheme.ThemeName}`);
 
   async function downloadXmltv(xmltvFilePath) {
@@ -201,6 +199,12 @@ logger.info(nextShowStartTime)
 logger.info(assText)
       fs.writeFileSync(`${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass`, assText);
 
+
+
+      const audioFile = await selectRandomAudioFile(config_current.customaudio);
+      const current_theme = await retrieveCurrentTheme();
+
+      
       const command = `${FFMPEGCOMMAND} -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
 
       logger.info(command);
