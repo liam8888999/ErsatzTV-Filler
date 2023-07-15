@@ -21,7 +21,6 @@ const CHANNEL_OFFLINE = async () => {
   isFunctionRunning = true;
   createDirectoryIfNotExists(CHANNEL_OFFLINEDIR);
   const config_current = await retrieveCurrentConfiguration();
-  logger.info(`current theme is: ${current_theme.ErsatzTVFillerTheme.ThemeName}`);
 
   async function downloadXmltv(xmltvFilePath) {
     return new Promise((resolve, reject) => {
@@ -43,7 +42,7 @@ const CHANNEL_OFFLINE = async () => {
         response.on('end', () => {
           resolve(data);
           logger.info(data);
-          fs.writeFileSync(`${CHANNEL_OFFLINEDIR}//xmltv.xmltv`, data);
+          fs.writeFileSync(`${CHANNEL_OFFLINEDIR}/xmltv.xmltv`, data);
         });
       }).on('error', (error) => {
         // Reject the promise with the error
