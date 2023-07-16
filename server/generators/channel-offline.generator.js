@@ -11,6 +11,7 @@ const path = require('path');
 const { listFilesInDir } = require("../utils/file.utils");
 const http = require('http')
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
+const { downloadImage } = require("../utils/downloadimage.utils");
 
 let isFunctionRunning = false;
 const CHANNEL_OFFLINE = async () => {
@@ -77,7 +78,7 @@ const CHANNEL_OFFLINE = async () => {
         };
 
         const channelXMLString = builder.buildObject(channelXMLData);
-        const channelFilePath = `${CHANNEL_OFFLINEDIR}//${channelId}.xml`;
+        const channelFilePath = `${CHANNEL_OFFLINEDIR}/${channelId}.xml`;
         logger.info(channelFilePath);
         await fs.promises.writeFile(channelFilePath, channelXMLString);
         logger.info(`Channel file saved: ${channelFilePath}`);
@@ -101,6 +102,17 @@ const CHANNEL_OFFLINE = async () => {
           logger.error('Error parsing XML:', parseErr);
           return;
         }
+
+        const channels = result.tv.channel;
+      channels.forEach((channel) => {
+        const channelId = channel.$.id;
+        const channelLogo = channel.icon && channel.icon[0].$.src;
+        downloadImage(`${channelLogo}`, `${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.png`)
+            .then(logger.success)
+            .catch(logger.error);
+      });
+
+
 
         // Extract the show start time
     const showName = 'Channel-Offline'; // Replace with the name of the show you're looking for
