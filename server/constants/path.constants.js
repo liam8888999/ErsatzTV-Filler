@@ -47,7 +47,8 @@ const DEFAULT_CONFIG = {
   "xmltvmergeinterval": "20",
   "processvanitycards": "yes",
   "amountvanitycards": "5",
-  "vanityinterval": "10"
+  "vanityinterval": "10",
+  "ffmpegencoder": "libx264"
 }
 
 const USER_CONFIG = "config.json"

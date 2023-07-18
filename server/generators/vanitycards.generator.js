@@ -83,7 +83,7 @@ const createVanityCard = async (filenumber) => {
   try {
     // add theme information
     // part1
-    const commandvanitycard = `${FFMPEGCOMMAND} -f lavfi -i color=white:${config_current.videoresolution} -i workdir/vanitycard/vanitycard-${filenumber}.jpg -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${config_current.output}/vanitycard-${filenumber}.mp4`;
+    const commandvanitycard = `${FFMPEGCOMMAND} -f lavfi -i color=white:${config_current.videoresolution} -i workdir/vanitycard/vanitycard-${filenumber}.jpg -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${config_current.output}/vanitycard-${filenumber}.mp4`;
     logger.info(commandvanitycard);
     logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
 
