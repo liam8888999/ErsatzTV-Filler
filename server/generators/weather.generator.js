@@ -31,7 +31,21 @@ const current_theme = await retrieveCurrentTheme();
 const weatherbackgroundcolour = themecolourdecoder(`${current_theme.Weather.weatherbackgroundcolour}`);
 
 
+if (config_current.hwaccel == "") {
+  hwaccel = ` `;
+  console.log('no hwaccel'); // Use the constant as needed
+} else {
+  hwaccel = ` -hwaccel ${config_current.hwaccel} `;
+  console.log(hwaccel);
+}
 
+if (config_current.hwacceldevice == "") {
+  hwacceldevice = ``;
+  console.log('no hwacceldevice'); // Use the constant as needed
+} else {
+  hwacceldevice = `-hwaccel_device ${config_current.hwacceldevice} `;
+  console.log(hwacceldevice);
+}
 
 const downloadimages = async () => {
 logger.info("Downloading weather images")
@@ -77,7 +91,7 @@ const createWeatherV1 = async () => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv1part1 = `${FFMPEGCOMMAND} -f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v1.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v1.mp4`;
+    const commandv1part1 = `${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v1.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v1.mp4`;
     logger.info(commandv1part1);
     logger.ffmpeg(`commandv1part1 is ${commandv1part1}`);
 
@@ -94,7 +108,7 @@ const createWeatherV1 = async () => {
       logger.success('Weather v1 part 1 created successfully.');
 
       //part2
-      const commandv1 = `${FFMPEGCOMMAND} -i ${WEATHERDIR}/weather-v1.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${config_current.output}/weather-v1.mp4`;
+      const commandv1 = `${FFMPEGCOMMAND}${hwaccel}-i ${WEATHERDIR}/weather-v1.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${config_current.output}/weather-v1.mp4`;
 logger.info(commandv1);
     logger.ffmpeg(`commandv1 is ${commandv1}`);
       exec(commandv1, (error, stdout, stderr) => {
@@ -120,7 +134,7 @@ const createWeatherV2 = async () => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv2part1 = `${FFMPEGCOMMAND} -f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v2.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v2.mp4`;
+    const commandv2part1 = `${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v2.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v2.mp4`;
     logger.info(commandv2part1);
 
     exec(commandv2part1, (error, stdout, stderr) => {
@@ -136,7 +150,7 @@ const createWeatherV2 = async () => {
       logger.success('Weather v2 part 1 created successfully.');
 
       //part2
-      const commandv2 = `${FFMPEGCOMMAND} -i ${WEATHERDIR}/weather-v2.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${config_current.output}/weather-v2.mp4`;
+      const commandv2 = `${FFMPEGCOMMAND}${hwaccel}-i ${WEATHERDIR}/weather-v2.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${config_current.output}/weather-v2.mp4`;
 logger.info(commandv2);
       exec(commandv2, (error, stdout, stderr) => {
         if (error) {
@@ -161,7 +175,7 @@ const createWeatherV3 = async () => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv3part1 = `${FFMPEGCOMMAND} -f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v3.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v3.mp4`;
+    const commandv3part1 = `${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${WEATHERDIR}/v3.png -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${WEATHERDIR}/weather-v3.mp4`;
     logger.info(commandv3part1);
 
     exec(commandv3part1, (error, stdout, stderr) => {
@@ -176,7 +190,7 @@ const createWeatherV3 = async () => {
       logger.success('Weather v3 part 1 created successfully.');
 
       //part2
-      const commandv3 = `${FFMPEGCOMMAND} -i ${WEATHERDIR}/weather-v3.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${config_current.output}/weather-v3.mp4`;
+      const commandv3 = `${FFMPEGCOMMAND}${hwaccel}-i ${WEATHERDIR}/weather-v3.mp4 -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${config_current.output}/weather-v3.mp4`;
 logger.info(`command3: ${commandv3}`);
       exec(commandv3, (error, stdout, stderr) => {
         if (error) {
@@ -208,9 +222,9 @@ await createWeatherV3();
 
 
 //const v4basecreation = async () => {
-//exec(`${FFMPEGCOMMAND} -f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v1.png -stream_loop -1 -i "${config_current.randomaudioweather1}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v1.mp4`)
-//exec(`${FFMPEGCOMMAND} -f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v2.png -stream_loop -1 -i "${config_current.randomaudioweather2}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v2.mp4`)
-//exec(`${FFMPEGCOMMAND} -f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v3.png -stream_loop -1 -i "${config_current.randomaudioweather3}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v3.mp4`)
+//exec(`${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v1.png -stream_loop -1 -i "${config_current.randomaudioweather1}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v1.mp4`)
+//exec(`${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v2.png -stream_loop -1 -i "${config_current.randomaudioweather2}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v2.mp4`)
+//exec(`${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${config_current.backgroundcolour}:${config_current.videoresolution} -i ${config_current.weatherdir}/v3.png -stream_loop -1 -i "${config_current.randomaudioweather3}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -pix_fmt yuv420p -c:a copy -t ${config_current.weathervideolength} ${WEATHERDIR}/weatherv4/weather-v3.mp4`)
 //}
 /**
 *check if weather v4 should be shuffled (add later)
@@ -254,8 +268,8 @@ await createWeatherV3();
 
 //logger.info("generate weatherv4")
 
-//exec(`${FFMPEGCOMMAND} -f concat -safe 0 -i ${config_current.WEATHERDIR}/weatherv4/weatherv4.txt -c copy ${WEATHERDIR}/weather-v4.mp4`)
-//exec(`${FFMPEGCOMMAND} -i ${WEATHERDIR}/weather-v4.mp4 -i "${config_current.randomaudioweather4}" -shortest -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${config_current.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${config_current.weatheraudiofadeoutstartv4}:d=${config_current.eatheraudiofadeoutduration}" ${config_current.output}/weather-v4.mp4`)
+//exec(`${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f concat -safe 0 -i ${config_current.WEATHERDIR}/weatherv4/weatherv4.txt -c copy ${WEATHERDIR}/weather-v4.mp4`)
+//exec(`${FFMPEGCOMMAND}${hwaccel}-i ${WEATHERDIR}/weather-v4.mp4 -i "${config_current.randomaudioweather4}" -shortest -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${config_current.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${config_current.weatheraudiofadeoutstartv4}:d=${config_current.eatheraudiofadeoutduration}" ${config_current.output}/weather-v4.mp4`)
 isFunctionRunning = false;
 }
 module.exports = {

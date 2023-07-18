@@ -48,7 +48,9 @@ const DEFAULT_CONFIG = {
   "processvanitycards": "yes",
   "amountvanitycards": "5",
   "vanityinterval": "10",
-  "ffmpegencoder": "libx264"
+  "ffmpegencoder": "libx264",
+  "hwaccel": "",
+  "hwaccel_device": ""
 }
 
 const USER_CONFIG = "config.json"

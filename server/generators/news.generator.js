@@ -112,11 +112,26 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 
 // Step 8: Generate the news video
 const generateNewsVideo = async (config_current, audioFile) => {
+  if (config_current.hwaccel == "") {
+    hwaccel = ` `;
+    console.log('no hwaccel'); // Use the constant as needed
+  } else {
+    hwaccel = ` -hwaccel ${config_current.hwaccel} `;
+    console.log(hwaccel);
+  }
+
+  if (config_current.hwacceldevice == "") {
+    hwacceldevice = ``;
+    console.log('no hwacceldevice'); // Use the constant as needed
+  } else {
+    hwacceldevice = `-hwaccel_device ${config_current.hwacceldevice} `;
+    console.log(hwacceldevice);
+  }
   const resolution = config_current.videoresolution;
   const width = resolution.split("x")[0];
   const textWidth = Math.floor(width / 40);
   const backgroundcolour = themecolourdecoder(current_theme.News.newsbackgroundcolour);
-  const command = `${FFMPEGCOMMAND} -f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${config_current.output}/news.mp4`;
+  const command = `${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${NEWSDIR}/news.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${config_current.output}/news.mp4`;
 
   logger.info(command);
   logger.ffmpeg(`command is ${command}`);

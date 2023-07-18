@@ -214,8 +214,28 @@ logger.info(assText)
       fs.writeFileSync(`${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass`, assText);
 
 
+if (config_current.hwaccel !== "") {
+  const hwaccell = ` -hwaccel ${config_current.hwaccel}`;
+  console.log(hwaccell); // Use the constant as needed
+} else {
+  console.log("The input string is empty.");
+}
+if (config_current.hwaccel == "") {
+  hwaccel = ` `;
+  console.log('no hwaccel'); // Use the constant as needed
+} else {
+  hwaccel = ` -hwaccel ${config_current.hwaccel} `;
+  console.log(hwaccel);
+}
 
-      const command = `${FFMPEGCOMMAND} -f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
+if (config_current.hwacceldevice == "") {
+  hwacceldevice = ``;
+  console.log('no hwacceldevice'); // Use the constant as needed
+} else {
+  hwacceldevice = `-hwaccel_device ${config_current.hwacceldevice} `;
+  console.log(hwacceldevice);
+}
+      const command = `${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);

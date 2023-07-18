@@ -81,9 +81,24 @@ isFunctionRunning = true;
 
 const createVanityCard = async (filenumber) => {
   try {
+    if (config_current.hwaccel == "") {
+      hwaccel = ` `;
+      console.log('no hwaccel'); // Use the constant as needed
+    } else {
+      hwaccel = ` -hwaccel ${config_current.hwaccel} `;
+      console.log(hwaccel);
+    }
+
+    if (config_current.hwacceldevice == "") {
+      hwacceldevice = ``;
+      console.log('no hwacceldevice'); // Use the constant as needed
+    } else {
+      hwacceldevice = `-hwaccel_device ${config_current.hwacceldevice} `;
+      console.log(hwacceldevice);
+    }
     // add theme information
     // part1
-    const commandvanitycard = `${FFMPEGCOMMAND} -f lavfi -i color=white:${config_current.videoresolution} -i workdir/vanitycard/vanitycard-${filenumber}.jpg -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${config_current.output}/vanitycard-${filenumber}.mp4`;
+    const commandvanitycard = `${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=white:${config_current.videoresolution} -i workdir/vanitycard/vanitycard-${filenumber}.jpg -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${config_current.output}/vanitycard-${filenumber}.mp4`;
     logger.info(commandvanitycard);
     logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
 
