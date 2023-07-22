@@ -67,8 +67,10 @@ const GENERATION = async () => {
       logger.info(`Running Vanity Cards generation at ${new Date()}`);
       logger.info(`${await manager}`)
 
-      while (weatherRunning || newsRunning || offlineRunning || mergeRunning) {
+  //  while (weatherRunning || newsRunning || offlineRunning || mergeRunning || exampleRunning) {
+      while (weatherRunning || newsRunning || offlineRunning || mergeRunning) { 
         const runningGenerators = [];
+  //    if (exampleRunning) runningGenerators.push('Example');
         if (weatherRunning) runningGenerators.push('Weather');
         if (newsRunning) runningGenerators.push('News');
         if (offlineRunning) runningGenerators.push('Channel Offline');
