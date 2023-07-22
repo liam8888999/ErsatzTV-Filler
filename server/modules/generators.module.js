@@ -5,6 +5,7 @@ const { NEWS } = require("../generators/news.generator");
 const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const { CHANNEL_OFFLINE } = require("../generators/channel-offline.generator");
 const { VANITYCARDS } = require("../generators/vanitycards.generator");
+//const { EXAMPLE } = require("../generators/example.generator");
 const CronJobManager = require('cron-job-manager');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
@@ -13,12 +14,54 @@ const GENERATION = async () => {
 
   const manager = new CronJobManager();
 
+//let exampleRunning = false;  
   let vanityRunning = false;
   let weatherRunning = false;
   let newsRunning = false;
   let offlineRunning = false;
   let mergeRunning = false;
 
+  // const startCronExample = async (interval) => {
+  //   manager.add('example', interval, async () => {
+  //     logger.info(`Running Example generator at ${new Date()}`);
+  //     logger.info(`${await manager}`);
+
+  //     while (vanityRunning || weatherRunning || newsRunning || offlineRunning || mergeRunning) {
+  //       const runningGenerators = [];
+  //       if (vanityRunning) runningGenerators.push('Vanity Cards');
+  //       if (weatherRunning) runningGenerators.push('Weather');
+  //       if (newsRunning) runningGenerators.push('News');
+  //       if (offlineRunning) runningGenerators.push('Channel Offline');
+  //       if (mergeRunning) runningGenerators.push('XMLTV Merge');
+  //       logger.info(`Example generator waiting for other generators to finish: ${runningGenerators.join(', ')}`);
+  //       await new Promise((resolve) => setTimeout(resolve, 15000));
+  //     }
+  //     exampleRunning = true;
+  //
+  //  const config_current = await retrieveCurrentConfiguration();
+  //  if (config_current.processExample === 'yes') {
+  //    try {
+  //    await EXAMPLE();
+  //  } catch (error) {
+  //          // Handle the error encountered in EXAMPLE generator
+  //          logger.error('Error encountered in EXAMPLE generator:', error);
+  //          exampleRunning = false; // Set running to false if an error is encountered
+  //          return;
+  //  } else {
+  //    logger.info('Not running Example generator');
+  //  }
+  //  
+  //  interval = `*/${config_current.exampleInterval} * * * *` || '*/10 * * * *';
+  //  manager.update('example', interval);
+  //  logger.success(`Example Generation completed at ${new Date()}`);
+  //  
+  //  exampleRunning = false;
+  //});
+  // 
+  //manager.start('example');
+  //};
+  //};
+	
   const startCronVanity = async (interval) => {
     manager.add('vanity', interval, async () => {
       logger.info(`Running Vanity Cards generation at ${new Date()}`);
@@ -56,7 +99,8 @@ const GENERATION = async () => {
     });
 
     manager.start('vanity');
-  };
+    };
+	};
 
   const startCronWeather = async (interval) => {
     manager.add('weather', interval, async () => {
@@ -95,7 +139,8 @@ const GENERATION = async () => {
     });
 
     manager.start('weather');
-  };
+    };
+	};
 
   const startCronNews = async (interval) => {
     manager.add('news', interval, async () => {
@@ -135,7 +180,8 @@ const GENERATION = async () => {
     });
 
     manager.start('news');
-  };
+    };
+    };
 
   const startCronOffline = async (interval) => {
     manager.add('offline', interval, async () => {
@@ -174,7 +220,8 @@ const GENERATION = async () => {
     });
 
     manager.start('offline');
-  };
+	};
+	};
 
   const startCronmerge = async (interval) => {
     manager.add('merge', interval, async () => {
@@ -225,6 +272,8 @@ const GENERATION = async () => {
   await startCronNews(`*/${config_current.newsinterval} * * * *`);
   await startCronOffline(`*/${config_current.offlineinterval} * * * *`);
   await startCronmerge(`*/${config_current.xmltvmergeinterval} * * * *`);
+  // Uncomment and use this if you add the EXAMPLE generator
+  // await startCronExample(`*/${config_current.exampleInterval} * * * *`);
 };
 
 module.exports = {
