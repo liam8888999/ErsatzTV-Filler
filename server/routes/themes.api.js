@@ -52,7 +52,7 @@ const loadApiThemeRoutes = (app) => {
 // show theme json
 
 app.get('/api/themes/readthemejson', async (req, res) => {
-  const filepath = `themes/system/${req.query.filepath}`;
+  const filepath = `themes/${req.query.filepath}`;
   readFile(`${filepath}`, 'utf8', (err, data) => {
       if (err) {
         logger.error(err);

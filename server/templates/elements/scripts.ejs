@@ -2,6 +2,82 @@
 <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
 
 <script>
+// user theme things
+  // Function to create a button for each theme
+function createThemeButton(themeName) {
+    const buttonContainer = document.createElement('div'); // Create a container for the button and theme name
+    const button = document.createElement('button');
+    button.textContent = `Use This Theme`;
+    button.setAttribute('id', `${themeName}setthemeButton`);
+    button.setAttribute('onclick', `settheme('user/${themeName}')`);
+    button.innerHTML += `<i class="fa">&#x2713;</i>`;
+
+    const themeNameElement = document.createElement('span'); // Use a span for the theme name
+    themeNameElement.textContent = themeName;
+
+    // Create a line break element
+        const lineBreak = document.createElement('br');
+
+        // Create a horizontal rule
+        const hrElement = document.createElement('hr');
+        hrElement.classList.add('solid'); // Add a class for styling, assuming you have a CSS class for the rule
+
+    buttonContainer.appendChild(button);
+    buttonContainer.appendChild(themeNameElement); // Append the theme name next to the button
+
+    // Add CSS styling for a standard gap between the button and the theme name
+    button.style.marginRight = '30px'; // Adjust this value as needed
+    button.style.marginLeft = '150px'; // Adjust this value as needed
+    buttonContainer.appendChild(lineBreak); // Append the line break
+    buttonContainer.appendChild(hrElement); // Append the horizontal rule
+
+
+    return buttonContainer;
+}
+
+
+// Function to display the list of themes
+function displayThemeList(themes) {
+    const themeListDiv = document.getElementById('theme-list');
+
+    themes.forEach((themeFileName) => {
+        // Decode HTML entities, then extract the theme name
+        const decodedFileName = decodeHTMLEntities(themeFileName);
+        const themeName = decodedFileName.split('/').pop().replace('.theme', '');
+        const buttonContainer = createThemeButton(themeName);
+        themeListDiv.appendChild(buttonContainer);
+
+    });
+}
+
+// Fetch and display the theme list on page load
+// Add an event listener for loading the theme list
+document.addEventListener('DOMContentLoaded', () => {
+    // Get the <ul> element by its ID
+    const ulElement = document.getElementById('userthemes');
+
+    // Initialize an empty array to store the themes
+    const themesArray = [];
+
+    // Iterate through each <li> element inside the <ul>
+    ulElement.querySelectorAll('li').forEach((liElement) => {
+        // Add the text content of each <li> to the themesArray
+        themesArray.push(liElement.textContent);
+    });
+
+    const downloadedThemes = themesArray;
+    displayThemeList(downloadedThemes);
+});
+
+// Function to decode HTML entities
+function decodeHTMLEntities(text) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = text;
+    return txt.value;
+}
+</script>
+
+<script>
     function myFunction() {
         var x = document.getElementById("myTopnav");
         if (x.className === "topnav") {
@@ -360,7 +436,7 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
 
       // Define the theme buttons and their corresponding IDs
       var themeButtons = [
-        { id: 'SystemLightdownloadButton', theme: 'Light.theme' },
+        { id: 'SystemLightdownloadButton', theme: 'SystemLight.theme' },
         { id: 'SystemDarkdownloadButton', theme: 'SystemDark.theme' },
         { id: 'stopandgodownloadButton', theme: 'stopandgo.theme' },
         { id: 'CandycanedownloadButton', theme: 'Candycane.theme' },
@@ -392,8 +468,8 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
       var jsonstatusDiv = document.getElementById('downloadedThemes');
 
       // Define the theme buttons and their corresponding IDs
-      var jsonButtons = [
-        { id: 'SystemLightjsonButton', theme: 'Light.theme' },
+      var jsonButton = [
+        { id: 'SystemLightjsonButton', theme: 'SystemLight.theme' },
         { id: 'SystemDarkjsonButton', theme: 'SystemDark.theme' },
         { id: 'stopandgojsonButton', theme: 'stopandgo.theme' },
         { id: 'CandycanejsonButton', theme: 'Candycane.theme' },

@@ -44,7 +44,7 @@ const themecolourdecoder = (colour) => {
 
  const retrieveCurrentTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
-   const themeFileExists = await doesFileExist(`themes/system/${config_current.theme}.theme`);
+   const themeFileExists = await doesFileExist(`themes/${config_current.theme}.theme`);
 
    let usetheme = ''
 
@@ -59,7 +59,7 @@ const themecolourdecoder = (colour) => {
 
  const retrieveTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
-   const data = await fs.readFileSync(`themes/system/${config_current.theme}.theme`);
+   const data = await fs.readFileSync(`themes/${config_current.theme}.theme`);
    logger.info(JSON.parse(data))
     return JSON.parse(data)
  }
