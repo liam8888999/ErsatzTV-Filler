@@ -105,7 +105,7 @@ console.log(JSON.stringify(filesinthemesdiruser))
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Themes",
             version: version,
-            theme: config_current.theme,
+            theme: config_current.theme.replace(/user\//g, "User - ").replace(/system\//g, "System - "),
             ErsatzTVURL: ErsatzTVURL,
             downloadedthemeslist: filesinthemesdir,
             downloadedthemesarray: filesinthemesdiruser,
