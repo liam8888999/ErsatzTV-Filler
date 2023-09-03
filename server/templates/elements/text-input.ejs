@@ -44,5 +44,71 @@
                 await save_changes(evt)
             }
         });
-    })()
+
+        // Define an object with the strings you want to find and their corresponding replacements
+        const replacements = {
+          "^customaudio$": "Custom Audio Location",
+          "^output$": "Output Directory",
+          "^city$": "City",
+          "^state$": "State",
+          "^videolength$": "Video Length",
+          "^xmltv$": "ErsatzTV XMLTV Location",
+          "^videoresolution$": "Video Resolution",
+          "^webport$": "Web Port",
+          "^fontfile$": "Custom Font File (unused currently)",
+          "^webtheme$": "Webpage Theme (dark/light)",
+          "^theme$": "Video Theme",
+          "^processweather$": "Process Weather?",
+          "^generate_weatherv4$": "Generate Weather V4 (Upcoming)",
+          "^weathervideofadeoutduration$": "Weather Video Fade Out Duration",
+          "^weathervideofadeinduration$": "Weather Video Fade In Duration",
+          "^weatheraudiofadeoutduration$": "Weather Audio Fade Out Duration",
+          "^weatheraudiofadeinduration$": "Weather Audio Fade In Duration",
+          "^weatherinterval$": "Weather Generation Interval",
+          "^processnews$": "Process News?",
+          "^newsvideofadeoutduration$": "News Video Fade Out Duration",
+          "^newsvideofadeinduration$": "News Video Fade In Duration",
+          "^newsaudiofadeoutduration$": "News Audio Fade Out Duration",
+          "^newsaudiofadeinduration$": "News Audio Fade In Duration",
+          "^newsfeed$": "Newsfeed 1 URL",
+          "^newsfeed1$": "Newsfeed 2 URL (Optional)",
+          "^newsfeed2$": "Newsfeed 3 URL (Optional)",
+          "^newsduration$": "News Video Duration",
+          "^newsarticles$": "News Articles To Display",
+          "^newsinterval$": "News Generation Interval",
+          "^processchanneloffline$": "Process Channel Offline?",
+          "^offlineinterval$": "Channel Offline Generation Interval",
+          "^processxmltvmerger$": "Run XMLTVMERGER?",
+          "^epgfiles$": "EPG Files To Merge",
+          "^xmltvmergeinterval$": "XMLTVMERGER Interval",
+          "^processvanitycards$": "Process Vanity Cards?",
+          "^amountvanitycards$": "Amount of Vanity Card Videos",
+          "^vanityinterval$": "Vanity Generation Interval",
+          "^ffmpegencoder$": "FFMPEG Encoder",
+          "^hwaccel$": "HW Accel Mode",
+          "^hwacceldevice$": "HW Accel Device",
+          "^customffmpeg$": "Custom FFMPEG Command"
+          // Add more string replacements as needed
+        };
+
+        // Function to perform the replacements only within id="basic-addon1" elements
+        function replaceStringsInAddon1() {
+          // Loop through all elements with class "form-group"
+          const formGroups = document.querySelectorAll('.form-group');
+          formGroups.forEach(formGroup => {
+            const addon1 = formGroup.querySelector('#basic-addon1');
+            if (addon1) {
+              for (const findString in replacements) {
+                if (replacements.hasOwnProperty(findString)) {
+                  const replaceString = replacements[findString];
+                  addon1.innerHTML = addon1.innerHTML.replace(new RegExp(findString, "g"), replaceString);
+                }
+              }
+            }
+          });
+        }
+
+        // Replace strings only within id="basic-addon1" elements
+        replaceStringsInAddon1();
+    })();
 </script>
