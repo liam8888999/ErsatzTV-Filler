@@ -93,6 +93,10 @@ const loadPageRoutes = async (app) => {
 .catch(error => {
 logger.error(`Error: ${error}`);
 });
+let filesinthemesdirsystem = await listFilesInDir("themes/system")
+.catch(error => {
+logger.error(`Error: ${error}`);
+});
 console.log(JSON.stringify(filesinthemesdiruser))
       const ersatz = config_current.xmltv
       let UPDATESTATUS = await checkForUpdates();
@@ -105,6 +109,7 @@ console.log(JSON.stringify(filesinthemesdiruser))
             ErsatzTVURL: ErsatzTVURL,
             downloadedthemeslist: filesinthemesdir,
             downloadedthemesarray: filesinthemesdiruser,
+            downloadedthemesarraysystem: filesinthemesdirsystem,
             updatestatus: UPDATESTATUS
         });
     });

@@ -11,6 +11,14 @@
 </ul>
 </div>
 
+<div>
+<ul id="systemthemes" style="display: none;">
+  <% for (var i = 0; i < downloadedthemesarraysystem.length; i++) { %>
+    <li><%= downloadedthemesarraysystem[i] %></li>
+  <% } %>
+</ul>
+</div>
+
 <!-- set downloaded themes list -->
 <div id="downloadedThemes" <!--style="display: none;"-->><%- downloadedthemeslist %></div>
 
@@ -392,7 +400,7 @@
 <p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
 <br>
 <div style="padding-left:55%;">
-  <button id="MoRBiD_MaNGLeRBlueWhitejsonButton" onclick="returnJson('system/MoRBiD_MaNGLeR-BlueWhite')">Show theme json file &#xf15b;</button>
+  <button id="MoRBiD_MaNGLeRBlueWhitejsonButton" onclick="returnJson('system/MoRBiD_MaNGLeR-BlueWhite')">Show theme json file</button>
 </div>
 <br>
 <br>
@@ -402,3 +410,12 @@
 <hr class="solid">
 
 </div>
+
+
+
+
+
+<script>
+
+
+</script>
