@@ -235,7 +235,7 @@ if (config_current.hwacceldevice == "") {
   hwacceldevice = `-hwaccel_device ${config_current.hwacceldevice} `;
   console.log(hwacceldevice);
 }
-      const command = `${FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
+      const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);
