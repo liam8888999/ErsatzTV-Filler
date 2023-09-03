@@ -8,7 +8,7 @@ function createThemeButton(themeName) {
     const buttonContainer = document.createElement('div'); // Create a container for the button and theme name
     const button = document.createElement('button');
     button.textContent = `Use This Theme`;
-    button.setAttribute('id', `${themeName}setthemeButton`);
+    button.setAttribute('id', `${themeName}setthemeButtonuser`);
     button.setAttribute('onclick', `settheme('user/${themeName}')`);
     button.innerHTML += `<i class="fa">&#x2713;</i>`;
 
@@ -414,6 +414,25 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
           { id1: 'MoRBiD_MaNGLeRC64setthemeButton', theme1: 'system/MoRBiD_MaNGLeR-C64' },
           { id1: 'MoRBiD_MaNGLeRBlueWhitesetthemeButton', theme1: 'system/MORBiD_MaNGLeR-BlueWhite' }
         ];
+
+        // Loop through all elements with an id attribute
+        var allElements = document.querySelectorAll('[id]');
+        allElements.forEach(function(element) {
+            var id = element.getAttribute('id');
+
+            // Check if the id matches the format you specified
+            if (id && id.endsWith('setthemeButtonuser')) {
+                // Extract the id1 and theme1 values
+                var id1 = id;
+                var theme1 = id.replace(/setthemeButtonuser$/, '');
+
+                // Create an object and push it to the existingArray
+                themeButtons1.push({ id1: id1, theme1: theme1 });
+            }
+        });
+
+        // Now, existingArray contains objects in the desired format
+        console.log(themeButtons1);
 
     var currentThemesText = statusDiv1.innerText;
         // Iterate over the theme buttons array
