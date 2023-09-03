@@ -12,6 +12,13 @@ function createThemeButton(themeName) {
     button.setAttribute('onclick', `settheme('user/${themeName}')`);
     button.innerHTML += `<i class="fa">&#x2713;</i>`;
 
+    const jsonbutton = document.createElement('button');
+jsonbutton.textContent = `Show JSON`;
+jsonbutton.setAttribute('id', `${themeName}jsonbuttonuser`);
+jsonbutton.setAttribute('onclick', `returnJson('user/${themeName}')`);
+
+
+
     const themeNameElement = document.createElement('span'); // Use a span for the theme name
     themeNameElement.textContent = themeName;
 
@@ -23,10 +30,12 @@ function createThemeButton(themeName) {
         hrElement.classList.add('solid'); // Add a class for styling, assuming you have a CSS class for the rule
 
     buttonContainer.appendChild(button);
+    buttonContainer.appendChild(jsonbutton);
     buttonContainer.appendChild(themeNameElement); // Append the theme name next to the button
 
     // Add CSS styling for a standard gap between the button and the theme name
     button.style.marginRight = '30px'; // Adjust this value as needed
+    jsonbutton.style.marginRight = '30px'; // Adjust this value as needed
     button.style.marginLeft = '150px'; // Adjust this value as needed
     buttonContainer.appendChild(lineBreak); // Append the line break
     buttonContainer.appendChild(hrElement); // Append the horizontal rule
