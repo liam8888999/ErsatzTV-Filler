@@ -2,13 +2,103 @@
   <div id="overlay">
   <div id="loading-message"></div>
 </div>
+
+<h1>List of Themes</h1>
+
+<script>
+
+  // Function to create a button for each theme
+function createThemeButton(themeName) {
+    const buttonContainer = document.createElement('div'); // Create a container for the button and theme name
+    const button = document.createElement('button');
+    button.textContent = `Use This Theme`;
+    button.setAttribute('id', `${themeName}setthemeButton`);
+    button.setAttribute('onclick', `settheme('${themeName}')`);
+    button.innerHTML += `<i class="fa">&#x2713;</i>`;
+
+    const themeNameElement = document.createElement('span'); // Use a span for the theme name
+    themeNameElement.textContent = themeName;
+
+    // Create a line break element
+        const lineBreak = document.createElement('br');
+
+        // Create a horizontal rule
+        const hrElement = document.createElement('hr');
+        hrElement.classList.add('solid'); // Add a class for styling, assuming you have a CSS class for the rule
+
+    buttonContainer.appendChild(button);
+    buttonContainer.appendChild(themeNameElement); // Append the theme name next to the button
+
+    // Add CSS styling for a standard gap between the button and the theme name
+    button.style.marginRight = '30px'; // Adjust this value as needed
+    button.style.marginLeft = '150px'; // Adjust this value as needed
+    buttonContainer.appendChild(lineBreak); // Append the line break
+    buttonContainer.appendChild(hrElement); // Append the horizontal rule
+
+
+    return buttonContainer;
+}
+
+
+// Function to display the list of themes
+function displayThemeList(themes) {
+    const themeListDiv = document.getElementById('theme-list');
+
+    themes.forEach((themeFileName) => {
+        // Decode HTML entities, then extract the theme name
+        const decodedFileName = decodeHTMLEntities(themeFileName);
+        const themeName = decodedFileName.split('/').pop().replace('.theme', '');
+        const buttonContainer = createThemeButton(themeName);
+        themeListDiv.appendChild(buttonContainer);
+
+    });
+}
+
+// Fetch and display the theme list on page load
+// Add an event listener for loading the theme list
+document.addEventListener('DOMContentLoaded', () => {
+    // Get the <ul> element by its ID
+    const ulElement = document.getElementById('userthemes');
+
+    // Initialize an empty array to store the themes
+    const themesArray = [];
+
+    // Iterate through each <li> element inside the <ul>
+    ulElement.querySelectorAll('li').forEach((liElement) => {
+        // Add the text content of each <li> to the themesArray
+        themesArray.push(liElement.textContent);
+    });
+
+    const downloadedThemes = themesArray;
+    displayThemeList(downloadedThemes);
+});
+
+// Function to decode HTML entities
+function decodeHTMLEntities(text) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = text;
+    return txt.value;
+}
+</script>
+
+<ul id="userthemes" style="display: none;">
+  <% for (var i = 0; i < downloadedthemesarray.length; i++) { %>
+    <li><%= downloadedthemesarray[i] %></li>
+  <% } %>
+</ul>
+
 <!-- set downloaded themes list -->
 <div id="downloadedThemes" style="display: none;"><%- downloadedthemeslist %></div>
 
 <h1 style="text-align:center;"> Themes </h1>
 <br>
-<p><b>Note:</b> Only System themes are currently available. User created themes will be reenabled in the future, for now if you would like your theme included please submit a pull request to <a href="https://github.com/liam8888999/ErsatzTV-Filler-Themes" target=”_blank”>ErsatzTV-Filler-Themes Github</a></p>
+<p><b>Note:</b>Initial Support added for user themes, if you would like your theme included in the system themes please submit a pull request to <a href="https://github.com/liam8888999/ErsatzTV-Filler-Themes" target=”_blank”>ErsatzTV-Filler-Themes Github</a></p>
 <h3 style="text-align:center;">Current theme is: <span id="currentTheme"><%- theme %></span></h3>
+
+<center><h3>User Themes</h3></center>
+<div id="theme-list"></div>
+
+<center><h3>System Themes</h3></center>
 <h4 style="text-align:center;color:brown;">System Light Theme (Default)</h4>
 
 <div class="slideshow-container">

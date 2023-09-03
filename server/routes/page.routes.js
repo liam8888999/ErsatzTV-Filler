@@ -85,10 +85,15 @@ const loadPageRoutes = async (app) => {
 
     app.get('/themes', async (req, res) => {
       const config_current = await retrieveCurrentConfiguration();
-      let filesinthemesdir = await listFilesInDir("themes/system")
-  .catch(error => {
+      let filesinthemesdir = await listFilesInDir("themes")
+.catch(error => {
     logger.error(`Error: ${error}`);
   });
+  let filesinthemesdiruser = await listFilesInDir("themes/user")
+.catch(error => {
+logger.error(`Error: ${error}`);
+});
+console.log(JSON.stringify(filesinthemesdiruser))
       const ersatz = config_current.xmltv
       let UPDATESTATUS = await checkForUpdates();
       const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
@@ -99,6 +104,7 @@ const loadPageRoutes = async (app) => {
             theme: config_current.theme,
             ErsatzTVURL: ErsatzTVURL,
             downloadedthemeslist: filesinthemesdir,
+            downloadedthemesarray: filesinthemesdiruser,
             updatestatus: UPDATESTATUS
         });
     });

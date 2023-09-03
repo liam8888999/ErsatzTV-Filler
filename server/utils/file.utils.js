@@ -52,18 +52,25 @@ async function listFilesInDir(directoryPath) {
   try {
     const files = await fs.promises.readdir(directoryPath);
     const filePromises = files.map(async (file) => {
-      const filePath = `${directoryPath}/${file}`;
+      const filePath = path.join(directoryPath, file);
       const stat = await fs.promises.stat(filePath);
+
       if (stat.isDirectory()) {
-        const subFiles = await listFilesInDir(filePath); // Recursive call
-        return subFiles;
+        if (!file.startsWith('.')) { // Ignore hidden directories
+          const subFiles = await listFilesInDir(filePath); // Recursive call
+          return subFiles;
+        }
+      } else {
+        if (!file.startsWith('.')) { // Ignore hidden files
+          return filePath;
+        }
       }
-      return filePath;
     });
+
     const results = await Promise.all(filePromises);
-    return results.flat();
+    return results.flat().filter(Boolean); // Remove undefined values
   } catch (error) {
-    logger.error(`Error reading directory: ${error}`);
+    console.error(`Error reading directory: ${error}`);
     return [];
   }
 }
