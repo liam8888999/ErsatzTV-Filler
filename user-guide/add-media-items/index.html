@@ -1,0 +1,1163 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../install/">
+      
+      
+        <link rel="next" href="../create-collections/">
+      
+      <link rel="icon" href="../../images/favicon-32x32.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Add Media Items - ErsatzTV</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#local-libraries" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ErsatzTV" class="md-header__button md-logo" aria-label="ErsatzTV" data-md-component="logo">
+      
+  <img src="../../images/ersatztv-square-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ErsatzTV
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Add Media Items
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ErsatzTV" class="md-nav__button md-logo" aria-label="ErsatzTV" data-md-component="logo">
+      
+  <img src="../../images/ersatztv-square-logo.png" alt="logo">
+
+    </a>
+    ErsatzTV
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="true">
+          Quick Start
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Quick Start" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Quick Start
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        Install ErsatzTV
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Add Media Items
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Add Media Items
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#local-libraries" class="md-nav__link">
+    Local Libraries
+  </a>
+  
+    <nav class="md-nav" aria-label="Local Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-libraries" class="md-nav__link">
+    Add Libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-media-items" class="md-nav__link">
+    Add Media Items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plex-libraries" class="md-nav__link">
+    Plex Libraries
+  </a>
+  
+    <nav class="md-nav" aria-label="Plex Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata_1" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-media-items_1" class="md-nav__link">
+    Add Media Items
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Media Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sign-in" class="md-nav__link">
+    Sign In
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronize-libraries" class="md-nav__link">
+    Synchronize Libraries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streaming-from-disk" class="md-nav__link">
+    Streaming From Disk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jellyfin-libraries" class="md-nav__link">
+    Jellyfin Libraries
+  </a>
+  
+    <nav class="md-nav" aria-label="Jellyfin Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata_2" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-media-items_2" class="md-nav__link">
+    Add Media Items
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Media Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-server" class="md-nav__link">
+    Connect to Server
+  </a>
+  
+    <nav class="md-nav" aria-label="Connect to Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-address" class="md-nav__link">
+    Server Address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-key" class="md-nav__link">
+    API Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronize-libraries_1" class="md-nav__link">
+    Synchronize Libraries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streaming-from-disk_1" class="md-nav__link">
+    Streaming From Disk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emby-libraries" class="md-nav__link">
+    Emby Libraries
+  </a>
+  
+    <nav class="md-nav" aria-label="Emby Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata_3" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-media-items_3" class="md-nav__link">
+    Add Media Items
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Media Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-server_1" class="md-nav__link">
+    Connect to Server
+  </a>
+  
+    <nav class="md-nav" aria-label="Connect to Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-address_1" class="md-nav__link">
+    Server Address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-key_1" class="md-nav__link">
+    API Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration_1" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronize-libraries_2" class="md-nav__link">
+    Synchronize Libraries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streaming-from-disk_2" class="md-nav__link">
+    Streaming From Disk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../create-collections/" class="md-nav__link">
+        Create Collections
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../create-channels/" class="md-nav__link">
+        Create Channels
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configure-clients/" class="md-nav__link">
+        Configure Clients
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="false">
+          Advanced
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Advanced" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Advanced
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filler/" class="md-nav__link">
+        Filler
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-libraries/" class="md-nav__link">
+        Local Libraries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search/" class="md-nav__link">
+        Search
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sample-schedules/" class="md-nav__link">
+        Sample Schedules
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thanks/" class="md-nav__link">
+        Thanks
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#local-libraries" class="md-nav__link">
+    Local Libraries
+  </a>
+  
+    <nav class="md-nav" aria-label="Local Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-libraries" class="md-nav__link">
+    Add Libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-media-items" class="md-nav__link">
+    Add Media Items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plex-libraries" class="md-nav__link">
+    Plex Libraries
+  </a>
+  
+    <nav class="md-nav" aria-label="Plex Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata_1" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-media-items_1" class="md-nav__link">
+    Add Media Items
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Media Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sign-in" class="md-nav__link">
+    Sign In
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronize-libraries" class="md-nav__link">
+    Synchronize Libraries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streaming-from-disk" class="md-nav__link">
+    Streaming From Disk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jellyfin-libraries" class="md-nav__link">
+    Jellyfin Libraries
+  </a>
+  
+    <nav class="md-nav" aria-label="Jellyfin Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata_2" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-media-items_2" class="md-nav__link">
+    Add Media Items
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Media Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-server" class="md-nav__link">
+    Connect to Server
+  </a>
+  
+    <nav class="md-nav" aria-label="Connect to Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-address" class="md-nav__link">
+    Server Address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-key" class="md-nav__link">
+    API Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronize-libraries_1" class="md-nav__link">
+    Synchronize Libraries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streaming-from-disk_1" class="md-nav__link">
+    Streaming From Disk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emby-libraries" class="md-nav__link">
+    Emby Libraries
+  </a>
+  
+    <nav class="md-nav" aria-label="Emby Libraries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata_3" class="md-nav__link">
+    Metadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-media-items_3" class="md-nav__link">
+    Add Media Items
+  </a>
+  
+    <nav class="md-nav" aria-label="Add Media Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-server_1" class="md-nav__link">
+    Connect to Server
+  </a>
+  
+    <nav class="md-nav" aria-label="Connect to Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#server-address_1" class="md-nav__link">
+    Server Address
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-key_1" class="md-nav__link">
+    API Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration_1" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronize-libraries_2" class="md-nav__link">
+    Synchronize Libraries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streaming-from-disk_2" class="md-nav__link">
+    Streaming From Disk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Add Media Items</h1>
+
+<p>ErsatzTV needs to know about your media items in order to create channels.
+Four library kinds are currently supported: <a href="#local-libraries">Local</a>, <a href="#plex-libraries">Plex</a>, <a href="#jellyfin-libraries">Jellyfin</a> and <a href="#emby-libraries">Emby</a>.</p>
+<p>ErsatzTV supports a subset of media kinds when synchronizing from media servers, i.e. <a href="#plex-libraries">Plex</a>, <a href="#jellyfin-libraries">Jellyfin</a> and <a href="#emby-libraries">Emby</a> only support <code>Movies</code> and <code>Shows</code>.
+<a href="#local-libraries">Local Libraries</a> support all media kinds: <code>Movies</code>, <code>Shows</code>, <code>Music Videos</code>, <code>Other Videos</code> and <code>Songs</code>.</p>
+<h2 id="local-libraries">Local Libraries</h2>
+<p>Local libraries provide a way to schedule media directly from folders; no media server is necessary.</p>
+<h3 id="metadata">Metadata</h3>
+<p>With local libraries, ErsatzTV will read metadata from <a href="https://kodi.wiki/view/NFO_files">NFO files</a>, falling back to a <em>minimal</em> amount of metadata if NFO files are not found.</p>
+<h3 id="add-libraries">Add Libraries</h3>
+<p>ErsatzTV provides four local libraries by default, one for each supported media kind: <code>Movies</code>, <code>Shows</code>, <code>Music Videos</code>, <code>Other Videos</code> and <code>Songs</code>.
+Additional libraries can be added under <code>Media Sources</code> &gt; <code>Local</code>.</p>
+<h3 id="add-media-items">Add Media Items</h3>
+<p>To add media items to a local library under <code>Media Sources</code> &gt; <code>Local</code>, click the edit button for the library:</p>
+<p><img alt="Local Libraries Edit Icon" src="../../images/local-libraries-edit-icon.png" /></p>
+<p>In the <code>Path</code> field, enter the path where your media files of the appropriate kind are stored:</p>
+<p><img alt="Add Local Library Path" src="../../images/shows-add-local-library-path.png" /></p>
+<p>Finally, click <code>Add Path</code>.</p>
+<p>When you have added all of your media paths, click <code>Save Changes</code> and ErsatzTV will scan and import your media items.</p>
+<h2 id="plex-libraries">Plex Libraries</h2>
+<p>Plex libraries provide a way to synchronize your media (metadata) from Plex to ErsatzTV.
+This synchronization process is one-way: changes made within Plex are synchronized to ErsatzTV.
+ErsatzTV will never make any modifications to your Plex configuration or media.</p>
+<h3 id="metadata_1">Metadata</h3>
+<p>With Plex libraries, Plex provides all metadata.</p>
+<h3 id="add-media-items_1">Add Media Items</h3>
+<h4 id="sign-in">Sign In</h4>
+<p>To add media items from Plex, under <code>Media Sources</code> &gt; <code>Plex</code> click the <code>Sign in to Plex</code> button and sign in with your Plex account.</p>
+<h4 id="synchronize-libraries">Synchronize Libraries</h4>
+<p>After signing in, select which libraries you would like to synchronize from Plex to ErsatzTV by clicking the <code>Edit Libraries</code> button for the desired Plex server.</p>
+<p><img alt="Plex Edit Libraries Icon" src="../../images/plex-media-source-edit-libaries-icon.png" /></p>
+<p>In the libraries listing, click the <code>Synchronize</code> switch for all libraries you would like to synchronize from Plex to ErsatzTV, and click the <code>Save Changes</code> button to start the synchronization process.</p>
+<p><img alt="Plex Libraries Synchronize Switch" src="../../images/plex-libraries-synchronize-switch.png" /></p>
+<h3 id="streaming-from-disk">Streaming From Disk</h3>
+<p>Media items are streamed from Plex media sources by default. Instead, if you would like to stream from disk, ErsatzTV will check for media items using the same path that Plex uses to play the media item.
+There are two ways to make this work:</p>
+<ol>
+<li>Ensure ErsatzTV has access to exactly the same shares and mounts as Plex</li>
+<li>Configure path replacements to tell ErsatzTV where it should look on its file system for a given Plex folder</li>
+</ol>
+<p>Option 1 is recommended as it will "just work" without any further configuration.</p>
+<p>To configure path replacements for a Plex media source, click the <code>Edit Path Replacements</code> button in the </p>
+<p><img alt="Plex Edit Path Replacements Icon" src="../../images/plex-media-source-edit-path-replacements-icon.png" /></p>
+<p>Click <code>Add Path Replacement</code> to add a new path replacement, and enter the <code>Plex Path</code> along with the equivalent <code>Local Path</code> for ErsatzTV.
+Click <code>Save Changes</code> after you have created all needed path replacements.</p>
+<p><img alt="Plex Path Replacements" src="../../images/plex-media-source-path-replacements.png" /></p>
+<h2 id="jellyfin-libraries">Jellyfin Libraries</h2>
+<p>Jellyfin libraries provide a way to synchronize your media (metadata) from Jellyfin to ErsatzTV. This synchronization process is one-way: changes made within Jellyfin are synchronized to ErsatzTV. ErsatzTV will never make any modifications to your Jellyfin configuration or media.</p>
+<h3 id="metadata_2">Metadata</h3>
+<p>With Jellyfin libraries, Jellyfin provides all metadata.</p>
+<h3 id="add-media-items_2">Add Media Items</h3>
+<h4 id="connect-to-server">Connect to Server</h4>
+<p>Connecting to a Jellyfin server requires two settings: the server address and an api key.</p>
+<h5 id="server-address">Server Address</h5>
+<p>The server address is the address that you type in your web browser to access your Jellyfin server.</p>
+<h5 id="api-key">API Key</h5>
+<p>To create a Jellyfin API Key, from the <code>Admin / Dashboard</code> in Jellyfin, select <code>Advanced / API Keys</code> and click the <code>+</code> button near the top.</p>
+<p><img alt="Jellyfin Create API Key Button" src="../../images/jellyfin-create-api-key-button.png" /></p>
+<p>Give the API Key a name like <code>ErsatzTV</code> and click <code>Ok</code>. The API key is then displayed.</p>
+<p><img alt="Jellyfin API Key" src="../../images/jellyfin-api-key.png" /></p>
+<h5 id="configuration">Configuration</h5>
+<p>Finally, in ErsatzTV, under <code>Media Sources</code> &gt; <code>Jellyfin</code> click the <code>Connect Jellyfin</code> button, enter the <code>Address</code> and <code>Api Key</code> and click <code>Save Changes</code> to connect to your Jellyfin server.</p>
+<h4 id="synchronize-libraries_1">Synchronize Libraries</h4>
+<p>After connecting, select which libraries you would like to synchronize from Jellyfin to ErsatzTV by clicking the <code>Edit Libraries</code> button for the desired Jellyfin server.</p>
+<p><img alt="Jellyfin Edit Libraries Icon" src="../../images/jellyfin-media-source-edit-libaries-icon.png" /></p>
+<p>In the libraries listing, click the <code>Synchronize</code> switch for all libraries you would like to synchronize from Jellyfin to ErsatzTV, and click the <code>Save Changes</code> button to start the synchronization process.</p>
+<p><img alt="Jellyfin Libraries Synchronize Switch" src="../../images/jellyfin-libraries-synchronize-switch.png" /></p>
+<h3 id="streaming-from-disk_1">Streaming From Disk</h3>
+<p>Media items are streamed from Jellyfin media sources by default. Instead, if you would like to stream from disk, ErsatzTV will check for media items using the same path that Jellyfin uses to play the media item.
+There are two ways to make this work:</p>
+<ol>
+<li>Ensure ErsatzTV has access to exactly the same shares and mounts as Jellyfin</li>
+<li>Configure path replacements to tell ErsatzTV where it should look on its file system for a given Jellyfin folder</li>
+</ol>
+<p>Option 1 is recommended as it will "just work" without any further configuration.</p>
+<p>To configure path replacements for a Jellyfin media source, click the <code>Edit Path Replacements</code> button in the</p>
+<p><img alt="Jellyfin Edit Path Replacements Icon" src="../../images/jellyfin-media-source-edit-path-replacements-icon.png" /></p>
+<p>Click <code>Add Path Replacement</code> to add a new path replacement, and enter the <code>Jellyfin Path</code> along with the equivalent <code>Local Path</code> for ErsatzTV.
+Click <code>Save Changes</code> after you have created all needed path replacements.</p>
+<p><img alt="Jellyfin Path Replacements" src="../../images/jellyfin-media-source-path-replacements.png" /></p>
+<h2 id="emby-libraries">Emby Libraries</h2>
+<p>Emby libraries provide a way to synchronize your media (metadata) from Emby to ErsatzTV. This synchronization process is one-way: changes made within Emby are synchronized to ErsatzTV. ErsatzTV will never make any modifications to your Emby configuration or media.</p>
+<h3 id="metadata_3">Metadata</h3>
+<p>With Emby libraries, Emby provides all metadata.</p>
+<h3 id="add-media-items_3">Add Media Items</h3>
+<h4 id="connect-to-server_1">Connect to Server</h4>
+<p>Connecting to a Emby server requires two settings: the server address and an api key.</p>
+<h5 id="server-address_1">Server Address</h5>
+<p>The server address is the address that you type in your web browser to access your Emby server.</p>
+<h5 id="api-key_1">API Key</h5>
+<p>To create a Emby API Key, from the <code>Admin / Manage Emby Server</code> in Emby, select <code>Advanced / API Keys</code> and click the <code>+ New Api Key</code> button near the top.</p>
+<p><img alt="Emby Create API Key Button" src="../../images/emby-create-api-key-button.png" /></p>
+<p>Give the API Key a name like <code>ErsatzTV</code> and click <code>Ok</code>. The API key is then displayed.</p>
+<p><img alt="Emby API Key" src="../../images/emby-api-key.png" /></p>
+<h5 id="configuration_1">Configuration</h5>
+<p>Finally, in ErsatzTV, under <code>Media Sources</code> &gt; <code>Emby</code> click the <code>Connect Emby</code> button, enter the <code>Address</code> and <code>Api Key</code> and click <code>Save Changes</code> to connect to your Emby server.</p>
+<h4 id="synchronize-libraries_2">Synchronize Libraries</h4>
+<p>After connecting, select which libraries you would like to synchronize from Emby to ErsatzTV by clicking the <code>Edit Libraries</code> button for the desired Emby server.</p>
+<p><img alt="Emby Edit Libraries Icon" src="../../images/emby-media-source-edit-libaries-icon.png" /></p>
+<p>In the libraries listing, click the <code>Synchronize</code> switch for all libraries you would like to synchronize from Emby to ErsatzTV, and click the <code>Save Changes</code> button to start the synchronization process.</p>
+<p><img alt="Emby Libraries Synchronize Switch" src="../../images/emby-libraries-synchronize-switch.png" /></p>
+<h3 id="streaming-from-disk_2">Streaming From Disk</h3>
+<p>Media items are streamed from Emby media sources by default. Instead, if you would like to stream from disk, ErsatzTV will check for media items using the same path that Emby uses to play the media item.
+There are two ways to make this work:</p>
+<ol>
+<li>Ensure ErsatzTV has access to exactly the same shares and mounts as Emby</li>
+<li>Configure path replacements to tell ErsatzTV where it should look on its file system for a given Emby folder</li>
+</ol>
+<p>Option 1 is recommended as it will "just work" without any further configuration.</p>
+<p>To configure path replacements for a Emby media source, click the <code>Edit Path Replacements</code> button in the</p>
+<p><img alt="Emby Edit Path Replacements Icon" src="../../images/emby-media-source-edit-path-replacements-icon.png" /></p>
+<p>Click <code>Add Path Replacement</code> to add a new path replacement, and enter the <code>Emby Path</code> along with the equivalent <code>Local Path</code> for ErsatzTV.
+Click <code>Save Changes</code> after you have created all needed path replacements.</p>
+<p><img alt="Emby Path Replacements" src="../../images/emby-media-source-path-replacements.png" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 - 2023 Jason Dove
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://discuss.ersatztv.org" target="_blank" rel="noopener" title="ErsatzTV Community" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M208 0c114.9 0 208 78.8 208 176s-93.1 176-208 176c-18.7 0-36.8-2.3-54.1-6.2-30.6 19-74.77 38.2-128.95 38.2-9.98 0-19.02-5.9-22.932-15.1-3.914-9.2-2.025-19.8 4.721-27 .521-.4 22.641-24.5 38.991-56C17.18 255.8 0 217.6 0 176 0 78.8 93.13 0 208 0zm-43.4 298.1c14.6 4.2 29.2 5.9 43.4 5.9 88.2 0 160-57.4 160-128S296.2 48 208 48 48 105.4 48 176c0 35.2 17.71 61.2 32.57 76.9l23.53 24.9-15.79 30.3c-3.57 6-7.58 13.8-11.76 20.4 17.71-5.1 35.15-13 52.15-24.4l16.7-9.5 19.2 3.5zm277-169.9C552 132.4 640 209.5 640 304c0 41.6-17.2 79.8-45.7 109.9 16.3 31.5 38.4 55.6 39 56 6.7 7.2 8.6 17.8 3.8 27-3 9.2-12.1 15.1-22.1 15.1-54.1 0-98.3-19.2-128.9-38.2-17.3 3.9-35.4 6.2-54.1 6.2-82 0-152.9-40.2-186.8-98.5 17.3-2.3 33.9-6.2 49.7-11.6 28 37.2 79 62.1 137.1 62.1 14.2 0 28.8-1.7 43.4-5.9l19.2-3.5 16.7 9.5c17 11.4 34.4 19.3 52.2 24.4-4.2-6.6-8.2-14.4-11.8-20.4l-15.8-30.3 23.5-24.9c14.9-15.6 32.6-41.7 32.6-76.9 0-66.3-63.3-120.9-144.9-127.4l.9-.6c0-16.5-2.2-32.5-6.4-47.8z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://discord.gg/hHaJm3yGy6" target="_blank" rel="noopener" title="ErsatzTV on Discord" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://github.com/ErsatzTV/ErsatzTV" target="_blank" rel="noopener" title="ErsatzTV on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://github.com/sponsors/jasongdove" target="_blank" rel="noopener" title="Sponsor on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m244 84 11.1 12 12-11.98C300.6 51.37 347 36.51 392.6 44.1c68.9 11.48 119.4 71.1 119.4 141v5.8c0 41.5-17.2 81.2-47.6 109.5L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9L47.59 300.4C17.23 272.1 0 232.4 0 190.9v-5.8c0-69.9 50.52-129.52 119.4-141 44.7-7.59 92 7.27 124.6 39.9-.9 0 0 .01 0 0zm11.1 79.9-45-46.8c-21.7-20.82-52.5-30.7-82.8-25.66C81.55 99.07 48 138.7 48 185.1v5.8c0 28.2 11.71 55.2 32.34 74.4L256 429.3l175.7-164c20.6-19.2 32.3-46.2 32.3-74.4v-5.8c0-46.4-33.6-86.03-79.3-93.66-30.3-5.04-61.1 4.84-82.8 25.66l-46.8 46.8z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://www.paypal.me/jasongdove" target="_blank" rel="noopener" title="Donate on PayPal" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M111.4 295.9c-3.5 19.2-17.4 108.7-21.5 134-.3 1.8-1 2.5-3 2.5H12.3c-7.6 0-13.1-6.6-12.1-13.9L58.8 46.6c1.5-9.6 10.1-16.9 20-16.9 152.3 0 165.1-3.7 204 11.4 60.1 23.3 65.6 79.5 44 140.3-21.5 62.6-72.5 89.5-140.1 90.3-43.4.7-69.5-7-75.3 24.2zM357.1 152c-1.8-1.3-2.5-1.8-3 1.3-2 11.4-5.1 22.5-8.8 33.6-39.9 113.8-150.5 103.9-204.5 103.9-6.1 0-10.1 3.3-10.9 9.4-22.6 140.4-27.1 169.7-27.1 169.7-1 7.1 3.5 12.9 10.6 12.9h63.5c8.6 0 15.7-6.3 17.4-14.9.7-5.4-1.1 6.1 14.4-91.3 4.6-22 14.3-19.7 29.3-19.7 71 0 126.4-28.8 142.9-112.3 6.5-34.8 4.6-71.4-23.8-92.6z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>
