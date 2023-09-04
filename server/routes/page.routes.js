@@ -106,6 +106,7 @@ console.log(JSON.stringify(filesinthemesdiruser))
             page: "Themes",
             version: version,
             theme: config_current.theme.replace(/user\//g, "User - ").replace(/system\//g, "System - "),
+            themeunreplaced: config_current.theme,
             ErsatzTVURL: ErsatzTVURL,
             downloadedthemeslist: filesinthemesdir,
             downloadedthemesarray: filesinthemesdiruser,

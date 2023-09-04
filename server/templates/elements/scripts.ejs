@@ -409,54 +409,43 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
 
     window.onload = function() {
 
+      var statusDiv1 = document.getElementById('currentTheme');
 
-      //disable set theme button if already set
-        var statusDiv1 = document.getElementById('currentTheme');
+      // Define the theme buttons and their corresponding IDs
+      var themeButtons1 = [
+        { id1: 'SystemLightsetthemeButton', theme1: 'system/SystemLight' },
+        { id1: 'SystemDarksetthemeButton', theme1: 'system/SystemDark' },
+        { id1: 'stopandgosetthemeButton', theme1: 'system/stopandgo' },
+        { id1: 'CandycanesetthemeButton', theme1: 'system/Candycane' },
+        { id1: 'MoRBiD_MaNGLeRDarksetthemeButton', theme1: 'system/MoRBiD_MaNGLeR-Dark' },
+        { id1: 'MoRBiD_MaNGLeRC64setthemeButton', theme1: 'system/MoRBiD_MaNGLeR-C64' },
+        { id1: 'MoRBiD_MaNGLeRBlueWhitesetthemeButton', theme1: 'system/MORBiD_MaNGLeR-BlueWhite' }
+      ];
 
-        // Define the theme buttons and their corresponding IDs
-        var themeButtons1 = [
-          { id1: 'SystemLightsetthemeButton', theme1: 'system/SystemLight' },
-          { id1: 'SystemDarksetthemeButton', theme1: 'system/SystemDark' },
-          { id1: 'stopandgosetthemeButton', theme1: 'system/stopandgo' },
-          { id1: 'CandycanesetthemeButton', theme1: 'system/Candycane' },
-          { id1: 'MoRBiD_MaNGLeRDarksetthemeButton', theme1: 'system/MoRBiD_MaNGLeR-Dark' },
-          { id1: 'MoRBiD_MaNGLeRC64setthemeButton', theme1: 'system/MoRBiD_MaNGLeR-C64' },
-          { id1: 'MoRBiD_MaNGLeRBlueWhitesetthemeButton', theme1: 'system/MORBiD_MaNGLeR-BlueWhite' }
-        ];
+    var allElements = document.querySelectorAll('[id]');
+    allElements.forEach(function(element) {
+      var id = element.getAttribute('id');
 
-        // Loop through all elements with an id attribute
-        var allElements = document.querySelectorAll('[id]');
-        allElements.forEach(function(element) {
-            var id = element.getAttribute('id');
+      if (id && id.endsWith('setthemeButtonuser')) {
+        var id1 = id;
+        var theme1 = id1.replace(/setthemeButtonuser$/, '');
 
-            // Check if the id matches the format you specified
-            if (id && id.endsWith('setthemeButtonuser')) {
-                // Extract the id1 and theme1 values
-                var id1 = id;
-                var theme1 = id.replace(/setthemeButtonuser$/, '');
-
-                // Create an object and push it to the existingArray
-                themeButtons1.push({ id1: id1, theme1: theme1 });
-            }
-        });
-
-        // Now, existingArray contains objects in the desired format
-        console.log(themeButtons1);
+        themeButtons1.push({ id1: id1, theme1: theme1 });
+      }
+    });
 
     var currentThemesText = statusDiv1.innerText;
-        // Iterate over the theme buttons array
-        themeButtons1.forEach(function(buttonset) {
-          var themeButton1 = document.getElementById(buttonset.id1);
-          if (currentThemesText.includes(buttonset.theme1)) {
-            themeButton1.disabled = true;
-            themeButton1.style.backgroundColor = '#d9d9d9';
-            themeButton1.style.textDecoration = 'line-through';
-            themeButton1.style.cursor = 'no-drop';
-          } else {
-      themeButton1.disabled = false;
-          }
-        });
-
+    themeButtons1.forEach(function(buttonset) {
+      var themeButton1 = document.getElementById(buttonset.id1);
+      if (currentThemesText.includes(buttonset.theme1)) {
+        themeButton1.disabled = true;
+        themeButton1.style.backgroundColor = '#d9d9d9';
+        themeButton1.style.textDecoration = 'line-through';
+        themeButton1.style.cursor = 'no-drop';
+      } else {
+        themeButton1.disabled = false;
+      }
+    });
 
 
     //disable download button if already downloaded
