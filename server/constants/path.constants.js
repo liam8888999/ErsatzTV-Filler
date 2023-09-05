@@ -51,7 +51,8 @@ const DEFAULT_CONFIG = {
   "customffmpeg": "",
   "ffmpegencoder": "libx264",
   "hwaccel": "",
-  "hwaccel_device": ""
+  "hwaccel_device": "",
+  "customffmpeg": ""
 }
 
 const USER_CONFIG = "config.json"
@@ -90,7 +91,9 @@ const CONFIG_CONSTANTS = () => {
     }
 }
 
-
+// to update to 
+//https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
+//and move to a different file more suited (probably 1 with the download stuff already)
 let FFMPEGCOMMAND;
 if (os.platform() === 'win32') {
   FFMPEGCOMMAND = 'ffmpeg.exe -y';
