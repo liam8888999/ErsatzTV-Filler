@@ -85,15 +85,15 @@ const loadPageRoutes = async (app) => {
 
     app.get('/themes', async (req, res) => {
       const config_current = await retrieveCurrentConfiguration();
-      let filesinthemesdir = await listFilesInDir("themes")
+      let filesinthemesdir = await listFilesInDir(THEMES_FOLDER)
 .catch(error => {
     logger.error(`Error: ${error}`);
   });
-  let filesinthemesdiruser = await listFilesInDir("themes/user")
+  let filesinthemesdiruser = await listFilesInDir(`${THEMES_FOLDER}/user`)
 .catch(error => {
 logger.error(`Error: ${error}`);
 });
-let filesinthemesdirsystem = await listFilesInDir("themes/system")
+let filesinthemesdirsystem = await listFilesInDir(`${THEMES_FOLDER}/system`)
 .catch(error => {
 logger.error(`Error: ${error}`);
 });
