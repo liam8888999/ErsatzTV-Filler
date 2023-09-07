@@ -39,11 +39,11 @@ if (config_current.hwaccel == "") {
   console.log(hwaccel);
 }
 
-if (config_current.hwacceldevice == "") {
+if (config_current.hwaccel_device == "") {
   hwacceldevice = ``;
   console.log('no hwacceldevice'); // Use the constant as needed
 } else {
-  hwacceldevice = `-hwaccel_device ${config_current.hwacceldevice} `;
+  hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
   console.log(hwacceldevice);
 }
 

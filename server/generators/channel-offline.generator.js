@@ -228,11 +228,11 @@ if (config_current.hwaccel == "") {
   console.log(hwaccel);
 }
 
-if (config_current.hwacceldevice == "") {
+if (config_current.hwaccel_device == "") {
   hwacceldevice = ``;
   console.log('no hwacceldevice'); // Use the constant as needed
 } else {
-  hwacceldevice = `-hwaccel_device ${config_current.hwacceldevice} `;
+  hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
   console.log(hwacceldevice);
 }
       const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
