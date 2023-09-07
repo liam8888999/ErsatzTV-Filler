@@ -34,7 +34,7 @@ const writeValueToConfigurationFile = async (key, value) => {
     //await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
 
 
-    const data = await fs.readFileSync('config.json');
+    const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
   const json = JSON.parse(data);
 
     const newConfigvar = {
@@ -43,7 +43,7 @@ const writeValueToConfigurationFile = async (key, value) => {
     }
 
       // Write updated object back to file
-      await fs.writeFileSync('config.json', JSON.stringify(newConfigvar, null, 2));
+      await fs.writeFileSync(`${CONFIG_CONSTANTS().USER_CONFIG}`, JSON.stringify(newConfigvar, null, 2));
 
 }
 
@@ -63,7 +63,7 @@ const writeValueToConfigurationFile = async (key, value) => {
 
 const setwebtheme = async (theme) => {
   try {
-    const fileData = await fs.readFileSync("config.json");
+    const fileData = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     const json = JSON.parse(fileData);
     json.webtheme = theme;
     await fs.writeFileSync("config.json", JSON.stringify(json, null, 2));
