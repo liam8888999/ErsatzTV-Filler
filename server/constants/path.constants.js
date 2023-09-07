@@ -83,6 +83,7 @@ const CHANNEL_OFFLINEDIR = WORKDIR + "/Channel-offline"
 const XMLTVMERGEDIR = WORKDIR + "/xmltvmerge"
 const VANITYCARDDIR = WORKDIR + "/vanitycard"
 const CONFIGCONFDIR = WORKDIR + "/configconf"
+const LOGFOLDER = startUpPath + "logs"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -135,5 +136,6 @@ module.exports = {
     CONFIGCONFDIR,
     THEMES_FOLDER,
     startUpPath,
-    FALLBACKAUDIO
+    FALLBACKAUDIO,
+    LOGFOLDER
   };

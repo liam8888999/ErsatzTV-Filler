@@ -9,6 +9,7 @@ const fs = require('fs');
 const { exec } = require('child_process');
 const archiver = require('archiver');
 const readline = require('readline');
+const {LOGFOLDER} = require("../constants/path.constants");
 
 
 const loadApilogsRoutes = (app) => {
@@ -88,7 +89,7 @@ const loadApilogsRoutes = (app) => {
 
 
   //logger.info(formattedDate)
-      const logFile = `logs/ersatztv-filler-${formattedDate}.log`;
+      const logFile = `${LOGFOLDER}/ersatztv-filler-${formattedDate}.log`;
       return logFile;
     } catch (error) {
       logger.error('Error getting log file', error.message);
@@ -103,7 +104,7 @@ const loadApilogsRoutes = (app) => {
 
 // Endpoint to handle directory zipping and download
 app.get('/zip/logs', (req, res) => {
-  const directoryPath = 'logs'; // Replace with the path to the directory you want to zip
+  const directoryPath = LOGFOLDER; // Replace with the path to the directory you want to zip
 
   // Create a new zip file
   const zipPath = `${directoryPath}.zip`;
