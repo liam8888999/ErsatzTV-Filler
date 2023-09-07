@@ -4,16 +4,16 @@ const moment = require('moment-timezone');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
-const { THEMES_FOLDER } = require("../constants/path.constants");
+const { THEMES_FOLDER, CONFIG_CONSTANTS, THEMES_FOLDER } = require("../constants/path.constants");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 
 const settheme = async (theme) => {
   try {
-    const fileData = await fs.readFileSync("config.json");
+    const fileData = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     const json = JSON.parse(fileData);
     json.theme = theme;
-    await fs.writeFileSync("config.json", JSON.stringify(json, null, 2));
+    await fs.writeFileSync(`${CONFIG_CONSTANTS().USER_CONFIG}`, JSON.stringify(json, null, 2));
     logger.success(`Successfully updated theme to '${theme}' in config.json`);
   } catch (err) {
     logger.error(`Error updating theme to '${theme}' in config.json: ${err}`);
@@ -44,7 +44,7 @@ const themecolourdecoder = (colour) => {
 
  const retrieveCurrentTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
-   const themeFileExists = await doesFileExist(`themes/${config_current.theme}.theme`);
+   const themeFileExists = await doesFileExist(`${THEMES_FOLDER}/${config_current.theme}.theme`);
 
    let usetheme = ''
 
@@ -59,16 +59,16 @@ const themecolourdecoder = (colour) => {
 
  const retrieveTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
-   const data = await fs.readFileSync(`themes/${config_current.theme}.theme`);
+   const data = await fs.readFileSync(`${THEMES_FOLDER}/${config_current.theme}.theme`);
    logger.info(JSON.parse(data))
     return JSON.parse(data)
  }
 
  const themeDoesNotExist = async () => {
-   await createDirectoryIfNotExists('themes');
-   await createDirectoryIfNotExists('themes/system')
+   await createDirectoryIfNotExists(THEMES_FOLDER);
+   await createDirectoryIfNotExists(`${THEMES_FOLDER}/system`)
    try {
-     await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'themes/system/SystemLight.theme');
+     await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', `${THEMES_FOLDER}/system/SystemLight.theme`);
    } catch (error) {
      logger.error(`Error downloading image: ${error.message}`);
    }
