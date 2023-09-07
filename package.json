@@ -60,7 +60,8 @@
     "entry": "server/app.js",
     "scripts": "server/**/*.js",
     "assets": ["server/templates/**/*", "audio-fallback/*", "*"],
-    "targets": ["node18-macos-x64"]
+    "targets": ["node18-macos-x64"],
+    "outputpath": "test"
   },
   "release-it": {
     "git": {

@@ -54,7 +54,7 @@ const CHANNEL_OFFLINE = async () => {
 
   // Function to split XMLTV by channel
   const splitXMLTVByChannel = async () => {
-    const xmlData = await fs.promises.readFile(`${CHANNEL_OFFLINEDIR}//xmltv.xmltv`, 'utf8');
+    const xmlData = await fs.promises.readFile(`${CHANNEL_OFFLINEDIR}/xmltv.xmltv`, 'utf8');
     xml2js.parseString(xmlData, (parseErr, result) => {
       if (parseErr) {
         logger.error('Error parsing XML:', parseErr);
