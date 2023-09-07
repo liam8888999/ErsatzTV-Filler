@@ -7,6 +7,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const { setwebtheme } = require("../utils/config.utils.js");
 const multer = require('multer');
 const fs = require('fs');
+const { CONFIG_CONSTANTS, CONFIGCONFDIR } = require("../constants/path.constants");
 
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 
@@ -56,7 +57,7 @@ logger.info(value);
     // show theme json
 
     app.get('/api/config/readconfigjson', async (req, res) => {
-      const filepath = `config.json`;
+      const filepath = CONFIG_CONSTANTS().USER_CONFIG;
       readFile(`${filepath}`, 'utf8', (err, data) => {
           if (err) {
             logger.error(err);
@@ -96,7 +97,7 @@ logger.info(theme)
 
 
   const storage = multer.diskStorage({
-    destination: 'workdir/configconf',
+    destination: CONFIGCONFDIR,
     filename: (req, file, cb) => {
       cb(null, file.originalname); // Preserve the original file name
     }
@@ -108,7 +109,7 @@ app.post('/uploadoldmodeltheme', uploadoldmodeltheme.single('file'), async (req,
   const file = req.file;
 const config_current = await retrieveCurrentConfiguration();
   // Read the file contents
-  fs.readFile('workdir/configconf/config.conf', 'utf8', (err, data) => {
+  fs.readFile(`${CONFIGCONFDIR}/config.conf`, 'utf8', (err, data) => {
     if (err) {
       logger.error('Error reading file:', err);
       res.sendStatus(500);
@@ -193,7 +194,7 @@ const updatedJsonString = JSON.stringify(config_current, null, 2);
 logger.info(updatedJsonString)
 
 // Write the updated JSON string back to the file
-fs.writeFile('config.json', updatedJsonString, 'utf8', (err) => {
+fs.writeFile(`${CONFIG_CONSTANTS().USER_CONFIG}`, updatedJsonString, 'utf8', (err) => {
   if (err) {
     logger.error(err);
     return;
