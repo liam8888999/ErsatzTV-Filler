@@ -1,6 +1,9 @@
 const os = require('os');
 const path = require('path')
 
+//serverLocation is Internal
+//startuppath is external
+
 
 if (process.pkg) {
   startUpPath = path.resolve(process.execPath, '..') + "/";
@@ -103,6 +106,8 @@ const CONFIG_CONSTANTS = () => {
     }
 }
 
+FALLBACKAUDIO = serverLocation + "audio-fallback"
+
 // to update to
 //https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
 //and move to a different file more suited (probably 1 with the download stuff already)
@@ -129,5 +134,6 @@ module.exports = {
     VANITYCARDDIR,
     CONFIGCONFDIR,
     THEMES_FOLDER,
-    startUpPath
+    startUpPath,
+    FALLBACKAUDIO
   };

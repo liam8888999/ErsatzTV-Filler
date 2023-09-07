@@ -2,6 +2,7 @@ const { listFilesInDir } = require("../../utils/file.utils");
 const { randomNumber } = require("../../utils/randomnumber.utils");
 const logger = require("../../utils/logger.utils");
 const moment = require('moment-timezone');
+const FALLBACKAUDIO = require("../../constants/path.constants")
 
 
 const audioExtensions = ['mp3', 'wav', 'flac', 'aac', 'ogg', 'wma', 'm4a', 'opus', 'amr', 'webm', 'amr', 'ape', 'mid', 'midi', 'ac3', 'aiff', 'aif', 'au', 'raw', 'mp2', 'ra', 'rm', 'dsf', 'dts', 'caf', 'alac', 'dff', 'oga', 'ogs', 'spx'];
@@ -22,7 +23,7 @@ const selectRandomAudioFile = async (path) => {
   if (fileList.length === 0) {
     logger.info("File list is empty");
     // If the directory is empty, retrieve the list of files from the backup directory
-    fileList = await listFilesInDir('audio-fallback')
+    fileList = await listFilesInDir(FALLBACKAUDIO)
 
     // Filter out non-audio files from the backup directory
     fileList = fileList.filter((file) => {
