@@ -83,6 +83,7 @@ const XMLTVMERGEDIR = WORKDIR + "/xmltvmerge"
 const VANITYCARDDIR = WORKDIR + "/vanitycard"
 const CONFIGCONFDIR = WORKDIR + "/configconf"
 const LOGFOLDER = startUpPath + "logs"
+const AUDIOFALLBACK = startUpPath + "audio-fallback"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -106,7 +107,6 @@ const CONFIG_CONSTANTS = () => {
     }
 }
 
-FALLBACKAUDIO = serverLocation + "audio-fallback"
 
 // to update to
 //https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
@@ -135,6 +135,7 @@ module.exports = {
     CONFIGCONFDIR,
     THEMES_FOLDER,
     startUpPath,
-    FALLBACKAUDIO,
-    LOGFOLDER
+    AUDIOFALLBACK,
+    LOGFOLDER,
+    serverLocation
   };

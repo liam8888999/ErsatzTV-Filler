@@ -1,15 +1,23 @@
 const { listFilesInDir } = require("../../utils/file.utils");
 const { randomNumber } = require("../../utils/randomnumber.utils");
 const logger = require("../../utils/logger.utils");
-const moment = require('moment-timezone');
-const FALLBACKAUDIO = require("../../constants/path.constants")
+const { AUDIOFALLBACK } = require("../../constants/path.constants")
+
 
 
 const audioExtensions = ['mp3', 'wav', 'flac', 'aac', 'ogg', 'wma', 'm4a', 'opus', 'amr', 'webm', 'amr', 'ape', 'mid', 'midi', 'ac3', 'aiff', 'aif', 'au', 'raw', 'mp2', 'ra', 'rm', 'dsf', 'dts', 'caf', 'alac', 'dff', 'oga', 'ogs', 'spx'];
 
 const selectRandomAudioFile = async (path) => {
-  // Get the list of files in the specified directory
-  let fileList = await listFilesInDir(path)
+  let selectedPath = path;
+console.log(selectedPath)
+  if (!selectedPath) {
+    // Handle the case where 'path' is undefined or falsy
+    logger.info("Path parameter is undefined or empty. Using the backup directory.");
+    selectedPath = `${AUDIOFALLBACK}`; // Set the backup directory
+  }
+console.log(selectedPath)
+  // Get the list of files in the specified directory or backup directory
+  let fileList = await listFilesInDir(selectedPath);
 
   logger.info(fileList);
 
@@ -23,7 +31,7 @@ const selectRandomAudioFile = async (path) => {
   if (fileList.length === 0) {
     logger.info("File list is empty");
     // If the directory is empty, retrieve the list of files from the backup directory
-    fileList = await listFilesInDir(FALLBACKAUDIO)
+    fileList = await listFilesInDir(`${AUDIOFALLBACK}`);
 
     // Filter out non-audio files from the backup directory
     fileList = fileList.filter((file) => {
@@ -39,12 +47,13 @@ const selectRandomAudioFile = async (path) => {
 
   const chosenFile = fileList[randomIndex];
 
-  logger.info(chosenFile)
+  logger.info(chosenFile);
 
   // Return the chosen random file path
   return chosenFile;
-
 };
+
+
 
 module.exports = {
   selectRandomAudioFile
