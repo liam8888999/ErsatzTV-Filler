@@ -4,7 +4,7 @@ const moment = require('moment-timezone');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
-const { THEMES_FOLDER, CONFIG_CONSTANTS, THEMES_FOLDER } = require("../constants/path.constants");
+const { THEMES_FOLDER, CONFIG_CONSTANTS } = require("../constants/path.constants");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 
