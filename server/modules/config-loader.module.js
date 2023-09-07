@@ -48,7 +48,7 @@ const jsonifyCurrentConfiguration = async () => {
 
   // convert config.conf to config.json  -- Delete config.conf totally in future versions
 const config = await retrieveCurrentConfiguration2();
-const FILE_EXISTS = await doesFileExist("config.json")
+const FILE_EXISTS = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG)
 if (!FILE_EXISTS) {
   logger.error('The config.json file does not exist.');
   await fs.writeFile(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(CONFIG_CONSTANTS().DEFAULT_CONFIG, null, 2), (err) => {
@@ -62,7 +62,7 @@ if (!FILE_EXISTS) {
 }
 
 const retrieveCurrentConfiguration = async () => {
-  const configFileExists = await doesFileExist("config.json");
+  const configFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
   const defaultConfigFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
 
   if (!configFileExists) {
@@ -73,7 +73,7 @@ const retrieveCurrentConfiguration = async () => {
   //  await retrieveCurrentConfiguration2()
   }
 
-    const data = await fs.readFileSync('config.json');
+    const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     CURRENT_CONFIG = JSON.parse(data);
 logger.info(CURRENT_CONFIG);
 return CURRENT_CONFIG;
