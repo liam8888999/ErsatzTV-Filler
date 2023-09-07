@@ -52,7 +52,7 @@ isFunctionRunning = true;
             // Download the random image
             const imageUrl = `http://chucklorre.com/images/cards/${randomImageFilename}`;
             http.get(imageUrl, (imageResponse) => {
-              const imagePath = VANITYCARDDIR + '/vanitycard-${filenumber}.jpg';
+              const imagePath = `${VANITYCARDDIR}/vanitycard-${filenumber}.jpg`;
 
               // Save the image to disk
               const fileStream = fs.createWriteStream(imagePath);

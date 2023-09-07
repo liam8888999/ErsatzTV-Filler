@@ -1,4 +1,4 @@
-const { TEMPLATE_CONSTANTS } = require("../constants/path.constants");
+const { TEMPLATE_CONSTANTS, THEMES_FOLDER } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 const { generateReadMe, changelogReplace, generateChangelog } = require("../utils/markdown.utils")
 const { listFilesInDir } = require("../utils/file.utils")

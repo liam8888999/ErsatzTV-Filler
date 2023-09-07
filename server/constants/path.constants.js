@@ -22,7 +22,7 @@ const serverLocation = path.dirname(parentDirName) + "/";
 const TEMPLATES_FOLDER = serverLocation + "server/templates/"; // Have to do this because it expects the layout in the top level directory.
 const LAYOUTS_FOLDER = "layouts/";
 const PAGES_FOLDER = "pages/";
-const THEMES_FOLDER = "themes/system"
+const THEMES_FOLDER = startUpPath + "themes"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
 const DEFAULT_CONFIG = {
@@ -34,7 +34,6 @@ const DEFAULT_CONFIG = {
   "xmltv": "http://127.0.0.1:8409/iptv/xmltv.xml",
   "videoresolution": "1280x720",
   "webport": "8408",
-  "fontfile": "fonts/Verdana.tff",
   "webtheme": "dark",
   "theme": "SystemLight",
   "processweather": "yes",
