@@ -50,7 +50,15 @@ const themecolourdecoder = (colour) => {
 
    if (!themeFileExists) {
      logger.warn(`${config_current.theme}.json file is missing... Falling back to the SystemLight (Default) theme.`);
-  return await themeDoesNotExist();
+     await createDirectoryIfNotExists(THEMES_FOLDER);
+     await createDirectoryIfNotExists(`${THEMES_FOLDER}/system`)
+     try {
+       await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', `${THEMES_FOLDER}/system/SystemLight.theme`);
+     } catch (error) {
+       logger.error(`Error downloading image: ${error.message}`);
+     }
+    await settheme('system/SystemLight');
+      return await retrieveTheme();
  } else {
      logger.info("Found the user selected theme file... loading...");
      return await retrieveTheme();
@@ -64,17 +72,6 @@ const themecolourdecoder = (colour) => {
     return JSON.parse(data)
  }
 
- const themeDoesNotExist = async () => {
-   await createDirectoryIfNotExists(THEMES_FOLDER);
-   await createDirectoryIfNotExists(`${THEMES_FOLDER}/system`)
-   try {
-     await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', `${THEMES_FOLDER}/system/SystemLight.theme`);
-   } catch (error) {
-     logger.error(`Error downloading image: ${error.message}`);
-   }
-  await settheme('SystemLight');
-    return await retrieveTheme();
- };
 
 module.exports = {
     settheme,

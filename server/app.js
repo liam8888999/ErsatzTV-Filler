@@ -4,7 +4,7 @@ const { selectRandomAudioFile } = require("../server/generators/utils/randomaudi
 const { GENERATION } = require("../server/modules/generators.module");
 const logger = require("../server/utils/logger.utils");
 const moment = require('moment-timezone');
-const { WORKDIR } = require("../server/constants/path.constants");
+const { WORKDIR, THEMES_FOLDER } = require("../server/constants/path.constants");
 const { createDirectoryIfNotExists } = require("../server/utils/file.utils");
 
 
@@ -43,6 +43,9 @@ process.on('unhandledRejection', (reason, promise) => {
         await startWebServer();
 
         await createDirectoryIfNotExists(WORKDIR);
+        await createDirectoryIfNotExists(THEMES_FOLDER);
+        await createDirectoryIfNotExists(`${THEMES_FOLDER}/system`);
+        await createDirectoryIfNotExists(`${THEMES_FOLDER}/user`);
 
       await GENERATION();
 
