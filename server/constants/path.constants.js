@@ -1,10 +1,22 @@
 const os = require('os');
+const path = require('path')
 
 
+if (process.pkg) {
+  startUpPath = path.resolve(process.execPath, '..') + "/";
+} else {
+  startUpPath = process.cwd() + "/";
+}
 
+// Assuming __dirname is "x/y"
+const fullDirName = __dirname;
 
+// Use path.dirname to get the parent directory
+const parentDirName = path.dirname(fullDirName);
 
-const TEMPLATES_FOLDER = "server/templates/"; // Have to do this because it expects the layout in the top level directory.
+const serverLocation = path.dirname(parentDirName) + "/";
+
+const TEMPLATES_FOLDER = serverLocation + "server/templates/"; // Have to do this because it expects the layout in the top level directory.
 const LAYOUTS_FOLDER = "layouts/";
 const PAGES_FOLDER = "pages/";
 const THEMES_FOLDER = "themes/system"
@@ -55,19 +67,19 @@ const DEFAULT_CONFIG = {
   "customffmpeg": ""
 }
 
-const USER_CONFIG = "config.json"
+const USER_CONFIG = startUpPath + "config.json"
 
-const CHANGELOG = "Changelog.md"
-const DOCUMENTATION = "Docs.md"
-const README = "README.md"
+const CHANGELOG = startUpPath + "Changelog.md";
+const DOCUMENTATION = startUpPath + "Docs.md"
+const README = startUpPath + "README.md"
 
-const WORKDIR = "workdir"
-const NEWSDIR = "workdir/News"
-const WEATHERDIR = "workdir/Weather"
-const CHANNEL_OFFLINEDIR = "workdir/Channel-offline"
-const XMLTVMERGEDIR = "workdir/xmltvmerge"
-const VANITYCARDDIR = "workdir/vanitycard"
-const CONFIGCONFDIR = "workdir/configconf"
+const WORKDIR = startUpPath + "workdir"
+const NEWSDIR = WORKDIR + "/News"
+const WEATHERDIR = WORKDIR + "/Weather"
+const CHANNEL_OFFLINEDIR = WORKDIR + "/Channel-offline"
+const XMLTVMERGEDIR = WORKDIR + "/xmltvmerge"
+const VANITYCARDDIR = WORKDIR + "/vanitycard"
+const CONFIGCONFDIR = WORKDIR + "/configconf"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -91,7 +103,7 @@ const CONFIG_CONSTANTS = () => {
     }
 }
 
-// to update to 
+// to update to
 //https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
 //and move to a different file more suited (probably 1 with the download stuff already)
 let FFMPEGCOMMAND;
@@ -116,5 +128,6 @@ module.exports = {
     README,
     VANITYCARDDIR,
     CONFIGCONFDIR,
-    THEMES_FOLDER
+    THEMES_FOLDER,
+    startUpPath
   };

@@ -3,10 +3,14 @@
   "version": "0.0.25",
   "description": "Currently this script  generates weather forecast, news and channel currently offline filler for ErsatzTV or similar programs.",
   "main": "server/app.js",
+  "bin": {
+    "ersatztv-filler": "server/app.js"
+  },
   "scripts": {
     "dev": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "release-it --verbose"
+    "release": "release-it --verbose",
+    "build": "pkg package.json"
   },
   "repository": {
     "type": "git",
@@ -31,7 +35,32 @@
     "node-fetch": "^3.3.0",
     "release-it": "^5.1.0",
     "save-dev": "^0.0.1-security",
-    "wordwrap": "^1.0.0"
+    "wordwrap": "^1.0.0",
+    "archiver": "^5.3.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cron-job-manager": "^2.3.1",
+    "epg-parser": "^0.2.0",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.0",
+    "moment-timezone": "^0.5.43",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.2",
+    "nodemon": "^1.14.9",
+    "socket.io": "^4.6.2",
+    "winston": "^3.9.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "xml2js": "^0.6.0",
+    "xmlbuilder": "^15.1.1",
+    "xmlbuilder2": "^3.1.1"
+  },
+  "pkg": {
+    "entry": "server/app.js",
+    "scripts": "server/**/*.js",
+    "assets": ["server/templates/**/*", "*"],
+    "targets": ["node18-macos-x64"]
   },
   "release-it": {
     "git": {
