@@ -1,6 +1,6 @@
 const { TEMPLATE_CONSTANTS, THEMES_FOLDER } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
-const { generateReadMe, changelogReplace, generateChangelog } = require("../utils/markdown.utils")
+const { changelogReplace, generateChangelog } = require("../utils/markdown.utils")
 const { listFilesInDir } = require("../utils/file.utils")
 const { version } = require('../../package.json');
 const fs = require('fs');

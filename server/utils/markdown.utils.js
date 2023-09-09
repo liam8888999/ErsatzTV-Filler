@@ -28,6 +28,5 @@ return html
 
 module.exports = {
     generateChangelog,
-    generateReadMe,
     changelogReplace
   }
