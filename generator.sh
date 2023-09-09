@@ -1,5 +1,5 @@
 #!/bin/bash
-#V0.0.25 - Beta
+#V0.0.26 - Beta
 CONFIG=${1:-config.conf}
 # load in configuration variables
 . "$CONFIG"
@@ -18,7 +18,7 @@ if [ ! -d $log_location ]; then
   mkdir -p $log_location;
 fi
 
-version="V0.0.25 - Beta"
+version="V0.0.26 - Beta"
 
 log_per_run1=$(echo $log_per_run | tr '[:upper:]' '[:lower:]')
 if [[ $log_per_run1 = yes ]]
@@ -137,7 +137,7 @@ fi
 rm -f $helperdir/config-temp.conf
 
 cat << EOF > $scriptdir/config.conf
-  #V0.0.25 - Beta
+  #V0.0.26 - Beta
 
   # set theme name
 
@@ -145,7 +145,7 @@ cat << EOF > $scriptdir/config.conf
 
   #automatic updates (yes / no)
   # Automatically disabled if running in docker
-  autoupdate=$autoupdate
+  # option removed, all updates disabled
 
   #choose which filler to create
   #weather
@@ -336,12 +336,7 @@ then
 else
   echo log_days=$log_days >> $helperdir/config-temp.conf
 fi
-if [[ -z $autoupdate ]];
-then
-  echo autoupdate=yes >> $helperdir/config-temp.conf
-else
-  echo autoupdate=$autoupdate >> $helperdir/config-temp.conf
-fi
+# removed autoupdate
 if [[ -z $videolength ]];
 then
   echo videolength=00:00:30 >> $helperdir/config-temp.conf
@@ -517,16 +512,10 @@ country=$(jq -r '.country' $workdir/information.json)
 echo country=$country >> $helperdir/config-temp.conf
 fi
 
-#call autoupdate.sh
-if [[ ! -z "$ETV_FILLER_DOCKER" ]]
-then
+
   echo Switching to weather.sh
   cd $helperdir
   ./weather.sh
-else
-    echo Switching to autoupdate.sh
-  cd $helperdir
-  ./autoupdate.sh
-fi
+
 
 #Music: https://audiotrimmer.com/royalty-free-music/
