@@ -14,3 +14,4 @@ config-old.json
 *.log
 logs.log
 *-audit.json
+test/*
