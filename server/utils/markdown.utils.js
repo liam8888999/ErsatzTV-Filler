@@ -1,6 +1,6 @@
 const marked = require("marked")
 const { loadFileContentsIntoMemory } =require("./file.utils")
-const { CHANGELOG, README} = require("../constants/path.constants");
+const { CHANGELOG } = require("../constants/path.constants");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 
@@ -22,6 +22,7 @@ html = html.replace(/<h3/g,"<h4").replace(/<\/h3>/g,"</h4>").replace(/<h2/g,"<h3
 logger.info(html)
 return html
 }
+
 
 
 
