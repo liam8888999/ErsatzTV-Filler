@@ -1,1 +1,3 @@
-site_name: ErsatzTV-Filler Documentation
+site_name: Ersatztv-Filler
+theme:
+  name: material
