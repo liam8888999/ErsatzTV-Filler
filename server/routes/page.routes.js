@@ -153,27 +153,4 @@ console.log(JSON.stringify(filesinthemesdiruser))
         });
     });
 
-
-
-
-    app.get('/documentation', async (req, res) => {
-      const config_current = await retrieveCurrentConfiguration();
-      let UPDATESTATUS = await checkForUpdates();
-let documentation = await generateReadMe()
-const ersatz = config_current.xmltv
-const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
-  res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "documentation", {
-          documentation: documentation,
-          layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
-          page: "Documentation", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
-          version: version,
-          ErsatzTVURL: ErsatzTVURL,
-          updatestatus: UPDATESTATUS
-     });
-
-    });
-}
-
-
-
 module.exports = { loadPageRoutes }

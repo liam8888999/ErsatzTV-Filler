@@ -1,6 +1,6 @@
 const marked = require("marked")
 const { loadFileContentsIntoMemory } =require("./file.utils")
-const { CHANGELOG, DOCUMENTATION, README} = require("../constants/path.constants");
+const { CHANGELOG, README} = require("../constants/path.constants");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 
@@ -23,15 +23,6 @@ logger.info(html)
 return html
 }
 
-
-const generateReadMe = async () => {
-const data1 = await loadFileContentsIntoMemory(DOCUMENTATION)
-const stringdata1 = data1.toString("UTF8")
-const data2 = await loadFileContentsIntoMemory(README)
-const stringdata2 = data2.toString("UTF8")
-const combinedString = stringdata2 + '\n' + stringdata1;
-return marked.parse(combinedString)
-}
 
 
 module.exports = {

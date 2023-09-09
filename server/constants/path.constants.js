@@ -72,7 +72,6 @@ const DEFAULT_CONFIG = {
 const USER_CONFIG = startUpPath + "config.json"
 
 const CHANGELOG = startUpPath + "Changelog.md";
-const DOCUMENTATION = startUpPath + "Docs.md"
 const README = startUpPath + "README.md"
 
 const WORKDIR = startUpPath + "workdir"
@@ -123,7 +122,6 @@ module.exports = {
     TEMPLATE_CONSTANTS,
     CONFIG_CONSTANTS,
     CHANGELOG,
-    DOCUMENTATION,
     WORKDIR,
     WEATHERDIR,
     NEWSDIR,
