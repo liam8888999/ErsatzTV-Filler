@@ -1,6 +1,41 @@
 site_name: Ersatztv-Filler Docs
 theme:
   name: material
+  palette:
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+
+  logo: images/ersatztv-square-logo.png
+  favicon: images/favicon-32x32.png
+  features:
+    - navigation.expand
+copyright: Copyright &copy; 2022 - 2023 Liam Robson
+extra:
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/x4Nk4sfgSg
+      name: ErsatzTV-Filler on Discord
+    - icon: fontawesome/brands/github
+      link: https://github.com/liam8888999/ErsatzTV-Filler
+      name: ErsatzTV-Filler on GitHub
+    - icon: fontawesome/regular/heart
+      link: https://ko-fi.com/E1E4MI8T5
+      name: Download on Ko-Fi
+    - icon: fontawesome/brands/paypal
+      link: https://www.paypal.me/200333
+      name: Donate on PayPal
 nav:
   - Home: index.md
   - Installation:
