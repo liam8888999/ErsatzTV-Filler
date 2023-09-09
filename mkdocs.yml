@@ -1,3 +1,17 @@
-site_name: Ersatztv-Filler
+site_name: Ersatztv-Filler Docs
 theme:
   name: material
+nav:
+  - Home: index.md
+  - Installation:
+    - Introduction: install/install.md
+    - Docker: install/docker.md
+    - Windows: install/windows.md
+    - Mac: install/mac.md
+    - Linux: install/linux.md
+  - Configuration:
+    - Subpage 3: folder2/subpage3.md
+    - Subpage 4: folder2/subpage4.md
+  - API:
+    - API Subpage 3: folder2/api_subpage3.md
+    - API Subpage 4: folder2/api_subpage4.md
