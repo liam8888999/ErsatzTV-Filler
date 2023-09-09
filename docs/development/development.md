@@ -38,12 +38,25 @@ Do not manually update the changelog
 ## Documentation
 
 ### Clone Repository
-`git clone -b gh-pages https://github.com/liam8888999/ErsatzTV-Filler.git`
+`git clone -b gh-pages-config https://github.com/liam8888999/ErsatzTV-Filler.git`
 
-### Build docs
-```python
-python3 -m mkdocs build
+### Publish docs
+
+#### Setup python virtual env
+```bash
+source myenv/bin/activate
 ```
+
+#### Build the site
+```python
+mkdocs build
+```
+
+#### Publish the site
+```python
+ghp-import -n -p -f site
+```
+
 
 ### Serve Docs
 The docs can be generated on the fly and served on a local web server for Development
