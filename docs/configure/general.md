@@ -1,4 +1,4 @@
-# ErsatzTV-Filler
+# ErsatzTV-Filler Configuration (General)
 
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 

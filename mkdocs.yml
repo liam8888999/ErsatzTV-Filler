@@ -4,14 +4,19 @@ theme:
 nav:
   - Home: index.md
   - Installation:
-    - Introduction: install/install.md
+    - Installation: install/install.md
     - Docker: install/docker.md
     - Windows: install/windows.md
     - Mac: install/mac.md
     - Linux: install/linux.md
   - Configuration:
-    - Subpage 3: folder2/subpage3.md
-    - Subpage 4: folder2/subpage4.md
+    - Configuration: configure/configure.md
+    - General Configuration: configure/general.md
+    - Weather Configuration: configure/weather.md
+    - News Configuration: configure/news.md
+    - Channel Offline Configuration: configure/channel-offline.md
+    - XMLTV Merge Configuration: configure/xmltv-merge.md
+    - Vanity Cards Configuration: configure/vanity-cards.md
   - API:
     - API Subpage 3: folder2/api_subpage3.md
     - API Subpage 4: folder2/api_subpage4.md

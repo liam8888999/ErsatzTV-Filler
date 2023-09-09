@@ -1,4 +1,4 @@
-# ErsatzTV-Filler
+# ErsatzTV-Filler Configuration (Vanity Cards)
 
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
