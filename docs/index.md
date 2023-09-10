@@ -1,17 +1,11 @@
-# ErsatzTV-Filler
+# ![ErsatzTV-Filler](images/ersatztv-filler.png)
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+- ### [Installation](install/install.md)
 
-## Commands
+- ### [Filler Types and Setup](filler-types/filler-types.md)
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+- ### [Configuration](configuration/configuration.md)
 
-## Project layout
+- ### [Themes](themes/themes.md)
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+- ### [Api](api/api.md)

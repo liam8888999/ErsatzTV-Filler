@@ -1,4 +1,4 @@
-# ErsatzTV-Filler Types (News)
+# ErsatzTV-Filler Types and Setup (News)
 
 ![News](../images/filler-types/news.png)
 
@@ -12,4 +12,4 @@ The News filler takes the information from the provided rss feed(s) and extracts
 
 ## How do I set it up?
 
-1. 
+1.

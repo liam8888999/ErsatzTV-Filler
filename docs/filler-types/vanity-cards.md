@@ -1,4 +1,4 @@
-# ErsatzTV-Filler Types (Vanity Cards)
+# ErsatzTV-Filler Types and Setup (Vanity Cards)
 
 ![Vanity Cards](../images/filler-types/vanity-cards.png)
 

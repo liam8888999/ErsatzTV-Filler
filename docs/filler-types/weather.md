@@ -1,4 +1,4 @@
-# ErsatzTV-Filler Filler Types (WEATHER)
+# ErsatzTV-Filler Filler Types and Setup (WEATHER)
 
 ![Weather](../images/filler-types/weather.png)
 

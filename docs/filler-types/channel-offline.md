@@ -1,4 +1,4 @@
-# ErsatzTV-Filler Filler Types (Channel-Offline)
+# ErsatzTV-Filler Filler Types and Setup (Channel-Offline)
 
 ![Channel Offline Filler](../images/filler-types/channel-offline.png)
 

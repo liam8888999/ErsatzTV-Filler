@@ -1,17 +1,50 @@
 # ErsatzTV-Filler Installation (Docker)
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Docker Install
 
-## Commands
+1. Download the latest container image
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+    ```
+    docker pull liam2003/ersatztv-filler
+    ```
 
-## Project layout
+2. Create Directories to store container data
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+    1. Create a directory to store configuration data
+
+        ```
+        mkdir /path/to/config
+        ```
+
+    2. Create a directory to store custom audio files (if not using an existing audio location)
+
+        ```
+        mkdir /path/to/audio
+        ```
+
+    3. Create a directory to store logs
+
+        ```
+        mkdir /path/to/logs
+        ```
+
+    4. Create a directory to store output files
+
+        ```
+        mkdir /path/to/output
+        ```
+
+3. Create and run a container
+
+    ```
+    docker run -d \
+      --name ersatztv-filler \
+      -e TZ=America/Chicago \
+      -p 8408:8408 \
+      -v /path/to/config:/app \
+      -v /path/to/audio:/path/to/audio:ro \
+      -v /path/to/logs:/app/logs \
+      -v /path/to/output:/path/to/output \
+      --restart unless-stopped \
+      liam2003/ersatztv-filler
+    ```

@@ -1,4 +1,4 @@
-# ErsatzTV-Filler Types (XMLTV Merge)
+# ErsatzTV-Filler Types and Setup (XMLTV Merge)
 
 ![News](../images/filler-types/xmltv-merge.png)
 
