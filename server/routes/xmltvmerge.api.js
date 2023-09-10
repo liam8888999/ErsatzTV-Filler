@@ -29,7 +29,7 @@ const loadApixmltvmergeRoutes = (app) => {
   // Define an API endpoint to retrieve a media file
   app.get('/xmltvmerge/:filename', (req, res) => {
   const { filename } = req.params;
-  const filePath = path.join(${config_current.output}, filename);
+  const filePath = path.join(config_current.output, filename);
   logger.info(filePath)
 
   // Check if the file exists
