@@ -1,6 +1,9 @@
 # ErsatzTV-Filler Development
 
+This is the different options to set up the development environment for ErsatzTV-Filler
+
 ## NODEJS ERSATZTV-FILLER DEV INSTRUCTIONS
+
 #### Install nodejs
 1. `sudo apt install nodejs`
 #### Install npm
@@ -16,26 +19,23 @@
 
 ## Docker
 
-### Build
-
+#### Build
 ```shell
 docker build -t liam8888999/ersatztv-filler .
 ```
-
-### Run
-
+#### Run
 ```shell
 docker run --rm -it -v $(pwd):/config -v /media/audio/whatever:/audio -v /media/whatever:/output -v /media/audio/whatever:/tmp/ErsatzTV-Filler liam8888999/ersatztv-filler /config/config.conf
 ```
-
-### Push to Repository
-
+#### Push to Repository
 ```shell
 docker push
 ```
 
 ## Development
+
 Do not manually update the changelog
+
 #### To update the changelog and release number run the command
 1. npm run release
 #### And follow the prompts
@@ -43,7 +43,7 @@ Do not manually update the changelog
 
 ## Documentation
 
-### Clone Repository
+#### Clone Repository
 `git clone -b gh-pages-config https://github.com/liam8888999/ErsatzTV-Filler.git`
 
 ### Publish docs
@@ -52,17 +52,14 @@ Do not manually update the changelog
 ```bash
 source myenv/bin/activate
 ```
-
 #### Build the site
 ```python
 mkdocs build
 ```
-
 #### Publish the site
 ```python
 ghp-import -n -p -f site
 ```
-
 
 ### Serve Docs
 The docs can be generated on the fly and served on a local web server for Development

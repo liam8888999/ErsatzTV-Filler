@@ -794,8 +794,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#colours" class="md-nav__link">
-    Colours
+  <a href="#what-are-themes" class="md-nav__link">
+    What are themes?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-get-a-new-theme" class="md-nav__link">
+    How do I get a new theme?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-select-a-theme-to-use" class="md-nav__link">
+    How do I select a theme to use?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-difference-between-a-user-theme-and-a-system-theme" class="md-nav__link">
+    What is the difference between a User theme and a System theme?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-can-i-create-a-new-user-theme" class="md-nav__link">
+    How can I create a new User theme?
+  </a>
+  
+    <nav class="md-nav" aria-label="How can I create a new User theme?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#json-file-template" class="md-nav__link">
+    Json file template
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#can-i-share-my-theme" class="md-nav__link">
+    Can I share my theme?
   </a>
   
 </li>
@@ -989,8 +1037,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#colours" class="md-nav__link">
-    Colours
+  <a href="#what-are-themes" class="md-nav__link">
+    What are themes?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-get-a-new-theme" class="md-nav__link">
+    How do I get a new theme?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-select-a-theme-to-use" class="md-nav__link">
+    How do I select a theme to use?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-difference-between-a-user-theme-and-a-system-theme" class="md-nav__link">
+    What is the difference between a User theme and a System theme?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-can-i-create-a-new-user-theme" class="md-nav__link">
+    How can I create a new User theme?
+  </a>
+  
+    <nav class="md-nav" aria-label="How can I create a new User theme?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#json-file-template" class="md-nav__link">
+    Json file template
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#can-i-share-my-theme" class="md-nav__link">
+    Can I share my theme?
   </a>
   
 </li>
@@ -1011,8 +1107,44 @@
 
 
 <h1 id="ersatztv-filler-themes">ErsatzTV-Filler - Themes</h1>
-<h2 id="colours">Colours</h2>
-<p>Themes use hex colours without the leading #</p>
+<h2 id="what-are-themes">What are themes?</h2>
+<p>Themes are files that include information such as colours that are used in the diffent filler videos to customise the look.</p>
+<h2 id="how-do-i-get-a-new-theme">How do I get a new theme?</h2>
+<p>The ErsatzTV-Filler webpage has a theme page where you can choose a theme and click 'install this theme', this will download the theme file for use in your videos.</p>
+<h2 id="how-do-i-select-a-theme-to-use">How do I select a theme to use?</h2>
+<p>The ErsatzTV-Filler webpage has a theme page where you can choose a theme and click 'use this theme', the theme will then be used for all future filler video generations unless changed.</p>
+<h2 id="what-is-the-difference-between-a-user-theme-and-a-system-theme">What is the difference between a User theme and a System theme?</h2>
+<p>A User theme is a theme file that the user has manually created for themselves. A system theme is a theme that has been downloaded via the webpage.</p>
+<h2 id="how-can-i-create-a-new-user-theme">How can I create a new User theme?</h2>
+<p>New user themes can be created in your favourite text editor as it is only a simple json file to create and edit.</p>
+<p>You will need to create a file with the name '{themename}.theme', where {themename} is the name of your theme. You will then need to copy in the correct json and edit the variables. This file will need to go in the Themes/User folder.</p>
+<p><em>Note:</em> Ensure your theme name and filename are 1 word</p>
+<h3 id="json-file-template">Json file template</h3>
+<pre><code class="language-json">{
+  &quot;ErsatzTVFillerTheme&quot;: {
+    &quot;ThemeName&quot;: &quot;SystemLight&quot;,
+    &quot;Creator&quot;: &quot;liam8888999&quot;
+  },
+  &quot;Offline&quot;: {
+  &quot;offlinetextcolour&quot;: &quot;404040&quot;,
+  &quot;offlinetitlecolour&quot;: &quot;000000&quot;,
+  &quot;offlinebackgroundcolour&quot;: &quot;ffffff&quot;
+  },
+  &quot;News&quot;: {
+  &quot;newstextcolour&quot;: &quot;404040&quot;,
+  &quot;newstitlecolour&quot;: &quot;000000&quot;,
+  &quot;newsbackgroundcolour&quot;: &quot;ffffff&quot;
+  },
+  &quot;Weather&quot;: {
+  &quot;weatherbackgroundcolour&quot;: &quot;000000&quot;
+  }
+}
+</code></pre>
+<p><em>Note:</em> Themes use hex colours without the leading #</p>
+<h2 id="can-i-share-my-theme">Can I share my theme?</h2>
+<p>Yes. Themes can be shared by creating a pull request at the <a href="https://github.com/liam8888999/ErsatzTV-Filler-Themes">ErsatzTV-Filler Themes Github</a> or asking in the <a href="https://discord.gg/x4Nk4sfgSg">Discord</a> if you dont know how to do that or dont want to.</p>
+<p>Your theme will then be included in the next version of ErsatzTV-Filler for everyone to download and use under System themes.</p>
+<p>Be sure to give your self credit in the Json creator section.</p>
 
 
 

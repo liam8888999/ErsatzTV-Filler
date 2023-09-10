@@ -731,16 +731,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    Commands
+  <a href="#vanity-cards-configuration-options" class="md-nav__link">
+    Vanity Cards Configuration Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Vanity Cards Configuration Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process-vanity-cards" class="md-nav__link">
+    Process Vanity Cards?
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
+        
+          <li class="md-nav__item">
+  <a href="#amount-of-vanity-card-videos" class="md-nav__link">
+    Amount of Vanity Card Videos
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vanity-generation-interval" class="md-nav__link">
+    Vanity Generation Interval
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -996,16 +1016,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    Commands
+  <a href="#vanity-cards-configuration-options" class="md-nav__link">
+    Vanity Cards Configuration Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Vanity Cards Configuration Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process-vanity-cards" class="md-nav__link">
+    Process Vanity Cards?
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
+        
+          <li class="md-nav__item">
+  <a href="#amount-of-vanity-card-videos" class="md-nav__link">
+    Amount of Vanity Card Videos
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vanity-generation-interval" class="md-nav__link">
+    Vanity Generation Interval
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1025,20 +1065,24 @@
 
 
 <h1 id="ersatztv-filler-configuration-vanity-cards">ErsatzTV-Filler Configuration (Vanity Cards)</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+<p>Vanity Cards configuration options are settings that control the Vanity Cards filler functions that users can set as needed.</p>
+<h2 id="vanity-cards-configuration-options">Vanity Cards Configuration Options</h2>
+<h3 id="process-vanity-cards">Process Vanity Cards?</h3>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li><code>yes/no</code></li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+<p>This is the option whether you want the Vanity Cards filler to generate, it can be set as <code>yes</code> to process or <code>no</code> if you dont want it to process.</p>
+<h3 id="amount-of-vanity-card-videos">Amount of Vanity Card Videos</h3>
+<ul>
+<li><code>Number</code></li>
+</ul>
+<p>This is the option to select how many different vanity card filler videos to create (with different vanity cards, randomly selected). If you want 5 videos then you would just set <code>5</code> as the option.</p>
+<h3 id="vanity-generation-interval">Vanity Generation Interval</h3>
+<ul>
+<li><code>Time (minutes)</code></li>
+</ul>
+<p>This is the option to select how often you wish the Vanity Cards filler to be regenerated to refresh the vanity cards shown in the videos. If you want it to run every 5 minutes then you would just set <code>5</code> as the option.</p>
+<p><em>Note:</em> This is based on the cron of '*/{interval} * * * *' e.g. '*/5 * * * *'</p>
 
 
 

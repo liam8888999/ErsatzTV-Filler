@@ -1335,6 +1335,7 @@
 
 
 <h1 id="ersatztv-filler-development">ErsatzTV-Filler Development</h1>
+<p>This is the different options to set up the development environment for ErsatzTV-Filler</p>
 <h2 id="nodejs-ersatztv-filler-dev-instructions">NODEJS ERSATZTV-FILLER DEV INSTRUCTIONS</h2>
 <h4 id="install-nodejs">Install nodejs</h4>
 <ol>
@@ -1357,13 +1358,13 @@
 <li><code>npm run dev</code></li>
 </ol>
 <h2 id="docker">Docker</h2>
-<h3 id="build">Build</h3>
+<h4 id="build">Build</h4>
 <pre><code class="language-shell">docker build -t liam8888999/ersatztv-filler .
 </code></pre>
-<h3 id="run">Run</h3>
+<h4 id="run">Run</h4>
 <pre><code class="language-shell">docker run --rm -it -v $(pwd):/config -v /media/audio/whatever:/audio -v /media/whatever:/output -v /media/audio/whatever:/tmp/ErsatzTV-Filler liam8888999/ersatztv-filler /config/config.conf
 </code></pre>
-<h3 id="push-to-repository">Push to Repository</h3>
+<h4 id="push-to-repository">Push to Repository</h4>
 <pre><code class="language-shell">docker push
 </code></pre>
 <h2 id="development">Development</h2>
@@ -1374,7 +1375,7 @@
 </ol>
 <h4 id="and-follow-the-prompts">And follow the prompts</h4>
 <h2 id="documentation">Documentation</h2>
-<h3 id="clone-repository_1">Clone Repository</h3>
+<h4 id="clone-repository_1">Clone Repository</h4>
 <p><code>git clone -b gh-pages-config https://github.com/liam8888999/ErsatzTV-Filler.git</code></p>
 <h3 id="publish-docs">Publish docs</h3>
 <h4 id="setup-python-virtual-env">Setup python virtual env</h4>
