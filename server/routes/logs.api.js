@@ -28,7 +28,7 @@ const loadApilogsRoutes = (app) => {
 
 
   // Define a route to stream the logs in real-time
-  app.get('/logsload', (req, res) => {
+  app.get('/logs/load', (req, res) => {
     try {
       const logFile = getLatestLogFile();
 
@@ -103,7 +103,7 @@ const loadApilogsRoutes = (app) => {
 
 
 // Endpoint to handle directory zipping and download
-app.get('/zip/logs', (req, res) => {
+app.get('/logs/zip', (req, res) => {
   const directoryPath = LOGFOLDER; // Replace with the path to the directory you want to zip
 
   // Create a new zip file

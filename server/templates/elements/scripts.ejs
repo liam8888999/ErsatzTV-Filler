@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
         }
       };
 
-      logRequest.open('GET', '/logsload', true);
+      logRequest.open('GET', '/logs/load', true);
       logRequest.send();
     }
 
@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
 
     <script>
         function handleZip() {
-          fetch('/zip/logs')
+          fetch('/logs/zip')
             .then(response => {
               if (response.ok) {
                 return response.blob();

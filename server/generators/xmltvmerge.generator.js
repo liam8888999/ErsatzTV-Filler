@@ -76,7 +76,7 @@ const XMLTVPARSE = async () => {
   });
 
   const xmlString = xml.end({ pretty: true });
-  fs.writeFileSync(`${XMLTVMERGEDIR}/mergedxmltv.xml`, xmlString, 'utf8');
+  fs.writeFileSync(`${config_current.output}/mergedxmltv.xml`, xmlString, 'utf8');
 
   logger.success('XMLTV file created successfully.');
   isFunctionRunning = true;
