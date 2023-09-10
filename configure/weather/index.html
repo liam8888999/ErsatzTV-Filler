@@ -651,16 +651,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    Commands
+  <a href="#weather-configuration-options" class="md-nav__link">
+    Weather Configuration Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Weather Configuration Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process-weather" class="md-nav__link">
+    Process Weather?
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
+        
+          <li class="md-nav__item">
+  <a href="#generate-weather-v4-upcoming" class="md-nav__link">
+    Generate Weather V4 (Upcoming)
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-video-fade-out-duration" class="md-nav__link">
+    Weather Video Fade Out Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-video-fade-in-duration" class="md-nav__link">
+    Weather Video Fade In Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-audio-fade-out-duration" class="md-nav__link">
+    Weather Audio Fade Out Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-audio-fade-in-duration" class="md-nav__link">
+    Weather Audio Fade In Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-generation-interval" class="md-nav__link">
+    Weather Generation Interval
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -996,16 +1044,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    Commands
+  <a href="#weather-configuration-options" class="md-nav__link">
+    Weather Configuration Options
+  </a>
+  
+    <nav class="md-nav" aria-label="Weather Configuration Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#process-weather" class="md-nav__link">
+    Process Weather?
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
+        
+          <li class="md-nav__item">
+  <a href="#generate-weather-v4-upcoming" class="md-nav__link">
+    Generate Weather V4 (Upcoming)
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-video-fade-out-duration" class="md-nav__link">
+    Weather Video Fade Out Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-video-fade-in-duration" class="md-nav__link">
+    Weather Video Fade In Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-audio-fade-out-duration" class="md-nav__link">
+    Weather Audio Fade Out Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-audio-fade-in-duration" class="md-nav__link">
+    Weather Audio Fade In Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-generation-interval" class="md-nav__link">
+    Weather Generation Interval
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1025,20 +1121,44 @@
 
 
 <h1 id="ersatztv-filler-configuration-weather">ErsatzTV-Filler Configuration (Weather)</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+<p>Weather configuration options are settings that control the Weather filler functions that users can set as needed.</p>
+<h2 id="weather-configuration-options">Weather Configuration Options</h2>
+<h3 id="process-weather">Process Weather?</h3>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li><code>yes/no</code></li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+<p>This is the option whether you want the Weather filler to generate, it can be set as <code>yes</code> to process or <code>no</code> if you dont want it to process.</p>
+<h3 id="generate-weather-v4-upcoming">Generate Weather V4 (Upcoming)</h3>
+<ul>
+<li><code>yes/no</code></li>
+</ul>
+<p>This option is currently unused but will be active in a future version.</p>
+<h3 id="weather-video-fade-out-duration">Weather Video Fade Out Duration</h3>
+<ul>
+<li><code>Time (seconds)</code></li>
+</ul>
+<p>This is the option to set a fade out for the video which will make the video fade to black for the selected amount of seconds at the end. If you want 5 seconds then you would just set <code>5</code> as the option.</p>
+<h3 id="weather-video-fade-in-duration">Weather Video Fade In Duration</h3>
+<ul>
+<li><code>Time (seconds)</code></li>
+</ul>
+<p>This is the option to set a fade in for the video which will make the video fade in from black for the selected amount of seconds at the start. If you want 5 seconds then you would just set <code>5</code> as the option.</p>
+<h3 id="weather-audio-fade-out-duration">Weather Audio Fade Out Duration</h3>
+<ul>
+<li><code>Time (seconds)</code></li>
+</ul>
+<p>This is the option to set a fade out for the audio which will make the audio volume fade to 0 for the selected amount of seconds at the end. If you want 5 seconds then you would just set <code>5</code> as the option.</p>
+<h3 id="weather-audio-fade-in-duration">Weather Audio Fade In Duration</h3>
+<ul>
+<li><code>Time (seconds)</code></li>
+</ul>
+<p>This is the option to set a fade in for the audio which will make the audio volume fade from 0 for the selected amount of seconds at the start. If you want 5 seconds then you would just set <code>5</code> as the option.</p>
+<h3 id="weather-generation-interval">Weather Generation Interval</h3>
+<ul>
+<li><code>Time (minutes)</code></li>
+</ul>
+<p>This is the option to select how often you wish the Weather filler to be regenerated to update the news information in the videos. If you want it to run every 10 minutes then you would just set <code>10</code> as the option.</p>
+<p><em>Note:</em> This is based on the cron of '*/{interval} * * * *' e.g. '*/10 * * * *'</p>
 
 
 
