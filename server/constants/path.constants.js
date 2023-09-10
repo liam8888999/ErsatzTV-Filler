@@ -49,8 +49,6 @@ const DEFAULT_CONFIG = {
   "newsaudiofadeoutduration": "5",
   "newsaudiofadeinduration": "5",
   "newsfeed": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
-  "newsfeed1": "",
-  "newsfeed2": "",
   "newsduration": "60",
   "newsarticles": "10",
   "newsinterval": "30",

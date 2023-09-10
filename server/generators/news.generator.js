@@ -12,6 +12,8 @@ const path = require('path');
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const { themecolourdecoder, retrieveCurrentTheme } = require("../utils/themes.utils");
 
+// TODO: Add support for multiple newsfeeds under the same variable , seperated and create different videos or join all together
+
 let isFunctionRunning = false;
 const NEWS = async () => {
   if (isFunctionRunning) {
