@@ -158,7 +158,10 @@ lines.forEach(line => {
 
       logger.info('File converted to JSON successfully');
 
-// To add: migrate config to current format
+
+if (json.xmltv) {
+    json.xmltv = json.xmltv.replace('/iptv/xmltv.xml', '');
+  }
 
 // Step 3: Update the desired value in the JavaScript object
 if (Object.keys(json).length !== 0) {
@@ -183,7 +186,7 @@ if (Object.keys(json).length !== 0) {
   config_current.newsfeed = json.newsfeed || config_current.newsfeed;
   config_current.newsfeed1 = json.newsfeed1 || config_current.newsfeed1;
   config_current.newsfeed2 = json.newsfeed2 || config_current.newsfeed2;
-  config_current.xmltv = json.xmltv || config_current.xmltv;
+  config_current.ersatztv = json.xmltv || config_current.ersatzTV;
   config_current.videoresolution = json.videoresolution || config_current.videoresolution;
   config_current.newsduration = json.newsduration || config_current.newsduration;
 }

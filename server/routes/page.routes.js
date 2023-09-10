@@ -29,9 +29,8 @@ const loadPageRoutes = async (app) => {
 
   app.get('/', async (req, res) => {
     const config_current = await retrieveCurrentConfiguration();
-    const ersatz = config_current.xmltv
     let UPDATESTATUS = await checkForUpdates();
-  const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+  const ErsatzTVURL = config_current.ersatztv
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
         page: "Home", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
@@ -45,9 +44,8 @@ const loadPageRoutes = async (app) => {
 
     app.get('/output', async (req, res) => {
       const config_current = await retrieveCurrentConfiguration();
-      const ersatz = config_current.xmltv
       let UPDATESTATUS = await checkForUpdates();
-    const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+    const ErsatzTVURL = config_current.ersatztv
     const protocol = req.protocol;
     const host = req.hostname;
     const url = req.originalUrl;
@@ -70,8 +68,7 @@ const loadPageRoutes = async (app) => {
     app.get('/config', async (req, res) => {
       const config_current = await retrieveCurrentConfiguration();
       let UPDATESTATUS = await checkForUpdates();
-      const ersatz = config_current.xmltv
-      const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+      const ErsatzTVURL = config_current.ersatztv
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "config", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
@@ -98,9 +95,8 @@ let filesinthemesdirsystem = await listFilesInDir(`${THEMES_FOLDER}/system`)
 logger.error(`Error: ${error}`);
 });
 console.log(JSON.stringify(filesinthemesdiruser))
-      const ersatz = config_current.xmltv
       let UPDATESTATUS = await checkForUpdates();
-      const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+      const ErsatzTVURL = config_current.ersatztv
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Themes",
@@ -117,8 +113,7 @@ console.log(JSON.stringify(filesinthemesdiruser))
 
     app.get('/updates', async (req, res) => {
       const config_current = await retrieveCurrentConfiguration();
-      const ersatz = config_current.xmltv
-      const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+      const ErsatzTVURL = config_current.ersatztv
       let UPDATESTATUS = await checkForUpdates();
       let html = await changelogReplace()
       const $ = cheerio.load(html);
@@ -141,8 +136,7 @@ console.log(JSON.stringify(filesinthemesdiruser))
     app.get('/logs', async (req, res) => {
       const config_current = await retrieveCurrentConfiguration();
       let UPDATESTATUS = await checkForUpdates();
-      const ersatz = config_current.xmltv
-      const ErsatzTVURL = ersatz.replace("/iptv/xmltv.xml", "");
+      const ErsatzTVURL = config_current.ersatztv
         // Render the specific ejs template view
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "logs", {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view

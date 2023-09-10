@@ -31,7 +31,7 @@ const DEFAULT_CONFIG = {
   "city": "Austin",
   "state": "Texas",
   "videolength": "30",
-  "xmltv": "http://127.0.0.1:8409/iptv/xmltv.xml",
+  "ersatztv": "http://127.0.0.1:8409",
   "videoresolution": "1280x720",
   "webport": "8408",
   "webtheme": "dark",

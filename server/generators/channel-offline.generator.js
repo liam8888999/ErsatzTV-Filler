@@ -288,7 +288,7 @@ if (config_current.hwaccel_device == "") {
   };
 
   try {
-    const downloadedData = await downloadXmltv(config_current.xmltv);
+    const downloadedData = await downloadXmltv(`${config_current.ersatztv}/iptv/xmltv.xml`);
     // Handle the downloaded data
     logger.success('XMLTV downloaded successfully:', downloadedData);
   } catch (error) {
