@@ -63,7 +63,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="black">
   
     
     
@@ -123,7 +123,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="black"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -133,7 +133,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="black"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
@@ -471,6 +471,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Channel Offline
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -480,6 +491,46 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-it" class="md-nav__link">
+    What is it?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-does-it-work" class="md-nav__link">
+    How does it work?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-set-it-up" class="md-nav__link">
+    How do I set it up?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -945,6 +996,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-it" class="md-nav__link">
+    What is it?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-does-it-work" class="md-nav__link">
+    How does it work?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-do-i-set-it-up" class="md-nav__link">
+    How do I set it up?
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -959,12 +1039,32 @@
 
 
 <h1 id="ersatztv-filler-filler-types-channel-offline">ErsatzTV-Filler Filler Types (Channel-Offline)</h1>
-<p>On the first run a video for each channel will be created, this video will not have any information in it but must be used scheduled in the time when the channel is expected to be offline.
-If a new channel is added its video will be created during the next scheduled run or it can be run manually from the web interface or api.
-For it to work the time when the channel is expected to be offline must be in 1 item on the schedule and must have a custom title of Channel-Offline (this will also appear nicely in any epg).
-You will also need to add each {channelnumber}-offline.mp4 file created automatically to the other videos library and add each one you use to a collection by its self (or with any other things you may want to interweave it with during the offline times, such as short videos, as long as each channel has its own offline collection with only that channeloffline video in it or you will see the the wrong information on the wrong channel).
-This collection should then be added to the schedule at times when the channel is planned to be offline (overnight would be a good example), you would then set it for the whole duration of the offline time (duration or flood mode, if the next scheduled item has a fixed start time, would both work), you would then set the Channel-Offline custom title and build the playout.
-You will then see the channel-Offline filler during the offline times as long as there is enough time between when the offline time is set and the offline time starts for at least 1 video generation to occur (this will only apply to the first scheduled offline time as it will automatically search for and build ahead next time).</p>
+<p><img alt="Channel Offline Filler" src="../../images/filler-types/channel-offline.png" /></p>
+<h2 id="what-is-it">What is it?</h2>
+<p>Channel Offline filler is great for filling in scheduled gaps in your channels, such as overnight when you wont be watching. It includes a message saying that the channel if offline and the start time and name of the next item to play.</p>
+<h2 id="how-does-it-work">How does it work?</h2>
+<p>The Channel Offline filler uses the xmltv grabbed from ErsatzTV to find places where it is scheduled to run and uses this information to populate the fields of text that are then displayed.</p>
+<h2 id="how-do-i-set-it-up">How do I set it up?</h2>
+<ol>
+<li>
+<p>On the first run, a video for each channel will be created. This video will not have any information in it but must be used scheduled in the time when the channel is expected to be offline.</p>
+</li>
+<li>
+<p>If a new channel is added, its video will be created during the next scheduled run or it can be run manually from the web interface or API.</p>
+</li>
+<li>
+<p>For it to work, the time when the channel is expected to be offline must be in 1 item on the schedule and must have a custom title of <code>Channel-Offline</code> (this will also appear nicely in any EPG).</p>
+</li>
+<li>
+<p>You will also need to add each <code>{channelnumber}-offline.mp4</code> file created automatically to the other videos library and add each one you use to a collection by itself (or with any other things you may want to interweave it with during the offline times, such as short videos, as long as each channel has its own offline collection with only that <code>channeloffline</code> video in it or you will see the wrong information on the wrong channel).</p>
+</li>
+<li>
+<p>This collection should then be added to the schedule at times when the channel is planned to be offline (overnight would be a good example). You would then set it for the whole duration of the offline time (duration or flood mode, if the next scheduled item has a fixed start time, would both work). You would then set the <code>Channel-Offline</code> custom title and build the playout.</p>
+</li>
+<li>
+<p>You will then see the <code>Channel-Offline</code> filler during the offline times as long as there is enough time between when the offline time is set and the offline time starts for at least 1 video generation to occur (this will only apply to the first scheduled offline time as it will automatically search for and build ahead next time).</p>
+</li>
+</ol>
 
 
 

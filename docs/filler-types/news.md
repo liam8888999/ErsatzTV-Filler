@@ -1,17 +1,15 @@
-# ErsatzTV-Filler
+# ErsatzTV-Filler Types (News)
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+![News](../images/filler-types/news.png)
 
-## Commands
+## What is it?
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+News filler is a great way to see the daily news headlines from your favourite rss feed inside a video with scrolling text.
 
-## Project layout
+## How does it work?
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+The News filler takes the information from the provided rss feed(s) and extracts the amount of headlines as set in the configuration. It then merges these headlines into text and overlays them scrolling on a video.
+
+## How do I set it up?
+
+1. 

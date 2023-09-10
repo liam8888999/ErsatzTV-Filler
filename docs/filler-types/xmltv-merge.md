@@ -1,17 +1,15 @@
-# ErsatzTV-Filler
+# ErsatzTV-Filler Types (XMLTV Merge)
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+![News](../images/filler-types/xmltv-merge.png)
 
-## Commands
+## What is it?
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+XMLTV Merge is a great way to merge 2 or more xmltv files together. It is useful if you have multiple xmltv providers and use something such as plex that only allows use of 1 xmltv file.
 
-## Project layout
+## How does it work?
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+The XMLTV Merger uses the xmltv files that the user provides and merges them together to create 1 xmltv file that can be used in places that only allow 1 xmltv file or when you want to make importing easier when you dont have to import multiple files.
+
+## How do I set it up?
+
+1.
