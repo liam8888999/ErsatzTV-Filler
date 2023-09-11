@@ -112,7 +112,6 @@ const CONFIG_CONSTANTS = () => {
 //https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
 //and move to a different file more suited (probably 1 with the download stuff already)
 let FFMPEGCOMMAND;
-let FFMPEGCOMMAND;
 
 if (os.platform() === 'win32') {
   FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-win.exe -y`;
