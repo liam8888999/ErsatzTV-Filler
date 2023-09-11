@@ -26,8 +26,8 @@ const THEMES_FOLDER = startUpPath + "themes"
 const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
 
 const DEFAULT_CONFIG = {
-  "customaudio": "audio-fallback",
-  "output": "workdir",
+  "customaudio": "",
+  "output": "",
   "city": "Austin",
   "state": "Texas",
   "videolength": "30",
@@ -69,9 +69,9 @@ const DEFAULT_CONFIG = {
 
 const USER_CONFIG = startUpPath + "config.json"
 
-const CHANGELOG = startUpPath + "Changelog.md";
+const CHANGELOG = serverLocation + "Changelog.md";
 const README = startUpPath + "README.md"
-
+const RESOURCESPATH = startUpPath + "resources"
 const WORKDIR = startUpPath + "workdir"
 const NEWSDIR = WORKDIR + "/News"
 const WEATHERDIR = WORKDIR + "/Weather"
@@ -80,7 +80,10 @@ const XMLTVMERGEDIR = WORKDIR + "/xmltvmerge"
 const VANITYCARDDIR = WORKDIR + "/vanitycard"
 const CONFIGCONFDIR = WORKDIR + "/configconf"
 const LOGFOLDER = startUpPath + "logs"
-const AUDIOFALLBACK = startUpPath + "audio-fallback"
+const AUDIOFALLBACK = RESOURCESPATH + "/audio-fallback"
+const AUDIOFALLBACKINTERNAL = serverLocation + "audio-fallback"
+const FFMPEGPATH = RESOURCESPATH + "/ffmpeg"
+const FFMPEGPATHINTERNAL = serverLocation + "ffmpeg"
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -109,11 +112,20 @@ const CONFIG_CONSTANTS = () => {
 //https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
 //and move to a different file more suited (probably 1 with the download stuff already)
 let FFMPEGCOMMAND;
+let FFMPEGCOMMAND;
+
 if (os.platform() === 'win32') {
-  FFMPEGCOMMAND = 'ffmpeg.exe -y';
+  FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-win.exe -y`;
+} else if (os.platform() === 'linux') {
+  FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-linux -y`; // Specify the Linux command
+} else if (os.platform() === 'darwin') {
+  FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-darwin -y`; // Specify the macOS/Darwin command
 } else {
-  FFMPEGCOMMAND = 'ffmpeg -y';
+  // Handle other platforms or provide a default value
+  FFMPEGCOMMAND = "ffmpeg -y"
+  console.log("operating system unknown, trying a safe default of ffmpeg -y")
 }
+
 
 
 module.exports = {
@@ -132,6 +144,10 @@ module.exports = {
     THEMES_FOLDER,
     startUpPath,
     AUDIOFALLBACK,
+    AUDIOFALLBACKINTERNAL,
+    FFMPEGPATH,
+    FFMPEGPATHINTERNAL,
     LOGFOLDER,
-    serverLocation
+    serverLocation,
+    RESOURCESPATH
   };

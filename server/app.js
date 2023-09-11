@@ -4,10 +4,28 @@ const { selectRandomAudioFile } = require("../server/generators/utils/randomaudi
 const { GENERATION } = require("../server/modules/generators.module");
 const logger = require("../server/utils/logger.utils");
 const moment = require('moment-timezone');
-const { WORKDIR, THEMES_FOLDER } = require("../server/constants/path.constants");
-const { createDirectoryIfNotExists } = require("../server/utils/file.utils");
+const { deleteFoldersOnShutdown, createrequiredstartupfolders, copyResources } = require("../server/modules/startup-shutdown.module");
 
 
+// Register a handler for the 'exit' event
+process.on('exit', () => {
+  console.log('Application is exiting.');
+  deleteFoldersOnShutdown();
+});
+
+// Register a handler for the 'SIGINT' (Ctrl+C) signal
+process.on('SIGINT', () => {
+  console.log('Received SIGINT signal (Ctrl+C).');
+  deleteFoldersOnShutdown();
+  process.exit(1); // Forcefully exit the application
+});
+
+// Register a handler for the 'SIGTERM' signal
+process.on('SIGTERM', () => {
+  console.log('Received SIGTERM signal.');
+  deleteFoldersOnShutdown();
+  process.exit(1); // Forcefully exit the application
+});
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
@@ -42,10 +60,9 @@ process.on('unhandledRejection', (reason, promise) => {
 
         await startWebServer();
 
-        await createDirectoryIfNotExists(WORKDIR);
-        await createDirectoryIfNotExists(THEMES_FOLDER);
-        await createDirectoryIfNotExists(`${THEMES_FOLDER}/system`);
-        await createDirectoryIfNotExists(`${THEMES_FOLDER}/user`);
+        await createrequiredstartupfolders();
+
+        await copyResources();
 
       await GENERATION();
 
