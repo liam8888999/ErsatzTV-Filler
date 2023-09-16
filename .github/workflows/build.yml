@@ -28,16 +28,16 @@ jobs:
 
       - name: Build Package with pkg
         run: pkg package.json # Modify this command as needed
-        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
       - name: create zips
         run: |
           mkdir ersatztv-windows
-          cp ersatztv-filler-windows ersatztv-filler-windows-ver/ersatztv-filler-windows
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver/ersatztv-filler-windows
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
           zip -r windows.zip ersatztv-filler-windows-ver
-        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
       - name: Upload Package
         uses: actions/upload-artifact@v2
