@@ -2,8 +2,7 @@ name: Release Webhook
 
 on:
   release:
-    types:
-      - created
+    types: [published]
 
 jobs:
   post-release-notes:
