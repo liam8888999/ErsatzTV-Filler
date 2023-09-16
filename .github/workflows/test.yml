@@ -1,64 +1,52 @@
-# The name of the workflow. GitHub displays the names of your workflows under your repository's "Actions" tab. If you omit `name`, GitHub displays the workflow file path relative to the root of the repository.
-name: Node.js npm run test
+name: Node.js npm run dev
 
-# This example workflow assumes that the default branch for your repository is `main`. If the default branch has a different name, edit this example and add your repository's default branch.
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
-#
 jobs:
   build:
 
-    # <!-- This is a YAML comment for use in annotated code examples. -->
-    # You can run this workflow using a different operating systems.
-    #
-    # The starter workflow configures jobs to run on Linux, using the GitHub-hosted `ubuntu-latest` runners. You can change the `runs-on` key to run your jobs on a different operating system.
-    #
-    # For example, you can use the GitHub-hosted Windows runners by specifying `runs-on: windows-latest`. Or, you can run on the GitHub-hosted macOS runners using `runs-on: macos-latest`.
-    #
-    # You can also run jobs in Docker containers, or you can provide a self-hosted runner that runs on your own infrastructure. For more information, see "[AUTOTITLE](/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on)."
     runs-on: ubuntu-latest
-#
+
     steps:
-      # This step uses the `actions/checkout` action to download a copy of your repository on the runner.
-      - uses: actions/checkout@v3
-      # This step uses the `actions/setup-node` action to set up Node.js for each version indicated by the `matrix.node-version` key above.
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Use Node.js 18
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: 18
-      # This step runs `npm ci` to install any dependencies listed in your `package.json` file.
-      - run: npm ci --legacy-peer-deps
-      # This step runs the `build` script if there is one specified under the `scripts` key in your `package.json` file.
-      name: Run npm run dev with Timeout
-      run: |
-        # Run the "npm run dev" command in the background
-        npm run dev &
 
-        # Get the process ID (PID) of the background process
-        dev_pid=$!
+      - name: Install Dependencies
+        run: npm ci --legacy-peer-deps
 
-        # Wait for a specific timeout (e.g., 60 seconds)
-        timeout=60
-        sleep $timeout
-
-        # Check if the process is still running
-        if ps -p $dev_pid > /dev/null; then
-          # Process is still running, terminate it
-          echo "The 'npm run dev' command is running for too long. Terminating..."
-          kill $dev_pid
-          exit 1
-        else
-          # Process has completed, check the exit status
-          if [ $? -eq 0 ]; then
-            echo "The 'npm run dev' command ran successfully."
-          else
-            echo "The 'npm run dev' command encountered an error."
+      - name: Run npm run dev with Timeout
+        run: |
+          # Run the "npm run dev" command in the background
+          npm run dev &
+          # Get the process ID (PID) of the background process
+          dev_pid=$!
+          # Wait for a specific timeout (e.g., 60 seconds)
+          timeout=60
+          sleep $timeout
+          # Check if the process is still running
+          if ps -p $dev_pid > /dev/null; then
+            # Process is still running, terminate it
+            echo "The 'npm run dev' command is running for too long. Terminating..."
+            kill $dev_pid
             exit 1
+          else
+            # Process has completed, check the exit status
+            if [ $? -eq 0 ]; then
+              echo "The 'npm run dev' command ran successfully."
+            else
+              echo "The 'npm run dev' command encountered an error."
+              exit 1
+            fi
           fi
-        fi
-      # This step runs the `test` script that is specified under the `scripts` key in your `package.json` file.
-      - run: npm run build --if-present
+
+      - name: Run npm run build
+        run: npm run build --if-present
+
