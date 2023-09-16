@@ -1,0 +1,38 @@
+# The name of the workflow. GitHub displays the names of your workflows under your repository's "Actions" tab. If you omit `name`, GitHub displays the workflow file path relative to the root of the repository.
+name: Node.js npm run test
+
+# This example workflow assumes that the default branch for your repository is `main`. If the default branch has a different name, edit this example and add your repository's default branch.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+#
+jobs:
+  build:
+
+    # <!-- This is a YAML comment for use in annotated code examples. -->
+    # You can run this workflow using a different operating systems.
+    #
+    # The starter workflow configures jobs to run on Linux, using the GitHub-hosted `ubuntu-latest` runners. You can change the `runs-on` key to run your jobs on a different operating system.
+    #
+    # For example, you can use the GitHub-hosted Windows runners by specifying `runs-on: windows-latest`. Or, you can run on the GitHub-hosted macOS runners using `runs-on: macos-latest`.
+    #
+    # You can also run jobs in Docker containers, or you can provide a self-hosted runner that runs on your own infrastructure. For more information, see "[AUTOTITLE](/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on)."
+    runs-on: ubuntu-latest
+#
+    steps:
+      # This step uses the `actions/checkout` action to download a copy of your repository on the runner.
+      - uses: actions/checkout@v3
+      # This step uses the `actions/setup-node` action to set up Node.js for each version indicated by the `matrix.node-version` key above.
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      # This step runs `npm ci` to install any dependencies listed in your `package.json` file.
+      - run: npm ci --legacy-peer-deps
+      # This step runs the `build` script if there is one specified under the `scripts` key in your `package.json` file.
+      - run: npm run dev --if-present
+      # This step runs the `test` script that is specified under the `scripts` key in your `package.json` file.
+      - run: npm run build --if-present
