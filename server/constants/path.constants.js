@@ -110,17 +110,17 @@ const CONFIG_CONSTANTS = () => {
 }
 
 
-// to update to
-//https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
-//and move to a different file more suited (probably 1 with the download stuff already)
 let FFMPEGCOMMAND;
 
 if (os.platform() === 'win32') {
-  FFMPEGCOMMAND = path.join(FFMPEGPATH, 'ffmpeg-windows.exe -y');
+  FFMPEGCOMMAND = path.join(FFMPEGPATH, 'ffmpeg', 'ffmpeg-windows.exe -y');
+  console.log('ffmpegpath:', FFMPEGPATH)
 } else if (os.platform() === 'linux') {
-  FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg-linux -y'); // Specify the Linux command
+  FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-linux -y'); // Specify the Linux command
+  console.log('ffmpegpath:', FFMPEGPATH)
 } else if (os.platform() === 'darwin') {
-  FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg-darwin -y'); // Specify the macOS/Darwin command
+  FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-darwin -y'); // Specify the macOS/Darwin command
+  console.log('ffmpegpath:', FFMPEGPATH)
 } else {
   // Handle other platforms or provide a default value
   FFMPEGCOMMAND = "ffmpeg -y"
