@@ -10,11 +10,13 @@ const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.util
 const path = require('path');
 const { listFilesInDir } = require("../utils/file.utils");
 const http = require('http')
+const https = require('https')
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const { downloadImage } = require("../utils/downloadimage.utils");
 
 let isFunctionRunning = false;
 const CHANNEL_OFFLINE = async () => {
+  console.log(CHANNEL_OFFLINEDIR)
   if (isFunctionRunning) {
   logger.error('Channel Offline Generator is already running.');
     return;
@@ -22,35 +24,6 @@ const CHANNEL_OFFLINE = async () => {
   isFunctionRunning = true;
   createDirectoryIfNotExists(CHANNEL_OFFLINEDIR);
   const config_current = await retrieveCurrentConfiguration();
-
-  async function downloadXmltv(xmltvFilePath) {
-    return new Promise((resolve, reject) => {
-      http.get(xmltvFilePath, (response) => {
-        if (response.statusCode !== 200) {
-          // Reject the promise with an error
-          reject(new Error(`Failed to download XMLTV. Status code: ${response.statusCode}`));
-          return;
-        }
-
-        let data = '';
-
-        // Concatenate the received data
-        response.on('data', (chunk) => {
-          data += chunk;
-        });
-
-        // Resolve the promise with the complete data when the request is finished
-        response.on('end', () => {
-          resolve(data);
-          logger.info(data);
-          fs.writeFileSync(`${CHANNEL_OFFLINEDIR}/xmltv.xmltv`, data);
-        });
-      }).on('error', (error) => {
-        // Reject the promise with the error
-        reject(error);
-      });
-    });
-  }
 
   // Function to split XMLTV by channel
   const splitXMLTVByChannel = async () => {
@@ -110,7 +83,7 @@ const CHANNEL_OFFLINE = async () => {
         downloadImage(`${channelLogo}`, `${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.png`)
             .then(logger.success)
             .catch(logger.error);
-      });
+     });
 
 
 
@@ -271,7 +244,9 @@ if (config_current.hwaccel_device == "") {
         logger.info(file);
         const filename = `${file}`;
         logger.info(filename)
-        const filePath = filename.replace(/\.xml$/, "").replace("workdir\/Channel\-offline\/", "");
+        const lastIndex = filename.lastIndexOf("/");
+const filenamenopath = filename.substring(lastIndex + 1);
+        const filePath = filenamenopath.replace(/\.xml$/, "").replace("workdir\/Channel\-offline\/", "");
 
         logger.info(`file path is ${filePath}`);
         await startTimefind(filePath);
@@ -288,9 +263,9 @@ if (config_current.hwaccel_device == "") {
   };
 
   try {
-    const downloadedData = await downloadXmltv(`${config_current.ersatztv}/iptv/xmltv.xml`);
+      await downloadImage(`${config_current.ersatztv}/iptv/xmltv.xml`, `${CHANNEL_OFFLINEDIR}/xmltv.xmltv`)
     // Handle the downloaded data
-    logger.success('XMLTV downloaded successfully:', downloadedData);
+    logger.success('XMLTV downloaded successfully');
   } catch (error) {
     // Handle the connection error
     logger.error('Error downloading or processing XMLTV:', error);
