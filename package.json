@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/liam8888999/ErsatzTV-Filler#readme",
   "dependencies": {
-    "@commitlint/cli": "^8.2.0",
+    "@commitlint/cli": "^8.3.6",
     "@commitlint/config-conventional": "^17.4.2",
     "@release-it/conventional-changelog": "^5.1.0",
     "cheerio": "^1.0.0-rc.12",
