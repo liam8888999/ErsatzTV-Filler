@@ -6,7 +6,7 @@ ENV ETV_FILLER_DOCKER 1
 
 WORKDIR /app
 
-COPY /home/liam/ersatzTV-Filler/ersatztv-filler-linux /app/ersatztv-filler
+COPY ersatztv-filler-linux /app
 
 # Make the binary executable (if needed)
 RUN chmod +x /app/ersatztv-filler
@@ -15,4 +15,4 @@ RUN chmod +x /app/ersatztv-filler
 EXPOSE 8408
 
 # Specify the command to run when the container starts
-CMD ["./ersatztv-filler"]
+CMD ["./ersatztv-filler-linux"]
