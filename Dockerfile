@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 
-RUN apt-get update \
+RUN apt-get update
 
 ENV ETV_FILLER_DOCKER 1
 
