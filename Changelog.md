@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.1...1.0.2) (2023-09-16)
+
+
+### Removed
+
+* ffmpeg path logging ([8837433](https://github.com/liam8888999/ErsatzTV-Filler/commit/88374331ee23f99fecc5f91933d6123bde397b00))
+
+
+### Fixed
+
+* prevent xmltv merger always claiming that there are no xmltv files ([004fe33](https://github.com/liam8888999/ErsatzTV-Filler/commit/004fe336b1c603375cd1b621183dc8319bfc0be1))
+* some logging fixes ([a0d7482](https://github.com/liam8888999/ErsatzTV-Filler/commit/a0d7482722ad3d1e2c4e9dff7574d8011a102a26))
+* use logger instead of console logs ([d8e7c5c](https://github.com/liam8888999/ErsatzTV-Filler/commit/d8e7c5cdc0be55926093f36f90a4e3ca91454293))
+
 ## [1.0.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.0...1.0.1) (2023-09-16)
 
 
