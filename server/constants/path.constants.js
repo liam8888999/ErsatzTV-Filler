@@ -108,7 +108,7 @@ const CONFIG_CONSTANTS = () => {
         USER_CONFIG
     }
 }
-}
+
 
 // to update to
 //https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
