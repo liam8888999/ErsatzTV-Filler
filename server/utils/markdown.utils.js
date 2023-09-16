@@ -4,7 +4,7 @@ const { CHANGELOG } = require("../constants/path.constants");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 
-//TODO: parse the changelog config for the front end.
+
 const parseMarkedDownFile = (markDown) => {
     return marked.parsed(markDown)
 }

@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { WORKDIR, THEMES_FOLDER, AUDIOFALLBACKINTERNAL, FFMPEGPATHINTERNAL, RESOURCESPATH, CONFIG_DIR } = require("../constants/path.constants");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
+const os = require('os');
 
 // Replace these with the actual paths to the files you want to delete
 const foldersToDelete = [
@@ -106,8 +107,28 @@ function copyFolderRecursive(source, destination) {
   });
 }
 copyFolderRecursive(AUDIOFALLBACKINTERNAL, `${RESOURCESPATH}/audio-fallback`);
-// TODO only copy specific ffmpeg file needed for platform
-copyFolderRecursive(FFMPEGPATHINTERNAL, `${RESOURCESPATH}/ffmpeg`);
+
+
+let ffmpegResourcesPath;
+let FFMPEGINTERALPATH;
+if (os.platform() === 'win32') {
+  FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-windows.exe');
+  ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-windows.exe');
+console.log("windows")
+} else if (os.platform() === 'linux') {
+  FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-linux');
+  ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-linux');
+  console.log("linux")
+} else if (os.platform() === 'darwin') {
+  console.log("darwin")
+  FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-darwin');
+  ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-darwin');
+} else {
+  // Handle other platforms or provide a default value
+  console.log("operating system unknown, not copying ffmpeg to resources folder, will test if ffmpeg is installed on the system and try to use that")
+}
+copyFileWithPermissions(FFMPEGINTERNALPATH, ffmpegResourcesPath);
+//copyFolderRecursive(FFMPEGPATHINTERNAL, `${RESOURCESPATH}/ffmpeg`);
 }
 
 

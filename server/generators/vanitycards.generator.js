@@ -10,7 +10,6 @@ const { FFMPEGCOMMAND, VANITYCARDDIR } = require("../constants/path.constants");
 const { exec } = require("child_process")
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
-// Future todo. add option to add episode number/episode title to main description for clients without support
 let isFunctionRunning = false;
 const VANITYCARDS = async () => {
 if (isFunctionRunning) {
