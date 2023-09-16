@@ -36,7 +36,7 @@ jobs:
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
-          zip -r windows.zip . -i ersatztv-filler-windows-ver
+          zip -r /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/windows.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
         working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
       - name: create macos zip
@@ -45,7 +45,7 @@ jobs:
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
-          zip -r macos.zip . -i ersatztv-filler-macos-ver
+          zip -r /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/macos.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
         working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
       - name: create linux zip
@@ -54,7 +54,7 @@ jobs:
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
-          zip -r linux.zip . -i ersatztv-filler-linux-ver
+          zip -r /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/linux.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
         working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
       - name: clean up
