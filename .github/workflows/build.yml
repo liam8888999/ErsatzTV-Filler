@@ -30,5 +30,4 @@ jobs:
       - name: Upload Package
         uses: actions/upload-artifact@v2
         with:
-          name: ersatztv-filler
           path: ersatztv-filler
