@@ -25,9 +25,9 @@ jobs:
 
       - name: Build Package with pkg
         run: pkg package.json # Modify this command as needed
-        working-directory: ersatztv-filler
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
       - name: Upload Package
         uses: actions/upload-artifact@v2
         with:
-          path: ersatztv-filler
+          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
