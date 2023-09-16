@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.0...1.0.1) (2023-09-16)
+
+
+### Fixed
+
+* add support for https with channel-offline filler and small path fix ([d1627ce](https://github.com/liam8888999/ErsatzTV-Filler/commit/d1627cef6418ae1cd16a73ce20f299f7ee3aed29))
+* error with ersatztv location showing on every config page ([10da886](https://github.com/liam8888999/ErsatzTV-Filler/commit/10da886b03738e1cb4779463d2212709c42314e9))
+* ffmpeg path not working correctly ([5595f9f](https://github.com/liam8888999/ErsatzTV-Filler/commit/5595f9f91861da6ac9978b920f9e897af8666cc3))
+* typo ([3b8f692](https://github.com/liam8888999/ErsatzTV-Filler/commit/3b8f692c3aa9fcd31295353fb8ffeff9919723ff))
+
 ## [1.0.0 - Beta](https://github.com/liam8888999/ErsatzTV-Filler/compare/0.0.26...1.0.0) (2023-09-16)
 
 Intial Version for nodejs version. more information can be found at https://liam8888999.github.io/ErsatzTV-Filler/
