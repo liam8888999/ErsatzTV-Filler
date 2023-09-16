@@ -4,7 +4,7 @@
 
 - ### [Filler Types and Setup](filler-types/filler-types.md)
 
-- ### [Configuration](configuration/configuration.md)
+- ### [Configuration](configure/configure.md)
 
 - ### [Themes](themes/themes.md)
 

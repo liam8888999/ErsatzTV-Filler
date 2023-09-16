@@ -1,7 +1,5 @@
 # ErsatzTV-Filler Types and Setup (XMLTV Merge)
 
-![News](../images/filler-types/xmltv-merge.png)
-
 ## What is it?
 
 XMLTV Merge is a great way to merge 2 or more xmltv files together. It is useful if you have multiple xmltv providers and use something such as plex that only allows use of 1 xmltv file.
@@ -12,4 +10,6 @@ The XMLTV Merger uses the xmltv files that the user provides and merges them tog
 
 ## How do I set it up?
 
-1.
+1. You will need to add your xmltv files in the configuration page.
+
+2. Once the merger has run there is a button containing a link on the xmltvmerger configuration page, this link can be imported into your xmltv client and will provide the merged xmltv files.

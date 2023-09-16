@@ -12,4 +12,4 @@ The Vanity Cards filler uses images grabbed from the chuck lorre vanity cards we
 
 ## How do I set it up?
 
-1.
+1. Once the video has generated it will need to be added to ersatztv as a other video type in ersatztv. It will then need to be added to your collection which will then be scheduled and played by ersatztv.
