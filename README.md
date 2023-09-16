@@ -3,7 +3,7 @@
 
  Check back regularly for updates.
 
-Discord chat: https://discord.gg/x4Nk4sfgSg
+Discord community can be found at https://discord.gg/x4Nk4sfgSg
 
 Donations are welcome: https://www.paypal.me/liam200333
 
@@ -11,7 +11,7 @@ Donations are welcome: https://www.paypal.me/liam200333
 
 ## Documentation
 
-Documentation for install and setup can be found [![here](https://liam8888999.github.io/ErsatzTV-Filler/)
+Documentation for install and setup can be found at https://liam8888999.github.io/ErsatzTV-Filler/
 
 ## Themes
 ErsatzTV-Filler uses theme files to adjust the look of the ouput video files.
