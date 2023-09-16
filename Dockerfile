@@ -6,7 +6,7 @@ ENV ETV_FILLER_DOCKER 1
 
 WORKDIR /app
 
-COPY ersatztv-filler-linux /app/ersatztv-filler
+COPY /home/liam/ersatzTV-Filler/ersatztv-filler-linux /app/ersatztv-filler
 
 # Make the binary executable (if needed)
 RUN chmod +x /app/ersatztv-filler
