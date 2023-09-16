@@ -114,17 +114,13 @@ let FFMPEGCOMMAND;
 
 if (os.platform() === 'win32') {
   FFMPEGCOMMAND = path.join(FFMPEGPATH, 'ffmpeg', 'ffmpeg-windows.exe -y');
-  console.log('ffmpegpath:', FFMPEGPATH)
 } else if (os.platform() === 'linux') {
   FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-linux -y'); // Specify the Linux command
-  console.log('ffmpegpath:', FFMPEGPATH)
 } else if (os.platform() === 'darwin') {
   FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-darwin -y'); // Specify the macOS/Darwin command
-  console.log('ffmpegpath:', FFMPEGPATH)
 } else {
   // Handle other platforms or provide a default value
   FFMPEGCOMMAND = "ffmpeg -y"
-  console.log("operating system unknown, trying a safe default of ffmpeg -y")
 }
 
 
