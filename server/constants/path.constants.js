@@ -11,6 +11,7 @@ if (process.pkg) {
   startUpPath = process.cwd() + "/";
 }
 
+
 // Assuming __dirname is "x/y"
 const fullDirName = __dirname;
 
@@ -108,14 +109,18 @@ const CONFIG_CONSTANTS = () => {
     }
 }
 
-
+if (process.pkg) {
+  WINFFMPEGPATH = path.resolve(process.execPath, '..') + "\" + "resources" + "ffmpeg";
+} else {
+  WINFFMPEGPATH = process.cwd() + "\" + "resources" + "ffmpeg";
+}
 // to update to
 //https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
 //and move to a different file more suited (probably 1 with the download stuff already)
 let FFMPEGCOMMAND;
 
 if (os.platform() === 'win32') {
-  FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-win.exe -y`;
+  FFMPEGCOMMAND = `${WINFFMPEGPATH}\ffmpeg-win.exe -y`;
 } else if (os.platform() === 'linux') {
   FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-linux -y`; // Specify the Linux command
 } else if (os.platform() === 'darwin') {
