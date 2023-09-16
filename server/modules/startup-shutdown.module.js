@@ -105,6 +105,7 @@ function copyFolderRecursive(source, destination) {
   });
 }
 copyFolderRecursive(AUDIOFALLBACKINTERNAL, `${RESOURCESPATH}/audio-fallback`);
+// TODO only copy specific ffmpeg file needed for platform
 copyFolderRecursive(FFMPEGPATHINTERNAL, `${RESOURCESPATH}/ffmpeg`);
 }
 
