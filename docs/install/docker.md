@@ -37,14 +37,15 @@ Docker Install
 3. Create and run a container
 
     ```
-    docker run -d \
-      --name ersatztv-filler \
-      -e TZ=America/Chicago \
-      -p 8408:8408 \
-      -v /path/to/config:/app \
-      -v /path/to/audio:/path/to/audio:ro \
-      -v /path/to/logs:/app/logs \
-      -v /path/to/output:/path/to/output \
-      --restart unless-stopped \
-      liam2003/ersatztv-filler
+    sudo docker run -d \
+    --name ersatztv-filler \
+    -e TZ=Australia/Melbourne \
+    -p 8408:8408 \
+    -v /path/to/config:/app/config \
+    -v /path/to/themes:/app/themes \
+    -v /path/to/audio:/audio:ro \
+    -v /path/to/logs:/app/logs \
+    -v /path/to/output:/output \
+    --restart unless-stopped \
+    liam8888999/ersatztv-filler
     ```

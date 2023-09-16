@@ -23,10 +23,6 @@ This is the different options to set up the development environment for ErsatzTV
 ```shell
 docker build -t liam8888999/ersatztv-filler .
 ```
-#### Run
-```shell
-docker run --rm -it -v $(pwd):/config -v /media/audio/whatever:/audio -v /media/whatever:/output -v /media/audio/whatever:/tmp/ErsatzTV-Filler liam8888999/ersatztv-filler /config/config.conf
-```
 #### Push to Repository
 ```shell
 docker push
