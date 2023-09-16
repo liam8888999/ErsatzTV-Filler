@@ -16,7 +16,7 @@ Intial Version for nodejs version. more information can be found at https://liam
 
 ## [0.0.26 - Beta] - 2023-09-10
 
-# Removed
+### Removed
 - Autoupdate features
 
 All auto update features have been removed as they are incompatible with future updates and there will be breaking changes in the next release that will totally break compatibility. This version will otherwise keep working and will move to a new bash-version branch of the github shortly if you want to stick with what is currently available but there will be no new feature updates on that branch and it will become obsolete. Docker images will not be built on the branch either and the old images will be updated to the newer version so if you want to run in docker you will need to manually build the container against that branch or prevent the current container updating (NOT RECOMMENDED).
