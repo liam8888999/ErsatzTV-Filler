@@ -6,9 +6,9 @@ const path = require('path')
 
 
 if (process.pkg) {
-  startUpPath = path.resolve(process.execPath, '..') + "/";
+  startUpPath = path.resolve(process.execPath, '..');
 } else {
-  startUpPath = process.cwd() + "/";
+  startUpPath = process.cwd();
 }
 
 
@@ -18,13 +18,13 @@ const fullDirName = __dirname;
 // Use path.dirname to get the parent directory
 const parentDirName = path.dirname(fullDirName);
 
-const serverLocation = path.dirname(parentDirName) + "/";
+const serverLocation = path.dirname(parentDirName);
 
-const TEMPLATES_FOLDER = serverLocation + "server/templates/"; // Have to do this because it expects the layout in the top level directory.
+const TEMPLATES_FOLDER = path.join(serverLocation, 'server', 'templates'); // Have to do this because it expects the layout in the top level directory.
 const LAYOUTS_FOLDER = "layouts/";
 const PAGES_FOLDER = "pages/";
-const THEMES_FOLDER = startUpPath + "themes"
-const DEFAULT_LAYOUT = LAYOUTS_FOLDER + "layout.ejs";
+const THEMES_FOLDER = path.join(startUpPath, 'themes');
+const DEFAULT_LAYOUT = path.join(LAYOUTS_FOLDER, 'layout.ejs');
 
 const DEFAULT_CONFIG = {
   "customaudio": "",
@@ -68,24 +68,24 @@ const DEFAULT_CONFIG = {
   "customffmpeg": ""
 }
 
-const CONFIG_DIR = startUpPath + "config/"
-const USER_CONFIG = CONFIG_DIR + "config.json"
+const CONFIG_DIR = path.join(startUpPath, 'config');
+const USER_CONFIG = path.join(CONFIG_DIR, 'config.json');
 
-const CHANGELOG = serverLocation + "Changelog.md";
-const README = startUpPath + "README.md"
-const RESOURCESPATH = startUpPath + "resources"
-const WORKDIR = startUpPath + "workdir"
-const NEWSDIR = WORKDIR + "/News"
-const WEATHERDIR = WORKDIR + "/Weather"
-const CHANNEL_OFFLINEDIR = WORKDIR + "/Channel-offline"
-const XMLTVMERGEDIR = WORKDIR + "/xmltvmerge"
-const VANITYCARDDIR = WORKDIR + "/vanitycard"
-const CONFIGCONFDIR = WORKDIR + "/configconf"
-const LOGFOLDER = startUpPath + "logs"
-const AUDIOFALLBACK = RESOURCESPATH + "/audio-fallback"
-const AUDIOFALLBACKINTERNAL = serverLocation + "audio-fallback"
-const FFMPEGPATH = RESOURCESPATH + "/ffmpeg"
-const FFMPEGPATHINTERNAL = serverLocation + "ffmpeg"
+const CHANGELOG = path.join(serverLocation, 'Changelog.md');
+const README = path.join(startUpPath, 'README.md');
+const RESOURCESPATH = path.join(startUpPath, 'resources');
+const WORKDIR = path.join(startUpPath, 'workdir');
+const NEWSDIR = path.join(WORKDIR, 'News');
+const WEATHERDIR = path.join(WORKDIR, 'Weather');
+const CHANNEL_OFFLINEDIR = path.join(WORKDIR, 'Channel-offline');
+const XMLTVMERGEDIR = path.join(WORKDIR, 'xmltvmerge');
+const VANITYCARDDIR = path.join(WORKDIR, 'vanitycard');
+const CONFIGCONFDIR = path.join(WORKDIR, 'configconf');
+const LOGFOLDER = path.join(startUpPath, 'logs');
+const AUDIOFALLBACK = path.join(RESOURCESPATH, 'audio-fallback');
+const AUDIOFALLBACKINTERNAL = path.join(serverLocation, 'audio-fallback');
+const FFMPEGPATH = path.join(RESOURCESPATH, 'ffmpeg');
+const FFMPEGPATHINTERNAL = path.join(serverLocation, 'ffmpeg');
 /**
  * Returns the path constants for our ui templates
  * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
@@ -109,18 +109,13 @@ const CONFIG_CONSTANTS = () => {
     }
 }
 
-if (process.pkg) {
-  WINFFMPEGPATH = path.resolve(process.execPath, '..') + "\" + "resources" + "ffmpeg";
-} else {
-  WINFFMPEGPATH = process.cwd() + "\" + "resources" + "ffmpeg";
-}
 // to update to
 //https://chat.openai.com/share/68d63890-f33a-4154-a2ce-a42066133e8e
 //and move to a different file more suited (probably 1 with the download stuff already)
 let FFMPEGCOMMAND;
 
 if (os.platform() === 'win32') {
-  FFMPEGCOMMAND = `${WINFFMPEGPATH}\ffmpeg-win.exe -y`;
+  FFMPEGCOMMAND = `${FFMPEGPATH}\ffmpeg-win.exe -y`;
 } else if (os.platform() === 'linux') {
   FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-linux -y`; // Specify the Linux command
 } else if (os.platform() === 'darwin') {
