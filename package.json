@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "release-it --verbose",
+    "release": "release-it --increment major --verbose",
     "build": "pkg package.json"
   },
   "repository": {
@@ -59,7 +59,12 @@
   "pkg": {
     "entry": "server/app.js",
     "scripts": "server/**/*.js",
-    "assets": ["server/templates/**/*", "audio-fallback/**/*", "Changelog.md", "ffmpeg/**/*"]
+    "assets": [
+      "server/templates/**/*",
+      "audio-fallback/**/*",
+      "Changelog.md",
+      "ffmpeg/**/*"
+    ]
   },
   "release-it": {
     "git": {
