@@ -1,4 +1,4 @@
-name: Build Package with pkg
+name: Build Package with pkg and zip
 
 on:
   push:
