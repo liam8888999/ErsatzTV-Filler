@@ -32,7 +32,7 @@ jobs:
 
       - name: create zips
         run: |
-          mkdir ersatztv-windows
+          mkdir builds/ersatztv-windows-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver/ersatztv-filler-windows
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
