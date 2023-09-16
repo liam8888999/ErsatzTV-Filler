@@ -21,6 +21,7 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci --legacy-peer-deps
+        run: npm install -g pkg
 
       - name: Run npm run dev with Timeout
         run: |
@@ -29,7 +30,7 @@ jobs:
           # Get the process ID (PID) of the background process
           dev_pid=$!
           # Wait for a specific timeout (e.g., 60 seconds)
-          timeout=60
+          timeout=30
           sleep $timeout
           # Check if the process is still running
           if ps -p $dev_pid > /dev/null; then
