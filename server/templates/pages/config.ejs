@@ -1,0 +1,148 @@
+<% let CONFIG_AVAILABLE = false %>
+<% if(typeof CURRENT_CONFIG !== "undefined"){ %>
+    <% CONFIG_AVAILABLE = true; %>
+<% } %>
+
+<% const base = "../elements" %>
+<% const text_input = base + "/text-input.ejs" %>
+
+
+  <div class="container">
+    <center>  <h1>Edit config</h1>
+      <p>Change your configuration file below!</p> <p>The form below will automatically update as you fill it in.</p>
+      </center>
+  <div class="tab-container">
+    <center>
+    <div class="tab-links">
+      <button class="tab-link active" onclick="openTab(event, 'tab1')">General Settings</button>
+      <button class="tab-link" onclick="openTab(event, 'tab2')">Weather Settings</button>
+      <button class="tab-link" onclick="openTab(event, 'tab3')">News Settings</button>
+      <button class="tab-link" onclick="openTab(event, 'tab4')">Channel Offline Settings</button>
+      <button class="tab-link" onclick="openTab(event, 'tab5')">XMLTV Merge</button>
+      <button class="tab-link" onclick="openTab(event, 'tab6')">Vanity Cards</button>
+    </div>
+    <br>
+    <button onclick="returnConfigJson()" style="margin-top:10px;">Show config.json file</button>
+    <div id="tab1" class="tab" style="display: block;">
+      <br>
+    <center>  <h2>General Settings</h2></center>
+      <% if(CONFIG_AVAILABLE){ %>
+          <form method="post" action="/config" id="config-form">
+              <div id="variables">
+                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                    <% if(key !== 'theme' && !['xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
+                      <%- include(text_input, {
+                          key,
+                          label: CURRENT_CONFIG[key]
+                      }) %>
+                       <% } %>
+                  <% }); %>
+              </div>
+          </form>
+      <% }else{ %>
+          <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+    </div>
+    <div id="tab2" class="tab">
+      <br>
+    <center>  <h2>Weather Settings</h2></center>
+      <% if(CONFIG_AVAILABLE){ %>
+          <form method="post" action="/config" id="config-form">
+              <div id="variables">
+                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                    <% if(key !== 'theme' && !['customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'fontfile', 'webtheme','webport', 'processnews', 'processchanneloffline', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength'].includes(key)){ %>
+                      <%- include(text_input, {
+                          key,
+                          label: CURRENT_CONFIG[key]
+                      }) %>
+                       <% } %>
+                  <% }); %>
+              </div>
+          </form>
+      <% }else{ %>
+          <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+    </div>
+    <div id="tab3" class="tab">
+      <br>
+    <center>  <h2>News Settings</h2></center>
+      <% if(CONFIG_AVAILABLE){ %>
+          <form method="post" action="/config" id="config-form">
+              <div id="variables">
+                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                    <% if(key !== 'theme' && !['customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'fontfile', 'webtheme', 'webport', 'processweather', 'processchanneloffline', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength', 'weatheraudiofadeinduration', 'weatheraudiofadeoutduration', 'weathervideofadeinduration', 'weathervideofadeoutduration', 'generate_weatherv4', 'videolength'].includes(key)){ %>
+                      <%- include(text_input, {
+                          key,
+                          label: CURRENT_CONFIG[key]
+                      }) %>
+                       <% } %>
+                  <% }); %>
+              </div>
+          </form>
+      <% }else{ %>
+          <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+    </div>
+    <div id="tab4" class="tab">
+      <br>
+    <center>  <h2>Channel Offline Settings</h2></center>
+      <% if(CONFIG_AVAILABLE){ %>
+          <form method="post" action="/config" id="config-form">
+              <div id="variables">
+                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                  <% if(key !== 'theme' && !['customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processweather', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration'].includes(key)){ %>
+                      <%- include(text_input, {
+                          key,
+                          label: CURRENT_CONFIG[key]
+                      }) %>
+                       <% } %>
+                  <% }); %>
+              </div>
+          </form>
+      <% }else{ %>
+          <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+    </div>
+ <div id="tab5" class="tab">
+    <center>  <h2>XMLTV Merge Settings</h2></center>
+    <center> <a href="/xmltvmerge/mergedxmltv.xml" class="button">XMLTVMERGE File LINK</a> </center>
+    <center><p>please list epg locations as a list with a space inbetween each, for example: 1.epg 2.epg 3.epg</p></center>
+      <% if(CONFIG_AVAILABLE){ %>
+          <form method="post" action="/config" id="config-form">
+              <div id="variables">
+                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                      <% if(key !== 'theme' && !['customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processchanneloffline', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processweather', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration'].includes(key)){ %>
+                      <%- include(text_input, {
+                          key,
+                          label: CURRENT_CONFIG[key]
+                      }) %>
+                       <% } %>
+                  <% }); %>
+              </div>
+          </form>
+      <% }else{ %>
+          <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+    </div>
+<div id="tab6" class="tab">
+      <br>
+    <center>  <h2>Vanity Card Settings</h2></center>
+      <% if(CONFIG_AVAILABLE){ %>
+          <form method="post" action="/config" id="config-form">
+              <div id="variables">
+                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                    <% if(key !== 'theme' && !['customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'xmltv', 'videoresolution', 'customaudio', 'output', 'city', 'state', 'videolength', 'log_location', 'log_days', 'webport', 'fontfile', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
+                      <%- include(text_input, {
+                          key,
+                          label: CURRENT_CONFIG[key]
+                      }) %>
+                       <% } %>
+                  <% }); %>
+              </div>
+          </form>
+      <% }else{ %>
+          <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+    </div>
+  </div>
+  </div>

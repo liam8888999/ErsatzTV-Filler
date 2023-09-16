@@ -1,0 +1,415 @@
+<div class="container">
+  <div id="overlay">
+  <div id="loading-message"></div>
+</div>
+
+<div>
+<ul id="userthemes" style="display: none;">
+  <% for (var i = 0; i < downloadedthemesarray.length; i++) { %>
+    <li><%= downloadedthemesarray[i] %></li>
+  <% } %>
+</ul>
+</div>
+
+<div>
+<ul id="systemthemes" style="display: none;">
+  <% for (var i = 0; i < downloadedthemesarraysystem.length; i++) { %>
+    <li><%= downloadedthemesarraysystem[i] %></li>
+  <% } %>
+</ul>
+</div>
+
+<!-- set downloaded themes list -->
+<div id="downloadedThemes" style="display: none;"><%- downloadedthemeslist %></div>
+
+<h1 style="text-align:center;"> Themes </h1>
+<br>
+<p><b>Note:</b>Initial Support added for user themes, if you would like your theme included in the system themes please submit a pull request to <a href="https://github.com/liam8888999/ErsatzTV-Filler-Themes" target=”_blank”>ErsatzTV-Filler-Themes Github</a></p>
+
+
+<h3 style="text-align:center;">Current theme is: <span id="currentTheme2"><%- theme %></span></h3>
+<span id="currentTheme" style="display: none;"><%- themeunreplaced %></span>
+<br>
+<center><h3>User Themes</h3></center>
+<div id="theme-list"></div>
+
+<center><h3>System Themes</h3></center>
+<h4 style="text-align:center;color:brown;">System Light Theme (Default)</h4>
+
+<div class="slideshow-container">
+  <div class="mySlides1">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/channel-offline.png?raw=true" style="width:100%">
+    <div class="numbertext">1 / 5</div>
+<div class="text" style="padding-top: 20px;">Channel-offline</div>
+  </div>
+
+
+  <div class="mySlides1">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/news.png?raw=true" style="width:100%">
+    <div class="numbertext">2 / 5</div>
+<div class="text" style="padding-top: 20px;">News</div>
+  </div>
+
+
+  <div class="mySlides1">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/weather-v1.png?raw=true" style="width:100%">
+    <div class="numbertext">3 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V1</div>
+  </div>
+
+  <div class="mySlides1">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/weather-v2.png?raw=true" style="width:100%">
+    <div class="numbertext">4 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V2</div>
+  </div>
+
+  <div class="mySlides1">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemLight-Theme/images/weather-v3.png?raw=true" style="width:100%">
+    <div class="numbertext">5 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V3</div>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+</div>
+<br>
+<div style="padding-left:55%;">
+  <button id="SystemLightdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'SystemLight.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="SystemLightsetthemeButton" onclick="settheme('system/SystemLight')">Use This Theme <i class="fa">&#x2713;</i></button>
+</div>
+<br>
+<br>
+<p style="color:blue;padding-left:55%;">The Light theme includes white backgrounds and black text.</p>
+<br>
+<div style="padding-left:55%;">
+  <button id="SystemLightjsonButton" onclick="returnJson('system/SystemLight')">Show theme json file</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<hr class="solid">
+<h4 style="text-align:center;color:brown;">System Dark Theme</h4>
+<div class="slideshow-container">
+  <div class="mySlides2">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/channel-offline.png?raw=true" style="width:100%">
+
+<div class="numbertext">1 / 5</div>
+<div class="text" style="padding-top: 20px;">Channel-offline</div>
+</div>
+
+  <div class="mySlides2">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/news.png?raw=true" style="width:100%">
+  <div class="numbertext">2 / 5</div>
+<div class="text" style="padding-top: 20px;">News</div>
+  </div>
+
+  <div class="mySlides2">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/weather-v1.png?raw=true" style="width:100%">
+  <div class="numbertext">3 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V1</div>
+  </div>
+
+  <div class="mySlides2">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/weather-v2.png?raw=true" style="width:100%">
+  <div class="numbertext">4 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V2</div>
+  </div>
+
+  <div class="mySlides2">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/SystemDark-Theme/images/weather-v3.png?raw=true" style="width:100%">
+  <div class="numbertext">5 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V3</div>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1, 1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 1)">&#10095;</a>
+</div>
+<br>
+<div style="padding-left:55%;">
+<button id="SystemDarkdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemDark-Theme/SystemDark.theme', 'SystemDark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="SystemDarksetthemeButton" onclick="settheme('system/SystemDark')">Use This Theme <i class="fa">&#x2713;</i></button>
+</div>
+<br>
+<br>
+<p style="color:blue;padding-left:55%;">The Dark theme includes black backgrounds and white text.</p>
+<br>
+<div style="padding-left:55%;">
+  <button id="SystemDarkjsonButton" onclick="returnJson('system/SystemDark')">Show theme json file</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<hr class="solid">
+<h4 style="text-align:center;color:brown;">StopandGo Theme</h4>
+<div class="slideshow-container">
+  <div class="mySlides3">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/StopandGo-Theme/images/channel-offline.png?raw=true" style="width:100%">
+  <div class="numbertext">1 / 5</div>
+<div class="text" style="padding-top: 20px;">Channel-offline</div>
+  </div>
+
+  <div class="mySlides3">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/StopandGo-Theme/images/news.png?raw=true" style="width:100%">
+  <div class="numbertext">2 / 5</div>
+<div class="text" style="padding-top: 20px;">News</div>
+  </div>
+
+  <div class="mySlides3">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/StopandGo-Theme/images/weather-v1.png?raw=true" style="width:100%">
+  <div class="numbertext">3 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-v1</div>
+  </div>
+
+  <div class="mySlides3">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/StopandGo-Theme/images/weather-v2.png?raw=true" style="width:100%">
+  <div class="numbertext">4 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V2</div>
+  </div>
+
+  <div class="mySlides3">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/StopandGo-Theme/images/weather-v3.png?raw=true" style="width:100%">
+  <div class="numbertext">5 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V3</div>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1, 2)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 2)">&#10095;</a>
+  </div>
+<br>
+<div style="padding-left:55%;">
+<button id="stopandgodownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/StopandGo-Theme/stopandgo.theme', 'stopandgo.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="stopandgosetthemeButton" onclick="settheme('system/stopandgo')">Use This Theme <i class="fa">&#x2713;</i></button>
+</div>
+<br>
+<br>
+<p style="color:blue;padding-left:55%;">The StopandGo theme includes lightgreen backgrounds and red text.</p>
+<br>
+<div style="padding-left:55%;">
+  <button id="stopandgojsonButton" onclick="returnJson('system/stopandgo')">Show theme json file</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<hr class="solid">
+<h4 style="text-align:center;color:brown;">Candycane Theme</h4>
+<div class="slideshow-container">
+  <div class="mySlides4">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Candycane-Theme/images/channel-offline.png?raw=true" style="width:100%">
+  <div class="numbertext">1 / 5</div>
+<div class="text" style="padding-top: 20px;">Channel-offline</div>
+  </div>
+
+  <div class="mySlides4">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Candycane-Theme/images/news.png?raw=true" style="width:100%">
+  <div class="numbertext">2 / 5</div>
+<div class="text" style="padding-top: 20px;">News</div>
+  </div>
+
+  <div class="mySlides4">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Candycane-Theme/images/weather-v1.png?raw=true" style="width:100%">
+  <div class="numbertext">3 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V1</div>
+  </div>
+
+  <div class="mySlides4">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Candycane-Theme/images/weather-v2.png?raw=true" style="width:100%">
+  <div class="numbertext">4 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V2</div>
+  </div>
+
+  <div class="mySlides4">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/Candycane-Theme/images/weather-v3.png?raw=true" style="width:100%">
+  <div class="numbertext">5 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V3</div>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1, 3)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 3)">&#10095;</a>
+</div>
+<br>
+<div style="padding-left:55%;">
+<button id="CandycanedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Candycane-Theme/Candycane.theme', 'Candycane.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="CandycanesetthemeButton" onclick="settheme('system/Candycane')">Use This Theme <i class="fa">&#x2713;</i></button>
+</div>
+<br>
+<br>
+<p style="color:blue;padding-left:55%;">The Candycane theme includes red backgrounds and white text.</p>
+<br>
+<div style="padding-left:55%;">
+  <button id="CandycanejsonButton" onclick="returnJson('system/Candycane')">Show theme json file</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<hr class="solid">
+<br>
+<h3 style="text-align:center;">Community Submitted Themes</h3>
+<br>
+<br>
+<h4 style="text-align:center;color:brown;">MoRBiD_MaNGLeR-Dark Theme</h4>
+<div class="slideshow-container">
+  <div class="mySlides5">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-Dark-theme/images/channel-offline.png?raw=true" style="width:100%">
+  <div class="numbertext">1 / 5</div>
+<div class="text" style="padding-top: 20px;">Channel-offline</div>
+  </div>
+
+  <div class="mySlides5">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-Dark-theme/images/news.png?raw=true" style="width:100%">
+  <div class="numbertext">2 / 5</div>
+<div class="text" style="padding-top: 20px;">News</div>
+  </div>
+
+  <div class="mySlides5">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-Dark-theme/images/weather-v1.png?raw=true" style="width:100%">
+  <div class="numbertext">3 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V1</div>
+  </div>
+
+  <div class="mySlides5">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-Dark-theme/images/weather-v2.png?raw=true" style="width:100%">
+  <div class="numbertext">4 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V2</div>
+  </div>
+
+  <div class="mySlides5">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-Dark-theme/images/weather-v3.png?raw=true" style="width:100%">
+  <div class="numbertext">5 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V3</div>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1, 4)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 4)">&#10095;</a>
+</div>
+<br>
+<div style="padding-left:55%;">
+<button id="MoRBiD_MaNGLeRDarkdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-Dark-theme/MoRBiD_MaNGLeR-Dark.theme', 'MoRBiD_MaNGLeR-Dark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="MoRBiD_MaNGLeRDarksetthemeButton" onclick="settheme('system/MoRBiD_MaNGLeR-Dark')">Use This Theme <i class="fa">&#x2713;</i></button>
+</div>
+<br>
+<br>
+<p style="color:blue;padding-left:55%;">The MoRBiD_MaNGLeR-Dark theme includes black backgrounds and yellow text.</p>
+<p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
+<br>
+<div style="padding-left:55%;">
+  <button id="MoRBiD_MaNGLeRDarkjsonButton" onclick="returnJson('system/MoRBiD_MaNGLeR-Dark')">Show theme json file</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<hr class="solid">
+<h4 style="text-align:center;color:brown;">MoRBiD_MaNGLeR-C64 Theme</h4>
+<div class="slideshow-container">
+  <div class="mySlides6">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-C64-theme/images/channel-offline.png?raw=true" style="width:100%">
+  <div class="numbertext">1 / 5</div>
+<div class="text" style="padding-top: 20px;">Channel-offline</div>
+  </div>
+
+  <div class="mySlides6">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-C64-theme/images/news.png?raw=true" style="width:100%">
+  <div class="numbertext">2 / 5</div>
+<div class="text" style="padding-top: 20px;">News</div>
+  </div>
+
+  <div class="mySlides6">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-C64-theme/images/weather-v1.png?raw=true" style="width:100%">
+  <div class="numbertext">3 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V1</div>
+  </div>
+
+  <div class="mySlides6">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-C64-theme/images/weather-v2.png?raw=true" style="width:100%">
+  <div class="numbertext">4 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V2</div>
+  </div>
+
+  <div class="mySlides6">
+  <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-C64-theme/images/weather-v3.png?raw=true" style="width:100%">
+  <div class="numbertext">5 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V3</div>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1, 5)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 5)">&#10095;</a>
+</div>
+<br>
+<div style="padding-left:55%;">
+<button id="MoRBiD_MaNGLeRC64downloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-C64-theme/MoRBiD_MaNGLeR-C64.theme', 'MoRBiD_MaNGLeR-C64.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="MoRBiD_MaNGLeRC64setthemeButton" onclick="settheme('system/MoRBiD_MaNGLeR-C64')">Use This Theme <i class="fa">&#x2713;</i></button>
+</div>
+<br>
+<br>
+<p style="color:blue;padding-left:55%;">The MoRBiD_MaNGLeR-C64 theme includes blue backgrounds and cyan text.</p>
+<p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
+<br>
+<div style="padding-left:55%;">
+  <button id="MoRBiD_MaNGLeRC64jsonButton" onclick="returnJson('system/MoRBiD_MaNGLeR-C64')">Show theme json file</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<hr class="solid">
+<h4 style="text-align:center;color:brown;">MoRBiD_MaNGLeR-BlueWhite Theme</h4>
+<div class="slideshow-container">
+  <div class="mySlides7">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-BlueWhite-theme/images/channel-offline.png?raw=true" style="width:100%">
+    <div class="numbertext">1 / 5</div>
+<div class="text" style="padding-top: 20px;">Channel-offline</div>
+  </div>
+
+  <div class="mySlides7">
+    <img id="myImg" src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-BlueWhite-theme/images/news.png?raw=true" style="width:100%">
+    <div class="numbertext">2 / 5</div>
+<div class="text" style="padding-top: 20px;">News</div>
+  </div>
+
+
+  <div class="mySlides7">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-BlueWhite-theme/images/weather-v1.png?raw=true" style="width:100%">
+    <div class="numbertext">3 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V1</div>
+  </div>
+
+  <div class="mySlides7">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-BlueWhite-theme/images/weather-v2.png?raw=true" style="width:100%">
+    <div class="numbertext">4 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V2</div>
+  </div>
+
+  <div class="mySlides7">
+    <img src="https://github.com/liam8888999/ErsatzTV-Filler-Themes/blob/main/MoRBiD_MaNGLeR-BlueWhite-theme/images/weather-v3.png?raw=true" style="width:100%">
+    <div class="numbertext">5 / 5</div>
+<div class="text" style="padding-top: 20px;">Weather-V3</div>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1, 6)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 6)">&#10095;</a>
+</div>
+<br>
+<div style="padding-left:55%;">
+<button id="MoRBiD_MaNGLeRBlueWhitedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR-BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Download Theme <i class="fa">&#xf019;</i></button>
+<button id="MoRBiD_MaNGLeRBlueWhitesetthemeButton" onclick="settheme('system/MoRBiD_MaNGLeR-BlueWhite')">Use This Theme <i class="fa">&#x2713;</i></button>
+</div>
+<br>
+<br>
+<p style="color:blue;padding-left:55%;">The MoRBiD_MaNGLeR-BlueWhite theme includes blue backgrounds and white text.</p>
+<p style="color:DimGray;padding-left:55%;">Credit to MoRBid MaNGLeR.</p>
+<br>
+<div style="padding-left:55%;">
+  <button id="MoRBiD_MaNGLeRBlueWhitejsonButton" onclick="returnJson('system/MoRBiD_MaNGLeR-BlueWhite')">Show theme json file</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<hr class="solid">
+
+</div>

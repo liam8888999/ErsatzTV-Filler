@@ -1,0 +1,77 @@
+<div id="output">
+  <center><h1>Manual Run</h1>
+  <button onclick="runFor('weather')">Run Weather <br>Generator Manually<br><span style="font-size:36px;">&#9925;</span></button>
+  <button onclick="runFor('news')">Run News <br>Generator Manually<br><span style="font-size:36px;">&#128240;</span></button>
+  <button onclick="runFor('channel-offline')">Run Channel-Offline <br>Generator Manually<br><span style="font-size:36px;">&#10060;</span></button>
+  <button onclick="runFor('xmltvmerger')">Run XMLTVMERGER <br>Manually<br><img src="https://img.icons8.com/?size=512&id=62008&format=png" style="height:55px;"></img></button>
+  <button onclick="runFor('vanitycard')">Run Vanity Card <br>Manually<br>  <center><div class="card-icon">
+    ♦
+  </div></center></button>
+  </center>
+</div>
+<br>
+<!--  <center><button onclick="window.location.href='/output'">View Filler Output</button></center> -->
+  <br>
+<center>  <h2>Upload Old Config</h2>
+  <p>The old config.conf file can be uploaded here to migrate the data to the new (current) config</p>
+  <p><b>Please Note:</b> Some configs will be overwritten</p>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" accept="config.conf" class="button">
+    <br>
+    <br>
+    <input type="submit" value="Upload" class="button">
+  </form>
+  <br>
+  </center>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      var fileInput = document.getElementById("fileInput");
+      var file = fileInput.files[0];
+
+      if (file) {
+        var formData = new FormData();
+        formData.append("file", file);
+
+        // You can send the formData object using AJAX or fetch to handle the file upload on the server
+        // Example using fetch:
+        fetch("/uploadoldmodeltheme", {
+          method: "POST",
+          body: formData
+        })
+        .then(response => {
+          // Handle the response from the server
+          logger.info("Upload successful");
+        })
+        .catch(error => {
+          // Handle any errors
+          logger.error("Upload failed:", error);
+        });
+      } else {
+        // Handle case where no file is selected
+        logger.error("No file selected");
+      }
+    });
+  </script>
+
+<div class="home-page-container">
+  <div class="home-page-box">
+  <center><h1>News</h1></center>
+  <center><p style="padding-right:10px;">This is currently a work in progress. Testers are welcome but things may break without notice</p></center>
+  <center><p>Support for user themes added</p></center>
+</div>
+  <div class="home-page-box">
+  <center><h1>Health Checks</h1></center>
+  <p>Health Api Status: <span id="healthapistatus"></span></p>
+  <p>FFmpeg installation Status: <span id="ffmpeginstallationstatus"></span></p>
+
+  <h4>Operating System Information</h4>
+  <p>Platform: <span id="platform"></span></p>
+  <p>Hostname: <span id="hostname"></span></p>
+  <p>Total Memory: <span id="totalMemory"></span> bytes</p>
+  <p>Free Memory: <span id="freeMemory"></span> bytes</p>
+
+</div>
+</div>

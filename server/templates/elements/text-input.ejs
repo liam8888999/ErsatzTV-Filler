@@ -1,0 +1,112 @@
+<div class="form-group">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"><%= key %></span>
+        <input input id="<%= key %>" type name="<%= key %>" type="text" class="form-control" aria-label="<%= key %>" aria-describedby="<%= key %>" value="<%= label %>">
+    </div>
+</div>
+
+<script>
+    (async function(){
+        const validate_response = () => {}
+        const set_valid = () => {}
+        const set_invalid = () => {}
+
+        const save_changes = async (evt) => {
+            try{
+                const res = await fetch('/api/config/edit', {
+                    method: "PATCH",
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    },
+                    body: JSON.stringify({
+                        key: evt.srcElement.id,
+                        value: evt.srcElement.value
+                    })
+                })
+                if(res.ok){
+                    const jsonResponse = await res.json();
+                    // Validate the response
+                }
+            }catch(e){
+                //TODO: update this when we make the validation side on the server. Needs to catch 400 errors automatically for validation.
+                logger.error(e)
+            }
+        }
+
+        // Set listeners for focus out and key up events. Setting will be saved via either of those actions.
+        const input_id = document.getElementById("<%- key %>")
+        input_id.addEventListener("focusout", async (evt) => {
+            await save_changes(evt)
+        });
+        input_id.addEventListener("keyup", async (evt) => {
+            //keyCode is legacy support, doubt it's needed anymore
+            if (evt.key === 'Enter' || evt.keyCode === 13) {
+                await save_changes(evt)
+            }
+        });
+
+        // Define an object with the strings you want to find and their corresponding replacements
+        const replacements = {
+          "^customaudio$": "Custom Audio Location",
+          "^output$": "Output Directory",
+          "^city$": "City",
+          "^state$": "State",
+          "^videolength$": "Video Length",
+          "^ersatztv$": "ErsatzTV Location (URL)",
+          "^videoresolution$": "Video Resolution",
+          "^webport$": "Web Port",
+          "^fontfile$": "Custom Font File (unused)",
+          "^webtheme$": "Webpage Theme (dark/light)",
+          "^theme$": "Video Theme",
+          "^processweather$": "Process Weather?",
+          "^generate_weatherv4$": "Generate Weather V4 (Upcoming)",
+          "^weathervideofadeoutduration$": "Weather Video Fade Out Duration",
+          "^weathervideofadeinduration$": "Weather Video Fade In Duration",
+          "^weatheraudiofadeoutduration$": "Weather Audio Fade Out Duration",
+          "^weatheraudiofadeinduration$": "Weather Audio Fade In Duration",
+          "^weatherinterval$": "Weather Generation Interval",
+          "^processnews$": "Process News?",
+          "^newsvideofadeoutduration$": "News Video Fade Out Duration",
+          "^newsvideofadeinduration$": "News Video Fade In Duration",
+          "^newsaudiofadeoutduration$": "News Audio Fade Out Duration",
+          "^newsaudiofadeinduration$": "News Audio Fade In Duration",
+          "^newsfeed$": "Newsfeed URL",
+          "^newsduration$": "News Video Duration",
+          "^newsarticles$": "News Articles To Display",
+          "^newsinterval$": "News Generation Interval",
+          "^processchanneloffline$": "Process Channel Offline?",
+          "^offlineinterval$": "Channel Offline Generation Interval",
+          "^processxmltvmerger$": "Run XMLTVMERGER?",
+          "^epgfiles$": "EPG Files To Merge",
+          "^xmltvmergeinterval$": "XMLTVMERGER Interval",
+          "^processvanitycards$": "Process Vanity Cards?",
+          "^amountvanitycards$": "Amount of Vanity Card Videos",
+          "^vanityinterval$": "Vanity Generation Interval",
+          "^ffmpegencoder$": "FFMPEG Encoder",
+          "^hwaccel$": "HW Accel Mode",
+          "^hwaccel_device$": "HW Accel Device",
+          "^customffmpeg$": "Custom FFMPEG Command"
+          // Add more string replacements as needed
+        };
+
+        // Function to perform the replacements only within id="basic-addon1" elements
+        function replaceStringsInAddon1() {
+          // Loop through all elements with class "form-group"
+          const formGroups = document.querySelectorAll('.form-group');
+          formGroups.forEach(formGroup => {
+            const addon1 = formGroup.querySelector('#basic-addon1');
+            if (addon1) {
+              for (const findString in replacements) {
+                if (replacements.hasOwnProperty(findString)) {
+                  const replaceString = replacements[findString];
+                  addon1.innerHTML = addon1.innerHTML.replace(new RegExp(findString, "g"), replaceString);
+                }
+              }
+            }
+          });
+        }
+
+        // Replace strings only within id="basic-addon1" elements
+        replaceStringsInAddon1();
+    })();
+</script>

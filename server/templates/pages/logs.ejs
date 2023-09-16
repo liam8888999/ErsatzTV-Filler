@@ -1,0 +1,32 @@
+<style>
+  body,
+  html {
+    height: 99%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #logContainer {
+    height: 79vh;
+    overflow-y: scroll;
+    margin: auto;
+    width: 100%;
+  }
+
+  p {
+    border-bottom: 1px solid darkgray;
+    padding-bottom: 15px;
+    padding-left: 30px;
+  }
+</style>
+
+<div>
+  <center>
+    <h1>Logs</h1>
+        <button onclick="handleZip()">Download Log Files</button>
+        <br>
+  </center>
+
+  <div id="logContainer" style="padding-top:10px;"></div>
+
+</div>

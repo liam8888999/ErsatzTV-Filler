@@ -7,3 +7,11 @@ v1.png
 v2.png
 v3.png
 .DS_Store
+/node_modules
+output.json
+config.json
+config-old.json
+*.log
+logs.log
+*-audit.json
+test/*

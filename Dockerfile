@@ -1,13 +1,18 @@
 FROM debian:bullseye-slim
 
-RUN apt-get update \
-    && DEBIAN_FRONTEND="noninteractive" apt-get install -y ffmpeg tzdata fontconfig fonts-dejavu xsltproc jq xmltv-util curl bsdextrautils man bc \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
 
 ENV ETV_FILLER_DOCKER 1
 
 WORKDIR /app
 
-COPY . ./
+COPY ersatztv-filler-linux /app
 
-ENTRYPOINT [ "/app/generator.sh" ]
+# Make the binary executable (if needed)
+RUN chmod +x /app/ersatztv-filler-linux
+
+# Expose any necessary ports
+EXPOSE 8408
+
+# Specify the command to run when the container starts
+CMD ["./ersatztv-filler-linux"]
