@@ -66,7 +66,7 @@ const setwebtheme = async (theme) => {
     const fileData = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     const json = JSON.parse(fileData);
     json.webtheme = theme;
-    await fs.writeFileSync("config.json", JSON.stringify(json, null, 2));
+    await fs.writeFileSync(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(json, null, 2));
     logger.success(`Successfully updated webtheme to '${theme}' in config.json`);
   } catch (err) {
     logger.error(`Error updating webtheme to '${theme}' in config.json: ${err}`);

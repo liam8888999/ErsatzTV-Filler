@@ -53,6 +53,9 @@ process.on('unhandledRejection', (reason, promise) => {
     // Also very basic global error caching for the entire application, might still completely stall if not careful but can be improved at a later date.
 
     try {
+
+      await createrequiredstartupfolders();
+      
         await setupConfigurationFile();
 
 
@@ -60,7 +63,6 @@ process.on('unhandledRejection', (reason, promise) => {
 
         await startWebServer();
 
-        await createrequiredstartupfolders();
 
         await copyResources();
 

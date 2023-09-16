@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { WORKDIR, THEMES_FOLDER, AUDIOFALLBACKINTERNAL, FFMPEGPATHINTERNAL, RESOURCESPATH } = require("../constants/path.constants");
+const { WORKDIR, THEMES_FOLDER, AUDIOFALLBACKINTERNAL, FFMPEGPATHINTERNAL, RESOURCESPATH, CONFIG_DIR } = require("../constants/path.constants");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 // Replace these with the actual paths to the files you want to delete
@@ -40,6 +40,7 @@ function deleteFoldersOnShutdown() {
 }
 
 async function createrequiredstartupfolders() {
+await createDirectoryIfNotExists(CONFIG_DIR);
 await createDirectoryIfNotExists(WORKDIR);
 await createDirectoryIfNotExists(THEMES_FOLDER);
 await createDirectoryIfNotExists(`${THEMES_FOLDER}/system`);

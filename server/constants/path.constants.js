@@ -67,7 +67,8 @@ const DEFAULT_CONFIG = {
   "customffmpeg": ""
 }
 
-const USER_CONFIG = startUpPath + "config.json"
+const CONFIG_DIR = startUpPath + "config/"
+const USER_CONFIG = CONFIG_DIR + "config.json"
 
 const CHANGELOG = serverLocation + "Changelog.md";
 const README = startUpPath + "README.md"
@@ -148,5 +149,6 @@ module.exports = {
     FFMPEGPATHINTERNAL,
     LOGFOLDER,
     serverLocation,
-    RESOURCESPATH
+    RESOURCESPATH,
+    CONFIG_DIR
   };
