@@ -1,10 +1,8 @@
 name: Build Package with pkg
 
 on:
-  release:
-    types:
-      - created # This triggers the workflow when a new release is created
-
+  push:
+    branches: [ "main" ]
 
 jobs:
   build:
