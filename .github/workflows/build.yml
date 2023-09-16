@@ -1,9 +1,10 @@
 name: Build Package with pkg
 
 on:
-  push:
-    branches:
-      - main # Change to the default branch of your repository
+  release:
+    types:
+      - created # This triggers the workflow when a new release is created
+
 
 jobs:
   build:
@@ -25,10 +26,10 @@ jobs:
         run: npm install -g pkg
 
       - name: Build Package with pkg
-        run: pkg package.json --output ersatztv-filler # Modify this command as needed
+        run: pkg package.json # Modify this command as needed
+        working-directory: ./ersatztv-filler
 
       - name: Upload Package
         uses: actions/upload-artifact@v2
         with:
-          name: ersatztv-filler
-          path: ersatztv-filler
+          path: ./ersatztv-filler
