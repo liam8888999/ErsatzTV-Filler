@@ -1,0 +1,43 @@
+name: Docker Image CI
+
+on:
+  release:
+    types:
+      - created # This triggers the workflow when a new release is created
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18 # Choose the Node.js version you want to use
+
+    - name: Install Dependencies
+      run: npm ci --legacy-peer-deps # Replace with your package manager (e.g., yarn)
+
+    - name: Install pkg
+      run: npm install -g pkg
+
+    - name: Build Package with pkg
+      run: pkg package.json # Modify this command as needed
+      working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+
+    - name: Docker Login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+    - name: Build the Docker Image
+      run: docker build . --file Dockerfile --tag liam2003/ersatztv-filler:latest
+      working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+
+    - name: Docker Push
+      run: docker push liam2003/ersatztv-filler # Replace v1 with your desired version number

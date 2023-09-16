@@ -1,10 +1,8 @@
-name: Build Package with pkg
+name: Build Package with pkg and zip
 
 on:
-  release:
-    types:
-      - created # This triggers the workflow when a new release is created
-
+  push:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -25,11 +23,47 @@ jobs:
       - name: Install pkg
         run: npm install -g pkg
 
+      - name: create working dir
+        run: mkdir builds # Modify this command as needed
+
       - name: Build Package with pkg
         run: pkg package.json # Modify this command as needed
-        working-directory: ./ersatztv-filler
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+
+      - name: create windows zip
+        run: |
+          mkdir builds/ersatztv-windows-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
+          zip -r /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/windows.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+
+      - name: create macos zip
+        run: |
+          mkdir builds/ersatztv-macos-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
+          zip -r /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/macos.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+
+      - name: create linux zip
+        run: |
+          mkdir builds/ersatztv-linux-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
+          zip -r /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/linux.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+
+      - name: clean up
+        run: |
+          rm -rf /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
+          rm -rf /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
+          rm -rf /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
 
       - name: Upload Package
         uses: actions/upload-artifact@v2
         with:
-          path: ./ersatztv-filler
+          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds
