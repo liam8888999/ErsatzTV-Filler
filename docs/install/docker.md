@@ -47,5 +47,5 @@ Docker Install
     -v /path/to/logs:/app/logs \
     -v /path/to/output:/output \
     --restart unless-stopped \
-    liam8888999/ersatztv-filler
+    liam2003/ersatztv-filler
     ```
