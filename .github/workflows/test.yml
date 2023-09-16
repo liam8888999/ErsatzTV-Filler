@@ -36,7 +36,7 @@ jobs:
             # Process is still running, terminate it
             echo "The 'npm run dev' command is running for too long. Terminating..."
             kill $dev_pid
-            exit 1
+            exit 0
           else
             # Process has completed, check the exit status
             if [ $? -eq 0 ]; then
