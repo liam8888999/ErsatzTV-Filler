@@ -94,7 +94,7 @@ let filesinthemesdirsystem = await listFilesInDir(`${THEMES_FOLDER}/system`)
 .catch(error => {
 logger.error(`Error: ${error}`);
 });
-console.log(JSON.stringify(filesinthemesdiruser))
+logger.info(JSON.stringify(filesinthemesdiruser))
       let UPDATESTATUS = await checkForUpdates();
       const ErsatzTVURL = config_current.ersatztv
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {

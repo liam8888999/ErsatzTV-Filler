@@ -16,7 +16,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 
 let isFunctionRunning = false;
 const CHANNEL_OFFLINE = async () => {
-  console.log(CHANNEL_OFFLINEDIR)
+  logger.info(CHANNEL_OFFLINEDIR)
   if (isFunctionRunning) {
   logger.error('Channel Offline Generator is already running.');
     return;
@@ -189,24 +189,24 @@ logger.info(assText)
 
 if (config_current.hwaccel !== "") {
   const hwaccell = ` -hwaccel ${config_current.hwaccel}`;
-  console.log(hwaccell); // Use the constant as needed
+  logger.info(hwaccell); // Use the constant as needed
 } else {
-  console.log("The input string is empty.");
+  logger.info("The input string is empty.");
 }
 if (config_current.hwaccel == "") {
   hwaccel = ` `;
-  console.log('no hwaccel'); // Use the constant as needed
+  logger.info('no hwaccel'); // Use the constant as needed
 } else {
   hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-  console.log(hwaccel);
+  logger.info(hwaccel);
 }
 
 if (config_current.hwaccel_device == "") {
   hwacceldevice = ``;
-  console.log('no hwacceldevice'); // Use the constant as needed
+  logger.info('no hwacceldevice'); // Use the constant as needed
 } else {
   hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-  console.log(hwacceldevice);
+  logger.info(hwacceldevice);
 }
       const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
 

@@ -33,18 +33,18 @@ const weatherbackgroundcolour = themecolourdecoder(`${current_theme.Weather.weat
 
 if (config_current.hwaccel == "") {
   hwaccel = ` `;
-  console.log('no hwaccel'); // Use the constant as needed
+  logger.info('no hwaccel'); // Use the constant as needed
 } else {
   hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-  console.log(hwaccel);
+  logger.info(hwaccel);
 }
 
 if (config_current.hwaccel_device == "") {
   hwacceldevice = ``;
-  console.log('no hwacceldevice'); // Use the constant as needed
+  logger.info('no hwacceldevice'); // Use the constant as needed
 } else {
   hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-  console.log(hwacceldevice);
+  logger.info(hwacceldevice);
 }
 
 const downloadimages = async () => {

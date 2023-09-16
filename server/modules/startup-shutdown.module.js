@@ -25,7 +25,7 @@ function deleteFolderRecursive(folderPath) {
     });
     // Delete the empty folder
     fs.rmdirSync(folderPath);
-    console.log(`Deleted folder and its contents: ${folderPath}`);
+    logger.info(`Deleted folder and its contents: ${folderPath}`);
   }
 }
 
@@ -66,7 +66,7 @@ function copyResources() {
       // Set the same permissions on the destination file
       fs.chmodSync(destinationFile, sourceStats.mode);
 
-      console.log(`Copied file: ${sourceFile} -> ${destinationFile}`);
+      logger.info(`Copied file: ${sourceFile} -> ${destinationFile}`);
     });
 
     sourceStream.on('error', (error) => {
@@ -102,7 +102,7 @@ function copyFolderRecursive(source, destination) {
     } else {
       // Copy files with permissions
       copyFileWithPermissions(sourcePath, destinationPath);
-      console.log(`Copied file: ${sourcePath} -> ${destinationPath}`);
+      logger.info(`Copied file: ${sourcePath} -> ${destinationPath}`);
     }
   });
 }
@@ -114,18 +114,18 @@ let FFMPEGINTERALPATH;
 if (os.platform() === 'win32') {
   FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-windows.exe');
   ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-windows.exe');
-console.log("windows")
+logger.info("windows")
 } else if (os.platform() === 'linux') {
   FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-linux');
   ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-linux');
-  console.log("linux")
+  logger.info("linux")
 } else if (os.platform() === 'darwin') {
-  console.log("darwin")
+  logger.info("darwin")
   FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-darwin');
   ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-darwin');
 } else {
   // Handle other platforms or provide a default value
-  console.log("operating system unknown, not copying ffmpeg to resources folder, will test if ffmpeg is installed on the system and try to use that")
+  logger.info("operating system unknown, not copying ffmpeg to resources folder, will test if ffmpeg is installed on the system and try to use that")
 }
 copyFileWithPermissions(FFMPEGINTERNALPATH, ffmpegResourcesPath);
 //copyFolderRecursive(FFMPEGPATHINTERNAL, `${RESOURCESPATH}/ffmpeg`);

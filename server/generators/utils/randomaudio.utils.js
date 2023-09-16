@@ -9,13 +9,13 @@ const audioExtensions = ['mp3', 'wav', 'flac', 'aac', 'ogg', 'wma', 'm4a', 'opus
 
 const selectRandomAudioFile = async (path) => {
   let selectedPath = path;
-console.log(selectedPath)
+logger.info(selectedPath)
   if (!selectedPath) {
     // Handle the case where 'path' is undefined or falsy
     logger.info("Path parameter is undefined or empty. Using the backup directory.");
     selectedPath = `${AUDIOFALLBACK}`; // Set the backup directory
   }
-console.log(selectedPath)
+logger.info(selectedPath)
   // Get the list of files in the specified directory or backup directory
   let fileList = await listFilesInDir(selectedPath);
 
