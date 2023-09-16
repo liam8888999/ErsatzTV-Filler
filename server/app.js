@@ -9,20 +9,20 @@ const { deleteFoldersOnShutdown, createrequiredstartupfolders, copyResources } =
 
 // Register a handler for the 'exit' event
 process.on('exit', () => {
-  console.log('Application is exiting.');
+  logger.info('Application is exiting.');
   deleteFoldersOnShutdown();
 });
 
 // Register a handler for the 'SIGINT' (Ctrl+C) signal
 process.on('SIGINT', () => {
-  console.log('Received SIGINT signal (Ctrl+C).');
+  logger.info('Received SIGINT signal (Ctrl+C).');
   deleteFoldersOnShutdown();
   process.exit(1); // Forcefully exit the application
 });
 
 // Register a handler for the 'SIGTERM' signal
 process.on('SIGTERM', () => {
-  console.log('Received SIGTERM signal.');
+  logger.info('Received SIGTERM signal.');
   deleteFoldersOnShutdown();
   process.exit(1); // Forcefully exit the application
 });
@@ -55,7 +55,7 @@ process.on('unhandledRejection', (reason, promise) => {
     try {
 
       await createrequiredstartupfolders();
-      
+
         await setupConfigurationFile();
 
 
