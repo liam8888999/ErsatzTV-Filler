@@ -115,11 +115,11 @@ const CONFIG_CONSTANTS = () => {
 let FFMPEGCOMMAND;
 
 if (os.platform() === 'win32') {
-  FFMPEGCOMMAND = `${FFMPEGPATH}\ffmpeg-win.exe -y`;
+  FFMPEGCOMMAND = path.join(FFMPEGPATH, 'ffmpeg-windows.exe -y');
 } else if (os.platform() === 'linux') {
-  FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-linux -y`; // Specify the Linux command
+  FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg-linux -y'); // Specify the Linux command
 } else if (os.platform() === 'darwin') {
-  FFMPEGCOMMAND = `${FFMPEGPATH}/ffmpeg-darwin -y`; // Specify the macOS/Darwin command
+  FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg-darwin -y'); // Specify the macOS/Darwin command
 } else {
   // Handle other platforms or provide a default value
   FFMPEGCOMMAND = "ffmpeg -y"
