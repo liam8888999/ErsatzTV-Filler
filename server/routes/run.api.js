@@ -53,7 +53,7 @@ await CHANNEL_OFFLINE();
 // run xmltvmerger function
 app.get('/api/run/xmltvmerger', async () => {
 logger.info("xmltvmerger function")
-const config_current = await retrieveCurrentConfiguration
+const config_current = await retrieveCurrentConfiguration()
 if (!(typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null')) {
 await XMLTVPARSE();
 } else {
