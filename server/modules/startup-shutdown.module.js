@@ -1,3 +1,4 @@
+const logger = require("../utils/logger.utils");
 const fs = require('fs');
 const path = require('path');
 const { WORKDIR, THEMES_FOLDER, AUDIOFALLBACKINTERNAL, FFMPEGPATHINTERNAL, RESOURCESPATH, CONFIG_DIR } = require("../constants/path.constants");
