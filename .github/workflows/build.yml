@@ -33,7 +33,7 @@ jobs:
       - name: create windows zip
         run: |
           mkdir builds/ersatztv-windows-ver
-          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver/ersatztv-filler-win.exe
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-ver
           zip -r windows.zip ersatztv-filler-windows-ver
@@ -42,7 +42,7 @@ jobs:
       - name: create macos zip
         run: |
           mkdir builds/ersatztv-macos-ver
-          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver/ersatztv-filler-macos
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-ver
           zip -r macos.zip ersatztv-filler-macos-ver
@@ -51,7 +51,7 @@ jobs:
       - name: create linux zip
         run: |
           mkdir builds/ersatztv-linux-ver
-          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver/ersatztv-filler-linux
+          cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
           cp /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-ver
           zip -r linux.zip ersatztv-filler-linux-ver
