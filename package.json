@@ -59,8 +59,7 @@
   "pkg": {
     "entry": "server/app.js",
     "scripts": "server/**/*.js",
-    "assets": ["server/templates/**/*", "audio-fallback/**/*", "Changelog.md", "ffmpeg/**/*"],
-    "targets": ["node18-macos-x64"]
+    "assets": ["server/templates/**/*", "audio-fallback/**/*", "Changelog.md", "ffmpeg/**/*"]
   },
   "release-it": {
     "git": {
