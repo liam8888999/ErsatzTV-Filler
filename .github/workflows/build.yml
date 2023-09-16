@@ -32,7 +32,6 @@ jobs:
 
       - name: create zip
         run: |
-          mkdir builds
           zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/windows.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md 
           zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/macos.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
           zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/linux.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
