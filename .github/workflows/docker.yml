@@ -2,9 +2,8 @@ name: Docker Image CI
 
 on:
   release:
-    types:
-      - created # This triggers the workflow when a new release is created
-
+    types: [published]
+    
 jobs:
   build:
     runs-on: ubuntu-latest
