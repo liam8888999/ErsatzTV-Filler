@@ -27,6 +27,15 @@
     <span style="float: right; margin-top: 8px; margin-right: 5px; font-size: 20px;">&#x263e;</span>
 </div>
 
+
+<% if (authentication === 'yes') { %>
+  <a id="logout" href="/logout" class="button" style="float: right; margin-right: 35px;">
+       <span>Log Out</span>
+     </a>
+<% } %>
+
+
+
 <div class="page-container" style="margin: auto; width: 75%; padding-top: 10px;">
   <!-- JSON Popup -->
   <div id="jsonPopup" class="modal" style="padding-top: 60px;">
@@ -38,6 +47,7 @@
       <br>
     </div>
   </div>
+
     <%- body %>
     <%- include(footer) %>
 </div>

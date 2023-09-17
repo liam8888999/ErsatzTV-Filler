@@ -20,6 +20,7 @@
       <button class="tab-link" onclick="openTab(event, 'tab4')">Channel Offline Settings</button>
       <button class="tab-link" onclick="openTab(event, 'tab5')">XMLTV Merge</button>
       <button class="tab-link" onclick="openTab(event, 'tab6')">Vanity Cards</button>
+      <button class="tab-link" onclick="openTab(event, 'tab7')">Login</button>
     </div>
     <br>
     <button onclick="returnConfigJson()" style="margin-top:10px;">Show config.json file</button>
@@ -144,5 +145,19 @@
           <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
     </div>
+    <div id="tab7" class="tab">
+          <br>
+        <center>  <h2>Login Settings</h2></center>
+
+        <br>
+        <h3>Register your user account here</h3>
+        <form action="/register" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <input type="submit" value="Register">
+            </form>
+        </div>
   </div>
   </div>

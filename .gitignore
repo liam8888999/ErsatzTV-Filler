@@ -15,3 +15,4 @@ config-old.json
 logs.log
 *-audit.json
 test/*
+config/password.json

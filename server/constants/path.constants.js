@@ -70,6 +70,7 @@ const DEFAULT_CONFIG = {
 
 const CONFIG_DIR = path.join(startUpPath, 'config');
 const USER_CONFIG = path.join(CONFIG_DIR, 'config.json');
+const PASSWORD = path.join(CONFIG_DIR, 'password.json');
 
 const CHANGELOG = path.join(serverLocation, 'Changelog.md');
 const README = path.join(startUpPath, 'README.md');
@@ -147,5 +148,6 @@ module.exports = {
     LOGFOLDER,
     serverLocation,
     RESOURCESPATH,
-    CONFIG_DIR
+    CONFIG_DIR,
+    PASSWORD
   };
