@@ -34,7 +34,7 @@
         }
 
         // Set listeners for focus out and key up events. Setting will be saved via either of those actions.
-        const input_id = document.getElementById("<%- key %>")
+        const input_id = document.getElementById("<%= key %>")
         input_id.addEventListener("focusout", async (evt) => {
             await save_changes(evt)
         });
