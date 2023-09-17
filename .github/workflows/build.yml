@@ -17,6 +17,7 @@ jobs:
         run: |
           tag=$(git describe --tags --abbrev=0 --always)
           echo "TAG=${tag}" >> $GITHUB_ENV
+          echo ${tag}
 
       - name: Set VERSION variable
         run: |
