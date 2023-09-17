@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.2...1.0.3) (2023-09-17)
+
+
+### Changed
+
+* add line under version number in changelog ([616cc90](https://github.com/liam8888999/ErsatzTV-Filler/commit/616cc90e02c6ce5dc7cea90f5521c6f48070e286))
+
+
+### Fixed
+
+* define logger ([3cb747e](https://github.com/liam8888999/ErsatzTV-Filler/commit/3cb747ea24789887cb94e2e4b61460d1e1f2da25))
+* error logging use logger ([36ad35b](https://github.com/liam8888999/ErsatzTV-Filler/commit/36ad35bbe0f6b33c3431ef6cf01c4a00fbc161cf))
+
 ## [1.0.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.1...1.0.2) (2023-09-16)
 
 
