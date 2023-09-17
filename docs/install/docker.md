@@ -49,3 +49,5 @@ Docker Install
     --restart unless-stopped \
     liam2003/ersatztv-filler
     ```
+
+*Note:* Please note there are no explicit output or audio locations set in docker, these will need to be set in the config page but the paths above are a good reference point
