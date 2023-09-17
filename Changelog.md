@@ -1,5 +1,8 @@
 # Changelog
 
+* Update build.yml (ca89ff34)
+* Revert "chore: release v1.0.4" (c6099e89)
+
 ## [1.0.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.2...1.0.3) (2023-09-17)
 
 
