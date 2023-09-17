@@ -9,9 +9,9 @@
   "scripts": {
     "dev": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release-minor": "release-it --increment minor --tag v${npm_package_version} --verbose",
-    "release-major": "release-it --increment major --tag v${npm_package_version} --verbose",
-    "release-patch": "release-it --increment patch --tag v${npm_package_version} --verbose",
+    "release-minor": "release-it --increment minor --verbose",
+    "release-major": "release-it --increment major --verbose",
+    "release-patch": "release-it --increment patch --verbose",
     "build": "pkg package.json"
   },
   "repository": {
