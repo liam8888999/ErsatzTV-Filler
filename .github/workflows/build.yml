@@ -30,11 +30,26 @@ jobs:
         run: pkg package.json # Modify this command as needed
         working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
+      - name: Check if commit has a tag
+        id: check_tag
+        run: echo ::set-output name=has_tag::$(git describe --tags --exact-match 2>/dev/null || echo "false")
+
+      - name: Determine version
+        id: determine_version
+        run: |
+          if [[ "${{ steps.check_tag.outputs.has_tag }}" == "false" ]]; then
+            VERSION="${{ github.sha }}"
+          else
+            VERSION="${{ github.ref }}"
+          fi
+          echo "Version is $VERSION"
+        shell: bash
+
       - name: create zip
         run: |
-          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md 
-          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
-          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
+          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-${{ steps.determine_version.outputs.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md 
+          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-${{ steps.determine_version.outputs.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
+          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-${{ steps.determine_version.outputs.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
         working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
       - name: Upload Package
