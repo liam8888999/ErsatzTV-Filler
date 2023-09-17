@@ -36,7 +36,7 @@ function deleteFoldersOnShutdown() {
     try {
       deleteFolderRecursive(folderPath);
     } catch (err) {
-      console.error(`Error deleting folder ${folderPath}: ${err.message}`);
+      logger.error(`Error deleting folder ${folderPath}: ${err.message}`);
     }
   });
 }
@@ -71,15 +71,15 @@ function copyResources() {
     });
 
     sourceStream.on('error', (error) => {
-      console.error(`Error copying file: ${sourceFile} -> ${destinationFile}`);
-      console.error(error);
+      logger.error(`Error copying file: ${sourceFile} -> ${destinationFile}`);
+      logger.error(error);
     });
   }
 
 function copyFolderRecursive(source, destination) {
   // Check if the source folder exists
   if (!fs.existsSync(source)) {
-    console.error(`Source folder "${source}" does not exist.`);
+    logger.error(`Source folder "${source}" does not exist.`);
     return;
   }
 

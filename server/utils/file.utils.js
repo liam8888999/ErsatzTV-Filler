@@ -70,7 +70,7 @@ async function listFilesInDir(directoryPath) {
     const results = await Promise.all(filePromises);
     return results.flat().filter(Boolean); // Remove undefined values
   } catch (error) {
-    console.error(`Error reading directory: ${error}`);
+    logger.error(`Error reading directory: ${error}`);
     return [];
   }
 }
