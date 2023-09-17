@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/1.0.3.0.0.0.0...1.0.4) (2023-09-17)
+
+
+### Fixed
+
+* documentation security fix ([1c29ba6](https://github.com/liam8888999/ErsatzTV-Filler/commit/1c29ba6166cabb2f478fe8ef1fcadab25124928a))
+* layout security fixes ([e57c000](https://github.com/liam8888999/ErsatzTV-Filler/commit/e57c00050ad87b4ea70f002e6353563151c6b2e6))
+* navbar security fix ([2aa043f](https://github.com/liam8888999/ErsatzTV-Filler/commit/2aa043fc25d1b2da1ea5bd78ec2ec67601e8656c))
+* navbar security fix ([9831a9d](https://github.com/liam8888999/ErsatzTV-Filler/commit/9831a9d464fbb7d23b118bfc715e08f465964bd0))
+* rendering fixes ([b22c996](https://github.com/liam8888999/ErsatzTV-Filler/commit/b22c996b84188cb7cff17132430001ad26f13bdd))
+* text-input security fix ([859e79e](https://github.com/liam8888999/ErsatzTV-Filler/commit/859e79e2f8e62008381eb55cd7c17ff0d09243e1))
+* themes security fixes ([63c2c56](https://github.com/liam8888999/ErsatzTV-Filler/commit/63c2c56f7d0db10806b5632f38129b42d4951403))
+
 ## [1.0.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.2...1.0.3) (2023-09-17)
 
 
