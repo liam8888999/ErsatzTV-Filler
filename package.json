@@ -75,7 +75,8 @@
   "release-it": {
     "git": {
       "commitMessage": "chore: release v${version}",
-      "tagName": "v${version}"
+      "tagName": "v${version}",
+      "releaseMessage": "V${version} - Beta"
     },
     "github": {
       "release": true
