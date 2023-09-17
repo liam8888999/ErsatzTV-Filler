@@ -15,3 +15,5 @@ This Guide explains all the configuration options available via the Ersatztv-Fil
 - [XMLTV Merge Configuration](xmltv-merge.md)
 
 - [Vanity Cards Configuration](vanity-cards.md)
+
+- [Login Configuration](login.md)

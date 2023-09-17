@@ -63,6 +63,7 @@ nav:
     - Channel Offline Configuration: configure/channel-offline.md
     - XMLTV Merge Configuration: configure/xmltv-merge.md
     - Vanity Cards Configuration: configure/vanity-cards.md
+    - Login Configuration: configure/login.md
   - Themes:
     - Themes: themes/themes.md
   - API:
