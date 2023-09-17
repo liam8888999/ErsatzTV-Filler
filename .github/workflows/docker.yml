@@ -27,12 +27,11 @@ jobs:
       run: pkg package.json # Modify this command as needed
       working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
-    - name: Docker Login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build the Docker Image
       run: docker build . --file Dockerfile --tag liam2003/ersatztv-filler:latest
