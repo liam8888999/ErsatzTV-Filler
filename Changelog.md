@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/1.1.0...1.1.1) (2023-09-17)
+
+
+### Fixed
+
+* install required dependencies in docker container ([fced4c1](https://github.com/liam8888999/ErsatzTV-Filler/commit/fced4c1434c545e8a1d01978b63d13ae8222e20b))
+
 ## [1.1.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/1.0.4...1.1.0) (2023-09-17)
 
 
