@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/1.0.4...1.1.0) (2023-09-17)
+
+
+### Changed
+
+* move line from bottom of version to top in update page to improve neatness ([23d290a](https://github.com/liam8888999/ErsatzTV-Filler/commit/23d290ae156b7f582af96dcca97de89bc2f0e20f))
+
+
+### Added
+
+* webui authentication has been added ([1b67edd](https://github.com/liam8888999/ErsatzTV-Filler/commit/1b67edd072e30e12b864f4135e30aa7a4c26b053))
+
 ## [1.0.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/1.0.3.0.0.0.0...1.0.4) (2023-09-17)
 
 
