@@ -9,7 +9,7 @@
     <a href="/updates" class="<%= page === 'Updates' %> float-end" style="background-color: darkgreen; display: inline-block;">
   <div style="display: flex; align-items: center;">
     <div style="margin-right: 5px;">
-      Version: <%- version %>
+      Version: <%= version %>
     </div>
     <% if (updatestatus.startsWith('Newer version is available:')) { %>
       <div style="position: relative;">
