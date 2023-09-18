@@ -74,10 +74,11 @@ logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
    app.use(bodyParser.urlencoded({ extended: false }));
    app.use(session({
      secret: '1JIdfqkdCMdA8zIJvCRfTENtIIwzthoP', // Change this to a long random string
-     resave: false,
-     saveUninitialized: true,
-     sameSite: lax,
-     maxAge: 172800000
+     resave: 'false',
+     saveUninitialized: 'true',
+     sameSite: 'lax',
+     maxAge: '172800000',
+     path: '/'
    }));
  };
 
