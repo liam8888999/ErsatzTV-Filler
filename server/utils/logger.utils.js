@@ -2,6 +2,7 @@ const winston = require('winston');
 const { format } = winston;
 const DailyRotateFile = require('winston-daily-rotate-file');
 const {LOGFOLDER} = require("../constants/path.constants");
+const path = require('path');
 
 // Define your custom log levels
 const customLevels = {
@@ -57,14 +58,14 @@ const logFormat = winston.format.printf(({ level, message, timestamp }) => {
     transports: [
       new winston.transports.Console(),
       new DailyRotateFile({
-        filename: `${LOGFOLDER}/ersatztv-filler-%DATE%.log`,
+        filename: `${path.join(LOGFOLDER, 'ersatztv-filler')}-%DATE%.log`,
         datePattern: 'YYYY-MM-DD',
         maxFiles: '7d', // Keep logs for 7 days
         maxSize: '900m', // Rotate logs if the file size exceeds 20MB
         level: 'debug'
       }),
       new DailyRotateFile({
-        filename: `${LOGFOLDER}/ersatztv-filler-ffmpeg-%DATE%.log`,
+        filename: `${path.join(LOGFOLDER, 'ersatztv-filler-ffmpeg')}-%DATE%.log`,
         datePattern: 'YYYY-MM-DD',
         maxFiles: '7d', // Keep logs for 7 days
         maxSize: '900m', // Rotate logs if the file size exceeds 20MB
