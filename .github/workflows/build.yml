@@ -27,7 +27,7 @@ jobs:
           if [[ "$tag" == "none" ]]; then
             tag="${{ github.sha }}"
           fi
-          echo "VERSION=${tag#v}" >> $GITHUB_ENV
+          echo "VERSION=${tag#V}" >> $GITHUB_ENV
 
       - name: Show version
         run: echo "Version is ${{ env.VERSION }}"
