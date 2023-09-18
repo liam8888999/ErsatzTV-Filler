@@ -1,4 +1,4 @@
-name: Node.js npm run dev
+name: Test Code
 
 on:
   push:
@@ -49,10 +49,9 @@ jobs:
 
       - name: Install pkg
         run: npm install -g pkg
-         
+
       - name: Run npm run build
         run: npm run build --if-present
 
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.1.1
-

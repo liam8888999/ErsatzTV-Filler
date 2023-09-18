@@ -1,9 +1,9 @@
-name: Docker Image CI
+name: Release Docker Image
 
 on:
   release:
     types: [published]
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
-      
+
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:

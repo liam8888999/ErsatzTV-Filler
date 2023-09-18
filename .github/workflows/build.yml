@@ -1,4 +1,4 @@
-name: Build Package with pkg and zip
+name: Build Packages on Push
 
 on:
   push:
@@ -52,7 +52,7 @@ jobs:
 
       - name: create zip
         run: |
-          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md 
+          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
           zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
           zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
         working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
@@ -74,4 +74,3 @@ jobs:
         with:
           name: ersatztv-filler-macos-${{ env.VERSION }}.zip
           path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-${{ env.VERSION }}.zip
-
