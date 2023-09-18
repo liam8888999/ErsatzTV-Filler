@@ -114,14 +114,18 @@ const CONFIG_CONSTANTS = () => {
 let FFMPEGCOMMAND;
 
 if (os.platform() === 'win32') {
-  FFMPEGCOMMAND = path.join(FFMPEGPATH, 'ffmpeg', 'ffmpeg-windows.exe -y');
+  FFMPEGCOMMAND = path.join(FFMPEGPATH, 'ffmpeg-windows.exe -y');
+  console.log(FFMPEGCOMMAND)
 } else if (os.platform() === 'linux') {
-  FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-linux -y'); // Specify the Linux command
+  FFMPEGCOMMAND = path.join(FFMPEGPATH, 'ffmpeg-linux -y'); // Specify the Linux command
+  console.log(FFMPEGCOMMAND)
 } else if (os.platform() === 'darwin') {
-  FFMPEGCOMMAND = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-darwin -y'); // Specify the macOS/Darwin command
+  FFMPEGCOMMAND = path.join(FFMPEGPATH, 'ffmpeg-darwin -y'); // Specify the macOS/Darwin command
+    console.log(FFMPEGCOMMAND)
 } else {
   // Handle other platforms or provide a default value
   FFMPEGCOMMAND = "ffmpeg -y"
+    console.log("OS unsupported trying safe fallback of ffmpeg -y")
 }
 
 
