@@ -78,7 +78,7 @@ logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
      saveUninitialized: true,
      cookie: {
      sameSite: 'lax',
-     maxAge: '172800000',
+     maxAge: 172800000,
      path: '/',
      name: 'ersatztv-filler.cookie'
    }
