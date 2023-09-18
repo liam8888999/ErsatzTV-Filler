@@ -5,6 +5,7 @@ const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 const { readFile } = require('fs');
 const {THEMES_FOLDER} = require("../constants/path.constants");
+const path = require('path');
 
 
 const loadApiThemeRoutes = (app) => {
@@ -26,7 +27,7 @@ const loadApiThemeRoutes = (app) => {
 // download theme api
     app.get('/api/themes/download', (req, res) => {
     const url = req.query.url;
-    const filepath = `${THEMES_FOLDER}/system/${req.query.filepath}`;
+    const filepath = `${path.join(THEMES_FOLDER, 'system', req.query.filepath)}`;
     logger.info(req.query.filepath)
 
     // use the url and path variables to download the image
@@ -53,7 +54,7 @@ const loadApiThemeRoutes = (app) => {
 // show theme json
 
 app.get('/api/themes/readthemejson', async (req, res) => {
-  const filepath = `${THEMES_FOLDER}/${req.query.filepath}`;
+  const filepath = `${path.join(THEMES_FOLDER, req.query.filepath)}`;
   readFile(`${filepath}`, 'utf8', (err, data) => {
       if (err) {
         logger.error(err);
