@@ -232,27 +232,33 @@ if (config_current.hwaccel_device == "") {
   };
 
   const runnersT = async () => {
-    let fileList = await listFilesInDir(CHANNEL_OFFLINEDIR);
+  let fileList = await listFilesInDir(CHANNEL_OFFLINEDIR);
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    logger.info(fileList);
-
-    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  logger.info(fileList);
 
   async function processFiles() {
     for (const file of fileList) {
       if (path.extname(file) === '.xml') {
         logger.info(file);
         const filename = `${file}`;
-        logger.info(filename)
-        const lastIndex = filename.lastIndexOf("/");
-const filenamenopath = filename.substring(lastIndex + 1);
-        const filePath = filenamenopath.replace(/\.xml$/, "").replace("workdir\/Channel\-offline\/", "");
+        logger.info(filename);
+
+        // Use path.sep to get the correct path separator for the platform
+        const lastIndex = filename.lastIndexOf(path.sep);
+        const filenamenopath = filename.substring(lastIndex + 1);
+        const filePath = filenamenopath.replace(/\.xml$/, "").replace(CHANNEL_OFFLINEDIR, "");
 
         logger.info(`file path is ${filePath}`);
-        await startTimefind(filePath);
+        try {
+       await startTimefind(filePath);
+       logger.info(`File processed successfully: ${file}`);
+     } catch (error) {
+       logger.error(`Error processing file: ${file}`, error);
+     }
 
-        // Introduce a delay of 1 second before processing the next file
-        await delay(5000);
+        // Introduce a delay of 5 seconds (5000 milliseconds) before processing the next file
+        await delay(3000);
       }
     }
   }
