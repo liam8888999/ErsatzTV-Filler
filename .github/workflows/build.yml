@@ -57,7 +57,21 @@ jobs:
           zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
         working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
 
-      - name: Upload Package
+      - name: Upload Package 1
         uses: actions/upload-artifact@v2
         with:
-          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds
+          name: ersatztv-filler-windows-${{ env.VERSION }}.zip
+          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-${{ env.VERSION }}.zip
+
+      - name: Upload Package 2
+        uses: actions/upload-artifact@v2
+        with:
+          name: ersatztv-filler-linux-${{ env.VERSION }}.zip
+          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-${{ env.VERSION }}.zip
+
+      - name: Upload Package 3
+        uses: actions/upload-artifact@v2
+        with:
+          name: ersatztv-filler-macos-${{ env.VERSION }}.zip
+          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-${{ env.VERSION }}.zip
+
