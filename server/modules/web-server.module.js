@@ -76,9 +76,11 @@ logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
      secret: '1JIdfqkdCMdA8zIJvCRfTENtIIwzthoP', // Change this to a long random string
      resave: false,
      saveUninitialized: true,
-     sameSite: lax,
+     cookie: {
+     sameSite: 'lax',
      maxAge: '172800000',
      path: '/'
+   }
    }));
  };
 
