@@ -8,6 +8,7 @@ const { setwebtheme } = require("../utils/config.utils.js");
 const multer = require('multer');
 const fs = require('fs');
 const { CONFIG_CONSTANTS, CONFIGCONFDIR } = require("../constants/path.constants");
+const path = require('path');
 
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 
@@ -109,7 +110,7 @@ app.post('/uploadoldmodeltheme', uploadoldmodeltheme.single('file'), async (req,
   const file = req.file;
 const config_current = await retrieveCurrentConfiguration();
   // Read the file contents
-  fs.readFile(`${CONFIGCONFDIR}/config.conf`, 'utf8', (err, data) => {
+  fs.readFile(`${path.join(CONFIGCONFDIR, 'config.conf')}`, 'utf8', (err, data) => {
     if (err) {
       logger.error('Error reading file:', err);
       res.sendStatus(500);
