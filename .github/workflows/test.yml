@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Use Node.js 18
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
@@ -54,4 +54,4 @@ jobs:
         run: npm run build --if-present
 
       - name: Download a Build Artifact
-        uses: actions/download-artifact@v2.1.1
+        uses: actions/download-artifact@v3

@@ -1,4 +1,4 @@
-name: Build Packages on Push
+name: Attach Packages to Release
 
 on:
   release:
