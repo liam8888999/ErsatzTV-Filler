@@ -1,0 +1,76 @@
+name: Build Packages on Push
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+         fetch-depth: 0
+
+      - name: Get latest Git tag
+        id: get_tag
+        run: |
+          tag=$(git describe --tags --abbrev=0 --always)
+          echo "TAG=${tag}" >> $GITHUB_ENV
+          echo ${tag}
+
+      - name: Set VERSION variable
+        run: |
+          tag="${TAG:-none}"
+          if [[ "$tag" == "none" ]]; then
+            tag="${{ github.sha }}"
+          fi
+          echo "VERSION=${tag#v}" >> $GITHUB_ENV
+
+      - name: Show version
+        run: echo "Version is ${{ env.VERSION }}"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Choose the Node.js version you want to use
+
+      - name: Install Dependencies
+        run: npm ci --legacy-peer-deps # Replace with your package manager (e.g., yarn)
+
+      - name: Install pkg
+        run: npm install -g pkg
+
+      - name: create working dir
+        run: mkdir builds # Modify this command as needed
+
+      - name: Build Package with pkg
+        run: pkg package.json # Modify this command as needed
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+
+      - name: create zip
+        run: |
+          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
+          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
+          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
+        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+
+      - name: Upload Package 1
+        uses: actions/upload-artifact@v3
+        with:
+          name: ersatztv-filler-windows-${{ env.VERSION }}.zip
+          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-${{ env.VERSION }}.zip
+
+      - name: Upload Package 2
+        uses: actions/upload-artifact@v3
+        with:
+          name: ersatztv-filler-linux-${{ env.VERSION }}.zip
+          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-${{ env.VERSION }}.zip
+
+      - name: Upload Package 3
+        uses: actions/upload-artifact@v3
+        with:
+          name: ersatztv-filler-macos-${{ env.VERSION }}.zip
+          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-${{ env.VERSION }}.zip
