@@ -45,11 +45,11 @@ async function createrequiredstartupfolders() {
 await createDirectoryIfNotExists(CONFIG_DIR);
 await createDirectoryIfNotExists(WORKDIR);
 await createDirectoryIfNotExists(THEMES_FOLDER);
-await createDirectoryIfNotExists(`${THEMES_FOLDER}/system`);
-await createDirectoryIfNotExists(`${THEMES_FOLDER}/user`);
+await createDirectoryIfNotExists(`${path.join(THEMES_FOLDER, 'system')}`);
+await createDirectoryIfNotExists(`${path.join(THEMES_FOLDER, 'user')}`);
 await createDirectoryIfNotExists(`${RESOURCESPATH}`);
-await createDirectoryIfNotExists(`${RESOURCESPATH}/ffmpeg`);
-await createDirectoryIfNotExists(`${RESOURCESPATH}/audio-fallback`);
+await createDirectoryIfNotExists(`${path.join(RESOURCESPATH, 'ffmpeg')}`);
+await createDirectoryIfNotExists(`${path.join(RESOURCESPATH, 'audio-fallback')}`);
 }
 
 function copyResources() {
@@ -107,7 +107,7 @@ function copyFolderRecursive(source, destination) {
     }
   });
 }
-copyFolderRecursive(AUDIOFALLBACKINTERNAL, `${RESOURCESPATH}/audio-fallback`);
+copyFolderRecursive(AUDIOFALLBACKINTERNAL, `${path.join(RESOURCESPATH, 'audio-fallback')}`);
 
 
 let ffmpegResourcesPath;
@@ -129,7 +129,6 @@ logger.info("windows")
   logger.info("operating system unknown, not copying ffmpeg to resources folder, will test if ffmpeg is installed on the system and try to use that")
 }
 copyFileWithPermissions(FFMPEGINTERNALPATH, ffmpegResourcesPath);
-//copyFolderRecursive(FFMPEGPATHINTERNAL, `${RESOURCESPATH}/ffmpeg`);
 }
 
 
