@@ -79,7 +79,8 @@ logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
      cookie: {
      sameSite: 'lax',
      maxAge: '172800000',
-     path: '/'
+     path: '/',
+     name: 'ersatztv-filler.cookie'
    }
    }));
  };
