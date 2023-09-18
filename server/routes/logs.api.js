@@ -10,7 +10,7 @@ const { exec } = require('child_process');
 const archiver = require('archiver');
 const readline = require('readline');
 const {LOGFOLDER} = require("../constants/path.constants");
-
+const path = require('path');
 
 const loadApilogsRoutes = (app) => {
 
@@ -89,7 +89,7 @@ const loadApilogsRoutes = (app) => {
 
 
   //logger.info(formattedDate)
-      const logFile = `${LOGFOLDER}/ersatztv-filler-${formattedDate}.log`;
+      const logFile = `${path.join(LOGFOLDER, 'ersatztv-filler')}-${formattedDate}.log`;
       return logFile;
     } catch (error) {
       logger.error('Error getting log file', error.message);
