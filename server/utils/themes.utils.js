@@ -6,6 +6,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
 const { THEMES_FOLDER, CONFIG_CONSTANTS } = require("../constants/path.constants");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
+const path = require('path');
 
 
 const settheme = async (theme) => {
@@ -44,20 +45,20 @@ const themecolourdecoder = (colour) => {
 
  const retrieveCurrentTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
-   const themeFileExists = await doesFileExist(`${THEMES_FOLDER}/${config_current.theme}.theme`);
+   const themeFileExists = await doesFileExist(`${path.join(THEMES_FOLDER, config_current.theme)}.theme`);
 
    let usetheme = ''
 
    if (!themeFileExists) {
      logger.warn(`${config_current.theme}.json file is missing... Falling back to the SystemLight (Default) theme.`);
      await createDirectoryIfNotExists(THEMES_FOLDER);
-     await createDirectoryIfNotExists(`${THEMES_FOLDER}/system`)
+     await createDirectoryIfNotExists(`${path.join(THEMES_FOLDER, 'system')}`)
      try {
-       await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', `${THEMES_FOLDER}/system/SystemLight.theme`);
+       await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', `${path.join(THEMES_FOLDER, 'system', 'SystemLight.theme')}`);
      } catch (error) {
        logger.error(`Error downloading image: ${error.message}`);
      }
-    await settheme('system/SystemLight');
+    await settheme(`${path.join('system', 'SystemLight')}`);
       return await retrieveTheme();
  } else {
      logger.info("Found the user selected theme file... loading...");
@@ -67,7 +68,7 @@ const themecolourdecoder = (colour) => {
 
  const retrieveTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
-   const data = await fs.readFileSync(`${THEMES_FOLDER}/${config_current.theme}.theme`);
+   const data = await fs.readFileSync(`${path.join(THEMES_FOLDER, config_current.theme)}.theme`);
    logger.info(JSON.parse(data))
     return JSON.parse(data)
  }
