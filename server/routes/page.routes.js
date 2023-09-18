@@ -46,7 +46,7 @@ const checkAuthentication = (req, res, next) => {
       decryptedUsername = ''
       decryptedPassword = ''
 
-      logger.error('Error:', error);
+      logger.error("No password file is found in the config dir");
     }
   if (!decryptedUsername && !decryptedPassword) {
     req.session.isAuthenticated = true;
@@ -101,7 +101,7 @@ const checkAuthentication = (req, res, next) => {
         decryptedUsername = ''
         decryptedPassword = ''
 
-        logger.error('Error:', error);
+        logger.error("No password file is found in the config dir");
       }
     let authentication;
     if (!decryptedUsername && !decryptedPassword) {
@@ -144,7 +144,7 @@ const checkAuthentication = (req, res, next) => {
           decryptedUsername = ''
           decryptedPassword = ''
 
-          logger.error('Error:', error);
+          logger.error("No password file is found in the config dir");
         }
       let authentication;
       if (!decryptedUsername && !decryptedPassword) {
@@ -197,7 +197,7 @@ const checkAuthentication = (req, res, next) => {
           decryptedUsername = ''
           decryptedPassword = ''
 
-          logger.error('Error:', error);
+          logger.error("No password file is found in the config dir");
         }
       let authentication;
       if (!decryptedUsername && !decryptedPassword) {
@@ -243,7 +243,7 @@ const checkAuthentication = (req, res, next) => {
           decryptedUsername = ''
           decryptedPassword = ''
 
-          logger.error('Error:', error);
+          logger.error("No password file is found in the config dir");
         }
       let authentication;
       if (!decryptedUsername && !decryptedPassword) {
@@ -305,7 +305,7 @@ logger.info(JSON.stringify(filesinthemesdiruser))
           decryptedUsername = ''
           decryptedPassword = ''
 
-          logger.error('Error:', error);
+          logger.error("No password file is found in the config dir");
         }
       let authentication;
       if (!decryptedUsername && !decryptedPassword) {
@@ -358,7 +358,7 @@ logger.info(JSON.stringify(filesinthemesdiruser))
           decryptedUsername = ''
           decryptedPassword = ''
 
-          logger.error('Error:', error);
+          logger.error("No password file is found in the config dir");
         }
       let authentication;
       if (!decryptedUsername && !decryptedPassword) {
@@ -404,7 +404,7 @@ logger.info(JSON.stringify(filesinthemesdiruser))
           decryptedUsername = ''
           decryptedPassword = ''
 
-          logger.error('Error:', error);
+          logger.error("No password file is found in the config dir");
         }
       let authentication;
       if (!decryptedUsername && !decryptedPassword) {
@@ -453,7 +453,7 @@ logger.info(JSON.stringify(filesinthemesdiruser))
           decryptedUsername = ''
           decryptedPassword = ''
 
-          logger.error('Error:', error);
+          logger.error("No password file is found in the config dir");
         }
 
 
@@ -469,7 +469,7 @@ if (username === decryptedUsername && password === decryptedPassword) {
   // Check if there's a stored original URL in the session
   const originalUrl = req.session.originalUrl || '/';
   delete req.session.originalUrl; // Remove the stored URL
-console.log(originalUrl)
+logger.info(originalUrl)
   // Redirect the user back to the original URL or the homepage if none is stored
   res.redirect(originalUrl);
 } else {
@@ -497,7 +497,7 @@ app.post('/register', (req, res) => {
   // Write the user data to the file, overwriting any existing data
   fs.writeFile(usersFilePath, JSON.stringify(user), (err) => {
       if (err) {
-          console.error(err);
+          logger.error((err);
           return res.status(500).send('Error writing to file');
       }
 
