@@ -467,9 +467,7 @@ if (username === decryptedUsername && password === decryptedPassword) {
   req.session.isAuthenticated = true;
 
   // Check if there's a stored original URL in the session
-  const originalUrl = req.session.originalUrl || '/';
-  delete req.session.originalUrl; // Remove the stored URL
-logger.info(originalUrl)
+  const originalUrl = '/';
   // Redirect the user back to the original URL or the homepage if none is stored
   res.redirect(originalUrl);
 } else {
