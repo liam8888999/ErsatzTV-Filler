@@ -75,7 +75,9 @@ logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
    app.use(session({
      secret: '1JIdfqkdCMdA8zIJvCRfTENtIIwzthoP', // Change this to a long random string
      resave: false,
-     saveUninitialized: true
+     saveUninitialized: true,
+     sameSite: true,
+     maxAge: 172800000
    }));
  };
 
