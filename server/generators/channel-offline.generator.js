@@ -27,7 +27,7 @@ const CHANNEL_OFFLINE = async () => {
 
   // Function to split XMLTV by channel
   const splitXMLTVByChannel = async () => {
-    const xmlData = await fs.promises.readFile(`${CHANNEL_OFFLINEDIR}/xmltv.xmltv`, 'utf8');
+    const xmlData = await fs.promises.readFile(`${path.join(CHANNEL_OFFLINEDIR, 'xmltv.xmltv')}`, 'utf8');
     xml2js.parseString(xmlData, (parseErr, result) => {
       if (parseErr) {
         logger.error('Error parsing XML:', parseErr);
@@ -51,7 +51,7 @@ const CHANNEL_OFFLINE = async () => {
         };
 
         const channelXMLString = builder.buildObject(channelXMLData);
-        const channelFilePath = `${CHANNEL_OFFLINEDIR}/${channelId}.xml`;
+        const channelFilePath = `${path.join(CHANNEL_OFFLINEDIR, channelId)}.xml`;
         logger.info(channelFilePath);
         await fs.promises.writeFile(channelFilePath, channelXMLString);
         logger.info(`Channel file saved: ${channelFilePath}`);
@@ -67,7 +67,7 @@ const CHANNEL_OFFLINE = async () => {
     logger.info(eachxmltvfile);
     try {
       // Read the XML file
-      const data = await fs.promises.readFile(`${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.xml`, 'utf-8');
+      const data = await fs.promises.readFile(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.xml`, 'utf-8');
 
       // Parse the XML
       xml2js.parseString(data, (parseErr, result) => {
@@ -80,7 +80,7 @@ const CHANNEL_OFFLINE = async () => {
       channels.forEach((channel) => {
         const channelId = channel.$.id;
         const channelLogo = channel.icon && channel.icon[0].$.src;
-        downloadImage(`${channelLogo}`, `${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.png`)
+        downloadImage(`${channelLogo}`, `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.png`)
             .then(logger.success)
             .catch(logger.error);
      });
@@ -184,7 +184,7 @@ logger.info(nextShowStartTime)
         Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
 logger.info(assText)
-      fs.writeFileSync(`${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass`, assText);
+      fs.writeFileSync(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass`, assText);
 
 
 if (config_current.hwaccel !== "") {
@@ -208,7 +208,7 @@ if (config_current.hwaccel_device == "") {
   hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
   logger.info(hwacceldevice);
 }
-      const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${CHANNEL_OFFLINEDIR}/${eachxmltvfile}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${config_current.output}/${eachxmltvfile}.mp4`;
+      const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;
 
       logger.info(command);
       logger.ffmpeg(`command is ${command}`);
@@ -263,7 +263,7 @@ const filenamenopath = filename.substring(lastIndex + 1);
   };
 
   try {
-      await downloadImage(`${config_current.ersatztv}/iptv/xmltv.xml`, `${CHANNEL_OFFLINEDIR}/xmltv.xmltv`)
+      await downloadImage(`${config_current.ersatztv}/iptv/xmltv.xml`, `${path.join(CHANNEL_OFFLINEDIR, 'xmltv.xmltv')}`)
     // Handle the downloaded data
     logger.success('XMLTV downloaded successfully');
   } catch (error) {
