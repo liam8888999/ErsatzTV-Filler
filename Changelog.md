@@ -7,34 +7,6 @@
 
 * escape ffmpeg path ([685e948](https://github.com/liam8888999/ErsatzTV-Filler/commit/685e94886127a81fa46855a3c57dd8fb6eb6f860))
 
-## [1.1.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.3...V1.1.3) (2023-09-18)
-
-
-### Added
-
-* webui authentication has been added ([1b67edd](https://github.com/liam8888999/ErsatzTV-Filler/commit/1b67edd072e30e12b864f4135e30aa7a4c26b053))
-
-
-### Fixed
-
-* broken builds ([0a20905](https://github.com/liam8888999/ErsatzTV-Filler/commit/0a20905a779045a8ccb35f5c8c49fcb9e18d37c7))
-* broken builds from typo ([155135f](https://github.com/liam8888999/ErsatzTV-Filler/commit/155135f60bcd694276f1c2f780a09cc2f3518e44))
-* documentation security fix ([1c29ba6](https://github.com/liam8888999/ErsatzTV-Filler/commit/1c29ba6166cabb2f478fe8ef1fcadab25124928a))
-* fix ffmpeg path for windows ([ee35855](https://github.com/liam8888999/ErsatzTV-Filler/commit/ee35855e1ee2ed416c199d2d4489699c8990b243))
-* install required dependencies in docker container ([fced4c1](https://github.com/liam8888999/ErsatzTV-Filler/commit/fced4c1434c545e8a1d01978b63d13ae8222e20b))
-* layout security fixes ([e57c000](https://github.com/liam8888999/ErsatzTV-Filler/commit/e57c00050ad87b4ea70f002e6353563151c6b2e6))
-* navbar security fix ([2aa043f](https://github.com/liam8888999/ErsatzTV-Filler/commit/2aa043fc25d1b2da1ea5bd78ec2ec67601e8656c))
-* navbar security fix ([9831a9d](https://github.com/liam8888999/ErsatzTV-Filler/commit/9831a9d464fbb7d23b118bfc715e08f465964bd0))
-* rendering fixes ([b22c996](https://github.com/liam8888999/ErsatzTV-Filler/commit/b22c996b84188cb7cff17132430001ad26f13bdd))
-* some small logging fixes ([acec8c6](https://github.com/liam8888999/ErsatzTV-Filler/commit/acec8c69f36dee228868cb26eb2f25b854e7b5d0))
-* text-input security fix ([859e79e](https://github.com/liam8888999/ErsatzTV-Filler/commit/859e79e2f8e62008381eb55cd7c17ff0d09243e1))
-* themes security fixes ([63c2c56](https://github.com/liam8888999/ErsatzTV-Filler/commit/63c2c56f7d0db10806b5632f38129b42d4951403))
-
-
-### Changed
-
-* move line from bottom of version to top in update page to improve neatness ([23d290a](https://github.com/liam8888999/ErsatzTV-Filler/commit/23d290ae156b7f582af96dcca97de89bc2f0e20f))
-
 ## [1.1.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/1.1.1...v1.1.2) (2023-09-18)
 
 
