@@ -7,6 +7,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
+const path = require('path');
 
 // Future todo. add option to add episode number/episode title to main description for clients without support
 
@@ -29,11 +30,11 @@ const XMLTVPARSE = async () => {
     let epgData;
 
     if (trimmedEpgFile.startsWith("http")) {
-      await downloadImage(trimmedEpgFile, `${XMLTVMERGEDIR}/epg${index + 1}.xml`)
+      await downloadImage(trimmedEpgFile, `${path.join(XMLTVMERGEDIR, 'epg')}${index + 1}.xml`)
         .then(logger.success)
         .catch(logger.error);
 
-      epgData = await fs.readFileSync(`${XMLTVMERGEDIR}/epg${index + 1}.xml`, { encoding: 'utf-8' });
+      epgData = await fs.readFileSync(`${path.join(XMLTVMERGEDIR, 'epg')}${index + 1}.xml`, { encoding: 'utf-8' });
     } else {
       epgData = await fs.readFileSync(trimmedEpgFile, { encoding: 'utf-8' });
     }
@@ -76,7 +77,7 @@ const XMLTVPARSE = async () => {
   });
 
   const xmlString = xml.end({ pretty: true });
-  fs.writeFileSync(`${config_current.output}/mergedxmltv.xml`, xmlString, 'utf8');
+  fs.writeFileSync(`${path.join(config_current.output, 'mergedxmltv.xml')}`, xmlString, 'utf8');
 
   logger.success('XMLTV file created successfully.');
   isFunctionRunning = true;
