@@ -256,11 +256,11 @@ const checkAuthentication = (req, res, next) => {
 .catch(error => {
     logger.error(`Error: ${error}`);
   });
-  let filesinthemesdiruser = await listFilesInDir(`${THEMES_FOLDER}/user`)
+  let filesinthemesdiruser = await listFilesInDir(`${path.join(THEMES_FOLDER, 'user')}`)
 .catch(error => {
 logger.error(`Error: ${error}`);
 });
-let filesinthemesdirsystem = await listFilesInDir(`${THEMES_FOLDER}/system`)
+let filesinthemesdirsystem = await listFilesInDir(`${path.join(THEMES_FOLDER, 'system')}`)
 .catch(error => {
 logger.error(`Error: ${error}`);
 });
