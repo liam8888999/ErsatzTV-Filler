@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.3...V1.1.4) (2023-09-18)
+
+
+### Fixed
+
+* improve channel-offline paths ([588a002](https://github.com/liam8888999/ErsatzTV-Filler/commit/588a002c7ef1555cc4ba7b1d2039a5b8939bf87b))
+* improve config paths ([ceac79d](https://github.com/liam8888999/ErsatzTV-Filler/commit/ceac79d626bbf3c119d0b99ed656887663f55d63))
+* improve log paths ([e5bf09a](https://github.com/liam8888999/ErsatzTV-Filler/commit/e5bf09a360894fc1026475f027ef33c44ce66222))
+* improve logger paths ([85f9d64](https://github.com/liam8888999/ErsatzTV-Filler/commit/85f9d64c46772087558dea8c0006583a274b058a))
+* improve news paths ([df1eac4](https://github.com/liam8888999/ErsatzTV-Filler/commit/df1eac4fd06845594cd1a790db2e11cb27513dd9))
+* improve page routes paths ([2e2ddb3](https://github.com/liam8888999/ErsatzTV-Filler/commit/2e2ddb3c519ad79e6f4b53a22a8abd8cb70e8617))
+* improve startup/shutdown paths ([cdff435](https://github.com/liam8888999/ErsatzTV-Filler/commit/cdff43500ca8f2e0697944d48b2b1b6301941fea))
+* improve theme api paths ([730a541](https://github.com/liam8888999/ErsatzTV-Filler/commit/730a541ba66e15db6667c6b1915b9f997ae0f52f))
+* improve theme utils ([b4a85cb](https://github.com/liam8888999/ErsatzTV-Filler/commit/b4a85cb1058550f26e0099d5dabc9a78b2a782bf))
+* improve vanity cards paths ([bcd35fc](https://github.com/liam8888999/ErsatzTV-Filler/commit/bcd35fc450ad5710182d5d02333ab7e18bce6985))
+* improve weather paths ([7fe77dc](https://github.com/liam8888999/ErsatzTV-Filler/commit/7fe77dc9670b3d09821d9c1aa600609970a02296))
+* improve xmltv merge paths ([51a1348](https://github.com/liam8888999/ErsatzTV-Filler/commit/51a13488eb7059e7a160f4138364b0a0480ab223))
+* windows paths channel offline ([8220b78](https://github.com/liam8888999/ErsatzTV-Filler/commit/8220b7830c20b845ba8d667dc7e657445cf1b31b))
+
 ## [1.1.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.0.3...V1.1.3) (2023-09-18)
 
 
