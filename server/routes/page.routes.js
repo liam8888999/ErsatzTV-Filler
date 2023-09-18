@@ -497,7 +497,7 @@ app.post('/register', (req, res) => {
   // Write the user data to the file, overwriting any existing data
   fs.writeFile(usersFilePath, JSON.stringify(user), (err) => {
       if (err) {
-          logger.error((err);
+          logger.error(err);
           return res.status(500).send('Error writing to file');
       }
 
