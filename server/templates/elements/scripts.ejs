@@ -76,7 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const downloadedThemes = themesArray;
-    displayThemeList(downloadedThemes);
+
+    // Display the theme list if there are themes
+    if (downloadedThemes.length > 0) {
+        displayThemeList(downloadedThemes);
+    } else {
+        // If there are no themes, display a message
+        const themeListDiv = document.getElementById('theme-list');
+        const messageElement = document.createElement('p');
+        messageElement.textContent = 'No user themes available.';
+
+        // Add an inline style to center-align the message
+        messageElement.style.textAlign = 'center';
+        
+        themeListDiv.appendChild(messageElement);
+    }
 });
 
 // Function to decode HTML entities
