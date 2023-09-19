@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.7](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.6...V1.1.7) (2023-09-19)
+
+
+### Added
+
+* news feed header ([656d8d7](https://github.com/liam8888999/ErsatzTV-Filler/commit/656d8d78eed142a2886d35240a8b0a9b296a744f))
+
+
+### Fixed
+
+* escape : in ass subtitle path ([e3fb0e5](https://github.com/liam8888999/ErsatzTV-Filler/commit/e3fb0e50d13be413dd0d4f567a9b7c4410f97e29))
+
 ## [1.1.6](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.5...V1.1.6) (2023-09-19)
 
 
