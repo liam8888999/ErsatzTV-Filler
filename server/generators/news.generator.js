@@ -43,6 +43,7 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
         const $ = cheerio.load(xmlData, { xmlMode: true });
 
         let newsFeed = '';
+        let newsFeedcontent = '';
         logger.info(`XMLDATA: ${xmlData}`);
 
         $('rss > channel > item').each((index, element) => {
@@ -52,10 +53,14 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
           const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
           const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
 
+          const newsheader = `{\\r}{\\b1}{\\c&H${titlecolor}&}Top News Stories\n\n`
+
           newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
+
+          newsFeedcontent = newsheader + newsFeed
         });
 
-        fs.writeFileSync(`${path.join(NEWSDIR, 'newstemp.txt')}`, newsFeed);
+        fs.writeFileSync(`${path.join(NEWSDIR, 'newstemp.txt')}`, newsFeedcontent);
 
         resolve(); // Resolve the promise when the operation is complete
       });
@@ -71,7 +76,6 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
 // Step 6: Prepare the news content
 const prepareNewsContent = async (config_current) => {
   const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, 'newstemp.txt')}`, 'utf8');
-
   const news1Content = newstempContent;
   const news2Content = news1Content.split('\n\n').slice(0, config_current.newsarticles).join('\n\n');
   const newsContent = news2Content.replace(/%/g, '\\%');
