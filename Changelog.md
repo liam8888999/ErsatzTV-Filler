@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.1.8](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.7...V1.1.8) (2023-09-19)
+
+
+### Added
+
+* button to new release on github when available ([c2edecd](https://github.com/liam8888999/ErsatzTV-Filler/commit/c2edecd1b0f673c7917c98d658840ad9aac11f40))
+* display message when there are no user theme files ([7950fa6](https://github.com/liam8888999/ErsatzTV-Filler/commit/7950fa62e969e6e89ceac35e5dddc9d10d47625a))
+* docker should now push a version tagged container as well as the latest tagged container ([14ffd1b](https://github.com/liam8888999/ErsatzTV-Filler/commit/14ffd1b674abbbf623bb296be2804a416d61b9f4))
+
+
+### Fixed
+
+* add escaping for square brackets in ass subtitle path ([e019a6a](https://github.com/liam8888999/ErsatzTV-Filler/commit/e019a6a92fc39510abd94596ce241f0d7fed890c))
+* another pesky typo ([23a454b](https://github.com/liam8888999/ErsatzTV-Filler/commit/23a454b47b083bc864eafef7afcb9d3de246d77a))
+* pesky typo ([7259e00](https://github.com/liam8888999/ErsatzTV-Filler/commit/7259e0033c72c91476ea29ab835d9e6ae380ae3a))
+
 ## [1.1.7](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.6...V1.1.7) (2023-09-19)
 
 
