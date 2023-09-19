@@ -17,7 +17,7 @@ const loadApiConfigRoutes = async (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error('Config api Error:', err); // Log the error for debugging purposes
+    logger.error(`Config api Error: ${err}`); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -33,7 +33,7 @@ const loadApiConfigRoutes = async (app) => {
      */
     app.patch(ROUTE_CONSTANTS().CONFIG_ROUTE_EDIT, async (req, res) => {
     const values = Object.entries(req.body);
-    logger.info('Config object.entries:', Object.entries(req.body))
+    logger.info(`Config object.entries: ${Object.entries(req.body)}`)
 
     const arr = values;
 const obj = {};
@@ -42,12 +42,12 @@ arr.forEach(([key, value]) => {
   obj[key] = value;
 });
 
-logger.info('config obj:', obj); // Output: { key: 'theme', value: 'button1fff' }
+logger.info(`config obj: ${obj}`); // Output: { key: 'theme', value: 'button1fff' }
 
 const { key, value } = obj;
 
-logger.info('Config Key:', key);
-logger.info('Config Value:', value);
+logger.info(`Config Key: ${key}`);
+logger.info(`Config Value: ${value}`);
 
 
 
@@ -61,19 +61,19 @@ logger.info('Config Value:', value);
       const filepath = CONFIG_CONSTANTS().USER_CONFIG;
       readFile(`${filepath}`, 'utf8', (err, data) => {
           if (err) {
-            logger.error('Error reading config json:', err);
+            logger.error(`Error reading config json: ${err}`);
             res.status(500).send('Error reading data file');
             return;
           }
-          logger.info('Config json parsed:', JSON.parse(data))
+          logger.info(`Config json parsed: ${JSON.parse(data)}`)
           res.json(JSON.parse(data));
         });
       });
 
       app.get('/api/config/webtheme/set', async (req, res) => {
         const theme = req.query.theme;
-        logger.info('Theme to set in config:', theme)
-        logger.info('Theme to set in config from req.query.theme:', req.query.theme)
+        logger.info(`Theme to set in config: ${theme}`)
+        logger.info(`Theme to set in config from req.query.theme: ${req.query.theme}`)
         await setwebtheme(theme)
         // use the url and path variables to set the theme
 
@@ -86,10 +86,10 @@ logger.info('Config Value:', value);
 const theme = config_current.webtheme;
       // Replace the code below with your logic to fetch the theme preference from a data source (e.g., a database)
       //const theme = 'dark'; // Replace with your desired theme value
-logger.info('Theme to load from config:', theme)
+logger.info(`Theme to load from config: ${theme}`)
       res.json({ theme });
     } catch (error) {
-      logger.error('Failed to load the theme preference:', error);
+      logger.error(`Failed to load the theme preference: ${error}`);
       res.status(500).json({ error: 'Failed to load the theme preference' });
     }
   });
@@ -112,7 +112,7 @@ const config_current = await retrieveCurrentConfiguration();
   // Read the file contents
   fs.readFile(`${path.join(CONFIGCONFDIR, 'config.conf')}`, 'utf8', (err, data) => {
     if (err) {
-      logger.error('Error reading old type config.conf file from upload:', err);
+      logger.error(`Error reading old type config.conf file from upload: ${err}`);
       res.sendStatus(500);
       return;
     }
@@ -151,7 +151,7 @@ lines.forEach(line => {
     // Write the JSON string to a file
   //  fs.writeFile('config1.json', jsonString1, 'utf8', err => {
     //  if (err) {
-      //  logger.error('Error writing JSON file:', err);
+      //  logger.error(`Error writing JSON file: ${err}`);
         //res.sendStatus(500);
       //  return;
   //    }
@@ -195,7 +195,7 @@ if (Object.keys(json).length !== 0) {
 
 // Step 4: Convert the updated object back to a JSON string
 const updatedJsonString = JSON.stringify(config_current, null, 2);
-logger.info('Updated config after old type import:', updatedJsonString)
+logger.info(`Updated config after old type import: ${updatedJsonString}`)
 
 // Write the updated JSON string back to the file
 fs.writeFile(`${CONFIG_CONSTANTS().USER_CONFIG}`, updatedJsonString, 'utf8', (err) => {

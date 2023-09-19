@@ -43,7 +43,7 @@ const overWriteFileContents = async (path, fileContents) => {
     try{
         await writeFile(path, fileContents);
     }catch(e){
-        logger.error('Error overwriting file contents:', e)
+        logger.error(`Error overwriting file contents: ${e}`)
     }
 
 }

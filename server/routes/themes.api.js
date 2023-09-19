@@ -12,7 +12,7 @@ const loadApiThemeRoutes = (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error('Themes api Error:', err); // Log the error for debugging purposes
+    logger.error(`Themes api Error: ${err}`); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -28,7 +28,7 @@ const loadApiThemeRoutes = (app) => {
     app.get('/api/themes/download', (req, res) => {
     const url = req.query.url;
     const filepath = `${path.join(THEMES_FOLDER, 'system', req.query.filepath)}`;
-    logger.info('Theme download req query filepath:', req.query.filepath)
+    logger.info(`Theme download req query filepath: ${req.query.filepath}`)
 
     // use the url and path variables to download the image
     downloadImage(url, filepath)
@@ -45,7 +45,7 @@ const loadApiThemeRoutes = (app) => {
 
   app.get('/api/themes/settheme', async (req, res) => {
   const theme = req.query.theme;
-  logger.info('Theme set req query theme:', req.query.theme)
+  logger.info(`Theme set req query theme: ${req.query.theme}`)
   await settheme(theme)
   // use the url and path variables to set the theme
 
@@ -57,11 +57,11 @@ app.get('/api/themes/readthemejson', async (req, res) => {
   const filepath = `${path.join(THEMES_FOLDER, req.query.filepath)}`;
   readFile(`${filepath}`, 'utf8', (err, data) => {
       if (err) {
-        logger.error('Error reading theme json:', err);
+        logger.error(`Error reading theme json: ${err}`);
         res.status(500).send('Error reading data file');
         return;
       }
-      logger.info('Theme json:', JSON.parse(data))
+      logger.info(`Theme json: ${JSON.parse(data)}`)
       res.json(JSON.parse(data));
     });
   });

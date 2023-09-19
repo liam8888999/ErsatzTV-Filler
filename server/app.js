@@ -29,7 +29,7 @@ process.on('SIGTERM', () => {
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
-  logger.error('Uncaught Exception:', error);
+  logger.error(`Uncaught Exception: ${error}`);
   // Perform any necessary cleanup or logging here
   // Terminate the process (optional)
   //process.exit(1);
@@ -37,7 +37,7 @@ process.on('uncaughtException', (error) => {
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {
-  logger.error('Unhandled Rejection:', reason);
+  logger.error(`Unhandled Rejection: ${reason}`);
   // Perform any necessary cleanup or logging here
 
   // Terminate the process (optional)

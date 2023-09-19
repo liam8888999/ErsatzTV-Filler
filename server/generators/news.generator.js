@@ -43,7 +43,7 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
         const $ = cheerio.load(xmlData, { xmlMode: true });
 
         let newsFeed = '';
-        logger.info('XMLDATA:', xmlData);
+        logger.info(`XMLDATA: ${xmlData}`);
 
         $('rss > channel > item').each((index, element) => {
           const title = $(element).find('title').text();
@@ -120,7 +120,7 @@ const generateNewsVideo = async (config_current, audioFile) => {
     logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
   } else {
     hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-    logger.info('Hwaccell:', hwaccel);
+    logger.info(`Hwaccell: ${hwaccel}`);
   }
 
   if (config_current.hwaccel_device == "") {
@@ -128,7 +128,7 @@ const generateNewsVideo = async (config_current, audioFile) => {
     logger.info('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
   } else {
     hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-    logger.info('Hwaccell_device:', hwacceldevice);
+    logger.info(`Hwaccell_device: ${hwacceldevice}`);
   }
   const resolution = config_current.videoresolution;
   const width = resolution.split("x")[0];

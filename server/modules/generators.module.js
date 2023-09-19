@@ -39,7 +39,7 @@ const GENERATION = async () => {
           await VANITYCARDS();
         } catch (error) {
           // Handle the error encountered in VANITYCARDS()
-          logger.error('Error encountered in VANITYCARDS:', error);
+          logger.error(`Error encountered in VANITYCARDS: ${error}`);
           vanityRunning = false; // Set running to false if an error is encountered
           return;
         }
@@ -77,7 +77,7 @@ const GENERATION = async () => {
           await WEATHER();
         } catch (error) {
           // Handle the error encountered in WEATHER()
-          logger.error('Error encountered in WEATHER:', error);
+          logger.error(`Error encountered in WEATHER: ${error}`);
           weatherRunning = false; // Set running to false if an error is encountered
           return;
         }
@@ -115,7 +115,7 @@ const GENERATION = async () => {
           await NEWS();
         } catch (error) {
           // Handle the error encountered in NEWS()
-          logger.error('Error encountered in NEWS:', error);
+          logger.error(`Error encountered in NEWS: ${error}`);
           newsRunning = false; // Set running to false if an error is encountered
           return;
         }
@@ -153,7 +153,7 @@ const GENERATION = async () => {
           await CHANNEL_OFFLINE();
         } catch (error) {
           // Handle the error encountered in CHANNEL_OFFLINE()
-          logger.error('Error encountered in CHANNEL_OFFLINE:', error);
+          logger.error(`Error encountered in CHANNEL_OFFLINE: ${error}`);
           offlineRunning = false;
           return;
         }
@@ -192,7 +192,7 @@ const GENERATION = async () => {
             await XMLTVPARSE();
           } catch (error) {
             // Handle the error encountered in XMLTVMERGE()
-            logger.error('Error encountered in XMLTVMERGE:', error);
+            logger.error(`Error encountered in XMLTVMERGE: ${error}`);
             mergeRunning = false; // Set running to false if an error is encountered
             return;
           }

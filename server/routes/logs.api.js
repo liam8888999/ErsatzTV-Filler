@@ -16,7 +16,7 @@ const loadApilogsRoutes = (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error('Logs api Error:', err); // Log the error for debugging purposes
+    logger.error(`Logs api Error: ${err}`); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -44,7 +44,7 @@ const loadApilogsRoutes = (app) => {
       // Handle error event for logStream
       logStream.on('error', (error) => {
         res.status(500).send('Error reading log file');
-        logger.error('cant create logstream:', error);
+        logger.error(`cant create logstream: ${error}`);
       });
 
       const rl = readline.createInterface({
@@ -57,14 +57,14 @@ const loadApilogsRoutes = (app) => {
         try {
           res.write(`<p>${line}</p>\n`);
         } catch (err) {
-          logger.error('An error occurred while processing a line:', err);
+          logger.error(`An error occurred while processing a line: ${err}`);
           // Handle the error as needed
         }
       });
 
       // Add "error" event listener
       rl.on('error', (err) => {
-        logger.error('An error occurred in the readline interface:', err);
+        logger.error(`An error occurred in the readline interface: ${err}`);
         // Handle the error as needed
       });
 
@@ -74,7 +74,7 @@ const loadApilogsRoutes = (app) => {
       });
     } catch (error) {
       res.status(500).send('Error getting log file');
-      logger.error('Error with reading and processing logs:', error.message);
+      logger.error(`Error with reading and processing logs: ${error.message}`);
     }
   });
 
@@ -114,12 +114,12 @@ app.get('/logs/zip', (req, res) => {
     // Download the zip file
     res.download(zipPath, (err) => {
       if (err) {
-        logger.error('Error occurred while downloading:', err);
+        logger.error(`Error occurred while downloading: ${err}`);
       } else {
         // Delete the zip file
         fs.unlink(zipPath, (unlinkErr) => {
           if (unlinkErr) {
-          logger.error('Error occurred while deleting the zip file:', unlinkErr);
+          logger.error(`Error occurred while deleting the zip file: ${unlinkErr}`);
           } else {
             logger.info('Zip file deleted successfully.');
           }

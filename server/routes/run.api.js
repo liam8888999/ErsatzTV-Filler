@@ -15,7 +15,7 @@ const loadApirunRoutes = (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error('Run api Error:', err); // Log the error for debugging purposes
+    logger.error(`Run api Error: ${err}`); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;

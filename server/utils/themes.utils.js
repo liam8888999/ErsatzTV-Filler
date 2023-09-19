@@ -35,7 +35,7 @@ const themecolourdecoder = (colour) => {
   const themeColour = `${blue.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${red.toString(16).padStart(2, '0')}`;
 
 
-  logger.info('Theme colour:', themeColour);
+  logger.info(`Theme colour: ${themeColour}`);
 
 
 
@@ -69,7 +69,7 @@ const themecolourdecoder = (colour) => {
  const retrieveTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
    const data = await fs.readFileSync(`${path.join(THEMES_FOLDER, config_current.theme)}.theme`);
-   logger.info('Current Theme json:', JSON.parse(data))
+   logger.info(`Current Theme json: ${JSON.parse(data)}`)
     return JSON.parse(data)
  }
 

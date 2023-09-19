@@ -157,7 +157,7 @@ async function loadThemePreference() {
        themeToggleButton.checked = true;
      }
    } catch (error) {
-     logger.error('Failed to load the theme preference:', error);
+     logger.error(`Failed to load the theme preference: ${error}`);
    }
 }
 
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
         })
         .catch(error => {
           // Handle any errors
-          logger.error('Error:', error);
+          logger.error(`Error: ${error}`);
         });
     }
   </script>
@@ -687,7 +687,7 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
               document.body.removeChild(link);
             })
             .catch(error => {
-              logger.error('Error:', error);
+              logger.error(`Error: ${error}`);
             });
         }
       </script>

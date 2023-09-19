@@ -68,12 +68,12 @@ isFunctionRunning = true;
               });
             });
           } catch (error) {
-            logger.error('Error parsing JSON:', error);
+            logger.error(`Error parsing JSON: ${error}`);
             reject(error); // Reject the promise if there's an error parsing the JSON
           }
         });
       }).on('error', (error) => {
-        logger.error('Error downloading JSON:', error);
+        logger.error(`Error downloading JSON: ${error}`);
         reject(error); // Reject the promise if there's an error downloading the JSON
       });
     });
@@ -86,7 +86,7 @@ const createVanityCard = async (filenumber) => {
       logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
     } else {
       hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-      logger.info('Hwaccell:', hwaccel);
+      logger.info(`Hwaccell: ${hwaccel}`);
     }
 
     if (config_current.hwaccel_device == "") {
@@ -94,7 +94,7 @@ const createVanityCard = async (filenumber) => {
       logger.info('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
     } else {
       hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-      logger.info('Hwaccell_device:', hwacceldevice);
+      logger.info(`Hwaccell_device: ${hwacceldevice}`);
     }
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     // add theme information
@@ -114,14 +114,14 @@ const createVanityCard = async (filenumber) => {
       logger.success('Vanity Card created successfully.');
     });
   } catch (err) {
-    logger.error('Error:', err);
+    logger.error(`Error: ${err}`);
   }
 };
 
 
 
 async function processVanityCards() {
-  logger.info('Amount of vanity cards:', config_current.amountvanitycards)
+  logger.info(`Amount of vanity cards: ${config_current.amountvanitycards}`)
   const maxIterations = config_current.amountvanitycards || 5;
   for (let filenumber = 1; filenumber <= maxIterations; filenumber++) {
     await getVanityCard(filenumber);

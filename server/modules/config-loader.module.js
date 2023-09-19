@@ -52,7 +52,7 @@ if (!FILE_EXISTS) {
   logger.error('The config.json file does not exist.');
   await fs.writeFile(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(CONFIG_CONSTANTS().DEFAULT_CONFIG, null, 2), (err) => {
     if (err) {
-      logger.error('Error creating user config file:', err);
+      logger.error(`Error creating user config file: ${err}`);
     } else {
     logger.success('Created config.json file');
   };
@@ -74,7 +74,7 @@ const retrieveCurrentConfiguration = async () => {
 
     const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     CURRENT_CONFIG = JSON.parse(data);
-logger.info('Current config is:', CURRENT_CONFIG);
+logger.info(`Current config is: ${CURRENT_CONFIG}`);
 return CURRENT_CONFIG;
 };
 
