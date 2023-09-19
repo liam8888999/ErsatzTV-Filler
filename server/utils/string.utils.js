@@ -21,7 +21,8 @@ function stringifyJavaScriptObjectToConfigFormat(obj) {
 function asssubstitution(asslocation) {
   logger.info(`ass file path: ${asslocation}`)
   const assfilelocation = asslocation
-  const asslocationsubstituted = assfilelocation.replace(/\//g, "\\")
+const asslocationsubstituted = assfilelocation.replace(/\\/g, "\\\\");
+    logger.info(`ass location substituted: ${asslocationsubstituted}`)
 return asslocationsubstituted
 }
 
