@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.5](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.4...V1.1.5) (2023-09-19)
+
+
+### Fixed
+
+* empty logging fix ([dd68fa0](https://github.com/liam8888999/ErsatzTV-Filler/commit/dd68fa0bf96ecd5271bbb14ce264a0911d7a6454))
+* escape ass subtitle location on windows ([d110df7](https://github.com/liam8888999/ErsatzTV-Filler/commit/d110df763b0b94278a6bfb2281e5997102038626))
+* give logs more context ([f8158a0](https://github.com/liam8888999/ErsatzTV-Filler/commit/f8158a050b9e61463c1288c5a40fc9d2e3aa30ac))
+
 ## [1.1.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.3...V1.1.4) (2023-09-18)
 
 
