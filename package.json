@@ -79,7 +79,7 @@
     },
     "github": {
       "release": true,
-      "releaseMessage": "V${version} - Beta"
+      "releaseName": "V${version} - Beta"
     },
     "npm": {
       "publish": false
