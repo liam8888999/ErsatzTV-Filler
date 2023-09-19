@@ -11,6 +11,7 @@ const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
 const path = require('path');
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const { themecolourdecoder, retrieveCurrentTheme } = require("../utils/themes.utils");
+const { asssubstitution } = require("../utils/string.utils");
 
 // TODO: Add support for multiple newsfeeds under the same variable , seperated and create different videos or join all together
 
@@ -133,7 +134,9 @@ const generateNewsVideo = async (config_current, audioFile) => {
   const width = resolution.split("x")[0];
   const textWidth = Math.floor(width / 40);
   const backgroundcolour = themecolourdecoder(current_theme.News.newsbackgroundcolour);
-  const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${path.join(NEWSDIR, 'news.ass')}" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, 'news.mp4')}`;
+  const assfilepath = `${path.join(NEWSDIR, 'news.ass')}`
+  const assfile = asssubstitution(`${assfilepath}`)
+  const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${assfile}" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, 'news.mp4')}`;
 
   logger.ffmpeg(`News ffmpeg command is ${command}`);
 

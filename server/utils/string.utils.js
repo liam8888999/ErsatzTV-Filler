@@ -1,5 +1,6 @@
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
+const path = require('path')
 
 /**
  * Stringify an object specifically for our config
@@ -17,6 +18,14 @@ function stringifyJavaScriptObjectToConfigFormat(obj) {
     return result;
 }
 
+function asssubstitution(asslocation) {
+  logger.info('ass file path:', asslocation)
+  const assfilelocation = asslocation
+  const asslocationsubstituted = assfilelocation.replace(/\//g, "\\")
+return asslocationsubstituted
+}
+
 module.exports = {
-    stringifyJavaScriptObjectToConfigFormat
+    stringifyJavaScriptObjectToConfigFormat,
+    asssubstitution
 }

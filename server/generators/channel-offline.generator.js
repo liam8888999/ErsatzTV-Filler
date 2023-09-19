@@ -13,6 +13,7 @@ const http = require('http')
 const https = require('https')
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const { downloadImage } = require("../utils/downloadimage.utils");
+const { asssubstitution } = require("../utils/string.utils");
 
 let isFunctionRunning = false;
 const CHANNEL_OFFLINE = async () => {
@@ -199,7 +200,9 @@ if (config_current.hwaccel_device == "") {
   hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
   logger.info('Hwaccel_device:', hwacceldevice);
 }
-      const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;
+const assfilepath = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass`
+const assfile = asssubstitution(`${assfilepath}`)
+      const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${assfile}" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;
 
       logger.ffmpeg(`Channel-Offline ffmpeg command is ${command}`);
 
