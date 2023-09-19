@@ -35,7 +35,7 @@ const themecolourdecoder = (colour) => {
   const themeColour = `${blue.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${red.toString(16).padStart(2, '0')}`;
 
 
-  logger.info(themeColour);
+  logger.info('Theme colour:', themeColour);
 
 
 
@@ -56,7 +56,7 @@ const themecolourdecoder = (colour) => {
      try {
        await downloadImage('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', `${path.join(THEMES_FOLDER, 'system', 'SystemLight.theme')}`);
      } catch (error) {
-       logger.error(`Error downloading image: ${error.message}`);
+       logger.error(`Error downloading Theme (system.light fallback): ${error.message}`);
      }
     await settheme(`${path.join('system', 'SystemLight')}`);
       return await retrieveTheme();
@@ -69,7 +69,7 @@ const themecolourdecoder = (colour) => {
  const retrieveTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
    const data = await fs.readFileSync(`${path.join(THEMES_FOLDER, config_current.theme)}.theme`);
-   logger.info(JSON.parse(data))
+   logger.info('Current Theme json:', JSON.parse(data))
     return JSON.parse(data)
  }
 

@@ -16,7 +16,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 
 let isFunctionRunning = false;
 const CHANNEL_OFFLINE = async () => {
-  logger.info(CHANNEL_OFFLINEDIR)
+  logger.info('Channel OFFLINE DIR is:', CHANNEL_OFFLINEDIR)
   if (isFunctionRunning) {
   logger.error('Channel Offline Generator is already running.');
     return;
@@ -52,7 +52,7 @@ const CHANNEL_OFFLINE = async () => {
 
         const channelXMLString = builder.buildObject(channelXMLData);
         const channelFilePath = `${path.join(CHANNEL_OFFLINEDIR, channelId)}.xml`;
-        logger.info(channelFilePath);
+        logger.info('ChannelFilePath:', channelFilePath);
         await fs.promises.writeFile(channelFilePath, channelXMLString);
         logger.info(`Channel file saved: ${channelFilePath}`);
       });
@@ -64,7 +64,7 @@ const CHANNEL_OFFLINE = async () => {
 
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     const current_theme = await retrieveCurrentTheme();
-    logger.info(eachxmltvfile);
+    logger.info('eachxmltvfile:', eachxmltvfile);
     try {
       // Read the XML file
       const data = await fs.promises.readFile(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.xml`, 'utf-8');
@@ -92,7 +92,7 @@ const CHANNEL_OFFLINE = async () => {
 
     const programme = result.tv.programme.find(program => program.title[0]._ === showName);
 
-logger.info(programme)
+logger.info('Next program name:', programme)
 
       let nextShowName = '';
       let nextStartTime = '';
@@ -110,7 +110,7 @@ if (nextShowName !== showName) {
 }
 }
 }
-logger.info(nextStartTime)
+logger.info('Next show start time:', nextStartTime)
 // Extract the time portion from the nextStartTime string
 const time = nextStartTime.substr(8, 6);
 
@@ -128,7 +128,7 @@ const nextShowStartTime = formattedHours && minutes ? `${formattedHours}:${minut
 
 
 
-logger.info(nextShowStartTime)
+logger.info('Next Show Start time (AM/PM):', nextShowStartTime)
 
       // Calculate the duration for each subtitle
       const subtitleDuration = 0; // Duration in seconds
@@ -141,9 +141,6 @@ logger.info(nextShowStartTime)
       const fontSize = 32;
       const lineSpacing = 1;
 
-      // Calculate the total height of the subtitle
-    //  const subtitleHeight = 1 * fontSize * lineSpacing + 80;
-    //  logger.info(subtitleHeight);
 
 
       // Create the move effect string
@@ -152,13 +149,13 @@ logger.info(nextShowStartTime)
   // const titlecolor = themecolourdecoder('FFBF00');
       const descriptioncolor = themecolourdecoder(`${current_theme.Offline.offlinetextcolour}`);
       const offlinebackgroundcolour = themecolourdecoder(`${current_theme.Offline.offlinebackgroundcolour}`);
-      logger.info(titlecolor)
-      logger.info(descriptioncolor)
+      logger.info('Offline Title Colour:', titlecolor)
+      logger.info('Offline Description Colour:', descriptioncolor)
 
       const newsFeed = `{\\r}{\\b1}{\\c&H${titlecolor}&}This Channel is Currently offline\n\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}Next showing at: ${nextShowStartTime}\n\nStarting With: ${nextShowName}`;
       const lines = newsFeed.replace(/\n/g, '\\N');
   //    let lines = newsFeed;
-      logger.info(lines)
+      logger.info('channel-offline template:', lines)
 
       // Combine the move effect with the subtitle text
       const subtitle = `${moveEffect}${lines}`;
@@ -183,35 +180,28 @@ logger.info(nextShowStartTime)
         [Events]
         Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
-logger.info(assText)
+logger.info('Channel-offline Ass text:', assText)
       fs.writeFileSync(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass`, assText);
 
 
-if (config_current.hwaccel !== "") {
-  const hwaccell = ` -hwaccel ${config_current.hwaccel}`;
-  logger.info(hwaccell); // Use the constant as needed
-} else {
-  logger.info("The input string is empty.");
-}
-if (config_current.hwaccel == "") {
-  hwaccel = ` `;
-  logger.info('no hwaccel'); // Use the constant as needed
-} else {
-  hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-  logger.info(hwaccel);
-}
+      if (config_current.hwaccel == "") {
+        hwaccel = ` `;
+        logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
+      } else {
+        hwaccel = ` -hwaccel ${config_current.hwaccel} `;
+        logger.info('Hwaccell:', hwaccel);
+      }
 
 if (config_current.hwaccel_device == "") {
   hwacceldevice = ``;
-  logger.info('no hwacceldevice'); // Use the constant as needed
+  logger.info('Hwaccel_device: no hwacceldevice'); // Use the constant as needed
 } else {
   hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-  logger.info(hwacceldevice);
+  logger.info('Hwaccel_device:', hwacceldevice);
 }
       const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;
 
-      logger.info(command);
-      logger.ffmpeg(`command is ${command}`);
+      logger.ffmpeg(`Channel-Offline ffmpeg command is ${command}`);
 
       exec(command, (error, stdout, stderr) => {
         if (error) {
@@ -235,14 +225,14 @@ if (config_current.hwaccel_device == "") {
   let fileList = await listFilesInDir(CHANNEL_OFFLINEDIR);
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-  logger.info(fileList);
+  logger.info('Channel-Offline File List:', fileList);
 
   async function processFiles() {
     for (const file of fileList) {
       if (path.extname(file) === '.xml') {
-        logger.info(file);
+        logger.info('channel-offline file:', file);
         const filename = `${file}`;
-        logger.info(filename);
+        logger.info('channel-offline filename:', filename);
 
         // Use path.sep to get the correct path separator for the platform
         const lastIndex = filename.lastIndexOf(path.sep);

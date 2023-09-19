@@ -15,7 +15,7 @@ const loadApirunRoutes = (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error(err); // Log the error for debugging purposes
+    logger.error('Run api Error:', err); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -27,7 +27,7 @@ const loadApirunRoutes = (app) => {
 
 // run weather function
 app.get('/api/run/weather', async () => {
-logger.info("running weather function")
+logger.info("running weather function from run api")
 await WEATHER();
 // use the url and path variables to set the theme
 
@@ -36,7 +36,7 @@ await WEATHER();
   // run news function
 
   app.get('/api/run/news', async () => {
-  logger.info("running news function")
+  logger.info("running news function from run api")
   await NEWS();
   // use the url and path variables to set the theme
 
@@ -44,7 +44,7 @@ await WEATHER();
 
 // run channel-offline function
 app.get('/api/run/channel-offline', async () => {
-logger.info("running channel-offline function")
+logger.info("running channel-offline function from run api")
 await CHANNEL_OFFLINE();
 // use the url and path variables to set the theme
 
@@ -52,19 +52,19 @@ await CHANNEL_OFFLINE();
 
 // run xmltvmerger function
 app.get('/api/run/xmltvmerger', async () => {
-logger.info("xmltvmerger function")
+logger.info("running xmltvmerger function from run api")
 const config_current = await retrieveCurrentConfiguration()
 if (!(typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null')) {
 await XMLTVPARSE();
 } else {
-  logger.info('no epg files set so merger not running')
+  logger.info('no epg files set so merger not running from run api')
 }// use the url and path variables to set the theme
 
 });
 
-// run xmltvmerger function
+// run vanity card function
 app.get('/api/run/vanitycard', async () => {
-logger.info("Vanity Cards function")
+logger.info("running Vanity Cards function from run api")
 await VANITYCARDS();
 // use the url and path variables to set the theme
 

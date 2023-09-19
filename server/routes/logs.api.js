@@ -16,7 +16,7 @@ const loadApilogsRoutes = (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error(err); // Log the error for debugging purposes
+    logger.error('Logs api Error:', err); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -44,7 +44,7 @@ const loadApilogsRoutes = (app) => {
       // Handle error event for logStream
       logStream.on('error', (error) => {
         res.status(500).send('Error reading log file');
-        logger.error(error);
+        logger.error('cant create logstream:', error);
       });
 
       const rl = readline.createInterface({
@@ -74,7 +74,7 @@ const loadApilogsRoutes = (app) => {
       });
     } catch (error) {
       res.status(500).send('Error getting log file');
-      logger.error(error.message);
+      logger.error('Error with reading and processing logs:', error.message);
     }
   });
 
@@ -88,7 +88,6 @@ const loadApilogsRoutes = (app) => {
   const formattedDate = `${year}-${month}-${day}`;
 
 
-  //logger.info(formattedDate)
       const logFile = `${path.join(LOGFOLDER, 'ersatztv-filler')}-${formattedDate}.log`;
       return logFile;
     } catch (error) {

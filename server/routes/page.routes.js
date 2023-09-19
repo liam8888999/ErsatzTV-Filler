@@ -64,7 +64,7 @@ const checkAuthentication = (req, res, next) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error(err); // Log the error for debugging purposes
+    logger.error('Page routes Error:', err); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -254,17 +254,17 @@ const checkAuthentication = (req, res, next) => {
       const config_current = await retrieveCurrentConfiguration();
       let filesinthemesdir = await listFilesInDir(THEMES_FOLDER)
 .catch(error => {
-    logger.error(`Error: ${error}`);
+    logger.error(`Error listing files in themes dir: ${error}`);
   });
   let filesinthemesdiruser = await listFilesInDir(`${path.join(THEMES_FOLDER, 'user')}`)
 .catch(error => {
-logger.error(`Error: ${error}`);
+logger.error(`Error listing files in themes user dir: ${error}`);
 });
 let filesinthemesdirsystem = await listFilesInDir(`${path.join(THEMES_FOLDER, 'system')}`)
 .catch(error => {
-logger.error(`Error: ${error}`);
+logger.error(`Error listing files in themes system dir: ${error}`);
 });
-logger.info(JSON.stringify(filesinthemesdiruser))
+logger.info('Files in themes dir:', JSON.stringify(filesinthemesdiruser))
       let UPDATESTATUS = await checkForUpdates();
       const ErsatzTVURL = config_current.ersatztv
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {
@@ -495,7 +495,7 @@ app.post('/register', (req, res) => {
   // Write the user data to the file, overwriting any existing data
   fs.writeFile(usersFilePath, JSON.stringify(user), (err) => {
       if (err) {
-          logger.error(err);
+          logger.error('Error writing registration information to file:', err);
           return res.status(500).send('Error writing to file');
       }
 

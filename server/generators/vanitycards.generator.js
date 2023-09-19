@@ -83,24 +83,23 @@ const createVanityCard = async (filenumber) => {
   try {
     if (config_current.hwaccel == "") {
       hwaccel = ` `;
-      logger.info('no hwaccel'); // Use the constant as needed
+      logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
     } else {
       hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-      logger.info(hwaccel);
+      logger.info('Hwaccell:', hwaccel);
     }
 
     if (config_current.hwaccel_device == "") {
       hwacceldevice = ``;
-      logger.info('no hwacceldevice'); // Use the constant as needed
+      logger.info('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
     } else {
       hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-      logger.info(hwacceldevice);
+      logger.info('Hwaccell_device:', hwacceldevice);
     }
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     // add theme information
     // part1
     const commandvanitycard = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=white:${config_current.videoresolution} -i "${path.join(VANITYCARDDIR, 'vanitycard')}-${filenumber}.jpg" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${path.join(config_current.output, 'vanitycard')}-${filenumber}.mp4`;
-    logger.info(commandvanitycard);
     logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
 
     exec(commandvanitycard, (error, stdout, stderr) => {
@@ -115,14 +114,14 @@ const createVanityCard = async (filenumber) => {
       logger.success('Vanity Card created successfully.');
     });
   } catch (err) {
-    logger.error(err);
+    logger.error('Error:', err);
   }
 };
 
 
 
 async function processVanityCards() {
-  logger.info(config_current.amountvanitycards)
+  logger.info('Amount of vanity cards:', config_current.amountvanitycards)
   const maxIterations = config_current.amountvanitycards || 5;
   for (let filenumber = 1; filenumber <= maxIterations; filenumber++) {
     await getVanityCard(filenumber);

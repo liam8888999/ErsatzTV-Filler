@@ -72,7 +72,7 @@ function copyResources() {
 
     sourceStream.on('error', (error) => {
       logger.error(`Error copying file: ${sourceFile} -> ${destinationFile}`);
-      logger.error(error);
+      logger.error('Error:', error);
     });
   }
 
@@ -115,13 +115,13 @@ let FFMPEGINTERALPATH;
 if (os.platform() === 'win32') {
   FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-windows.exe');
   ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-windows.exe');
-logger.info("windows")
+logger.info("OS: windows")
 } else if (os.platform() === 'linux') {
   FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-linux');
   ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-linux');
-  logger.info("linux")
+  logger.info("OS: linux")
 } else if (os.platform() === 'darwin') {
-  logger.info("darwin")
+  logger.info("OS: macos (darwin)")
   FFMPEGINTERNALPATH = path.join(FFMPEGPATHINTERNAL, 'ffmpeg-darwin');
   ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-darwin');
 } else {

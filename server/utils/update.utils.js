@@ -35,8 +35,8 @@ async function checkForUpdates() {
 
     // Check if the latest version is different from the installed version
     const currentVersion = `${version}`; // Implement this function to get the current version
-    logger.info(`current version is ${currentVersion}`)
-    logger.info(`latest version is ${latestVersion}`)
+    logger.info(`current version is: ${currentVersion}`)
+    logger.info(`latest version is: ${latestVersion}`)
     if (currentVersion === latestVersion) {
         logger.updates('Application is already up to date.')
       return 'Application is already up to date.';
@@ -45,8 +45,8 @@ async function checkForUpdates() {
       return `Newer version is available: ${latestVersion}`;
     }
   } catch (error) {
-    logger.updates(`Error checking for updates: ${error.message}`)
-    return `Error checking for updates: ${error.message}`;
+    logger.updates(`Error checking for updates, Please try again later: ${error.message}`)
+    return `Error checking for updates, Please try again later: ${error.message}`;
   }
 }
 

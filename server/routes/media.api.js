@@ -13,7 +13,7 @@ const loadApimediaRoutes = (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error(err); // Log the error for debugging purposes
+    logger.error('Media api Error:', err); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -27,7 +27,7 @@ const loadApimediaRoutes = (app) => {
 app.get('/media/:filename', (req, res) => {
   const { filename } = req.params;
   const filePath = path.join(WORKDIR, filename);
-  logger.info(filePath)
+  logger.info('Media api filepath:', filePath)
 
   // Check if the file exists
   if (!fs.existsSync(filePath)) {

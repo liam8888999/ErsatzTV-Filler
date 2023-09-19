@@ -16,7 +16,7 @@ const loadApihealthRoutes = (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error(err); // Log the error for debugging purposes
+    logger.error('Health api Error:', err); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -56,10 +56,10 @@ app.get('/api/health', async (req, res) => {
 
   checkFFmpegInstallation()
     .then(message => {
-      logger.info(message.status);
+      logger.info('Check ffmpeg installation:', message.status);
       return message.status;
     })
-    .catch(error => logger.error(error));
+    .catch(error => logger.error('Error checking ffmpeg installation:', error));
 
 const osInfo = {
   platform: os.platform(),
@@ -72,7 +72,7 @@ const osInfo = {
 };
 
 res.json({ status: 'OK', os: osInfo });
-logger.info(osInfo);
+logger.info('System info from health api:', osInfo);
 });
 
 

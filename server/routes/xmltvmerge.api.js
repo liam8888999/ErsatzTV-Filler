@@ -16,7 +16,7 @@ const loadApixmltvmergeRoutes = (app) => {
 
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error(err); // Log the error for debugging purposes
+    logger.error('XMLTVMERGE api Error:', err); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -30,7 +30,7 @@ const loadApixmltvmergeRoutes = (app) => {
   app.get('/xmltvmerge/:filename', (req, res) => {
   const { filename } = req.params;
   const filePath = path.join(config_current.output, filename);
-  logger.info(filePath)
+  logger.info('XMLTVMERGE api retrieval filename:', filePath)
 
   // Check if the file exists
   if (!fs.existsSync(filePath)) {

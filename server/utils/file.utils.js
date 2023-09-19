@@ -43,7 +43,7 @@ const overWriteFileContents = async (path, fileContents) => {
     try{
         await writeFile(path, fileContents);
     }catch(e){
-        logger.error(e)
+        logger.error('Error overwriting file contents:', e)
     }
 
 }
@@ -70,7 +70,7 @@ async function listFilesInDir(directoryPath) {
     const results = await Promise.all(filePromises);
     return results.flat().filter(Boolean); // Remove undefined values
   } catch (error) {
-    logger.error(`Error reading directory: ${error}`);
+    logger.error(`Error reading directory for directory listing: ${error}`);
     return [];
   }
 }
@@ -81,7 +81,7 @@ const createDirectoryIfNotExists = (directoryPath) => {
     fs.mkdirSync(directoryPath);
     logger.info(`Directory created: ${directoryPath}`);
   } else {
-    logger.info(`Directory already exists: ${directoryPath}`);
+    logger.info(`Directory already exists, will not be created: ${directoryPath}`);
   }
 };
 

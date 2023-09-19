@@ -42,7 +42,7 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
         const $ = cheerio.load(xmlData, { xmlMode: true });
 
         let newsFeed = '';
-        logger.info(xmlData);
+        logger.info('XMLDATA:', xmlData);
 
         $('rss > channel > item').each((index, element) => {
           const title = $(element).find('title').text();
@@ -116,18 +116,18 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 const generateNewsVideo = async (config_current, audioFile) => {
   if (config_current.hwaccel == "") {
     hwaccel = ` `;
-    logger.info('no hwaccel'); // Use the constant as needed
+    logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
   } else {
     hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-    logger.info(hwaccel);
+    logger.info('Hwaccell:', hwaccel);
   }
 
   if (config_current.hwaccel_device == "") {
     hwacceldevice = ``;
-    logger.info('no hwacceldevice'); // Use the constant as needed
+    logger.info('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
   } else {
     hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-    logger.info(hwacceldevice);
+    logger.info('Hwaccell_device:', hwacceldevice);
   }
   const resolution = config_current.videoresolution;
   const width = resolution.split("x")[0];
@@ -135,8 +135,7 @@ const generateNewsVideo = async (config_current, audioFile) => {
   const backgroundcolour = themecolourdecoder(current_theme.News.newsbackgroundcolour);
   const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass=${path.join(NEWSDIR, 'news.ass')}" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, 'news.mp4')}`;
 
-  logger.info(command);
-  logger.ffmpeg(`command is ${command}`);
+  logger.ffmpeg(`News ffmpeg command is ${command}`);
 
   exec(command, (error, stdout, stderr) => {
     if (error) {

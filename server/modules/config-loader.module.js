@@ -32,7 +32,6 @@ const setupConfigurationFile = async () => {
  */
 const parseConfigurationFileContents = async (path) => {
     CURRENT_CONFIG = await parseConfigurationFile(path).parsed;
-  //  logger.info(CURRENT_CONFIG)
 }
 
 
@@ -75,7 +74,7 @@ const retrieveCurrentConfiguration = async () => {
 
     const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     CURRENT_CONFIG = JSON.parse(data);
-logger.info(CURRENT_CONFIG);
+logger.info('Current config is:', CURRENT_CONFIG);
 return CURRENT_CONFIG;
 };
 
