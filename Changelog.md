@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.1.9](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.8...V1.1.9) (2023-09-21)
+
+
+### Added
+
+* channel logo now displays on channel-offline filler ([fb65326](https://github.com/liam8888999/ErsatzTV-Filler/commit/fb65326c29d7bcfafe631dba5f51da80373f8243))
+* image conversion logic ([0025de0](https://github.com/liam8888999/ErsatzTV-Filler/commit/0025de030bd443ed2f3794bd2c29998bad6a16a2))
+
+
+### Fixed
+
+* add try/catch blocks in run api ([fd849ed](https://github.com/liam8888999/ErsatzTV-Filler/commit/fd849edc1d21542ebe370aa27212252483715246))
+
+
+### Changed
+
+* make escape logic more universal ([eee7b08](https://github.com/liam8888999/ErsatzTV-Filler/commit/eee7b083ade32d5162270826fb7d48dacd93424a))
+
 ## [1.1.8](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.7...V1.1.8) (2023-09-19)
 
 
