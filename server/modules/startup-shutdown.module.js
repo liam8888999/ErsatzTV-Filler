@@ -8,7 +8,6 @@ const os = require('os');
 // Replace these with the actual paths to the files you want to delete
 const foldersToDelete = [
   `${WORKDIR}`,
-  `${THEMES_FOLDER}`,
   `${RESOURCESPATH}`
 ];
 
