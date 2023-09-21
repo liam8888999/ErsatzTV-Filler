@@ -28,8 +28,13 @@ const loadApirunRoutes = (app) => {
 // run weather function
 app.get('/api/run/weather', async () => {
 logger.info("running weather function from run api")
-await WEATHER();
-// use the url and path variables to set the theme
+try {
+  await WEATHER();
+} catch (error) {
+  // Handle the error encountered in XMLTVMERGE()
+  logger.error(`Error encountered in Weather: ${error}`);
+  return;
+}
 
 });
 
@@ -37,16 +42,25 @@ await WEATHER();
 
   app.get('/api/run/news', async () => {
   logger.info("running news function from run api")
-  await NEWS();
-  // use the url and path variables to set the theme
-
+  try {
+    await NEWS();
+  } catch (error) {
+    // Handle the error encountered in XMLTVMERGE()
+    logger.error(`Error encountered in News: ${error}`);
+    return;
+  }
 });
 
 // run channel-offline function
 app.get('/api/run/channel-offline', async () => {
 logger.info("running channel-offline function from run api")
-await CHANNEL_OFFLINE();
-// use the url and path variables to set the theme
+try {
+  await CHANNEL_OFFLINE();
+} catch (error) {
+  // Handle the error encountered in XMLTVMERGE()
+  logger.error(`Error encountered in Channel Offline: ${error}`);
+  return;
+}
 
 });
 
@@ -55,7 +69,13 @@ app.get('/api/run/xmltvmerger', async () => {
 logger.info("running xmltvmerger function from run api")
 const config_current = await retrieveCurrentConfiguration()
 if (!(typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null')) {
-await XMLTVPARSE();
+  try {
+    await XMLTVPARSE();
+  } catch (error) {
+    // Handle the error encountered in XMLTVMERGE()
+    logger.error(`Error encountered in XMLTVMERGER: ${error}`);
+    return;
+  }
 } else {
   logger.info('no epg files set so merger not running from run api')
 }// use the url and path variables to set the theme
@@ -65,9 +85,13 @@ await XMLTVPARSE();
 // run vanity card function
 app.get('/api/run/vanitycard', async () => {
 logger.info("running Vanity Cards function from run api")
-await VANITYCARDS();
-// use the url and path variables to set the theme
-
+try {
+  await VANITYCARDS();
+} catch (error) {
+  // Handle the error encountered in XMLTVMERGE()
+  logger.error(`Error encountered in VANITYCARDS: ${error}`);
+  return;
+}
 });
 
 }
