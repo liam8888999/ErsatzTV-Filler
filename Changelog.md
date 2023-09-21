@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.10](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.9...V1.1.10) (2023-09-21)
+
+
+### Fixed
+
+* small logging fixes ([513e0c9](https://github.com/liam8888999/ErsatzTV-Filler/commit/513e0c971b9368cfe06200d1f36f33a6f8b0f569))
+* stop deleting themes folder on shutdown ([f1c6337](https://github.com/liam8888999/ErsatzTV-Filler/commit/f1c633761c112c16d692117b6082bb40afaaee9e))
+
 ## [1.1.9](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.8...V1.1.9) (2023-09-21)
 
 
