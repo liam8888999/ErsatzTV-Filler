@@ -32,9 +32,9 @@ await sharp(inputImagePath)
   .toFormat('png', conversionOptions)
   .toFile(outputImagePath, (err, info) => {
     if (err) {
-      console.error('Error converting image:', err);
+      logger.error('Error converting image:', err);
     } else {
-      console.log('Image converted successfully:', info);
+      logger.success('Image converted successfully:', info);
     }
   });
 }

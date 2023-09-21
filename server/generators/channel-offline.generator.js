@@ -88,9 +88,8 @@ const CHANNEL_OFFLINE = async () => {
         const lastIndex = filename.lastIndexOf(".");
         if (lastIndex !== -1) {
           fileimageExtension = filename.slice(lastIndex + 1);
-          console.log("File extension:", fileimageExtension);
         } else {
-          console.log("No file extension found.");
+          logger.error("No file extension found.");
         }
         downloadImage(`${channelLogo}`, `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimageExtension}`)
     .then(() => {
@@ -178,7 +177,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
 
             const centering = `${height}/2`;
             const assimage = `${asssubstitution(path.join(CHANNEL_OFFLINEDIR, 'sharpimgdir', eachxmltvfile))}.png`
-            console.log(assimage)
+            logger.info (assimage)
 
             let assText = `[Script Info]
             Title: Scrolling Text Example

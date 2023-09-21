@@ -139,7 +139,7 @@ const generateNewsVideo = async (config_current, audioFile) => {
   const textWidth = Math.floor(width / 40);
   const backgroundcolour = themecolourdecoder(current_theme.News.newsbackgroundcolour);
   const assfile = asssubstitution(`${path.join(NEWSDIR, 'news.ass')}`)
-  console.log(assfile)
+  logger.info(assfile)
   const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, 'news.mp4')}`;
 
   logger.ffmpeg(`News ffmpeg command is ${command}`);
