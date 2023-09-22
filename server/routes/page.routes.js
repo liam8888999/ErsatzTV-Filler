@@ -260,10 +260,18 @@ const checkAuthentication = (req, res, next) => {
 .catch(error => {
 logger.error(`Error listing files in themes user dir: ${error}`);
 });
-let filesinthemesdirsystem = await listFilesInDir(`${path.join(THEMES_FOLDER, 'system')}`)
+let filesinthemesdirsystemoriginal = await listFilesInDir(`${path.join(THEMES_FOLDER, 'system')}`)
 .catch(error => {
 logger.error(`Error listing files in themes system dir: ${error}`);
 });
+let joinedString = filesinthemesdirsystemoriginal.join(','); // Join array elements into a single string
+let escapedThemesFolder = THEMES_FOLDER.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+let regexPattern = new RegExp(escapedThemesFolder, 'g');
+
+// Replace the pattern in joinedString
+let filesinthemesdirsystemcorrect = joinedString.replace(regexPattern, "");
+let filesinthemesdirsystem = filesinthemesdirsystemcorrect.split(",")
+console.log("themessystemdir:", filesinthemesdirsystem)
 logger.info(`Files in themes dir: ${JSON.stringify(filesinthemesdiruser)}`)
       let UPDATESTATUS = await checkForUpdates();
       const ErsatzTVURL = config_current.ersatztv
