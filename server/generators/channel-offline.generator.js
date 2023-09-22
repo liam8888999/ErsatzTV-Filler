@@ -288,6 +288,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
     // Handle the connection error
     logger.error(`Error downloading or processing XMLTV: ${error}`);
     // Stop further execution by throwing the error
+    isFunctionRunning = false;
     throw error
   }
   isFunctionRunning = false;
