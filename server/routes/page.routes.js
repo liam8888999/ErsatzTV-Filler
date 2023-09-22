@@ -380,6 +380,55 @@ logger.info(`Files in themes dir: ${JSON.stringify(filesinthemesdiruser)}`)
         });
     });
 
+
+
+    app.get('/themecreator', checkAuthentication, async (req, res) => {
+      const config_current = await retrieveCurrentConfiguration();
+      let UPDATESTATUS = await checkForUpdates();
+      let decryptedUsername;
+      let decryptedPassword;
+        try {
+          const passwordData = JSON.parse(fs.readFileSync(PASSWORD));
+
+          // Decrypt the username and password
+          decryptedUsername = decryptText(
+            passwordData.encryptedusername.encryptedText,
+            passwordData.encryptedusername.iv.data,
+            passwordData.encryptedusername.encryptionKey.data
+          );
+          decryptedPassword = decryptText(
+            passwordData.encryptedpassword.encryptedText,
+            passwordData.encryptedpassword.iv.data,
+            passwordData.encryptedpassword.encryptionKey.data
+          );
+
+        } catch (error) {
+          // Handle the error encountered when reading or decrypting the password file
+          decryptedUsername = ''
+          decryptedPassword = ''
+
+          logger.error("No password file is found in the config dir");
+        }
+      let authentication;
+      if (!decryptedUsername && !decryptedPassword) {
+        authentication = 'no'
+      } else {
+        authentication = 'yes';
+      }
+    const ErsatzTVURL = config_current.ersatztv
+        res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "creator", {
+          layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
+          page: "Home", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
+          version: version,
+          ErsatzTVURL: ErsatzTVURL,
+          updatestatus: UPDATESTATUS,
+          authentication: authentication
+     });
+    });
+
+
+
+
     // Add a login route
     app.get('/login', async (req, res) => {
       let decryptedUsername;
@@ -510,5 +559,7 @@ app.post('/register', (req, res) => {
         });
       });
     };
+
+
 
 module.exports = { loadPageRoutes }

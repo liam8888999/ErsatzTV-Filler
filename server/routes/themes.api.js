@@ -6,6 +6,8 @@ const moment = require('moment-timezone');
 const { readFile } = require('fs');
 const {THEMES_FOLDER} = require("../constants/path.constants");
 const path = require('path');
+const fs = require("fs");
+const https = require('https');
 
 
 const loadApiThemeRoutes = (app) => {
@@ -65,6 +67,126 @@ app.get('/api/themes/readthemejson', async (req, res) => {
       res.json(JSON.parse(data));
     });
   });
+
+let themeName;
+  app.post('/themecreator', (req, res) => {
+      // Generate a unique filename based on the theme name
+      themeName = req.body.themeName;
+      const filename = themeName.replace(/ /g, '') + '.theme';
+      const filePath = path.join(THEMES_FOLDER, 'user', filename);
+
+      // Strip the "#" symbol from the color values
+    const stripHash = (color) => color.replace('#', '');
+
+    // Create an object to store the updated theme data with stripped colors
+    const updatedThemeData = {
+        "ErsatzTVFillerTheme": {
+            "ThemeName": req.body.themeName,
+            "Creator": req.body.creator
+        },
+        "Offline": {
+            "offlinetextcolour": stripHash(req.body.offlineTextColour),
+            "offlinetitlecolour": stripHash(req.body.offlineTitleColour),
+            "offlinebackgroundcolour": stripHash(req.body.offlineBackgroundColour)
+        },
+        "News": {
+            "newstextcolour": stripHash(req.body.newsTextColour),
+            "newstitlecolour": stripHash(req.body.newsTitleColour),
+            "newsbackgroundcolour": stripHash(req.body.newsBackgroundColour)
+        },
+        "Weather": {
+            "weatherbackgroundcolour": stripHash(req.body.weatherBackgroundColour)
+        }
+      };
+
+      // Save the updated JSON data to the new file
+      fs.writeFile(filePath, JSON.stringify(updatedThemeData, null, 4), (err) => {
+              if (err) {
+                  console.error(err);
+                  res.status(500).send('Error saving data');
+              } else {
+                  // Check if the "sendToWebhook" checkbox is checked
+                  if (req.body.sendToWebhook === 'on') {
+    // Send the file to the Discord webhook
+    sendFileToDiscordWebhook(filePath, (error) => {
+        if (error) {
+            res.status(500).send('Error sending data to Discord Webhook.');
+        } else {
+              res.redirect("/themecreator");
+        }
+    });
+} else {
+    res.redirect("/themecreator");
+}
+              }
+          });
+      });
+
+
+      function sendFileToDiscordWebhook(filePath, callback) {
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+
+        // Log the file content before sending it
+ console.log('File Content:');
+ console.log(fileContent);
+
+ const discordMessage = {
+     content: `${themeName}`, // Your message here
+     embeds: [
+         {
+             title: `${themeName}.theme`,
+             fields: [
+                 {
+                     name: `${themeName}.theme`,
+                     value: '```json\n' + JSON.stringify(JSON.parse(fileContent), null, 4) + '```',
+                 },
+             ],
+         },
+     ],
+ };
+
+        const options = {
+            hostname: 'discord.com',
+            port: 443,
+            path: '/api/webhooks/1154413704662761562/t3xJYQY0jINPasvaZx46hG9JA1vwx6n0rpVPgZuupD70xMwTyYAvKtY3VssIlCPtctbD', // Replace with your webhook ID and token
+            method: 'POST',
+     headers: {
+         'Content-Type': 'application/json',
+     },
+ };
+
+ const req = https.request(options, (res) => {
+       console.log(`Response Status Code: ${res.statusCode}`);
+
+       let responseText = '';
+
+       res.on('data', (chunk) => {
+           responseText += chunk;
+       });
+
+       res.on('end', () => {
+           if (res.statusCode === 204) {
+               console.log('File sent to Discord webhook successfully.');
+               callback(null);
+           } else {
+               console.error(`Error sending file to Discord webhook. Status code: ${res.statusCode}`);
+               console.error(`Response Data: ${responseText}`);
+               callback(new Error(`Error sending file to Discord webhook. Status code: ${res.statusCode}`));
+           }
+       });
+   });
+
+   req.on('error', (error) => {
+       console.error('Error sending file to Discord webhook:', error);
+       callback(error);
+   });
+
+   // Send the JSON message as the request body
+   req.write(JSON.stringify(discordMessage));
+   req.end();
+}
+
+
 
 
 };
