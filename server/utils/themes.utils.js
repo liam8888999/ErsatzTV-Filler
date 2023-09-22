@@ -32,7 +32,8 @@ const themecolourdecoder = (colour) => {
   const blue = parseInt(colour.substring(4, 6), 16);
 
   // Creating the RGB color code
-  const themeColour = `${blue.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${red.toString(16).padStart(2, '0')}`;
+  // Changed this as a test as the spec seems to have changed?? according to spec should be blue,green,red but appears to go to red,green,blue
+  const themeColour = `${red.toString(16).padStart(2, '0')}${green.toString(16).padStart(2, '0')}${blue.toString(16).padStart(2, '0')}`;
 
 
   logger.info(`Theme colour: ${themeColour}`);
