@@ -2,12 +2,12 @@ const {CONFIG_CONSTANTS, CHANNEL_OFFLINEDIR} = require("../constants/path.consta
 const logger = require("../utils/logger.utils");
 const fs = require("fs")
 const path = require("path")
-const sharp = require("sharp")
+const Jimp = require("jimp")
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 
 async function imageconvert(input) {
 
-  createDirectoryIfNotExists(path.join(CHANNEL_OFFLINEDIR, 'sharpimgdir'))
+  createDirectoryIfNotExists(path.join(CHANNEL_OFFLINEDIR, 'jimpimgdir'))
 
 // Input file path
 const inputImagePath = `${input}`; // Replace with your input image path
@@ -16,27 +16,24 @@ const inputImagePath = `${input}`; // Replace with your input image path
 const inputFileName = path.basename(inputImagePath, path.extname(inputImagePath));
 
 // Construct the output file path with the same name and a different extension
-const outputImagePath = `${path.join(CHANNEL_OFFLINEDIR, 'sharpimgdir', inputFileName)}.png`;
-
-// Define the conversion options
-const conversionOptions = {
-  quality: 90, // JPEG quality (0-100)
-};
-
+const outputImagePath = `${path.join(CHANNEL_OFFLINEDIR, 'jimpimgdir', inputFileName)}`;
+console.log(inputImagePath)
+console.log(outputImagePath)
 // Perform the image conversion
-await sharp(inputImagePath)
-  .resize(200, 500, {
-    kernel: sharp.kernel.nearest,
-    fit: 'inside'
+await Jimp.read(inputImagePath)
+  .then(image => {
+    // Resize the image to a specific width and height
+    return image
+    .contain(200, 200)
+    .write(`${outputImagePath}.png`); // Change the dimensions as needed
+
+    // If you want to convert to a different format (e.g., PNG), use:
+    // return image.resize(300, 200).write('output.png');
   })
-  .toFormat('png', conversionOptions)
-  .toFile(outputImagePath, (err, info) => {
-    if (err) {
-      logger.error('Error converting image:', err);
-    } else {
-      logger.success('Image converted successfully:', info);
-    }
+  .catch(err => {
+    console.error('image conversion error:', err);
   });
+
 }
 
 module.exports = {

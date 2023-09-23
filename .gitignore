@@ -17,3 +17,4 @@ logs.log
 test/*
 config/password.json
 /resources
+themes/*
