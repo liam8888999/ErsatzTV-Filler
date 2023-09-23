@@ -85,7 +85,7 @@ const prepareNewsContent = async (config_current) => {
 // Step 7: Prepare the ASS subtitle text
 const prepareSubtitleText = async (config_current) => {
   const inputText = await fs.readFileSync(`${path.join(NEWSDIR, 'news-temp.txt')}`, 'utf8');
-  const lines = inputText.replace(/\n/g, '\\N');
+  const lines = inputText.replace(/\n/g, '\\N').replace(/<p>/g, '').replace(/<\/p>/g, '');
   const maxLinesPerFrame = 70;
   const subtitleDuration = 0;
   let startTime = 0;
