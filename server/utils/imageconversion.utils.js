@@ -16,25 +16,52 @@ const inputImagePath = `${input}`; // Replace with your input image path
 const inputFileName = path.basename(inputImagePath, path.extname(inputImagePath));
 
 // Construct the output file path with the same name and a different extension
-const outputImagePath = `${path.join(CHANNEL_OFFLINEDIR, 'jimpimgdir', inputFileName)}`;
+const outputImagePath = `${path.join(CHANNEL_OFFLINEDIR, 'jimpimgdir', inputFileName)}.png`;
 console.log(inputImagePath)
 console.log(outputImagePath)
-// Perform the image conversion
-await Jimp.read(inputImagePath)
-  .then(image => {
-    // Resize the image to a specific width and height
-    return image
-    .contain(200, 200)
-    .write(`${outputImagePath}.png`); // Change the dimensions as needed
 
-    // If you want to convert to a different format (e.g., PNG), use:
-    // return image.resize(300, 200).write('output.png');
-  })
-  .catch(err => {
-    console.error('image conversion error:', err);
-  });
+
+// Perform the image conversion
+
+
+function processLocalImage() {
+  return Jimp.read(inputImagePath)
+    .then((image) => {
+      return image.contain(200, 200).writeAsync(outputImagePath);
+    })
+    .then(() => {
+      console.log('Local image converted to PNG:', outputImagePath);
+    })
+    .catch((err) => {
+      console.error('Local image Jimp Error:', err);
+      // If there's an error with the local image, fall back to processing the URL-based image
+      processUrlImage();
+    });
+}
+
+// Function to process the URL-based image
+function processUrlImage() {
+  Jimp.read('https://liam8888999.github.io/ErsatzTV-Filler/images/ersatztv-filler.png')
+    .then((image) => {
+      return image.contain(200, 200).writeAsync(outputImagePath);
+    })
+    .then(() => {
+      console.log('URL-based image converted to PNG:', outputImagePath);
+    })
+    .catch((err) => {
+      console.error('URL-based image Jimp Error:', err);
+    });
+}
+
+await processLocalImage()
+
+
+
+
 
 }
+
+
 
 module.exports = {
     imageconvert
