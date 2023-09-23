@@ -24,7 +24,7 @@ logger.info("starting weather")
 
 const config_current = await retrieveCurrentConfiguration();
 const current_theme = await retrieveCurrentTheme();
-const weatherbackgroundcolour = themecolourdecoder(`${current_theme.Weather.weatherbackgroundcolour}`);
+const weatherbackgroundcolour = current_theme.Weather.weatherbackgroundcolour;
 
 
 if (config_current.hwaccel == "") {

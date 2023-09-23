@@ -159,7 +159,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
             const titlecolor = themecolourdecoder(`${current_theme.Offline.offlinetitlecolour}`);
         // const titlecolor = themecolourdecoder('FFBF00');
             const descriptioncolor = themecolourdecoder(`${current_theme.Offline.offlinetextcolour}`);
-            const offlinebackgroundcolour = themecolourdecoder(`${current_theme.Offline.offlinebackgroundcolour}`);
+            const offlinebackgroundcolour = `${current_theme.Offline.offlinebackgroundcolour}`;
             logger.info(`Offline Title Colour: ${titlecolor}`)
             logger.info(`Offline Description Colour: ${descriptioncolor}`)
 
