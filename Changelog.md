@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.1.11](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.10...V1.1.11) (2023-09-23)
+
+
+### Added
+
+* theme creator added ([ddabb4b](https://github.com/liam8888999/ErsatzTV-Filler/commit/ddabb4b21ae091be869177a0b9b32c9db63c6036))
+
+
+### Fixed
+
+* fix for theme page buttons which were not working ([3dfc1ec](https://github.com/liam8888999/ErsatzTV-Filler/commit/3dfc1ecfc33e7793c7f626d227e9794290ff8608))
+* fix typo that was preventing some theme features from working ([8cb350d](https://github.com/liam8888999/ErsatzTV-Filler/commit/8cb350d878d5a325f2736e9e75bab4135fef6975))
+* hide theme list on theme page ([9c8ff94](https://github.com/liam8888999/ErsatzTV-Filler/commit/9c8ff94353af2b0245515a70e20a42c1fabd7cff))
+* remove <p> and </p> from news feeds ([61687f8](https://github.com/liam8888999/ErsatzTV-Filler/commit/61687f86dd75eb83e237f4e71801e37d0cec7316))
+* set channel offline running false on failure ([6c96465](https://github.com/liam8888999/ErsatzTV-Filler/commit/6c96465cbe31281e3dd92a042298293336441465))
+* theme colours are now used correctly ([6202c7b](https://github.com/liam8888999/ErsatzTV-Filler/commit/6202c7bbde9370d2e60738dba7774a371bbac07a))
+* update theme download urls ([93a5357](https://github.com/liam8888999/ErsatzTV-Filler/commit/93a5357dda4745deb5b9d27b0e8c604b7469b361))
+
+
+### Removed
+
+* remove images from channel-offline filler. this is only temporary and will be added back ([350bbf8](https://github.com/liam8888999/ErsatzTV-Filler/commit/350bbf875fad5bc1dbd1c2ffc7ad07e39cb5bc6d))
+
+
+### Changed
+
+* rgb colors are now used in the code for ass subtitles rather than ([127b8d1](https://github.com/liam8888999/ErsatzTV-Filler/commit/127b8d1efc07bd334a230955da08b3b18635c7f1))
+
 ## [1.1.10](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.9...V1.1.10) (2023-09-21)
 
 
