@@ -44,6 +44,7 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
 
         let newsFeed = '';
         let newsFeedcontent = '';
+        let newsheader = '';
         logger.info(`XMLDATA: ${xmlData}`);
 
         $('rss > channel > item').each((index, element) => {
@@ -53,7 +54,12 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
           const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
           const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
 
-          const newsheader = `{\\r}{\\b1}{\\c&H${titlecolor}&}{\\u1}${config_current.newsheadertext}{//u0}\n\n`
+          if (config_current.underlinenewsheader === 'yes') {
+            newsheader = `{\\r}{\\b1}{\\c&H${titlecolor}&}{\\u1}${config_current.newsheadertext}{//u0}\n\n`
+          } else {
+            newsheader = `{\\r}{\\b1}{\\c&H${titlecolor}&}${config_current.newsheadertext}\n\n`
+          }
+
 
           newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
 console.log("header text:", config_current.newsheadertext)

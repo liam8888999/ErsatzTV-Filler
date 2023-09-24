@@ -99,6 +99,10 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'vanitycardduration',
       value: '30',
+    },
+    {
+      key: 'underlinenewsheader',
+      value: 'yes',
     }
   ];
 

@@ -55,6 +55,7 @@ const DEFAULT_CONFIG = {
   "newsarticles": "10",
   "shownewsheader": "yes",
   "newsheadertext": "Top News Stories",
+  "underlinenewsheader": "yes",
   "newsinterval": "30",
   "processchanneloffline": "yes",
   "offlineinterval": "5",
