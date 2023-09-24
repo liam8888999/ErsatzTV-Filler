@@ -63,11 +63,11 @@ await downloadImage(`https://v3.wttr.in/${config_current.state}.png`, `${path.jo
 
 
   const weathercalculations = async () => {
-    const weathervideofadeoutstart = config_current.videolength - config_current.weathervideofadeoutduration;
+    const weathervideofadeoutstart = config_current.weatherduration - config_current.weathervideofadeoutduration;
     logger.info(`Weather video fade out start: ${weathervideofadeoutstart}`)
-    const weatheraudiofadeoutstart = config_current.videolength - config_current.weatheraudiofadeoutduration;
+    const weatheraudiofadeoutstart = config_current.weatherduration - config_current.weatheraudiofadeoutduration;
     logger.info(`Weather Audio Fade out start: ${weatheraudiofadeoutstart}`)
-    const weatherv4videolength = config_current.videolength * 3;
+    const weatherv4videolength = config_current.weatherduration * 3;
     const weathervideofadeoutstartv4 = weatherv4videolength - config_current.weathervideofadeoutduration;
     const weatheraudiofadeoutstartv4 = weatherv4videolength - config_current.weatheraudiofadeoutduration;
     return {
@@ -87,7 +87,7 @@ const createWeatherV1 = async () => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v1.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${path.join(WEATHERDIR, 'weather-v1.mp4')}`;
+    const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v1.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v1.mp4')}`;
     logger.ffmpeg(`ffmpeg weather commandv1part1 is ${commandv1part1}`);
 
     exec(commandv1part1, (error, stdout, stderr) => {
@@ -128,7 +128,7 @@ const createWeatherV2 = async () => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv2part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v2.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${path.join(WEATHERDIR, 'weather-v2.mp4')}`;
+    const commandv2part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v2.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v2.mp4')}`;
     logger.ffmpeg(`ffmpeg weather commandv2part1 is: ${commandv2part1}`);
 
     exec(commandv2part1, (error, stdout, stderr) => {
@@ -169,7 +169,7 @@ const createWeatherV3 = async () => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1
-    const commandv3part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v3.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.videolength} ${path.join(WEATHERDIR, 'weather-v3.mp4')}`;
+    const commandv3part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v3.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v3.mp4')}`;
     logger.ffmpeg(`ffmpeg weather commandv3part1: ${commandv3part1}`);
 
     exec(commandv3part1, (error, stdout, stderr) => {

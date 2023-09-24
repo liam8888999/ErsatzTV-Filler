@@ -91,6 +91,14 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'newsheadertext',
       value: 'Top News Stories',
+    },
+    {
+      key: 'weatherduration',
+      value: '30',
+    },
+    {
+      key: 'vanitycardduration',
+      value: '30',
     }
   ];
 

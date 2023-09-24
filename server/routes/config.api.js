@@ -184,6 +184,8 @@ if (Object.keys(json).length !== 0) {
   config_current.newsaudiofadeoutduration = json.newsaudiofadeoutduration || config_current.newsaudiofadeoutduration;
   config_current.newsaudiofadeinduration = json.newsaudiofadeinduration || config_current.newsaudiofadeinduration;
   config_current.videolength = json.videolength || config_current.videolength;
+  config_current.weatherduration = json.videolength || config_current.videolength;
+  config_current.vanitycardduration = json.videolength || config_current.videolength;
   config_current.newsfeed = json.newsfeed || config_current.newsfeed;
   config_current.newsfeed1 = json.newsfeed1 || config_current.newsfeed1;
   config_current.newsfeed2 = json.newsfeed2 || config_current.newsfeed2;
