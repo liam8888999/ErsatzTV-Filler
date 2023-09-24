@@ -47,3 +47,9 @@ This is the option to set a fade in for the audio which will make the audio volu
 This is the option to select how often you wish the Weather filler to be regenerated to update the news information in the videos. If you want it to run every 10 minutes then you would just set `10` as the option.
 
 *Note:* This is based on the cron of '\*/{interval} \* \* \* \*' e.g. '\*/10 \* \* \* \*'
+
+### Weather Video Duration
+
+- `Time (seconds)`
+
+This is the option to set the duration the weather filler will run for. If you want 30 seconds then you would just set `30` as the option.

@@ -59,3 +59,15 @@ This is the option to select how many news articles to display in the video. If 
 This is the option to select how often you wish the news filler to be regenerated to include new articles. If you want it to run every 30 minutes then you would just set `30` as the option.
 
 *Note:* This is based on the cron of '\*/{interval} \* \* \* \*' e.g. '\*/30 \* \* \* \*'
+
+### Show the news header?
+
+- `yes/no`
+
+This is the option whether you want to show the header in the news filler, it can be set as `yes` to show or `no` if you dont want it to show.
+
+### News header text
+
+- `String (header text)`
+
+This is the option to select what text to show in the news header.

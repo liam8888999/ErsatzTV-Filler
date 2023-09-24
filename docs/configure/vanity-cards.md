@@ -23,3 +23,9 @@ This is the option to select how many different vanity card filler videos to cre
 This is the option to select how often you wish the Vanity Cards filler to be regenerated to refresh the vanity cards shown in the videos. If you want it to run every 5 minutes then you would just set `5` as the option.
 
 *Note:* This is based on the cron of '\*/{interval} \* \* \* \*' e.g. '\*/5 \* \* \* \*'
+
+### Vanity Card Video Duration
+
+- `Time (seconds)`
+
+This is the option to set the duration the Vanity Card filler will run for. If you want 30 seconds then you would just set `30` as the option.
