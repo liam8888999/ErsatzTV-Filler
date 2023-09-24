@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.2.0...V1.2.1) (2023-09-24)
+
+
+### Added
+
+* channel-offline filler preview in theme creator ([7ad8901](https://github.com/liam8888999/ErsatzTV-Filler/commit/7ad890114d7ea85f6f6eb61fa2e65d09c64ce378))
+* option to underline news header text ([e5df5a9](https://github.com/liam8888999/ErsatzTV-Filler/commit/e5df5a9eadfcbd049a7ce57c68decb8d2d07d7e7))
+
+
+### Changed
+
+* underline news header text ([0c573be](https://github.com/liam8888999/ErsatzTV-Filler/commit/0c573be79f0c29302d94a85a5f72930785767a47))
+
 ## [1.2.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.11...V1.2.0) (2023-09-24)
 
 
