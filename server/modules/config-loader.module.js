@@ -2,6 +2,7 @@ const { CONFIG_CONSTANTS } = require("../constants/path.constants");
 const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
 const { parseConfigurationFile, createNewUserConfigFromDefault } = require("../utils/config.utils");
 const fs = require('fs');
+const fsPromises = fs.promises;
 const logger = require("../utils/logger.utils");
 
 
@@ -63,7 +64,7 @@ if (!FILE_EXISTS) {
 const retrieveCurrentConfiguration = async () => {
   const configFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
   const defaultConfigFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-
+  await addKeyValuesToconfigFile();
   if (!configFileExists) {
     logger.warn("config.json file is missing... Generating a new copy");
     await jsonifyCurrentConfiguration();
@@ -78,6 +79,50 @@ logger.info(`Current config is: ${CURRENT_CONFIG}`);
 return CURRENT_CONFIG;
 };
 
+
+async function addKeyValuesToconfigFile() {
+  const filename = CONFIG_CONSTANTS().USER_CONFIG;
+
+  const keyValuesToAdd = [
+    {
+      key: 'shownewsheader',
+      value: 'yes',
+    },
+    {
+      key: 'newsheadertext',
+      value: 'Top News Stories',
+    }
+  ];
+
+  try {
+    // Read the JSON file with the 'utf8' encoding using fs.promises
+    const data = await fsPromises.readFile(filename, 'utf8');
+
+    // Parse the JSON data
+    const jsonData = JSON.parse(data);
+
+    // Loop through the key/value pairs to add
+    for (const { key, value } of keyValuesToAdd) {
+      // Check if the key already exists in the JSON object
+      if (!jsonData.hasOwnProperty(key)) {
+        // If it doesn't exist, add the new key/value pair
+        jsonData[key] = value;
+      } else {
+        console.log(`Key '${key}' already exists in the JSON object.`);
+      }
+    }
+
+    // Convert the updated data back to JSON string
+    const updatedData = JSON.stringify(jsonData, null, 2);
+
+    // Write the updated JSON data back to the file using fs.promises
+    await fsPromises.writeFile(filename, updatedData);
+
+    console.log('Key/value pairs added successfully.');
+  } catch (err) {
+    console.error('Error:', err);
+  }
+}
 
 
 

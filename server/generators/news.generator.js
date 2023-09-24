@@ -53,11 +53,16 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
           const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
           const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
 
-          const newsheader = `{\\r}{\\b1}{\\c&H${titlecolor}&}Top News Stories\n\n`
+          const newsheader = `{\\r}{\\b1}{\\c&H${titlecolor}&}${config_current.newsheadertext}\n\n`
 
           newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
-
-          newsFeedcontent = newsheader + newsFeed
+console.log("header text:", config_current.newsheadertext)
+console.log("header show:", config_current.shownewsheader)
+          if (config_current.shownewsheader === 'yes') {
+            newsFeedcontent = newsheader + newsFeed;
+          } else {
+            newsFeedcontent = newsFeed;
+          }
         });
 
         fs.writeFileSync(`${path.join(NEWSDIR, 'newstemp.txt')}`, newsFeedcontent);
