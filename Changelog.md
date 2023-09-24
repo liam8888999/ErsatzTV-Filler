@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.2.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.11...V1.2.0) (2023-09-24)
+
+
+### Added
+
+* option to set individual video duration for weather and vanity cards ([5889b3d](https://github.com/liam8888999/ErsatzTV-Filler/commit/5889b3d4ab56b532bc665768bd8d70d00757cecc))
+* option to set the news header text and display/hide the newsfeed ([887639c](https://github.com/liam8888999/ErsatzTV-Filler/commit/887639c85e484c7ff902f7067776d8cbd5f215be))
+* preview window in theme creator ([de9f78f](https://github.com/liam8888999/ErsatzTV-Filler/commit/de9f78f787840598fea24fb8b232bf3330fc8bcb))
+
+
+### Fixed
+
+* format weather and vanity card duration settings on config page ([a272b85](https://github.com/liam8888999/ErsatzTV-Filler/commit/a272b85f95f1581459cc2df151cfd7e5e6ec1baf))
+* readd images to channel-offline filler type ([7d80e7a](https://github.com/liam8888999/ErsatzTV-Filler/commit/7d80e7a7c85d4767a08adcd24fd396d31bddb5e8))
+
 ## [1.1.11](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.1.10...V1.1.11) (2023-09-23)
 
 
