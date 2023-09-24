@@ -71,3 +71,9 @@ This is the option whether you want to show the header in the news filler, it ca
 - `String (header text)`
 
 This is the option to select what text to show in the news header.
+
+### Underline News Header?
+
+- `yes/no`
+
+This is the option whether you want to underline the header in the news filler, it can be set as `yes` to show or `no` if you dont want it to underline.
