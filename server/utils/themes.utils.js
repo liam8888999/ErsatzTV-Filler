@@ -4,7 +4,7 @@ const moment = require('moment-timezone');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
-const { THEMES_FOLDER, CONFIG_CONSTANTS } = require("../constants/path.constants");
+const { THEMES_FOLDER, CONFIG_CONSTANTS, CURRENT_THEME_VERSION } = require("../constants/path.constants");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const path = require('path');
 
@@ -70,8 +70,24 @@ const themecolourdecoder = (colour) => {
    const config_current = await retrieveCurrentConfiguration();
    const data = await fs.readFileSync(`${path.join(THEMES_FOLDER, config_current.theme)}.theme`);
    logger.info(`Current Theme json: ${JSON.parse(data)}`)
-    return JSON.parse(data)
+    return await checkThemeVersion(JSON.parse(data))
  }
+
+ const checkThemeVersion = async (themedata) => {
+   if (themedata.ErsatzTVFillerTheme.ThemeVersion === CURRENT_THEME_VERSION) {
+     return themedata;
+   } else {
+     console.log("themedataoriginal:", themedata);
+     logger.error(`The theme is not version ${CURRENT_THEME_VERSION}, fallback for the missing items will be used`);
+     // Add the ThemeVersion property here
+     themedata.ChannelLogo = {
+      channellogobackgroundcolor: '000000'
+    };
+     console.log("themedataedited:", themedata);
+     return themedata;
+   }
+ };
+
 
 
 module.exports = {

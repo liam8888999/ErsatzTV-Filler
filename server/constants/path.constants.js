@@ -1,6 +1,8 @@
 const os = require('os');
 const path = require('path')
 
+const CURRENT_THEME_VERSION = '2'
+
 //serverLocation is Internal
 //startuppath is external
 
@@ -84,6 +86,7 @@ const WORKDIR = path.join(startUpPath, 'workdir');
 const NEWSDIR = path.join(WORKDIR, 'News');
 const WEATHERDIR = path.join(WORKDIR, 'Weather');
 const CHANNEL_OFFLINEDIR = path.join(WORKDIR, 'Channel-offline');
+const CHANNEL_LOGODIR = path.join(WORKDIR, 'Channel-logo');
 const XMLTVMERGEDIR = path.join(WORKDIR, 'xmltvmerge');
 const VANITYCARDDIR = path.join(WORKDIR, 'vanitycard');
 const CONFIGCONFDIR = path.join(WORKDIR, 'configconf');
@@ -130,8 +133,6 @@ if (os.platform() === 'win32') {
     logger.info("OS unsupported trying safe fallback of ffmpeg -y")
 }
 
-
-
 module.exports = {
     TEMPLATE_CONSTANTS,
     CONFIG_CONSTANTS,
@@ -155,5 +156,7 @@ module.exports = {
     serverLocation,
     RESOURCESPATH,
     CONFIG_DIR,
-    PASSWORD
+    PASSWORD,
+    CHANNEL_LOGODIR,
+    CURRENT_THEME_VERSION
   };

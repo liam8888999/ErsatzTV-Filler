@@ -4,7 +4,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
 const moment = require('moment-timezone');
 const { readFile } = require('fs');
-const {THEMES_FOLDER} = require("../constants/path.constants");
+const {THEMES_FOLDER, CURRENT_THEME_VERSION} = require("../constants/path.constants");
 const path = require('path');
 const fs = require("fs");
 const https = require('https');
@@ -82,7 +82,8 @@ let themeName;
     const updatedThemeData = {
         "ErsatzTVFillerTheme": {
             "ThemeName": req.body.themeName,
-            "Creator": req.body.creator
+            "Creator": req.body.creator,
+            "ThemeVersion": CURRENT_THEME_VERSION
         },
         "Offline": {
             "offlinetextcolour": stripHash(req.body.offlineTextColour),
