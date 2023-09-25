@@ -65,6 +65,16 @@
 </div>
   <div class="home-page-box">
   <center><h1>Health Checks</h1></center>
+  <% if (oldtypethemes && oldtypethemes.length > 0) { %>
+  <p style="color: red;">Old type themes that require updating:</p> <div>
+      <ul id="oldtypethemes" style="color: red;">
+          <ul>
+            <% for (var i = 0; i < oldtypethemes.length; i++) { %>
+              <li><%= oldtypethemes[i] %></li>
+            <% } %>
+          </ul>
+</ul>
+<% } %>
   <p>Health Api Status: <span id="healthapistatus"></span></p>
   <p>FFmpeg installation Status: <span id="ffmpeginstallationstatus"></span></p>
 

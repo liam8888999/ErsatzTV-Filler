@@ -90,8 +90,56 @@ const themecolourdecoder = (colour) => {
 
 
 
+ const findOldVersionThemeFilesRecursively = (folderPath) => {
+   try {
+     const files = fs.readdirSync(folderPath);
+     const filteredFiles = [];
+
+     for (const file of files) {
+       const filePath = path.join(folderPath, file);
+       const stat = fs.statSync(filePath);
+
+       if (stat.isDirectory()) {
+         // If it's a directory, recursively call the function
+         const subfolderFiles = findOldVersionThemeFilesRecursively(filePath);
+         filteredFiles.push(...subfolderFiles);
+       } else if (path.extname(file).toLowerCase() === '.theme') {
+         // If it's a .theme file, read and filter JSON content
+         try {
+           const fileContent = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+           if (fileContent?.ErsatzTVFillerTheme?.ThemeVersion !== CURRENT_THEME_VERSION) {
+             // Extract just the last folder and the file name
+             const parts = folderPath.split(path.sep);
+             const lastFolder = parts[parts.length - 1];
+             filteredFiles.push(path.join(lastFolder, file));
+           }
+         } catch (error) {
+           console.error(`Error reading or parsing JSON file ${file}: ${error}`);
+           // You can choose to skip files with errors or handle them differently
+         }
+       }
+     }
+
+     return filteredFiles;
+   } catch (error) {
+     console.error(`Error reading folder: ${error}`);
+     return [];
+   }
+ };
+
+ const findoldVersionThemeFiles = () => {
+   const folderPath = THEMES_FOLDER; // Replace with the actual path to your folder
+   const filteredFiles = findOldVersionThemeFilesRecursively(folderPath);
+
+   return filteredFiles;
+ };
+
+
+
+
 module.exports = {
     settheme,
     themecolourdecoder,
-    retrieveCurrentTheme
+    retrieveCurrentTheme,
+    findoldVersionThemeFiles
 }

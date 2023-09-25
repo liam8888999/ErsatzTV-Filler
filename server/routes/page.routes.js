@@ -10,6 +10,7 @@ const readline = require('readline');
 const { checkForUpdates } = require('../utils/update.utils');
 const path = require('path');
 const { encryptText, decryptText } = require("../utils/encryption.utils")
+const { findoldVersionThemeFiles } = require("../utils/themes.utils")
 
 
 
@@ -109,6 +110,8 @@ const checkAuthentication = (req, res, next) => {
     } else {
       authentication = 'yes';
     }
+    const oldtypethemes = findoldVersionThemeFiles()
+    logger.info(`old version themes: ${oldtypethemes}`)
   const ErsatzTVURL = config_current.ersatztv
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
@@ -116,7 +119,8 @@ const checkAuthentication = (req, res, next) => {
         version: version,
         ErsatzTVURL: ErsatzTVURL,
         updatestatus: UPDATESTATUS,
-        authentication: authentication
+        authentication: authentication,
+        oldtypethemes: oldtypethemes
    });
 });
 
