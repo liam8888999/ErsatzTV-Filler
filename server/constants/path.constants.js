@@ -72,8 +72,16 @@ const DEFAULT_CONFIG = {
   "ffmpegencoder": "libx264",
   "hwaccel": "",
   "hwaccel_device": "",
-  "customffmpeg": ""
+  "customffmpeg": "",
+  "processchannellogo": "yes",
+  "channellogovideofadeoutduration": "5",
+  "channellogovideofadeinduration": "5",
+  "channellogoaudiofadeoutduration": "5",
+  "channellogoaudiofadeinduration": "5",
+  "channellogointerval": "10",
+  "channellogoduration": "30",
 }
+
 
 const CONFIG_DIR = path.join(startUpPath, 'config');
 const USER_CONFIG = path.join(CONFIG_DIR, 'config.json');

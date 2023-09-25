@@ -97,6 +97,9 @@ let themeName;
         },
         "Weather": {
             "weatherbackgroundcolour": stripHash(req.body.weatherBackgroundColour)
+        },
+        "ChannelLogo": {
+            "channellogobackgroundcolour": stripHash(req.body.channellogoBackgroundColour)
         }
       };
 

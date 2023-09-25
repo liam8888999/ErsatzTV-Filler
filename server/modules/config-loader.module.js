@@ -103,6 +103,34 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'underlinenewsheader',
       value: 'yes',
+    },
+    {
+      key: 'processchannellogo',
+      value: 'yes',
+    },
+    {
+      key: 'channellogovideofadeoutduration',
+      value: '5',
+    },
+    {
+      key: 'channellogovideofadeinduration',
+      value: '5',
+    },
+    {
+      key: 'channellogoaudiofadeoutduration',
+      value: '5',
+    },
+    {
+      key: 'channellogoaudiofadeinduration',
+      value: '5',
+    },
+    {
+      key: 'channellogointerval',
+      value: '10',
+    },
+    {
+      key: 'channellogoduration',
+      value: '30',
     }
   ];
 

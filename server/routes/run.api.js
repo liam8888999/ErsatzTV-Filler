@@ -7,6 +7,7 @@ const { WEATHER } = require("../generators/weather.generator");
 const { NEWS } = require("../generators/news.generator");
 const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const { CHANNEL_OFFLINE } = require("../generators/channel-offline.generator");
+const { CHANNEL_LOGO } = require("../generators/channel-logo.generator");
 const { VANITYCARDS } = require("../generators/vanitycards.generator");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
@@ -33,6 +34,19 @@ try {
 } catch (error) {
   // Handle the error encountered in XMLTVMERGE()
   logger.error(`Error encountered in Weather: ${error}`);
+  return;
+}
+
+});
+
+// run weather function
+app.get('/api/run/channellogo', async () => {
+logger.info("running channellogo function from run api")
+try {
+  await CHANNEL_LOGO();
+} catch (error) {
+  // Handle the error encountered in XMLTVMERGE()
+  logger.error(`Error encountered in ChannelLogo: ${error}`);
   return;
 }
 
