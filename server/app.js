@@ -5,7 +5,7 @@ const { GENERATION } = require("../server/modules/generators.module");
 const logger = require("../server/utils/logger.utils");
 const moment = require('moment-timezone');
 const { deleteFoldersOnShutdown, createrequiredstartupfolders, copyResources } = require("../server/modules/startup-shutdown.module");
-
+const { version } = require('../package.json');
 
 // Register a handler for the 'exit' event
 process.on('exit', () => {
@@ -53,7 +53,7 @@ process.on('unhandledRejection', (reason, promise) => {
     // Also very basic global error caching for the entire application, might still completely stall if not careful but can be improved at a later date.
 
     try {
-
+      logger.info(`Current ErsatzTV-Filler version: ${version}`)
       await createrequiredstartupfolders();
 
         await setupConfigurationFile();
