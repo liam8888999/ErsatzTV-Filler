@@ -94,15 +94,9 @@ const CHANNEL_LOGO = async () => {
         downloadImage(`${channelLogo}`, `${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}`)
     .then(() => {
 
+      const channellogovideofadeoutstart = config_current.channellogoduration - config_current.channellogovideofadeoutduration;
+      const channellogoaudiofadeoutstart = config_current.channellogoduration - config_current.channellogoaudiofadeoutduration;
 
-      const logocalculations = async () => {
-        const channellogovideofadeoutstart = config_current.channellogoduration - config_current.channellogovideofadeoutduration;
-        const channellogoaudiofadeoutstart = config_current.channellogoduration - config_current.channellogofadeoutduration;
-        return {
-          channellogovideofadeoutstart,
-          channellogoaudiofadeoutstart
-        };
-      };
 
 
             if (config_current.hwaccel == "") {
@@ -124,7 +118,7 @@ const CHANNEL_LOGO = async () => {
 
           //add theme information
           //part1
-            const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -i '${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}' -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*2:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}`;
+            const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -i '${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}' -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*2:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.channellogoduration} ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}`;
             logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1part1}`);
           exec(commandv1part1, (error, stdout, stderr) => {
             if (error) {
@@ -139,7 +133,7 @@ const CHANNEL_LOGO = async () => {
             logger.success('channel-logo v1 part 1 created successfully.');
 
             //part2
-            const commandv1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}-i ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)} -vf "fade=t=in:st=0:d=${config_current.channellogovideofadeinduration},fade=t=out:st=${logocalculations.channellogovideofadeoutstart}:d=${config_current.channellogovideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.channellogoaudiofadeinduration},afade=t=out:st=${logocalculations.channellogoaudiofadeoutstart}:d=${config_current.channellogoaudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}`;
+            const commandv1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}-i ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)} -vf "fade=t=in:st=0:d=${config_current.channellogovideofadeinduration},fade=t=out:st=${channellogovideofadeoutstart}:d=${config_current.channellogovideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.channellogoaudiofadeinduration},afade=t=out:st=${channellogoaudiofadeoutstart}:d=${config_current.channellogoaudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}`;
           logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1}`);
             exec(commandv1, (error, stdout, stderr) => {
               if (error) {
