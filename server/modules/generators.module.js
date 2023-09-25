@@ -237,7 +237,7 @@ const GENERATION = async () => {
 
       if (config_current.processchannellogo === 'yes') {
           try {
-            await XMLTVPARSE();
+            await CHANNEL_LOGO();
           } catch (error) {
             // Handle the error encountered in XMLTVMERGE()
             logger.error(`Error encountered in XMLTVMERGE: ${error}`);
