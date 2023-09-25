@@ -4,6 +4,7 @@ const { WEATHER } = require("../generators/weather.generator");
 const { NEWS } = require("../generators/news.generator");
 const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const { CHANNEL_OFFLINE } = require("../generators/channel-offline.generator");
+const { CHANNEL_LOGO } = require("../generators/channel-logo.generator");
 const { VANITYCARDS } = require("../generators/vanitycards.generator");
 const CronJobManager = require('cron-job-manager');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
@@ -18,13 +19,15 @@ const GENERATION = async () => {
   let newsRunning = false;
   let offlineRunning = false;
   let mergeRunning = false;
+  let channellogoRunning = false;
 
   const startCronVanity = async (interval) => {
     manager.add('vanity', interval, async () => {
       logger.info(`Running Vanity Cards generation at ${new Date()}`);
 
-      while (weatherRunning || newsRunning || offlineRunning || mergeRunning) {
+      while (weatherRunning || newsRunning || offlineRunning || mergeRunning || channellogoRunning) {
         const runningGenerators = [];
+        if (channellogoRunning) runningGenerators.push('Channel Logo')
         if (weatherRunning) runningGenerators.push('Weather');
         if (newsRunning) runningGenerators.push('News');
         if (offlineRunning) runningGenerators.push('Channel Offline');
@@ -61,8 +64,9 @@ const GENERATION = async () => {
     manager.add('weather', interval, async () => {
       logger.info(`Running Weather generation at ${new Date()}`);
 
-      while (vanityRunning || newsRunning || offlineRunning || mergeRunning) {
+      while (vanityRunning || newsRunning || offlineRunning || mergeRunning || channellogoRunning) {
         const runningGenerators = [];
+        if (channellogoRunning) runningGenerators.push('Channel Logo')
         if (vanityRunning) runningGenerators.push('Vanity Cards');
         if (newsRunning) runningGenerators.push('News');
         if (offlineRunning) runningGenerators.push('Channel Offline');
@@ -99,8 +103,9 @@ const GENERATION = async () => {
     manager.add('news', interval, async () => {
       logger.info(`Running News generation at ${new Date()}`);
 
-      while (vanityRunning || weatherRunning || offlineRunning || mergeRunning) {
+      while (vanityRunning || weatherRunning || offlineRunning || mergeRunning || channellogoRunning) {
         const runningGenerators = [];
+        if (channellogoRunning) runningGenerators.push('Channel Logo')
         if (vanityRunning) runningGenerators.push('Vanity Cards');
         if (weatherRunning) runningGenerators.push('Weather');
         if (offlineRunning) runningGenerators.push('Channel Offline');
@@ -137,8 +142,9 @@ const GENERATION = async () => {
     manager.add('offline', interval, async () => {
       logger.info(`Running Channel-Offline generation at ${new Date()}`);
 
-      while (vanityRunning || weatherRunning || newsRunning || mergeRunning) {
+      while (vanityRunning || weatherRunning || newsRunning || mergeRunning || channellogoRunning) {
         const runningGenerators = [];
+        if (channellogoRunning) runningGenerators.push('Channel Logo')
         if (vanityRunning) runningGenerators.push('Vanity Cards');
         if (weatherRunning) runningGenerators.push('Weather');
         if (newsRunning) runningGenerators.push('News');
@@ -175,8 +181,9 @@ const GENERATION = async () => {
     manager.add('merge', interval, async () => {
       logger.info(`Running XMLTV Merge generation at ${new Date()}`);
 
-      while (vanityRunning || weatherRunning || newsRunning || offlineRunning) {
+      while (vanityRunning || weatherRunning || newsRunning || offlineRunning || channellogoRunning) {
         const runningGenerators = [];
+        if (channellogoRunning) runningGenerators.push('Channel Logo')
         if (vanityRunning) runningGenerators.push('Vanity Cards');
         if (weatherRunning) runningGenerators.push('Weather');
         if (newsRunning) runningGenerators.push('News');
@@ -211,6 +218,44 @@ const GENERATION = async () => {
     manager.start('merge');
   };
 
+
+  const startCronchannellogo = async (interval) => {
+    manager.add('channellogo', interval, async () => {
+      logger.info(`Running Channel Logo generation at ${new Date()}`);
+
+      while (vanityRunning || weatherRunning || newsRunning || offlineRunning || mergeRunning) {
+        const runningGenerators = [];
+        if (vanityRunning) runningGenerators.push('Vanity Cards');
+        if (weatherRunning) runningGenerators.push('Weather');
+        if (newsRunning) runningGenerators.push('News');
+        if (offlineRunning) runningGenerators.push('Channel Offline');
+        if (mergeRunning) runningGenerators.push('XMLTV Merge');
+        logger.info(`Channel Logo waiting for other generators to finish: ${runningGenerators.join(', ')}`);
+        await new Promise((resolve) => setTimeout(resolve, 15000));
+      }
+      channellogoRunning = true;
+
+      if (config_current.processchannellogo === 'yes') {
+          try {
+            await XMLTVPARSE();
+          } catch (error) {
+            // Handle the error encountered in XMLTVMERGE()
+            logger.error(`Error encountered in XMLTVMERGE: ${error}`);
+            channellogoRunning = false; // Set running to false if an error is encountered
+            return;
+          }
+      }
+
+      interval = `*/${config_current.channellogointerval} * * * *` || '*/20 * * * *';
+      manager.update('channellogo', interval);
+      logger.success(`Channel Logo Generation completed at ${new Date()}`);
+
+      channellogoRunning = false;
+    });
+
+    manager.start('channellogo');
+  };
+
   logger.success('Starting Generator Jobs');
 
   await startCronVanity(`*/${config_current.vanityinterval} * * * *`);
@@ -218,6 +263,7 @@ const GENERATION = async () => {
   await startCronNews(`*/${config_current.newsinterval} * * * *`);
   await startCronOffline(`*/${config_current.offlineinterval} * * * *`);
   await startCronmerge(`*/${config_current.xmltvmergeinterval} * * * *`);
+  await startCronchannellogo(`*/${config_current.channellogointerval} * * * *`);
 };
 
 module.exports = {
