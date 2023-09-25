@@ -275,6 +275,7 @@ let regexPattern = new RegExp(escapedThemesFolder, 'g');
 // Replace the pattern in joinedString
 let filesinthemesdirsystemcorrect = joinedString.replace(regexPattern, "");
 let filesinthemesdirsystem = filesinthemesdirsystemcorrect.split(",")
+const oldtypethemes = findoldVersionThemeFiles()
 console.log("themessystemdir:", filesinthemesdirsystem)
 logger.info(`Files in themes dir: ${JSON.stringify(filesinthemesdiruser)}`)
       let UPDATESTATUS = await checkForUpdates();
@@ -290,7 +291,8 @@ logger.info(`Files in themes dir: ${JSON.stringify(filesinthemesdiruser)}`)
             downloadedthemesarray: filesinthemesdiruser,
             downloadedthemesarraysystem: filesinthemesdirsystem,
             updatestatus: UPDATESTATUS,
-            authentication: authentication
+            authentication: authentication,
+            oldtypethemes: oldtypethemes
         });
     });
 

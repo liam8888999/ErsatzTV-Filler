@@ -31,6 +31,13 @@ Theme Creator
 </center>
 <br>
 
+<% if (oldtypethemes && oldtypethemes.length > 0) { %>
+  <center>
+  <h5 style="color:orange;">Some Theme files need updating to the latest version to get all the available features.</h5>
+    <h5 style="color:orange;">Please check the health checks section on the home page to find which ones.</h5>
+    </center>
+<% } %>
+
 <h3 style="text-align:center;">Current theme is: <span id="currentTheme2"><%= theme %></span></h3>
 <span id="currentTheme" style="display: none;"><%= theme %></span>
 <br>
@@ -80,8 +87,12 @@ Theme Creator
 <div style="padding-left:55%;">
   <button id="SystemLightdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'SystemLight.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button id="SystemLightsetthemeButton" onclick="settheme('system/SystemLight')">Use This Theme <i class="fa">&#x2713;</i></button>
-</div>
+<% if (oldtypethemes.includes('system/SystemLight.theme')) { %>
+  <br>
 <br>
+  <button id="SystemLightdownloadButton" style="color: orange;" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemLight-Theme/SystemLight.theme', 'SystemLight.theme')">Update Theme <i class="fa">&#xf019;</i></button>
+<% } %>
+</div>
 <br>
 <p style="color:blue;padding-left:55%;">The Light theme includes white backgrounds and black text.</p>
 <br>
@@ -133,6 +144,11 @@ Theme Creator
 <div style="padding-left:55%;">
 <button id="SystemDarkdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemDark-Theme/SystemDark.theme', 'SystemDark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button id="SystemDarksetthemeButton" onclick="settheme('system/SystemDark')">Use This Theme <i class="fa">&#x2713;</i></button>
+<% if (oldtypethemes.includes('system/SystemDark.theme')) { %>
+  <br>
+<br>
+<button id="SystemDarkdownloadButton" style="color: orange;" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/SystemDark-Theme/SystemDark.theme', 'SystemDark.theme')">Update Theme <i class="fa">&#xf019;</i></button>
+<% } %>
 </div>
 <br>
 <br>
@@ -185,6 +201,11 @@ Theme Creator
 <div style="padding-left:55%;">
 <button id="stopandgodownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/StopandGo-Theme/stopandgo.theme', 'stopandgo.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button id="stopandgosetthemeButton" onclick="settheme('system/stopandgo')">Use This Theme <i class="fa">&#x2713;</i></button>
+<% if (oldtypethemes.includes('system/stopandgo.theme')) { %>
+  <br>
+<br>
+<button id="stopandgodownloadButton" style="color: orange;" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/StopandGo-Theme/stopandgo.theme', 'stopandgo.theme')">Update Theme <i class="fa">&#xf019;</i></button>
+<% } %>
 </div>
 <br>
 <br>
@@ -237,6 +258,11 @@ Theme Creator
 <div style="padding-left:55%;">
 <button id="CandycanedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Candycane-Theme/Candycane.theme', 'Candycane.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button id="CandycanesetthemeButton" onclick="settheme('system/Candycane')">Use This Theme <i class="fa">&#x2713;</i></button>
+<% if (oldtypethemes.includes('system/Candycane.theme')) { %>
+  <br>
+<br>
+<button id="CandycanedownloadButton" style="color: orange;" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/Candycane-Theme/Candycane.theme', 'Candycane.theme')">Update Theme <i class="fa">&#xf019;</i></button>
+<% } %>
 </div>
 <br>
 <br>
@@ -293,6 +319,11 @@ Theme Creator
 <div style="padding-left:55%;">
 <button id="MoRBiD_MaNGLeRDarkdownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-Dark-theme/MoRBiD_MaNGLeR_Dark.theme', 'MoRBiD_MaNGLeR-Dark.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button id="MoRBiD_MaNGLeRDarksetthemeButton" onclick="settheme('system/MoRBiD_MaNGLeR-Dark')">Use This Theme <i class="fa">&#x2713;</i></button>
+<% if (oldtypethemes.includes('system/MoRBiD_MaNGLeR_Dark.theme')) { %>
+  <br>
+<br>
+<button id="MoRBiD_MaNGLeRDarkdownloadButton" style="color: orange;" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-Dark-theme/MoRBiD_MaNGLeR_Dark.theme', 'MoRBiD_MaNGLeR-Dark.theme')">Update Theme <i class="fa">&#xf019;</i></button>
+<% } %>
 </div>
 <br>
 <br>
@@ -346,6 +377,11 @@ Theme Creator
 <div style="padding-left:55%;">
 <button id="MoRBiD_MaNGLeRC64downloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-C64-theme/MoRBiD_MaNGLeR_C64.theme', 'MoRBiD_MaNGLeR-C64.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button id="MoRBiD_MaNGLeRC64setthemeButton" onclick="settheme('system/MoRBiD_MaNGLeR-C64')">Use This Theme <i class="fa">&#x2713;</i></button>
+<% if (oldtypethemes.includes('system/MoRBiD_MaNGLeR_C64.theme')) { %>
+  <br>
+<br>
+<button id="MoRBiD_MaNGLeRC64downloadButton" style="color: orange;" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-C64-theme/MoRBiD_MaNGLeR_C64.theme', 'MoRBiD_MaNGLeR-C64.theme')">Update Theme <i class="fa">&#xf019;</i></button>
+<% } %>
 </div>
 <br>
 <br>
@@ -400,6 +436,11 @@ Theme Creator
 <div style="padding-left:55%;">
 <button id="MoRBiD_MaNGLeRBlueWhitedownloadButton" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR_BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Download Theme <i class="fa">&#xf019;</i></button>
 <button id="MoRBiD_MaNGLeRBlueWhitesetthemeButton" onclick="settheme('system/MoRBiD_MaNGLeR-BlueWhite')">Use This Theme <i class="fa">&#x2713;</i></button>
+<% if (oldtypethemes.includes('system/MoRBiD_MaNGLeR_BlueWhite.theme')) { %>
+  <br>
+<br>
+<button id="MoRBiD_MaNGLeRBlueWhitedownloadButton" style="color: orange;" onclick="makeRequest('https://raw.githubusercontent.com/liam8888999/ErsatzTV-Filler-Themes/main/MoRBiD_MaNGLeR-BlueWhite-theme/MoRBiD_MaNGLeR_BlueWhite.theme', 'MoRBiD_MaNGLeR-BlueWhite.theme')">Update Theme <i class="fa">&#xf019;</i></button>
+<% } %>
 </div>
 <br>
 <br>
