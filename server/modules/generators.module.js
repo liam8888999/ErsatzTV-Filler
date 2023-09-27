@@ -236,17 +236,16 @@ const GENERATION = async () => {
       channellogoRunning = true;
 
       if (config_current.processchannellogo === 'yes') {
-          try {
-            await CHANNEL_LOGO();
-          } catch (error) {
-            // Handle the error encountered in XMLTVMERGE()
-            logger.error(`Error encountered in Channel Logo: ${error}`);
-            channellogoRunning = false; // Set running to false if an error is encountered
-            return;
-          }
-        } else {
-          logger.error('Not running Channel Logo');
+        try {
+          await CHANNEL_LOGO();
+        } catch (error) {
+          // Handle the error encountered in CHANNEL_OFFLINE()
+          logger.error(`Error encountered in Channel Logo: ${error}`);
+          channellogoRunning = false;
+          return;
         }
+      } else {
+        logger.error('Not running Channel Logo');
       }
 
       interval = `*/${config_current.channellogointerval} * * * *` || '*/20 * * * *';
