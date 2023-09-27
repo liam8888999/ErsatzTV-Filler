@@ -59,7 +59,7 @@ logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
    const config_current = await retrieveCurrentConfiguration()
    const port = await config_current.webport;
    app.listen(`${port}`, () => {
-     logger.info(`Server started on port ${port}`);
+     logger.success(`Server started on port ${port}`);
    });
  };
 /**

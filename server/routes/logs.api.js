@@ -121,7 +121,7 @@ app.get('/logs/zip', (req, res) => {
           if (unlinkErr) {
           logger.error(`Error occurred while deleting the zip file: ${unlinkErr}`);
           } else {
-            logger.info('Zip file deleted successfully.');
+            logger.success('Zip file deleted successfully.');
           }
         });
       }

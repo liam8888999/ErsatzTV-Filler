@@ -247,7 +247,7 @@ await createWeatherV3();
   //if (err)
     //logger.error(err);
   //else {
-    //logger.info("File written successfully\n");
+    //logger.success("File written successfully\n");
   //}
 //});
 //    logger.info(file)

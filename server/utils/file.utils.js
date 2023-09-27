@@ -79,9 +79,9 @@ async function listFilesInDir(directoryPath) {
 const createDirectoryIfNotExists = (directoryPath) => {
   if (!fs.existsSync(directoryPath)) {
     fs.mkdirSync(directoryPath);
-    logger.info(`Directory created: ${directoryPath}`);
+    logger.success(`Directory created: ${directoryPath}`);
   } else {
-    logger.info(`Directory already exists, will not be created: ${directoryPath}`);
+    logger.warn(`Directory already exists, will not be created: ${directoryPath}`);
   }
 };
 

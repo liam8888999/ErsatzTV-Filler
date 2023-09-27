@@ -106,7 +106,7 @@ let themeName;
       // Save the updated JSON data to the new file
       fs.writeFile(filePath, JSON.stringify(updatedThemeData, null, 4), (err) => {
               if (err) {
-                  console.error(err);
+                  logger.error(err);
                   res.status(500).send('Error saving data');
               } else {
                   // Check if the "sendToWebhook" checkbox is checked
@@ -131,8 +131,7 @@ let themeName;
         const fileContent = fs.readFileSync(filePath, 'utf-8');
 
         // Log the file content before sending it
- console.log('File Content:');
- console.log(fileContent);
+        logger.info(`File Content: ${fileContent}`);
 
  const discordMessage = {
      content: `${themeName}`, // Your message here
@@ -160,7 +159,7 @@ let themeName;
  };
 
  const req = https.request(options, (res) => {
-       console.log(`Response Status Code: ${res.statusCode}`);
+       logger.info(`Response Status Code: ${res.statusCode}`);
 
        let responseText = '';
 
@@ -170,18 +169,18 @@ let themeName;
 
        res.on('end', () => {
            if (res.statusCode === 204) {
-               console.log('File sent to Discord webhook successfully.');
+               logger.success('File sent to Discord webhook successfully.');
                callback(null);
            } else {
-               console.error(`Error sending file to Discord webhook. Status code: ${res.statusCode}`);
-               console.error(`Response Data: ${responseText}`);
+               logger.error(`Error sending file to Discord webhook. Status code: ${res.statusCode}`);
+               logger.error(`Response Data: ${responseText}`);
                callback(new Error(`Error sending file to Discord webhook. Status code: ${res.statusCode}`));
            }
        });
    });
 
    req.on('error', (error) => {
-       console.error('Error sending file to Discord webhook:', error);
+       logger.error(`Error sending file to Discord webhook: ${error}`);
        callback(error);
    });
 

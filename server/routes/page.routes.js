@@ -276,7 +276,7 @@ let regexPattern = new RegExp(escapedThemesFolder, 'g');
 let filesinthemesdirsystemcorrect = joinedString.replace(regexPattern, "");
 let filesinthemesdirsystem = filesinthemesdirsystemcorrect.split(",")
 const oldtypethemes = findoldVersionThemeFiles()
-console.log("themessystemdir:", filesinthemesdirsystem)
+logger.info(`Files in themes system dir: ${filesinthemesdirsystem}`)
 logger.info(`Files in themes dir: ${JSON.stringify(filesinthemesdiruser)}`)
       let UPDATESTATUS = await checkForUpdates();
       const ErsatzTVURL = config_current.ersatztv

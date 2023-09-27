@@ -32,7 +32,7 @@ const GENERATION = async () => {
         if (newsRunning) runningGenerators.push('News');
         if (offlineRunning) runningGenerators.push('Channel Offline');
         if (mergeRunning) runningGenerators.push('XMLTV Merge');
-        logger.info(`Vanity waiting for other generators to finish: ${runningGenerators.join(', ')}`);
+        logger.warn(`Vanity waiting for other generators to finish: ${runningGenerators.join(', ')}`);
         await new Promise((resolve) => setTimeout(resolve, 15000));
       }
       vanityRunning = true;
@@ -47,7 +47,7 @@ const GENERATION = async () => {
           return;
         }
       } else {
-        logger.info('Not running vanity cards');
+        logger.error('Not running vanity cards');
       }
 
       interval = `*/${config_current.vanityinterval} * * * *` || '*/10 * * * *';
@@ -71,7 +71,7 @@ const GENERATION = async () => {
         if (newsRunning) runningGenerators.push('News');
         if (offlineRunning) runningGenerators.push('Channel Offline');
         if (mergeRunning) runningGenerators.push('XMLTV Merge');
-        logger.info(`Weather waiting for other generators to finish: ${runningGenerators.join(', ')}`);
+        logger.warn(`Weather waiting for other generators to finish: ${runningGenerators.join(', ')}`);
         await new Promise((resolve) => setTimeout(resolve, 15000));
       }
       weatherRunning = true;
@@ -86,7 +86,7 @@ const GENERATION = async () => {
           return;
         }
       } else {
-        logger.info('Not running WEATHER');
+        logger.error('Not running WEATHER');
       }
 
       interval = `*/${config_current.weatherinterval} * * * *` || '*/10 * * * *';
@@ -110,7 +110,7 @@ const GENERATION = async () => {
         if (weatherRunning) runningGenerators.push('Weather');
         if (offlineRunning) runningGenerators.push('Channel Offline');
         if (mergeRunning) runningGenerators.push('XMLTV Merge');
-        logger.info(`News waiting for other generators to finish: ${runningGenerators.join(', ')}`);
+        logger.warn(`News waiting for other generators to finish: ${runningGenerators.join(', ')}`);
         await new Promise((resolve) => setTimeout(resolve, 15000));
       }
       newsRunning = true;
@@ -125,7 +125,7 @@ const GENERATION = async () => {
           return;
         }
       } else {
-        logger.info('Not running News');
+        logger.error('Not running News');
       }
 
       interval = `*/${config_current.newsinterval} * * * *` || '*/30 * * * *';
@@ -149,7 +149,7 @@ const GENERATION = async () => {
         if (weatherRunning) runningGenerators.push('Weather');
         if (newsRunning) runningGenerators.push('News');
         if (mergeRunning) runningGenerators.push('XMLTV Merge');
-        logger.info(`Offline waiting for other generators to finish: ${runningGenerators.join(', ')}`);
+        logger.warn(`Offline waiting for other generators to finish: ${runningGenerators.join(', ')}`);
         await new Promise((resolve) => setTimeout(resolve, 15000));
       }
       offlineRunning = true;
@@ -164,7 +164,7 @@ const GENERATION = async () => {
           return;
         }
       } else {
-        logger.info('Not running Channel Offline');
+        logger.error('Not running Channel Offline');
       }
 
       interval = `*/${config_current.offlineinterval} * * * *` || '*/5 * * * *';
@@ -188,7 +188,7 @@ const GENERATION = async () => {
         if (weatherRunning) runningGenerators.push('Weather');
         if (newsRunning) runningGenerators.push('News');
         if (offlineRunning) runningGenerators.push('Channel Offline');
-        logger.info(`Merge waiting for other generators to finish: ${runningGenerators.join(', ')}`);
+        logger.warn(`Merge waiting for other generators to finish: ${runningGenerators.join(', ')}`);
         await new Promise((resolve) => setTimeout(resolve, 15000));
       }
       mergeRunning = true;
@@ -204,7 +204,7 @@ const GENERATION = async () => {
             return;
           }
         } else {
-          logger.info('Not running XMLTV Merge');
+          logger.error('Not running XMLTV Merge');
         }
       }
 
@@ -230,7 +230,7 @@ const GENERATION = async () => {
         if (newsRunning) runningGenerators.push('News');
         if (offlineRunning) runningGenerators.push('Channel Offline');
         if (mergeRunning) runningGenerators.push('XMLTV Merge');
-        logger.info(`Channel Logo waiting for other generators to finish: ${runningGenerators.join(', ')}`);
+        logger.warn(`Channel Logo waiting for other generators to finish: ${runningGenerators.join(', ')}`);
         await new Promise((resolve) => setTimeout(resolve, 15000));
       }
       channellogoRunning = true;
@@ -240,10 +240,13 @@ const GENERATION = async () => {
             await CHANNEL_LOGO();
           } catch (error) {
             // Handle the error encountered in XMLTVMERGE()
-            logger.error(`Error encountered in XMLTVMERGE: ${error}`);
+            logger.error(`Error encountered in Channel Logo: ${error}`);
             channellogoRunning = false; // Set running to false if an error is encountered
             return;
           }
+        } else {
+          logger.error('Not running Channel Logo');
+        }
       }
 
       interval = `*/${config_current.channellogointerval} * * * *` || '*/20 * * * *';

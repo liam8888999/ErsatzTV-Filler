@@ -57,7 +57,7 @@ const CHANNEL_LOGO = async () => {
         const channelFilePath = `${path.join(CHANNEL_LOGODIR, channelId)}.xml`;
         logger.info(`ChannelFilePath: ${channelFilePath}`);
         await fs.promises.writeFile(channelFilePath, channelXMLString);
-        logger.info(`Channel file saved: ${channelFilePath}`);
+        logger.success(`Channel file saved: ${channelFilePath}`);
       });
     });
   };
@@ -181,7 +181,7 @@ const CHANNEL_LOGO = async () => {
         logger.info(`file path is ${filePath}`);
         try {
        await startTimefind(filePath);
-       logger.info(`File processed successfully: ${file}`);
+       logger.success(`File processed successfully: ${file}`);
      } catch (error) {
        logger.error(`Error processing file: ${file}`, error);
      }

@@ -65,7 +65,7 @@ logger.info(`Config Value: ${value}`);
             res.status(500).send('Error reading data file');
             return;
           }
-          logger.info(`Config json parsed: ${JSON.parse(data)}`)
+          logger.success(`Config json parsed: ${JSON.parse(data)}`)
           res.json(JSON.parse(data));
         });
       });
@@ -157,7 +157,7 @@ lines.forEach(line => {
   //    }
 //    })
 
-      logger.info('File converted to JSON successfully');
+      logger.success('File converted to JSON successfully');
 
 
 if (json.xmltv) {
@@ -197,7 +197,7 @@ if (Object.keys(json).length !== 0) {
 
 // Step 4: Convert the updated object back to a JSON string
 const updatedJsonString = JSON.stringify(config_current, null, 2);
-logger.info(`Updated config after old type import: ${updatedJsonString}`)
+logger.success(`Updated config after old type import: ${updatedJsonString}`)
 
 // Write the updated JSON string back to the file
 fs.writeFile(`${CONFIG_CONSTANTS().USER_CONFIG}`, updatedJsonString, 'utf8', (err) => {
@@ -206,7 +206,7 @@ fs.writeFile(`${CONFIG_CONSTANTS().USER_CONFIG}`, updatedJsonString, 'utf8', (er
     return;
   }
 
-  logger.info('JSON file has been updated.');
+  logger.success('JSON file has been updated.');
 
 
 

@@ -138,7 +138,7 @@ if (os.platform() === 'win32') {
 } else {
   // Handle other platforms or provide a default value
   FFMPEGCOMMAND = "ffmpeg -y"
-    logger.info("OS unsupported trying safe fallback of ffmpeg -y")
+    logger.warn("OS unsupported trying safe fallback of ffmpeg -y")
 }
 
 module.exports = {

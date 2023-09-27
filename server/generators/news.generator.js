@@ -62,8 +62,8 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
 
 
           newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
-console.log("header text:", config_current.newsheadertext)
-console.log("header show:", config_current.shownewsheader)
+          logger.info(`header text: ${config_current.newsheadertext}`)
+          logger.info(`show header: ${config_current.shownewsheader}`)
           if (config_current.shownewsheader === 'yes') {
             newsFeedcontent = newsheader + newsFeed;
           } else {

@@ -91,7 +91,7 @@ if (!(typeof config_current.epgfiles === 'undefined' || config_current.epgfiles 
     return;
   }
 } else {
-  logger.info('no epg files set so merger not running from run api')
+  logger.warn('no epg files set so merger not running from run api')
 }// use the url and path variables to set the theme
 
 });

@@ -61,7 +61,7 @@ const themecolourdecoder = (colour) => {
     await settheme(`${path.join('system', 'SystemLight')}`);
       return await retrieveTheme();
  } else {
-     logger.info("Found the user selected theme file... loading...");
+     logger.success("Found the user selected theme file... loading...");
      return await retrieveTheme();
    }
  };
@@ -77,13 +77,13 @@ const themecolourdecoder = (colour) => {
    if (themedata.ErsatzTVFillerTheme.ThemeVersion === CURRENT_THEME_VERSION) {
      return themedata;
    } else {
-     console.log("themedataoriginal:", themedata);
+     logger.info(`Theme data original: ${themedata}`);
      logger.error(`The theme is not version ${CURRENT_THEME_VERSION}, fallback for the missing items will be used`);
      // Add the ThemeVersion property here
      themedata.ChannelLogo = {
       channellogobackgroundcolour: '000000'
     };
-     console.log("themedataedited:", themedata);
+     logger.info(`Theme data edited: ${themedata}`);
      return themedata;
    }
  };
@@ -114,7 +114,7 @@ const themecolourdecoder = (colour) => {
              filteredFiles.push(path.join(lastFolder, file));
            }
          } catch (error) {
-           console.error(`Error reading or parsing JSON file ${file}: ${error}`);
+           logger.error(`Error reading or parsing JSON file ${file}: ${error}`);
            // You can choose to skip files with errors or handle them differently
          }
        }
@@ -122,7 +122,7 @@ const themecolourdecoder = (colour) => {
 
      return filteredFiles;
    } catch (error) {
-     console.error(`Error reading folder: ${error}`);
+     logger.error(`Error reading folder: ${error}`);
      return [];
    }
  };

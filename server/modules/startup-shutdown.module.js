@@ -25,7 +25,7 @@ function deleteFolderRecursive(folderPath) {
     });
     // Delete the empty folder
     fs.rmdirSync(folderPath);
-    logger.info(`Deleted folder and its contents: ${folderPath}`);
+    logger.success(`Deleted folder and its contents: ${folderPath}`);
   }
 }
 
@@ -66,7 +66,7 @@ function copyResources() {
       // Set the same permissions on the destination file
       fs.chmodSync(destinationFile, sourceStats.mode);
 
-      logger.info(`Copied file: ${sourceFile} -> ${destinationFile}`);
+      logger.success(`Copied file: ${sourceFile} -> ${destinationFile}`);
     });
 
     sourceStream.on('error', (error) => {
@@ -102,7 +102,7 @@ function copyFolderRecursive(source, destination) {
     } else {
       // Copy files with permissions
       copyFileWithPermissions(sourcePath, destinationPath);
-      logger.info(`Copied file: ${sourcePath} -> ${destinationPath}`);
+      logger.success(`Copied file: ${sourcePath} -> ${destinationPath}`);
     }
   });
 }
@@ -125,7 +125,7 @@ logger.info("OS: windows")
   ffmpegResourcesPath = path.join(RESOURCESPATH, 'ffmpeg', 'ffmpeg-darwin');
 } else {
   // Handle other platforms or provide a default value
-  logger.info("operating system unknown, not copying ffmpeg to resources folder, will test if ffmpeg is installed on the system and try to use that")
+  logger.warn("operating system unknown, not copying ffmpeg to resources folder, will test if ffmpeg is installed on the system and try to use that")
 }
 copyFileWithPermissions(FFMPEGINTERNALPATH, ffmpegResourcesPath);
 }

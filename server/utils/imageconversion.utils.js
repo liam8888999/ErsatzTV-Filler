@@ -17,8 +17,8 @@ const inputFileName = path.basename(inputImagePath, path.extname(inputImagePath)
 
 // Construct the output file path with the same name and a different extension
 const outputImagePath = `${path.join(CHANNEL_OFFLINEDIR, 'jimpimgdir', inputFileName)}.png`;
-console.log(inputImagePath)
-console.log(outputImagePath)
+logger.info(`Input image path: ${inputImagePath}`)
+logger.info(`Output image path: ${outputImagePath}`)
 
 
 // Perform the image conversion
@@ -30,10 +30,10 @@ function processLocalImage() {
       return image.contain(200, 200).writeAsync(outputImagePath);
     })
     .then(() => {
-      console.log('Local image converted to PNG:', outputImagePath);
+      logger.success(`Local image converted to PNG: ${outputImagePath}`);
     })
     .catch((err) => {
-      console.error('Local image Jimp Error:', err);
+      logger.error(`Local image Jimp Error: ${err}`);
       // If there's an error with the local image, fall back to processing the URL-based image
       processUrlImage();
     });
@@ -46,10 +46,10 @@ function processUrlImage() {
       return image.contain(200, 200).writeAsync(outputImagePath);
     })
     .then(() => {
-      console.log('URL-based image converted to PNG:', outputImagePath);
+      logger.success(`URL-based image converted to PNG: ${outputImagePath}`);
     })
     .catch((err) => {
-      console.error('URL-based image Jimp Error:', err);
+      logger.error(`URL-based image Jimp Error: ${err}`);
     });
 }
 

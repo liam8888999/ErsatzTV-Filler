@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
       fetch(url, options)
         .then(response => {
           if (response.ok) {
-            logger.info('Request succeeded');
+            logger.success('Request succeeded');
           } else {
             logger.error('Request failed');
           }

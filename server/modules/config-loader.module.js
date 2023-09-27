@@ -148,7 +148,7 @@ async function addKeyValuesToconfigFile() {
         // If it doesn't exist, add the new key/value pair
         jsonData[key] = value;
       } else {
-        console.log(`Key '${key}' already exists in the JSON object.`);
+        logger.warn(`Key '${key}' already exists in the JSON object.`);
       }
     }
 
@@ -158,9 +158,9 @@ async function addKeyValuesToconfigFile() {
     // Write the updated JSON data back to the file using fs.promises
     await fsPromises.writeFile(filename, updatedData);
 
-    console.log('Key/value pairs added successfully.');
+    logger.success('Key/value pairs added successfully.');
   } catch (err) {
-    console.error('Error:', err);
+    logger.error(`Error: ${err}`);
   }
 }
 

@@ -214,7 +214,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
       }
       const assfile = asssubstitution(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass`)
         const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "movie='${assimage}' [image]; [in][image] overlay=(W-w)/2:(H-h)/5 [video+image]; [video+image] ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;
-        
+
             logger.ffmpeg(`Channel-Offline ffmpeg command is ${command}`);
 
             exec(command, (error, stdout, stderr) => {
@@ -262,7 +262,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
         logger.info(`file path is ${filePath}`);
         try {
        await startTimefind(filePath);
-       logger.info(`File processed successfully: ${file}`);
+       logger.success(`File processed successfully: ${file}`);
      } catch (error) {
        logger.error(`Error processing file: ${file}`, error);
      }
