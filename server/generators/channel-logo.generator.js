@@ -160,41 +160,42 @@ const CHANNEL_LOGO = async () => {
     }
   };
 
+
   const runnersT = async () => {
-  let fileList = await listFilesInDir(CHANNEL_LOGODIR);
-  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    let fileList = await listFilesInDir(CHANNEL_LOGODIR);
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-  logger.info(`Channel-Offline File List: ${fileList}`);
+    logger.info(`Channel-logo File List: ${fileList}`);
 
-  async function processFiles() {
-    for (const file of fileList) {
-      if (path.extname(file) === '.xml') {
-        logger.info(`channel-offline file: ${file}`);
-        const filename = `${file}`;
-        logger.info(`channel-offline filename: ${filename}`);
+    async function processFilesSequentially() {
+      for (const file of fileList) {
+        if (path.extname(file) === '.xml') {
+          logger.info(`channel-logo file: ${file}`);
+          const filename = `${file}`;
+          logger.info(`channel-logo filename: ${filename}`);
 
-        // Use path.sep to get the correct path separator for the platform
-        const lastIndex = filename.lastIndexOf(path.sep);
-        const filenamenopath = filename.substring(lastIndex + 1);
-        const filePath = filenamenopath.replace(/\.xml$/, "").replace(CHANNEL_LOGODIR, "");
+          // Use path.sep to get the correct path separator for the platform
+          const lastIndex = filename.lastIndexOf(path.sep);
+          const filenamenopath = filename.substring(lastIndex + 1);
+          const filePath = filenamenopath.replace(/\.xml$/, "").replace(CHANNEL_LOGODIR, "");
 
-        logger.info(`file path is ${filePath}`);
-        try {
-       await startTimefind(filePath);
-       logger.success(`File processed successfully: ${file}`);
-     } catch (error) {
-       logger.error(`Error processing file: ${file}`, error);
-     }
+          logger.info(`file path is ${filePath}`);
+          try {
+            await startTimefind(filePath);
+            logger.success(`File processed successfully: ${file}`);
+          } catch (error) {
+            logger.error(`Error processing file: ${file}`, error);
+          }
 
-        // Introduce a delay of 5 seconds (5000 milliseconds) before processing the next file
-        await delay(3000);
+          // Introduce a delay of 5 seconds (5000 milliseconds) before processing the next file
+          await delay(3000);
+        }
       }
     }
-  }
 
-  // Call the function to start processing the files
-  processFiles();
-    logger.success('complete generation of channel-offline filler');
+    // Call the function to start processing the files sequentially
+    await processFilesSequentially();
+    logger.success('complete generation of channel-logo filler');
   };
 
   try {
