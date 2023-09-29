@@ -40,6 +40,8 @@ const GENERATION = async () => {
       if (config_current.processvanitycards === 'yes') {
         try {
           await VANITYCARDS();
+          // Add a 3-second delay here
+          await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in VANITYCARDS()
           logger.error(`Error encountered in VANITYCARDS: ${error}`);
@@ -79,6 +81,8 @@ const GENERATION = async () => {
       if (config_current.processweather === 'yes') {
         try {
           await WEATHER();
+          // Add a 3-second delay here
+          await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in WEATHER()
           logger.error(`Error encountered in WEATHER: ${error}`);
@@ -118,6 +122,8 @@ const GENERATION = async () => {
       if (config_current.processnews === 'yes') {
         try {
           await NEWS();
+          // Add a 3-second delay here
+          await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in NEWS()
           logger.error(`Error encountered in NEWS: ${error}`);
@@ -157,6 +163,8 @@ const GENERATION = async () => {
       if (config_current.processchanneloffline === 'yes') {
         try {
           await CHANNEL_OFFLINE();
+          // Add a 3-second delay here
+          await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in CHANNEL_OFFLINE()
           logger.error(`Error encountered in CHANNEL_OFFLINE: ${error}`);
@@ -197,6 +205,8 @@ const GENERATION = async () => {
         if (typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null') {
           try {
             await XMLTVPARSE();
+            // Add a 3-second delay here
+            await new Promise(resolve => setTimeout(resolve, 3000));
           } catch (error) {
             // Handle the error encountered in XMLTVMERGE()
             logger.error(`Error encountered in XMLTVMERGE: ${error}`);
@@ -238,6 +248,8 @@ const GENERATION = async () => {
       if (config_current.processchannellogo === 'yes') {
         try {
           await CHANNEL_LOGO();
+          // Add a 3-second delay here
+          await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in CHANNEL_OFFLINE()
           logger.error(`Error encountered in Channel Logo: ${error}`);
