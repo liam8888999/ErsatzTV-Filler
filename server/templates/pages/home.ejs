@@ -1,5 +1,5 @@
 <div id="output">
-  <center><h1>Manual Run</h1>
+  <center><u><h1 style="color:white;">Manual Run</h1></u>
   <button onclick="runFor('weather')">Run Weather <br>Generator Manually<br><span style="font-size:36px;">&#9925;</span></button>
   <button onclick="runFor('news')">Run News <br>Generator Manually<br><span style="font-size:36px;">&#128240;</span></button>
   <button onclick="runFor('channel-offline')">Run Channel-Offline <br>Generator Manually<br><span style="font-size:36px;">&#10060;</span></button>
@@ -14,7 +14,7 @@
 <br>
 <!--  <center><button onclick="window.location.href='/output'">View Filler Output</button></center> -->
   <br>
-<center>  <h2>Upload Old Config</h2>
+<center>  <u><h2>Upload Old Config</h2></u>
   <p>The old config.conf file can be uploaded here to migrate the data to the new (current) config</p>
   <p><b>Please Note:</b> Some configs will be overwritten</p>
   <form id="uploadForm" enctype="multipart/form-data">
@@ -60,14 +60,14 @@
 
 <div class="home-page-container">
   <div class="home-page-box">
-  <center><h1>News</h1></center>
+  <center><u><h1>News</h1></u></center>
   <center><p>The associated channel logo now displays on the Channel-Offline filler type</p></center>
 </div>
   <div class="home-page-box">
-  <center><h1>Health Checks</h1></center>
+  <center><u><h1>Health Checks</h1></u></center>
   <% if (oldtypethemes && oldtypethemes.length > 0) { %>
-  <p style="color: red;">Old type themes that require updating:</p> <div>
-      <ul id="oldtypethemes" style="color: red;">
+  <p style="color: orange;">Old type themes that require updating:</p> <div>
+      <ul id="oldtypethemes" style="color: orange;">
           <ul>
             <% for (var i = 0; i < oldtypethemes.length; i++) { %>
               <li><%= oldtypethemes[i] %></li>
@@ -77,8 +77,8 @@
 <% } %>
   <p>Health Api Status: <span id="healthapistatus"></span></p>
   <p>FFmpeg installation Status: <span id="ffmpeginstallationstatus"></span></p>
-
-  <h4>Operating System Information</h4>
+<br>
+<center>  <u><h4>Operating System Information</h4></u></center>
   <p>Platform: <span id="platform"></span></p>
   <p>Hostname: <span id="hostname"></span></p>
   <p>Total Memory: <span id="totalMemory"></span> bytes</p>
