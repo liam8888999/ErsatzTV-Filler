@@ -1,10 +1,9 @@
 const os = require('os');
 const path = require('path')
 
-const CURRENT_THEME_VERSION = '2'
-
-//serverLocation is Internal
-//startuppath is external
+// Path calculation
+// serverLocation is Internal
+// startuppath is external
 
 
 if (process.pkg) {
@@ -22,12 +21,31 @@ const parentDirName = path.dirname(fullDirName);
 
 const serverLocation = path.dirname(parentDirName);
 
+
+// Theme Consts
+const CURRENT_THEME_VERSION = '2'
+const THEMES_FOLDER = path.join(startUpPath, 'themes');
+
+
+// Web server consts
 const TEMPLATES_FOLDER = path.join(serverLocation, 'server', 'templates'); // Have to do this because it expects the layout in the top level directory.
 const LAYOUTS_FOLDER = "layouts/";
 const PAGES_FOLDER = "pages/";
-const THEMES_FOLDER = path.join(startUpPath, 'themes');
 const DEFAULT_LAYOUT = path.join(LAYOUTS_FOLDER, 'layout.ejs');
 
+/**
+ * Returns the path constants for our ui templates
+ * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
+ * @constructor
+ */
+const TEMPLATE_CONSTANTS = () => {
+    return {
+        TEMPLATES_FOLDER, LAYOUTS_FOLDER, PAGES_FOLDER, DEFAULT_LAYOUT
+    }
+}
+
+
+// Config consts
 const DEFAULT_CONFIG = {
   "customaudio": "",
   "output": "",
@@ -81,38 +99,9 @@ const DEFAULT_CONFIG = {
   "channellogointerval": "10",
   "channellogoduration": "30",
 }
-
-
 const CONFIG_DIR = path.join(startUpPath, 'config');
 const USER_CONFIG = path.join(CONFIG_DIR, 'config.json');
 const PASSWORD = path.join(CONFIG_DIR, 'password.json');
-
-const CHANGELOG = path.join(serverLocation, 'Changelog.md');
-const README = path.join(startUpPath, 'README.md');
-const RESOURCESPATH = path.join(startUpPath, 'resources');
-const WORKDIR = path.join(startUpPath, 'workdir');
-const NEWSDIR = path.join(WORKDIR, 'News');
-const WEATHERDIR = path.join(WORKDIR, 'Weather');
-const CHANNEL_OFFLINEDIR = path.join(WORKDIR, 'Channel-offline');
-const CHANNEL_LOGODIR = path.join(WORKDIR, 'Channel-logo');
-const XMLTVMERGEDIR = path.join(WORKDIR, 'xmltvmerge');
-const VANITYCARDDIR = path.join(WORKDIR, 'vanitycard');
-const CONFIGCONFDIR = path.join(WORKDIR, 'configconf');
-const LOGFOLDER = path.join(startUpPath, 'logs');
-const AUDIOFALLBACK = path.join(RESOURCESPATH, 'audio-fallback');
-const AUDIOFALLBACKINTERNAL = path.join(serverLocation, 'audio-fallback');
-const FFMPEGPATH = path.join(RESOURCESPATH, 'ffmpeg');
-const FFMPEGPATHINTERNAL = path.join(serverLocation, 'ffmpeg');
-/**
- * Returns the path constants for our ui templates
- * @returns {{TEMPLATES_FOLDER: string, DEFAULT_LAYOUT: string, LAYOUTS_FOLDER: string, PAGES_FOLDER: string}}
- * @constructor
- */
-const TEMPLATE_CONSTANTS = () => {
-    return {
-        TEMPLATES_FOLDER, LAYOUTS_FOLDER, PAGES_FOLDER, DEFAULT_LAYOUT
-    }
-}
 
 /**
  * Returns the path constants for our script config
@@ -127,6 +116,15 @@ const CONFIG_CONSTANTS = () => {
 }
 
 
+// Resources Consts
+const CHANGELOG = path.join(serverLocation, 'Changelog.md');
+const README = path.join(startUpPath, 'README.md');
+const RESOURCESPATH = path.join(startUpPath, 'resources');
+
+
+// FFMPEG Consts
+const FFMPEGPATH = path.join(RESOURCESPATH, 'ffmpeg');
+const FFMPEGPATHINTERNAL = path.join(serverLocation, 'ffmpeg');
 let FFMPEGCOMMAND;
 
 if (os.platform() === 'win32') {
@@ -140,6 +138,49 @@ if (os.platform() === 'win32') {
   FFMPEGCOMMAND = "ffmpeg -y"
     logger.warn("OS unsupported trying safe fallback of ffmpeg -y")
 }
+
+
+// Workdir
+const WORKDIR = path.join(startUpPath, 'workdir');
+
+
+// Audio Consts
+const AUDIOFALLBACK = path.join(RESOURCESPATH, 'audio-fallback');
+const AUDIOFALLBACKINTERNAL = path.join(serverLocation, 'audio-fallback');
+
+
+// News Consts
+const NEWSDIR = path.join(WORKDIR, 'News');
+
+
+// Weather Consts
+const WEATHERDIR = path.join(WORKDIR, 'Weather');
+
+
+// Channel Offline Consts
+const CHANNEL_OFFLINEDIR = path.join(WORKDIR, 'Channel-offline');
+
+
+// Channel logo consts
+const CHANNEL_LOGODIR = path.join(WORKDIR, 'Channel-logo');
+
+
+// XMLTV MERGER consts
+const XMLTVMERGEDIR = path.join(WORKDIR, 'xmltvmerge');
+
+
+// Vanity Card consts
+const VANITYCARDDIR = path.join(WORKDIR, 'vanitycard');
+
+
+// Config upload Consts
+const CONFIGCONFDIR = path.join(WORKDIR, 'configconf');
+
+
+// Logs Consts
+const LOGFOLDER = path.join(startUpPath, 'logs');
+
+
 
 module.exports = {
     TEMPLATE_CONSTANTS,

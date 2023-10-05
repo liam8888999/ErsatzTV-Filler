@@ -4,9 +4,11 @@ const logger = require("../../utils/logger.utils");
 const { AUDIOFALLBACK } = require("../../constants/path.constants")
 
 
-
+// Set accepted audio extensions
 const audioExtensions = ['mp3', 'wav', 'flac', 'aac', 'ogg', 'wma', 'm4a', 'opus', 'amr', 'webm', 'amr', 'ape', 'mid', 'midi', 'ac3', 'aiff', 'aif', 'au', 'raw', 'mp2', 'ra', 'rm', 'dsf', 'dts', 'caf', 'alac', 'dff', 'oga', 'ogs', 'spx'];
 
+
+// Select Random audio file
 const selectRandomAudioFile = async (path) => {
   let selectedPath = path;
 logger.info(`Selected Path: ${selectedPath}`)
