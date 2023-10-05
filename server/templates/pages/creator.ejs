@@ -2,6 +2,20 @@
 <html>
 <head>
   <style>
+  .collapsible {
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  outline: none;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
 
 body {
           justify-content: center;
@@ -13,7 +27,7 @@ body {
 form {
   max-width: 50%;
   margin: auto;
-  with: 50%;
+  width: 50%;
 }
 
 h2 {
@@ -50,22 +64,26 @@ label {
 </head>
 <body>
   <center>
-    <h1>Theme Creator</h1>
+  <u>  <h1>Theme Creator</h1></u>
+  <br>
   </center>
     <form action="/themecreator" method="POST">
+    <u> <b> <h5>General Options</h5></b></u>
         <label for="themeName">Theme Name:</label>
         <input type="text" id="themeName" name="themeName" required><br>
         <label for="creator">Creator:</label>
         <input type="text" id="creator" name="creator" required><br>
-
-      <b>  <h4>Offline Theme Options</h4> </b>
+<br>
+      <b> <u> <h5>Offline Theme Options</h5></u> </b>
         <label for="offlineTextColour">Offline Text Colour:</label>
         <input type="color" id="offlineTextColour" name="offlineTextColour" required><br>
         <label for="offlineTitleColour">Offline Title Colour:</label>
         <input type="color" id="offlineTitleColour" name="offlineTitleColour" required><br>
         <label for="offlineBackgroundColour">Offline Background Colour:</label>
         <input type="color" id="offlineBackgroundColour" name="offlineBackgroundColour" required><br>
-<br>
+
+<center><button type="button" class="collapsible">Show Preview</button>
+<div class="content">
 <div id="Channel-Offline-Background" style="border: 2px solid; width:50%; margin:auto; background-color:black;">
   <center>
     <p id="coloredofflineTitle" style="color:black; padding-top:15px;">This Channel is Currently offline</p>
@@ -73,30 +91,34 @@ label {
     <p id="coloredofflineText" style="color:black; width:75%; margin:auto;">    Next showing at:</p>
     <p id="coloredofflineText" style="color:black; width:75%; margin:auto;">    Starting with:</p>
 </div>
-        <h4>News Theme Options</h4>
+</div></center>
+<br>
+      <u><b>  <h5>News Theme Options</h5></b></u>
         <label for="newsTextColour">News Text Colour:</label>
         <input type="color" id="newsTextColour" name="newsTextColour" required><br>
         <label for="newsTitleColour">News Title Colour:</label>
         <input type="color" id="newsTitleColour" name="newsTitleColour" required><br>
         <label for="newsBackgroundColour">News Background Colour:</label>
         <input type="color" id="newsBackgroundColour" name="newsBackgroundColour" required><br>
-<br>
+<center><button type="button" class="collapsible">Show Preview</button>
+<div class="content">
 <div id="news-Background" style="border: 2px solid; width:50%; margin:auto; background-color:black;">
   <center>
     <p id="colorednewsTitle" style="color:black; padding-top:15px;">News Title</p>
   </center>
     <p id="colorednewsText" style="color:black; width:75%; margin:auto;">This is a breaking news story. The news story is extremely important and cant be missed in this template.</p>
 </div>
+</div></center> 
 <br>
-        <h4>Weather Theme Options</h4>
+      <u><b>  <h5>Weather Theme Options</h5></b></u>
         <label for="weatherBackgroundColour">Weather Background Colour:</label>
         <input type="color" id="weatherBackgroundColour" name="weatherBackgroundColour" required><br>
         <br>
-        <h4>Channel Logo Theme Options</h4>
+      <u><b>  <h5>Channel Logo Theme Options</h5></b></u>
         <label for="channellogoBackgroundColour">Channel Logo Background Colour:</label>
         <input type="color" id="channellogoBackgroundColour" name="channellogoBackgroundColour" required><br>
-
-        <h4>Add to the themes store for other users</h4>
+<br>
+        <u><b><h5>Add to the themes store for other users</h5></b></u>
         <label for="sendToWebhook">Add to the themes store:</label>
         <input type="checkbox" id="sendToWebhook" name="sendToWebhook" checked><br>
 
@@ -179,7 +201,22 @@ label {
         colorednewsbackground.style.backgroundColor = newsbackgroundcolour;
     });
 </script>
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
 
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 
 </body>
 </html>

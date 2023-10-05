@@ -22,7 +22,7 @@
 <!-- set downloaded themes list -->
 <div id="downloadedThemes" style="display: none;"><%= downloadedthemeslist %></div>
 
-<h1 style="text-align:center;"> Themes </h1>
+<u><h1 style="text-align:center;"> Themes </h1></u>
 <br>
 <center>
 <button onclick="window.location.href='/themecreator';">
@@ -33,18 +33,19 @@ Theme Creator
 
 <% if (oldtypethemes && oldtypethemes.length > 0) { %>
   <center>
-  <h5 style="color:orange;">Some Theme files need updating to the latest version to get all the available features.</h5>
+  <h5 style="color:orange;">! Some Theme files need updating to the latest version to get all the available features.</h5>
     <h5 style="color:orange;">Please check the health checks section on the home page to find which ones.</h5>
     </center>
+    <br>
 <% } %>
 
-<h3 style="text-align:center;">Current theme is: <span id="currentTheme2"><%= theme %></span></h3>
+<h4 style="text-align:center; color:skyblue;">Current theme is: <span id="currentTheme2"><%= theme %></span></h4>
 <span id="currentTheme" style="display: none;"><%= theme %></span>
 <br>
-<center><h3>User Themes</h3></center>
+<center><u><h3>User Themes</h3></u></center>
 <div id="theme-list"></div>
 
-<center><h3>System Themes</h3></center>
+<center><u><h3>System Themes</h3></u></center>
 <h4 style="text-align:center;color:brown;">System Light Theme (Default)</h4>
 
 <div class="slideshow-container">
@@ -277,7 +278,7 @@ Theme Creator
 <br>
 <hr class="solid">
 <br>
-<h3 style="text-align:center;">Community Submitted Themes</h3>
+<u><h3 style="text-align:center;">Community Submitted Themes</h3></u>
 <br>
 <br>
 <h4 style="text-align:center;color:brown;">MoRBiD_MaNGLeR-Dark Theme</h4>

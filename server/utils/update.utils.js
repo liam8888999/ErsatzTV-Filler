@@ -46,7 +46,7 @@ async function checkForUpdates() {
     }
   } catch (error) {
     logger.updates(`Error checking for updates, Please try again later: ${error.message}`)
-    return `Error checking for updates, Please try again later: ${error.message}`;
+    return `Error checking for updates, Please try again later`;
   }
 }
 
