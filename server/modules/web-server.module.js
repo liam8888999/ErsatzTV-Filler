@@ -8,6 +8,7 @@ const moment = require('moment-timezone');
 
 const { TEMPLATE_CONSTANTS, WORKDIR } = require("../constants/path.constants");
 const { loadPageRoutes } = require("../routes/page.routes");
+const { authentificationPageRoutes } = require("../routes/authentification.routes");
 const { loadApiConfigRoutes } = require("../routes/config.api");
 const { loadApiThemeRoutes } = require("../routes/themes.api")
 const { loadApirunRoutes } = require("../routes/run.api");
@@ -27,6 +28,7 @@ const { createDirectoryIfNotExists } =require("../utils/file.utils")
 const createWebServer = () => {
     injectMiddleware();
     loadPageRoutes(app);
+    authentificationPageRoutes(app);
     loadApiConfigRoutes(app);
     loadApiThemeRoutes(app);
     loadApirunRoutes(app);
