@@ -148,7 +148,7 @@ async function addKeyValuesToconfigFile() {
         // If it doesn't exist, add the new key/value pair
         jsonData[key] = value;
       } else {
-        logger.warn(`Key '${key}' already exists in the JSON object.`);
+        logger.info(`Key '${key}' already exists in the JSON object.`);
       }
     }
 
