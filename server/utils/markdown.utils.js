@@ -2,7 +2,6 @@ const marked = require("marked")
 const { loadFileContentsIntoMemory } =require("./file.utils")
 const { CHANGELOG } = require("../constants/path.constants");
 const logger = require("../utils/logger.utils");
-const moment = require('moment-timezone');
 
 
 const parseMarkedDownFile = (markDown) => {

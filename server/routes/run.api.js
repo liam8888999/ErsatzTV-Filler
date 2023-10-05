@@ -2,7 +2,7 @@ const {ROUTE_CONSTANTS} = require("../constants/route.constants");
 const { settheme } = require("../utils/themes.utils.js");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
-const moment = require('moment-timezone');
+
 const { WEATHER } = require("../generators/weather.generator");
 const { NEWS } = require("../generators/news.generator");
 const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");

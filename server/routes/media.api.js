@@ -1,6 +1,6 @@
 const {ROUTE_CONSTANTS} = require("../constants/route.constants");
 const logger = require("../utils/logger.utils");
-const moment = require('moment-timezone');
+
 const os = require('os');
 const { exec } = require('child_process');
 const path = require('path');

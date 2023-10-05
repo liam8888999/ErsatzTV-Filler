@@ -1,6 +1,5 @@
 const fs = require("fs")
 const logger = require("../utils/logger.utils");
-const moment = require('moment-timezone');
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");

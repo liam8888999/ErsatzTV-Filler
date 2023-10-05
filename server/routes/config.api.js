@@ -1,7 +1,7 @@
 const {ROUTE_CONSTANTS} = require("../constants/route.constants");
 const { writeValueToConfigurationFile } = require("../utils/config.utils.js");
 const logger = require("../utils/logger.utils");
-const moment = require('moment-timezone');
+
 const { readFile } = require('fs');
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { setwebtheme } = require("../utils/config.utils.js");

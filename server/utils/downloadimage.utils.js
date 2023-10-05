@@ -2,7 +2,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const logger = require("../utils/logger.utils");
-const moment = require('moment-timezone');
+
 
 function downloadImage(url, filepath) {
   const protocol = url.startsWith('https') ? https : http;

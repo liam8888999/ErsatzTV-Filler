@@ -3,7 +3,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const { WEATHERDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const logger = require("../utils/logger.utils");
-const moment = require('moment-timezone');
+
 const { createDirectoryIfNotExists } =require("../utils/file.utils");
 const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
 const { exec } = require("child_process")

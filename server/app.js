@@ -3,7 +3,7 @@ const { setupConfigurationFile } = require("../server/modules/config-loader.modu
 const { selectRandomAudioFile } = require("../server/generators/utils/randomaudio.utils");
 const { GENERATION } = require("../server/modules/generators.module");
 const logger = require("../server/utils/logger.utils");
-const moment = require('moment-timezone');
+
 const { deleteFoldersOnShutdown, createrequiredstartupfolders, copyResources } = require("../server/modules/startup-shutdown.module");
 const { version } = require('../package.json');
 
