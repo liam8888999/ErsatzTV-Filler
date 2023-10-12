@@ -50,15 +50,27 @@ logger.info(`Weatherdir: ${WEATHERDIR}`)
 
 await downloadImage(`https://wttr.in/${config_current.city}.png`, `${path.join(WEATHERDIR, 'v1.png')}`)
     .then(logger.success)
-    .catch(logger.error);
+    .catch(() => {
+            downloadImage('https://liam8888999.github.io/ErsatzTV-Filler/images/ersatztv-filler.png', `${path.join(WEATHERDIR, 'v1.png')}`)
+              .then(logger.success)
+              .catch(logger.error);
+          });
 
 await downloadImage(`https://v2.wttr.in/${config_current.city}.png`, `${path.join(WEATHERDIR, 'v2.png')}`)
     .then(logger.success)
-    .catch(logger.error);
+    .catch(() => {
+            downloadImage('https://liam8888999.github.io/ErsatzTV-Filler/images/ersatztv-filler.png', `${path.join(WEATHERDIR, 'v2.png')}`)
+              .then(logger.success)
+              .catch(logger.error);
+          });
 
 await downloadImage(`https://v3.wttr.in/${config_current.state}.png`, `${path.join(WEATHERDIR, 'v3.png')}`)
     .then(logger.success)
-    .catch(logger.error);
+    .catch(() => {
+            downloadImage('https://liam8888999.github.io/ErsatzTV-Filler/images/ersatztv-filler.png', `${path.join(WEATHERDIR, 'v3.png')}`)
+              .then(logger.success)
+              .catch(logger.error);
+          });
   }
 
 
