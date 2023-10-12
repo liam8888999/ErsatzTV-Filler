@@ -16,6 +16,46 @@ const { findoldVersionThemeFiles } = require("../utils/themes.utils")
 
 const authentificationPageRoutes = async (app) => {
 
+  // Middleware to check if the user is authenticated
+const checkAuthentication = (req, res, next) => {
+  let decryptedUsername;
+  let decryptedPassword;
+    try {
+      const passwordData = JSON.parse(fs.readFileSync(PASSWORD));
+
+      // Decrypt the username and password
+      decryptedUsername = decryptText(
+        passwordData.encryptedusername.encryptedText,
+        passwordData.encryptedusername.iv.data,
+        passwordData.encryptedusername.encryptionKey.data
+      );
+      decryptedPassword = decryptText(
+        passwordData.encryptedpassword.encryptedText,
+        passwordData.encryptedpassword.iv.data,
+        passwordData.encryptedpassword.encryptionKey.data
+      );
+
+    } catch (error) {
+      // Handle the error encountered when reading or decrypting the password file
+      decryptedUsername = ''
+      decryptedPassword = ''
+
+      logger.error("No password file is found in the config dir");
+    }
+  if (!decryptedUsername && !decryptedPassword) {
+    req.session.isAuthenticated = true;
+    return next();
+  }
+  if (req.session.isAuthenticated) {
+    // User is authenticated; continue to the next middleware or route handler
+    return next();
+  } else {
+
+  res.redirect('/login');
+    // User is not authenticated; redirect to the login page
+  }
+};
+
     // Add a login route
     app.get('/login', async (req, res) => {
       let decryptedUsername;
@@ -145,7 +185,28 @@ app.post('/register', (req, res) => {
           res.redirect('/');
         });
       });
-    };
+
+app.post('/delusrpswrd', checkAuthentication, async (req, res) => {
+  const filePath = PASSWORD; // Replace with the path to the file you want to delete
+
+// Check if the file exists before attempting to delete it
+if (fs.existsSync(filePath)) {
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error('Error deleting the login file:', err);
+    } else {
+      console.log('Login File has been deleted successfully.');
+    }
+  });
+} else {
+  console.log('The login file does not exist.');
+}
+req.session.destroy(() => {
+  res.redirect('/config');
+});
+});
+
+}
 
 
 

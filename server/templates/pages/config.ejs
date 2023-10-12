@@ -180,6 +180,12 @@
                 <input type="password" id="password" name="password" required><br><br>
                 <input type="submit" value="Register">
             </form>
+            <% if (authentication === 'yes') { %>
+            <br>
+            <form action="/delusrpswrd" method="post">
+                    <input type="submit" value="Remove authentication">
+                </form>
+                  <% } %>
         </div>
   </div>
   </div>
