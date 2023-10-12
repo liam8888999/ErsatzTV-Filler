@@ -249,19 +249,26 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
   </script>
   <script>
     const healthapistatusElement = document.getElementById('healthapistatus');
+    const healthapistatuspElement = document.getElementById('healthapistatusp');
     const platformElement = document.getElementById('platform');
     const hostnameElement = document.getElementById('hostname');
     const totalMemoryElement = document.getElementById('totalMemory');
     const freeMemoryElement = document.getElementById('freeMemory');
     const ffmpeginstallationstatusElement = document.getElementById('ffmpeginstallationstatus');
+    const ffmpeginstallationstatuspElement = document.getElementById('ffmpeginstallationstatusp');
 
     fetch('/api/health')
       .then(response => {
         if (response.ok) {
           healthapistatusElement.innerText = 'OK';
+          healthapistatusElement.style.color = 'lime';
+          healthapistatuspElement.style.color = 'lime';
           return response.json();
         } else {
           healthapistatusElement.innerText = 'Failed';
+          healthapistatusElement.style.color = 'orange';
+          healthapistatuspElement.style.color = 'orange';
+          return response.json();
         }
       })
       .then(data => {
@@ -270,9 +277,23 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
         totalMemoryElement.innerText = data.os.totalMemory;
         freeMemoryElement.innerText = data.os.freeMemory;
         ffmpeginstallationstatusElement.innerText = data.os.ffmpeg;
+        if (data.os.ffmpeg === 'FFmpeg is installed. Everything will work.') {
+          ffmpeginstallationstatusElement.style.color = 'lime'; // Set color to green for "Installed"
+          ffmpeginstallationstatuspElement.style.color = 'lime';
+        } else if (data.os.ffmpeg === 'FFmpeg is installed. libass is not compiled in. The News generator will not work.') {
+          ffmpeginstallationstatusElement.style.color = 'orange'; // Set color to red for other statuses
+          ffmpeginstallationstatuspElement.style.color = 'orange';
+        } else if (data.os.ffmpeg.startsWith('FFmpeg is installed, but the required version')) {
+          ffmpeginstallationstatusElement.style.color = 'orange'; // Set color to red for other statuses
+          ffmpeginstallationstatuspElement.style.color = 'orange';
+        } else if (data.os.ffmpeg === 'FFmpeg is not installed. Please install it to create filler video files.') {
+          ffmpeginstallationstatusElement.style.color = 'orange'; // Set color to red for other statuses
+          ffmpeginstallationstatuspElement.style.color = 'orange';
+        }
       })
       .catch(error => {
         healthapistatusElement.innerText = 'Failed';
+        healthapistatusElement.style.color = 'orange';
       });
 
   </script>
