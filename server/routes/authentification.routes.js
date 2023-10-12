@@ -195,13 +195,13 @@ app.post('/delusrpswrd', checkAuthentication, async (req, res) => {
 if (fs.existsSync(filePath)) {
   fs.unlink(filePath, (err) => {
     if (err) {
-      console.error('Error deleting the login file:', err);
+      logger.error('Error deleting the login file:', err);
     } else {
-      console.log('Login File has been deleted successfully.');
+      logger.success('Login File has been deleted successfully.');
     }
   });
 } else {
-  console.log('The login file does not exist.');
+  logger.warn('The login file does not exist.');
 }
 req.session.destroy(() => {
   res.redirect('/config');
