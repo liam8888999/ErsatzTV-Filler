@@ -13,3 +13,5 @@ This is a brief explanation of what each filler type is. The Guide also explains
 - [XMLTV Merge Filler](xmltv-merge.md)
 
 - [Vanity Cards Filler](vanity-cards.md)
+
+- [Channel Logo Filler](channel-logo.md)

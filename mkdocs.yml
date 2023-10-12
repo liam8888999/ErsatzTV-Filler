@@ -53,6 +53,7 @@ nav:
     - Weather: filler-types/weather.md
     - News: filler-types/news.md
     - Channel Offline: filler-types/channel-offline.md
+    - Channel Logo: filler-types/channel-logo.md
     - XMLTV Merge: filler-types/xmltv-merge.md
     - Vanity Cards: filler-types/vanity-cards.md
   - Configuration:
@@ -61,6 +62,7 @@ nav:
     - Weather Configuration: configure/weather.md
     - News Configuration: configure/news.md
     - Channel Offline Configuration: configure/channel-offline.md
+    - Channel Logo Configuration: configure/channel-logo.md
     - XMLTV Merge Configuration: configure/xmltv-merge.md
     - Vanity Cards Configuration: configure/vanity-cards.md
     - Login Configuration: configure/login.md

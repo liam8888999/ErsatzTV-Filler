@@ -16,4 +16,6 @@ This Guide explains all the configuration options available via the Ersatztv-Fil
 
 - [Vanity Cards Configuration](vanity-cards.md)
 
+- [Channel Logo Configuration](channel-logo.md)
+
 - [Login Configuration](login.md)
