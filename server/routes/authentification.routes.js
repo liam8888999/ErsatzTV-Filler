@@ -60,6 +60,7 @@ const checkAuthentication = (req, res, next) => {
     app.get('/login', async (req, res) => {
       let decryptedUsername;
       let decryptedPassword;
+      let hint;
         try {
           const passwordData = JSON.parse(fs.readFileSync(PASSWORD));
 
@@ -74,7 +75,7 @@ const checkAuthentication = (req, res, next) => {
             passwordData.encryptedpassword.iv.data,
             passwordData.encryptedpassword.encryptionKey.data
           );
-
+          hint = passwordData.hint
         } catch (error) {
           // Handle the error encountered when reading or decrypting the password file
           decryptedUsername = ''
@@ -98,7 +99,8 @@ const checkAuthentication = (req, res, next) => {
             version: version,
             ErsatzTVURL: ErsatzTVURL,
             updatestatus: UPDATESTATUS,
-            authentication: authentication
+            authentication: authentication,
+            hint: hint
         });
     });
 
@@ -160,13 +162,13 @@ app.post('/register', (req, res) => {
   if (!fs.existsSync(usersFilePath)) {
       fs.writeFileSync(usersFilePath, '[]', 'utf8');
   }
-  const { username, password } = req.body;
+  const { username, password, hint } = req.body;
 
   const encryptedusername = encryptText(username)
   const encryptedpassword = encryptText(password)
 
   // Create a user object with the provided credentials
-  const user = { encryptedusername, encryptedpassword };
+  const user = { encryptedusername, encryptedpassword, hint };
 
   // Write the user data to the file, overwriting any existing data
   fs.writeFile(usersFilePath, JSON.stringify(user), (err) => {

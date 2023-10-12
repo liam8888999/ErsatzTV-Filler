@@ -2,6 +2,11 @@
   <html>
   <head>
       <title>Login Page</title>
+      <style>
+      body {
+      margin-top: -60px;
+    }
+    </style>
   </head>
   <body>
     <center>
@@ -23,8 +28,23 @@
 
           <input type="submit" value="Login">
       </form>
+<br>
+      <button onclick="toggleHintText()">Forgot Password</button>
+      <br>
+        <div id="hintText" style="display: none;">Password Hint: <%= hint %></div>
+
 
       </center>
+      <script>
+  function toggleHintText() {
+    var hintText = document.getElementById('hintText');
+    if (hintText.style.display === 'none') {
+      hintText.style.display = 'block';
+    } else {
+      hintText.style.display = 'none';
+    }
+  }
+</script>
       <script>
         // Get the element by its ID
 var logoutbutton = document.getElementById("logout");
