@@ -1,5 +1,51 @@
 # Changelog
 
+## [1.3.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.2.1...V1.3.0) (2023-10-12)
+
+
+### Added
+
+* auto run for channel logo generator ([b1553ba](https://github.com/liam8888999/ErsatzTV-Filler/commit/b1553ba1e17bfd73765dd2d10c656daec0d5328d))
+* button to remove login information ([70eb154](https://github.com/liam8888999/ErsatzTV-Filler/commit/70eb154146ea4258f0b7d7960f5f315836ac06da))
+* check theme version number and add required fallbacks ([e03a532](https://github.com/liam8888999/ErsatzTV-Filler/commit/e03a5321a5ac12d3a910cccd9ee105441f89c22d))
+* initial framework for channel logo filler ([960777b](https://github.com/liam8888999/ErsatzTV-Filler/commit/960777bd67745154281dfef1501b46cfb67b1152))
+* log app version on startup ([e99f6af](https://github.com/liam8888999/ErsatzTV-Filler/commit/e99f6af60047186d4bc0ea384b02f6cf2f92289e))
+* run logo to homepage ([39dff45](https://github.com/liam8888999/ErsatzTV-Filler/commit/39dff4553948f76fc40af7af3df849bee95e9623))
+* show old type theme on healthcheck ([b6662e2](https://github.com/liam8888999/ErsatzTV-Filler/commit/b6662e296c12648e3c1570a8af12d1256770eedd))
+* update theme button ([579c0f4](https://github.com/liam8888999/ErsatzTV-Filler/commit/579c0f4e8b249469c551d42a9825fa86a94b6154))
+
+
+### Fixed
+
+* add 3 second delay after each filler type is finished generating to wait ([d1de68b](https://github.com/liam8888999/ErsatzTV-Filler/commit/d1de68bb512e07ac65cd6a6f708543e8457fe32e))
+* fix issue where channel logo function was running the merger ([6cc972c](https://github.com/liam8888999/ErsatzTV-Filler/commit/6cc972c6e6e8793c43230cee9df614d89363d377))
+* improve healthcheck ui elements ([dc9ea3f](https://github.com/liam8888999/ErsatzTV-Filler/commit/dc9ea3feca334f40a8f0ac8063c5e32460235621))
+* improve logging categories ([25ac5d6](https://github.com/liam8888999/ErsatzTV-Filler/commit/25ac5d6f6f0240adebc0e17c635a272a77231676))
+* improve logic to only create 1 channel offline video at a time ([14f8741](https://github.com/liam8888999/ErsatzTV-Filler/commit/14f87417aa57b2916128bb9906c52972877eb7ae))
+* improve logic to only create 1 logo filler at a time ([4c7cee8](https://github.com/liam8888999/ErsatzTV-Filler/commit/4c7cee8cf5989ee023f7784c3196ce7779fcb13f))
+* improvements to health api and health display ([678c48b](https://github.com/liam8888999/ErsatzTV-Filler/commit/678c48b5ff7d63179792ee3f622ae8952cfa099c))
+* issue that was preventing startup ([05e6924](https://github.com/liam8888999/ErsatzTV-Filler/commit/05e69246934f9d61adc74e18cd783c7448c00d2b))
+* neaten up config form ([2712ada](https://github.com/liam8888999/ErsatzTV-Filler/commit/2712ada1cf93936a5929e3212cee6095d71b4592))
+* small gui fix ([91985b0](https://github.com/liam8888999/ErsatzTV-Filler/commit/91985b037123fa5ff186e2ecb9b22d747df4fff7))
+* small logging fix ([bb52d24](https://github.com/liam8888999/ErsatzTV-Filler/commit/bb52d2431fd9fa00c9ab489d5b8b60d9a708edac))
+* some code cleanup ([1e16d1e](https://github.com/liam8888999/ErsatzTV-Filler/commit/1e16d1edbc522af2ea87275f4dcfaf5778cf2739))
+* typo that was breaking things ([4c26755](https://github.com/liam8888999/ErsatzTV-Filler/commit/4c26755f3bdab8207b0db98479040dd726aa7c33))
+* video fade out ([4b733b0](https://github.com/liam8888999/ErsatzTV-Filler/commit/4b733b007328c07ab9940d5a1d50588cdab3969e))
+
+
+### Removed
+
+* unused dependency ([0a99582](https://github.com/liam8888999/ErsatzTV-Filler/commit/0a995821e32f136fe2492ea9039d259db177fceb))
+
+
+### Changed
+
+* add extra text about old theme file types ([b36a331](https://github.com/liam8888999/ErsatzTV-Filler/commit/b36a331df602ddf23d08195618220501aaeb1cf5))
+* move authentification routes ([ada4850](https://github.com/liam8888999/ErsatzTV-Filler/commit/ada4850f28b4c8987275372395997c0c8468eed0))
+* some visual changes for the home page ([e076ccb](https://github.com/liam8888999/ErsatzTV-Filler/commit/e076ccb055a85b3a103ff71fcc6428198ce22d7b))
+* update news ([e1568c0](https://github.com/liam8888999/ErsatzTV-Filler/commit/e1568c0b428b8926b6256a7767840560b2722b98))
+* various ui improvements ([18a938b](https://github.com/liam8888999/ErsatzTV-Filler/commit/18a938b9336d57170f8ab750c7f932b72eaeb5fd))
+
 ## [1.2.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.2.0...V1.2.1) (2023-09-24)
 
 
