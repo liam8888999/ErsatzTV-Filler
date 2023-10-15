@@ -50,27 +50,15 @@ logger.info(`Weatherdir: ${WEATHERDIR}`)
 
 await downloadImage(`https://wttr.in/${config_current.city}.png`, `${path.join(WEATHERDIR, 'v1.png')}`)
     .then(logger.success)
-    .catch(() => {
-            downloadImage('https://liam8888999.github.io/ErsatzTV-Filler/images/ersatztv-filler.png', `${path.join(WEATHERDIR, 'v1.png')}`)
-              .then(logger.success)
-              .catch(logger.error);
-          });
+    .catch(logger.error);
 
 await downloadImage(`https://v2.wttr.in/${config_current.city}.png`, `${path.join(WEATHERDIR, 'v2.png')}`)
-    .then(logger.success)
-    .catch(() => {
-            downloadImage('https://liam8888999.github.io/ErsatzTV-Filler/images/ersatztv-filler.png', `${path.join(WEATHERDIR, 'v2.png')}`)
-              .then(logger.success)
-              .catch(logger.error);
-          });
+  .then(logger.success)
+  .catch(logger.error);
 
 await downloadImage(`https://v3.wttr.in/${config_current.state}.png`, `${path.join(WEATHERDIR, 'v3.png')}`)
-    .then(logger.success)
-    .catch(() => {
-            downloadImage('https://liam8888999.github.io/ErsatzTV-Filler/images/ersatztv-filler.png', `${path.join(WEATHERDIR, 'v3.png')}`)
-              .then(logger.success)
-              .catch(logger.error);
-          });
+  .then(logger.success)
+  .catch(logger.error);
   }
 
 
@@ -107,6 +95,20 @@ const createWeatherV1 = async () => {
         logger.error(`Error: ${error.message}`);
 
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
+
+
+                  // Run another FFmpeg command here on error
+            const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the weather filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v1.mp4')}`;
+            logger.ffmpeg(`Running weather fallback command on error: ${commandOnError1}`);
+            exec(commandOnError1, (error2, stdout2, stderr2) => {
+              if (error2) {
+                logger.error(`Error running weather fallback command: ${error2.message}`);
+                // Handle the error for the second command as needed.
+              } else {
+                logger.success('Weather fallback FFmpeg command executed successfully.');
+              }
+            });
+
         return;
       }
       if (stderr) {
@@ -122,6 +124,10 @@ const createWeatherV1 = async () => {
           logger.error(`Error: ${error.message}`);
 
           logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
+
+    return;
+
+
           return;
         }
         if (stderr) {
@@ -148,6 +154,19 @@ const createWeatherV2 = async () => {
         logger.error(`Error: ${error.message}`);
 
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
+
+        // Run another FFmpeg command here on error
+  const commandOnError2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the weather filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v2.mp4')}`;
+  logger.ffmpeg(`Running weather fallback command on error: ${commandOnError2}`);
+  exec(commandOnError2, (error20, stdout20, stderr20) => {
+    if (error20) {
+      logger.error(`Error running weather fallback command: ${error20.message}`);
+      // Handle the error for the second command as needed.
+    } else {
+      logger.success('Weather fallback FFmpeg command executed successfully.');
+    }
+  });
+
         return;
       }
       if (stderr) {
@@ -188,6 +207,19 @@ const createWeatherV3 = async () => {
       if (error) {
         logger.error(`Error: ${error.message}`);
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
+
+        // Run another FFmpeg command here on error
+  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the weather filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v3.mp4')}`;
+  logger.ffmpeg(`Running weather fallback command on error: ${commandOnError3}`);
+  exec(commandOnError3, (error3, stdout3, stderr3) => {
+    if (error3) {
+      logger.error(`Error running weather fallback command: ${error3.message}`);
+      // Handle the error for the second command as needed.
+    } else {
+      logger.success('Weather fallback FFmpeg command executed successfully.');
+    }
+  });
+
         return;
       }
       if (stderr) {
