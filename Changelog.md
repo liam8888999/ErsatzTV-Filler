@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.3.0...V1.3.1) (2023-10-15)
+
+
+### Added
+
+* acknowledgements ([30f6fcd](https://github.com/liam8888999/ErsatzTV-Filler/commit/30f6fcd37b52eb1c96f7b00125ff0cb81da68ee9))
+* forgot password option and password hint ([76b3624](https://github.com/liam8888999/ErsatzTV-Filler/commit/76b362400f7f6febe2ad88c71001120400b53b37))
+
+
+### Fixed
+
+* add fallback when weather doesnt download ([3835e31](https://github.com/liam8888999/ErsatzTV-Filler/commit/3835e31361b3208f704f02242ac172b1d0e25120))
+* small logging fix ([e80a8e4](https://github.com/liam8888999/ErsatzTV-Filler/commit/e80a8e434055d651852aa34f80a0f1afec6d9519))
+
 ## [1.3.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.2.1...V1.3.0) (2023-10-12)
 
 
