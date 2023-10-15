@@ -16,6 +16,38 @@
       <h6>* Please Note there is currently no update mechanism built in</h6>
       </center>
 <br>
+
+<center>
+<button onclick="toggleHintText()">Acknowledgements</button>
+<br>
+</center>
+  <div id="hintText" style="display: none;">
+  <center>
+    <h3>Acknowledgements to:</h3>
+      </center>
+      <div style="width:70%; margin: 0 auto">
+    <p><b>Music:</b> https://audiotrimmer.com/royalty-free-music/</p>
+    <p><b>MoRBid_MaNGLeR:</b> Testing and Feedback</p>
+    <p><b>jasongdove:</b> Feedback and assistance</p>
+    <p><b>S1mpleman/NotExpectedYet:</b> Alot of assistance getting setup/started</p>
+    <p><b>Portal/Stoxis:</b> ideas/Feedback and assistance with getting the generator run logic working</p>
+    <p>There are likely some i have missed so if this is you let me know and i will add</p>
+</div>
+</div>
+
+
+
+<script>
+function toggleHintText() {
+var hintText = document.getElementById('hintText');
+if (hintText.style.display === 'none') {
+hintText.style.display = 'block';
+} else {
+hintText.style.display = 'none';
+}
+}
+</script>
+<br>
       <%- markdown %>
       <button class="show-content-button" style="width: 100%; border: none; color: black; border-top: 5px solid dimgray; background-image: linear-gradient(dimgray, white)">Show older Changelogs</button>
 
