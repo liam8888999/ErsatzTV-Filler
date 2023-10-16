@@ -162,13 +162,13 @@ const generateNewsVideo = async (config_current, audioFile) => {
       logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
       // Run another FFmpeg command here on error
 const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the news filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, 'news.mp4')}`;
-logger.ffmpeg(`Running vanity card fallback command on error: ${commandOnError3}`);
+logger.ffmpeg(`Running news card fallback command on error: ${commandOnError3}`);
 exec(commandOnError3, (error3, stdout3, stderr3) => {
   if (error3) {
-    logger.error(`Error running vanity card fallback command: ${error3.message}`);
+    logger.error(`Error running news fallback command: ${error3.message}`);
     // Handle the error for the second command as needed.
   } else {
-    logger.success('vanity card fallback FFmpeg command executed successfully.');
+    logger.success('news fallback FFmpeg command executed successfully.');
   }
 });
   return;
