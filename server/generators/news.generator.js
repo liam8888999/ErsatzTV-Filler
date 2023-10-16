@@ -25,7 +25,7 @@ const NEWS = async () => {
 const config_current = await retrieveCurrentConfiguration();
 const audioFile = await selectRandomAudioFile(config_current.customaudio);
 const current_theme = await retrieveCurrentTheme();
-
+const NEWSNUM = '1'
 
 // Step 5: Generate the news feed
 const generateNewsFeed = async (config_current, audioFile, current_theme) => {
@@ -71,7 +71,7 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
           }
         });
 
-        fs.writeFileSync(`${path.join(NEWSDIR, 'newstemp.txt')}`, newsFeedcontent);
+        fs.writeFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, newsFeedcontent);
 
         resolve(); // Resolve the promise when the operation is complete
       });
@@ -86,16 +86,16 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
 
 // Step 6: Prepare the news content
 const prepareNewsContent = async (config_current) => {
-  const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, 'newstemp.txt')}`, 'utf8');
+  const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, 'utf8');
   const news1Content = newstempContent;
   const news2Content = news1Content.split('\n\n').slice(0, config_current.newsarticles).join('\n\n');
   const newsContent = news2Content.replace(/%/g, '\\%');
-  await fs.writeFileSync(`${path.join(NEWSDIR, 'news-temp.txt')}`, newsContent);
+  await fs.writeFileSync(`${path.join(NEWSDIR, `news-temp-${NEWSNUM}.txt`)}`, newsContent);
 };
 
 // Step 7: Prepare the ASS subtitle text
 const prepareSubtitleText = async (config_current) => {
-  const inputText = await fs.readFileSync(`${path.join(NEWSDIR, 'news-temp.txt')}`, 'utf8');
+  const inputText = await fs.readFileSync(`${path.join(NEWSDIR, `news-temp-${NEWSNUM}.txt`)}`, 'utf8');
   const lines = inputText.replace(/\n/g, '\\N').replace(/<p>/g, '').replace(/<\/p>/g, '');
   const maxLinesPerFrame = 70;
   const subtitleDuration = 0;
@@ -125,7 +125,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, 0, ,${subtitle}`;
 
-  await fs.writeFileSync(`${path.join(NEWSDIR, 'news.ass')}`, assText);
+  await fs.writeFileSync(`${path.join(NEWSDIR, `news-${NEWSNUM}.ass`)}`, assText);
 };
 
 // Step 8: Generate the news video
@@ -149,9 +149,9 @@ const generateNewsVideo = async (config_current, audioFile) => {
   const width = resolution.split("x")[0];
   const textWidth = Math.floor(width / 40);
   const backgroundcolour = current_theme.News.newsbackgroundcolour;
-  const assfile = asssubstitution(`${path.join(NEWSDIR, 'news.ass')}`)
+  const assfile = asssubstitution(`${path.join(NEWSDIR, `news-${NEWSNUM}.ass`)}`)
   logger.info(assfile)
-  const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, 'news.mp4')}`;
+  const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
 
   logger.ffmpeg(`News ffmpeg command is ${command}`);
 
@@ -161,7 +161,7 @@ const generateNewsVideo = async (config_current, audioFile) => {
 
       logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
       // Run another FFmpeg command here on error
-const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the news filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, 'news.mp4')}`;
+const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the news filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
 logger.ffmpeg(`Running news card fallback command on error: ${commandOnError3}`);
 exec(commandOnError3, (error3, stdout3, stderr3) => {
   if (error3) {
