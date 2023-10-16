@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.4.0...V1.4.1) (2023-10-16)
+
+
+### Changed
+
+* news.mp4 is now named news-1.mp4 to accomodate more news feeds in a future release ([54310ce](https://github.com/liam8888999/ErsatzTV-Filler/commit/54310ce1eea8626feae2e6f5ba976b22f3e27237))
+
 ## [1.4.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.3.1...V1.4.0) (2023-10-16)
 
 
