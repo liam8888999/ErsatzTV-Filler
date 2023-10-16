@@ -1,14 +1,15 @@
 const {ROUTE_CONSTANTS} = require("../constants/route.constants");
 const { writeValueToConfigurationFile } = require("../utils/config.utils.js");
 const logger = require("../utils/logger.utils");
-
+const archiver = require('archiver');
 const { readFile } = require('fs');
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { setwebtheme } = require("../utils/config.utils.js");
 const multer = require('multer');
 const fs = require('fs');
-const { CONFIG_CONSTANTS, CONFIGCONFDIR } = require("../constants/path.constants");
+const { CONFIG_CONSTANTS, CONFIGCONFDIR, CONFIG_DIR, WORKDIR } = require("../constants/path.constants");
 const path = require('path');
+const extract = require('extract-zip');
 
 const { retrieveCurrentConfiguration, retrieveNewConfiguration } = require("../modules/config-loader.module");
 
@@ -213,6 +214,81 @@ fs.writeFile(`${CONFIG_CONSTANTS().USER_CONFIG}`, updatedJsonString, 'utf8', (er
       res.json({ message: 'File uploaded and converted to JSON successfully' });
     });
   });
+});
+
+
+// Endpoint to handle directory zipping and download
+app.get('/api/config/backup', (req, res) => {
+  const directoryPath = CONFIG_DIR; // Replace with the path to the directory you want to zip
+const currentDate = new Date();
+  // Create a new zip file
+  const zipPath = `ersatztv-filler-backup-${currentDate}.zip`;
+  const output = fs.createWriteStream(zipPath);
+  const archive = archiver('zip', { zlib: { level: 9 } });
+
+  output.on('close', () => {
+    // Download the zip file
+    res.download(zipPath, (err) => {
+      if (err) {
+        logger.error(`Error occurred while downloading: ${err}`);
+      } else {
+        // Delete the zip file
+        fs.unlink(zipPath, (unlinkErr) => {
+          if (unlinkErr) {
+          logger.error(`Error occurred while deleting the zip file: ${unlinkErr}`);
+          } else {
+            logger.success('Zip file deleted successfully.');
+          }
+        });
+      }
+    });
+  });
+
+  archive.pipe(output);
+  archive.directory(directoryPath, false);
+  archive.finalize();
+});
+
+
+
+const restoreStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, WORKDIR); // Set the destination folder where the zip will be extracted.
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Preserve the original file name
+  }
+});
+
+const restoreconfigs = multer({ storage: restoreStorage });
+
+app.post('/api/config/restore', restoreconfigs.single('file'), async (req, res) => {
+  try {
+    const file = req.file;
+
+    // Check if the uploaded file is a zip file
+    if (file.mimetype !== 'application/zip') {
+      return res.status(400).json({ error: 'Invalid file format. Please upload a ZIP file.' });
+    }
+    // Extract the uploaded zip file to the destination directory
+  await extract(file.path, { dir: CONFIG_DIR }, (err) => {
+      if (err) {
+        logger.error(`error: 'Failed to extract the zip file.' `)
+        return res.status(500).json({ error: 'Failed to extract the zip file.' });
+      }
+    });
+    // Delete the uploaded zip file after extraction
+    fs.unlink(file.path, (err) => {
+    if (err) {
+      logger.error('Error deleting zip file:', err);
+      return res.status(500).json({ error: 'Failed to delete the zip file after extraction.' });
+    }
+    logger.success(`restore successfully completed`)
+    res.json({ message: 'Restoration completed successfully' });
+  });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error.' });
+  }
 });
 
 

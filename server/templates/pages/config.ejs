@@ -22,6 +22,7 @@
       <button class="tab-link" onclick="openTab(event, 'tab6')">Vanity Cards</button>
       <button class="tab-link" onclick="openTab(event, 'tab7')">Channel Logo</button>
       <button class="tab-link" onclick="openTab(event, 'tab8')">Login</button>
+      <button class="tab-link" onclick="openTab(event, 'tab9')">Backup & Restore</button>
     </div>
     <br>
     <button onclick="returnConfigJson()" style="margin-top:10px;">Show config.json file</button>
@@ -189,5 +190,77 @@
                 </form>
                   <% } %>
         </div>
+        <div id="tab9" class="tab">
+              <br>
+            <center> <u> <h2>Backup & Restore</h2></u></center>
+
+            <br>
+            <h3>Backup</h3>
+            <form action="/api/config/backup" method="get">
+                    <input type="submit" value="Backup">
+                </form>
+                <br>
+            <h3>Restore</h3>
+            <form id="uploadForm" enctype="multipart/form-data">
+              <input type="file" id="fileInput" accept=".zip" class="button">
+              <script>
+                document.getElementById('fileInput').addEventListener('change', function () {
+                  const fileInput = this;
+                  const allowedExtension = '.zip';
+
+                  if (fileInput.files.length > 0) {
+                    const selectedFile = fileInput.files[0];
+                    const fileName = selectedFile.name;
+
+                    if (fileName.endsWith(allowedExtension) && fileName.startsWith('ersatztv-filler-backup-')) {
+                      alert('File accepted: ' + fileName);
+                      // You can proceed with handling the selected file here.
+                    } else {
+                      alert('Invalid file. Please select a file with the correct format.');
+                      fileInput.value = ''; // Clear the file input
+                    }
+                  }
+                });
+
+                </script>
+              <br>
+              <br>
+              <input type="submit" value="Restore" class="button">
+            </form>
+            <br>
+            </center>
+
+            <script>
+              document.getElementById("uploadForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var fileInput = document.getElementById("fileInput");
+                var file = fileInput.files[0];
+
+                if (file) {
+                  var formData = new FormData();
+                  formData.append("file", file);
+
+                  // You can send the formData object using AJAX or fetch to handle the file upload on the server
+                  // Example using fetch:
+                  fetch("/api/config/restore", {
+                    method: "POST",
+                    body: formData
+                  })
+                  .then(response => {
+                    // Handle the response from the server
+                    logger.success("Upload successful");
+                  })
+                  .catch(error => {
+                    // Handle any errors
+                    logger.error("Upload failed:", error);
+                  });
+                } else {
+                  // Handle case where no file is selected
+                  logger.error("No file selected");
+                }
+              });
+            </script>
+            </div>
   </div>
   </div>
