@@ -125,6 +125,17 @@ const CHANNEL_LOGO = async () => {
               logger.error(`Error: ${error.message}`);
 
               logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
+              // Run another FFmpeg command here on error
+              const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the channel-logo filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.channellogoduration} ${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}`;
+              logger.ffmpeg(`Running channel-logo fallback command on error: ${commandOnError3}`);
+              exec(commandOnError3, (error3, stdout3, stderr3) => {
+              if (error3) {
+              logger.error(`Error running channel-logo fallback command: ${error3.message}`);
+              // Handle the error for the second command as needed.
+              } else {
+              logger.success('channel-logo fallback FFmpeg command executed successfully.');
+              }
+              });
               return;
             }
             if (stderr) {
