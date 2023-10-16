@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.4.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.3.1...V1.4.0) (2023-10-16)
+
+
+### Added
+
+* channel-logo video fallback ([a8a0c1e](https://github.com/liam8888999/ErsatzTV-Filler/commit/a8a0c1e1d44d7949d763e9c29f4c2a17b6e16cc1))
+* channel-offline fallback video ([09dec59](https://github.com/liam8888999/ErsatzTV-Filler/commit/09dec59025770c94285ed332e60bcfaed9dae54e))
+* news video fallback video ([1406d61](https://github.com/liam8888999/ErsatzTV-Filler/commit/1406d61d6789001d468064c6a4500e5ec7fe35f5))
+* vanity card video fallback ([6c52950](https://github.com/liam8888999/ErsatzTV-Filler/commit/6c5295064c3e0ba1a0cce222087207ebf850b152))
+* weather video unavailable fallback ([f372574](https://github.com/liam8888999/ErsatzTV-Filler/commit/f372574bf2107415230a1762aaa27c6864d732b1))
+
+
+### Fixed
+
+* news fallback logging ([a0cfc3b](https://github.com/liam8888999/ErsatzTV-Filler/commit/a0cfc3b461e03d9b09149d778d2bd0b4eb0627fa))
+
 ## [1.3.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.3.0...V1.3.1) (2023-10-15)
 
 
