@@ -2,7 +2,6 @@ const {ROUTE_CONSTANTS} = require("../constants/route.constants");
 const { settheme } = require("../utils/themes.utils.js");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
-
 const { readFile } = require('fs');
 const {THEMES_FOLDER, CURRENT_THEME_VERSION} = require("../constants/path.constants");
 const path = require('path');

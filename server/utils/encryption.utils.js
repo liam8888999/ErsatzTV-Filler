@@ -1,5 +1,7 @@
 const logger = require("../utils/logger.utils");
 const crypto = require('crypto');
+const { PASSWORD } = require("../constants/path.constants");
+const fs = require('fs')
 
 // Encryption settings
 const algorithm = 'aes-256-cbc'; // AES algorithm with a 256-bit key in CBC mode
@@ -33,7 +35,45 @@ function decryptText(encryptedText, iv, decryptionKey) {
 
 
 
+function readAndDecryptPassword() {
+  let decryptedUsername;
+  let decryptedPassword;
+
+  try {
+    const passwordData = JSON.parse(fs.readFileSync(PASSWORD));
+    hint = passwordData.hint
+    // Decrypt the username and password
+    decryptedUsername = decryptText(
+      passwordData.encryptedusername.encryptedText,
+      passwordData.encryptedusername.iv.data,
+      passwordData.encryptedusername.encryptionKey.data
+    );
+    decryptedPassword = decryptText(
+      passwordData.encryptedpassword.encryptedText,
+      passwordData.encryptedpassword.iv.data,
+      passwordData.encryptedpassword.encryptionKey.data
+    );
+
+  } catch (error) {
+    // Handle the error encountered when reading or decrypting the password file
+    decryptedUsername = '';
+    decryptedPassword = '';
+
+    logger.error("No password file is found in the config dir");
+  }
+
+  let authentication;
+  if (!decryptedUsername && !decryptedPassword) {
+    authentication = 'no';
+  } else {
+    authentication = 'yes';
+  }
+
+  return { decryptedUsername, decryptedPassword, authentication, hint };
+}
+
 module.exports = {
 encryptText,
-decryptText
+decryptText,
+readAndDecryptPassword
 }

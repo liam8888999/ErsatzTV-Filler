@@ -9,7 +9,7 @@ const logger = require("../utils/logger.utils");
 const readline = require('readline');
 const { checkForUpdates } = require('../utils/update.utils');
 const path = require('path');
-const { encryptText, decryptText } = require("../utils/encryption.utils")
+const { encryptText, decryptText, readAndDecryptPassword } = require("../utils/encryption.utils")
 const { findoldVersionThemeFiles } = require("../utils/themes.utils")
 
 
@@ -18,30 +18,7 @@ const authentificationPageRoutes = async (app) => {
 
   // Middleware to check if the user is authenticated
 const checkAuthentication = (req, res, next) => {
-  let decryptedUsername;
-  let decryptedPassword;
-    try {
-      const passwordData = JSON.parse(fs.readFileSync(PASSWORD));
-
-      // Decrypt the username and password
-      decryptedUsername = decryptText(
-        passwordData.encryptedusername.encryptedText,
-        passwordData.encryptedusername.iv.data,
-        passwordData.encryptedusername.encryptionKey.data
-      );
-      decryptedPassword = decryptText(
-        passwordData.encryptedpassword.encryptedText,
-        passwordData.encryptedpassword.iv.data,
-        passwordData.encryptedpassword.encryptionKey.data
-      );
-
-    } catch (error) {
-      // Handle the error encountered when reading or decrypting the password file
-      decryptedUsername = ''
-      decryptedPassword = ''
-
-      logger.error("No password file is found in the config dir");
-    }
+  const { decryptedUsername, decryptedPassword } = readAndDecryptPassword();
   if (!decryptedUsername && !decryptedPassword) {
     req.session.isAuthenticated = true;
     return next();
@@ -58,37 +35,7 @@ const checkAuthentication = (req, res, next) => {
 
     // Add a login route
     app.get('/login', async (req, res) => {
-      let decryptedUsername;
-      let decryptedPassword;
-      let hint;
-        try {
-          const passwordData = JSON.parse(fs.readFileSync(PASSWORD));
-
-          // Decrypt the username and password
-          decryptedUsername = decryptText(
-            passwordData.encryptedusername.encryptedText,
-            passwordData.encryptedusername.iv.data,
-            passwordData.encryptedusername.encryptionKey.data
-          );
-          decryptedPassword = decryptText(
-            passwordData.encryptedpassword.encryptedText,
-            passwordData.encryptedpassword.iv.data,
-            passwordData.encryptedpassword.encryptionKey.data
-          );
-          hint = passwordData.hint
-        } catch (error) {
-          // Handle the error encountered when reading or decrypting the password file
-          decryptedUsername = ''
-          decryptedPassword = ''
-
-          logger.error("No password file is found in the config dir");
-        }
-      let authentication;
-      if (!decryptedUsername && !decryptedPassword) {
-        authentication = 'no'
-      } else {
-        authentication = 'yes';
-      }
+      const { decryptedUsername, decryptedPassword, authentication, hint } = await readAndDecryptPassword();
       const config_current = await retrieveCurrentConfiguration();
       let UPDATESTATUS = await checkForUpdates();
       const ErsatzTVURL = config_current.ersatztv
@@ -106,36 +53,7 @@ const checkAuthentication = (req, res, next) => {
 
     app.post('/login', (req, res) => {
 
-
-
-
-      let decryptedUsername;
-      let decryptedPassword;
-        try {
-          const passwordData = JSON.parse(fs.readFileSync(PASSWORD));
-
-          // Decrypt the username and password
-          decryptedUsername = decryptText(
-            passwordData.encryptedusername.encryptedText,
-            passwordData.encryptedusername.iv.data,
-            passwordData.encryptedusername.encryptionKey.data
-          );
-          decryptedPassword = decryptText(
-            passwordData.encryptedpassword.encryptedText,
-            passwordData.encryptedpassword.iv.data,
-            passwordData.encryptedpassword.encryptionKey.data
-          );
-
-        } catch (error) {
-          // Handle the error encountered when reading or decrypting the password file
-          decryptedUsername = ''
-          decryptedPassword = ''
-
-          logger.error("No password file is found in the config dir");
-        }
-
-
-
+      const { decryptedUsername, decryptedPassword } = readAndDecryptPassword();
 
 const username = req.body.username;
 const password = req.body.password;

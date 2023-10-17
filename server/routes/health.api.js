@@ -3,8 +3,6 @@ const {FFMPEGCOMMAND} = require("../constants/path.constants");
 const { settheme } = require("../utils/themes.utils.js");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
-
-const { WEATHER } = require("../generators/weather.generator");
 const os = require('os');
 const fs = require('fs');
 const { exec } = require('child_process');
