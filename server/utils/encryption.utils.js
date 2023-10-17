@@ -38,10 +38,16 @@ function decryptText(encryptedText, iv, decryptionKey) {
 function readAndDecryptPassword() {
   let decryptedUsername;
   let decryptedPassword;
+  let hint;
 
   try {
     const passwordData = JSON.parse(fs.readFileSync(PASSWORD));
-    hint = passwordData.hint
+    // Check if hint exists and isn't empty/undefined
+if (passwordData.hint) {
+  hint = passwordData.hint;
+} else {
+  hint = 'Hint is unavailable, one can be set in the login config page';
+}
     // Decrypt the username and password
     decryptedUsername = decryptText(
       passwordData.encryptedusername.encryptedText,
