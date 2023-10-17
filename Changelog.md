@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.5.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.4.1...V1.5.0) (2023-10-17)
+
+
+### Added
+
+* backup/restore functionality ([46881fe](https://github.com/liam8888999/ErsatzTV-Filler/commit/46881fe0ab7722827fdbd1b4eb105d7bd8a5ee31))
+* make old themes areas in home page a link to themes page ([2b7e3ac](https://github.com/liam8888999/ErsatzTV-Filler/commit/2b7e3acafd95ac1625413353b22b7ec681e366d2))
+
+
+### Fixed
+
+* a couple more ui fixes ([7301f9d](https://github.com/liam8888999/ErsatzTV-Filler/commit/7301f9d13c628c7da67cbaaa94a294a7344f0d8a))
+* alert when uploading file with correct name ([8c4843f](https://github.com/liam8888999/ErsatzTV-Filler/commit/8c4843fd7e6bf702ca7dd443d6af08cb3004d869))
+* clarify user register/change button text ([72965c9](https://github.com/liam8888999/ErsatzTV-Filler/commit/72965c9126f78c2d92cde56b2a0ffd143635f569))
+* light/dark mode buttons ([f987510](https://github.com/liam8888999/ErsatzTV-Filler/commit/f9875107f59727860bbc176307a10a8bf3b62a8f))
+* remove bug that would occur if no password hint was set ([622b94a](https://github.com/liam8888999/ErsatzTV-Filler/commit/622b94a68c3bd59e3480ca95dcf567a338ac3333))
+* small ui fix ([412787e](https://github.com/liam8888999/ErsatzTV-Filler/commit/412787e6d14c29177584f4ea958cecc6364c5bb9))
+* standardise buttons in ui ([3eefa4b](https://github.com/liam8888999/ErsatzTV-Filler/commit/3eefa4b1c6d4f8b15d21d5447d5676fd311fdece))
+* standardise form inputs ([3d39246](https://github.com/liam8888999/ErsatzTV-Filler/commit/3d3924621e4a15d389b4e70316254ba99be1982b))
+* update news ([421bf60](https://github.com/liam8888999/ErsatzTV-Filler/commit/421bf602f8f2fda17f78b78147794d3d9bad484c))
+
+
+### Changed
+
+* change ui arrow dropdown ([c38f499](https://github.com/liam8888999/ErsatzTV-Filler/commit/c38f499bbf503f3319152074d324f3761105a020))
+* collapse old config upload ([900d90b](https://github.com/liam8888999/ErsatzTV-Filler/commit/900d90b3e58f0f33d3bb300604581528b7fdc80b))
+* show human readable os in healthcheck ui ([139985f](https://github.com/liam8888999/ErsatzTV-Filler/commit/139985ff0490cb1f5358fee8a27f0b2124b6461b))
+
 ## [1.4.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.4.0...V1.4.1) (2023-10-16)
 
 
