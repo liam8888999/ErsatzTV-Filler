@@ -80,6 +80,7 @@
   <div class="home-page-box">
   <center><u><h1>Health Checks</h1></u></center>
   <% if (oldtypethemes && oldtypethemes.length > 0) { %>
+    <a href="/themes" style="display: block; text-decoration: none; color: orange;">
   <p style="color: orange;"><b>Old type themes that require updating:</b></p> <div>
       <ul id="oldtypethemes" style="color: orange;">
           <ul>
@@ -87,7 +88,7 @@
               <li><%= oldtypethemes[i] %></li>
             <% } %>
           </ul>
-</ul>
+</ul></a>
 <% } %>
 <p id="healthapistatusp"><b>Health Api Status: </b><span id="healthapistatus"></span></p>
 
