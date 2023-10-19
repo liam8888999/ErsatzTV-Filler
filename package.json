@@ -31,7 +31,6 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cheerio": "^1.0.0-rc.12",
-    "chokidar": "^3.5.3",
     "cookie-parser": "^1.4.6",
     "cron-job-manager": "^2.3.1",
     "dotenv": "^16.3.1",
