@@ -1,61 +1,82 @@
 const { listFilesInDir } = require("../../utils/file.utils");
 const { randomNumber } = require("../../utils/randomnumber.utils");
 const logger = require("../../utils/logger.utils");
-const { AUDIOFALLBACK } = require("../../constants/path.constants")
-
+const { AUDIOFALLBACK } = require("../../constants/path.constants");
+const chokidar = require('chokidar');
 
 // Set accepted audio extensions
 const audioExtensions = ['mp3', 'wav', 'flac', 'aac', 'ogg', 'wma', 'm4a', 'opus', 'amr', 'webm', 'amr', 'ape', 'mid', 'midi', 'ac3', 'aiff', 'aif', 'au', 'raw', 'mp2', 'ra', 'rm', 'dsf', 'dts', 'caf', 'alac', 'dff', 'oga', 'ogs', 'spx'];
 
+const audioFileCache = new Map();
 
-// Select Random audio file
-const selectRandomAudioFile = async (path) => {
-  let selectedPath = path;
-logger.info(`Selected Path: ${selectedPath}`)
-  if (!selectedPath) {
-    // Handle the case where 'path' is undefined or falsy
-    logger.info("Custom Audio Path parameter is undefined or empty. Using the audio-fallback directory.");
-    selectedPath = `${AUDIOFALLBACK}`; // Set the backup directory
-  }
-logger.info(`Selected Path: ${selectedPath}`)
-  // Get the list of files in the specified directory or backup directory
-  let fileList = await listFilesInDir(selectedPath);
+// Function to update the cache for a directory
+const updateCacheForDirectory = async (directoryPath) => {
+  const fileList = await listFilesInDir(directoryPath);
 
-  logger.info(`Audio Files List: ${fileList}`);
-
-  // Filter out non-audio files
-  fileList = fileList.filter((file) => {
+  const filteredList = fileList.filter((file) => {
     const extension = file.split('.').pop();
     return audioExtensions.includes(extension.toLowerCase());
   });
 
-  // Check if the directory is empty after filtering for audio files
-  if (fileList.length === 0) {
-    logger.info("Audio File list is empty, Using the audio-fallback directory");
-    // If the directory is empty, retrieve the list of files from the backup directory
-    fileList = await listFilesInDir(`${AUDIOFALLBACK}`);
+  audioFileCache.set(directoryPath, filteredList);
+  logger.info(`Updated Audio Files List for ${directoryPath}`);
+};
 
-    // Filter out non-audio files from the backup directory
-    fileList = fileList.filter((file) => {
-      const extension = file.split('.').pop();
-      return audioExtensions.includes(extension.toLowerCase());
-    });
+// Watch the selectedPath directory for changes
+const watchDirectory = (directoryPath) => {
+  const watcher = chokidar.watch(directoryPath, { persistent: true });
+
+  watcher.on('add', async (filePath) => {
+    // Handle file additions
+    await updateCacheForDirectory(directoryPath);
+  });
+
+  watcher.on('unlink', async (filePath) => {
+    // Handle file deletions
+    await updateCacheForDirectory(directoryPath);
+  });
+
+  watcher.on('change', async (filePath) => {
+    // Handle file changes
+    await updateCacheForDirectory(directoryPath);
+  });
+
+  return watcher;
+};
+
+// Select Random audio file
+const selectRandomAudioFile = async (path) => {
+  let selectedPath = path;
+  logger.info(`Selected Path: ${selectedPath}`);
+
+  if (!selectedPath) {
+    logger.info("Custom Audio Path parameter is undefined or empty. Using the audio-fallback directory.");
+    selectedPath = AUDIOFALLBACK;
+  }
+
+  if (audioFileCache.has(selectedPath)) {
+    // Use cached file list if available
+    fileList = audioFileCache.get(selectedPath);
+    logger.info(`Using cached Audio Files List for ${selectedPath}`);
+  } else {
+    // If not cached, retrieve and cache the list
+    await updateCacheForDirectory(selectedPath);
+
+    // Start watching for changes in the selected directory
+     if (selectedPath !== AUDIOFALLBACK) {
+    watchDirectory(selectedPath);
+  }
   }
 
   logger.info(`Audio filelist: ${fileList}`);
 
-  // Generate a random number from 0 to length-1
   const randomIndex = randomNumber(fileList.length);
-
   const chosenFile = fileList[randomIndex];
 
   logger.info(`Selected Audio File: ${chosenFile}`);
 
-  // Return the chosen random file path
   return chosenFile;
 };
-
-
 
 module.exports = {
   selectRandomAudioFile

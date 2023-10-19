@@ -68,6 +68,22 @@ process.on('unhandledRejection', (reason, promise) => {
 
       await GENERATION();
 
+//      const interval = 2000;
+
+// Function to run selectRandomAudioFile every 5 seconds
+//const runSelectRandomAudioFile = async () => {
+//  try {
+//    const randomAudioFile = await selectRandomAudioFile("/Volumes/Media/Music");
+//    console.log(`Selected Audio File: ${randomAudioFile}`);
+//  } catch (error) {
+//    console.error("Error selecting a random audio file:", error);
+//  }
+//};
+
+// Set up the interval to run the function every 5 seconds
+//const intervalId = setInterval(runSelectRandomAudioFile, interval);
+
+
     } catch(e){
         logger.error("Fatal error occurred!", e)
     }
