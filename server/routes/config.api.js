@@ -7,7 +7,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const { setwebtheme } = require("../utils/config.utils.js");
 const multer = require('multer');
 const fs = require('fs');
-const { CONFIG_CONSTANTS, CONFIGCONFDIR, CONFIG_DIR, WORKDIR } = require("../constants/path.constants");
+const { CONFIG_CONSTANTS, CONFIGCONFDIR, CONFIG_DIR, WORKDIR, THEMES_FOLDER, startUpPath } = require("../constants/path.constants");
 const path = require('path');
 const extract = require('extract-zip');
 
@@ -219,8 +219,9 @@ fs.writeFile(`${CONFIG_CONSTANTS().USER_CONFIG}`, updatedJsonString, 'utf8', (er
 
 // Endpoint to handle directory zipping and download
 app.get('/api/config/backup', (req, res) => {
-  const directoryPath = CONFIG_DIR; // Replace with the path to the directory you want to zip
-const currentDate = new Date();
+  const directoryPath1 = CONFIG_DIR; // Replace with the path to the first directory you want to zip
+  const directoryPath2 = THEMES_FOLDER; // Replace with the path to the second directory you want to zip
+  const currentDate = new Date();
   // Create a new zip file
   const zipPath = `ersatztv-filler-backup-${currentDate}.zip`;
   const output = fs.createWriteStream(zipPath);
@@ -235,7 +236,7 @@ const currentDate = new Date();
         // Delete the zip file
         fs.unlink(zipPath, (unlinkErr) => {
           if (unlinkErr) {
-          logger.error(`Error occurred while deleting the zip file: ${unlinkErr}`);
+            logger.error(`Error occurred while deleting the zip file: ${unlinkErr}`);
           } else {
             logger.success('Zip file deleted successfully.');
           }
@@ -245,9 +246,11 @@ const currentDate = new Date();
   });
 
   archive.pipe(output);
-  archive.directory(directoryPath, false);
+  archive.directory(directoryPath1, "config"); // Add the first directory to the zip
+  archive.directory(directoryPath2, "themes"); // Add the second directory to the zip
   archive.finalize();
 });
+
 
 
 
@@ -271,7 +274,7 @@ app.post('/api/config/restore', restoreconfigs.single('file'), async (req, res) 
       return res.status(400).json({ error: 'Invalid file format. Please upload a ZIP file.' });
     }
     // Extract the uploaded zip file to the destination directory
-  await extract(file.path, { dir: CONFIG_DIR }, (err) => {
+  await extract(file.path, { dir: startUpPath }, (err) => {
       if (err) {
         logger.error(`error: 'Failed to extract the zip file.' `)
         return res.status(500).json({ error: 'Failed to extract the zip file.' });
