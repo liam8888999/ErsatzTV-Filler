@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.0...V1.5.1) (2023-10-19)
+
+
+### Added
+
+* themes folder added to backup/restore ([9292610](https://github.com/liam8888999/ErsatzTV-Filler/commit/9292610db213bfc107ef43ba5c4020c798359fa9))
+
+
+### Changed
+
+* make weather fallback text more informative ([91dccd3](https://github.com/liam8888999/ErsatzTV-Filler/commit/91dccd3176618489c8820bf09ad83b3344634795))
+* move xmltv download and split to common module ([b84e9e6](https://github.com/liam8888999/ErsatzTV-Filler/commit/b84e9e68e014bcd8bdbe31bddd5a5553005fa67e))
+
 ## [1.5.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.4.1...V1.5.0) (2023-10-17)
 
 
