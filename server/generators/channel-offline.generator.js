@@ -6,6 +6,7 @@ const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const { selectRandomAudioFile } = require("./utils/randomaudio.utils");
+const { splitXMLTVByChannel } = require("./utils/XMLTV.utils");
 const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
 const path = require('path');
 const { listFilesInDir } = require("../utils/file.utils");
@@ -29,38 +30,7 @@ const CHANNEL_OFFLINE = async () => {
   const config_current = await retrieveCurrentConfiguration();
 
   // Function to split XMLTV by channel
-  const splitXMLTVByChannel = async () => {
-    const xmlData = await fs.promises.readFile(`${path.join(CHANNEL_OFFLINEDIR, 'xmltv.xmltv')}`, 'utf8');
-    xml2js.parseString(xmlData, (parseErr, result) => {
-      if (parseErr) {
-        logger.error(`Error parsing XML: ${parseErr}`);
-        return;
-      }
-
-      const channels = result.tv.channel;
-
-      channels.forEach(async (channel) => {
-        const channelId = channel.$.id;
-
-        const programs = result.tv.programme.filter(program => program.$.channel === channelId);
-
-        const builder = new xml2js.Builder();
-
-        const channelXMLData = {
-          tv: {
-            channel: [channel],
-            programme: programs
-          }
-        };
-
-        const channelXMLString = builder.buildObject(channelXMLData);
-        const channelFilePath = `${path.join(CHANNEL_OFFLINEDIR, channelId)}.xml`;
-        logger.info(`ChannelFilePath: ${channelFilePath}`);
-        await fs.promises.writeFile(channelFilePath, channelXMLString);
-        logger.info(`Channel file saved: ${channelFilePath}`);
-      });
-    });
-  };
+  // Moved to XMLTV.utils
 
   // Function to find start time
   const startTimefind = async (eachxmltvfile) => {
@@ -290,10 +260,8 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
   };
 
   try {
-      await downloadImage(`${config_current.ersatztv}/iptv/xmltv.xml`, `${path.join(CHANNEL_OFFLINEDIR, 'xmltv.xmltv')}`)
-    // Handle the downloaded data
-    logger.success('XMLTV downloaded successfully');
-    await splitXMLTVByChannel();
+    
+    await splitXMLTVByChannel(CHANNEL_OFFLINEDIR);
     await runnersT();
   } catch (error) {
     // Handle the connection error
