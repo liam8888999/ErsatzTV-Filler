@@ -43,6 +43,11 @@ if (config_current.hwaccel_device == "") {
   logger.info(`Hwaccell_device: ${hwacceldevice}`);
 }
 
+let currentTempC;
+let currentTempF;
+let humidity;
+let weatherDescription;
+let textterror;
 const downloadimages = async () => {
 logger.info("Downloading weather images")
 logger.info(`Current City: ${config_current.city}`)
@@ -59,6 +64,45 @@ await downloadImage(`https://v2.wttr.in/${config_current.city}.png`, `${path.joi
 await downloadImage(`https://v3.wttr.in/${config_current.state}.png`, `${path.join(WEATHERDIR, 'v3.png')}`)
   .then(logger.success)
   .catch(logger.error);
+
+await downloadImage(`https://wttr.in/${config_current.city}?format=j1`, `${path.join(WEATHERDIR, 'weather.json')}`)
+  .then(logger.success)
+  .catch(logger.error);
+
+await fs.promises.readFile(`${path.join(WEATHERDIR, 'weather.json')}`, 'utf8')
+.then(data => {
+// Parse the JSON data into a JavaScript object
+weatherjsonObject = JSON.parse(data);
+
+// Now you can work with the jsonObject
+})
+.catch(error => {
+console.error('Error reading JSON file:', error);
+});
+console.log(weatherjsonObject)
+const currentCondition = weatherjsonObject.current_condition[0];
+
+currentTempC = currentCondition.temp_C;
+currentTempF = currentCondition.temp_F;
+humidity = currentCondition.humidity;
+weatherDescription = currentCondition.weatherDesc[0].value;
+console.log(currentTempC)
+console.log(currentTempF)
+console.log(humidity)
+console.log(weatherDescription)
+
+textterror = `
+                      Unfortunately the weather filler is unavailable at this time,
+                      
+                      Hopefully it will be back soon
+
+                      The Current Temperature is ${currentTempC}°C or ${currentTempF}°F
+
+                      The Current Humidity ${humidity}percent
+
+                      It is Currently ${weatherDescription} outside
+                    `
+
   }
 
 
@@ -81,6 +125,8 @@ await downloadImage(`https://v3.wttr.in/${config_current.state}.png`, `${path.jo
 
   const weatherCalculationsResult = await weathercalculations();
 
+
+
 const createWeatherV1 = async () => {
   try {
     logger.info(`Weather Video fade out start: ${weatherCalculationsResult.weathervideofadeoutstart}`)
@@ -95,10 +141,7 @@ const createWeatherV1 = async () => {
         logger.error(`Error: ${error.message}`);
 
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
-
-
-                  // Run another FFmpeg command here on error
-            const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the weather filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v1.mp4')}`;
+            const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='${textterror}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v1.mp4')}`;
             logger.ffmpeg(`Running weather fallback command on error: ${commandOnError1}`);
             exec(commandOnError1, (error2, stdout2, stderr2) => {
               if (error2) {
@@ -156,7 +199,8 @@ const createWeatherV2 = async () => {
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
 
         // Run another FFmpeg command here on error
-  const commandOnError2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the weather filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v2.mp4')}`;
+              const commandOnError2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='${textterror}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v2.mp4')}`;
+
   logger.ffmpeg(`Running weather fallback command on error: ${commandOnError2}`);
   exec(commandOnError2, (error20, stdout20, stderr20) => {
     if (error20) {
@@ -209,7 +253,7 @@ const createWeatherV3 = async () => {
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
 
         // Run another FFmpeg command here on error
-  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the weather filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v3.mp4')}`;
+  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='${textterror}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v3.mp4')}`;
   logger.ffmpeg(`Running weather fallback command on error: ${commandOnError3}`);
   exec(commandOnError3, (error3, stdout3, stderr3) => {
     if (error3) {
