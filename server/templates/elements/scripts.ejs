@@ -5,7 +5,7 @@
 <script>
 // user theme things
   // Function to create a button for each theme
-function createThemeButton(themeName) {
+function createThemeButton(themeName, oldtypethemes) {
     const buttonContainer = document.createElement('div'); // Create a container for the button and theme name
     const button = document.createElement('button');
     button.textContent = `Use This Theme`;
@@ -20,8 +20,14 @@ jsonbutton.setAttribute('onclick', `returnJson('user/${themeName}')`);
 
 
 
-    const themeNameElement = document.createElement('span'); // Use a span for the theme name
-    themeNameElement.textContent = themeName;
+const themeNameElement = document.createElement('span'); // Create a span for the theme name
+themeNameElement.textContent = themeName;
+
+// Get the content of the 'oldtypethemes' element
+const oldtypethemesElement = document.getElementById('oldtypethemes');
+if (oldtypethemesElement.textContent.includes(`user/${themeName}.theme`)) {
+  themeNameElement.style.color = 'orange';
+}
 
     // Create a line break element
         const lineBreak = document.createElement('br');
