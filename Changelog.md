@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.5.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.1...V1.5.2) (2023-10-20)
+
+
+### Added
+
+* add note to let people know ffmpeg may take a minute to load ([0988a30](https://github.com/liam8888999/ErsatzTV-Filler/commit/0988a307ed7b32b3b9908d8767a8acde974ff2a8))
+* make user theme orange if it requires an update ([f549689](https://github.com/liam8888999/ErsatzTV-Filler/commit/f549689974b881445ce92ebcd685fb3de094b5d7))
+
+
+### Fixed
+
+* escaping in ffmpeg command ([baa7831](https://github.com/liam8888999/ErsatzTV-Filler/commit/baa783166c8a5644712fdeee68a5ef78e6d55632))
+* lots of improvements to theme page logic ([1b4abc7](https://github.com/liam8888999/ErsatzTV-Filler/commit/1b4abc7f00512ec8386e698f98dee01c77e20b9c))
+* only attempt to load logs on logs page for performance improvements ([ee5cb59](https://github.com/liam8888999/ErsatzTV-Filler/commit/ee5cb597ce500066c4eecb658423a6259547688a))
+* some small ui fixes ([1641f3f](https://github.com/liam8888999/ErsatzTV-Filler/commit/1641f3fd38e564f0a6aa6a3ff11fc5fd9ad1bc98))
+
 ## [1.5.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.0...V1.5.1) (2023-10-19)
 
 
