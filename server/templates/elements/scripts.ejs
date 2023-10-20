@@ -294,7 +294,7 @@ if (platform === "darwin") {
         } else if (data.os.ffmpeg.startsWith('FFmpeg is installed, but the required version')) {
           ffmpeginstallationstatusElement.style.color = 'orange'; // Set color to red for other statuses
           ffmpeginstallationstatuspElement.style.color = 'orange';
-        } else if (data.os.ffmpeg === 'FFmpeg is not installed. Please install it to create filler video files.') {
+        } else if (data.os.ffmpeg === 'FFmpeg is not installed. Please install it to create filler video files. (If you just started the program it may take a minute for ffmpeg to be recognised, please wait 1 minute and refresh the browser window.)') {
           ffmpeginstallationstatusElement.style.color = 'orange'; // Set color to red for other statuses
           ffmpeginstallationstatuspElement.style.color = 'orange';
         }

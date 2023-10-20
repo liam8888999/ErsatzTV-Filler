@@ -35,7 +35,7 @@ app.get('/api/health', async (req, res) => {
     exec(`${FFMPEGCOMMAND} -version`, (error, stdout, stderr) => {
       if (error) {
         //reject(new Error('FFmpeg is not installed. Please install it to create filler video files.'));
-        resolve({ status: 'FFmpeg is not installed. Please install it to create filler video files.' });
+        resolve({ status: 'FFmpeg is not installed. Please install it to create filler video files. (If you just started the program it may take a minute for ffmpeg to be recognised, please wait 1 minute and refresh the browser window.)' });
       }
 
       const versionMatch = stdout.match(/version\s(\d+\.\d+)/);
