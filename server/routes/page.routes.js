@@ -10,7 +10,7 @@ const readline = require('readline');
 const { checkForUpdates } = require('../utils/update.utils');
 const path = require('path');
 const { encryptText, decryptText, readAndDecryptPassword } = require("../utils/encryption.utils")
-const { findoldVersionThemeFiles } = require("../utils/themes.utils")
+const { retrieveThemelists } = require("../utils/themes.utils")
 
 
 
@@ -58,7 +58,7 @@ const checkAuthentication = (req, res, next) => {
     const config_current = await retrieveCurrentConfiguration();
     let UPDATESTATUS = await checkForUpdates();
   const { decryptedUsername, decryptedPassword, authentication } = await readAndDecryptPassword();
-    const oldtypethemes = findoldVersionThemeFiles()
+    const { oldtypethemes } = await retrieveThemelists()
     logger.info(`old version themes: ${oldtypethemes}`)
   const ErsatzTVURL = config_current.ersatztv
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
@@ -117,28 +117,7 @@ const checkAuthentication = (req, res, next) => {
     app.get('/themes', checkAuthentication, async (req, res) => {
       const { decryptedUsername, decryptedPassword, authentication } = await readAndDecryptPassword();
       const config_current = await retrieveCurrentConfiguration();
-      let filesinthemesdir = await listFilesInDir(THEMES_FOLDER)
-.catch(error => {
-    logger.error(`Error listing files in themes dir: ${error}`);
-  });
-  let filesinthemesdiruser = await listFilesInDir(`${path.join(THEMES_FOLDER, 'user')}`)
-.catch(error => {
-logger.error(`Error listing files in themes user dir: ${error}`);
-});
-let filesinthemesdirsystemoriginal = await listFilesInDir(`${path.join(THEMES_FOLDER, 'system')}`)
-.catch(error => {
-logger.error(`Error listing files in themes system dir: ${error}`);
-});
-let joinedString = filesinthemesdirsystemoriginal.join(','); // Join array elements into a single string
-let escapedThemesFolder = THEMES_FOLDER.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-let regexPattern = new RegExp(escapedThemesFolder, 'g');
-
-// Replace the pattern in joinedString
-let filesinthemesdirsystemcorrect = joinedString.replace(regexPattern, "");
-let filesinthemesdirsystem = filesinthemesdirsystemcorrect.split(",")
-const oldtypethemes = findoldVersionThemeFiles()
-logger.info(`Files in themes system dir: ${filesinthemesdirsystem}`)
-logger.info(`Files in themes dir: ${JSON.stringify(filesinthemesdiruser)}`)
+      const { filesinthemesdir, filesinthemesdiruser, filesinthemesdirsystem, oldtypethemes } = await retrieveThemelists()
       let UPDATESTATUS = await checkForUpdates();
       const ErsatzTVURL = config_current.ersatztv
         res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "themes", {

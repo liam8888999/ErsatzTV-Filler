@@ -6,6 +6,8 @@ const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.uti
 const { THEMES_FOLDER, CONFIG_CONSTANTS, CURRENT_THEME_VERSION } = require("../constants/path.constants");
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const path = require('path');
+const { asssubstitution } = require("../utils/string.utils");
+const { listFilesInDir } = require("../utils/file.utils")
 
 
 const settheme = async (theme) => {
@@ -136,9 +138,59 @@ const themecolourdecoder = (colour) => {
 
 
 
+
+
+
+const retrieveThemelists = async () => {
+ let filesinthemesdirorig = await listFilesInDir(THEMES_FOLDER)
+.catch(error => {
+logger.error(`Error listing files in themes dir: ${error}`);
+});
+console.log(filesinthemesdirorig)
+let filesinthemesdir2 = asssubstitution(`${filesinthemesdirorig.join(',')}`).split(',')
+const filesinthemesdir = filesinthemesdir2.map(item => {
+  const parts = item.split('/');
+  const lastTwoFields = parts.slice(-2).join('/');
+  return '/' + lastTwoFields; // Add back the leading '/'
+});
+console.log(filesinthemesdirorig)
+
+let filesinthemesdiruserorig = await listFilesInDir(`${path.join(THEMES_FOLDER, 'user')}`)
+.catch(error => {
+logger.error(`Error listing files in themes user dir: ${error}`);
+});
+let filesinthemesdiruser2 = asssubstitution(filesinthemesdiruserorig.join(',')).split(',')
+const filesinthemesdiruser = filesinthemesdiruser2.map(item => {
+  const parts = item.split('/');
+  const lastTwoFields = parts.slice(-2).join('/');
+  return '/' + lastTwoFields; // Add back the leading '/'
+});
+let filesinthemesdirsystemoriginal = await listFilesInDir(`${path.join(THEMES_FOLDER, 'system')}`)
+.catch(error => {
+logger.error(`Error listing files in themes system dir: ${error}`);
+});
+
+let filesinthemesdirsystem2 = asssubstitution(filesinthemesdirsystemoriginal.join(',')).split(",")
+const filesinthemesdirsystem = filesinthemesdirsystem2.map(item => {
+  const parts = item.split('/');
+  const lastTwoFields = parts.slice(-2).join('/');
+  return '/' + lastTwoFields; // Add back the leading '/'
+});
+const oldtypethemes = await findoldVersionThemeFiles()
+return {
+  filesinthemesdir,
+  filesinthemesdiruser,
+  filesinthemesdirsystem,
+  oldtypethemes
+};
+}
+
+
+
 module.exports = {
     settheme,
     themecolourdecoder,
     retrieveCurrentTheme,
-    findoldVersionThemeFiles
+    findoldVersionThemeFiles,
+    retrieveThemelists
 }
