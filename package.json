@@ -51,6 +51,7 @@
     "nodemon": "^3.0.1",
     "release-it": "^16.2.1",
     "save-dev": "^0.0.1-security",
+    "simple-tts-mp3": "^1.0.7",
     "socket.io": "^4.7.2",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1",
