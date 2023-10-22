@@ -151,7 +151,10 @@ let filesinthemesdir2 = asssubstitution(`${filesinthemesdirorig.join(',')}`).spl
 const filesinthemesdir = filesinthemesdir2.map(item => {
   const parts = item.split('/');
   const lastTwoFields = parts.slice(-2).join('/');
-  return '/' + lastTwoFields; // Add back the leading '/'
+  if (parts.length > 1) {
+  return '/' + lastTwoFields;
+}
+  return lastTwoFields; // Add back the leading '/'
 });
 console.log(filesinthemesdirorig)
 
@@ -163,7 +166,10 @@ let filesinthemesdiruser2 = asssubstitution(filesinthemesdiruserorig.join(',')).
 const filesinthemesdiruser = filesinthemesdiruser2.map(item => {
   const parts = item.split('/');
   const lastTwoFields = parts.slice(-2).join('/');
-  return '/' + lastTwoFields; // Add back the leading '/'
+  if (parts.length > 1) {
+  return '/' + lastTwoFields;
+}
+  return lastTwoFields; // Add back the leading '/'
 });
 let filesinthemesdirsystemoriginal = await listFilesInDir(`${path.join(THEMES_FOLDER, 'system')}`)
 .catch(error => {
@@ -174,7 +180,10 @@ let filesinthemesdirsystem2 = asssubstitution(filesinthemesdirsystemoriginal.joi
 const filesinthemesdirsystem = filesinthemesdirsystem2.map(item => {
   const parts = item.split('/');
   const lastTwoFields = parts.slice(-2).join('/');
-  return '/' + lastTwoFields; // Add back the leading '/'
+  if (parts.length > 1) {
+  return '/' + lastTwoFields;
+}
+  return lastTwoFields; // Add back the leading '/'
 });
 const oldtypethemes = await findoldVersionThemeFiles()
 return {

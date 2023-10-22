@@ -11,6 +11,7 @@ const { checkForUpdates } = require('../utils/update.utils');
 const path = require('path');
 const { encryptText, decryptText, readAndDecryptPassword } = require("../utils/encryption.utils")
 const { retrieveThemelists } = require("../utils/themes.utils")
+const { asssubstitution } = require("../utils/string.utils");
 
 
 
@@ -124,7 +125,7 @@ const checkAuthentication = (req, res, next) => {
             layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
             page: "Themes",
             version: version,
-            theme: config_current.theme.replace(/user\//g, "User - ").replace(/system\//g, "System - "),
+            theme: asssubstitution(config_current.theme.replace(/user\//g, "User - ").replace(/system\//g, "System - ")),
             themeunreplaced: config_current.theme,
             ErsatzTVURL: ErsatzTVURL,
             downloadedthemeslist: filesinthemesdir,
