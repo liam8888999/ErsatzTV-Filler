@@ -364,8 +364,9 @@ if (platform === "darwin") {
     // Start loading logs when the page is ready
     window.addEventListener('load', function() {
   if (window.location.pathname === '/logs') {
-    loadLogs();
-    setInterval(loadLogs, 1000);
+    // TEMPORARILY DISABLE LOG VIEWER
+  //  loadLogs();
+    //setInterval(loadLogs, 1000);
   }
 });
   </script>
