@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.2...V1.5.3) (2023-10-23)
+
+
+### Fixed
+
+* theme fixes ([04140b8](https://github.com/liam8888999/ErsatzTV-Filler/commit/04140b8f0ee4126e52854436f8ee7ab43ff2f11d))
+* weather fallback fixes ([4e2df5f](https://github.com/liam8888999/ErsatzTV-Filler/commit/4e2df5fc88d8adc35d02d24acef78583bfcb6f9c))
+
+
+### Changed
+
+* temporarily disable log viewer ([6443c1b](https://github.com/liam8888999/ErsatzTV-Filler/commit/6443c1bc540d6d012d479b531f2c9e4decd479f8))
+
 ## [1.5.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.1...V1.5.2) (2023-10-20)
 
 
