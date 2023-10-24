@@ -3,13 +3,13 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const { WEATHERDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const logger = require("../utils/logger.utils");
-
 const { createDirectoryIfNotExists } =require("../utils/file.utils");
 const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
 const { exec } = require("child_process")
 const fs = require('fs');
 const client = require('https');
 const path = require('path');
+const { asssubstitution } = require("../utils/string.utils");
 
 let isFunctionRunning = false;
 
@@ -143,7 +143,7 @@ const createWeatherV1 = async () => {
         logger.error(`Error: ${error.message}`);
 
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
-            const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${path.join(WEATHERDIR, 'error.txt')}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v1.mp4')}`;
+            const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${asssubstitution(path.join(WEATHERDIR, 'error.txt'))}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v1.mp4')}`;
             logger.ffmpeg(`Running weather fallback command on error: ${commandOnError1}`);
             exec(commandOnError1, (error2, stdout2, stderr2) => {
               if (error2) {
@@ -201,7 +201,7 @@ const createWeatherV2 = async () => {
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
 
         // Run another FFmpeg command here on error
-              const commandOnError2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${path.join(WEATHERDIR, 'error.txt')}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v2.mp4')}`;
+              const commandOnError2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${asssubstitution(path.join(WEATHERDIR, 'error.txt'))}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v2.mp4')}`;
 
   logger.ffmpeg(`Running weather fallback command on error: ${commandOnError2}`);
   exec(commandOnError2, (error20, stdout20, stderr20) => {
@@ -255,7 +255,7 @@ const createWeatherV3 = async () => {
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
 
         // Run another FFmpeg command here on error
-  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${path.join(WEATHERDIR, 'error.txt')}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v3.mp4')}`;
+  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${asssubstitution(path.join(WEATHERDIR, 'error.txt'))}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v3.mp4')}`;
   logger.ffmpeg(`Running weather fallback command on error: ${commandOnError3}`);
   exec(commandOnError3, (error3, stdout3, stderr3) => {
     if (error3) {
