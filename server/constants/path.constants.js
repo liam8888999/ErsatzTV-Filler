@@ -73,6 +73,8 @@ const DEFAULT_CONFIG = {
   "newsfeed": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
   "newsduration": "60",
   "newsarticles": "10",
+  "readnews": "no",
+  "readonlynewsheadings": "yes",
   "shownewsheader": "yes",
   "newsheadertext": "Top News Stories",
   "underlinenewsheader": "yes",

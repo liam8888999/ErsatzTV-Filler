@@ -129,8 +129,12 @@ async function addKeyValuesToconfigFile() {
       value: '10',
     },
     {
-      key: 'channellogoduration',
-      value: '30',
+      key: 'readnews',
+      value: 'no',
+    },
+    {
+      key: 'readonlynewsheadings',
+      value: 'yes',
     }
   ];
 

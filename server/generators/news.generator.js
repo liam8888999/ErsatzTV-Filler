@@ -12,6 +12,8 @@ const path = require('path');
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const { themecolourdecoder, retrieveCurrentTheme } = require("../utils/themes.utils");
 const { asssubstitution } = require("../utils/string.utils");
+const { createAudioFile } = require('simple-tts-mp3');
+const mp3Duration = require('mp3-duration');
 
 // TODO: Add support for multiple newsfeeds under the same variable , seperated and create different videos or join all together
 
@@ -26,6 +28,8 @@ const config_current = await retrieveCurrentConfiguration();
 const audioFile = await selectRandomAudioFile(config_current.customaudio);
 const current_theme = await retrieveCurrentTheme();
 const NEWSNUM = '1'
+
+let newsFeed2;
 
 // Step 5: Generate the news feed
 const generateNewsFeed = async (config_current, audioFile, current_theme) => {
@@ -61,16 +65,17 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
           }
 
 
+
+
           newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
-          logger.info(`header text: ${config_current.newsheadertext}`)
+            logger.info(`header text: ${config_current.newsheadertext}`)
           logger.info(`show header: ${config_current.shownewsheader}`)
           if (config_current.shownewsheader === 'yes') {
             newsFeedcontent = newsheader + newsFeed;
           } else {
             newsFeedcontent = newsFeed;
           }
-        });
-
+          });
         fs.writeFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, newsFeedcontent);
 
         resolve(); // Resolve the promise when the operation is complete
@@ -90,6 +95,31 @@ const prepareNewsContent = async (config_current) => {
   const news1Content = newstempContent;
   const news2Content = news1Content.split('\n\n').slice(0, config_current.newsarticles).join('\n\n');
   const newsContent = news2Content.replace(/%/g, '\\%');
+  const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
+  const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
+  const descriptionpatternregex = new RegExp(`{\\\\r}{\\\\b0}{\\\\c&H${descriptioncolor}&}`, 'g');
+  const titlepatternregex = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`, 'g');
+  console.log(titlepatternregex)
+
+if (config_current.readonlynewsheadings === "yes") {
+    const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
+  newsFeedread = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '')
+} else {
+  newsFeedread = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '')
+}
+
+// Creates an "output.mp3" audio file with default English text
+if (config_current.readnews === "yes") {
+  function createaudiofunct() {
+    return new Promise((resolve) => {
+      createAudioFile(newsFeedread, path.join(NEWSDIR, `news-audio-${NEWSNUM}`));
+       setTimeout(resolve, 3000);
+   });
+}
+await createaudiofunct()
+}
+
+
   await fs.writeFileSync(`${path.join(NEWSDIR, `news-temp-${NEWSNUM}.txt`)}`, newsContent);
 };
 
@@ -151,8 +181,25 @@ const generateNewsVideo = async (config_current, audioFile) => {
   const backgroundcolour = current_theme.News.newsbackgroundcolour;
   const assfile = asssubstitution(`${path.join(NEWSDIR, `news-${NEWSNUM}.ass`)}`)
   logger.info(assfile)
-  const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
 
+
+let speedFactor;
+if (config_current.readnews === "yes") {
+let fileduration;
+await mp3Duration(path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`), function (err, mp3fileduration) {
+  if (err) return console.log(err.message);
+  console.log('Your file is ' + mp3fileduration + ' seconds long');
+  fileduration = mp3fileduration
+});
+speedFactor = fileduration / config_current.newsduration
+console.log('speedFactor is:', speedFactor)
+}
+
+if (config_current.readnews === "yes") {
+command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`)}" -filter_complex "[1:a]atempo=${speedFactor},volume=2[a]" -map 0 -map "[a]" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
+} else {
+command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
+}
   logger.ffmpeg(`News ffmpeg command is ${command}`);
 
   exec(command, (error, stdout, stderr) => {
