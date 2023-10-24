@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.4...V1.6.0) (2023-10-24)
+
+
+### Added
+
+* text to speech for news feed ([54b7613](https://github.com/liam8888999/ErsatzTV-Filler/commit/54b7613d961155f22412269d21001afa58fe5220))
+
 ## [1.5.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.3...V1.5.4) (2023-10-24)
 
 
