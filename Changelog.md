@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.3...V1.5.4) (2023-10-24)
+
+
+### Fixed
+
+* weather fallback fix ([3cde11a](https://github.com/liam8888999/ErsatzTV-Filler/commit/3cde11ace59a135dc11df9547803bf81b8bdd025))
+
 ## [1.5.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.2...V1.5.3) (2023-10-23)
 
 
