@@ -135,6 +135,14 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'readonlynewsheadings',
       value: 'yes',
+    },
+    {
+      key: 'weatherheader',
+      value: 'Current Weather',
+    },
+    {
+      key: 'showweatherheader',
+      value: 'false',
     }
   ];
 

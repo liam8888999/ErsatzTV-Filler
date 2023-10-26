@@ -63,6 +63,8 @@ const DEFAULT_CONFIG = {
   "weathervideofadeinduration": "5",
   "weatheraudiofadeoutduration": "5",
   "weatheraudiofadeinduration": "5",
+  "weatherheader": "Current Weather",
+  "showweatherheader": "false",
   "weatherinterval": "10",
   "weatherduration": "30",
   "processnews": "yes",

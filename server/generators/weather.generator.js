@@ -90,18 +90,41 @@ console.log(currentTempC)
 console.log(currentTempF)
 console.log(humidity)
 console.log(weatherDescription)
+dateTimeString = currentCondition.localObsDateTime;
 
+
+if (config_current.showweatherheader === "yes") {
 textterror = `
-                      Unfortunately the weather filler is unavailable at this time,
+              ${config_current.weatherheader}
 
-                      Hopefully it will be back soon
 
-                      The Current Temperature is ${currentTempC}°C or ${currentTempF}°F
+Unfortunately the weather filler is unavailable at this time,
 
-                      The Current Humidity ${humidity}percent
+Hopefully it will be back soon
 
-                      It is Currently ${weatherDescription} outside
+The Current Temperature is ${currentTempC}°C or ${currentTempF}°F
+
+The Current Humidity ${humidity}percent
+
+It is Currently ${weatherDescription} outside
+
+Information is correct as of ${dateTimeString}
                     `
+} else {
+  textterror = `
+  Unfortunately the weather filler is unavailable at this time,
+
+  Hopefully it will be back soon
+
+  The Current Temperature is ${currentTempC}°C or ${currentTempF}°F
+
+  The Current Humidity ${humidity}percent
+
+  It is Currently ${weatherDescription} outside
+
+  Information is correct as of ${dateTimeString}
+                      `
+}
 
 await fs.writeFileSync(`${path.join(WEATHERDIR, `error.txt`)}`, textterror);
 
