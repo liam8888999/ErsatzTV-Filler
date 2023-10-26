@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.0...V1.6.1) (2023-10-26)
+
+
+### Added
+
+* weather error header ([0a2295e](https://github.com/liam8888999/ErsatzTV-Filler/commit/0a2295e8b9e5ca34726be77f7c632403f0fdb9f8))
+
 ## [1.6.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.5.4...V1.6.0) (2023-10-24)
 
 
