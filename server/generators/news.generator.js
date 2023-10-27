@@ -67,13 +67,15 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
 
 
 
-          newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}\n\n`;
+          newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}.\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}.\n\n`;
             logger.info(`header text: ${config_current.newsheadertext}`)
           logger.info(`show header: ${config_current.shownewsheader}`)
           if (config_current.shownewsheader === 'yes') {
-            newsFeedcontent = newsheader + newsFeed;
+            newsFeedcontent1 = newsheader + newsFeed;
+            newsFeedcontent = newsFeedcontent1.replace(/\.\./g, '\.')
           } else {
-            newsFeedcontent = newsFeed;
+            newsFeedcontent1 = newsFeed;
+            newsFeedcontent = newsFeedcontent1.replace(/\.\./g, '\.')
           }
           });
         fs.writeFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, newsFeedcontent);
@@ -99,15 +101,19 @@ const prepareNewsContent = async (config_current) => {
   const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
   const descriptionpatternregex = new RegExp(`{\\\\r}{\\\\b0}{\\\\c&H${descriptioncolor}&}`, 'g');
   const titlepatternregex = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`, 'g');
+  const headerregex = new RegExp(`${config_current.newsheadertext}`, 'g');
+  const headerreplacedregex = `${config_current.newsheadertext}.`;
   console.log(titlepatternregex)
+
+
 
 if (config_current.readonlynewsheadings === "yes") {
     const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
-  newsFeedread = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '')
+  newsFeedread = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
 } else {
-  newsFeedread = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '')
+  newsFeedread = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
 }
-
+  console.log(newsFeedread)
 // Creates an "output.mp3" audio file with default English text
 if (config_current.readnews === "yes") {
   function createaudiofunct() {
