@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.1...V1.6.2) (2023-10-27)
+
+
+### Added
+
+* news read improvements with break between lines ([30e384b](https://github.com/liam8888999/ErsatzTV-Filler/commit/30e384b0e57df35447797caf14e5e810ef141aba))
+
 ## [1.6.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.0...V1.6.1) (2023-10-26)
 
 
