@@ -65,7 +65,7 @@ const CHANNEL_OFFLINE = async () => {
     .then(() => {
       logger.success
 const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimageExtension}`
-      imageconvert(convertimage)
+      imageconvert(convertimage, 200, 200, CHANNEL_OFFLINEDIR)
       .then(() => {
 
               // Extract the show start time
@@ -260,7 +260,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
   };
 
   try {
-    
+
     await splitXMLTVByChannel(CHANNEL_OFFLINEDIR);
     await runnersT();
   } catch (error) {

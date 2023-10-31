@@ -16,6 +16,7 @@ const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const { asssubstitution } = require("../utils/string.utils");
 const { imageconvert } = require("../utils/imageconversion.utils");
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 let isFunctionRunning = false;
 const CHANNEL_LOGO = async () => {
@@ -63,7 +64,15 @@ const CHANNEL_LOGO = async () => {
         }
         downloadImage(`${channelLogo}`, `${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}`)
     .then(() => {
-
+      logger.success
+      const convertimage = `${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}`
+      const resolution = `${config_current.videoresolution}`
+      const [width, height] = resolution.split('x');
+      const imgwidth = width / 4
+      const imgheight = height / 4
+            imageconvert(convertimage, imgwidth, imgheight, CHANNEL_LOGODIR)
+            .then(async() => {
+            //  await delay(4000)
       const channellogovideofadeoutstart = config_current.channellogoduration - config_current.channellogovideofadeoutduration;
       const channellogoaudiofadeoutstart = config_current.channellogoduration - config_current.channellogoaudiofadeoutduration;
 
@@ -88,7 +97,7 @@ const CHANNEL_LOGO = async () => {
 
           //add theme information
           //part1
-            const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -i "${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*2:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.channellogoduration} ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}`;
+            const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -i "${path.join(CHANNEL_LOGODIR, 'jimpimgdir', eachxmltvfile)}.png" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*2:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.channellogoduration} ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}`;
             logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1part1}`);
           exec(commandv1part1, (error, stdout, stderr) => {
             if (error) {
@@ -132,7 +141,7 @@ const CHANNEL_LOGO = async () => {
 
 });
 
-
+});
       });
 
       });
@@ -144,7 +153,7 @@ const CHANNEL_LOGO = async () => {
 
   const runnersT = async () => {
     let fileList = await listFilesInDir(CHANNEL_LOGODIR);
-    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 
     logger.info(`Channel-logo File List: ${fileList}`);
 
