@@ -143,6 +143,14 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'showweatherheader',
       value: 'false',
+    },
+    {
+      key: 'newsreadintro',
+      value: '',
+    },
+    {
+      key: 'newsreadoutro',
+      value: '',
     }
   ];
 

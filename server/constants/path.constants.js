@@ -76,6 +76,8 @@ const DEFAULT_CONFIG = {
   "newsduration": "60",
   "newsarticles": "10",
   "readnews": "no",
+  "newsreadintro": "",
+  "newsreadoutro": "",
   "readonlynewsheadings": "yes",
   "shownewsheader": "yes",
   "newsheadertext": "Top News Stories",

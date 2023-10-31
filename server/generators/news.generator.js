@@ -106,12 +106,14 @@ const prepareNewsContent = async (config_current) => {
   console.log(titlepatternregex)
 
 
-
+const intro = `${config_current.newsreadintro}...`
 if (config_current.readonlynewsheadings === "yes") {
     const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
-  newsFeedread = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
+  newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
+  newsFeedread = intro + newsFeedread1 + config_current.newsreadoutro
 } else {
-  newsFeedread = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
+  newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
+  newsFeedread = `${intro} + ${newsFeedread1} + ${config_current.newsreadoutro}`
 }
   console.log(newsFeedread)
 // Creates an "output.mp3" audio file with default English text
