@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.2...V1.6.3) (2023-10-31)
+
+
+### Added
+
+* news reader intro and outro ([e8abcef](https://github.com/liam8888999/ErsatzTV-Filler/commit/e8abcefa9d6f7dc46a8361f6512f383d912633b0))
+
+
+### Fixed
+
+* improvements with image scaling ([112ef51](https://github.com/liam8888999/ErsatzTV-Filler/commit/112ef519c252ab42ca769dfe55f0b306108c57ac))
+
 ## [1.6.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.1...V1.6.2) (2023-10-27)
 
 
