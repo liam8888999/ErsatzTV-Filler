@@ -105,8 +105,12 @@ const prepareNewsContent = async (config_current) => {
   const headerreplacedregex = `${config_current.newsheadertext}.`;
   console.log(titlepatternregex)
 
-
-const intro = `${config_current.newsreadintro}...`
+let intro;
+if (config_current.newsreadintro) {
+intro = `${config_current.newsreadintro}...`
+} else {
+  intro = ''
+}
 if (config_current.readonlynewsheadings === "yes") {
     const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
   newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
