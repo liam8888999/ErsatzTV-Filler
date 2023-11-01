@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.3...V1.6.4) (2023-11-01)
+
+
+### Added
+
+* improvents to news reader and option to set language for audio functions ([6923e82](https://github.com/liam8888999/ErsatzTV-Filler/commit/6923e82c7ef842b3b8a922c87be768df03464217))
+
 ## [1.6.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.2...V1.6.3) (2023-10-31)
 
 
