@@ -10,7 +10,10 @@ Login (Authentication) options.
 
 - `Password`
 
+- `Login Hint`
+
 insert your desired username and password in this form and it will immediately take effect. The autentication currently only works for the webui and not the apis.
+The password hint can be retrieved by clicking on Forgot password on the login screen.
 
 ### How is the username and password stored?
 

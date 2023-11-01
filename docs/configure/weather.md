@@ -53,3 +53,15 @@ This is the option to select how often you wish the Weather filler to be regener
 - `Time (seconds)`
 
 This is the option to set the duration the weather filler will run for. If you want 30 seconds then you would just set `30` as the option.
+
+### Weather Header text
+
+- `String (header text)`
+
+This is the option to select what text to show in the weather header.
+
+### Show the Weather Header?
+
+- `yes/no`
+
+This is the option whether you want to show the header in the weather filler, it can be set as `yes` to show or `no` if you dont want it to show.

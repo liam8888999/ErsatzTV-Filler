@@ -77,3 +77,27 @@ This is the option to select what text to show in the news header.
 - `yes/no`
 
 This is the option whether you want to underline the header in the news filler, it can be set as `yes` to show or `no` if you dont want it to underline.
+
+### Read the News with text to Speech?
+
+- `yes/no`
+
+This is the option whether you want to have the news read out using text to speech technologies, it can be set as `yes` to read or `no` if you dont want it to be read.
+
+### Read only the news headings?
+
+- `yes/no`
+
+This is the option to read only the news headings `yes` or the entire article as well as the heading `no`.
+
+### News Reader intro
+
+- `String (intro text)`
+
+This text will be read before the news when reading the news using the text to speech functions.
+
+### News Reader outro
+
+- `String (outro text)`
+
+This text will be read after the news when reading the news using the text to speech functions. 

@@ -80,3 +80,68 @@ This is the option to set a custom HW Accel Mode to enable hardware acceleration
 - `Variable`
 
 This is the option to set a custom HW Accel Device to enable hardware acceleration. This setting is not recommended to be used and is expirimental. Will not work in docker.
+
+### Audio Function Language (where available)
+
+- `String (Language Code)` - Default `en` if empty  
+
+Option to set the Language to use for text to speech functions.
+
+The languages currently available are:
+
+ *  - af - Afrikaans
+ *  - sq - Albanian
+ *  - de - German
+ *  - ar - Arabic
+ *  - bn - Bengali
+ *  - my - Burmese
+ *  - bs - Bosnian
+ *  - bg - Bulgarian
+ *  - km - Cambodian
+ *  - kn - Kannada
+ *  - ca - Catalan
+ *  - cs - Czech
+ *  - zh - Simplified Chinese
+ *  - zh-TW - Traditional Chinese
+ *  - si - Sinhalese
+ *  - ko - Korean
+ *  - hr - Croatian
+ *  - da - Danish
+ *  - sk - Slovak
+ *  - es - Spanish
+ *  - et - Estonian
+ *  - fi - Finnish
+ *  - fr - French
+ *  - el - Greek
+ *  - gu - Gujarati
+ *  - hi - Hindi
+ *  - nl - Dutch
+ *  - hu - Hungarian
+ *  - id - Indonesian
+ *  - en - English
+ *  - is - Icelandic
+ *  - it - Italian
+ *  - ja - Japanese
+ *  - la - Latin
+ *  - lv - Latvian
+ *  - ml - Malayalam
+ *  - ms - Malay
+ *  - mr - Marathi
+ *  - ne - Nepali
+ *  - no - Norwegian
+ *  - pl - Polish
+ *  - pt - Portuguese
+ *  - ro - Romanian
+ *  - ru - Russian
+ *  - sr - Serbian
+ *  - sw - Swahili
+ *  - sv - Swedish
+ *  - su - Sundanese
+ *  - tl - Tagalog
+ *  - th - Thai
+ *  - ta - Tamil
+ *  - te - Telugu
+ *  - tr - Turkish
+ *  - uk - Ukrainian
+ *  - ur - Urdu
+ *  - vi - Vietnamese
