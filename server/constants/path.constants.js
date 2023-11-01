@@ -56,6 +56,7 @@ const DEFAULT_CONFIG = {
   "videoresolution": "1280x720",
   "webport": "8408",
   "webtheme": "dark",
+  "audiolanguage": "en",
   "theme": "SystemLight",
   "processweather": "yes",
   "generate_weatherv4": "no",

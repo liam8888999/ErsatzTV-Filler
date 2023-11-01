@@ -151,6 +151,10 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'newsreadoutro',
       value: '',
+    },
+    {
+      key: 'audiolanguage',
+      value: 'en',
     }
   ];
 

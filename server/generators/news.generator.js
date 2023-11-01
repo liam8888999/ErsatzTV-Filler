@@ -12,7 +12,7 @@ const path = require('path');
 const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const { themecolourdecoder, retrieveCurrentTheme } = require("../utils/themes.utils");
 const { asssubstitution } = require("../utils/string.utils");
-const { createAudioFile } = require('simple-tts-mp3');
+const googleTTS = require('google-tts-api');
 const mp3Duration = require('mp3-duration');
 
 // TODO: Add support for multiple newsfeeds under the same variable , seperated and create different videos or join all together
@@ -110,17 +110,28 @@ const intro = `${config_current.newsreadintro}...`
 if (config_current.readonlynewsheadings === "yes") {
     const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
   newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
-  newsFeedread = intro + newsFeedread1 + config_current.newsreadoutro
+  newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
 } else {
   newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
-  newsFeedread = `${intro} + ${newsFeedread1} + ${config_current.newsreadoutro}`
+  newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
 }
   console.log(newsFeedread)
 // Creates an "output.mp3" audio file with default English text
+
 if (config_current.readnews === "yes") {
   function createaudiofunct() {
     return new Promise((resolve) => {
-      createAudioFile(newsFeedread, path.join(NEWSDIR, `news-audio-${NEWSNUM}`));
+      //createAudioFile(newsFeedread, path.join(NEWSDIR, `news-audio-${NEWSNUM}`));
+      const audiolanguage = config_current.audiolanguage || 'en'
+googleTTS.getAllAudioBase64(newsFeedread, { lang: `${audiolanguage}` }).then((results) => {
+  const buffers = results.map(results => Buffer.from(results.base64, 'base64'));
+      const finalBuffer = Buffer.concat(buffers);
+      fs.writeFileSync(path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`), finalBuffer);
+      console.log(`Audio file ${path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`)} created successfully`);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
        setTimeout(resolve, 3000);
    });
 }
