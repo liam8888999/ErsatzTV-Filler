@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.5](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.4...V1.6.5) (2023-11-01)
+
+
+### Fixed
+
+* fix for news reader cutting off early ([b3995e3](https://github.com/liam8888999/ErsatzTV-Filler/commit/b3995e33545eec5fc40fdf200f034a5675f44cd3))
+* fix news intro when nothing set ([b7d644d](https://github.com/liam8888999/ErsatzTV-Filler/commit/b7d644dc4f3a961237a6dac3ac2c6f9a10efd195))
+* small config page fix ([5980edd](https://github.com/liam8888999/ErsatzTV-Filler/commit/5980edd3269a189b55a7c304f9620ce86fe5d89b))
+
 ## [1.6.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.3...V1.6.4) (2023-11-01)
 
 
