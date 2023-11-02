@@ -11,18 +11,23 @@ const { VANITYCARDS } = require("../generators/vanitycards.generator");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 const loadApirunRoutes = (app) => {
-
-
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error(`Run api Error: ${err}`); // Log the error for debugging purposes
+    logger.error(`Page routes Error: ${err}`); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
     const message = err.message || 'Internal Server Error';
 
     // Send an error response to the client
+    if (req.accepts('html')) {
+    // Render an error HTML page
+    res.status(status).send(`<html><head><style>body { background-color: #4d4d4d; }</style><title>Error</title></head><body><center><br><br><br><h1 style="color: red;">Error: ${status}</h1></center><br><center><h2 style="color: orange;">OOPS, Something went terribly wrong.</h2><br><span style="font-size: 48px;">🙁</span></center></body></html>`);
+
+  } else {
+    // Send a JSON response to the client
     res.status(status).json({ error: message });
+  }
   });
 
 // run weather function
