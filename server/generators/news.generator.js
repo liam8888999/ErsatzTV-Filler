@@ -96,7 +96,7 @@ const prepareNewsContent = async (config_current) => {
   const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, 'utf8');
   const news1Content = newstempContent;
   const news2Content = news1Content.split('\n\n').slice(0, config_current.newsarticles).join('\n\n');
-  const newsContent = news2Content.replace(/%/g, '\\%');
+  const newsContent = news2Content.replace(/%/g, '\\%').replace(/&lt;p&gt;/g, '').replace(/&lt;\/p&gt;/g, '').replace(/&lt;br&gt;/g, '')
   const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
   const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
   const descriptionpatternregex = new RegExp(`{\\\\r}{\\\\b0}{\\\\c&H${descriptioncolor}&}`, 'g');
