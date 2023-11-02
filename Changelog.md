@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.8](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.7...V1.6.8) (2023-11-02)
+
+
+### Fixed
+
+* remove more html characters in newsfeed ([4f97503](https://github.com/liam8888999/ErsatzTV-Filler/commit/4f97503026cd6d2b9d4b371b4b3728a733f8b9f4))
+
 ## [1.6.7](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.6...V1.6.7) (2023-11-02)
 
 
