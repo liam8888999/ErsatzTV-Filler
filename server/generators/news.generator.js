@@ -96,13 +96,14 @@ const prepareNewsContent = async (config_current) => {
   const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, 'utf8');
   const news1Content = newstempContent;
   const news2Content = news1Content.split('\n\n').slice(0, config_current.newsarticles).join('\n\n');
-  const newsContent = news2Content.replace(/%/g, '\\%').replace(/&lt;p&gt;/g, '').replace(/&lt;\/p&gt;/g, '').replace(/&lt;br&gt;/g, '')
+  const newsContent = news2Content.replace(/%/g, '\\%').replace(/&lt;p&gt;/g, '').replace(/&lt;\/p&gt;/g, '').replace(/&lt;br&gt;/g, '').replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<\/br>/g, '').replace(/<br>/g, '')
   const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
   const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
   const descriptionpatternregex = new RegExp(`{\\\\r}{\\\\b0}{\\\\c&H${descriptioncolor}&}`, 'g');
   const titlepatternregex = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`, 'g');
   const headerregex = new RegExp(`${config_current.newsheadertext}`, 'g');
   const headerreplacedregex = `${config_current.newsheadertext}.`;
+  console.log(newsContent)
   console.log(titlepatternregex)
 
 let intro;
