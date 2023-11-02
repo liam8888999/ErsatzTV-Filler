@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.7](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.6...V1.6.7) (2023-11-02)
+
+
+### Fixed
+
+* small route fix ([ae7d25d](https://github.com/liam8888999/ErsatzTV-Filler/commit/ae7d25d1257e623b3f7f000eda217477f919a1ce))
+
+
+### Changed
+
+* improve error html page ([15b965b](https://github.com/liam8888999/ErsatzTV-Filler/commit/15b965b0ea839334011cbca6ea0503de3801e09f))
+
 ## [1.6.6](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.5...V1.6.6) (2023-11-02)
 
 
