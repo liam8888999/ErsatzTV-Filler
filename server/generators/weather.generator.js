@@ -93,40 +93,53 @@ console.log(weatherDescription)
 dateTimeString = currentCondition.localObsDateTime;
 
 
+// Step 7: Prepare the ASS subtitle text
 if (config_current.showweatherheader === "yes") {
-textterror = `
-              ${config_current.weatherheader}
-
-
-Unfortunately the weather filler is unavailable at this time,
-
-Hopefully it will be back soon
-
-The Current Temperature is ${currentTempC}°C or ${currentTempF}°F
-
-The Current Humidity ${humidity}percent
-
-It is Currently ${weatherDescription} outside
-
-Information is correct as of ${dateTimeString}
-                    `
+textterror = `${config_current.weatherheader}\\N\\N\\NUnfortunately the weather filler is unavailable at this time,\\N\\NHopefully it will be back soon\\N\\NThe Current Temperature is ${currentTempC}°C or ${currentTempF}°F\\N\\NThe Current Humidity ${humidity}percent\\N\\NIt is Currently ${weatherDescription} outside\\N\\NInformation is correct as of ${dateTimeString}\\N`
 } else {
-  textterror = `
-  Unfortunately the weather filler is unavailable at this time,
-
-  Hopefully it will be back soon
-
-  The Current Temperature is ${currentTempC}°C or ${currentTempF}°F
-
-  The Current Humidity ${humidity}percent
-
-  It is Currently ${weatherDescription} outside
-
-  Information is correct as of ${dateTimeString}
-                      `
+  textterror = `Unfortunately the weather filler is unavailable at this time,\\N\\N  Hopefully it will be back soon\\N\\N  The Current Temperature is ${currentTempC}°C or ${currentTempF}°F\\N\\N  The Current Humidity ${humidity}percent\\N\\N  It is Currently ${weatherDescription} outside\\N\\N  Information is correct as of ${dateTimeString}\\N`
 }
 
-await fs.writeFileSync(`${path.join(WEATHERDIR, `error.txt`)}`, textterror);
+
+// Calculate the start and end time for each subtitle
+let startTime = 0; // Start time adjusted by 2 seconds
+let endTime = config_current.weatherduration;
+
+// Define the font size and line spacing
+const fontSize = 32;
+const lineSpacing = 1;
+
+// Create the move effect string
+const moveEffect = ''//`{\\move(0,0,0,0)}`;
+const lines = `${textterror}`;
+//    let lines = newsFeed;
+logger.info(`channel-offline template: ${lines}`)
+
+// Combine the move effect with the subtitle text
+const subtitle = `${moveEffect}${lines}`;
+
+const resolution = `${config_current.videoresolution}`
+
+const [width, height] = resolution.split('x');
+
+const centering = `${height}/2`;
+
+let assText = `[Script Info]
+Title: Scrolling Text Example
+ScriptType: v4.00+
+WrapStyle: 0
+PlayResX: ${width}
+PlayResY: ${height}
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 5, 30, 30, 50, 0
+
+  [Events]
+  Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+  Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
+logger.info(`weather error Ass text: ${assText}`)
+  await fs.writeFileSync(`${path.join(WEATHERDIR, `error.ass`)}`, assText);
 
   }
 
@@ -151,9 +164,10 @@ await fs.writeFileSync(`${path.join(WEATHERDIR, `error.txt`)}`, textterror);
   const weatherCalculationsResult = await weathercalculations();
 
 
-
+const assfile = asssubstitution(`${path.join(WEATHERDIR, `error.ass`)}`)
 const createWeatherV1 = async () => {
   try {
+
     logger.info(`Weather Video fade out start: ${weatherCalculationsResult.weathervideofadeoutstart}`)
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
@@ -166,7 +180,7 @@ const createWeatherV1 = async () => {
         logger.error(`Error: ${error.message}`);
 
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
-            const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${asssubstitution(path.join(WEATHERDIR, 'error.txt'))}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v1.mp4')}`;
+            const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v1.mp4')}`;
             logger.ffmpeg(`Running weather fallback command on error: ${commandOnError1}`);
             exec(commandOnError1, (error2, stdout2, stderr2) => {
               if (error2) {
@@ -224,7 +238,7 @@ const createWeatherV2 = async () => {
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
 
         // Run another FFmpeg command here on error
-              const commandOnError2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${asssubstitution(path.join(WEATHERDIR, 'error.txt'))}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v2.mp4')}`;
+              const commandOnError2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v2.mp4')}`;
 
   logger.ffmpeg(`Running weather fallback command on error: ${commandOnError2}`);
   exec(commandOnError2, (error20, stdout20, stderr20) => {
@@ -278,7 +292,7 @@ const createWeatherV3 = async () => {
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
 
         // Run another FFmpeg command here on error
-  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=textfile='${asssubstitution(path.join(WEATHERDIR, 'error.txt'))}':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v3.mp4')}`;
+  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} ${path.join(config_current.output, 'weather-v3.mp4')}`;
   logger.ffmpeg(`Running weather fallback command on error: ${commandOnError3}`);
   exec(commandOnError3, (error3, stdout3, stderr3) => {
     if (error3) {
