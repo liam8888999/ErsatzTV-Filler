@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.6](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.5...V1.6.6) (2023-11-02)
+
+
+### Fixed
+
+* fix for removing unescaped html characters in newsfeed ([c966d17](https://github.com/liam8888999/ErsatzTV-Filler/commit/c966d1746f570abefd7a227d66086d542eddcbb2))
+* improve weather fallback video ([61161b4](https://github.com/liam8888999/ErsatzTV-Filler/commit/61161b4f4c0014c6c6fb03a289e7ebf8025316d3))
+
 ## [1.6.5](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.4...V1.6.5) (2023-11-01)
 
 
