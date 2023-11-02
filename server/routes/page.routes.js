@@ -70,7 +70,7 @@ const checkAuthentication = (req, res, next) => {
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
         page: "Home", //This is used by the front end to figure out where it is, allows us to statically set the active class on the navigation links. The page will not load without this variable.
-        //version: version,
+        version: version,
         ErsatzTVURL: ErsatzTVURL,
         updatestatus: UPDATESTATUS,
         authentication: authentication,
