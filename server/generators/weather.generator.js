@@ -163,7 +163,7 @@ logger.info(`weather error Ass text: ${assText}`)
 
   const weatherCalculationsResult = await weathercalculations();
 
-
+createDirectoryIfNotExists(config_current.output);
 const assfile = asssubstitution(`${path.join(WEATHERDIR, `error.ass`)}`)
 const createWeatherV1 = async () => {
   try {

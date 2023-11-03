@@ -218,7 +218,7 @@ await mp3Duration(path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`), function (err
 speedFactor = fileduration / config_current.newsduration
 console.log('speedFactor is:', speedFactor)
 }
-
+createDirectoryIfNotExists(config_current.output);
 if (config_current.readnews === "yes") {
 command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`)}" -filter_complex "[1:a]atempo=${speedFactor},volume=2[a]" -map 0 -map "[a]" -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
 } else {

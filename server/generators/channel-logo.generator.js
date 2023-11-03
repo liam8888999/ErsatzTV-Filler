@@ -97,6 +97,7 @@ const CHANNEL_LOGO = async () => {
 
           //add theme information
           //part1
+          createDirectoryIfNotExists(config_current.output);
             const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -i "${path.join(CHANNEL_LOGODIR, 'jimpimgdir', eachxmltvfile)}.png" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*2:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.channellogoduration} ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}`;
             logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1part1}`);
           exec(commandv1part1, (error, stdout, stderr) => {
