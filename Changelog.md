@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.9](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.8...V1.6.9) (2023-11-03)
+
+
+### Added
+
+* add random quote to homepage ([54b86c4](https://github.com/liam8888999/ErsatzTV-Filler/commit/54b86c48ad8647df705f2b5bde3c3d01c2f5f847))
+
+
+### Fixed
+
+* create output folder if it doesnt exist before creating video ([495bc4f](https://github.com/liam8888999/ErsatzTV-Filler/commit/495bc4f05f44df6ca64d0080f15fceeb75f10293))
+
 ## [1.6.8](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.7...V1.6.8) (2023-11-02)
 
 
