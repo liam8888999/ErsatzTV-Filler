@@ -12,6 +12,7 @@ const path = require('path');
 const { encryptText, decryptText, readAndDecryptPassword } = require("../utils/encryption.utils")
 const { retrieveThemelists } = require("../utils/themes.utils")
 const { asssubstitution } = require("../utils/string.utils");
+const randomQuotes = require('random-quotes');
 
 
 
@@ -66,6 +67,11 @@ const checkAuthentication = (req, res, next) => {
   const { decryptedUsername, decryptedPassword, authentication } = await readAndDecryptPassword();
     const { oldtypethemes } = await retrieveThemelists()
     logger.info(`old version themes: ${oldtypethemes}`)
+    function getRandomQuote() {
+    const quote = randomQuotes.default();
+    return { body: quote.body, author: quote.author };
+}
+const randomquote = getRandomQuote()
   const ErsatzTVURL = config_current.ersatztv
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
@@ -74,7 +80,8 @@ const checkAuthentication = (req, res, next) => {
         ErsatzTVURL: ErsatzTVURL,
         updatestatus: UPDATESTATUS,
         authentication: authentication,
-        oldtypethemes: oldtypethemes
+        oldtypethemes: oldtypethemes,
+        quote: randomquote
    });
 });
 
