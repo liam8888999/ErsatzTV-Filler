@@ -82,18 +82,18 @@ const createVanityCard = async (filenumber) => {
   try {
     if (config_current.hwaccel == "") {
       hwaccel = ` `;
-      logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
+      logger.debugaccell: no hwaccel'); // Use the constant as needed
     } else {
       hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-      logger.info(`Hwaccell: ${hwaccel}`);
+      logger.debugaccell: ${hwaccel}`);
     }
 
     if (config_current.hwaccel_device == "") {
       hwacceldevice = ``;
-      logger.info('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
+      logger.debugaccell_device: no hwacceldevice'); // Use the constant as needed
     } else {
       hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-      logger.info(`Hwaccell_device: ${hwacceldevice}`);
+      logger.debugaccell_device: ${hwacceldevice}`);
     }
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     // add theme information

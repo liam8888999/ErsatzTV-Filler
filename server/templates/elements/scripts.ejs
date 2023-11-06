@@ -150,7 +150,7 @@ function saveThemeToJSON(theme) {
   xhr.open('GET', endpointUrl, true);
   xhr.onreadystatechange = function() {
     if (this.readyState === 4 && this.status === 200) {
-      logger.info(this.responseText);
+      logger.debug(this.responseText);
     }
   };
   xhr.send();
@@ -406,7 +406,7 @@ if (platform === "darwin") {
           xhr.open('GET', endpointUrl, true);
           xhr.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-              logger.info(this.responseText);
+              logger.debug(this.responseText);
             }
           };
           xhr.send();

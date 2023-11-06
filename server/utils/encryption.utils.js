@@ -12,12 +12,12 @@ function encryptText(textToEncrypt) {
   // Generate a 256-bit (32-byte) encryption key
   const encryptionKey = crypto.randomBytes(32);
 
-  //logger.info(`Encryption Key: ${encryptionKey.toString('hex')}`);
+  //logger.debug(`Encryption Key: ${encryptionKey.toString('hex')}`);
     const iv = crypto.randomBytes(16); // Initialization Vector (IV) should be random and unique
     const cipher = crypto.createCipheriv(algorithm, Buffer.from(encryptionKey), iv);
     let encryptedText = cipher.update(textToEncrypt, 'utf8', 'hex');
     encryptedText += cipher.final('hex');
-  //  logger.info(`Encrypted text: ${encryptedText}`)
+  //  logger.debug(`Encrypted text: ${encryptedText}`)
     return { encryptedText, iv, encryptionKey };
 }
 
@@ -29,7 +29,7 @@ function decryptText(encryptedText, iv, decryptionKey) {
     const decipher = crypto.createDecipheriv(algorithm, Buffer.from(decryptBuffer), ivBuffer);
     let decryptedText = decipher.update(encryptedText, 'hex', 'utf8');
     decryptedText += decipher.final('utf8');
-//    logger.info(`Decrypted text: ${decryptedText}`)
+//    logger.debug(`Decrypted text: ${decryptedText}`)
     return decryptedText;
 }
 

@@ -154,7 +154,7 @@ lines.forEach(line => {
     // Convert the JSON object to a string
   //  const jsonString = JSON.stringify(json, null, 2);
     //jsonString1 = jsonString.replace(/'/g, '').replace(/"/g, '')
-      // logger.info(json)
+      // logger.debug(json)
 
     // Write the JSON string to a file
   //  fs.writeFile('config1.json', jsonString1, 'utf8', err => {

@@ -48,7 +48,7 @@ const createWebServer = () => {
       loadAverage: os.loadavg()
     };
 
-logger.info(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
+logger.debug(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
 
 
 

@@ -49,7 +49,7 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
         let newsFeed = '';
         let newsFeedcontent = '';
         let newsheader = '';
-        logger.info(`XMLDATA: ${xmlData}`);
+        logger.debug(`XMLDATA: ${xmlData}`);
 
         $('rss > channel > item').each((index, element) => {
           const title = $(element).find('title').text();
@@ -68,8 +68,8 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
 
 
           newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}.\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}.\n\n`;
-            logger.info(`header text: ${config_current.newsheadertext}`)
-          logger.info(`show header: ${config_current.shownewsheader}`)
+            logger.debug(`header text: ${config_current.newsheadertext}`)
+          logger.debug(`show header: ${config_current.shownewsheader}`)
           if (config_current.shownewsheader === 'yes') {
             newsFeedcontent1 = newsheader + newsFeed;
             newsFeedcontent = newsFeedcontent1.replace(/\.\./g, '\.')
@@ -103,8 +103,8 @@ const prepareNewsContent = async (config_current) => {
   const titlepatternregex = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`, 'g');
   const headerregex = new RegExp(`${config_current.newsheadertext}`, 'g');
   const headerreplacedregex = `${config_current.newsheadertext}.`;
-  console.log(newsContent)
-  console.log(titlepatternregex)
+  logger.debug(newsContent)
+  logger.debug(titlepatternregex)
 
 let intro;
 if (config_current.newsreadintro) {
@@ -120,7 +120,7 @@ if (config_current.readonlynewsheadings === "yes") {
   newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
   newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
 }
-  console.log(newsFeedread)
+  logger.debug(newsFeedread)
 // Creates an "output.mp3" audio file with default English text
 
 if (config_current.readnews === "yes") {
@@ -132,7 +132,7 @@ googleTTS.getAllAudioBase64(newsFeedread, { lang: `${audiolanguage}` }).then((re
   const buffers = results.map(results => Buffer.from(results.base64, 'base64'));
       const finalBuffer = Buffer.concat(buffers);
       fs.writeFileSync(path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`), finalBuffer);
-      console.log(`Audio file ${path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`)} created successfully`);
+      logger.success(`Audio file ${path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`)} created successfully`);
     })
     .catch((err) => {
       console.error(err);
@@ -186,37 +186,37 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 const generateNewsVideo = async (config_current, audioFile) => {
   if (config_current.hwaccel == "") {
     hwaccel = ` `;
-    logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
+    logger.debugaccell: no hwaccel'); // Use the constant as needed
   } else {
     hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-    logger.info(`Hwaccell: ${hwaccel}`);
+    logger.debugaccell: ${hwaccel}`);
   }
 
   if (config_current.hwaccel_device == "") {
     hwacceldevice = ``;
-    logger.info('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
+    logger.debugaccell_device: no hwacceldevice'); // Use the constant as needed
   } else {
     hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-    logger.info(`Hwaccell_device: ${hwacceldevice}`);
+    logger.debugaccell_device: ${hwacceldevice}`);
   }
   const resolution = config_current.videoresolution;
   const width = resolution.split("x")[0];
   const textWidth = Math.floor(width / 40);
   const backgroundcolour = current_theme.News.newsbackgroundcolour;
   const assfile = asssubstitution(`${path.join(NEWSDIR, `news-${NEWSNUM}.ass`)}`)
-  logger.info(assfile)
+  logger.debug(assfile)
 
 
 let speedFactor;
 if (config_current.readnews === "yes") {
 let fileduration;
 await mp3Duration(path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`), function (err, mp3fileduration) {
-  if (err) return console.log(err.message);
-  console.log('Your file is ' + mp3fileduration + ' seconds long');
+  if (err) return logger.error(err.message);
+  logger.debug('Your file is ' + mp3fileduration + ' seconds long');
   fileduration = mp3fileduration
 });
 speedFactor = fileduration / config_current.newsduration
-console.log('speedFactor is:', speedFactor)
+logger.debug('speedFactor is:', speedFactor)
 }
 if (config_current.readnews === "yes") {
 command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`)}" -filter_complex "[1:a]atempo=${speedFactor},volume=2[a]" -map 0 -map "[a]" -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;

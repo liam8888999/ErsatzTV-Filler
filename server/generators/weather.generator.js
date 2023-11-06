@@ -29,18 +29,18 @@ const weatherbackgroundcolour = current_theme.Weather.weatherbackgroundcolour;
 
 if (config_current.hwaccel == "") {
   hwaccel = ` `;
-  logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
+  logger.debugaccell: no hwaccel'); // Use the constant as needed
 } else {
   hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-  logger.info(`Hwaccell: ${hwaccel}`);
+  logger.debugaccell: ${hwaccel}`);
 }
 
 if (config_current.hwaccel_device == "") {
   hwacceldevice = ``;
-  logger.info('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
+  logger.debugaccell_device: no hwacceldevice'); // Use the constant as needed
 } else {
   hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-  logger.info(`Hwaccell_device: ${hwacceldevice}`);
+  logger.debugaccell_device: ${hwacceldevice}`);
 }
 
 let currentTempC;
@@ -77,19 +77,19 @@ weatherjsonObject = JSON.parse(data);
 // Now you can work with the jsonObject
 })
 .catch(error => {
-console.error('Error reading JSON file:', error);
+logger.error('Error reading JSON file:', error);
 });
-console.log(weatherjsonObject)
+logger.debug(weatherjsonObject)
 const currentCondition = weatherjsonObject.current_condition[0];
 
 currentTempC = currentCondition.temp_C;
 currentTempF = currentCondition.temp_F;
 humidity = currentCondition.humidity;
 weatherDescription = currentCondition.weatherDesc[0].value;
-console.log(currentTempC)
-console.log(currentTempF)
-console.log(humidity)
-console.log(weatherDescription)
+logger.debug(currentTempC)
+logger.debug(currentTempF)
+logger.debug(humidity)
+logger.debug(weatherDescription)
 dateTimeString = currentCondition.localObsDateTime;
 
 
@@ -138,7 +138,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
   [Events]
   Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
   Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
-logger.info(`weather error Ass text: ${assText}`)
+logger.debug(`weather error Ass text: ${assText}`)
   await fs.writeFileSync(`${path.join(WEATHERDIR, `error.ass`)}`, assText);
 
   }
@@ -146,9 +146,9 @@ logger.info(`weather error Ass text: ${assText}`)
 
   const weathercalculations = async () => {
     const weathervideofadeoutstart = config_current.weatherduration - config_current.weathervideofadeoutduration;
-    logger.info(`Weather video fade out start: ${weathervideofadeoutstart}`)
+    logger.debug(`Weather video fade out start: ${weathervideofadeoutstart}`)
     const weatheraudiofadeoutstart = config_current.weatherduration - config_current.weatheraudiofadeoutduration;
-    logger.info(`Weather Audio Fade out start: ${weatheraudiofadeoutstart}`)
+    logger.debug(`Weather Audio Fade out start: ${weatheraudiofadeoutstart}`)
     const weatherv4videolength = config_current.weatherduration * 3;
     const weathervideofadeoutstartv4 = weatherv4videolength - config_current.weathervideofadeoutduration;
     const weatheraudiofadeoutstartv4 = weatherv4videolength - config_current.weatheraudiofadeoutduration;
@@ -169,7 +169,7 @@ const assfile = asssubstitution(`${path.join(WEATHERDIR, `error.ass`)}`)
 const createWeatherV1 = async () => {
   try {
 
-    logger.info(`Weather Video fade out start: ${weatherCalculationsResult.weathervideofadeoutstart}`)
+    logger.debug(`Weather Video fade out start: ${weatherCalculationsResult.weathervideofadeoutstart}`)
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     //add theme information
     //part1

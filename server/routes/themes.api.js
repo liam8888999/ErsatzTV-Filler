@@ -66,7 +66,7 @@ app.get('/api/themes/readthemejson', async (req, res) => {
         res.status(500).send('Error reading data file');
         return;
       }
-      logger.info(`Theme json: ${JSON.parse(data)}`)
+      logger.debug(`Theme json: ${JSON.parse(data)}`)
       res.json(JSON.parse(data));
     });
   });
@@ -134,7 +134,7 @@ let themeName;
         const fileContent = fs.readFileSync(filePath, 'utf-8');
 
         // Log the file content before sending it
-        logger.info(`File Content: ${fileContent}`);
+        logger.debug(`File Content: ${fileContent}`);
 
  const discordMessage = {
      content: `${themeName}`, // Your message here

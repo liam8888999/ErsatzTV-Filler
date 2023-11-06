@@ -70,7 +70,7 @@ const themecolourdecoder = (colour) => {
  const retrieveTheme = async () => {
    const config_current = await retrieveCurrentConfiguration();
    const data = await fs.readFileSync(`${path.join(THEMES_FOLDER, config_current.theme)}.theme`);
-   logger.info(`Current Theme json: ${JSON.parse(data)}`)
+   logger.debug(`Current Theme json: ${JSON.parse(data)}`)
     return await checkThemeVersion(JSON.parse(data))
  }
 
@@ -78,13 +78,13 @@ const themecolourdecoder = (colour) => {
    if (themedata.ErsatzTVFillerTheme.ThemeVersion === CURRENT_THEME_VERSION) {
      return themedata;
    } else {
-     logger.info(`Theme data original: ${themedata}`);
+     logger.debug(`Theme data original: ${themedata}`);
      logger.error(`The theme is not version ${CURRENT_THEME_VERSION}, fallback for the missing items will be used`);
      // Add the ThemeVersion property here
      themedata.ChannelLogo = {
       channellogobackgroundcolour: '000000'
     };
-     logger.info(`Theme data edited: ${themedata}`);
+     logger.debug(`Theme data edited: ${themedata}`);
      return themedata;
    }
  };
@@ -146,7 +146,7 @@ const retrieveThemelists = async () => {
 .catch(error => {
 logger.error(`Error listing files in themes dir: ${error}`);
 });
-console.log(filesinthemesdirorig)
+logger.debug(filesinthemesdirorig)
 let filesinthemesdir2 = asssubstitution(`${filesinthemesdirorig.join(',')}`).split(',')
 const filesinthemesdir = filesinthemesdir2.map(item => {
   const parts = item.split('/');
@@ -156,7 +156,7 @@ const filesinthemesdir = filesinthemesdir2.map(item => {
 }
   return lastTwoFields; // Add back the leading '/'
 });
-console.log(filesinthemesdirorig)
+logger.debug(filesinthemesdirorig)
 
 let filesinthemesdiruserorig = await listFilesInDir(`${path.join(THEMES_FOLDER, 'user')}`)
 .catch(error => {

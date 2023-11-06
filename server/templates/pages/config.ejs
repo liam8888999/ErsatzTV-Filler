@@ -215,7 +215,7 @@
                     const fileName = selectedFile.name;
 
                     if (fileName.endsWith(allowedExtension) && fileName.startsWith('ersatztv-filler-backup-')) {
-                      logger.info('File accepted: ' + fileName);
+                      logger.success('File accepted: ' + fileName);
                       // You can proceed with handling the selected file here.
                     } else {
                       alert('Invalid file. Please select a file with the correct format.');

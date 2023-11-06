@@ -37,7 +37,7 @@ const CHANNEL_OFFLINE = async () => {
 
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     const current_theme = await retrieveCurrentTheme();
-    logger.info(`eachxmltvfile: ${eachxmltvfile}`);
+    logger.debug(`eachxmltvfile: ${eachxmltvfile}`);
     try {
       // Read the XML file
       const data = await fs.promises.readFile(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.xml`, 'utf-8');
@@ -73,7 +73,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
 
           const programme = result.tv.programme.find(program => program.title[0]._ === showName);
 
-      logger.info(`Next program name: ${programme}`)
+      logger.debug(`Next program name: ${programme}`)
 
             let nextShowName = '';
             let nextStartTime = '';
@@ -91,7 +91,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
       }
       }
       }
-      logger.info(`Next show start time: ${nextStartTime}`)
+      logger.debug(`Next show start time: ${nextStartTime}`)
       // Extract the time portion from the nextStartTime string
       const time = nextStartTime.substr(8, 6);
 
@@ -109,7 +109,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
 
 
 
-      logger.info(`Next Show Start time (AM/PM): ${nextShowStartTime}`)
+      logger.debug(`Next Show Start time (AM/PM): ${nextShowStartTime}`)
 
             // Calculate the duration for each subtitle
             const subtitleDuration = 0; // Duration in seconds
@@ -130,13 +130,13 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
         // const titlecolor = themecolourdecoder('FFBF00');
             const descriptioncolor = themecolourdecoder(`${current_theme.Offline.offlinetextcolour}`);
             const offlinebackgroundcolour = `${current_theme.Offline.offlinebackgroundcolour}`;
-            logger.info(`Offline Title Colour: ${titlecolor}`)
-            logger.info(`Offline Description Colour: ${descriptioncolor}`)
+            logger.debug(`Offline Title Colour: ${titlecolor}`)
+            logger.debug(`Offline Description Colour: ${descriptioncolor}`)
 
             const newsFeed = `{\\r}{\\b1}{\\c&H${titlecolor}&}This Channel is Currently offline\n\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}Next showing at: ${nextShowStartTime}\n\nStarting With: ${nextShowName}`;
             const lines = newsFeed.replace(/\n/g, '\\N');
         //    let lines = newsFeed;
-            logger.info(`channel-offline template: ${lines}`)
+            logger.debug(`channel-offline template: ${lines}`)
 
             // Combine the move effect with the subtitle text
             const subtitle = `${moveEffect}${lines}`;
@@ -147,7 +147,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
 
             const centering = `${height}/2`;
             const assimage = `${asssubstitution(path.join(CHANNEL_OFFLINEDIR, 'jimpimgdir', eachxmltvfile))}.png`
-            logger.info (assimage)
+            logger.debug (assimage)
 
             let assText = `[Script Info]
             Title: Scrolling Text Example
@@ -163,24 +163,24 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
               [Events]
               Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
               Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.toString().padStart(2, '0')}.00, Default, ScrollText, 0, 0, ${centering}, ,${subtitle}`;
-      logger.info(`Channel-offline Ass text: ${assText}`)
+      logger.debug(`Channel-offline Ass text: ${assText}`)
             fs.writeFileSync(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass`, assText);
 
 
             if (config_current.hwaccel == "") {
               hwaccel = ` `;
-              logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
+              logger.debugaccell: no hwaccel'); // Use the constant as needed
             } else {
               hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-              logger.info(`Hwaccell: ${hwaccel}`);
+              logger.debugaccell: ${hwaccel}`);
             }
 
       if (config_current.hwaccel_device == "") {
         hwacceldevice = ``;
-        logger.info('Hwaccel_device: no hwacceldevice'); // Use the constant as needed
+        logger.debugaccel_device: no hwacceldevice'); // Use the constant as needed
       } else {
         hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-        logger.info(`Hwaccel_device: ${hwacceldevice}`);
+        logger.debugaccel_device: ${hwacceldevice}`);
       }
       const assfile = asssubstitution(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass`)
         const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "movie='${assimage}' [image]; [in][image] overlay=(W-w)/2:(H-h)/5 [video+image]; [video+image] ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;
@@ -226,21 +226,21 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
     let fileList = await listFilesInDir(CHANNEL_OFFLINEDIR);
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    logger.info(`Channel-Offline File List: ${fileList}`);
+    logger.debug(`Channel-Offline File List: ${fileList}`);
 
     async function processFilesSequentially() {
       for (const file of fileList) {
         if (path.extname(file) === '.xml') {
-          logger.info(`channel-offline file: ${file}`);
+          logger.debug(`channel-offline file: ${file}`);
           const filename = `${file}`;
-          logger.info(`channel-offline filename: ${filename}`);
+          logger.debug(`channel-offline filename: ${filename}`);
 
           // Use path.sep to get the correct path separator for the platform
           const lastIndex = filename.lastIndexOf(path.sep);
           const filenamenopath = filename.substring(lastIndex + 1);
           const filePath = filenamenopath.replace(/\.xml$/, "").replace(CHANNEL_OFFLINEDIR, "");
 
-          logger.info(`file path is ${filePath}`);
+          logger.debug(`file path is ${filePath}`);
           try {
             await startTimefind(filePath);
             logger.success(`File processed successfully: ${file}`);

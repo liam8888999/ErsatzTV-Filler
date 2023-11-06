@@ -11,8 +11,8 @@ const customLevels = {
   updates: 2,
   warn: 3,
   error: 4,
-  debug: 5,
-  ffmpeg: 6
+  ffmpeg: 5,
+  debug: 6
 };
 
 // Define colors for the custom log levels
@@ -50,7 +50,7 @@ const logFormat = winston.format.printf(({ level, message, timestamp }) => {
 // Create the logger
   const logger = winston.createLogger({
     levels: customLevels,
-    level: 'ffmpeg',
+    level: 'debug',
     format: winston.format.combine(
       winston.format.timestamp({ format: customTimestamp }),
       logFormat
@@ -62,7 +62,7 @@ const logFormat = winston.format.printf(({ level, message, timestamp }) => {
         datePattern: 'YYYY-MM-DD',
         maxFiles: '7d', // Keep logs for 7 days
         maxSize: '900m', // Rotate logs if the file size exceeds 20MB
-        level: 'debug'
+        level: 'error'
       }),
       new DailyRotateFile({
         filename: `${path.join(LOGFOLDER, 'ersatztv-filler-ffmpeg')}-%DATE%.log`,

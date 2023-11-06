@@ -38,7 +38,7 @@ const CHANNEL_LOGO = async () => {
 
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     const current_theme = await retrieveCurrentTheme();
-    logger.info(`eachxmltvfile: ${eachxmltvfile}`);
+    logger.debug(`eachxmltvfile: ${eachxmltvfile}`);
     try {
       // Read the XML file
       const data = await fs.promises.readFile(`${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.xml`, 'utf-8');
@@ -80,18 +80,18 @@ const CHANNEL_LOGO = async () => {
 
             if (config_current.hwaccel == "") {
               hwaccel = ` `;
-              logger.info('Hwaccell: no hwaccel'); // Use the constant as needed
+              logger.debugaccell: no hwaccel'); // Use the constant as needed
             } else {
               hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-              logger.info(`Hwaccell: ${hwaccel}`);
+              logger.debugaccell: ${hwaccel}`);
             }
 
       if (config_current.hwaccel_device == "") {
         hwacceldevice = ``;
-        logger.info('Hwaccel_device: no hwacceldevice'); // Use the constant as needed
+        logger.debugaccel_device: no hwacceldevice'); // Use the constant as needed
       } else {
         hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-        logger.info(`Hwaccel_device: ${hwacceldevice}`);
+        logger.debugaccel_device: ${hwacceldevice}`);
       }
         const backgroundcolour = current_theme.ChannelLogo.channellogobackgroundcolour;
 
@@ -155,21 +155,21 @@ const CHANNEL_LOGO = async () => {
     let fileList = await listFilesInDir(CHANNEL_LOGODIR);
 
 
-    logger.info(`Channel-logo File List: ${fileList}`);
+    logger.debug(`Channel-logo File List: ${fileList}`);
 
     async function processFilesSequentially() {
       for (const file of fileList) {
         if (path.extname(file) === '.xml') {
-          logger.info(`channel-logo file: ${file}`);
+          logger.debug(`channel-logo file: ${file}`);
           const filename = `${file}`;
-          logger.info(`channel-logo filename: ${filename}`);
+          logger.debug(`channel-logo filename: ${filename}`);
 
           // Use path.sep to get the correct path separator for the platform
           const lastIndex = filename.lastIndexOf(path.sep);
           const filenamenopath = filename.substring(lastIndex + 1);
           const filePath = filenamenopath.replace(/\.xml$/, "").replace(CHANNEL_LOGODIR, "");
 
-          logger.info(`file path is ${filePath}`);
+          logger.debug(`file path is ${filePath}`);
           try {
             await startTimefind(filePath);
             logger.success(`File processed successfully: ${file}`);

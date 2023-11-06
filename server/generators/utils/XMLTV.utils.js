@@ -35,7 +35,7 @@ const splitXMLTVByChannel = async (xmltvpath) => {
 
       const channelXMLString = builder.buildObject(channelXMLData);
       const channelFilePath = `${path.join(xmltvpath, channelId)}.xml`;
-      logger.info(`ChannelFilePath: ${channelFilePath}`);
+      logger.debug(`ChannelFilePath: ${channelFilePath}`);
       await fs.promises.writeFile(channelFilePath, channelXMLString);
       logger.success(`Channel file saved: ${channelFilePath}`);
     });

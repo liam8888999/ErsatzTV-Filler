@@ -77,7 +77,7 @@ const osInfo = {
 };
 
 res.json({ status: 'OK', os: osInfo });
-logger.info(`System info from health api: ${osInfo}`);
+logger.debug(`System info from health api: ${osInfo}`);
 });
 
 

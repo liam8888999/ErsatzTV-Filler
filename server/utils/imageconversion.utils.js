@@ -19,7 +19,7 @@ const inputFileName = path.basename(inputImagePath, path.extname(inputImagePath)
 const outputImagePath = `${path.join(output, 'jimpimgdir', inputFileName)}.png`;
 logger.info(`Input image path: ${inputImagePath}`)
 logger.info(`Output image path: ${outputImagePath}`)
-console.log(xvalue, yvalue)
+logger.info(xvalue, yvalue)
 
 const xmeasure = xvalue
 const ymeasure = yvalue
