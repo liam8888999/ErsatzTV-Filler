@@ -24,6 +24,7 @@
         <button class="tab-link" onclick="openTab(event, 'tab8')">Login</button>
         <button class="tab-link" onclick="openTab(event, 'tab9')">Backup & Restore</button>
     <button class="tab-link" onclick="openTab(event, 'tab10')">Migrate Config</button>
+    <button class="tab-link" onclick="openTab(event, 'tab11')">Advanced Config</button>
   </div>
     <br>
     <button onclick="returnConfigJson()" style="margin-top:10px;">Show config.json file</button>
@@ -34,7 +35,7 @@
           <form method="post" action="/config" id="config-form">
               <div id="variables">
                   <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                    <% if(key !== 'theme' && !['newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
+                    <% if(key !== 'theme' && !['customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
                       <%- include(text_input, {
                           key,
                           label: CURRENT_CONFIG[key]
@@ -108,6 +109,7 @@
       <% } %>
     </div>
  <div id="tab5" class="tab">
+   <br>
     <center> <u> <h2>XMLTV Merge Settings</h2></u></center>
     <center> <a href="/xmltvmerge/mergedxmltv.xml" class="button">XMLTVMERGE File LINK</a> </center>
     <center><p>please list epg locations as a list with a space inbetween each, for example: 1.epg 2.epg 3.epg</p></center>
@@ -318,4 +320,29 @@
 
                 <br>
   </div>
+  <div id="tab11" class="tab">
+        <br>
+      <center> <u> <h2>Advanced Config</h2></u></center>
+    <center>  <p>** It is <b>NOT RECCOMENDED</b> to change these settings, the options here are untested and things may break unexpectedly **</p> </center>
+
+      <br>
+      <% if(CONFIG_AVAILABLE){ %>
+          <form method="post" action="/config" id="config-form">
+              <div id="variables">
+                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+                    <% if(key !== 'theme' && !['audiolanguage', 'webport', 'ersatztv', 'xmltv', 'videoresolution', 'state', 'city', 'output', 'customaudio', 'videolength', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
+                      <%- include(text_input, {
+                          key,
+                          label: CURRENT_CONFIG[key]
+                      }) %>
+                       <% } %>
+                  <% }); %>
+              </div>
+          </form>
+      <% }else{ %>
+          <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+
+      <br>
+</div>
   </div>
