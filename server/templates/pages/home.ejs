@@ -14,63 +14,7 @@
 <br>
 <!--  <center><button onclick="window.location.href='/output'">View Filler Output</button></center> -->
   <br>
-<center>  <u><h2>Upload Old Config</h2></u>
-  <button onclick="toggleoldconfigupload()">Upload old config <span>▾</span></button>
-  <br>
-    <div id="oldconfigupload" style="display: none;">
-  <p>The old config.conf file can be uploaded here to migrate the data to the new (current) config</p>
-  <p><b>Please Note:</b> Some configs will be overwritten</p>
-  <form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" id="fileInput" accept="config.conf" class="button">
-    <br>
-    <br>
-    <input type="submit" value="Upload" class="button">
-  </form>
-  <br></div>
-  </center>
-  <br>
 
-  <script>
-    document.getElementById("uploadForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent default form submission
-
-      var fileInput = document.getElementById("fileInput");
-      var file = fileInput.files[0];
-
-      if (file) {
-        var formData = new FormData();
-        formData.append("file", file);
-
-        // You can send the formData object using AJAX or fetch to handle the file upload on the server
-        // Example using fetch:
-        fetch("/uploadoldmodeltheme", {
-          method: "POST",
-          body: formData
-        })
-        .then(response => {
-          // Handle the response from the server
-          logger.success("Upload successful");
-        })
-        .catch(error => {
-          // Handle any errors
-          logger.error("Upload failed:", error);
-        });
-      } else {
-        // Handle case where no file is selected
-        logger.error("No file selected");
-      }
-    });
-  </script>
-  <script>
-  function toggleoldconfigupload() {
-  var hintText = document.getElementById('oldconfigupload');
-  if (hintText.style.display === 'none') {
-  hintText.style.display = 'block';
-  } else {
-  hintText.style.display = 'none';
-  }
-  }
-  </script>
 
 <div class="home-page-container">
   <div class="home-page-box">

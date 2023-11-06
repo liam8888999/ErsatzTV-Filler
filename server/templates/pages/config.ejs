@@ -19,11 +19,12 @@
       <button class="tab-link" onclick="openTab(event, 'tab3')">News Settings</button>
       <button class="tab-link" onclick="openTab(event, 'tab4')">Channel Offline Settings</button>
       <button class="tab-link" onclick="openTab(event, 'tab5')">XMLTV Merge</button>
-      <button class="tab-link" onclick="openTab(event, 'tab6')">Vanity Cards</button>
-      <button class="tab-link" onclick="openTab(event, 'tab7')">Channel Logo</button>
-      <button class="tab-link" onclick="openTab(event, 'tab8')">Login</button>
-      <button class="tab-link" onclick="openTab(event, 'tab9')">Backup & Restore</button>
-    </div>
+        <button class="tab-link" onclick="openTab(event, 'tab6')">Vanity Cards</button>
+        <button class="tab-link" onclick="openTab(event, 'tab7')">Channel Logo</button>
+        <button class="tab-link" onclick="openTab(event, 'tab8')">Login</button>
+        <button class="tab-link" onclick="openTab(event, 'tab9')">Backup & Restore</button>
+    <button class="tab-link" onclick="openTab(event, 'tab10')">Migrate Config</button>
+  </div>
     <br>
     <button onclick="returnConfigJson()" style="margin-top:10px;">Show config.json file</button>
     <div id="tab1" class="tab" style="display: block;">
@@ -263,5 +264,58 @@
               });
             </script>
             </div>
+            <div id="tab10" class="tab">
+                  <br>
+                <center> <u> <h2>Migrate Config</h2></u></center>
+
+                <br>
+                <center>  <u><h4>Migrate V0.x Congig to V1.x cofig</h4></u>
+
+                  <br>
+                  <p>The old config.conf file can be uploaded here to migrate the data to the new (current) config</p>
+                  <p><b>Please Note:</b> Some configs will be overwritten</p>
+                  <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" accept="config.conf" class="button">
+                    <br>
+                    <br>
+                    <input type="submit" value="Upload" class="button">
+                  </form>
+                  <br>
+                  </center>
+                  <br>
+
+                  <script>
+                    document.getElementById("uploadForm").addEventListener("submit", function(event) {
+                      event.preventDefault(); // Prevent default form submission
+
+                      var fileInput = document.getElementById("fileInput");
+                      var file = fileInput.files[0];
+
+                      if (file) {
+                        var formData = new FormData();
+                        formData.append("file", file);
+
+                        // You can send the formData object using AJAX or fetch to handle the file upload on the server
+                        // Example using fetch:
+                        fetch("/uploadoldmodeltheme", {
+                          method: "POST",
+                          body: formData
+                        })
+                        .then(response => {
+                          // Handle the response from the server
+                          logger.success("Upload successful");
+                        })
+                        .catch(error => {
+                          // Handle any errors
+                          logger.error("Upload failed:", error);
+                        });
+                      } else {
+                        // Handle case where no file is selected
+                        logger.error("No file selected");
+                      }
+                    });
+                  </script>
+
+                <br>
   </div>
   </div>
