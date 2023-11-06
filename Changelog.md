@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.7.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.10...V1.7.0) (2023-11-06)
+
+
+### Added
+
+* attempt to create output directory if it doesnt exist ([a763be9](https://github.com/liam8888999/ErsatzTV-Filler/commit/a763be974ce285d306bb309fe9276d730b69493f))
+
+
+### Fixed
+
+* another bunch of pesky typos ([988f25e](https://github.com/liam8888999/ErsatzTV-Filler/commit/988f25eff45dea1e39a21024b49a00840bd16161))
+* housekeeping and pesky typo ([343fa4f](https://github.com/liam8888999/ErsatzTV-Filler/commit/343fa4fef0f3b69794a3b5b9fe9475ecf6443490))
+
+
+### Changed
+
+* logging size improvements ([a6169cd](https://github.com/liam8888999/ErsatzTV-Filler/commit/a6169cd9f6ba109b4a5a6744b7a7a9010b23286b))
+* move advanced settings to their own location ([fcd4615](https://github.com/liam8888999/ErsatzTV-Filler/commit/fcd4615499004ac9fa7788b2e2e5c066f85f0041))
+* move old config migration to config page ([0adb76c](https://github.com/liam8888999/ErsatzTV-Filler/commit/0adb76c770facf96a343699eeb2176dc9e047732))
+
 ## [1.6.10](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.9...V1.6.10) (2023-11-06)
 
 
