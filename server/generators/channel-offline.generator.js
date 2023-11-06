@@ -262,6 +262,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
   try {
 
     await splitXMLTVByChannel(CHANNEL_OFFLINEDIR);
+    await createDirectoryIfNotExists(config_current.output);
     await runnersT();
   } catch (error) {
     // Handle the connection error

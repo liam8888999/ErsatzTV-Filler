@@ -257,6 +257,7 @@ exec(commandOnError3, (error3, stdout3, stderr3) => {
   await generateNewsFeed(config_current, audioFile, current_theme);
   await prepareNewsContent(config_current);
   await prepareSubtitleText(config_current);
+  await createDirectoryIfNotExists(config_current.output);
   await generateNewsVideo(config_current, audioFile);
   isFunctionRunning = false;
 };

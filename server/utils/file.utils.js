@@ -77,13 +77,16 @@ async function listFilesInDir(directoryPath) {
 
 
 const createDirectoryIfNotExists = (directoryPath) => {
+  if (directoryPath && directoryPath.trim() !== '') {
   if (!fs.existsSync(directoryPath)) {
     fs.mkdirSync(directoryPath);
     logger.success(`Directory created: ${directoryPath}`);
   } else {
     logger.warn(`Directory already exists, will not be created: ${directoryPath}`);
   }
+}
 };
+
 
 
 module.exports = {

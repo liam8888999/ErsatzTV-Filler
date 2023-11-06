@@ -78,7 +78,6 @@ isFunctionRunning = true;
       });
     });
   };
-
 const createVanityCard = async (filenumber) => {
   try {
     if (config_current.hwaccel == "") {
@@ -142,6 +141,7 @@ async function processVanityCards() {
 }
 
 // Assuming you're in an async function or using the `async` keyword somewhere
+await createDirectoryIfNotExists(config_current.output);
 await processVanityCards();
  isFunctionRunning = false;
 

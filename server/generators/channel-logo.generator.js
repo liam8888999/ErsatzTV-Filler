@@ -191,6 +191,7 @@ const CHANNEL_LOGO = async () => {
   try {
 
     await splitXMLTVByChannel(CHANNEL_LOGODIR);
+    await createDirectoryIfNotExists(config_current.output);
     await runnersT();
   } catch (error) {
     // Handle the connection error

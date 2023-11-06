@@ -164,6 +164,7 @@ logger.info(`weather error Ass text: ${assText}`)
   const weatherCalculationsResult = await weathercalculations();
 
 
+
 const assfile = asssubstitution(`${path.join(WEATHERDIR, `error.ass`)}`)
 const createWeatherV1 = async () => {
   try {
@@ -332,6 +333,7 @@ logger.ffmpeg(`ffmpeg weather commandv3: ${commandv3}`);
 
 
 await downloadimages();
+await createDirectoryIfNotExists(config_current.output);
 await createWeatherV1();
 await createWeatherV2();
 await createWeatherV3();

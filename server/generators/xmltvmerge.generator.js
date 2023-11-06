@@ -77,6 +77,7 @@ const XMLTVPARSE = async () => {
   });
 
   const xmlString = xml.end({ pretty: true });
+  createDirectoryIfNotExists(config_current.output);
   fs.writeFileSync(`${path.join(config_current.output, 'mergedxmltv.xml')}`, xmlString, 'utf8');
 
   logger.success('XMLTV file created successfully.');
