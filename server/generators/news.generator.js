@@ -186,18 +186,18 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 const generateNewsVideo = async (config_current, audioFile) => {
   if (config_current.hwaccel == "") {
     hwaccel = ` `;
-    logger.debugaccell: no hwaccel'); // Use the constant as needed
+    logger.debug('HWaccell: no hwaccel'); // Use the constant as needed
   } else {
     hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-    logger.debugaccell: ${hwaccel}`);
+    logger.debug(`Hwaccell: ${hwaccel}`);
   }
 
   if (config_current.hwaccel_device == "") {
     hwacceldevice = ``;
-    logger.debugaccell_device: no hwacceldevice'); // Use the constant as needed
+    logger.debug('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
   } else {
     hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-    logger.debugaccell_device: ${hwacceldevice}`);
+    logger.debug(`Hwaccell_device: ${hwacceldevice}`);
   }
   const resolution = config_current.videoresolution;
   const width = resolution.split("x")[0];

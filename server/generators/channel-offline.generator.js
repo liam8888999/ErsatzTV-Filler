@@ -169,18 +169,18 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
 
             if (config_current.hwaccel == "") {
               hwaccel = ` `;
-              logger.debugaccell: no hwaccel'); // Use the constant as needed
+              logger.debug('Hwaccell: no hwaccel'); // Use the constant as needed
             } else {
               hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-              logger.debugaccell: ${hwaccel}`);
+              logger.debug(`Hwaccell: ${hwaccel}`);
             }
 
       if (config_current.hwaccel_device == "") {
         hwacceldevice = ``;
-        logger.debugaccel_device: no hwacceldevice'); // Use the constant as needed
+        logger.debug('Hwaccel_device: no hwacceldevice'); // Use the constant as needed
       } else {
         hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-        logger.debugaccel_device: ${hwacceldevice}`);
+        logger.debug(`Hwaccel_device: ${hwacceldevice}`);
       }
       const assfile = asssubstitution(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass`)
         const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "movie='${assimage}' [image]; [in][image] overlay=(W-w)/2:(H-h)/5 [video+image]; [video+image] ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;

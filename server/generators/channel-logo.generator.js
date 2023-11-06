@@ -80,18 +80,18 @@ const CHANNEL_LOGO = async () => {
 
             if (config_current.hwaccel == "") {
               hwaccel = ` `;
-              logger.debugaccell: no hwaccel'); // Use the constant as needed
+              logger.debug('Hwaccell: no hwaccel'); // Use the constant as needed
             } else {
               hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-              logger.debugaccell: ${hwaccel}`);
+              logger.debug(`Hwaccell: ${hwaccel}`);
             }
 
       if (config_current.hwaccel_device == "") {
         hwacceldevice = ``;
-        logger.debugaccel_device: no hwacceldevice'); // Use the constant as needed
+        logger.debug('Hwaccel_device: no hwacceldevice'); // Use the constant as needed
       } else {
         hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-        logger.debugaccel_device: ${hwacceldevice}`);
+        logger.debug(`Hwaccel_device: ${hwacceldevice}`);
       }
         const backgroundcolour = current_theme.ChannelLogo.channellogobackgroundcolour;
 

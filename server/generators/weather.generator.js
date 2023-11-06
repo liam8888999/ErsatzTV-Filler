@@ -29,18 +29,18 @@ const weatherbackgroundcolour = current_theme.Weather.weatherbackgroundcolour;
 
 if (config_current.hwaccel == "") {
   hwaccel = ` `;
-  logger.debugaccell: no hwaccel'); // Use the constant as needed
+  logger.debug('Hwaccell: no hwaccel'); // Use the constant as needed
 } else {
   hwaccel = ` -hwaccel ${config_current.hwaccel} `;
-  logger.debugaccell: ${hwaccel}`);
+  logger.debug(`Hwaccell: ${hwaccel}`);
 }
 
 if (config_current.hwaccel_device == "") {
   hwacceldevice = ``;
-  logger.debugaccell_device: no hwacceldevice'); // Use the constant as needed
+  logger.debug('Hwaccell_device: no hwacceldevice'); // Use the constant as needed
 } else {
   hwacceldevice = `-hwaccel_device ${config_current.hwaccel_device} `;
-  logger.debugaccell_device: ${hwacceldevice}`);
+  logger.debug(`Hwaccell_device: ${hwacceldevice}`);
 }
 
 let currentTempC;
