@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.10](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.9...V1.6.10) (2023-11-06)
+
+
+### Removed
+
+* create output directory automatically ([8a42961](https://github.com/liam8888999/ErsatzTV-Filler/commit/8a42961f5198d1bf6235527a398172a4f1fb9698))
+
 ## [1.6.9](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.8...V1.6.9) (2023-11-03)
 
 
