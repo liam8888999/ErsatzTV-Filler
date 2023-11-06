@@ -99,7 +99,6 @@ const createVanityCard = async (filenumber) => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     // add theme information
     // part1
-    createDirectoryIfNotExists(config_current.output);
     const commandvanitycard = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=white:${config_current.videoresolution} -i "${path.join(VANITYCARDDIR, 'vanitycard')}-${filenumber}.jpg" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.vanitycardduration} ${path.join(config_current.output, 'vanitycard')}-${filenumber}.mp4`;
     logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
 
