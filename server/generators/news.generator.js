@@ -38,7 +38,7 @@ const generateNewsFeed = async (config_current, audioFile, current_theme) => {
    const protocol = newsfeed.startsWith('https') ? https : http;
 
   return new Promise((resolve, reject) => {
-    const request = protocol.get(url, (response) => {
+    const request = protocol.get(newsfeed, (response) => {
       let xmlData = '';
 
       response.on('data', (chunk) => {
@@ -116,10 +116,10 @@ intro = `${config_current.newsreadintro}...`
 }
 if (config_current.readonlynewsheadings === "yes") {
     const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
-  newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
+  newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.')
   newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
 } else {
-  newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.')
+  newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.')
   newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
 }
   logger.debug(newsFeedread)
