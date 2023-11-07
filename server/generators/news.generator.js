@@ -35,8 +35,10 @@ let newsFeed2;
 const generateNewsFeed = async (config_current, audioFile, current_theme) => {
   const newsfeed = config_current.newsfeed;
 
-  await new Promise((resolve, reject) => {
-    https.get(newsfeed, (response) => {
+   const protocol = newsfeed.startsWith('https') ? https : http;
+
+  return new Promise((resolve, reject) => {
+    const request = protocol.get(url, (response) => {
       let xmlData = '';
 
       response.on('data', (chunk) => {
