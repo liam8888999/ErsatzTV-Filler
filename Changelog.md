@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.7.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.0...V1.7.1) (2023-11-07)
+
+
+### Fixed
+
+* allow http news feeds ([ba407a8](https://github.com/liam8888999/ErsatzTV-Filler/commit/ba407a8942b31954898eef23b67fab19b7fac00e))
+* improve color selection for weather fallback text depending on theme in use ([280d8a1](https://github.com/liam8888999/ErsatzTV-Filler/commit/280d8a1e8e33b9f0ca2f104f9718a5f4811c0136))
+* more small news fixes for edge cases ([7c8240f](https://github.com/liam8888999/ErsatzTV-Filler/commit/7c8240f9621a46a6b11d6e45e94e72c427182772))
+
 ## [1.7.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.6.10...V1.7.0) (2023-11-06)
 
 
