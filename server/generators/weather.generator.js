@@ -10,6 +10,7 @@ const fs = require('fs');
 const client = require('https');
 const path = require('path');
 const { asssubstitution } = require("../utils/string.utils");
+const { contrastColor } = require('contrast-color');
 
 let isFunctionRunning = false;
 
@@ -92,12 +93,13 @@ logger.debug(humidity)
 logger.debug(weatherDescription)
 dateTimeString = currentCondition.localObsDateTime;
 
-
+const contrasttextcolor = contrastColor({ bgColor: `${weatherbackgroundcolour}`, threshold: 140 }).replace(/#/g, '');
+const textcolor = themecolourdecoder(contrasttextcolor)
 // Step 7: Prepare the ASS subtitle text
 if (config_current.showweatherheader === "yes") {
-textterror = `${config_current.weatherheader}\\N\\N\\NUnfortunately the weather filler is unavailable at this time,\\N\\NHopefully it will be back soon\\N\\NThe Current Temperature is ${currentTempC}°C or ${currentTempF}°F\\N\\NThe Current Humidity ${humidity}percent\\N\\NIt is Currently ${weatherDescription} outside\\N\\NInformation is correct as of ${dateTimeString}\\N`
+textterror = `{\\c&H${textcolor}&}${config_current.weatherheader}\\N\\N\\NUnfortunately the weather filler is unavailable at this time,\\N\\NHopefully it will be back soon\\N\\NThe Current Temperature is ${currentTempC}°C or ${currentTempF}°F\\N\\NThe Current Humidity ${humidity}percent\\N\\NIt is Currently ${weatherDescription} outside\\N\\NInformation is correct as of ${dateTimeString}\\N`
 } else {
-  textterror = `Unfortunately the weather filler is unavailable at this time,\\N\\N  Hopefully it will be back soon\\N\\N  The Current Temperature is ${currentTempC}°C or ${currentTempF}°F\\N\\N  The Current Humidity ${humidity}percent\\N\\N  It is Currently ${weatherDescription} outside\\N\\N  Information is correct as of ${dateTimeString}\\N`
+  textterror = `{\\c&H${textcolor}&}Unfortunately the weather filler is unavailable at this time,\\N\\N  Hopefully it will be back soon\\N\\N  The Current Temperature is ${currentTempC}°C or ${currentTempF}°F\\N\\N  The Current Humidity ${humidity}percent\\N\\N  It is Currently ${weatherDescription} outside\\N\\N  Information is correct as of ${dateTimeString}\\N`
 }
 
 
