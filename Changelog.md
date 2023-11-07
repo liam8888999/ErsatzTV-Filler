@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.1...V1.7.2) (2023-11-07)
+
+
+### Fixed
+
+* small news reader pronunciation improvement ([c10e2f4](https://github.com/liam8888999/ErsatzTV-Filler/commit/c10e2f492163a47e4b3b6e17b14202ebebe19650))
+
 ## [1.7.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.0...V1.7.1) (2023-11-07)
 
 
