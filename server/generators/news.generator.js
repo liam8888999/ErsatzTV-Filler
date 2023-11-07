@@ -116,10 +116,10 @@ intro = `${config_current.newsreadintro}...`
 }
 if (config_current.readonlynewsheadings === "yes") {
     const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
-  newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.')
+  newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.').replace(/U\.\.S/g, 'U\.S').replace(/U\.\.K/g, 'U\.K').replace(/U\.\.N/g, 'U\.N')
   newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
 } else {
-  newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.')
+  newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.').replace(/U\.\.S/g, 'U\.S').replace(/U\.\.K/g, 'U\.K').replace(/U\.\.N/g, 'U\.N')
   newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
 }
   logger.debug(newsFeedread)
