@@ -19,11 +19,13 @@
 <div class="home-page-container">
   <div class="home-page-box">
   <center><u><h1>News</h1></u></center>
-  <center><p>Nothing at the moment</p></center>
-  <br>
 
+  <%- markdown %>
+<br>
+<div style="padding-right: 5px; width: 95%;">
 <center><b><i>  <blockquote><%= quote.body %></blockquote>
   <p><%= quote.author %></p></i></b></center>
+  </div>
 </div>
   <div class="home-page-box">
   <center><u><h1>Health Checks</h1></u></center>

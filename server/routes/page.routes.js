@@ -72,6 +72,11 @@ const checkAuthentication = (req, res, next) => {
     return { body: quote.body, author: quote.author };
 }
 const randomquote = getRandomQuote()
+let html = await changelogReplace()
+const $ = cheerio.load(html);
+const parent = $('h3').eq(1).parent();
+const content = parent.find('h3').eq(1).addClass('expand-button').nextAll();
+content.addBack().wrapAll('<div class="expand-content hidden"></div>');
   const ErsatzTVURL = config_current.ersatztv
       res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "home", {
         layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
@@ -81,7 +86,8 @@ const randomquote = getRandomQuote()
         updatestatus: UPDATESTATUS,
         authentication: authentication,
         oldtypethemes: oldtypethemes,
-        quote: randomquote
+        quote: randomquote,
+        markdown: $.html().replace(/<u><center><h1>Changelog<\/h1><\/center><\/u>/g, '').replace(/border-top: 1px solid darkgray/g, 'border-top: none;').replace(/padding-top: 15px;/g, 'padding-top: 0px;')
    });
 });
 
