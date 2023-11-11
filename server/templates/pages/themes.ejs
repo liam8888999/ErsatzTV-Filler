@@ -8,9 +8,13 @@
     <%= oldtypethemes %>
     </div>
 <ul id="userthemes" style="display: none;">
-  <% for (var i = 0; i < downloadedthemesarray.length; i++) { %>
-    <li><%= downloadedthemesarray[i] %></li>
-  <% } %>
+  <% if (downloadedthemesarray && downloadedthemesarray.length > 0 && downloadedthemesarray.some(theme => theme.trim() !== '')) { %>
+  <ul>
+    <% for (var i = 0; i < downloadedthemesarray.length; i++) { %>
+      <li><%= downloadedthemesarray[i] %></li>
+    <% } %>
+  </ul>
+<% } %>
 </ul>
 </div>
 
