@@ -89,11 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         // If there are no themes, display a message
         const themeListDiv = document.getElementById('theme-list');
-        const messageElement = document.createElement('p');
+        const messageElement = document.createElement('h4');
         messageElement.textContent = 'No user themes available.';
 
         // Add an inline style to center-align the message
         messageElement.style.textAlign = 'center';
+        messageElement.style.color = 'brown';
 
         themeListDiv.appendChild(messageElement);
     }
