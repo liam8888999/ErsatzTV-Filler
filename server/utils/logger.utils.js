@@ -61,14 +61,12 @@ const logFormat = winston.format.printf(({ level, message, timestamp }) => {
         filename: `${path.join(LOGFOLDER, 'ersatztv-filler')}-%DATE%.log`,
         datePattern: 'YYYY-MM-DD',
         maxFiles: '7d', // Keep logs for 7 days
-        maxSize: '900m', // Rotate logs if the file size exceeds 20MB
         level: 'error'
       }),
       new DailyRotateFile({
         filename: `${path.join(LOGFOLDER, 'ersatztv-filler-ffmpeg')}-%DATE%.log`,
         datePattern: 'YYYY-MM-DD',
         maxFiles: '7d', // Keep logs for 7 days
-        maxSize: '900m', // Rotate logs if the file size exceeds 20MB
         level: 'ffmpeg'
       })
     ]
