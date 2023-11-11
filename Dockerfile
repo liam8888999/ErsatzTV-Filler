@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:stable-slim
 
 RUN apt-get update \
     && DEBIAN_FRONTEND="noninteractive" apt-get install -y tzdata fontconfig fonts-dejavu \
