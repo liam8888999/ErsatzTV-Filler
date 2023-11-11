@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.7.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.2...V1.7.3) (2023-11-11)
+
+
+### Added
+
+* add latest changelog to homepage ([9db967d](https://github.com/liam8888999/ErsatzTV-Filler/commit/9db967d61982ee982ccd95307f3f00dbabfca81a))
+
+
+### Fixed
+
+* docker files updated which reduces vulnerabilities and size ([fc37b88](https://github.com/liam8888999/ErsatzTV-Filler/commit/fc37b88bde0e78c045e421f7b0578f8b7dc91605))
+* issue where an empty user theme would show up when there was none in the directory ([c7b1ef2](https://github.com/liam8888999/ErsatzTV-Filler/commit/c7b1ef2954e637102f9704a6d39979e04b7e56ee))
+* several theme page fixes ([e06d019](https://github.com/liam8888999/ErsatzTV-Filler/commit/e06d019fe188c72b5bd690dd42ec4aec34f5a28f))
+* web prefer darkmode correctly rather than loading light first ([a205789](https://github.com/liam8888999/ErsatzTV-Filler/commit/a205789624a199d0ef36b3a9b1fa18cd56dfdd95))
+
+
+### Changed
+
+* remove pre nodejs versions from changelog ([48b699f](https://github.com/liam8888999/ErsatzTV-Filler/commit/48b699ff92bdc49206b41ad9473d7046b05a0eba))
+
 ## [1.7.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.1...V1.7.2) (2023-11-07)
 
 
