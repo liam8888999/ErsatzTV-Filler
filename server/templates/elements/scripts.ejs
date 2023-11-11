@@ -162,8 +162,8 @@ async function loadThemePreference() {
     const response = await fetch('/api/config/webtheme/load');
     const data = await response.json();
     const theme = data.theme;
-    if (theme === 'dark') {
-      document.body.classList.add('dark-mode');
+    if (theme === 'light') {
+      document.body.classList.remove('dark-mode');
     }
 
     // Set the initial state and position of the theme toggle switch
