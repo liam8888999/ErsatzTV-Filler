@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.5](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.4...V1.7.5) (2023-11-14)
+
+
+### Fixed
+
+* small gui fix ([82d89c8](https://github.com/liam8888999/ErsatzTV-Filler/commit/82d89c8d60b27d5ebf62c9cc7b62605604ea3d82))
+
 ## [1.7.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.3...V1.7.4) (2023-11-14)
 
 
