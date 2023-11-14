@@ -116,9 +116,9 @@ const contrasttextcolor = contrastColor({ bgColor: `${weatherbackgroundcolour}`,
 const textcolor = themecolourdecoder(contrasttextcolor)
 // Step 7: Prepare the ASS subtitle text
 if (config_current.showweatherheader === "yes") {
-textterror = `{\\c&H${textcolor}&}${config_current.weatherheader}\\N\\N\\NUnfortunately the weather filler is unavailable at this time,\\N\\NHopefully it will be back soon\\N\\NThe Current Temperature is ${TEMPWITHUNIT}\\N\\NThe Current Humidity ${humidity}percent\\N\\NIt is Currently ${weatherDescription} outside\\N\\NInformation is correct as of ${dateTimeString}\\N`
+textterror = `{\\c&H${textcolor}&}${config_current.weatherheader}\\N\\N\\NUnfortunately the weather filler is unavailable at this time,\\N\\NHopefully it will be back soon\\N\\NThe Current Temperature is ${TEMPWITHUNIT}\\N\\NThe Current Humidity ${humidity}\%\\N\\NIt is Currently ${weatherDescription} outside\\N\\NInformation is correct as of ${dateTimeString}\\N`
 } else {
-  textterror = `{\\c&H${textcolor}&}Unfortunately the weather filler is unavailable at this time,\\N\\N  Hopefully it will be back soon\\N\\N  The Current Temperature is ${TEMPWITHUNIT}\\N\\N  The Current Humidity ${humidity}percent\\N\\N  It is Currently ${weatherDescription} outside\\N\\N  Information is correct as of ${dateTimeString}\\N`
+  textterror = `{\\c&H${textcolor}&}Unfortunately the weather filler is unavailable at this time,\\N\\N  Hopefully it will be back soon\\N\\N  The Current Temperature is ${TEMPWITHUNIT}\\N\\N  The Current Humidity ${humidity}\%\\N\\N  It is Currently ${weatherDescription} outside\\N\\N  Information is correct as of ${dateTimeString}\\N`
 }
 
 
