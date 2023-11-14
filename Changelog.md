@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.7.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.3...V1.7.4) (2023-11-14)
+
+
+### Added
+
+* add temperature unit selection for weather ([feb64f9](https://github.com/liam8888999/ErsatzTV-Filler/commit/feb64f94d2fe788b8fd636d27bf94e5be1dbe962))
+
+
+### Fixed
+
+* correctly display % in weather fallback ([9b0f328](https://github.com/liam8888999/ErsatzTV-Filler/commit/9b0f328225b8a27f0ed4df7bf8858f3f34f5af34))
+
+
+### Changed
+
+* logs no longer rotate after reaching a max size so 1 days logs will be in the same file ([b519bf4](https://github.com/liam8888999/ErsatzTV-Filler/commit/b519bf4f7e133c77c1fa89c6071fc79521e3ac84))
+
 ## [1.7.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.2...V1.7.3) (2023-11-11)
 
 
