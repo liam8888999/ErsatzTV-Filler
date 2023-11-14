@@ -155,6 +155,10 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'audiolanguage',
       value: 'en',
+    },
+    {
+      key: 'temperatureunits',
+      value: '',
     }
   ];
 

@@ -68,6 +68,7 @@ const DEFAULT_CONFIG = {
   "showweatherheader": "false",
   "weatherinterval": "10",
   "weatherduration": "30",
+  "temperatureunits": "",
   "processnews": "yes",
   "newsvideofadeoutduration": "5",
   "newsvideofadeinduration": "5",
