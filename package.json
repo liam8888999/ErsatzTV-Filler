@@ -55,7 +55,7 @@
     "random-quotes": "^1.3.0",
     "release-it": "^17.0.0",
     "save-dev": "^0.0.1-security",
-    "simple-tts-mp3": "^1.0.7",
+    "simple-tts-mp3": "^1.1.0",
     "socket.io": "^4.7.2",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1",
