@@ -49,20 +49,28 @@ let currentTempF;
 let humidity;
 let weatherDescription;
 let textterror;
+let v1 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zone&alt=hwizone7day5&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=7`;
+let v2 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwiws&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&daysonly=0&maxdays=1`;
+let v3 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwizandh&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=5`;
+if(config_current.usewttrin === 'yes') {
+	v1 = `https://wttr.in/${config_current.city}.png`;
+	v2 = `https://v2.wttr.in/${config_current.city}.png`;
+	v3 = `https://v3.wttr.in/${config_current.state}.png`;
+}
 const downloadimages = async () => {
 logger.info("Downloading weather images")
 logger.info(`Current City: ${config_current.city}`)
 logger.info(`Weatherdir: ${WEATHERDIR}`)
 
-await downloadImage(`https://wttr.in/${config_current.city}.png`, `${path.join(WEATHERDIR, 'v1.png')}`)
+await downloadImage(v1, `${path.join(WEATHERDIR, 'v1.png')}`)
     .then(logger.success)
     .catch(logger.error);
 
-await downloadImage(`https://v2.wttr.in/${config_current.city}.png`, `${path.join(WEATHERDIR, 'v2.png')}`)
+await downloadImage(v2, `${path.join(WEATHERDIR, 'v2.png')}`)
   .then(logger.success)
   .catch(logger.error);
 
-await downloadImage(`https://v3.wttr.in/${config_current.state}.png`, `${path.join(WEATHERDIR, 'v3.png')}`)
+await downloadImage(v3, `${path.join(WEATHERDIR, 'v3.png')}`)
   .then(logger.success)
   .catch(logger.error);
 
