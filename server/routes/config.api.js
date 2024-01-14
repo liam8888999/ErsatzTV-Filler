@@ -182,8 +182,6 @@ if (Object.keys(json).length !== 0) {
   config_current.output = json.output || config_current.output;
   config_current.city = json.city || config_current.city;
   config_current.state = json.state || config_current.state;
-  config_current.country = json.country || config_current.country;
-  config_current.usewttrin = json.usewttrin || config_current.usewttrin;
   config_current.generate_weatherv4 = json.generate_weatherv4 || config_current.generate_weatherv4;
   config_current.weathervideofadeoutduration = json.weathervideofadeoutduration || config_current.weathervideofadeoutduration;
   config_current.weathervideofadeinduration = json.weathervideofadeinduration || config_current.weathervideofadeinduration;
