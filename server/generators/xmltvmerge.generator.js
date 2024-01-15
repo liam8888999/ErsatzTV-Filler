@@ -54,8 +54,16 @@ const XMLTVPARSE = async () => {
 
   mergedObject.channels.forEach(channel => {
     const channelElem = xml.ele('channel', { id: channel.id });
-    channel.name.forEach(name => channelElem.ele('display-name', name.value));
-    channel.icon.forEach(icon => channelElem.ele('icon', { src: icon }));
+    channel.displayName.forEach(name => channelElem.ele('display-name', name.value));
+    channel.icon.forEach(icon => {
+    // Check if 'src' property exists in the icon object
+    if ('src' in icon) {
+      channelElem.ele('icon', { src: icon.src });
+      console.log(icon.src);
+    } else {
+      console.error("The 'icon' object does not have a 'src' property.");
+    }
+  });
   });
 
   mergedObject.programs.forEach(program => {
@@ -73,10 +81,19 @@ const XMLTVPARSE = async () => {
       programElem.ele('episode-num', { system: episodeNum.system }, episodeNum.value);
     });
 
-    program.icon.forEach(icon => programElem.ele('icon', { src: icon }));
+    program.icon.forEach(icon => {
+    // Check if 'src' property exists in the icon object
+    if ('src' in icon) {
+      programElem.ele('icon', { src: icon.src });
+      console.log(icon.src);
+    } else {
+      console.error("The 'icon' object does not have a 'src' property.");
+    }
+  });
   });
 
   const xmlString = xml.end({ pretty: true });
+  console.log(xmlString)
   createDirectoryIfNotExists(config_current.output);
   fs.writeFileSync(`${path.join(config_current.output, 'mergedxmltv.xml')}`, xmlString, 'utf8');
 
