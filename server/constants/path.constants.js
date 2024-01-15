@@ -61,6 +61,7 @@ const DEFAULT_CONFIG = {
   "theme": "SystemLight",
   "processweather": "yes",
   "usewttrin": "no",
+  "booked_code": '',
   "generate_weatherv4": "no",
   "weathervideofadeoutduration": "5",
   "weathervideofadeinduration": "5",

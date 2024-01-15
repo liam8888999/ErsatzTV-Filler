@@ -167,6 +167,10 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'usewttrin',
       value: 'no',
+    },
+    {
+      key: 'booked_code',
+      value: '',
     }
   ];
 
