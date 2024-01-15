@@ -159,6 +159,18 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'temperatureunits',
       value: '',
+    },
+    {
+      key: 'country',
+      value: 'us',
+    },
+    {
+      key: 'usewttrin',
+      value: 'no',
+    },
+    {
+      key: 'booked_code',
+      value: '',
     }
   ];
 

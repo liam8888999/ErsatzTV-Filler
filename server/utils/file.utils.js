@@ -3,6 +3,7 @@ const { CONFIG_CONSTANTS } = require("../constants/path.constants");
 const path = require('path')
 const fs = require('fs')
 const logger = require("../utils/logger.utils");
+const sizeOf = require("image-size");
 
 
 
@@ -87,12 +88,30 @@ const createDirectoryIfNotExists = (directoryPath) => {
 }
 };
 
-
+function getImageWidthHeight(image, videoresolution) {
+  let calcHW = {
+    vWidth: videoresolution.toLowerCase().split('x')[0] - 30,
+    vHeight: '-1'
+  };
+  try {
+    const dimensions = sizeOf.imageSize(image);
+    let resWidth = videoresolution.toLowerCase().split('x')[0];
+    let resHeight = videoresolution.toLowerCase().split('x')[1];
+    if (resWidth / dimensions.width * dimensions.height > resHeight) {
+      calcHW.vWidth = '-1';
+      calcHW.vHeight = videoresolution.toLowerCase().split('x')[1] - 20;
+    }
+  } catch (e) {
+    logger.error('Image size Detection Failed For ' + image);
+  }
+  return calcHW;
+}
 
 module.exports = {
     doesFileExist,
     loadFileContentsIntoMemory,
     overWriteFileContents,
     listFilesInDir,
-    createDirectoryIfNotExists
+    createDirectoryIfNotExists,
+    getImageWidthHeight
 }

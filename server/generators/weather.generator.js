@@ -3,7 +3,7 @@ const { downloadImage } = require("../utils/downloadimage.utils");
 const { WEATHERDIR, FFMPEGCOMMAND } = require("../constants/path.constants");
 const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 const logger = require("../utils/logger.utils");
-const { createDirectoryIfNotExists } =require("../utils/file.utils");
+const { createDirectoryIfNotExists, getImageWidthHeight} =require("../utils/file.utils");
 const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
 const { exec } = require("child_process")
 const fs = require('fs');
@@ -49,20 +49,39 @@ let currentTempF;
 let humidity;
 let weatherDescription;
 let textterror;
+let v1 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zone&alt=hwizone7day5&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=7`;
+let v2 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwiws&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&daysonly=0&maxdays=1`;
+let v3 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwizandh&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=5`;
+if (config_current.booked_code.length > 0) {
+  const html=config_current.booked_code;
+  const idPos=html.indexOf('cityID=');
+  const semiPos = html.indexOf(';', idPos);
+  if(idPos > 0 && semiPos > 0) {
+    const units = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 0 : 1;
+    const city_id = html.substring(idPos + 7, semiPos);
+    v1 = `https://w.bookcdn.com/weather/picture/3_${city_id}_${units}_1_137AE9_430_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
+    v2 = `https://w.bookcdn.com/weather/picture/4_${city_id}_${units}_1_137AE9_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
+    v3 = `https://w.bookcdn.com/weather/picture/1_${city_id}_${units}_1_137AE9_320_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
+}
+} else if (config_current.usewttrin === 'yes' || config_current.country !== 'us') {
+	v1 = `https://wttr.in/${config_current.city}.png`;
+	v2 = `https://v2.wttr.in/${config_current.city}.png`;
+	v3 = `https://v3.wttr.in/${config_current.state}.png`;
+}
 const downloadimages = async () => {
 logger.info("Downloading weather images")
 logger.info(`Current City: ${config_current.city}`)
 logger.info(`Weatherdir: ${WEATHERDIR}`)
 
-await downloadImage(`https://wttr.in/${config_current.city}.png`, `${path.join(WEATHERDIR, 'v1.png')}`)
+await downloadImage(v1, `${path.join(WEATHERDIR, 'v1.png')}`)
     .then(logger.success)
     .catch(logger.error);
 
-await downloadImage(`https://v2.wttr.in/${config_current.city}.png`, `${path.join(WEATHERDIR, 'v2.png')}`)
+await downloadImage(v2, `${path.join(WEATHERDIR, 'v2.png')}`)
   .then(logger.success)
   .catch(logger.error);
 
-await downloadImage(`https://v3.wttr.in/${config_current.state}.png`, `${path.join(WEATHERDIR, 'v3.png')}`)
+await downloadImage(v3, `${path.join(WEATHERDIR, 'v3.png')}`)
   .then(logger.success)
   .catch(logger.error);
 
@@ -184,17 +203,17 @@ logger.debug(`weather error Ass text: ${assText}`)
 
   const weatherCalculationsResult = await weathercalculations();
 
-
-
 const assfile = asssubstitution(`${path.join(WEATHERDIR, `error.ass`)}`)
 const createWeatherV1 = async () => {
   try {
 
     logger.debug(`Weather Video fade out start: ${weatherCalculationsResult.weathervideofadeoutstart}`)
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
+    let calcHW = getImageWidthHeight(path.join(WEATHERDIR, 'v1.png'), config_current.videoresolution);
+
     //add theme information
     //part1
-    const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v1.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v1.mp4')}`;
+    const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v1.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=${calcHW.vWidth}:${calcHW.vHeight}[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v1.mp4')}`;
     logger.ffmpeg(`ffmpeg weather commandv1part1 is ${commandv1part1}`);
 
     exec(commandv1part1, (error, stdout, stderr) => {
@@ -248,9 +267,10 @@ const createWeatherV1 = async () => {
 const createWeatherV2 = async () => {
   try {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
+    let calcHW = getImageWidthHeight(path.join(WEATHERDIR, 'v2.png'), config_current.videoresolution);
     //add theme information
     //part1
-    const commandv2part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v2.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v2.mp4')}`;
+    const commandv2part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v2.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=${calcHW.vWidth}:${calcHW.vHeight}[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v2.mp4')}`;
     logger.ffmpeg(`ffmpeg weather commandv2part1 is: ${commandv2part1}`);
 
     exec(commandv2part1, (error, stdout, stderr) => {
@@ -303,9 +323,10 @@ logger.ffmpeg(`ffmpeg weather commandv2: ${commandv2}`);
 const createWeatherV3 = async () => {
   try {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
+    let calcHW = getImageWidthHeight(path.join(WEATHERDIR, 'v3.png'), config_current.videoresolution);
     //add theme information
     //part1
-    const commandv3part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v3.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v3.mp4')}`;
+    const commandv3part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -i ${path.join(WEATHERDIR, 'v3.png')} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=${calcHW.vWidth}:${calcHW.vHeight}[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.weatherduration} ${path.join(WEATHERDIR, 'weather-v3.mp4')}`;
     logger.ffmpeg(`ffmpeg weather commandv3part1: ${commandv3part1}`);
 
     exec(commandv3part1, (error, stdout, stderr) => {
