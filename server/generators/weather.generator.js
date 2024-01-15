@@ -52,11 +52,7 @@ let textterror;
 let v1 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zone&alt=hwizone7day5&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=7`;
 let v2 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwiws&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&daysonly=0&maxdays=1`;
 let v3 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwizandh&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=5`;
-if (config_current.usewttrin === 'yes' || config_current.country !== 'us') {
-	v1 = `https://wttr.in/${config_current.city}.png`;
-	v2 = `https://v2.wttr.in/${config_current.city}.png`;
-	v3 = `https://v3.wttr.in/${config_current.state}.png`;
-} else if (config_current.booked_code.length > 0) {
+if (config_current.booked_code.length > 0) {
   const html=config_current.booked_code;
   const idPos=html.indexOf('cityID=');
   const semiPos = html.indexOf(';', idPos);
@@ -66,7 +62,11 @@ if (config_current.usewttrin === 'yes' || config_current.country !== 'us') {
     v1 = `https://w.bookcdn.com/weather/picture/3_${city_id}_${units}_1_137AE9_430_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
     v2 = `https://w.bookcdn.com/weather/picture/4_${city_id}_${units}_1_137AE9_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
     v3 = `https://w.bookcdn.com/weather/picture/1_${city_id}_${units}_1_137AE9_320_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
-  }
+}
+} else if (config_current.usewttrin === 'yes' || config_current.country !== 'us') {
+	v1 = `https://wttr.in/${config_current.city}.png`;
+	v2 = `https://v2.wttr.in/${config_current.city}.png`;
+	v3 = `https://v3.wttr.in/${config_current.state}.png`;
 }
 const downloadimages = async () => {
 logger.info("Downloading weather images")
