@@ -37,6 +37,8 @@ This is the option to set the `State` you want to use for various filler types. 
 
 - `Location (Country)`
 
+<b>To use booked.net this config value must be left set to 'us' or wttr.it will be used</b>
+ 
 Used to determine which weather service to use wttr.in for International, weatherforyou.net for the US.
 
 ### Video Length
