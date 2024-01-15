@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.7.6](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.5...V1.7.6) (2024-01-15)
+
+
+### Fixed
+
+* small ui fix ([34c932c](https://github.com/liam8888999/ErsatzTV-Filler/commit/34c932c669d8c8d9ffb118a5c40e2eda1b081d4a))
+* small ui improvement ([a650475](https://github.com/liam8888999/ErsatzTV-Filler/commit/a6504759a092150cd190688a308a58530c3ea684))
+* xmltv merge fix after dependency update ([adced48](https://github.com/liam8888999/ErsatzTV-Filler/commit/adced48b1a219a5351616c236783efb1b65bbd0d))
+
 ## [1.7.5](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.4...V1.7.5) (2023-11-14)
 
 
