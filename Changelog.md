@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.8.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.6...V1.8.0) (2024-01-15)
+
+
+### Added
+
+* weather provider indicator ([4517b27](https://github.com/liam8888999/ErsatzTV-Filler/commit/4517b278aaa76fe215b9fb2b56bf50727f0492c7))
+
+
+### Fixed
+
+* error with weather provider selection ([db33c1b](https://github.com/liam8888999/ErsatzTV-Filler/commit/db33c1baf507acd157db99b47e3ce7289bc39965))
+* small config page fixes ([b5ccf66](https://github.com/liam8888999/ErsatzTV-Filler/commit/b5ccf66a5c67c2aaa657850ada6cb8022e4fc235))
+
+
+### Changed
+
+* only default to weatherforyou.net if in us ([695b2b7](https://github.com/liam8888999/ErsatzTV-Filler/commit/695b2b7045bf664074fd0592fc19e42a6e9efc0a))
+
 ## [1.7.6](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.5...V1.7.6) (2024-01-15)
 
 
