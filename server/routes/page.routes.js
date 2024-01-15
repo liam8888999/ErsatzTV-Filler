@@ -155,6 +155,23 @@ content.addBack().wrapAll('<div class="expand-content hidden"></div>');
         });
     });
 
+    app.get('/downloadcenter', checkAuthentication, async (req, res) => {
+      const { decryptedUsername, decryptedPassword, authentication } = await readAndDecryptPassword();
+      const config_current = await retrieveCurrentConfiguration();
+      const { filesinthemesdir, filesinthemesdiruser, filesinthemesdirsystem, oldtypethemes } = await retrieveThemelists()
+      let UPDATESTATUS = await checkForUpdates();
+      const ErsatzTVURL = config_current.ersatztv
+        res.render(TEMPLATE_CONSTANTS().PAGES_FOLDER + "downloadcenter", {
+            layout: TEMPLATE_CONSTANTS().DEFAULT_LAYOUT, //Just registering which layout to use for each view
+            page: "Download Center",
+            version: version,
+            ErsatzTVURL: ErsatzTVURL,
+            updatestatus: UPDATESTATUS,
+            authentication: authentication,
+            oldtypethemes: oldtypethemes
+        });
+    });
+
     app.get('/updates', checkAuthentication, async (req, res) => {
         const { decryptedUsername, decryptedPassword, authentication } = await readAndDecryptPassword();
       const config_current = await retrieveCurrentConfiguration();

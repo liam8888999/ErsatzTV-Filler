@@ -1,0 +1,68 @@
+<% let CONFIG_AVAILABLE = false %>
+<% if(typeof CURRENT_CONFIG !== "undefined"){ %>
+    <% CONFIG_AVAILABLE = true; %>
+<% } %>
+
+<% const base = "../elements" %>
+<% const text_input = base + "/text-input.ejs" %>
+
+
+  <div class="container">
+    <center>  <u><h1>Download Center</h1></u>
+      <p>Download a selection of pre compiled filler and logos</p>
+      </center>
+  <div class="tab-container">
+    <center>
+    <div class="tab-links">
+      <button class="tab-link" onclick="openTab(event, 'tab1')">Open Custom Posters</button>
+    <!--  <button class="tab-link active" onclick="openTab(event, 'tab2')">Open Commercial Pack</button> -->
+      <button class="tab-link" onclick="openTab(event, 'tab3')">Closed Channel Logos</button>
+    <!--  <button class="tab-link" onclick="openTab(event, 'tab4')">Open Channel Logos</button> -->
+  </div>
+    <div id="tab1" class="tab">
+      <br>
+    <center>  <u><h2>Open Custom Posters</h2></u></center>
+    <image style="width: 20%; height: 300px" src="https://github.com/binarygeek119/open-custom-posters/blob/main/binarygeek119/dont-forget.jpg?raw=true">
+      <image style="width: 20%; height: 300px" src="https://github.com/binarygeek119/open-custom-posters/blob/main/binarygeek119/hotdog.jpg?raw=true">
+        <image style="width: 20%; height: 300px" src="https://github.com/binarygeek119/open-custom-posters/blob/main/binarygeek119/nachos.jpg?raw=true">
+
+    </div>
+    <div id="tab2" class="tab" style="display: block;">
+      <br>
+    <center>  <u><h2>Open Commercial Pack</h2></u></center>
+
+    </div>
+    <div id="tab3" class="tab">
+      <br>
+    <center>  <u><h2>Closed Channel Logos</h2></u></center>
+    <br>
+    <center>  <u><h3>United States</h3></u></center>
+    <br>
+    <center>  <u><h4>Local - IOWA</h4></u></center>
+    <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/Local/Iowa/KCCI%208.1%20.png?raw=true">
+    <br><br>  <center>  <u><h4>National</h4></u></center>
+      <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/FOX.png?raw=true">
+        <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/NEWSMAX2.png?raw=true">
+          <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/NEWSY.png?raw=true">
+            <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/biz%20tv.png?raw=true">
+              <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/bounce.png?raw=true">
+                <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/court%20tv.png?raw=true">
+                  <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/defy.png?raw=true">
+                    <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/get%20tv.png?raw=true">
+                      <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/hsn.png?raw=true">
+                        <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/ion%20mystery.png?raw=true">
+                          <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/ion%20television.png?raw=true">
+
+                              <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/laff.png?raw=true">
+                                <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/quest.png?raw=true">
+                                  <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/sbn.png?raw=true">
+                                    <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/the%20cw.png?raw=true">
+                                      <image style="width: 20%; max-height: 300px" src="https://github.com/binarygeek119/closed-channel-logos/blob/main/Logos/USA/national/true%20real.png?raw=true">
+    </div>
+    <div id="tab4" class="tab">
+      <br>
+    <center>  <u><h2>Open Channel Logos</h2></u></center>
+
+    </div>
+
+  </div>
