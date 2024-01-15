@@ -75,8 +75,6 @@ If the Country field is set to a country other than US, wttr.in will be used as 
 ### Booked.Net Widget Code
 - `Widget HTML`
 
-<b>For this to be used, the Country config in General must be set to 'us' otherwise the system will attempt to use the wttr.net images.</b>
-
 Click on the link and customize any of the available widgets to your desired location.
 
 Click on the "Get HTML code" button and copy the text displayed with "A Script" selected.
