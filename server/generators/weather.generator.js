@@ -52,7 +52,7 @@ let textterror;
 let v1 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zone&alt=hwizone7day5&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=7`;
 let v2 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwiws&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&daysonly=0&maxdays=1`;
 let v3 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwizandh&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=5`;
-if (config_current.usewttrin === 'yes') {
+if (config_current.usewttrin === 'yes' || config_current.country !== 'us') {
 	v1 = `https://wttr.in/${config_current.city}.png`;
 	v2 = `https://v2.wttr.in/${config_current.city}.png`;
 	v3 = `https://v3.wttr.in/${config_current.state}.png`;
