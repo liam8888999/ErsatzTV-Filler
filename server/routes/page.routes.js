@@ -71,6 +71,20 @@ const checkAuthentication = (req, res, next) => {
     const quote = randomQuotes.default();
     return { body: quote.body, author: quote.author };
 }
+let weatherprovider = '';
+if (config_current.booked_code.length > 0) {
+  weatherprovider = 'booked.net';
+  // Code for when booked_code has elements
+  console.log('booked_code has elements');
+} else if (config_current.usewttrin === 'yes' || config_current.country !== 'us') {
+  weatherprovider = 'wttr.in';
+  // Code for when usewttrin is 'yes' or country is not 'us'
+  console.log('usewttrin is yes or country is not us');
+} else {
+  weatherprovider = 'weatherforyou.net';
+  // Code for when none of the conditions are true
+  console.log('none of the conditions are true');
+}
 const randomquote = getRandomQuote()
 let html = await changelogReplace()
 const $ = cheerio.load(html);
@@ -87,7 +101,8 @@ content.addBack().wrapAll('<div class="expand-content hidden"></div>');
         authentication: authentication,
         oldtypethemes: oldtypethemes,
         quote: randomquote,
-        markdown: $.html().replace(/<u><center><h1>Changelog<\/h1><\/center><\/u>/g, '').replace(/border-top: 1px solid darkgray/g, 'border-top: none;').replace(/padding-top: 15px;/g, 'padding-top: 0px;')
+        markdown: $.html().replace(/<u><center><h1>Changelog<\/h1><\/center><\/u>/g, '').replace(/border-top: 1px solid darkgray/g, 'border-top: none;').replace(/padding-top: 15px;/g, 'padding-top: 0px;'),
+        weatherprovider: weatherprovider
    });
 });
 
