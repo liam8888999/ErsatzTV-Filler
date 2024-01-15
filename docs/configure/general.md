@@ -33,6 +33,12 @@ This is the option to set the `State` you want to use for various filler types. 
 
 *Note:* If the location is 2 words e.g. 'New Mexico' the 2 words should be seperated with a '+' e.g. 'New+Mexico'
 
+### Country
+
+- `Location (Country)`
+
+Used to determine which weather service to use wtter.it for International, weatherforyou.net for the US.
+
 ### Video Length
 
 - `Time (seconds)`
