@@ -65,3 +65,18 @@ This is the option to select what text to show in the weather header.
 - `yes/no`
 
 This is the option whether you want to show the header in the weather filler, it can be set as `yes` to show or `no` if you dont want it to show.
+
+### Use wttr.in Instead Of weatherforyou.net
+- `yes/no`
+
+Yes to use wttr.in for weather, no to parse the city/state/country values on weatherforyou.net
+If the Country field is set to a country other than US, wttr.in will be used as well.
+
+### Booked.Net Widget Code
+- `Widget HTML`
+
+Click on the link and customize any of the available widgets to your desired location.
+
+Click on the "Get HTML code" button and copy the text displayed with "A Script" selected.
+
+Paste that text into the field.  This will cause the booked.net images to be used.
