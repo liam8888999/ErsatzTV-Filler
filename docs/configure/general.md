@@ -37,7 +37,7 @@ This is the option to set the `State` you want to use for various filler types. 
 
 - `Location (Country)`
 
-Used to determine which weather service to use wtter.it for International, weatherforyou.net for the US.
+Used to determine which weather service to use wttr.in for International, weatherforyou.net for the US.
 
 ### Video Length
 
