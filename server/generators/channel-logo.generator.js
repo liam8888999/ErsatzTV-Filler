@@ -97,7 +97,7 @@ const CHANNEL_LOGO = async () => {
 
           //add theme information
           //part1
-            const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -i "${path.join(CHANNEL_LOGODIR, 'jimpimgdir', eachxmltvfile)}.png" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*2:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.channellogoduration} ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}`;
+            const commandv1part1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -i "${path.join(CHANNEL_LOGODIR, 'jimpimgdir', eachxmltvfile)}.png" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*2:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.channellogoduration} "${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}"`;
             logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1part1}`);
           exec(commandv1part1, (error, stdout, stderr) => {
             if (error) {
@@ -105,7 +105,7 @@ const CHANNEL_LOGO = async () => {
 
               logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
               // Run another FFmpeg command here on error
-              const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the channel-logo filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.channellogoduration} ${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}`;
+              const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the channel-logo filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.channellogoduration} "${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}"`;
               logger.ffmpeg(`Running channel-logo fallback command on error: ${commandOnError3}`);
               exec(commandOnError3, (error3, stdout3, stderr3) => {
               if (error3) {
@@ -123,7 +123,7 @@ const CHANNEL_LOGO = async () => {
             logger.success('channel-logo v1 part 1 created successfully.');
 
             //part2
-            const commandv1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}-i ${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)} -vf "fade=t=in:st=0:d=${config_current.channellogovideofadeinduration},fade=t=out:st=${channellogovideofadeoutstart}:d=${config_current.channellogovideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.channellogoaudiofadeinduration},afade=t=out:st=${channellogoaudiofadeoutstart}:d=${config_current.channellogoaudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} ${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}`;
+            const commandv1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}-i "${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}" -vf "fade=t=in:st=0:d=${config_current.channellogovideofadeinduration},fade=t=out:st=${channellogovideofadeoutstart}:d=${config_current.channellogovideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.channellogoaudiofadeinduration},afade=t=out:st=${channellogoaudiofadeoutstart}:d=${config_current.channellogoaudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} "${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}"`;
           logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1}`);
             exec(commandv1, (error, stdout, stderr) => {
               if (error) {

@@ -221,9 +221,9 @@ speedFactor = fileduration / config_current.newsduration
 logger.debug('speedFactor is:', speedFactor)
 }
 if (config_current.readnews === "yes") {
-command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`)}" -filter_complex "[1:a]atempo=${speedFactor},volume=2[a]" -map 0 -map "[a]" -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
+command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`)}" -filter_complex "[1:a]atempo=${speedFactor},volume=2[a]" -map 0 -map "[a]" -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -t ${config_current.newsduration} "${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}"`;
 } else {
-command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
+command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} "${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}"`;
 }
   logger.ffmpeg(`News ffmpeg command is ${command}`);
 
@@ -233,7 +233,7 @@ command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldev
 
       logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
       // Run another FFmpeg command here on error
-const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the news filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} ${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}`;
+const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the news filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} "${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}"`;
 logger.ffmpeg(`Running news card fallback command on error: ${commandOnError3}`);
 exec(commandOnError3, (error3, stdout3, stderr3) => {
   if (error3) {
