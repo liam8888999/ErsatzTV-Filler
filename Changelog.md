@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.0...V1.8.1) (2024-01-16)
+
+
+### Fixed
+
+* fix handling for paths with spaces ([0da9356](https://github.com/liam8888999/ErsatzTV-Filler/commit/0da9356ca6c3e8e15c53c4c47266d0689d906a3b))
+
 ## [1.8.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.6...V1.8.0) (2024-01-15)
 
 
