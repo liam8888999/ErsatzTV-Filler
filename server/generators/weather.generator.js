@@ -16,7 +16,7 @@ let isFunctionRunning = false;
 
 const WEATHER = async () => {
   if (isFunctionRunning) {
-    logger.error('Weather Generator is already running.');
+    logger.warn('Weather Generator is already running.');
     return;
   }
 isFunctionRunning = true;

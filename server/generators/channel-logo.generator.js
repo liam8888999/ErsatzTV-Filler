@@ -23,7 +23,7 @@ const CHANNEL_LOGO = async () => {
     let fileimageExtension;
   logger.info(`Channel LOGO DIR is: ${CHANNEL_LOGODIR}`)
   if (isFunctionRunning) {
-  logger.error('Channel Logo Generator is already running.');
+  logger.warn('Channel Logo Generator is already running.');
     return;
   }
   isFunctionRunning = true;
@@ -101,7 +101,7 @@ const CHANNEL_LOGO = async () => {
             logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1part1}`);
           exec(commandv1part1, (error, stdout, stderr) => {
             if (error) {
-              logger.error(`Error: ${error.message}`);
+              logger.error(error);
 
               logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
               // Run another FFmpeg command here on error
@@ -109,7 +109,7 @@ const CHANNEL_LOGO = async () => {
               logger.ffmpeg(`Running channel-logo fallback command on error: ${commandOnError3}`);
               exec(commandOnError3, (error3, stdout3, stderr3) => {
               if (error3) {
-              logger.error(`Error running channel-logo fallback command: ${error3.message}`);
+              logger.error(new Error(`Error running channel-logo fallback command: ${error3.message}`));
               // Handle the error for the second command as needed.
               } else {
               logger.success('channel-logo fallback FFmpeg command executed successfully.');
@@ -127,7 +127,7 @@ const CHANNEL_LOGO = async () => {
           logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1}`);
             exec(commandv1, (error, stdout, stderr) => {
               if (error) {
-                logger.error(`Error: ${error.message}`);
+                logger.error(error);
 
                 logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
                 return;
@@ -146,7 +146,7 @@ const CHANNEL_LOGO = async () => {
 
       });
     } catch (error) {
-      logger.error(`Error reading XML file: ${error}`);
+      logger.error(error);
     }
   };
 
@@ -174,7 +174,7 @@ const CHANNEL_LOGO = async () => {
             await startTimefind(filePath);
             logger.success(`File processed successfully: ${file}`);
           } catch (error) {
-            logger.error(`Error processing file: ${file}`, error);
+            logger.error(error);
           }
 
           // Introduce a delay of 5 seconds (5000 milliseconds) before processing the next file
@@ -195,7 +195,7 @@ const CHANNEL_LOGO = async () => {
     await runnersT();
   } catch (error) {
     // Handle the connection error
-    logger.error(`Error downloading or processing XMLTV: ${error}`);
+    logger.error(error);
     // Stop further execution by throwing the error
     isFunctionRunning = false;
     throw error

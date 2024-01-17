@@ -19,15 +19,15 @@ const mp3Duration = require('mp3-duration');
 
 let isFunctionRunning = false;
 const NEWS = async () => {
-  if (isFunctionRunning) {
-    logger.error('News Generator is already running.');
-    return;
-  }
-  isFunctionRunning = true;
-const config_current = await retrieveCurrentConfiguration();
-const audioFile = await selectRandomAudioFile(config_current.customaudio);
-const current_theme = await retrieveCurrentTheme();
-const NEWSNUM = '1'
+    if (isFunctionRunning) {
+        logger.warn('News Generator is already running.');
+        return;
+    }
+    isFunctionRunning = true;
+    const config_current = await retrieveCurrentConfiguration();
+    const audioFile = await selectRandomAudioFile(config_current.customaudio);
+    const current_theme = await retrieveCurrentTheme();
+    const NEWSNUM = '1'
 
 let newsFeed2;
 
@@ -227,9 +227,9 @@ command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldev
 }
   logger.ffmpeg(`News ffmpeg command is ${command}`);
 
-  exec(command, (error, stdout, stderr) => {
-    if (error) {
-      logger.error(`Error: ${error.message}`);
+        exec(command, (error, stdout, stderr) => {
+            if (error) {
+                logger.error(error);
 
       logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
       // Run another FFmpeg command here on error

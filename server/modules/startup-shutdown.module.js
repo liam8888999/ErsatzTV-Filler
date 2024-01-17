@@ -71,7 +71,7 @@ function copyResources() {
 
     sourceStream.on('error', (error) => {
       logger.error(`Error copying file: ${sourceFile} -> ${destinationFile}`);
-      logger.error(`Error: ${error}`);
+      logger.error(error);
     });
   }
 

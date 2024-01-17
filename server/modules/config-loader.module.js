@@ -200,7 +200,7 @@ async function addKeyValuesToconfigFile() {
 
     logger.success('Key/value pairs added successfully.');
   } catch (err) {
-    logger.error(`Error: ${err}`);
+    logger.error(err);
   }
 }
 
