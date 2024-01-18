@@ -171,6 +171,10 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'booked_code',
       value: '',
+    },
+    {
+      key: 'readweather',
+      value: 'yes'
     }
   ];
 
