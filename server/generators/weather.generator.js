@@ -58,7 +58,7 @@ const WEATHER = async () => {
     const idPos = html.indexOf('cityID=');
     const semiPos = html.indexOf(';', idPos);
     if (idPos > 0 && semiPos > 0) {
-      const units = config_current.temperatureunits.toLowerCase().trim() === 'fahrenheit' ? 0 : 1;
+      const units = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 0 : 1;
       const city_id = html.substring(idPos + 7, semiPos);
       v1 = `https://w.bookcdn.com/weather/picture/3_${city_id}_${units}_1_137AE9_430_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
       v2 = `https://w.bookcdn.com/weather/picture/4_${city_id}_${units}_1_137AE9_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
@@ -119,7 +119,7 @@ const WEATHER = async () => {
     dateTimeString = currentCondition.localObsDateTime;
 
     let TEMPWITHUNIT;
-    let temperatureUnit = config_current.temperatureunits?.toLowerCase().trim();
+    let temperatureUnit = config_current.temperatureunits?.toLowerCase();
 
     if (temperatureUnit) {
       const kelvintemp = parseFloat(currentTempC) + 273.15
@@ -217,8 +217,8 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
   const creatWeatherScript = async () => {
     let weatherData;
     let script;
-    let speed = config_current.temperatureunits.toLowerCase().trim() === 'fahrenheit' ? 'Miles' : 'Kmph';
-    let degree = config_current.temperatureunits.toLowerCase().trim() === 'fahrenheit' ? 'F' : 'C';
+    let speed = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Miles' : 'Kmph';
+    let degree = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'F' : 'C';
     let dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     let obsDate;
     let today;
