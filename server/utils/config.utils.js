@@ -1,7 +1,5 @@
 const dotenv = require('dotenv')
 const {CONFIG_CONSTANTS} = require("../constants/path.constants");
-const {overWriteFileContents} = require("../utils/file.utils");
-const {stringifyJavaScriptObjectToConfigFormat} = require("../utils/string.utils")
 const logger = require("../utils/logger.utils");
 const fs = require("fs")
 
@@ -9,7 +7,7 @@ const fs = require("fs")
 /**
  * Parse the configuration file with given path
  * @param path
- * @returns {DotenvConfigOutput}
+ * @returns DotenvConfigOutput
  */
 const parseConfigurationFile = (path) => {
     return dotenv.config({path})
@@ -22,21 +20,22 @@ const parseConfigurationFile = (path) => {
  * @returns {Promise<void>}
  */
 const writeValueToConfigurationFile = async (key, value) => {
-    //const latestDotEnvConfig = parseConfigurationFile(CONFIG_CONSTANTS().USER_CONFIG)
-    //logger.debug(key)
+  //const latestDotEnvConfig = parseConfigurationFile(CONFIG_CONSTANTS().USER_CONFIG)
+  //logger.debug(key)
 
-    //const newDotEnv = {
-      //  ...latestDotEnvConfig.parsed,
-        //[key]: value
-    //};
+  //const newDotEnv = {
+    //  ...latestDotEnvConfig.parsed,
+      //[key]: value
+  //};
 
-    //const dotEnvResult = stringifyJavaScriptObjectToConfigFormat(newDotEnv);
-    //await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
+  //const dotEnvResult = stringifyJavaScriptObjectToConfigFormat(newDotEnv);
+  //await overWriteFileContents(CONFIG_CONSTANTS().USER_CONFIG,  dotEnvResult)
 
 
-    const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
+  const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
   const json = JSON.parse(data);
-
+  value=value.trim();
+  value = value.toLowerCase() === 'yes' ? 'yes' : value;
     const newConfigvar = {
         ...json,
         [key]: value
