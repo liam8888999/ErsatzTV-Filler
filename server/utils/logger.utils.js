@@ -47,9 +47,9 @@ return formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 const logFormat = winston.format.printf(({ level, message, timestamp }) => {
   let stack = ''
   if(level === 'error') {
-    stack = message.hasOwnProperty('stack')? message.stack : new Error().stack;
+    stack = message.hasOwnProperty('stack')? "| " + message.stack : "| " + new Error().stack;
   }
-  return `${timestamp} | ${level}: ${message} | ${stack}`;
+  return `${timestamp} | ${level}: ${message} ${stack}`;
 });
 
 // Create the logger
