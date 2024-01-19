@@ -44,12 +44,12 @@ const GENERATION = async () => {
           await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in VANITYCARDS()
-          logger.error(`Error encountered in VANITYCARDS: ${error}`);
+          logger.error(error);
           vanityRunning = false; // Set running to false if an error is encountered
           return;
         }
       } else {
-        logger.error('Not running vanity cards');
+        logger.warn('Not running vanity cards');
       }
 
       interval = `*/${config_current.vanityinterval} * * * *` || '*/10 * * * *';
@@ -85,12 +85,12 @@ const GENERATION = async () => {
           await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in WEATHER()
-          logger.error(`Error encountered in WEATHER: ${error}`);
+          logger.error(error);
           weatherRunning = false; // Set running to false if an error is encountered
           return;
         }
       } else {
-        logger.error('Not running WEATHER');
+        logger.warn('Not running WEATHER');
       }
 
       interval = `*/${config_current.weatherinterval} * * * *` || '*/10 * * * *';
@@ -126,12 +126,12 @@ const GENERATION = async () => {
           await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in NEWS()
-          logger.error(`Error encountered in NEWS: ${error}`);
+          logger.error(error);
           newsRunning = false; // Set running to false if an error is encountered
           return;
         }
       } else {
-        logger.error('Not running News');
+        logger.warn('Not running News');
       }
 
       interval = `*/${config_current.newsinterval} * * * *` || '*/30 * * * *';
@@ -167,12 +167,12 @@ const GENERATION = async () => {
           await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in CHANNEL_OFFLINE()
-          logger.error(`Error encountered in CHANNEL_OFFLINE: ${error}`);
+          logger.error(error);
           offlineRunning = false;
           return;
         }
       } else {
-        logger.error('Not running Channel Offline');
+        logger.warn('Not running Channel Offline');
       }
 
       interval = `*/${config_current.offlineinterval} * * * *` || '*/5 * * * *';
@@ -209,12 +209,12 @@ const GENERATION = async () => {
             await new Promise(resolve => setTimeout(resolve, 3000));
           } catch (error) {
             // Handle the error encountered in XMLTVMERGE()
-            logger.error(`Error encountered in XMLTVMERGE: ${error}`);
+            logger.error(error);
             mergeRunning = false; // Set running to false if an error is encountered
             return;
           }
         } else {
-          logger.error('Not running XMLTV Merge');
+          logger.warn('Not running XMLTV Merge');
         }
       }
 
@@ -252,12 +252,12 @@ const GENERATION = async () => {
           await new Promise(resolve => setTimeout(resolve, 3000));
         } catch (error) {
           // Handle the error encountered in CHANNEL_OFFLINE()
-          logger.error(`Error encountered in Channel Logo: ${error}`);
+          logger.error(error);
           channellogoRunning = false;
           return;
         }
       } else {
-        logger.error('Not running Channel Logo');
+        logger.info('Not running Channel Logo');
       }
 
       interval = `*/${config_current.channellogointerval} * * * *` || '*/20 * * * *';

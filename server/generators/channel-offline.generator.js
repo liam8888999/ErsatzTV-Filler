@@ -22,7 +22,7 @@ const CHANNEL_OFFLINE = async () => {
     let fileimageExtension;
   logger.info(`Channel OFFLINE DIR is: ${CHANNEL_OFFLINEDIR}`)
   if (isFunctionRunning) {
-  logger.error('Channel Offline Generator is already running.');
+  logger.warn('Channel Offline Generator is already running.');
     return;
   }
   isFunctionRunning = true;

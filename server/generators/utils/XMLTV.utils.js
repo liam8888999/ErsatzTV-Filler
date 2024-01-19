@@ -13,7 +13,7 @@ const splitXMLTVByChannel = async (xmltvpath) => {
   const xmlData = await fs.promises.readFile(`${path.join(xmltvpath, 'xmltv.xmltv')}`, 'utf8');
   xml2js.parseString(xmlData, (parseErr, result) => {
     if (parseErr) {
-      logger.error(`Error parsing XML: ${parseErr}`);
+      logger.error(parseErr);
       return;
     }
 
