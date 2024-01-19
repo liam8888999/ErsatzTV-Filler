@@ -66,6 +66,11 @@ This is the option to select what text to show in the weather header.
 
 This is the option whether you want to show the header in the weather filler, it can be set as `yes` to show or `no` if you dont want it to show.
 
+### Temperature Units
+- `<empty>/fahrenheit/celsius`
+
+Used by the various image and text to speech generators to determine what to display.  Empty will default to Celsius or both in some cases.
+
 ### Use wttr.in Instead Of weatherforyou.net
 - `yes/no`
 
@@ -80,3 +85,8 @@ Click on the link and customize any of the available widgets to your desired loc
 Click on the "Get HTML code" button and copy the text displayed with "A Script" selected.
 
 Paste that text into the field.  This will cause the booked.net images to be used.
+
+### Read The Weather
+- `yes/no`
+
+If set to yes, the audio on the weather videos will be a text to speech read of the current weather and the 3-day temperature forecast.
