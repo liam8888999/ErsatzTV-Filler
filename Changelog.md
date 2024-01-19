@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.1...V1.8.2) (2024-01-19)
+
+
+### Added
+
+* weather reader and various error handling fixes ([7392fac](https://github.com/liam8888999/ErsatzTV-Filler/commit/7392facb072b2ed0fdc2ff65a594da65bfc36ed3))
+
 ## [1.8.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.0...V1.8.1) (2024-01-16)
 
 
