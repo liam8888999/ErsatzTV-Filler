@@ -796,6 +796,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#custom-weather-reader-script" class="md-nav__link">
+    Custom Weather Reader Script
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1258,6 +1265,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#custom-weather-reader-script" class="md-nav__link">
+    Custom Weather Reader Script
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1355,6 +1369,320 @@ If the Country field is set to a country other than US, wttr.in will be used as 
 <li><code>yes/no</code></li>
 </ul>
 <p>If set to yes, the audio on the weather videos will be a text to speech read of the current weather and the 3-day temperature forecast.</p>
+<h3 id="custom-weather-reader-script">Custom Weather Reader Script</h3>
+<ul>
+<li><code>String (custom weather reader script text)</code></li>
+</ul>
+<p>The text for a custom weather reader script. If this option has any text then it will automatically be used otherwise it will fallback to the default.</p>
+<p>The Format should be 'The current temperature is {{CURRENT_TEMP}}' with the variables enclosed in <code>{{VARIABLE}}</code></p>
+<p>The available variables are:</p>
+<ul>
+<li>
+<ul>
+<li>{{TODAY}} - RETURNS <code>today</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW}} - RETURNS <code>tomorrows day name (e.g. wednesday)</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE}} - RETURNS <code>the day after tomorrows day name (e.g. thursday)</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{OBSERVATION_TIME}} - RETURNS <code>weathers observation time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{LOCAL_OBSERVATION_DATETIME}} - RETURNS <code>weathers observation time (localised)</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{WEATHER_HEADER}} - RETURNS <code>the text from the weather header config option</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CITY}} - RETURNS <code>City of weather report</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{STATE}} - RETURNS <code>State of weather report</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{COUNTRY}} - RETURNS <code>Country of weather report</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_CONDITIONS}} - RETURNS <code>the current weather conditions (e.g. sunny/cloudy)</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_TEMP}} - RETURNS <code>the current temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_FEELSLIKE}} - RETURNS <code>the current feels like temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_CLOUDCOVER}} - RETURNS <code>the current cloud cover percentage</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_HUMIDITY}} - RETURNS <code>the current humidity percentage</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_PRESSURE}} - RETURNS <code>the current pressure</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_PRESSUREINCHES}} - RETURNS <code>the current pressure (inches)</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_UVINDEX}} - RETURNS <code>the current uv index</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_WIND_DIR}} - RETURNS <code>the current wind direction (North, South, East, West)</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{CURRENT_WIND_SPEED}} - RETURNS <code>the current wind speed</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{LATITUDE}} - RETURNS <code>the latitute of the weather forecast location</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{LONGITUDE}} - RETURNS <code>the longitude of the weather forecast location</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{POPULATION}} - RETURNS <code>the population of the weather forecast location</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_AVERAGETEMP}} - RETURNS <code>todays average temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_DATE}} - RETURNS <code>todays date</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_MAXTEMP}} - RETURNS <code>todays maximum temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_MINTEMP}} - RETURNS <code>todays minimum temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_SUNHOUR}} - RETURNS <code>todays amount of sunlight hours</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_TOTALSNOW_CM}} - RETURNS <code>todays total snow fall in cm</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_UVINDEX}}' - RETURNS <code>todays uv index</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_MOON_ILLUMINATION}} - RETURNS <code>todays moon moon illumination</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_MOON_PHASE}} - RETURNS <code>todays moon phase</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_MOONRISE}} - RETURNS <code>todays moonrise time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_MOONSET}} - RETURNS <code>todays moon set time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_SUNRISE}} - RETURNS <code>todays sunrise time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TODAY_SUNSET}} - RETURNS <code>todays sunset time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_AVERAGETEMP}} - RETURNS <code>tomorrows average temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_DATE}} - RETURNS <code>tomorrows date</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_MAXTEMP}} - RETURNS <code>tomorrows maximum temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_MINTEMP}} - RETURNS <code>tomorrows minimum temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_SUNHOUR}} - RETURNS <code>tomorrows amount of sunlight hours</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_TOTALSNOW_CM}} - RETURNS <code>tomorrows total snow fall in cm</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_UVINDEX}}' - RETURNS <code>tomorrows uv index</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_MOON_ILLUMINATION}} - RETURNS <code>tomorrows moon moon illumination</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_MOON_PHASE}} - RETURNS <code>tomorrows moon phase</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_MOONRISE}} - RETURNS <code>tomorrows moonrise time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_MOONSET}} - RETURNS <code>tomorrows moon set time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_SUNRISE}} - RETURNS <code>tomorrows sunrise time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{TOMORROW_SUNSET}} - RETURNS <code>tomorrows sunset time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_AVERAGETEMP}} - RETURNS <code>the day after tomorrows average temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_DATE}} - RETURNS <code>the day after tomorrows date</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_MAXTEMP}} - RETURNS <code>the day after tomorrows maximum temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_MINTEMP}} - RETURNS <code>the day after tomorrows/ minimum temperature</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_SUNHOUR}} - RETURNS <code>the day after tomorrows amount of sunlight hours</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_TOTALSNOW_CM}} - RETURNS <code>the day after tomorrows total snow fall in cm</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_UVINDEX}}' - RETURNS <code>the day after tomorrows uv index</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_MOON_ILLUMINATION}} - RETURNS <code>the day after tomorrows moon moon illumination</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_MOON_PHASE}} - RETURNS <code>the day after tomorrows moon phase</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_MOONRISE}} - RETURNS <code>the day after tomorrows moonrise time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_MOONSET}} - RETURNS <code>the day after tomorrows moon set time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_SUNRISE}} - RETURNS <code>the day after tomorrows sunrise time</code></li>
+</ul>
+</li>
+<li>
+<ul>
+<li>{{DAY_THREE_SUNSET}} - RETURNS <code>the day after tomorrows sunset time</code></li>
+</ul>
+</li>
+</ul>
 
 
 
