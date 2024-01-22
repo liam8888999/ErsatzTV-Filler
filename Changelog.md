@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.2...V1.9.0) (2024-01-22)
+
+
+### Added
+
+* custom weather reader script templating ([dc15067](https://github.com/liam8888999/ErsatzTV-Filler/commit/dc150679c0c1ffa308cc2d46d3b41687c4e03a90))
+
 ## [1.8.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.1...V1.8.2) (2024-01-19)
 
 
