@@ -175,6 +175,10 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'readweather',
       value: 'yes'
+    },
+    {
+      key: 'cutomweathereaderscript',
+      value: ''
     }
   ];
 

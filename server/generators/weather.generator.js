@@ -1,6 +1,6 @@
 const {selectRandomAudioFile} = require("./utils/randomaudio.utils");
 const {downloadImage} = require("../utils/downloadimage.utils");
-const {WEATHERDIR, FFMPEGCOMMAND} = require("../constants/path.constants");
+const {WEATHERDIR, FFMPEGCOMMAND, DEFAULT_WEATHER_SCRIPT} = require("../constants/path.constants");
 const {retrieveCurrentConfiguration} = require("../modules/config-loader.module");
 const logger = require("../utils/logger.utils");
 const {createDirectoryIfNotExists, getImageWidthHeight} = require("../utils/file.utils");
@@ -11,6 +11,7 @@ const path = require('path');
 const {asssubstitution} = require("../utils/string.utils");
 const {contrastColor} = require('contrast-color');
 const {createAudio, ffmpegSpeechOrMusicCommand, speedFactor} = require("./utils/texttospeech.utils");
+const { weathertemplatereplacement } = require("./utils/weather-templating.utils");
 
 let isFunctionRunning = false;
 
@@ -215,39 +216,12 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
   const assfile = asssubstitution(`${path.join(WEATHERDIR, `error.ass`)}`);
 
   const creatWeatherScript = async () => {
-    let weatherData;
     let script;
-    let speed = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Miles' : 'Kmph';
-    let degree = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'F' : 'C';
-    let dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let obsDate;
-    let today;
-    let dateThree;
-    let windDir;
-    await fs.promises.readFile(`${path.join(WEATHERDIR, 'weather2.json')}`, 'utf8')
-      .then(data => {
-        weatherData = JSON.parse(data);
-        logger.debug(weatherData);
-      })
-      .catch(error => {
-        logger.error(error);
-      });
-    obsDate = new Date(Date.parse(weatherData.current_condition[0].localObsDateTime));
-    today = obsDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    dateThree = new Date();
-    dateThree.setDate(obsDate.getDate() + 2);
-    windDir = weatherData.current_condition[0].winddir16Point;
-    windDir = windDir
-      .replaceAll('N', ' north')
-      .replaceAll('E', ' east')
-      .replaceAll('S', ' south')
-      .replaceAll('W', ' west');
-    script = config_current.weatherheader + '. Today is ' + today + ' and this is the forecast for ' + weatherData.nearest_area[0].areaName[0].value + ', ' + weatherData.nearest_area[0].region[0].value;
-    script += '. The sky is currently ' + weatherData.current_condition[0].weatherDesc[0].value + ' with a temperature of ' + weatherData.current_condition[0]['temp_' + degree] + ' degrees with wind coming out of the ' + windDir + ' at ' + weatherData.current_condition[0]['windspeed' + speed];
-    script += '. The high today will be ' + weatherData.weather[0]['maxtemp' + degree] + ' with a low of ' + weatherData.weather[0]['mintemp' + degree];
-    script += '. The forecast for tomorrow is for a high of ' + weatherData.weather[1]['maxtemp' + degree] + ' and a low of ' + weatherData.weather[1]['mintemp' + degree];
-    script += '. Temperatures on ' + dayName[dateThree.getDay()] + ' will go up to ' + weatherData.weather[2]['maxtemp' + degree] + ' degrees and fall down to ' + weatherData.weather[2]['mintemp' + degree] + ' degrees';
-    return script;
+    script = `${DEFAULT_WEATHER_SCRIPT}`
+    if (config_current.weathereaderscript.length > 0) {
+      script = `${config_current.customweathereaderscript}`
+    }
+    return await weathertemplatereplacement(script);
   }
 
   const createWeather = async (image, fileName) => {

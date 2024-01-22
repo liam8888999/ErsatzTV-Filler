@@ -62,6 +62,7 @@ const DEFAULT_CONFIG = {
   "processweather": "yes",
   "usewttrin": "no",
   "readweather": "yes",
+  "cutomweathereaderscript": "",
   "booked_code": '',
   "generate_weatherv4": "no",
   "weathervideofadeoutduration": "5",
@@ -192,6 +193,14 @@ const CONFIGCONFDIR = path.join(WORKDIR, 'configconf');
 // Logs Consts
 const LOGFOLDER = path.join(startUpPath, 'logs');
 
+const DEFAULT_WEATHER_SCRIPT = `
+{{WEATHER_HEADER}}. Today is {{TODAY}} and this is the forecast for {{CITY}} {{STATE}}.
+The sky is currently {{CURRENT_CONDITIONS}} with a temperature of {{CURRENT_TEMP}} degrees with wind coming out of the {{CURRENT_WIND_DIR}} at {{CURRENT_WIND_SPEED}}.
+The high today will be {{TODAY_MAXTEMP}} with a low of {{TODAY_MINTEMP}}.
+The forecast for tomorrow is for a high of {{TOMORROW_MAXTEMP}} and a low of {{TOMORROW_MINTEMP}}.
+Temperatures on {{DAY_THREE}} will go up to {{DAY_THREE_MAXTEMP}} degrees and fall down to {{DAY_THREE_MINTEMP}} degrees.
+`
+
 
 
 module.exports = {
@@ -219,5 +228,6 @@ module.exports = {
     CONFIG_DIR,
     PASSWORD,
     CHANNEL_LOGODIR,
-    CURRENT_THEME_VERSION
+    CURRENT_THEME_VERSION,
+    DEFAULT_WEATHER_SCRIPT
   };
