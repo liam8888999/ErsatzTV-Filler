@@ -177,6 +177,9 @@ const CHANNEL_OFFLINEDIR = path.join(WORKDIR, 'Channel-offline');
 // Channel logo consts
 const CHANNEL_LOGODIR = path.join(WORKDIR, 'Channel-logo');
 
+// Provider logo consts
+const PROVIDER_LOGODIR = path.join(WORKDIR, 'Provider-logo');
+
 
 // XMLTV MERGER consts
 const XMLTVMERGEDIR = path.join(WORKDIR, 'xmltvmerge');
@@ -229,5 +232,6 @@ module.exports = {
     PASSWORD,
     CHANNEL_LOGODIR,
     CURRENT_THEME_VERSION,
-    DEFAULT_WEATHER_SCRIPT
+    DEFAULT_WEATHER_SCRIPT,
+    PROVIDER_LOGODIR
   };
