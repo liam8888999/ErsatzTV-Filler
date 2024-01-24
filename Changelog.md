@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.9.0...V1.9.1) (2024-01-24)
+
+
+### Changed
+
+* small ui fix ([8516f94](https://github.com/liam8888999/ErsatzTV-Filler/commit/8516f942d7070de5d80c751678f09907755d3a18))
+* small update to homepage ([802a441](https://github.com/liam8888999/ErsatzTV-Filler/commit/802a441a66d2dcf1b0c532829b908dcb8a96236c))
+
 ## [1.9.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.2...V1.9.0) (2024-01-22)
 
 
