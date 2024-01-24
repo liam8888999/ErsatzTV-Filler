@@ -218,7 +218,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
   const creatWeatherScript = async () => {
     let script;
     script = `${DEFAULT_WEATHER_SCRIPT}`
-    if (config_current.weathereaderscript.length > 0) {
+    if (config_current.customweathereaderscript.length > 0) {
       script = `${config_current.customweathereaderscript}`
     }
     return await weathertemplatereplacement(script);
