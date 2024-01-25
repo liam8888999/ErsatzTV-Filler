@@ -173,7 +173,7 @@
     <div id="tab8" class="tab">
       <br>
       <center><u><h2>Login Settings</h2></u></center>
-
+      <center>
       <br>
       <h3>Register your user account here</h3>
       <br>
@@ -192,12 +192,13 @@
           <input type="submit" value="Remove authentication">
         </form>
       <% } %>
+      </center>
     </div>
     <br>
     <div id="tab9" class="tab">
       <br>
       <center><u><h2>Backup & Restore</h2></u></center>
-
+      <center>
       <br>
       <h3>Backup</h3>
       <form action="/api/config/backup" method="get">
@@ -232,7 +233,7 @@
         <input type="submit" value="Restore" class="button">
       </form>
       <br>
-
+      </center>
       <script>
         document.getElementById("uploadForm").addEventListener("submit", function (event) {
           event.preventDefault(); // Prevent default form submission
