@@ -26,12 +26,13 @@ isFunctionRunning = true;
 
 
   const getVanityCard = async (filenumber) => {
+
     return new Promise((resolve, reject) => {
       // URL of the Chuck Lorre website
-      const url = 'http://chucklorre.com/card-json.php';
+      const url = 'https://chucklorre.com/card-json.php';
 
       // Download the JSON file
-      http.get(url, (response) => {
+      https.get(url, (response) => {
         let data = '';
 
         response.on('data', (chunk) => {
@@ -40,6 +41,7 @@ isFunctionRunning = true;
 
         response.on('end', () => {
           try {
+
             // Parse the JSON data
             const json = JSON.parse(data);
 
@@ -50,8 +52,8 @@ isFunctionRunning = true;
             const randomImageFilename = imageFilenames[Math.floor(Math.random() * imageFilenames.length)];
 
             // Download the random image
-            const imageUrl = `http://chucklorre.com/images/cards/${randomImageFilename}`;
-            http.get(imageUrl, (imageResponse) => {
+            const imageUrl = `https://chucklorre.com/images/cards/${randomImageFilename}`;
+            https.get(imageUrl, (imageResponse) => {
               const imagePath = `${path.join(VANITYCARDDIR, 'vanitycard')}-${filenumber}.jpg`;
 
               // Save the image to disk
