@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.9.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.9.1...V1.9.2) (2024-01-25)
+
+
+### Fixed
+
+* change vanity cards to https ([d478d35](https://github.com/liam8888999/ErsatzTV-Filler/commit/d478d354f7c9642c6559cb6873983d08eaf1d88a))
+* config ui formatting fixes ([bc51634](https://github.com/liam8888999/ErsatzTV-Filler/commit/bc51634335787bb69cebd2df5b93889e0ec3c5e3))
+* fix weather undefined length bug ([5b8febe](https://github.com/liam8888999/ErsatzTV-Filler/commit/5b8febea70f89357a00173c44acce8eb17f47438))
+* small home formating change ([bfa0e11](https://github.com/liam8888999/ErsatzTV-Filler/commit/bfa0e11af87d6ee69b4eb09848e6629466797c5b))
+
 ## [1.9.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.9.0...V1.9.1) (2024-01-24)
 
 
