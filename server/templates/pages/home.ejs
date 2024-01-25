@@ -21,7 +21,7 @@
   <center><u><h1>News</h1></u></center>
 
 <center>  <%- markdown %>  </center>
-<br>
+
 <center><hr style="width: 85%;"></center>
 <br>
 <div style="padding-right: 5px; width: 95%;">
@@ -31,6 +31,7 @@
 </div>
   <div class="home-page-box">
   <center><u><h1>Health Checks</h1></u></center>
+  <div style="margin-left:10px;">
   <% if (oldtypethemes && oldtypethemes.length > 0) { %>
     <a href="/themes" style="display: block; text-decoration: none; color: orange;">
   <p style="color: orange;"><b>Old type themes that require updating:</b></p> <div>
@@ -52,6 +53,6 @@
   <p><b>Hostname: </b><span id="hostname"></span></p>
   <p><b>Total Memory: </b><span id="totalMemory"></span> bytes</p>
   <p><b>Free Memory: </b><span id="freeMemory"></span> bytes</p>
-
+</div>
 </div>
 </div>
