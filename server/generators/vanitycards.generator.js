@@ -14,7 +14,7 @@ const path = require('path');
 let isFunctionRunning = false;
 const VANITYCARDS = async () => {
 if (isFunctionRunning) {
-  logger.error('Vanity Cards Generator is already running.');
+  logger.warn('Vanity Cards Generator is already running.');
   return;
 }
 
@@ -26,12 +26,13 @@ isFunctionRunning = true;
 
 
   const getVanityCard = async (filenumber) => {
+
     return new Promise((resolve, reject) => {
       // URL of the Chuck Lorre website
-      const url = 'http://chucklorre.com/card-json.php';
+      const url = 'https://chucklorre.com/card-json.php';
 
       // Download the JSON file
-      http.get(url, (response) => {
+      https.get(url, (response) => {
         let data = '';
 
         response.on('data', (chunk) => {
@@ -40,6 +41,7 @@ isFunctionRunning = true;
 
         response.on('end', () => {
           try {
+
             // Parse the JSON data
             const json = JSON.parse(data);
 
@@ -50,8 +52,8 @@ isFunctionRunning = true;
             const randomImageFilename = imageFilenames[Math.floor(Math.random() * imageFilenames.length)];
 
             // Download the random image
-            const imageUrl = `http://chucklorre.com/images/cards/${randomImageFilename}`;
-            http.get(imageUrl, (imageResponse) => {
+            const imageUrl = `https://chucklorre.com/images/cards/${randomImageFilename}`;
+            https.get(imageUrl, (imageResponse) => {
               const imagePath = `${path.join(VANITYCARDDIR, 'vanitycard')}-${filenumber}.jpg`;
 
               // Save the image to disk
@@ -68,12 +70,12 @@ isFunctionRunning = true;
               });
             });
           } catch (error) {
-            logger.error(`Error parsing JSON: ${error}`);
+            logger.error(error);
             reject(error); // Reject the promise if there's an error parsing the JSON
           }
         });
       }).on('error', (error) => {
-        logger.error(`Error downloading JSON: ${error}`);
+        logger.error(error);
         reject(error); // Reject the promise if there's an error downloading the JSON
       });
     });
@@ -98,19 +100,19 @@ const createVanityCard = async (filenumber) => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     // add theme information
     // part1
-    const commandvanitycard = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=white:${config_current.videoresolution} -i "${path.join(VANITYCARDDIR, 'vanitycard')}-${filenumber}.jpg" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.vanitycardduration} ${path.join(config_current.output, 'vanitycard')}-${filenumber}.mp4`;
+    const commandvanitycard = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=white:${config_current.videoresolution} -i "${path.join(VANITYCARDDIR, 'vanitycard')}-${filenumber}.jpg" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.vanitycardduration} "${path.join(config_current.output, 'vanitycard')}-${filenumber}.mp4"`;
     logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
 
     exec(commandvanitycard, (error, stdout, stderr) => {
       if (error) {
-        logger.error(`Error: ${error.message}`);
+        logger.error(error);
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
         // Run another FFmpeg command here on error
-  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=black:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the vanity card filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.vanitycardduration} ${path.join(config_current.output, 'vanitycard')}-${filenumber}.mp4`;
+  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=black:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the vanity card filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.vanitycardduration} "${path.join(config_current.output, 'vanitycard')}-${filenumber}.mp4"`;
   logger.ffmpeg(`Running vanity card fallback command on error: ${commandOnError3}`);
   exec(commandOnError3, (error3, stdout3, stderr3) => {
     if (error3) {
-      logger.error(`Error running vanity card fallback command: ${error3.message}`);
+      logger.error(error3);
       // Handle the error for the second command as needed.
     } else {
       logger.success('vanity card fallback FFmpeg command executed successfully.');
@@ -125,7 +127,7 @@ const createVanityCard = async (filenumber) => {
       logger.success('Vanity Card created successfully.');
     });
   } catch (err) {
-    logger.error(`Error: ${err}`);
+    logger.error(err);
   }
 };
 

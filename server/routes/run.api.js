@@ -64,7 +64,7 @@ try {
     await NEWS();
   } catch (error) {
     // Handle the error encountered in XMLTVMERGE()
-    logger.error(`Error encountered in News: ${error}`);
+    logger.error(error);
     return;
   }
 });

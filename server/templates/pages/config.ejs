@@ -1,348 +1,350 @@
 <% let CONFIG_AVAILABLE = false %>
 <% if(typeof CURRENT_CONFIG !== "undefined"){ %>
-    <% CONFIG_AVAILABLE = true; %>
+  <% CONFIG_AVAILABLE = true; %>
 <% } %>
-
 <% const base = "../elements" %>
 <% const text_input = base + "/text-input.ejs" %>
 
 
-  <div class="container">
-    <center>  <u><h1>Edit config</h1></u>
-      <p>Change your configuration file below!</p> <p>The form below will automatically update as you fill it in.</p>
-      </center>
-  <div class="tab-container">
-    <center>
+<div class="container">
+  <center><u><h1>Edit config</h1></u>
+    <p>Change your configuration file below!</p>
+    <p>The form below will automatically update as you fill it in.</p>
+  </center>
+  <div class="tab-container" style="align-content: center">
     <div class="tab-links">
       <button class="tab-link active" onclick="openTab(event, 'tab1')">General Settings</button>
       <button class="tab-link" onclick="openTab(event, 'tab2')">Weather Settings</button>
       <button class="tab-link" onclick="openTab(event, 'tab3')">News Settings</button>
       <button class="tab-link" onclick="openTab(event, 'tab4')">Channel Offline Settings</button>
       <button class="tab-link" onclick="openTab(event, 'tab5')">XMLTV Merge</button>
-        <button class="tab-link" onclick="openTab(event, 'tab6')">Vanity Cards</button>
-        <button class="tab-link" onclick="openTab(event, 'tab7')">Channel Logo</button>
-        <button class="tab-link" onclick="openTab(event, 'tab8')">Login</button>
-        <button class="tab-link" onclick="openTab(event, 'tab9')">Backup & Restore</button>
-    <button class="tab-link" onclick="openTab(event, 'tab10')">Migrate Config</button>
-    <button class="tab-link" onclick="openTab(event, 'tab11')">Advanced Config</button>
-  </div>
+      <button class="tab-link" onclick="openTab(event, 'tab6')">Vanity Cards</button>
+      <button class="tab-link" onclick="openTab(event, 'tab7')">Channel Logo</button>
+      <button class="tab-link" onclick="openTab(event, 'tab8')">Login</button>
+      <button class="tab-link" onclick="openTab(event, 'tab9')">Backup & Restore</button>
+      <button class="tab-link" onclick="openTab(event, 'tab10')">Migrate Config</button>
+      <button class="tab-link" onclick="openTab(event, 'tab11')">Advanced Config</button>
+    </div>
     <br>
-    <button onclick="returnConfigJson()" style="margin-top:10px;">Show config.json file</button>
+    <center><button onclick="returnConfigJson()" style="margin-top:10px;">Show config.json file</button></center>
     <div id="tab1" class="tab" style="display: block;">
       <br>
-    <center>  <u><h2>General Settings</h2></u></center>
+      <center><u><h2>General Settings</h2></u></center>
       <% if(CONFIG_AVAILABLE){ %>
-          <form method="post" action="/config" id="config-form">
-              <div id="variables">
-                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                    <% if(key !== 'theme' && !['temperatureunits', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'usewttrin', 'booked_code', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
-                      <%- include(text_input, {
-                          key,
-                          label: CURRENT_CONFIG[key]
-                      }) %>
-                       <% } %>
-                  <% }); %>
-              </div>
-          </form>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+              <% if(key !== 'theme' && !['cutomweathereaderscript', 'temperatureunits', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme', 'processweather', 'usewttrin', 'readweather', 'booked_code', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
+                <%- include(text_input, {
+                key,
+                label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
       <% }else{ %>
-          <h1> Error loading configuration file... please check the server logs! </h1>
+        <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
     </div>
     <div id="tab2" class="tab">
       <br>
-    <center>  <u><h2>Weather Settings</h2></center></u>
+      <center><u><h2>Weather Settings</h2></u></center>
       <% if(CONFIG_AVAILABLE){ %>
-          <form method="post" action="/config" id="config-form">
-              <div id="variables">
-                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                    <% if(key !== 'theme' && !['audiolanguage', 'newsreadintro', 'newsreadoutro', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'fontfile', 'webtheme','webport', 'processnews', 'processchanneloffline', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'ersatztv'].includes(key)){ %>
-                      <%- include(text_input, {
-                          key,
-                          label: CURRENT_CONFIG[key]
-                      }) %>
-                       <% } %>
-                  <% }); %>
-              </div>
-          </form>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+              <% if(key !== 'theme' && !['audiolanguage', 'newsreadintro', 'newsreadoutro', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processchanneloffline', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'ersatztv'].includes(key)){ %>
+                <%- include(text_input, {
+                key,
+                label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
       <% }else{ %>
-          <h1> Error loading configuration file... please check the server logs! </h1>
+        <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
     </div>
     <div id="tab3" class="tab">
       <br>
-    <center>  <u><h2>News Settings</h2></center></u>
+      <center><u><h2>News Settings</h2></u></center>
       <% if(CONFIG_AVAILABLE){ %>
-          <form method="post" action="/config" id="config-form">
-              <div id="variables">
-                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                    <% if(key !== 'theme' && !['usewttrin', 'booked_code', 'temperatureunits', 'audiolanguage', 'weatherheader', 'showweatherheader', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'weatherduration', 'vanitycardduration', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'fontfile', 'webtheme', 'webport', 'processweather', 'usewttrin', 'booked_code', 'processchanneloffline', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'weatheraudiofadeinduration', 'weatheraudiofadeoutduration', 'weathervideofadeinduration', 'weathervideofadeoutduration', 'generate_weatherv4', 'videolength', 'ersatztv'].includes(key)){ %>
-                      <%- include(text_input, {
-                          key,
-                          label: CURRENT_CONFIG[key]
-                      }) %>
-                       <% } %>
-                  <% }); %>
-              </div>
-          </form>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+              <% if(key !== 'theme' && !['cutomweathereaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'weatherheader', 'showweatherheader', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'weatherduration', 'vanitycardduration', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'fontfile', 'webtheme', 'webport', 'processweather', 'usewttrin', 'booked_code', 'processchanneloffline', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'weatheraudiofadeinduration', 'weatheraudiofadeoutduration', 'weathervideofadeinduration', 'weathervideofadeoutduration', 'generate_weatherv4', 'videolength', 'ersatztv'].includes(key)){ %>
+                <%- include(text_input, {
+                key,
+                label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
       <% }else{ %>
-          <h1> Error loading configuration file... please check the server logs! </h1>
+        <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
     </div>
     <div id="tab4" class="tab">
       <br>
-    <center>  <u><h2>Channel Offline Settings</h2></center></u>
+      <center><u><h2>Channel Offline Settings</h2></u></center>
       <% if(CONFIG_AVAILABLE){ %>
-          <form method="post" action="/config" id="config-form">
-              <div id="variables">
-                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                  <% if(key !== 'theme' && !['usewttrin', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processweather', 'usewttrin', 'booked_code', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'ersatztv'].includes(key)){ %>
-                      <%- include(text_input, {
-                          key,
-                          label: CURRENT_CONFIG[key]
-                      }) %>
-                       <% } %>
-                  <% }); %>
-              </div>
-          </form>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+              <% if(key !== 'theme' && !['cutomweathereaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processweather', 'usewttrin', 'booked_code', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'ersatztv'].includes(key)){ %>
+                <%- include(text_input, {
+                key,
+                label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
       <% }else{ %>
-          <h1> Error loading configuration file... please check the server logs! </h1>
+        <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
     </div>
- <div id="tab5" class="tab">
-   <br>
-    <center> <u> <h2>XMLTV Merge Settings</h2></u></center>
-    <center> <a href="/xmltvmerge/mergedxmltv.xml" class="button">XMLTVMERGE File LINK</a> </center>
-    <center><p>please list epg locations as a list with a space inbetween each, for example: 1.epg 2.epg 3.epg</p></center>
-      <% if(CONFIG_AVAILABLE){ %>
-          <form method="post" action="/config" id="config-form">
-              <div id="variables">
-                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                      <% if(key !== 'theme' && !['usewttrin', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processchanneloffline', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processweather', 'usewttrin', 'booked_code', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'ersatztv'].includes(key)){ %>
-                      <%- include(text_input, {
-                          key,
-                          label: CURRENT_CONFIG[key]
-                      }) %>
-                       <% } %>
-                  <% }); %>
-              </div>
-          </form>
-      <% }else{ %>
-          <h1> Error loading configuration file... please check the server logs! </h1>
-      <% } %>
-    </div>
-<div id="tab6" class="tab">
+    <div id="tab5" class="tab">
       <br>
-    <center>  <u><h2>Vanity Card Settings</h2></u></center>
+      <center><u><h2>XMLTV Merge Settings</h2></u></center>
+      <center><a href="/xmltvmerge/mergedxmltv.xml" class="button">XMLTVMERGE File LINK</a></center>
+      <center><p>please list epg locations as a list with a space inbetween each, for example: 1.epg 2.epg
+          3.epg</p></center>
       <% if(CONFIG_AVAILABLE){ %>
-          <form method="post" action="/config" id="config-form">
-              <div id="variables">
-                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                    <% if(key !== 'theme' && !['usewttrin', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'xmltv', 'videoresolution', 'customaudio', 'output', 'city', 'country', 'state', 'videolength', 'log_location', 'log_days', 'webport', 'fontfile', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'ersatztv'].includes(key)){ %>
-                      <%- include(text_input, {
-                          key,
-                          label: CURRENT_CONFIG[key]
-                      }) %>
-                       <% } %>
-                  <% }); %>
-              </div>
-          </form>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+              <% if(key !== 'theme' && !['cutomweathereaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processchanneloffline', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processweather', 'usewttrin', 'booked_code', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'ersatztv'].includes(key)){ %>
+                <%- include(text_input, {
+                key,
+                label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
       <% }else{ %>
-          <h1> Error loading configuration file... please check the server logs! </h1>
+        <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+    </div>
+    <div id="tab6" class="tab">
+      <br>
+      <center><u><h2>Vanity Card Settings</h2></u></center>
+      <% if(CONFIG_AVAILABLE){ %>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+              <% if(key !== 'theme' && !['cutomweathereaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'xmltv', 'videoresolution', 'customaudio', 'output', 'city', 'country', 'state', 'videolength', 'log_location', 'log_days', 'webport', 'fontfile', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme', 'processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'ersatztv'].includes(key)){ %>
+                <%- include(text_input, {
+                key,
+                label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
+      <% }else{ %>
+        <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
     </div>
     <div id="tab7" class="tab">
-          <br>
-        <center>  <u><h2>Channel Logo Settings</h2></u></center>
-          <% if(CONFIG_AVAILABLE){ %>
-              <form method="post" action="/config" id="config-form">
-                  <div id="variables">
-                      <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                        <% if(key !== 'theme' && !['usewttrin', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'amountvanitycards', 'vanityinterval', 'processvanitycards', 'vanitycardduration', 'underlinenewsheader', 'weatherduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'xmltv', 'videoresolution', 'customaudio', 'output', 'city', 'country', 'state', 'videolength', 'log_location', 'log_days', 'webport', 'fontfile', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'ersatztv'].includes(key)){ %>
-                          <%- include(text_input, {
-                              key,
-                              label: CURRENT_CONFIG[key]
-                          }) %>
-                           <% } %>
-                      <% }); %>
-                  </div>
-              </form>
-          <% }else{ %>
-              <h1> Error loading configuration file... please check the server logs! </h1>
-          <% } %>
-        </div>
+      <br>
+      <center><u><h2>Channel Logo Settings</h2></u></center>
+      <% if(CONFIG_AVAILABLE){ %>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+              <% if(key !== 'theme' && !['cutomweathereaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'amountvanitycards', 'vanityinterval', 'processvanitycards', 'vanitycardduration', 'underlinenewsheader', 'weatherduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'xmltv', 'videoresolution', 'customaudio', 'output', 'city', 'country', 'state', 'videolength', 'log_location', 'log_days', 'webport', 'fontfile', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme', 'processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'ersatztv'].includes(key)){ %>
+                <%- include(text_input, {
+                key,
+                label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
+      <% }else{ %>
+        <h1> Error loading configuration file... please check the server logs! </h1>
+      <% } %>
+    </div>
     <div id="tab8" class="tab">
-          <br>
-        <center> <u> <h2>Login Settings</h2></u></center>
-
+      <br>
+      <center><u><h2>Login Settings</h2></u></center>
+      <center>
+      <br>
+      <h3>Register your user account here</h3>
+      <br>
+      <form action="/register" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <label for="hint">Login Hint:</label>
+        <input type="text" id="hint" name="hint" required><br><br>
+        <input type="submit" value="Register/Update Account Details">
+      </form>
+      <% if (authentication === 'yes') { %>
         <br>
-        <h3>Register your user account here</h3>
+        <form action="/delusrpswrd" method="post">
+          <input type="submit" value="Remove authentication">
+        </form>
+      <% } %>
+      </center>
+    </div>
+    <br>
+    <div id="tab9" class="tab">
+      <br>
+      <center><u><h2>Backup & Restore</h2></u></center>
+      <center>
+      <br>
+      <h3>Backup</h3>
+      <form action="/api/config/backup" method="get">
+        <input type="submit" value="Backup">
+      </form>
+      <br>
+      <h3>Restore</h3>
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" accept=".zip" class="button">
+        <script>
+          document.getElementById('fileInput').addEventListener('change', function () {
+            const fileInput = this;
+            const allowedExtension = '.zip';
+
+            if (fileInput.files.length > 0) {
+              const selectedFile = fileInput.files[0];
+              const fileName = selectedFile.name;
+
+              if (fileName.endsWith(allowedExtension) && fileName.startsWith('ersatztv-filler-backup-')) {
+                logger.success('File accepted: ' + fileName);
+                // You can proceed with handling the selected file here.
+              } else {
+                alert('Invalid file. Please select a file with the correct format.');
+                fileInput.value = ''; // Clear the file input
+              }
+            }
+          });
+
+        </script>
         <br>
-        <form action="/register" method="post">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br><br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br><br>
-                <label for="hint">Login Hint:</label>
-                <input type="text" id="hint" name="hint" required><br><br>
-                <input type="submit" value="Register/Update Account Details">
-            </form>
-            <% if (authentication === 'yes') { %>
-            <br>
-            <form action="/delusrpswrd" method="post">
-                    <input type="submit" value="Remove authentication">
-                </form>
-                  <% } %>
-        </div>
         <br>
-        <div id="tab9" class="tab">
-              <br>
-            <center> <u> <h2>Backup & Restore</h2></u></center>
+        <input type="submit" value="Restore" class="button">
+      </form>
+      <br>
+      </center>
+      <script>
+        document.getElementById("uploadForm").addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent default form submission
 
-            <br>
-            <h3>Backup</h3>
-            <form action="/api/config/backup" method="get">
-                    <input type="submit" value="Backup">
-                </form>
-                <br>
-            <h3>Restore</h3>
-            <form id="uploadForm" enctype="multipart/form-data">
-              <input type="file" id="fileInput" accept=".zip" class="button">
-              <script>
-                document.getElementById('fileInput').addEventListener('change', function () {
-                  const fileInput = this;
-                  const allowedExtension = '.zip';
+          var fileInput = document.getElementById("fileInput");
+          var file = fileInput.files[0];
 
-                  if (fileInput.files.length > 0) {
-                    const selectedFile = fileInput.files[0];
-                    const fileName = selectedFile.name;
+          if (file) {
+            var formData = new FormData();
+            formData.append("file", file);
 
-                    if (fileName.endsWith(allowedExtension) && fileName.startsWith('ersatztv-filler-backup-')) {
-                      logger.success('File accepted: ' + fileName);
-                      // You can proceed with handling the selected file here.
-                    } else {
-                      alert('Invalid file. Please select a file with the correct format.');
-                      fileInput.value = ''; // Clear the file input
-                    }
-                  }
-                });
-
-                </script>
-              <br>
-              <br>
-              <input type="submit" value="Restore" class="button">
-            </form>
-            <br>
-            </center>
-
-            <script>
-              document.getElementById("uploadForm").addEventListener("submit", function(event) {
-                event.preventDefault(); // Prevent default form submission
-
-                var fileInput = document.getElementById("fileInput");
-                var file = fileInput.files[0];
-
-                if (file) {
-                  var formData = new FormData();
-                  formData.append("file", file);
-
-                  // You can send the formData object using AJAX or fetch to handle the file upload on the server
-                  // Example using fetch:
-                  fetch("/api/config/restore", {
-                    method: "POST",
-                    body: formData
-                  })
-                  .then(response => {
-                    // Handle the response from the server
-                    logger.success("Upload successful");
-                  })
-                  .catch(error => {
-                    // Handle any errors
-                    logger.error("Upload failed:", error);
-                  });
-                } else {
-                  // Handle case where no file is selected
-                  logger.error("No file selected");
-                }
+            // You can send the formData object using AJAX or fetch to handle the file upload on the server
+            // Example using fetch:
+            fetch("/api/config/restore", {
+              method: "POST",
+              body: formData
+            })
+              .then(response => {
+                // Handle the response from the server
+                logger.success("Upload successful");
+              })
+              .catch(error => {
+                // Handle any errors
+                logger.error("Upload failed:", error);
               });
-            </script>
-            </div>
-            <div id="tab10" class="tab">
-                  <br>
-                <center> <u> <h2>Migrate Config</h2></u></center>
+          } else {
+            // Handle case where no file is selected
+            logger.error("No file selected");
+          }
+        });
+      </script>
+    </div>
+    <div id="tab10" class="tab">
+      <br>
+      <center><u><h2>Migrate Config</h2></u></center>
 
-                <br>
-                <center>  <u><h5>Migrate V0.X Config to V1.X Config</h5></u>
+      <br>
+      <center><u><h5>Migrate V0.X Config to V1.X Config</h5></u>
 
-                  <br>
-                  <p>The old config.conf file can be uploaded here to migrate the data to the new (current) config</p>
-                  <p><b>Please Note:</b> Some configs will be overwritten</p>
-                  <form id="uploadForm" enctype="multipart/form-data">
-                    <input type="file" id="fileInput" accept="config.conf" class="button">
-                    <br>
-                    <br>
-                    <input type="submit" value="Upload" class="button">
-                  </form>
-                  <br>
-                  </center>
-                  <br>
-
-                  <script>
-                    document.getElementById("uploadForm").addEventListener("submit", function(event) {
-                      event.preventDefault(); // Prevent default form submission
-
-                      var fileInput = document.getElementById("fileInput");
-                      var file = fileInput.files[0];
-
-                      if (file) {
-                        var formData = new FormData();
-                        formData.append("file", file);
-
-                        // You can send the formData object using AJAX or fetch to handle the file upload on the server
-                        // Example using fetch:
-                        fetch("/uploadoldmodeltheme", {
-                          method: "POST",
-                          body: formData
-                        })
-                        .then(response => {
-                          // Handle the response from the server
-                          logger.success("Upload successful");
-                        })
-                        .catch(error => {
-                          // Handle any errors
-                          logger.error("Upload failed:", error);
-                        });
-                      } else {
-                        // Handle case where no file is selected
-                        logger.error("No file selected");
-                      }
-                    });
-                  </script>
-
-                <br>
-  </div>
-  <div id="tab11" class="tab">
         <br>
-      <center> <u> <h2>Advanced Config</h2></u></center>
-    <center>  <p>** It is <b>NOT RECCOMENDED</b> to change these settings, the options here are untested and things may break unexpectedly **</p> </center>
+        <p>The old config.conf file can be uploaded here to migrate the data to the new (current) config</p>
+        <p><b>Please Note:</b> Some configs will be overwritten</p>
+        <form id="uploadForm" enctype="multipart/form-data">
+          <input type="file" id="fileInput" accept="config.conf" class="button">
+          <br>
+          <br>
+          <input type="submit" value="Upload" class="button">
+        </form>
+        <br>
+      </center>
+      <br>
+
+      <script>
+        document.getElementById("uploadForm").addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent default form submission
+
+          var fileInput = document.getElementById("fileInput");
+          var file = fileInput.files[0];
+
+          if (file) {
+            var formData = new FormData();
+            formData.append("file", file);
+
+            // You can send the formData object using AJAX or fetch to handle the file upload on the server
+            // Example using fetch:
+            fetch("/uploadoldmodeltheme", {
+              method: "POST",
+              body: formData
+            })
+              .then(response => {
+                // Handle the response from the server
+                logger.success("Upload successful");
+              })
+              .catch(error => {
+                // Handle any errors
+                logger.error("Upload failed:", error);
+              });
+          } else {
+            // Handle case where no file is selected
+            logger.error("No file selected");
+          }
+        });
+      </script>
+
+      <br>
+    </div>
+    <div id="tab11" class="tab">
+      <br>
+      <center><u><h2>Advanced Config</h2></u></center>
+      <center><p>** It is <b>NOT RECCOMENDED</b> to change these settings, the options here are untested and
+          things may break unexpectedly **</p></center>
 
       <br>
       <% if(CONFIG_AVAILABLE){ %>
-          <form method="post" action="/config" id="config-form">
-              <div id="variables">
-                  <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-                    <% if(key !== 'theme' && !['usewttrin', 'booked_code', 'temperatureunits', 'audiolanguage', 'webport', 'ersatztv', 'xmltv', 'videoresolution', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme','processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
-                      <%- include(text_input, {
-                          key,
-                          label: CURRENT_CONFIG[key]
-                      }) %>
-                       <% } %>
-                  <% }); %>
-              </div>
-          </form>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
+              <% if(key !== 'theme' && !['cutomweathereaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'webport', 'ersatztv', 'xmltv', 'videoresolution', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme', 'processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
+                <%- include(text_input, {
+                key,
+                label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
       <% }else{ %>
-          <h1> Error loading configuration file... please check the server logs! </h1>
+        <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
 
       <br>
-</div>
+    </div>
   </div>
+</div>

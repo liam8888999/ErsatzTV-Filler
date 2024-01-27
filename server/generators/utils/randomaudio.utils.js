@@ -14,7 +14,7 @@ const selectRandomAudioFile = async (path) => {
 logger.info(`Selected Path: ${selectedPath}`)
   if (!selectedPath) {
     // Handle the case where 'path' is undefined or falsy
-    logger.error("Custom Audio Path parameter is undefined or empty. Using the audio-fallback directory.");
+    logger.warn("Custom Audio Path parameter is undefined or empty. Using the audio-fallback directory.");
     selectedPath = `${AUDIOFALLBACK}`; // Set the backup directory
   }
 logger.info(`Selected Path: ${selectedPath}`)

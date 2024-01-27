@@ -17,7 +17,7 @@ const { findoldVersionThemeFiles } = require("../utils/themes.utils")
 const authentificationPageRoutes = async (app) => {
   // Middleware to handle errors
   app.use((err, req, res, next) => {
-    logger.error(`Page routes Error: ${err}`); // Log the error for debugging purposes
+    logger.error(err); // Log the error for debugging purposes
 
     // Set a default error status and message
     const status = err.status || 500;
@@ -131,7 +131,7 @@ app.post('/delusrpswrd', checkAuthentication, async (req, res) => {
 if (fs.existsSync(filePath)) {
   fs.unlink(filePath, (err) => {
     if (err) {
-      logger.error('Error deleting the login file:', err);
+      logger.error(`Error deleting the login file: ${err}`);
     } else {
       logger.success('Login File has been deleted successfully.');
     }

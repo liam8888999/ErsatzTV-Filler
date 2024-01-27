@@ -15,7 +15,7 @@ let isFunctionRunning = false;
 
 const XMLTVPARSE = async () => {
   if (isFunctionRunning) {
-    logger.error('XMLTV Merger is already running.');
+    logger.warn('XMLTV Merger is already running.');
     return;
   }
   isFunctionRunning = true;

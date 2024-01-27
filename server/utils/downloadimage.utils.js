@@ -39,7 +39,6 @@ function downloadImage(url, filepath) {
 
     request.on('error', (error) => {
       reject(new Error(`Failed to download: ${error.message}`));
-      logger.error(`Failed to download: ${error.message}`);
     });
   });
 }

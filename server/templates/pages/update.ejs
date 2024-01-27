@@ -1,57 +1,55 @@
-
-<div>
-  <center>
-  <u>  <h1> Updates </h1></u>
+<div style="text-align: center;">
+  <h1><u>Updates</u></h1>
   <br>
-    <div style="background-color: #5bc0de; color: #fff; padding: 5px 10px; border-radius: 3px;  display: inline-block;">
-        <h2 style="font-size: 18px; margin: 0;"><%= updatestatus %></h2>
-      </div>
-      <br>
-      <% if (updatestatus.startsWith('Newer version is available:')) { %>
-        <br>
-        <button onclick="window.open('https://github.com/liam8888999/ErsatzTV-Filler/releases/latest', '_blank');">
-        Latest Release on Github
-      </button>
-<% } %>
-      <br>
-      <h6>* Please Note there is currently no update mechanism built in</h6>
-      </center>
-<br>
-
-<center>
-<button onclick="toggleHintText()">Acknowledgements ▾</button>
-<br>
-</center>
+  <div style="background-color: #5bc0de; color: #fff; padding: 5px 10px; border-radius: 3px;  display: inline-block;">
+    <h2 style="font-size: 18px; margin: 0;"><%= updatestatus %></h2>
+  </div>
+  <br>
+  <% if (updatestatus.startsWith('Newer version is available:')) { %>
+    <br>
+    <button onclick="window.open('https://github.com/liam8888999/ErsatzTV-Filler/releases/latest', '_blank');">
+      Latest Release on Github
+    </button>
+  <% } %>
+  <br>
+  <h6>* Please Note there is currently no update mechanism built in</h6>
+  <br>
+  <div style="text-align: center;">
+    <button onclick="toggleHintText()">Acknowledgements ▾</button>
+    <br>
+  </div>
   <div id="hintText" style="display: none;">
-  <center>
-    <h3>Acknowledgements to:</h3>
-      </center>
-      <div style="width:70%; margin: 0 auto">
-    <p><b>Music:</b> https://audiotrimmer.com/royalty-free-music/</p>
-    <p><b>MoRBid_MaNGLeR:</b> Testing and Feedback</p>
-    <p><b>jasongdove:</b> Feedback and assistance</p>
-    <p><b>S1mpleman/NotExpectedYet:</b> Alot of assistance getting setup/started</p>
-    <p><b>Portal/Stoxis:</b> ideas/Feedback and assistance with getting the generator run logic working</p>
-    <b><b>Kragger/notKragger</b> add weather provider code and features</p>
-    <p>There are likely some i have missed so if this is you let me know and i will add</p>
-</div>
-</div>
+    <div style="text-align: center;">
+      <h3>Acknowledgements to:</h3>
+    </div>
+    <div style="width:70%; margin: 0 auto">
+      <p><b>Music:</b> https://audiotrimmer.com/royalty-free-music/</p>
+      <p><b>MoRBid_MaNGLeR:</b> Testing and Feedback</p>
+      <p><b>jasongdove:</b> Feedback and assistance</p>
+      <p><b>S1mpleman/NotExpectedYet:</b> Alot of assistance getting setup/started</p>
+      <p><b>Portal/Stoxis:</b> ideas/Feedback and assistance with getting the generator run logic working</p>
+      <p><b>Kragger/notKragger:</b> add weather provider code, weather transcript TTS and features</p>
+      <p>There are likely some i have missed so if this is you let me know and i will add</p>
+    </div>
+  </div>
 
 
-
-<script>
-function toggleHintText() {
-var hintText = document.getElementById('hintText');
-if (hintText.style.display === 'none') {
-hintText.style.display = 'block';
-} else {
-hintText.style.display = 'none';
-}
-}
-</script>
-<br>
-      <%- markdown %>
-      <button class="show-content-button" style="width: 100%; border: none; color: black; border-top: 5px solid dimgray; background-image: linear-gradient(dimgray, white)">Show older Changelogs</button>
+  <script>
+    function toggleHintText() {
+      var hintText = document.getElementById('hintText');
+      if (hintText.style.display === 'none') {
+        hintText.style.display = 'block';
+      } else {
+        hintText.style.display = 'none';
+      }
+    }
+  </script>
+  <br>
+  <%- markdown %>
+  <button class="show-content-button"
+          style="width: 100%; border: none; color: black; border-top: 5px solid dimgray; background-image: linear-gradient(dimgray, white)">
+    Show older Changelogs
+  </button>
 
 
 </div>

@@ -22,7 +22,7 @@ const CHANNEL_OFFLINE = async () => {
     let fileimageExtension;
   logger.info(`Channel OFFLINE DIR is: ${CHANNEL_OFFLINEDIR}`)
   if (isFunctionRunning) {
-  logger.error('Channel Offline Generator is already running.');
+  logger.warn('Channel Offline Generator is already running.');
     return;
   }
   isFunctionRunning = true;
@@ -183,7 +183,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
         logger.debug(`Hwaccel_device: ${hwacceldevice}`);
       }
       const assfile = asssubstitution(`${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.ass`)
-        const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "movie='${assimage}' [image]; [in][image] overlay=(W-w)/2:(H-h)/5 [video+image]; [video+image] ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;
+        const command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "movie='${assimage}' [image]; [in][image] overlay=(W-w)/2:(H-h)/5 [video+image]; [video+image] ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 "${path.join(config_current.output, eachxmltvfile)}.mp4"`;
 
             logger.ffmpeg(`Channel-Offline ffmpeg command is ${command}`);
 
@@ -192,7 +192,7 @@ const convertimage = `${path.join(CHANNEL_OFFLINEDIR, eachxmltvfile)}.${fileimag
                 logger.error(`Error: ${error.message}`);
                 logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
                 // Run another FFmpeg command here on error
-          const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the channel-offline filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 ${path.join(config_current.output, eachxmltvfile)}.mp4`;
+          const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${offlinebackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the channel-offline filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t 5 "${path.join(config_current.output, eachxmltvfile)}.mp4"`;
           logger.ffmpeg(`Running channel-offline fallback command on error: ${commandOnError3}`);
           exec(commandOnError3, (error3, stdout3, stderr3) => {
             if (error3) {

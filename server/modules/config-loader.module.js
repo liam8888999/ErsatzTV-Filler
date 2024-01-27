@@ -171,6 +171,14 @@ async function addKeyValuesToconfigFile() {
     {
       key: 'booked_code',
       value: '',
+    },
+    {
+      key: 'readweather',
+      value: 'yes'
+    },
+    {
+      key: 'cutomweathereaderscript',
+      value: ''
     }
   ];
 
@@ -200,7 +208,7 @@ async function addKeyValuesToconfigFile() {
 
     logger.success('Key/value pairs added successfully.');
   } catch (err) {
-    logger.error(`Error: ${err}`);
+    logger.error(err);
   }
 }
 

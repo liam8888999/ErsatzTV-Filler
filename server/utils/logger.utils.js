@@ -3,6 +3,7 @@ const { format } = winston;
 const DailyRotateFile = require('winston-daily-rotate-file');
 const {LOGFOLDER} = require("../constants/path.constants");
 const path = require('path');
+const {error} = require("winston");
 
 // Define your custom log levels
 const customLevels = {
@@ -44,7 +45,11 @@ return formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 // Define the log format
 const logFormat = winston.format.printf(({ level, message, timestamp }) => {
-  return `${timestamp} | ${level}: ${message}`;
+  let stack = ''
+  if(level === 'error') {
+    stack = message.hasOwnProperty('stack')? "| " + message.stack : "| " + new Error().stack;
+  }
+  return `${timestamp} | ${level}: ${message} ${stack}`;
 });
 
 // Create the logger

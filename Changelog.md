@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.9.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.9.1...V1.9.2) (2024-01-25)
+
+
+### Fixed
+
+* change vanity cards to https ([d478d35](https://github.com/liam8888999/ErsatzTV-Filler/commit/d478d354f7c9642c6559cb6873983d08eaf1d88a))
+* config ui formatting fixes ([bc51634](https://github.com/liam8888999/ErsatzTV-Filler/commit/bc51634335787bb69cebd2df5b93889e0ec3c5e3))
+* fix weather undefined length bug ([5b8febe](https://github.com/liam8888999/ErsatzTV-Filler/commit/5b8febea70f89357a00173c44acce8eb17f47438))
+* small home formating change ([bfa0e11](https://github.com/liam8888999/ErsatzTV-Filler/commit/bfa0e11af87d6ee69b4eb09848e6629466797c5b))
+
+## [1.9.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.9.0...V1.9.1) (2024-01-24)
+
+
+### Changed
+
+* small ui fix ([8516f94](https://github.com/liam8888999/ErsatzTV-Filler/commit/8516f942d7070de5d80c751678f09907755d3a18))
+* small update to homepage ([802a441](https://github.com/liam8888999/ErsatzTV-Filler/commit/802a441a66d2dcf1b0c532829b908dcb8a96236c))
+
+## [1.9.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.2...V1.9.0) (2024-01-22)
+
+
+### Added
+
+* custom weather reader script templating ([dc15067](https://github.com/liam8888999/ErsatzTV-Filler/commit/dc150679c0c1ffa308cc2d46d3b41687c4e03a90))
+
+## [1.8.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.1...V1.8.2) (2024-01-19)
+
+
+### Added
+
+* weather reader and various error handling fixes ([7392fac](https://github.com/liam8888999/ErsatzTV-Filler/commit/7392facb072b2ed0fdc2ff65a594da65bfc36ed3))
+
+## [1.8.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.8.0...V1.8.1) (2024-01-16)
+
+
+### Fixed
+
+* fix handling for paths with spaces ([0da9356](https://github.com/liam8888999/ErsatzTV-Filler/commit/0da9356ca6c3e8e15c53c4c47266d0689d906a3b))
+
 ## [1.8.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.7.6...V1.8.0) (2024-01-15)
 
 
