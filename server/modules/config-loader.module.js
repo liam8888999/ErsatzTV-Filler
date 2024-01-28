@@ -1,29 +1,28 @@
-const { CONFIG_CONSTANTS } = require("../constants/path.constants");
-const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
-const { parseConfigurationFile, createNewUserConfigFromDefault } = require("../utils/config.utils");
+const {CONFIG_CONSTANTS} = require("../constants/path.constants");
+const {doesFileExist} = require("../utils/file.utils");
+const {parseConfigurationFile, createNewUserConfigFromDefault} = require("../utils/config.utils");
 const fs = require('fs');
 const fsPromises = fs.promises;
 const logger = require("../utils/logger.utils");
 
 
-
 let CURRENT_CONFIG = {}; //In memory store for config data
 
 /**
- * Boot taks to setup the configuration file or load the users current one
+ * Boot takes to set up the configuration file or load the users current one
  * @returns {Promise<void>}
  */
 const setupConfigurationFile = async () => {
-    //For now, check exists and just load the user one over the default one... can be expanded to control your variable updating, and it will always run on server boot.
-    const HAVE_USER_CONFIG = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-    if(!HAVE_USER_CONFIG){
-        logger.warn("Can not find a user configuration file... loading default...")
-        await createNewUserConfigFromDefault();
-    }else{
-        logger.success("Found a user configuration file... loading...")
-        await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG)
-    }
-    await jsonifyCurrentConfiguration();
+  //For now, check exists and just load the user one over the default one... can be expanded to control your variable updating, and it will always run on server boot.
+  const HAVE_USER_CONFIG = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
+  if (!HAVE_USER_CONFIG) {
+    logger.warn("Can not find a user configuration file... loading default...")
+    await createNewUserConfigFromDefault();
+  } else {
+    logger.success("Found a user configuration file... loading...")
+    await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG)
+  }
+  await jsonifyCurrentConfiguration();
 }
 
 /**
@@ -32,55 +31,44 @@ const setupConfigurationFile = async () => {
  * @returns {Promise<void>}
  */
 const parseConfigurationFileContents = async (path) => {
-    CURRENT_CONFIG = await parseConfigurationFile(path).parsed;
-}
-
-
-/**
- * Return the current configuration as a object
- * @returns {{}}
- */
-const retrieveCurrentConfiguration2 = () => {
-    return CURRENT_CONFIG
+  CURRENT_CONFIG = await parseConfigurationFile(path).parsed;
 }
 
 const jsonifyCurrentConfiguration = async () => {
 
   // convert config.conf to config.json  -- Delete config.conf totally in future versions
-const config = await retrieveCurrentConfiguration2();
-const FILE_EXISTS = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG)
-if (!FILE_EXISTS) {
-  logger.error('The config.json file does not exist.');
-  await fs.writeFile(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(CONFIG_CONSTANTS().DEFAULT_CONFIG, null, 2), (err) => {
-    if (err) {
-      logger.error(`Error creating user config file: ${err}`);
-    } else {
-    logger.success('Created config.json file');
-  };
-});
-}
+  const FILE_EXISTS = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG)
+  if (!FILE_EXISTS) {
+    logger.error('The config.json file does not exist.');
+    await fs.writeFile(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(CONFIG_CONSTANTS().DEFAULT_CONFIG, null, 2), (err) => {
+      if (err) {
+        logger.error(`Error creating user config file: ${err}`);
+      } else {
+        logger.success('Created config.json file');
+      }
+    });
+  }
 }
 
 const retrieveCurrentConfiguration = async () => {
   const configFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-  const defaultConfigFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-  await addKeyValuesToconfigFile();
+  await addKeyValuesToConfigFile();
   if (!configFileExists) {
     logger.warn("config.json file is missing... Generating a new copy");
     await jsonifyCurrentConfiguration();
-} else {
+  } else {
     logger.info("Found a user configuration file... loading...");
-  //  await retrieveCurrentConfiguration2()
+    //  await retrieveCurrentConfiguration2()
   }
 
-    const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
-    CURRENT_CONFIG = JSON.parse(data);
-    //(async () => { const config = await retrieveCurrentConfiguration(); logger.success(`Current config is: ${CURRENT_CONFIG}`)})()
-return CURRENT_CONFIG;
+  const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
+  CURRENT_CONFIG = JSON.parse(data);
+  //(async () => { const config = await retrieveCurrentConfiguration(); logger.success(`Current config is: ${CURRENT_CONFIG}`)})()
+  return CURRENT_CONFIG;
 };
 
 
-async function addKeyValuesToconfigFile() {
+async function addKeyValuesToConfigFile() {
   const filename = CONFIG_CONSTANTS().USER_CONFIG;
 
   const keyValuesToAdd = [
@@ -177,7 +165,7 @@ async function addKeyValuesToconfigFile() {
       value: 'yes'
     },
     {
-      key: 'cutomweathereaderscript',
+      key: 'customweatherreaderscript',
       value: ''
     }
   ];
@@ -190,7 +178,7 @@ async function addKeyValuesToconfigFile() {
     const jsonData = JSON.parse(data);
 
     // Loop through the key/value pairs to add
-    for (const { key, value } of keyValuesToAdd) {
+    for (const {key, value} of keyValuesToAdd) {
       // Check if the key already exists in the JSON object
       if (!jsonData.hasOwnProperty(key)) {
         // If it doesn't exist, add the new key/value pair
@@ -213,12 +201,11 @@ async function addKeyValuesToconfigFile() {
 }
 
 
-
 //async log
 //(async () => { const config = await retrieveCurrentConfiguration(); logger.info(config)})()
 
 
 module.exports = {
-    setupConfigurationFile,
-    retrieveCurrentConfiguration,
+  setupConfigurationFile,
+  retrieveCurrentConfiguration,
 }

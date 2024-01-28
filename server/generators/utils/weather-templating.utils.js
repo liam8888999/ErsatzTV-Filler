@@ -2,18 +2,24 @@ const fs = require("fs");
 const logger = require("../../utils/logger.utils");
 const {retrieveCurrentConfiguration} = require("../../modules/config-loader.module");
 const path = require("path");
-const {WEATHERDIR} = require("../../constants/path.constants");
+const {WEATHERDIR, DEFAULT_WEATHER_SCRIPT} = require("../../constants/path.constants");
+const Mustache = require("mustache");
 
-const weathertemplatereplacement = async (script) => {
+//Thinking of future expansion, first of all a collection of templates that can be selected
+//purposefully or randomly.
+const currentTemplate = async () => {
+  const config_current = await retrieveCurrentConfiguration();
+  let script;
+  script = `${DEFAULT_WEATHER_SCRIPT}`
+  if (config_current.customweatherreaderscript.length > 0) {
+    script = `${config_current.customweatherreaderscript}`
+  }
+  return script;
+}
+
+const weatherTemplateReplacement = async (script) => {
   const config_current = await retrieveCurrentConfiguration();
   let weatherData;
-  let speed = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Miles' : 'Kmph';
-  let degree = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'F' : 'C';
-  let dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let obsDate;
-  let today;
-  let dateThree;
-  let windDir;
   await fs.promises.readFile(`${path.join(WEATHERDIR, 'weather2.json')}`, 'utf8')
     .then(data => {
       weatherData = JSON.parse(data);
@@ -22,86 +28,150 @@ const weathertemplatereplacement = async (script) => {
     .catch(error => {
       logger.error(error);
     });
-  obsDate = new Date();
-  today = obsDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  dateThree = new Date();
-  dateThree.setDate(obsDate.getDate() + 2);
-  windDir = weatherData.current_condition[0].winddir16Point;
-  windDir = windDir
-    .replaceAll('N', 'north')
-    .replaceAll('E', 'east')
-    .replaceAll('S', 'south')
-    .replaceAll('W', 'west');
+  const outputData = weatherTemplateData(weatherData, config_current);
+  return Mustache.render(script, outputData);
+}
 
-  script = script
-    .replaceAll('{{TODAY}}', today)
-    .replaceAll('{{TOMORROW}}', 'Tomorrow')
-    .replaceAll('{{DAY_THREE}}', dayName[dateThree.getDay()])
-    .replaceAll('{{OBSERVATION_TIME}}', weatherData.current_condition[0].observation_time)
-    .replaceAll('{{LOCAL_OBSERVATION_DATETIME}}', weatherData.current_condition[0].localObsDateTime)
-    .replaceAll('{{WEATHER_HEADER}}', config_current.weatherheader)
-    .replaceAll('{{CITY}}', weatherData.nearest_area[0].areaName[0].value)
-    .replaceAll('{{STATE}}', weatherData.nearest_area[0].region[0].value)
-    .replaceAll('{{COUNTRY}}', weatherData.nearest_area[0].country[0].value)
-    .replaceAll('{{CURRENT_CONDITIONS}}', weatherData.current_condition[0].weatherDesc[0].value)
-    .replaceAll('{{CURRENT_TEMP}}', weatherData.current_condition[0]['temp_' + degree])
-    .replaceAll('{{CURRENT_FEELSLIKE}}', weatherData.current_condition[0]['FeelsLike' + degree])
-    .replaceAll('{{CURRENT_CLOUDCOVER}}', weatherData.current_condition[0].cloudcover)
-    .replaceAll('{{CURRENT_HUMIDITY}}', weatherData.current_condition[0].humidity)
-    .replaceAll('{{CURRENT_PRESSURE}}', weatherData.current_condition[0].pressure)
-    .replaceAll('{{CURRENT_PRESSUREINCHES}}', weatherData.current_condition[0].pressureinches)
-    .replaceAll('{{CURRENT_UVINDEX}}', weatherData.current_condition[0].uvIndex)
-    .replaceAll('{{CURRENT_WIND_DIR_DEGREE}}', weatherData.current_condition[0].winddirDegree)
-    .replaceAll('{{CURRENT_WIND_DIR}}', windDir)
-    .replaceAll('{{CURRENT_WIND_SPEED}}', weatherData.current_condition[0]['windspeed' + speed])
-    .replaceAll('{{LATITUDE}}', weatherData.nearest_area[0].latitude)
-    .replaceAll('{{LONGITUDE}}', weatherData.nearest_area[0].longitude)
-    .replaceAll('{{POPULATION}}', weatherData.nearest_area[0].population)
-    .replaceAll('{{TODAY_AVERAGETEMP}}', weatherData.weather[0]['avgtemp' + degree])
-    .replaceAll('{{TODAY_DATE}}', weatherData.weather[0].date)
-    .replaceAll('{{TODAY_MAXTEMP}}', weatherData.weather[0]['maxtemp' + degree])
-    .replaceAll('{{TODAY_MINTEMP}}', weatherData.weather[0]['mintemp' + degree])
-    .replaceAll('{{TODAY_SUNHOUR}}', weatherData.weather[0].sunHour + "hours")
-    .replaceAll('{{TODAY_TOTALSNOW_CM}}', weatherData.weather[0].totalSnow_cm)
-    .replaceAll('{{TODAY_UVINDEX}}', weatherData.weather[0].uvIndex)
-    .replaceAll('{{TODAY_MOON_ILLUMINATION}}', weatherData.weather[0].astronomy[0].moon_illumination)
-    .replaceAll('{{TODAY_MOON_PHASE}}', weatherData.weather[0].astronomy[0].moon_phase)
-    .replaceAll('{{TODAY_MOONRISE}}', weatherData.weather[0].astronomy[0].moonrise)
-    .replaceAll('{{TODAY_MOONSET}}', weatherData.weather[0].astronomy[0].moonset)
-    .replaceAll('{{TODAY_SUNRISE}}', weatherData.weather[0].astronomy[0].sunrise)
-    .replaceAll('{{TODAY_SUNSET}}', weatherData.weather[0].astronomy[0].sunset)
-    .replaceAll('{{TOMORROW_AVERAGETEMP}}', weatherData.weather[1]['avgtemp' + degree])
-    .replaceAll('{{TOMORROW_DATE}}', weatherData.weather[1].date)
-    .replaceAll('{{TOMORROW_MAXTEMP}}', weatherData.weather[1]['maxtemp' + degree])
-    .replaceAll('{{TOMORROW_MINTEMP}}', weatherData.weather[1]['mintemp' + degree])
-    .replaceAll('{{TOMORROW_SUNHOUR}}', weatherData.weather[1].sunHour + "hours")
-    .replaceAll('{{TOMORROW_TOTALSNOW_CM}}', weatherData.weather[1].totalSnow_cm)
-    .replaceAll('{{TOMORROW_UVINDEX}}', weatherData.weather[1].uvIndex)
-    .replaceAll('{{TOMORROW_MOON_ILLUMINATION}}', weatherData.weather[1].astronomy[0].moon_illumination)
-    .replaceAll('{{TOMORROW_MOON_PHASE}}', weatherData.weather[1].astronomy[0].moon_phase)
-    .replaceAll('{{TOMORROW_MOONRISE}}', weatherData.weather[1].astronomy[0].moonrise)
-    .replaceAll('{{TOMORROW_MOONSET}}', weatherData.weather[1].astronomy[0].moonset)
-    .replaceAll('{{TOMORROW_SUNRISE}}', weatherData.weather[1].astronomy[0].sunrise)
-    .replaceAll('{{TOMORROW_SUNSET}}', weatherData.weather[1].astronomy[0].sunset)
-    .replaceAll('{{DAY_THREE_AVERAGETEMP}}', weatherData.weather[2]['avgtemp' + degree])
-    .replaceAll('{{DAY_THREE_DATE}}', weatherData.weather[2].date)
-    .replaceAll('{{DAY_THREE_MAXTEMP}}', weatherData.weather[2]['maxtemp' + degree])
-    .replaceAll('{{DAY_THREE_MINTEMP}}', weatherData.weather[2]['mintemp' + degree])
-    .replaceAll('{{DAY_THREE_SUNHOUR}}', weatherData.weather[2].sunHour + "hours")
-    .replaceAll('{{DAY_THREE_TOTALSNOW_CM}}', weatherData.weather[2].totalSnow_cm)
-    .replaceAll('{{DAY_THREE_UVINDEX}}', weatherData.weather[2].uvIndex)
-    .replaceAll('{{DAY_THREE_MOON_ILLUMINATION}}', weatherData.weather[2].astronomy[0].moon_illumination)
-    .replaceAll('{{DAY_THREE_MOON_PHASE}}', weatherData.weather[2].astronomy[0].moon_phase)
-    .replaceAll('{{DAY_THREE_MOONRISE}}', weatherData.weather[2].astronomy[0].moonrise)
-    .replaceAll('{{DAY_THREE_MOONSET}}', weatherData.weather[2].astronomy[0].moonset)
-    .replaceAll('{{DAY_THREE_SUNRISE}}', weatherData.weather[2].astronomy[0].sunrise)
-    .replaceAll('{{DAY_THREE_SUNSET}}', weatherData.weather[2].astronomy[0].sunset)
+function weatherTemplateData(inputJSON, config_current) {
+  let weatherData = {
+    currentConditions: {},
+    location: {},
+    forecast: {},
+    units: {}
+  };
+  let values;
+  let speed = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Miles' : 'Kmph';
+  let degree = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'F' : 'C';
+  let depth = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Inches' : 'mm';
 
-  //  console.log(script)
+  //output some units if people want to use them
+  weatherData.units.temperature = config_current.temperatureunits;
+  weatherData.units.speed = speed;
+  weatherData.units.depth = depth;
+  weatherData.header = config_current.weatherheader;
 
-    return script
+  for (let section in inputJSON) {
+    switch (section) {
+      case 'current_condition':
+        values = inputJSON[section][0];
+        for (let valKey in values) {
+          //In general, we're locating the local values and outputting as the default
+          switch (valKey) {
+            case 'localObsDateTime':
+              //create some different date formats
+              const obsDate = new Date(Date.parse(values[valKey]));
+              weatherData.currentConditions.observationDate = obsDate.toLocaleString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+              });
+              weatherData.currentConditions.day = obsDate.toLocaleDateString('en-US', {weekday: 'long'});
+              weatherData.currentConditions.date = obsDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              });
+              break;
+            case 'weatherDesc':
+              weatherData.currentConditions.conditions = values[valKey][0].value;
+              break;
+            case 'FeelsLike' + degree:
+              weatherData.currentConditions.feelsLike = values[valKey];
+              break;
+            case 'precip' + depth:
+              weatherData.currentConditions.precip = values[valKey];
+              break;
+            case 'pressure' + depth:
+              weatherData.currentConditions.pressure = values[valKey];
+              break;
+            case 'temp_' + degree:
+              weatherData.currentConditions.temp = values[valKey];
+              break;
+            case 'visibility' + speed:
+              weatherData.currentConditions.visibility = values[valKey];
+              break;
+            case 'winddir16Point':
+              weatherData.currentConditions.windDir = values[valKey]
+                .replaceAll('N', 'north ')
+                .replaceAll('E', 'east ')
+                .replaceAll('S', 'south ')
+                .replaceAll('W', 'west ');
+              break;
+            case 'windspeed' + speed:
+              weatherData.currentConditions.windspeed = values[valKey];
+              break;
+            default:
+              //Keep everything even if we don't process it.  Just dump it direct
+              weatherData.currentConditions[valKey] = values[valKey];
+          }
+        }
+        break;
+      case 'nearest_area':
+        values = inputJSON[section][0];
+        for (let valKey in values) {
+          switch (valKey) {
+            case 'areaName':
+              weatherData.location.city = values[valKey][0].value;
+              break;
+            case'region':
+              weatherData.location.state = values[valKey][0].value;
+              break;
+            case 'country':
+              weatherData.location.country = values[valKey][0].value;
+              break;
+            case 'weatherUrl':
+              break;
+            default:
+              weatherData.location[valKey] = values[valKey];
+          }
+        }
+        break;
+      case 'weather':
+        values = inputJSON[section];
+        values.forEach((forecast, index) => {
+          //Mustache can do things with arrays but not how we want to so convert
+          //all of this to a list of objects.  Today, 1 = tomorrow, 2 = the following day
+          const dayInd = index === 0 ? 'today' : index;
+          weatherData.forecast[dayInd] = {};
+          const destData = weatherData.forecast[dayInd];
+          for (let valKey in forecast) {
+            switch (valKey) {
+              case 'astronomy':
+                destData['astronomy'] = forecast['astronomy'][0];
+                break;
+              case 'avgtemp' + degree:
+                destData.avgtemp = forecast['avgtemp' + degree];
+                break;
+              case 'date':
+                let fDate = new Date(Date.parse(forecast['date']));
+                destData.date = fDate.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric'});
+                destData.day = fDate.toLocaleDateString('en-US', {weekday: 'long'});
+                break;
+              case 'maxtemp' + degree:
+                destData.maxtemp = forecast['maxtemp' + degree];
+                break;
+              case 'mintemp' + degree:
+                destData.mintemp = forecast['mintemp' + degree];
+                break;
+              default:
+                destData[valKey] = forecast[valKey];
+                break;
+            }
+          }
+        });
+        break;
+      default:
+        //Again, if any top level parameters exist, just dump them in whole to the output
+        weatherData[section] = inputJSON[section];
+    }
+  }
+  return weatherData;
 }
 
 module.exports = {
-    weathertemplatereplacement
+  weatherTemplateReplacement, weatherTemplateData, currentTemplate
 };

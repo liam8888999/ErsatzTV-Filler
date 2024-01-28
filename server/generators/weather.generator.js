@@ -5,13 +5,13 @@ const {retrieveCurrentConfiguration} = require("../modules/config-loader.module"
 const logger = require("../utils/logger.utils");
 const {createDirectoryIfNotExists, getImageWidthHeight} = require("../utils/file.utils");
 const {themecolourdecoder, retrieveCurrentTheme} = require("../utils/themes.utils");
-const {exec} = require("child_process")
+const {exec} = require("child_process");
 const fs = require('fs');
 const path = require('path');
 const {asssubstitution} = require("../utils/string.utils");
 const {contrastColor} = require('contrast-color');
 const {createAudio, ffmpegSpeechOrMusicCommand, speedFactor} = require("./utils/texttospeech.utils");
-const { weathertemplatereplacement } = require("./utils/weather-templating.utils");
+const { weatherTemplateReplacement, currentTemplate} = require("./utils/weather-templating.utils");
 
 let isFunctionRunning = false;
 
@@ -216,12 +216,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
   const assfile = asssubstitution(`${path.join(WEATHERDIR, `error.ass`)}`);
 
   const creatWeatherScript = async () => {
-    let script;
-    script = `${DEFAULT_WEATHER_SCRIPT}`
-    if (config_current.cutomweathereaderscript.length > 0) {
-      script = `${config_current.cutomweathereaderscript}`
-    }
-    return await weathertemplatereplacement(script);
+    return await weatherTemplateReplacement(await currentTemplate());
   }
 
   const createWeather = async (image, fileName) => {
