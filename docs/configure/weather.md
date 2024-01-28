@@ -95,70 +95,136 @@ If set to yes, the audio on the weather videos will be a text to speech read of 
 
 - `String (custom weather reader script text)`
 
-The text for a custom weather reader script. If this option has any text then it will automatically be used otherwise it will fallback to the default.
+The text for a custom weather reader script. If this option has any text then it will automatically be used otherwise it will fall back to the default. Clicking on the `View Scripts` link will display the current template and how it will be filled out when sent to be converted to speech.
 
-The Format should be 'The current temperature is {{CURRENT_TEMP}}' with the variables enclosed in `{{VARIABLE}}`
+The Format should be 'The current temperature is {{currentConditions.temp}}' with the variables enclosed in `{{variable}}`
 
-The available variables are:
+Each set of {} indicates a grouping to get to data inside that group use a .
 
-  *  - `{{TODAY}}` - today
-  *  - `{{TOMORROW}}` - tomorrows day name (e.g. wednesday)
-  *  - `{{DAY_THREE}}` - the day after tomorrows day name (e.g. thursday)
-  *  - `{{OBSERVATION_TIME}}` - weathers observation time
-  *  - `{{LOCAL_OBSERVATION_DATETIME}}` - weathers observation time (localised)
-  *  - `{{WEATHER_HEADER}}` - the text from the weather header config option
-  *  - `{{CITY}}` - City of weather report
-  *  - `{{STATE}}` - State of weather report
-  *  - `{{COUNTRY}}` - Country of weather repor
-  *  - `{{CURRENT_CONDITIONS}}` - the current weather conditions (e.g. sunny/cloudy)
-  *  - `{{CURRENT_TEMP}}` - the current temperature
-  *  - `{{CURRENT_FEELSLIKE}}` - the current feels like temperature
-  *  - `{{CURRENT_CLOUDCOVER}}` - the current cloud cover percentage
-  *  - `{{CURRENT_HUMIDITY}}` - the current humidity percentage
-  *  - `{{CURRENT_PRESSURE}}` - the current pressure
-  *  - `{{CURRENT_PRESSUREINCHES}}` - the current pressure (inches)
-  *  - `{{CURRENT_UVINDEX}}` - the current uv index
-  *  - `{{CURRENT_WIND_DIR}}` - the current wind direction (North, South, East, West)
-  *  - `{{CURRENT_WIND_SPEED}}` - the current wind speed
-  *  - `{{LATITUDE}}` - the latitute of the weather forecast location
-  *  - `{{LONGITUDE}}` - the longitude of the weather forecast location
-  *  - `{{POPULATION}}` - the population of the weather forecast location
-  *  - `{{TODAY_AVERAGETEMP}}` - todays average temperature
-  *  - `{{TODAY_DATE}}` - todays date
-  *  - `{{TODAY_MAXTEMP}}` - todays maximum temperature
-  *  - `{{TODAY_MINTEMP}}` - todays minimum temperature
-  *  - `{{TODAY_SUNHOUR}}` - todays amount of sunlight hours
-  *  - `{{TODAY_TOTALSNOW_CM}}` - todays total snow fall in cm
-  *  - `{{TODAY_UVINDEX}}' - `todays uv index
-  *  - `{{TODAY_MOON_ILLUMINATION}}` - todays moon moon illumination
-  *  - `{{TODAY_MOON_PHASE}}` - todays moon phase
-  *  - `{{TODAY_MOONRISE}}` - todays moonrise time
-  *  - `{{TODAY_MOONSET}}` - todays moon set time
-  *  - `{{TODAY_SUNRISE}}` - todays sunrise time
-  *  - `{{TODAY_SUNSET}}` - todays sunset time
-  *  - `{{TOMORROW_AVERAGETEMP}}` - tomorrows average temperature
-  *  - `{{TOMORROW_DATE}}` - tomorrows date
-  *  - `{{TOMORROW_MAXTEMP}}` - tomorrows maximum temperature
-  *  - `{{TOMORROW_MINTEMP}}` - tomorrows minimum temperature
-  *  - `{{TOMORROW_SUNHOUR}}` - tomorrows amount of sunlight hours
-  *  - `{{TOMORROW_TOTALSNOW_CM}}` - tomorrows total snow fall in cm
-  *  - `{{TOMORROW_UVINDEX}}' - `tomorrows uv index
-  *  - `{{TOMORROW_MOON_ILLUMINATION}}` - tomorrows moon moon illumination
-  *  - `{{TOMORROW_MOON_PHASE}}` - tomorrows moon phase
-  *  - `{{TOMORROW_MOONRISE}}` - tomorrows moonrise time
-  *  - `{{TOMORROW_MOONSET}}` - tomorrows moon set time
-  *  - `{{TOMORROW_SUNRISE}}` - tomorrows sunrise time
-  *  - `{{TOMORROW_SUNSET}}` - tomorrows sunset time
-  *  - `{{DAY_THREE_AVERAGETEMP}}` - the day after tomorrows average temperature
-  *  - `{{DAY_THREE_DATE}}` - the day after tomorrows date
-  *  - `{{DAY_THREE_MAXTEMP}}` - the day after tomorrows maximum temperature
-  *  - `{{DAY_THREE_MINTEMP}}` - the day after tomorrows/ minimum temperature
-  *  - `{{DAY_THREE_SUNHOUR}}` - the day after tomorrows amount of sunlight hours
-  *  - `{{DAY_THREE_TOTALSNOW_CM}}` - the day after tomorrows total snow fall in cm
-  *  - `{{DAY_THREE_UVINDEX}}' - `the day after tomorrows uv index
-  *  - `{{DAY_THREE_MOON_ILLUMINATION}}` - the day after tomorrows moon moon illumination
-  *  - `{{DAY_THREE_MOON_PHASE}}` - the day after tomorrows moon phase
-  *  - `{{DAY_THREE_MOONRISE}}` - the day after tomorrows moonrise time
-  *  - `{{DAY_THREE_MOONSET}}` - the day after tomorrows moon set time
-  *  - `{{DAY_THREE_SUNRISE}}` - the day after tomorrows sunrise time
-  *  - `{{DAY_THREE_SUNSET}}` - the day after tomorrows sunset time
+For example:
+
+* Current Feels Like Temperature = `{{currentConditions.feelsLike}}`
+* Today's Forecast High = `{{forecast.today.maxtemp}}`
+
+Many of the unitless variables are dynamic based on your temperature setting.  Metric units will be in the short form by default unless the `Temperature Unit` is set to `Fahrenheit`.
+
+Clicking on the `View Data` link will generate and display a file containing the data used to generate the weather reader script.
+
+An example with `Farenheight` set:
+```json
+{
+    "currentConditions": {
+        "FeelsLikeC": "-3",
+        "feelsLike": "26",
+        "cloudcover": "0",
+        "humidity": "51",
+        "observationDate": "Sunday, January 28, 2024 at 4:00 AM",
+        "day": "Sunday",
+        "date": "Sunday, January 28, 2024",
+        "observation_time": "11:00 AM",
+        "precip": "0.0",
+        "precipMM": "0.0",
+        "pressure": "30",
+        "temp_C": "0",
+        "temp": "32", //Farenheight degrees
+        "uvIndex": "1",
+        "visibility": "9",
+        "weatherCode": "113",
+        "conditions": "Clear",
+        "weatherIconUrl": [
+            {
+              "value": ""
+            }
+        ],
+        "windDir": "west ",
+        "winddirDegree": "280",
+        "windspeedKmph": "9",
+        "windspeed": "6" //Miles Per Hour
+    },
+    "location": {
+        "city": "Broomfield",
+        "country": "United States of America",
+        "latitude": "39.921",
+        "longitude": "-105.086",
+        "population": "44692",
+        "state": "Colorado"
+    },
+    "forecast": {
+        "1": {
+            "astronomy": {
+                "moon_illumination": "91",
+                "moon_phase": "Waning Gibbous",
+                "moonrise": "09:14 PM",
+                "moonset": "09:18 AM",
+                "sunrise": "07:12 AM",
+                "sunset": "05:16 PM"
+            },
+            "avgtempC": "6",
+            "avgtemp": "42",
+            "date": "Sunday, January 28",
+            "day": "Sunday",
+            "maxtempC": "12",
+            "maxtemp": "53",
+            "mintempC": "2",
+            "mintemp": "35",
+            "sunHour": "10.0",
+            "totalSnow_cm": "0.0",
+            "uvIndex": "3"
+        },
+        "2": {
+            "astronomy": {
+                "moon_illumination": "84",
+                "moon_phase": "Waning Gibbous",
+                "moonrise": "10:12 PM",
+                "moonset": "09:38 AM",
+                "sunrise": "07:11 AM",
+                "sunset": "05:17 PM"
+            },
+                "avgtempC": "6",
+                "avgtemp": "43",
+                "date": "Monday, January 29",
+                "day": "Monday",
+                "maxtempC": "12",
+                "maxtemp": "54",
+                "mintempC": "2",
+                "mintemp": "36",
+                "sunHour": "10.0",
+                "totalSnow_cm": "0.0",
+                "uvIndex": "3"
+        },
+        "today": {
+            "astronomy": {
+                "moon_illumination": "95",
+                "moon_phase": "Waning Gibbous",
+                "moonrise": "08:14 PM",
+                "moonset": "08:58 AM",
+                "sunrise": "07:13 AM",
+                "sunset": "05:15 PM"
+            },
+            "avgtempC": "4",
+            "avgtemp": "40",
+            "date": "Saturday, January 27",
+            "day": "Saturday",
+            "maxtempC": "12",
+            "maxtemp": "54",
+            "mintempC": "0",
+            "mintemp": "32",
+            "sunHour": "10.0",
+            "totalSnow_cm": "0.0",
+            "uvIndex": "3"
+        }
+    },
+    "units": {
+        "temperature": "fahrenheit",
+        "speed": "Miles",
+        "depth": "Inches"
+    },
+    "header": "Current Weather",
+    "request": [
+        {
+            "query": "Lat 39.94 and Lon -105.04",
+            "type": "LatLon"
+        }
+    ]
+}
+```
