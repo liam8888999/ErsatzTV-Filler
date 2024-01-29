@@ -4,7 +4,7 @@ const { parseConfigurationFile, createNewUserConfigFromDefault } = require("../u
 const fs = require('fs');
 const fsPromises = fs.promises;
 const logger = require("../utils/logger.utils");
-
+const { version } = require('../../package.json');
 
 
 let CURRENT_CONFIG = {}; //In memory store for config data
@@ -65,6 +65,7 @@ const retrieveCurrentConfiguration = async () => {
   const configFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
   const defaultConfigFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
   await addKeyValuesToconfigFile();
+  await updateLatestVersionInconfigFile();
   if (!configFileExists) {
     logger.warn("config.json file is missing... Generating a new copy");
     await jsonifyCurrentConfiguration();
@@ -199,7 +200,6 @@ async function addKeyValuesToconfigFile() {
         logger.info(`Key '${key}' already exists in the JSON object.`);
       }
     }
-
     // Convert the updated data back to JSON string
     const updatedData = JSON.stringify(jsonData, null, 2);
 
@@ -212,7 +212,29 @@ async function addKeyValuesToconfigFile() {
   }
 }
 
+async function updateLatestVersionInconfigFile() {
+  const filename = CONFIG_CONSTANTS().USER_CONFIG;
 
+  try {
+    // Read the JSON file with the 'utf8' encoding using fs.promises
+    const data = await fsPromises.readFile(filename, 'utf8');
+
+    // Parse the JSON data
+    const jsonData = JSON.parse(data);
+
+    // Update the last ran version
+    jsonData.latestversion = version;
+    // Convert the updated data back to JSON string
+    const updatedData = JSON.stringify(jsonData, null, 2);
+
+    // Write the updated JSON data back to the file using fs.promises
+    await fsPromises.writeFile(filename, updatedData);
+
+    logger.success('Latest version variable updated successfully.');
+  } catch (err) {
+    logger.error(err);
+  }
+}
 
 //async log
 //(async () => { const config = await retrieveCurrentConfiguration(); logger.info(config)})()
