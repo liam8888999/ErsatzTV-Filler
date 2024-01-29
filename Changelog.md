@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.10.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.9.2...V1.10.0) (2024-01-29)
+
+
+### Added
+
+* note last run version as variable for internal use in future versions ([a2a53a4](https://github.com/liam8888999/ErsatzTV-Filler/commit/a2a53a442502d9d98f61543db1c729ce72a7b24c))
+
+
+### Fixed
+
+* hide latestversion variable from config page ([4460530](https://github.com/liam8888999/ErsatzTV-Filler/commit/4460530de374832adb0b8d21cded6d77c7552b5e))
+* improved error handling ([a7aa1c2](https://github.com/liam8888999/ErsatzTV-Filler/commit/a7aa1c2c7b25846ac319e47b665e7c85f9e069d9))
+
 ## [1.9.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.9.1...V1.9.2) (2024-01-25)
 
 
