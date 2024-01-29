@@ -158,6 +158,7 @@ const createvideos = async (image, fileName, backgroundcolour) => {
     }
   };
 
+try {
   await downloadimages()
   await resizeimages()
   await createvideos(path.join(PROVIDER_LOGODIR, 'jimpimgdir', 'etv.png'), 'etv_provider_logo.mp4', 'black');
@@ -165,6 +166,11 @@ const createvideos = async (image, fileName, backgroundcolour) => {
   if (config_current.customproviderlogo.length > 0) {
     await createvideos(path.join(PROVIDER_LOGODIR, 'jimpimgdir', 'custom.png'), 'custom_provider_logo.mp4' , newsbackgroundcolour);
   }
+} catch (error) {
+  logger.error(error);
+    isFunctionRunning = false;
+    throw error
+}
   isFunctionRunning = false;
 };
 

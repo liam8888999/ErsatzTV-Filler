@@ -143,8 +143,14 @@ async function processVanityCards() {
 }
 
 // Assuming you're in an async function or using the `async` keyword somewhere
+  try {
 await createDirectoryIfNotExists(config_current.output);
 await processVanityCards();
+} catch (error) {
+  logger.error(error);
+    isFunctionRunning = false;
+    throw error
+}
  isFunctionRunning = false;
 
 

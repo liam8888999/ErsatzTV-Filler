@@ -225,14 +225,18 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
   };
 
 // Step 9: Call all the functions in order
-
+try {
   createDirectoryIfNotExists(NEWSDIR);
-
   await generateNewsFeed(config_current, audioFile, current_theme);
   await prepareNewsContent(config_current);
   await prepareSubtitleText(config_current);
   await createDirectoryIfNotExists(config_current.output);
   await generateNewsVideo(config_current, audioFile);
+} catch (error) {
+  logger.error(error);
+    isFunctionRunning = false;
+    throw error
+}
   isFunctionRunning = false;
 };
 

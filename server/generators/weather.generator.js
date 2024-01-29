@@ -288,16 +288,24 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
     }
   };
 
-  await downloadimages();
-  if(config_current.readweather === 'yes') {
-    const script = await creatWeatherScript();
-    await createAudio(script, config_current.audiolanguage, scriptAudioPath);
+
+  try {
+      await downloadimages();
+      if(config_current.readweather === 'yes') {
+          const script = await creatWeatherScript();
+          await createAudio(script, config_current.audiolanguage, scriptAudioPath);
+      }
+
+      await createDirectoryIfNotExists(config_current.output);
+      await createWeather(path.join(WEATHERDIR, 'v1.png'), 'weather-v1.mp4');
+      await createWeather(path.join(WEATHERDIR, 'v2.png'), 'weather-v2.mp4');
+      await createWeather(path.join(WEATHERDIR, 'v3.png'), 'weather-v3.mp4');
+  } catch (error) {
+      logger.error(error);
+        isFunctionRunning = false;
+        throw error
   }
 
-  await createDirectoryIfNotExists(config_current.output);
-  await createWeather(path.join(WEATHERDIR, 'v1.png'), 'weather-v1.mp4');
-  await createWeather(path.join(WEATHERDIR, 'v2.png'), 'weather-v2.mp4');
-  await createWeather(path.join(WEATHERDIR, 'v3.png'), 'weather-v3.mp4');
 //createWeatherV4();
 
 
