@@ -52,8 +52,8 @@ const jsonifyCurrentConfiguration = async () => {
 
 const retrieveCurrentConfiguration = async () => {
   const configFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-  await addKeyValuesToconfigFile();
-  await updateVariablesChangedInconfigFile()
+  await addKeyValuesToConfigFile();
+  await updateVariablesChangedInconfigFile();
   if (!configFileExists) {
     logger.warn("config.json file is missing... Generating a new copy");
     await jsonifyCurrentConfiguration();
@@ -300,11 +300,11 @@ async function updateVariablesChangedInconfigFile() {
       .replaceAll('{{DAY_THREE_SUNRISE}}', '{{forecast.2.astronomy.sunrise}}')
       .replaceAll('{{DAY_THREE_SUNSET}}', '{{forecast.2.astronomy.sunset}}')
 
+      // Delete the old key    -- Error currently when key gets deleted
+      delete jsonData.cutomweathereaderscript;
+
       // Convert the updated data back to JSON string
       const updatedData = JSON.stringify(jsonData, null, 2);
-
-      // Delete the old incorrect key
-      delete jsonData.customweathereaderscript;
 
       // Write the updated JSON data back to the file using fs.promises
       await fsPromises.writeFile(filename, updatedData);
