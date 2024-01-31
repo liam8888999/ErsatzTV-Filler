@@ -142,11 +142,11 @@ const NEWS = async () => {
     let startTime = 0;
     let endTime = config_current.newsduration;
     // Set the font size different to text size to allow for longer text
-    const fontSize = 36;
+    const fontSize = 32;
     const lineSpacing = 1;
     const lines2 = inputText.split('\n');
     const subtitleHeight = lines2.length * fontSize * lineSpacing + 80;
-    const y1 = 720 + subtitleHeight;
+    const y1 = 720 + 1.01 * subtitleHeight;
     const y2 = 0;
     const moveEffect = `{\\move(640,${y1},640,${y2})}`;
     const subtitle = `${moveEffect}${lines}`;
