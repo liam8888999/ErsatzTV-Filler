@@ -224,6 +224,102 @@ async function updateLatestVersionInconfigFile() {
   }
 }
 
+
+
+async function updateVariablesChangedInconfigFile() {
+  const filename = CONFIG_CONSTANTS().USER_CONFIG;
+
+  try {
+    // Read the JSON file with the 'utf8' encoding using fs.promises
+    const data = await fsPromises.readFile(filename, 'utf8');
+
+    // Parse the JSON data
+    const jsonData = JSON.parse(data);
+
+    if (typeof jsonData.latestversion === 'undefined' || jsonData.latestversion <= '1.10.1') {
+      jsonData.customweatherreaderscript = jsonData.cutomweathereaderscript
+      .replaceAll('{{TODAY}}', '{{currentConditions.date}}')
+      .replaceAll('{{TOMORROW}}', 'tomorrow')
+      .replaceAll('{{DAY_THREE}}', '{{forecast.2.day}}')
+      .replaceAll('{{OBSERVATION_TIME}}', '{{currentConditions.observation_time}}')
+      .replaceAll('{{LOCAL_OBSERVATION_DATETIME}}', '{{currentConditions.observationDate}}')
+      .replaceAll('{{CITY}}', '{{location.city}}')
+      .replaceAll('{{STATE}}', '{{location.state}}')
+      .replaceAll('{{COUNTRY}}', '{{location.country}}')
+      .replaceAll('{{CURRENT_CONDITIONS}}', '{{currentConditions.conditions}}')
+      .replaceAll('{{CURRENT_TEMP}}', '{{currentConditions.temp}}')
+      .replaceAll('{{CURRENT_FEELSLIKE}}', '{{currentConditions.feelsLike}}')
+      .replaceAll('{{CURRENT_CLOUDCOVER}}', '{{currentConditions.cloudcover}}')
+      .replaceAll('{{CURRENT_HUMIDITY}}', '{{currentConditions.humidity}}')
+      .replaceAll('{{CURRENT_PRESSURE}}', '{{currentConditions.pressure}}')
+      .replaceAll('{{CURRENT_PRESSUREINCHES}}', '{{currentConditions.pressureInches}}')
+      .replaceAll('{{CURRENT_UVINDEX}}', '{{currentConditions.uvIndex}}')
+      .replaceAll('{{CURRENT_WIND_DIR_DEGREE}}', '{{currentConditions.winddirDegree}}')
+      .replaceAll('{{CURRENT_WIND_DIR}}', '{{currentConditions.windDir}}')
+      .replaceAll('{{CURRENT_WIND_SPEED}}', '{{currentConditions.windspeed}}')
+      .replaceAll('{{LATITUDE}}', '{{location.latitude}}')
+      .replaceAll('{{LONGITUDE}}', '{{location.longitude}}')
+      .replaceAll('{{POPULATION}}', '{{location.population}}')
+      .replaceAll('{{TODAY_AVERAGETEMP}}', '{{forecast.today.avgtemp}}')
+      .replaceAll('{{TODAY_DATE}}', '{{forecast.today.date}}')
+      .replaceAll('{{TODAY_MAXTEMP}}', '{{forecast.today.maxtemp}}')
+      .replaceAll('{{TODAY_MINTEMP}}', '{{forecast.today.mintemp}}')
+      .replaceAll('{{TODAY_SUNHOUR}}', '{{forecast.today.sunHour}}')
+      .replaceAll('{{TODAY_TOTALSNOW_CM}}', '{forecast.today.totalSnow_cm}}')
+      .replaceAll('{{TODAY_UVINDEX}}', '{forecast.today.uvIndex}}')
+      .replaceAll('{{TODAY_MOON_ILLUMINATION}}', '{forecast.today.astronomy.moon_illumination}}')
+      .replaceAll('{{TODAY_MOON_PHASE}}', '{forecast.today.astronomy.moon_phase}}')
+      .replaceAll('{{TODAY_MOONRISE}}', '{forecast.today.astronomy.moonrise}}')
+      .replaceAll('{{TODAY_MOONSET}}', '{forecast.today.astronomy.moonset}}')
+      .replaceAll('{{TODAY_SUNRISE}}', '{forecast.today.astronomy.sunrise}}')
+      .replaceAll('{{TODAY_SUNSET}}', '{forecast.today.astronomy.sunset}}')
+      .replaceAll('{{TOMORROW_AVERAGETEMP}}', '{{forecast.1.avgtemp}}')
+      .replaceAll('{{TOMORROW_DATE}}', '{{forecast.1.date}}')
+      .replaceAll('{{TOMORROW_MAXTEMP}}', '{{forecast.1.maxtemp}}')
+      .replaceAll('{{TOMORROW_MINTEMP}}', '{{forecast.1.mintemp}}')
+      .replaceAll('{{TOMORROW_SUNHOUR}}', '{{forecast.1.sunHour}}')
+      .replaceAll('{{TOMORROW_TOTALSNOW_CM}}', '{{forecast.1.totalSnow_cm}}')
+      .replaceAll('{{TOMORROW_UVINDEX}}', '{{forecast.1.uvIndex}}')
+      .replaceAll('{{TOMORROW_MOON_ILLUMINATION}}', '{{forecast.1.astronomy.moon_illumination}}')
+      .replaceAll('{{TOMORROW_MOON_PHASE}}', '{{forecast.1.astronomy.moon_phase}}')
+      .replaceAll('{{TOMORROW_MOONRISE}}', '{{forecast.1.astronomy.moonrise}}')
+      .replaceAll('{{TOMORROW_MOONSET}}', '{{forecast.1.astronomy.moonset}}')
+      .replaceAll('{{TOMORROW_SUNRISE}}', '{{forecast.1.astronomy.sunrise}}')
+      .replaceAll('{{TOMORROW_SUNSET}}', '{{forecast.1.astronomy.sunset}}')
+      .replaceAll('{{DAY_THREE_AVERAGETEMP}}', '{{forecast.2.avgtemp}}')
+      .replaceAll('{{DAY_THREE_DATE}}', '{{forecast.2.date}}')
+      .replaceAll('{{DAY_THREE_MAXTEMP}}', '{{forecast.2.maxtemp}}')
+      .replaceAll('{{DAY_THREE_MINTEMP}}', '{{forecast.2.mintemp}}')
+      .replaceAll('{{DAY_THREE_SUNHOUR}}', '{{forecast.2.sunHour}}')
+      .replaceAll('{{DAY_THREE_TOTALSNOW_CM}}', '{{forecast.2.totalSnow_cm}}')
+      .replaceAll('{{DAY_THREE_UVINDEX}}', '{{forecast.2.uvIndex}}')
+      .replaceAll('{{DAY_THREE_MOON_ILLUMINATION}}', '{{forecast.2.astronomy.moon_illumination}}')
+      .replaceAll('{{DAY_THREE_MOON_PHASE}}', '{{forecast.2.astronomy.moon_phase}}')
+      .replaceAll('{{DAY_THREE_MOONRISE}}', '{{forecast.2.astronomy.moonrise}}')
+      .replaceAll('{{DAY_THREE_MOONSET}}', '{{forecast.2.astronomy.moonset}}')
+      .replaceAll('{{DAY_THREE_SUNRISE}}', '{{forecast.2.astronomy.sunrise}}')
+      .replaceAll('{{DAY_THREE_SUNSET}}', '{{forecast.2.astronomy.sunset}}')
+
+      // Convert the updated data back to JSON string
+      const updatedData = JSON.stringify(jsonData, null, 2);
+
+      // Delete the old incorrect key
+      delete jsonData.customweathereaderscript;
+
+      // Write the updated JSON data back to the file using fs.promises
+      await fsPromises.writeFile(filename, updatedData);
+}
+
+
+
+
+
+    logger.success('Updated changed variables in config.');
+  } catch (err) {
+    logger.error(err);
+  }
+}
+
 //async log
 //(async () => { const config = await retrieveCurrentConfiguration(); logger.info(config)})()
 
