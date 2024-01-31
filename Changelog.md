@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.10.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.10.0...V1.10.1) (2024-01-31)
+
+
+### Fixed
+
+* newsfeed length handling improved ([925cd2f](https://github.com/liam8888999/ErsatzTV-Filler/commit/925cd2f6052467c7e21e75de9c46d2370a9ad521))
+* remove some html that may be found in news xml files ([7a15117](https://github.com/liam8888999/ErsatzTV-Filler/commit/7a15117ed22db4785385930d471f2f2d5bf48067))
+* use correct amount of news articles if news header is also used ([1f7104a](https://github.com/liam8888999/ErsatzTV-Filler/commit/1f7104a674da385f8565fbdd33aef8bdfde16ee9))
+
 ## [1.10.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.9.2...V1.10.0) (2024-01-29)
 
 
