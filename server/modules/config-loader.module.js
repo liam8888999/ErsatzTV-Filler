@@ -53,7 +53,7 @@ const jsonifyCurrentConfiguration = async () => {
 const retrieveCurrentConfiguration = async () => {
   const configFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
   await addKeyValuesToconfigFile();
-  await updateLatestVersionInconfigFile();
+  await updateVariablesChangedInconfigFile()
   if (!configFileExists) {
     logger.warn("config.json file is missing... Generating a new copy");
     await jsonifyCurrentConfiguration();
@@ -313,6 +313,7 @@ async function updateVariablesChangedInconfigFile() {
 
 
 
+    await updateLatestVersionInconfigFile();
 
     logger.success('Updated changed variables in config.');
   } catch (err) {
