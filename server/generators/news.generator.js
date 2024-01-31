@@ -93,8 +93,14 @@ const NEWS = async () => {
   const prepareNewsContent = async (config_current) => {
     const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, 'utf8');
     const news1Content = newstempContent;
-    const news2Content = news1Content.split('\n\n').slice(0, config_current.newsarticles).join('\n\n');
-    const newsContent = news2Content.replace(/%/g, '\\%').replace(/&lt;p&gt;/g, '').replace(/&lt;\/p&gt;/g, '').replace(/&lt;br&gt;/g, '').replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<\/br>/g, '').replace(/<br>/g, '')
+    let newsfeedarticleamount = '';
+    if (config_current.shownewsheader === 'yes') {
+      newsfeedarticleamount = config_current.newsarticles + 1
+    } else {
+      newsfeedarticleamount = config_current.newsarticles;
+    }
+    const news2Content = news1Content.split('\n\n').slice(0, newsfeedarticleamount).join('\n\n');
+    const newsContent = news2Content.replace(/%/g, '\\%').replace(/&lt;p&gt;/g, '').replace(/&lt;\/p&gt;/g, '').replace(/&lt;br&gt;/g, '').replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<\/br>/g, '').replace(/<br>/g, '').replace(/<a\b[^>]*>.*?<\/a>/gi, '').replace(/&#160;/g, ' ').replace(/&#8217;/g, '\'');;
     const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
     const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
     const descriptionpatternregex = new RegExp(`{\\\\r}{\\\\b0}{\\\\c&H${descriptioncolor}&}`, 'g');
@@ -112,10 +118,10 @@ const NEWS = async () => {
     }
     if (config_current.readonlynewsheadings === "yes") {
       const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
-      newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.').replace(/U\.\.S/g, 'U\.S').replace(/U\.\.K/g, 'U\.K').replace(/U\.\.N/g, 'U\.N')
+      newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.').replace(/U\.\.S/g, 'U\.S').replace(/U\.\.K/g, 'U\.K').replace(/U\.\.N/g, 'U\.N').replace(/\[\&\#8230\;]/g, '...')
       newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
     } else {
-      newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.').replace(/U\.\.S/g, 'U\.S').replace(/U\.\.K/g, 'U\.K').replace(/U\.\.N/g, 'U\.N')
+      newsFeedread1 = newsContent.replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.').replace(/U\.\.S/g, 'U\.S').replace(/U\.\.K/g, 'U\.K').replace(/U\.\.N/g, 'U\.N').replace(/\[\&\#8230\;]/g, '...')
       newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
     }
     logger.debug(newsFeedread)
@@ -130,16 +136,17 @@ const NEWS = async () => {
 // Step 7: Prepare the ASS subtitle text
   const prepareSubtitleText = async (config_current) => {
     const inputText = await fs.readFileSync(`${path.join(NEWSDIR, `news-temp-${NEWSNUM}.txt`)}`, 'utf8');
-    const lines = inputText.replace(/\n/g, '\\N').replace(/<p>/g, '').replace(/<\/p>/g, '');
+    const lines = inputText.replace(/\n/g, '\\N').replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/\[\&\#8230\;]/g, '...');
     const maxLinesPerFrame = 70;
     const subtitleDuration = 0;
     let startTime = 0;
     let endTime = config_current.newsduration;
+    // Set the font size different to text size to allow for longer text
     const fontSize = 32;
     const lineSpacing = 1;
     const lines2 = inputText.split('\n');
     const subtitleHeight = lines2.length * fontSize * lineSpacing + 80;
-    const y1 = 720 + subtitleHeight;
+    const y1 = 720 + 1.01 * subtitleHeight;
     const y2 = 0;
     const moveEffect = `{\\move(640,${y1},640,${y2})}`;
     const subtitle = `${moveEffect}${lines}`;
@@ -225,14 +232,18 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
   };
 
 // Step 9: Call all the functions in order
-
+try {
   createDirectoryIfNotExists(NEWSDIR);
-
   await generateNewsFeed(config_current, audioFile, current_theme);
   await prepareNewsContent(config_current);
   await prepareSubtitleText(config_current);
   await createDirectoryIfNotExists(config_current.output);
   await generateNewsVideo(config_current, audioFile);
+} catch (error) {
+  logger.error(error);
+    isFunctionRunning = false;
+    throw error
+}
   isFunctionRunning = false;
 };
 
