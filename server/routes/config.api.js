@@ -3,7 +3,7 @@ const {writeValueToConfigurationFile} = require("../utils/config.utils.js");
 const logger = require("../utils/logger.utils");
 const archiver = require('archiver');
 const {downloadImage} = require("../utils/downloadimage.utils");
-const {setwebtheme} = require("../utils/config.utils.js");
+const {setWebTheme} = require("../utils/config.utils.js");
 const multer = require('multer');
 const fs = require('fs');
 const axios = require('axios').default;
@@ -17,7 +17,7 @@ const {
 } = require("../constants/path.constants");
 const path = require('path');
 const extract = require('extract-zip');
-const {retrieveCurrentConfiguration, retrieveNewConfiguration} = require("../modules/config-loader.module");
+const {retrieveCurrentConfiguration} = require("../modules/config-loader.module");
 const {
   weatherTemplateData,
   weatherTemplateReplacement,
@@ -27,7 +27,7 @@ const {doesFileExist, createDirectoryIfNotExists} = require("../utils/file.utils
 
 const loadApiConfigRoutes = async (app) => {
   // Middleware to handle errors
-  app.use((err, req, res, next) => {
+  app.use((err, req, res) => {
     logger.error(`Page routes Error: ${err}`); // Log the error for debugging purposes
 
     // Set a default error status and message
@@ -37,7 +37,7 @@ const loadApiConfigRoutes = async (app) => {
     // Send an error response to the client
     if (req.accepts('html')) {
       // Render an error HTML page
-      res.status(status).send(`<html><head><style>body { background-color: #4d4d4d; }</style><title>Error</title></head><body><center><br><br><br><h1 style="color: red;">Error: ${status}</h1></center><br><center><h2 style="color: orange;">OOPS, Something went terribly wrong.</h2><br><span style="font-size: 48px;">🙁</span></center></body></html>`);
+      res.status(status).send(`<html lang="en"><head><style>body { background-color: #4d4d4d; }</style><title>Error</title></head><body><center><br><br><br><h1 style="color: red;">Error: ${status}</h1></center><br><center><h2 style="color: orange;">OOPS, Something went terribly wrong.</h2><br><span style="font-size: 48px;">🙁</span></center></body></html>`);
 
     } else {
       // Send a JSON response to the client
@@ -119,11 +119,11 @@ const loadApiConfigRoutes = async (app) => {
   });
 
 // show theme json
-  app.get('/api/config/webtheme/set', async (req, res) => {
+  app.get('/api/config/webtheme/set', async (req) => {
     const theme = req.query.theme;
     logger.info(`Theme to set in config: ${theme}`)
     logger.info(`Theme to set in config from req.query.theme: ${req.query.theme}`)
-    await setwebtheme(theme)
+    await setWebTheme(theme)
     // use the url and path variables to set the theme
 
   });
@@ -153,7 +153,6 @@ const loadApiConfigRoutes = async (app) => {
   const uploadoldmodeltheme = multer({storage});
 
   app.post('/uploadoldmodeltheme', uploadoldmodeltheme.single('file'), async (req, res) => {
-    const file = req.file;
     const config_current = await retrieveCurrentConfiguration();
     // Read the file contents
     fs.readFile(`${path.join(CONFIGCONFDIR, 'config.conf')}`, 'utf8', (err, data) => {
@@ -180,11 +179,9 @@ const loadApiConfigRoutes = async (app) => {
 
         // Trim whitespace and remove quotes from the value
         const trimmedKey = key.trim().replace(/'/g, '').replace(/"/g, '');
-        const trimmedValue = value.trim().replace(/'/g, '').replace(/"/g, '');
-//  const trimmedValue2 = value.strip
 
         // Add the key-value pair to the JSON object
-        json[trimmedKey] = trimmedValue;
+        json[trimmedKey] = value.trim().replace(/'/g, '').replace(/"/g, '');
 
       });
 
