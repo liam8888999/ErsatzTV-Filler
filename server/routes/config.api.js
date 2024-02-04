@@ -27,7 +27,7 @@ const {doesFileExist, createDirectoryIfNotExists} = require("../utils/file.utils
 
 const loadApiConfigRoutes = async (app) => {
   // Middleware to handle errors
-  app.use((err, req, res) => {
+  app.use((err, req, res, next) => {
     logger.error(`Page routes Error: ${err}`); // Log the error for debugging purposes
 
     // Set a default error status and message
