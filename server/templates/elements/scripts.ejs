@@ -187,19 +187,34 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
 </script>
 <script>
   //start json popup functions
-  function returnConfigJson() {
-    const xhr = new XMLHttpRequest();
-    const endpointUrl = `/api/config/readconfigjson`;
 
-    xhr.open('GET', endpointUrl, true);
+  function requestEndpoint(url, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
     xhr.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
-        const jsonData = JSON.parse(this.responseText);
-        // Display the JSON data in a modal popup
-        showConfigJsonPopup(jsonData);
+        callback(JSON.parse(this.responseText));
       }
     };
     xhr.send();
+  }
+
+  function returnConfigJson() {
+    const endpointUrl = `/api/config/readconfigjson`;
+
+    requestEndpoint(endpointUrl, showConfigJsonPopup);
+  }
+
+  function returnWeatherJson() {
+    const endpointUrl = `/api/config/weatherdata`;
+
+    requestEndpoint(endpointUrl, showConfigJsonPopup);
+  }
+
+  function returnWeaterScript() {
+    const endpointUrl = `/api/config/weatherscriptpreview`;
+
+    requestEndpoint(endpointUrl, showConfigJsonPopup);
   }
 
   // Function to display the JSON popup

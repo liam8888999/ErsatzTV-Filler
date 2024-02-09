@@ -58,7 +58,7 @@ logger.debug(`System Information: ${JSON.stringify(systemInfo, null, 2)}`);
  * Starts the express webserver on port 3000
  */
  const startWebServer = async () => {
-   const config_current = await retrieveCurrentConfiguration()
+  const config_current = await retrieveCurrentConfiguration();
    const port = await config_current.webport;
    app.listen(`${port}`, () => {
      logger.success(`Server started on port ${port}`);

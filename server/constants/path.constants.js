@@ -62,7 +62,7 @@ const DEFAULT_CONFIG = {
   "processweather": "yes",
   "usewttrin": "no",
   "readweather": "yes",
-  "cutomweathereaderscript": "",
+  "customweatherreaderscript": "",
   "booked_code": '',
   "generate_weatherv4": "no",
   "weathervideofadeoutduration": "5",
@@ -103,7 +103,6 @@ const DEFAULT_CONFIG = {
   "ffmpegencoder": "libx264",
   "hwaccel": "",
   "hwaccel_device": "",
-  "customffmpeg": "",
   "processchannellogo": "yes",
   "channellogovideofadeoutduration": "5",
   "channellogovideofadeinduration": "5",
@@ -197,12 +196,11 @@ const CONFIGCONFDIR = path.join(WORKDIR, 'configconf');
 const LOGFOLDER = path.join(startUpPath, 'logs');
 
 const DEFAULT_WEATHER_SCRIPT = `
-{{WEATHER_HEADER}}. Today is {{TODAY}} and this is the forecast for {{CITY}} {{STATE}}.
-The sky is currently {{CURRENT_CONDITIONS}} with a temperature of {{CURRENT_TEMP}} degrees with wind coming out of the {{CURRENT_WIND_DIR}} at {{CURRENT_WIND_SPEED}}.
-The high today will be {{TODAY_MAXTEMP}} with a low of {{TODAY_MINTEMP}}.
-The forecast for tomorrow is for a high of {{TOMORROW_MAXTEMP}} and a low of {{TOMORROW_MINTEMP}}.
-Temperatures on {{DAY_THREE}} will go up to {{DAY_THREE_MAXTEMP}} degrees and fall down to {{DAY_THREE_MINTEMP}} degrees.
-`
+{{header}}. Today is {{currentConditions.date}} and this is the forecast for {{location.city}} {{location.state}}.
+The sky is currently {{currentConditions.conditions}} with a temperature of {{currentConditions.temp}} degrees with wind coming out of the {{currentConditions.windDir}} at {{currentConditions.windspeed}}.
+The high today will be {{forecast.today.maxtemp}} with a low of {{forecast.today.mintemp}}.
+The forecast for tomorrow is for a high of {{forecast.1.maxtemp}} and a low of {{forecast.1.mintemp}}.
+Temperatures on {{forecast.2.day}} will go up to {{forecast.2.maxtemp}} degrees and fall down to {{forecast.2.mintemp}} degrees.`
 
 
 

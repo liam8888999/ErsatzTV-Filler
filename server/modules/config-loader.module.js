@@ -1,29 +1,36 @@
-const { CONFIG_CONSTANTS } = require("../constants/path.constants");
-const { doesFileExist, loadFileContentsIntoMemory } = require("../utils/file.utils");
-const { parseConfigurationFile, createNewUserConfigFromDefault } = require("../utils/config.utils");
+const {CONFIG_CONSTANTS} = require("../constants/path.constants");
+const {doesFileExist} = require("../utils/file.utils");
+const {
+  parseConfigurationFile,
+  createNewUserConfigFromDefault,
+  configChanged,
+  configUpdated
+} = require("../utils/config.utils");
 const fs = require('fs');
 const fsPromises = fs.promises;
 const logger = require("../utils/logger.utils");
-const { version } = require('../../package.json');
-
+const {version} = require('../../package.json');
 
 let CURRENT_CONFIG = {}; //In memory store for config data
 
 /**
- * Boot taks to setup the configuration file or load the users current one
+ * Boot takes to set up the configuration file or load the users current one
+ * We take this opportunity to add any new variables and do version change cleanup
  * @returns {Promise<void>}
  */
 const setupConfigurationFile = async () => {
-    //For now, check exists and just load the user one over the default one... can be expanded to control your variable updating, and it will always run on server boot.
-    const HAVE_USER_CONFIG = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-    if(!HAVE_USER_CONFIG){
-        logger.warn("Can not find a user configuration file... loading default...")
-        await createNewUserConfigFromDefault();
-    }else{
-        logger.success("Found a user configuration file... loading...")
-        await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG)
-    }
-    await jsonifyCurrentConfiguration();
+  //For now, check exists and just load the user one over the default one... can be expanded to control your variable updating, and it will always run on server boot.
+  const HAVE_USER_CONFIG = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
+  if (!HAVE_USER_CONFIG) {
+    logger.warn("Can not find a user configuration file... loading default...");
+    await createNewUserConfigFromDefault();
+  } else {
+    logger.success("Found a user configuration file... loading...")
+    await parseConfigurationFileContents(CONFIG_CONSTANTS().USER_CONFIG);
+  }
+
+  await addKeyValuesToConfigFile();
+  await updateVariablesChangedInConfigFile();
 }
 
 /**
@@ -32,56 +39,20 @@ const setupConfigurationFile = async () => {
  * @returns {Promise<void>}
  */
 const parseConfigurationFileContents = async (path) => {
-    CURRENT_CONFIG = await parseConfigurationFile(path).parsed;
-}
-
-
-/**
- * Return the current configuration as a object
- * @returns {{}}
- */
-const retrieveCurrentConfiguration2 = () => {
-    return CURRENT_CONFIG
-}
-
-const jsonifyCurrentConfiguration = async () => {
-
-  // convert config.conf to config.json  -- Delete config.conf totally in future versions
-const config = await retrieveCurrentConfiguration2();
-const FILE_EXISTS = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG)
-if (!FILE_EXISTS) {
-  logger.error('The config.json file does not exist.');
-  await fs.writeFile(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(CONFIG_CONSTANTS().DEFAULT_CONFIG, null, 2), (err) => {
-    if (err) {
-      logger.error(`Error creating user config file: ${err}`);
-    } else {
-    logger.success('Created config.json file');
-  };
-});
-}
+  CURRENT_CONFIG = await parseConfigurationFile(path).parsed;
 }
 
 const retrieveCurrentConfiguration = async () => {
-  const configFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-  const defaultConfigFileExists = await doesFileExist(CONFIG_CONSTANTS().USER_CONFIG);
-  await addKeyValuesToconfigFile();
-  await updateLatestVersionInconfigFile();
-  if (!configFileExists) {
-    logger.warn("config.json file is missing... Generating a new copy");
-    await jsonifyCurrentConfiguration();
-} else {
-    logger.info("Found a user configuration file... loading...");
-  //  await retrieveCurrentConfiguration2()
-  }
-
+  if (Object.keys(CURRENT_CONFIG).length === 0 || configChanged()) {
     const data = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     CURRENT_CONFIG = JSON.parse(data);
-    //(async () => { const config = await retrieveCurrentConfiguration(); logger.success(`Current config is: ${CURRENT_CONFIG}`)})()
-return CURRENT_CONFIG;
+    configUpdated();
+  }
+  return CURRENT_CONFIG;
 };
 
 
-async function addKeyValuesToconfigFile() {
+async function addKeyValuesToConfigFile() {
   const filename = CONFIG_CONSTANTS().USER_CONFIG;
 
   const keyValuesToAdd = [
@@ -178,7 +149,7 @@ async function addKeyValuesToconfigFile() {
       value: 'yes'
     },
     {
-      key: 'cutomweathereaderscript',
+      key: 'customweatherreaderscript',
       value: ''
     }
   ];
@@ -191,7 +162,7 @@ async function addKeyValuesToconfigFile() {
     const jsonData = JSON.parse(data);
 
     // Loop through the key/value pairs to add
-    for (const { key, value } of keyValuesToAdd) {
+    for (const {key, value} of keyValuesToAdd) {
       // Check if the key already exists in the JSON object
       if (!jsonData.hasOwnProperty(key)) {
         // If it doesn't exist, add the new key/value pair
@@ -236,11 +207,104 @@ async function updateLatestVersionInconfigFile() {
   }
 }
 
+async function updateVariablesChangedInConfigFile() {
+  const filename = CONFIG_CONSTANTS().USER_CONFIG;
+
+  try {
+    // Read the JSON file with the 'utf8' encoding using fs.promises
+    const data = await fsPromises.readFile(filename, 'utf8');
+
+    // Parse the JSON data
+    const jsonData = JSON.parse(data);
+
+    if ((typeof jsonData.latestversion === 'undefined' || jsonData.latestversion <= '1.10.1') && (typeof jsonData.cutomweathereaderscript !== 'undefined')) {
+      jsonData.customweatherreaderscript = jsonData.cutomweathereaderscript
+        .replaceAll('{{TODAY}}', '{{currentConditions.date}}')
+        .replaceAll('{{TOMORROW}}', 'tomorrow')
+        .replaceAll('{{DAY_THREE}}', '{{forecast.2.day}}')
+        .replaceAll('{{OBSERVATION_TIME}}', '{{currentConditions.observation_time}}')
+        .replaceAll('{{LOCAL_OBSERVATION_DATETIME}}', '{{currentConditions.observationDate}}')
+        .replaceAll('{{CITY}}', '{{location.city}}')
+        .replaceAll('{{STATE}}', '{{location.state}}')
+        .replaceAll('{{COUNTRY}}', '{{location.country}}')
+        .replaceAll('{{CURRENT_CONDITIONS}}', '{{currentConditions.conditions}}')
+        .replaceAll('{{CURRENT_TEMP}}', '{{currentConditions.temp}}')
+        .replaceAll('{{CURRENT_FEELSLIKE}}', '{{currentConditions.feelsLike}}')
+        .replaceAll('{{CURRENT_CLOUDCOVER}}', '{{currentConditions.cloudcover}}')
+        .replaceAll('{{CURRENT_HUMIDITY}}', '{{currentConditions.humidity}}')
+        .replaceAll('{{CURRENT_PRESSURE}}', '{{currentConditions.pressure}}')
+        .replaceAll('{{CURRENT_PRESSUREINCHES}}', '{{currentConditions.pressureInches}}')
+        .replaceAll('{{CURRENT_UVINDEX}}', '{{currentConditions.uvIndex}}')
+        .replaceAll('{{CURRENT_WIND_DIR_DEGREE}}', '{{currentConditions.winddirDegree}}')
+        .replaceAll('{{CURRENT_WIND_DIR}}', '{{currentConditions.windDir}}')
+        .replaceAll('{{CURRENT_WIND_SPEED}}', '{{currentConditions.windspeed}}')
+        .replaceAll('{{LATITUDE}}', '{{location.latitude}}')
+        .replaceAll('{{LONGITUDE}}', '{{location.longitude}}')
+        .replaceAll('{{POPULATION}}', '{{location.population}}')
+        .replaceAll('{{TODAY_AVERAGETEMP}}', '{{forecast.today.avgtemp}}')
+        .replaceAll('{{TODAY_DATE}}', '{{forecast.today.date}}')
+        .replaceAll('{{TODAY_MAXTEMP}}', '{{forecast.today.maxtemp}}')
+        .replaceAll('{{TODAY_MINTEMP}}', '{{forecast.today.mintemp}}')
+        .replaceAll('{{TODAY_SUNHOUR}}', '{{forecast.today.sunHour}}')
+        .replaceAll('{{TODAY_TOTALSNOW_CM}}', '{forecast.today.totalSnow_cm}}')
+        .replaceAll('{{TODAY_UVINDEX}}', '{forecast.today.uvIndex}}')
+        .replaceAll('{{TODAY_MOON_ILLUMINATION}}', '{forecast.today.astronomy.moon_illumination}}')
+        .replaceAll('{{TODAY_MOON_PHASE}}', '{forecast.today.astronomy.moon_phase}}')
+        .replaceAll('{{TODAY_MOONRISE}}', '{forecast.today.astronomy.moonrise}}')
+        .replaceAll('{{TODAY_MOONSET}}', '{forecast.today.astronomy.moonset}}')
+        .replaceAll('{{TODAY_SUNRISE}}', '{forecast.today.astronomy.sunrise}}')
+        .replaceAll('{{TODAY_SUNSET}}', '{forecast.today.astronomy.sunset}}')
+        .replaceAll('{{TOMORROW_AVERAGETEMP}}', '{{forecast.1.avgtemp}}')
+        .replaceAll('{{TOMORROW_DATE}}', '{{forecast.1.date}}')
+        .replaceAll('{{TOMORROW_MAXTEMP}}', '{{forecast.1.maxtemp}}')
+        .replaceAll('{{TOMORROW_MINTEMP}}', '{{forecast.1.mintemp}}')
+        .replaceAll('{{TOMORROW_SUNHOUR}}', '{{forecast.1.sunHour}}')
+        .replaceAll('{{TOMORROW_TOTALSNOW_CM}}', '{{forecast.1.totalSnow_cm}}')
+        .replaceAll('{{TOMORROW_UVINDEX}}', '{{forecast.1.uvIndex}}')
+        .replaceAll('{{TOMORROW_MOON_ILLUMINATION}}', '{{forecast.1.astronomy.moon_illumination}}')
+        .replaceAll('{{TOMORROW_MOON_PHASE}}', '{{forecast.1.astronomy.moon_phase}}')
+        .replaceAll('{{TOMORROW_MOONRISE}}', '{{forecast.1.astronomy.moonrise}}')
+        .replaceAll('{{TOMORROW_MOONSET}}', '{{forecast.1.astronomy.moonset}}')
+        .replaceAll('{{TOMORROW_SUNRISE}}', '{{forecast.1.astronomy.sunrise}}')
+        .replaceAll('{{TOMORROW_SUNSET}}', '{{forecast.1.astronomy.sunset}}')
+        .replaceAll('{{DAY_THREE_AVERAGETEMP}}', '{{forecast.2.avgtemp}}')
+        .replaceAll('{{DAY_THREE_DATE}}', '{{forecast.2.date}}')
+        .replaceAll('{{DAY_THREE_MAXTEMP}}', '{{forecast.2.maxtemp}}')
+        .replaceAll('{{DAY_THREE_MINTEMP}}', '{{forecast.2.mintemp}}')
+        .replaceAll('{{DAY_THREE_SUNHOUR}}', '{{forecast.2.sunHour}}')
+        .replaceAll('{{DAY_THREE_TOTALSNOW_CM}}', '{{forecast.2.totalSnow_cm}}')
+        .replaceAll('{{DAY_THREE_UVINDEX}}', '{{forecast.2.uvIndex}}')
+        .replaceAll('{{DAY_THREE_MOON_ILLUMINATION}}', '{{forecast.2.astronomy.moon_illumination}}')
+        .replaceAll('{{DAY_THREE_MOON_PHASE}}', '{{forecast.2.astronomy.moon_phase}}')
+        .replaceAll('{{DAY_THREE_MOONRISE}}', '{{forecast.2.astronomy.moonrise}}')
+        .replaceAll('{{DAY_THREE_MOONSET}}', '{{forecast.2.astronomy.moonset}}')
+        .replaceAll('{{DAY_THREE_SUNRISE}}', '{{forecast.2.astronomy.sunrise}}')
+        .replaceAll('{{DAY_THREE_SUNSET}}', '{{forecast.2.astronomy.sunset}}')
+
+      // Delete the old key    -- Error currently when key gets deleted
+      delete jsonData.cutomweathereaderscript;
+
+      // Convert the updated data back to JSON string
+      const updatedData = JSON.stringify(jsonData, null, 2);
+
+      // Write the updated JSON data back to the file using fs.promises
+      await fsPromises.writeFile(filename, updatedData);
+    }
+
+
+    await updateLatestVersionInconfigFile();
+
+    logger.success('Updated changed variables in config.');
+  } catch (err) {
+    logger.error(err);
+  }
+}
+
 //async log
 //(async () => { const config = await retrieveCurrentConfiguration(); logger.info(config)})()
 
 
 module.exports = {
-    setupConfigurationFile,
-    retrieveCurrentConfiguration,
+  setupConfigurationFile,
+  retrieveCurrentConfiguration,
 }
