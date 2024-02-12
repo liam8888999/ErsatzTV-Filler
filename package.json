@@ -61,7 +61,7 @@
     "simple-tts-mp3": "^1.1.0",
     "socket.io": "^4.7.4",
     "winston": "^3.11.0",
-    "winston-daily-rotate-file": "^4.7.1",
+    "winston-daily-rotate-file": "^5.0.0",
     "wordwrap": "^1.0.0",
     "xmlbuilder": "^15.1.1",
     "xmlbuilder2": "^3.1.1"
@@ -153,7 +153,7 @@
     "nodemon": "^3.0.3",
     "socket.io": "^4.7.4",
     "winston": "^3.11.0",
-    "winston-daily-rotate-file": "^4.7.1",
+    "winston-daily-rotate-file": "^5.0.0",
     "xml2js": "^0.6.2",
     "xmlbuilder": "^15.1.1",
     "xmlbuilder2": "^3.1.1"
