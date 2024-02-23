@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.10.1...V1.11.0) (2024-02-23)
+
+
+### Added
+
+* large improvements to weather reader templating ([cfb9b11](https://github.com/liam8888999/ErsatzTV-Filler/commit/cfb9b112ed335fa44ff9bad990ba3027c3774fec))
+
 ## [1.10.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.10.0...V1.10.1) (2024-01-31)
 
 
