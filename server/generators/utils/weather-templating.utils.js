@@ -6,7 +6,7 @@ const {WEATHERDIR, DEFAULT_WEATHER_SCRIPT} = require("../../constants/path.const
 const Mustache = require("mustache");
 
 //Thinking of future expansion, first of all a collection of templates that can be selected
-//purposefully or randomly.
+//purposefully or randomly. 
 const currentTemplate = async () => {
   const config_current = await retrieveCurrentConfiguration();
   let script;
