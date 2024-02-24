@@ -73,7 +73,8 @@
       "server/templates/**/*",
       "audio-fallback/**/*",
       "Changelog.md",
-      "ffmpeg/**/*"
+      "ffmpeg/**/*",
+      "./node_modules/axios/dist/node/axios.cjs"
     ],
     "targets": [
       "node18-linux-x64",
