@@ -171,12 +171,7 @@ async function loadThemePreference() {
      const themeToggleButton = document.getElementById('theme-toggle');
      const themeToggleSlider = themeToggleButton.nextElementSibling;
 
-     if (document.body.classList.contains('dark-mode')) {
-      themeToggleButton.checked = false;
-
-     } else {
-       themeToggleButton.checked = true;
-     }
+    themeToggleButton.checked = !document.body.classList.contains('dark-mode');
    } catch (error) {
      logger.error(`Failed to load the theme preference: ${error}`);
    }
@@ -222,7 +217,8 @@ document.addEventListener('DOMContentLoaded', loadThemePreference)
     const jsonString = JSON.stringify(content, null, 2);
       var popup = document.getElementById("jsonPopup");
       var jsonContent = document.getElementById("jsonContent");
-      jsonContent.textContent = jsonString;
+    jsonContent.textContent = jsonString.replaceAll('\\n', `
+      `);
       var jsonfileheading = document.getElementById("jsonfileheading");
       jsonfileheading.textContent = `Config.json file`;
       popup.style.display = "flex";
