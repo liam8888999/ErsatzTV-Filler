@@ -27,7 +27,7 @@
   "dependencies": {
     "@commitlint/cli": "^19.0.2",
     "@commitlint/config-conventional": "^19.0.3",
-    "archiver": "^6.0.1",
+    "archiver": "^7.0.0",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -137,7 +137,7 @@
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^8.0.1",
-    "archiver": "^6.0.1",
+    "archiver": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
