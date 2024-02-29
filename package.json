@@ -26,7 +26,7 @@
   "homepage": "https://github.com/liam8888999/ErsatzTV-Filler#readme",
   "dependencies": {
     "@commitlint/cli": "^19.0.2",
-    "@commitlint/config-conventional": "^18.6.2",
+    "@commitlint/config-conventional": "^19.0.3",
     "archiver": "^6.0.1",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
