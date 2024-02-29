@@ -1373,316 +1373,133 @@ If the Country field is set to a country other than US, wttr.in will be used as 
 <ul>
 <li><code>String (custom weather reader script text)</code></li>
 </ul>
-<p>The text for a custom weather reader script. If this option has any text then it will automatically be used otherwise it will fallback to the default.</p>
-<p>The Format should be 'The current temperature is {{CURRENT_TEMP}}' with the variables enclosed in <code>{{VARIABLE}}</code></p>
-<p>The available variables are:</p>
+<p>The text for a custom weather reader script. If this option has any text then it will automatically be used otherwise it will fall back to the default. Clicking on the <code>View Scripts</code> link will display the current template and how it will be filled out when sent to be converted to speech.</p>
+<p>The Format should be 'The current temperature is {{currentConditions.temp}}' with the variables enclosed in <code>{{variable}}</code></p>
+<p>Each set of {} indicates a grouping to get to data inside that group use a .</p>
+<p>For example:</p>
 <ul>
-<li>
-<ul>
-<li><code>{{TODAY}}</code> - today</li>
+<li>Current Feels Like Temperature = <code>{{currentConditions.feelsLike}}</code></li>
+<li>Today's Forecast High = <code>{{forecast.today.maxtemp}}</code></li>
 </ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW}}</code> - tomorrows day name (e.g. wednesday)</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE}}</code> - the day after tomorrows day name (e.g. thursday)</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{OBSERVATION_TIME}}</code> - weathers observation time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{LOCAL_OBSERVATION_DATETIME}}</code> - weathers observation time (localised)</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{WEATHER_HEADER}}</code> - the text from the weather header config option</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CITY}}</code> - City of weather report</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{STATE}}</code> - State of weather report</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{COUNTRY}}</code> - Country of weather repor</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_CONDITIONS}}</code> - the current weather conditions (e.g. sunny/cloudy)</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_TEMP}}</code> - the current temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_FEELSLIKE}}</code> - the current feels like temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_CLOUDCOVER}}</code> - the current cloud cover percentage</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_HUMIDITY}}</code> - the current humidity percentage</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_PRESSURE}}</code> - the current pressure</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_PRESSUREINCHES}}</code> - the current pressure (inches)</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_UVINDEX}}</code> - the current uv index</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_WIND_DIR}}</code> - the current wind direction (North, South, East, West)</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{CURRENT_WIND_SPEED}}</code> - the current wind speed</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{LATITUDE}}</code> - the latitute of the weather forecast location</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{LONGITUDE}}</code> - the longitude of the weather forecast location</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{POPULATION}}</code> - the population of the weather forecast location</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_AVERAGETEMP}}</code> - todays average temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_DATE}}</code> - todays date</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_MAXTEMP}}</code> - todays maximum temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_MINTEMP}}</code> - todays minimum temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_SUNHOUR}}</code> - todays amount of sunlight hours</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_TOTALSNOW_CM}}</code> - todays total snow fall in cm</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_UVINDEX}}' -</code>todays uv index</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_MOON_ILLUMINATION}}</code> - todays moon moon illumination</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_MOON_PHASE}}</code> - todays moon phase</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_MOONRISE}}</code> - todays moonrise time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_MOONSET}}</code> - todays moon set time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_SUNRISE}}</code> - todays sunrise time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TODAY_SUNSET}}</code> - todays sunset time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_AVERAGETEMP}}</code> - tomorrows average temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_DATE}}</code> - tomorrows date</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_MAXTEMP}}</code> - tomorrows maximum temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_MINTEMP}}</code> - tomorrows minimum temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_SUNHOUR}}</code> - tomorrows amount of sunlight hours</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_TOTALSNOW_CM}}</code> - tomorrows total snow fall in cm</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_UVINDEX}}' -</code>tomorrows uv index</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_MOON_ILLUMINATION}}</code> - tomorrows moon moon illumination</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_MOON_PHASE}}</code> - tomorrows moon phase</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_MOONRISE}}</code> - tomorrows moonrise time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_MOONSET}}</code> - tomorrows moon set time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_SUNRISE}}</code> - tomorrows sunrise time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{TOMORROW_SUNSET}}</code> - tomorrows sunset time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_AVERAGETEMP}}</code> - the day after tomorrows average temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_DATE}}</code> - the day after tomorrows date</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_MAXTEMP}}</code> - the day after tomorrows maximum temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_MINTEMP}}</code> - the day after tomorrows/ minimum temperature</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_SUNHOUR}}</code> - the day after tomorrows amount of sunlight hours</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_TOTALSNOW_CM}}</code> - the day after tomorrows total snow fall in cm</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_UVINDEX}}' -</code>the day after tomorrows uv index</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_MOON_ILLUMINATION}}</code> - the day after tomorrows moon moon illumination</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_MOON_PHASE}}</code> - the day after tomorrows moon phase</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_MOONRISE}}</code> - the day after tomorrows moonrise time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_MOONSET}}</code> - the day after tomorrows moon set time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_SUNRISE}}</code> - the day after tomorrows sunrise time</li>
-</ul>
-</li>
-<li>
-<ul>
-<li><code>{{DAY_THREE_SUNSET}}</code> - the day after tomorrows sunset time</li>
-</ul>
-</li>
-</ul>
+<p>Many of the unitless variables are dynamic based on your temperature setting.  Metric units will be in the short form by default unless the <code>Temperature Unit</code> is set to <code>Fahrenheit</code>.</p>
+<p>Clicking on the <code>View Data</code> link will generate and display a file containing the data used to generate the weather reader script.</p>
+<p>An example with <code>Farenheight</code> set:</p>
+<pre><code class="language-json">{
+    &quot;currentConditions&quot;: {
+        &quot;FeelsLikeC&quot;: &quot;-3&quot;,
+        &quot;feelsLike&quot;: &quot;26&quot;,
+        &quot;cloudcover&quot;: &quot;0&quot;,
+        &quot;humidity&quot;: &quot;51&quot;,
+        &quot;observationDate&quot;: &quot;Sunday, January 28, 2024 at 4:00 AM&quot;,
+        &quot;day&quot;: &quot;Sunday&quot;,
+        &quot;date&quot;: &quot;Sunday, January 28, 2024&quot;,
+        &quot;observation_time&quot;: &quot;11:00 AM&quot;,
+        &quot;precip&quot;: &quot;0.0&quot;,
+        &quot;precipMM&quot;: &quot;0.0&quot;,
+        &quot;pressure&quot;: &quot;30&quot;,
+        &quot;temp_C&quot;: &quot;0&quot;,
+        &quot;temp&quot;: &quot;32&quot;, //Farenheight degrees
+        &quot;uvIndex&quot;: &quot;1&quot;,
+        &quot;visibility&quot;: &quot;9&quot;,
+        &quot;weatherCode&quot;: &quot;113&quot;,
+        &quot;conditions&quot;: &quot;Clear&quot;,
+        &quot;weatherIconUrl&quot;: [
+            {
+              &quot;value&quot;: &quot;&quot;
+            }
+        ],
+        &quot;windDir&quot;: &quot;west &quot;,
+        &quot;winddirDegree&quot;: &quot;280&quot;,
+        &quot;windspeedKmph&quot;: &quot;9&quot;,
+        &quot;windspeed&quot;: &quot;6&quot; //Miles Per Hour
+    },
+    &quot;location&quot;: {
+        &quot;city&quot;: &quot;Broomfield&quot;,
+        &quot;country&quot;: &quot;United States of America&quot;,
+        &quot;latitude&quot;: &quot;39.921&quot;,
+        &quot;longitude&quot;: &quot;-105.086&quot;,
+        &quot;population&quot;: &quot;44692&quot;,
+        &quot;state&quot;: &quot;Colorado&quot;
+    },
+    &quot;forecast&quot;: {
+        &quot;1&quot;: {
+            &quot;astronomy&quot;: {
+                &quot;moon_illumination&quot;: &quot;91&quot;,
+                &quot;moon_phase&quot;: &quot;Waning Gibbous&quot;,
+                &quot;moonrise&quot;: &quot;09:14 PM&quot;,
+                &quot;moonset&quot;: &quot;09:18 AM&quot;,
+                &quot;sunrise&quot;: &quot;07:12 AM&quot;,
+                &quot;sunset&quot;: &quot;05:16 PM&quot;
+            },
+            &quot;avgtempC&quot;: &quot;6&quot;,
+            &quot;avgtemp&quot;: &quot;42&quot;,
+            &quot;date&quot;: &quot;Sunday, January 28&quot;,
+            &quot;day&quot;: &quot;Sunday&quot;,
+            &quot;maxtempC&quot;: &quot;12&quot;,
+            &quot;maxtemp&quot;: &quot;53&quot;,
+            &quot;mintempC&quot;: &quot;2&quot;,
+            &quot;mintemp&quot;: &quot;35&quot;,
+            &quot;sunHour&quot;: &quot;10.0&quot;,
+            &quot;totalSnow_cm&quot;: &quot;0.0&quot;,
+            &quot;uvIndex&quot;: &quot;3&quot;
+        },
+        &quot;2&quot;: {
+            &quot;astronomy&quot;: {
+                &quot;moon_illumination&quot;: &quot;84&quot;,
+                &quot;moon_phase&quot;: &quot;Waning Gibbous&quot;,
+                &quot;moonrise&quot;: &quot;10:12 PM&quot;,
+                &quot;moonset&quot;: &quot;09:38 AM&quot;,
+                &quot;sunrise&quot;: &quot;07:11 AM&quot;,
+                &quot;sunset&quot;: &quot;05:17 PM&quot;
+            },
+                &quot;avgtempC&quot;: &quot;6&quot;,
+                &quot;avgtemp&quot;: &quot;43&quot;,
+                &quot;date&quot;: &quot;Monday, January 29&quot;,
+                &quot;day&quot;: &quot;Monday&quot;,
+                &quot;maxtempC&quot;: &quot;12&quot;,
+                &quot;maxtemp&quot;: &quot;54&quot;,
+                &quot;mintempC&quot;: &quot;2&quot;,
+                &quot;mintemp&quot;: &quot;36&quot;,
+                &quot;sunHour&quot;: &quot;10.0&quot;,
+                &quot;totalSnow_cm&quot;: &quot;0.0&quot;,
+                &quot;uvIndex&quot;: &quot;3&quot;
+        },
+        &quot;today&quot;: {
+            &quot;astronomy&quot;: {
+                &quot;moon_illumination&quot;: &quot;95&quot;,
+                &quot;moon_phase&quot;: &quot;Waning Gibbous&quot;,
+                &quot;moonrise&quot;: &quot;08:14 PM&quot;,
+                &quot;moonset&quot;: &quot;08:58 AM&quot;,
+                &quot;sunrise&quot;: &quot;07:13 AM&quot;,
+                &quot;sunset&quot;: &quot;05:15 PM&quot;
+            },
+            &quot;avgtempC&quot;: &quot;4&quot;,
+            &quot;avgtemp&quot;: &quot;40&quot;,
+            &quot;date&quot;: &quot;Saturday, January 27&quot;,
+            &quot;day&quot;: &quot;Saturday&quot;,
+            &quot;maxtempC&quot;: &quot;12&quot;,
+            &quot;maxtemp&quot;: &quot;54&quot;,
+            &quot;mintempC&quot;: &quot;0&quot;,
+            &quot;mintemp&quot;: &quot;32&quot;,
+            &quot;sunHour&quot;: &quot;10.0&quot;,
+            &quot;totalSnow_cm&quot;: &quot;0.0&quot;,
+            &quot;uvIndex&quot;: &quot;3&quot;
+        }
+    },
+    &quot;units&quot;: {
+        &quot;temperature&quot;: &quot;fahrenheit&quot;,
+        &quot;speed&quot;: &quot;Miles&quot;,
+        &quot;depth&quot;: &quot;Inches&quot;
+    },
+    &quot;header&quot;: &quot;Current Weather&quot;,
+    &quot;request&quot;: [
+        {
+            &quot;query&quot;: &quot;Lat 39.94 and Lon -105.04&quot;,
+            &quot;type&quot;: &quot;LatLon&quot;
+        }
+    ]
+}
+</code></pre>
 
 
 
