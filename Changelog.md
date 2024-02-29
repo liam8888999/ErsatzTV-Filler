@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.11.0...V1.11.1) (2024-02-29)
+
+
+### Fixed
+
+* fix broken releases ([5ec523f](https://github.com/liam8888999/ErsatzTV-Filler/commit/5ec523f5f7aa7cf2505c00c51e1bc65b611b77d4))
+
 ## [1.11.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.10.1...V1.11.0) (2024-02-23)
 
 
