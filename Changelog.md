@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.12.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.11.1...V1.12.0) (2024-04-14)
+
+
+### Added
+
+* fishfish softblue community theme ([380d9b7](https://github.com/liam8888999/ErsatzTV-Filler/commit/380d9b7c09171bbf1fd155c4ee1637c9cbec62bb))
+
+
+### Fixed
+
+* correctly register and load changed config ([5ef0ab6](https://github.com/liam8888999/ErsatzTV-Filler/commit/5ef0ab69280b26875215c010b59c32c11ae550e2))
+
+
+### Changed
+
+* improve themes ui when no images are found for certain themes ([aafb8a5](https://github.com/liam8888999/ErsatzTV-Filler/commit/aafb8a58606349cdaba787db74bd629c9ef6036f))
+
 ## [1.11.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.11.0...V1.11.1) (2024-02-29)
 
 
