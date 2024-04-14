@@ -4,7 +4,8 @@ const {
   parseConfigurationFile,
   createNewUserConfigFromDefault,
   configChanged,
-  configUpdated
+  configUpdated,
+  configstatuschanged
 } = require("../utils/config.utils");
 const fs = require('fs');
 const fsPromises = fs.promises;
@@ -176,6 +177,7 @@ async function addKeyValuesToConfigFile() {
 
     // Write the updated JSON data back to the file using fs.promises
     await fsPromises.writeFile(filename, updatedData);
+    configstatuschanged()
 
     logger.success('Key/value pairs added successfully.');
   } catch (err) {
@@ -200,7 +202,7 @@ async function updateLatestVersionInconfigFile() {
 
     // Write the updated JSON data back to the file using fs.promises
     await fsPromises.writeFile(filename, updatedData);
-
+    configstatuschanged()
     logger.success('Latest version variable updated successfully.');
   } catch (err) {
     logger.error(err);
@@ -289,6 +291,7 @@ async function updateVariablesChangedInConfigFile() {
 
       // Write the updated JSON data back to the file using fs.promises
       await fsPromises.writeFile(filename, updatedData);
+      configstatuschanged()
     }
 
 

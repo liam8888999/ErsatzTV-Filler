@@ -47,6 +47,11 @@ const configUpdated = () => {
 const configChanged = () => {
   return configStatus.changed;
 }
+
+const configstatuschanged = () => {
+  configStatus.changed = true;
+}
+
 /**
  * Copy sample-config.conf if config.conf does not exist
  * @returns {Promise<void>}
@@ -57,6 +62,7 @@ const createNewUserConfigFromDefault = async () => {
       logger.error(`Error creating user config file: ${err}`);
     } else {
       logger.success('A new user config file was generated from the default file');
+      configStatus.changed = true;
     }
   });
 };
@@ -65,13 +71,13 @@ const setWebTheme = async (theme) => {
   try {
     const fileData = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     const json = JSON.parse(fileData);
-    json.webtheme = theme;
-    await fs.writeFileSync(CONFIG_CONSTANTS().USER_CONFIG, JSON.stringify(json, null, 2));
+      await writeValueToConfigurationFile("webtheme", `${theme}`)
     logger.success(`Successfully updated webtheme to '${theme}' in config.json`);
   } catch (err) {
     logger.error(`Error updating webtheme to '${theme}' in config.json: ${err}`);
   }
 }
+
 
 module.exports = {
   parseConfigurationFile,
@@ -80,4 +86,5 @@ module.exports = {
   setWebTheme,
   configChanged,
   configUpdated,
+  configstatuschanged
 }

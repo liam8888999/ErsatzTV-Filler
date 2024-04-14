@@ -8,14 +8,14 @@ const { createDirectoryIfNotExists } = require("../utils/file.utils");
 const path = require('path');
 const { asssubstitution } = require("../utils/string.utils");
 const { listFilesInDir } = require("../utils/file.utils")
+const {writeValueToConfigurationFile} = require("../utils/config.utils.js");
 
 
 const settheme = async (theme) => {
   try {
     const fileData = await fs.readFileSync(CONFIG_CONSTANTS().USER_CONFIG);
     const json = JSON.parse(fileData);
-    json.theme = theme;
-    await fs.writeFileSync(`${CONFIG_CONSTANTS().USER_CONFIG}`, JSON.stringify(json, null, 2));
+    await writeValueToConfigurationFile("theme", `${theme}`)
     logger.success(`Successfully updated theme to '${theme}' in config.json`);
   } catch (err) {
     logger.error(`Error updating theme to '${theme}' in config.json: ${err}`);
