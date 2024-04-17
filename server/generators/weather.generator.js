@@ -51,6 +51,10 @@ const WEATHER = async () => {
   let weatherDescription;
   let textterror;
 
+  // Booked image url format
+  // a += '<img src="https://w.bookcdn.com/weather/picture/' + e + "_" + n + "_" + booked.weather.cmetric + "_" + booked.weather.wlangid + "_" + booked.weather.color + "_" + h + "_" + booked.weather.header_color + "_" + booked.weather.text_color + "_" + booked.weather.link_color + "_" + booked.weather.border_form + "_" + booked.weather.footer_color + "_" + booked.weather.footer_text_color + "_" + booked.weather.transparent + "_6.png
+  
+
   let v1 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zone&alt=hwizone7day5&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=7`;
   let v2 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwiws&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&daysonly=0&maxdays=1`;
   let v3 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwizandh&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=5`;
