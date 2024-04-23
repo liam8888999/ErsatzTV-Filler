@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.12.0...V1.12.1) (2024-04-23)
+
+
+### Fixed
+
+* fix config not found in xmltv merger api error ([8865a48](https://github.com/liam8888999/ErsatzTV-Filler/commit/8865a48b35ffd7ea98c52155b1fa198c60499b31))
+
 ## [1.12.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.11.1...V1.12.0) (2024-04-14)
 
 
