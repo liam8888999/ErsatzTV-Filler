@@ -10,6 +10,7 @@ const archiver = require('archiver');
 const readline = require('readline');
 const path = require('path');
 const { XMLTVMERGEDIR } = require("../constants/path.constants");
+const { retrieveCurrentConfiguration } = require("../modules/config-loader.module");
 
 const loadApixmltvmergeRoutes = (app) => {
   // Middleware to handle errors
@@ -33,7 +34,8 @@ const loadApixmltvmergeRoutes = (app) => {
 
 
   // Define an API endpoint to retrieve a media file
-  app.get('/xmltvmerge/:filename', (req, res) => {
+  app.get('/xmltvmerge/:filename', async (req, res) => {
+  const config_current = await retrieveCurrentConfiguration();
   const { filename } = req.params;
   const filePath = path.join(config_current.output, filename);
   logger.info(`XMLTVMERGE api retrieval filename: ${filePath}`)
