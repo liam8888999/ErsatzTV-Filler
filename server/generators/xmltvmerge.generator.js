@@ -98,7 +98,7 @@ const XMLTVPARSE = async () => {
   fs.writeFileSync(`${path.join(config_current.output, 'mergedxmltv.xml')}`, xmlString, 'utf8');
 
   logger.success('XMLTV file created successfully.');
-  isFunctionRunning = true;
+  isFunctionRunning = false;
 };
 
 module.exports = {
