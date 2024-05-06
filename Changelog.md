@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.12.1...V1.13.0) (2024-05-06)
+
+
+### Added
+
+* experimental change to run xmltv merger on demand rather than on schedule ([0691b83](https://github.com/liam8888999/ErsatzTV-Filler/commit/0691b83f09036f9113316cbc204d94d789d7bffc))
+
+
+### Fixed
+
+* bug that would prevent xmltv merge running more than once ([f47a2eb](https://github.com/liam8888999/ErsatzTV-Filler/commit/f47a2ebabae178318281cfdfa2cdb7a2ed89fcd8))
+
 ## [1.12.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.12.0...V1.12.1) (2024-04-23)
 
 
