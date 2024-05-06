@@ -201,7 +201,7 @@ const GENERATION = async () => {
       }
       mergeRunning = true;
 
-      if (config_current.processxmltvmerger === 'yes') {
+      if (config_current.processxmltvmerger === 'yes' && config_current.mergexmltvondemand !== 'yes') {
         if (typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null') {
           try {
             await XMLTVPARSE();

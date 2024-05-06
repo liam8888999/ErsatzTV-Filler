@@ -3,6 +3,7 @@ const { settheme } = require("../utils/themes.utils.js");
 const { downloadImage } = require("../utils/downloadimage.utils");
 const logger = require("../utils/logger.utils");
 const { WEATHER } = require("../generators/weather.generator");
+const { XMLTVPARSE } = require("../generators/xmltvmerge.generator");
 const os = require('os');
 const fs = require('fs');
 const { exec } = require('child_process');
@@ -39,6 +40,21 @@ const loadApixmltvmergeRoutes = (app) => {
   const { filename } = req.params;
   const filePath = path.join(config_current.output, filename);
   logger.info(`XMLTVMERGE api retrieval filename: ${filePath}`)
+
+  if (config_current.mergexmltvondemand == "yes") {
+    if (!(typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null')) {
+      try {
+        await XMLTVPARSE();
+      } catch (error) {
+        // Handle the error encountered in XMLTVMERGE()
+        logger.error(`Error encountered in XMLTVMERGER: ${error}`);
+        return;
+      }
+    } else {
+      logger.warn('no epg files set so merger not running from run api');
+    }
+  }
+
 
   // Check if the file exists
   if (!fs.existsSync(filePath)) {

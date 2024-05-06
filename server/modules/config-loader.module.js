@@ -153,6 +153,11 @@ async function addKeyValuesToConfigFile() {
       key: 'customweatherreaderscript',
       value: ''
     }
+    ,
+    {
+      key: 'mergexmltvondemand',
+      value: 'yes'
+    }
   ];
 
   try {
