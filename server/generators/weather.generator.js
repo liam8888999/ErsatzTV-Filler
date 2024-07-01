@@ -53,7 +53,7 @@ const WEATHER = async () => {
 
   // Booked image url format
   // a += '<img src="https://w.bookcdn.com/weather/picture/' + e + "_" + n + "_" + booked.weather.cmetric + "_" + booked.weather.wlangid + "_" + booked.weather.color + "_" + h + "_" + booked.weather.header_color + "_" + booked.weather.text_color + "_" + booked.weather.link_color + "_" + booked.weather.border_form + "_" + booked.weather.footer_color + "_" + booked.weather.footer_text_color + "_" + booked.weather.transparent + "_6.png
-  
+
 
   let v1 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zone&alt=hwizone7day5&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=7`;
   let v2 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwiws&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&daysonly=0&maxdays=1`;
@@ -70,9 +70,9 @@ const WEATHER = async () => {
       v3 = `https://w.bookcdn.com/weather/picture/1_${city_id}_${units}_1_137AE9_320_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
     }
   } else if (config_current.usewttrin === 'yes' || config_current.country.toLowerCase() !== 'us') {
-    v1 = `https://wttr.in/${config_current.city}.png`;
-    v2 = `https://v2.wttr.in/${config_current.city}.png`;
-    v3 = `https://v3.wttr.in/${config_current.state}.png`;
+    v1 = `https://wttr.in/${config_current.city}+${config_current.state}.png`;
+    v2 = `https://v2.wttr.in/${config_current.city}+${config_current.state}.png`;
+    v3 = `https://v3.wttr.in/${config_current.state}+${config_current.state}.png`;
   }
   const downloadimages = async () => {
     logger.info("Downloading weather images")
@@ -91,11 +91,11 @@ const WEATHER = async () => {
       .then(logger.success)
       .catch(logger.error);
 
-    await downloadImage(`https://wttr.in/${config_current.city}?format=j1`, `${path.join(WEATHERDIR, 'weather.json')}`)
+    await downloadImage(`https://wttr.in/${config_current.city}+${config_current.state}?format=j1`, `${path.join(WEATHERDIR, 'weather.json')}`)
       .then(logger.success)
       .catch(logger.error);
     if (config_current.readweather) {
-      await downloadImage(`https://wttr.in/${config_current.city}?format=j2`, `${path.join(WEATHERDIR, 'weather2.json')}`)
+      await downloadImage(`https://wttr.in/${config_current.city}+${config_current.state}?format=j2`, `${path.join(WEATHERDIR, 'weather2.json')}`)
         .then(logger.success)
         .catch(logger.error);
     }
