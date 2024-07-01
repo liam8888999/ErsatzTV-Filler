@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.14.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.13.0...V1.14.0) (2024-07-01)
+
+
+### Fixed
+
+* hide errornous setting in across config categories ([64037be](https://github.com/liam8888999/ErsatzTV-Filler/commit/64037bee475ff748ae5af7a5ef39ca2158dcc35d))
+* make weather data more accurate by sending state as well as city in information grab requests ([a98c0d8](https://github.com/liam8888999/ErsatzTV-Filler/commit/a98c0d82b538c583a13b892000d802c1329de406))
+
 ## [1.13.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.12.1...V1.13.0) (2024-05-06)
 
 
