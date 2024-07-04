@@ -257,7 +257,7 @@ const loadApiConfigRoutes = async (app) => {
 
         logger.success('JSON file has been updated.');
 
-
+        configstatuschanged()
         res.json({message: 'File uploaded and converted to JSON successfully'});
       });
     });
