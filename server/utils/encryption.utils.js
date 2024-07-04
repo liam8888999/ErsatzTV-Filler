@@ -65,7 +65,7 @@ if (passwordData.hint) {
     decryptedUsername = '';
     decryptedPassword = '';
 
-    logger.error("No password file is found in the config dir");
+    logger.warn("No password file is found in the config dir");
   }
 
   let authentication;
