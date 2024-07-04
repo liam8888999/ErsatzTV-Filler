@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.15.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.14.0...V1.15.0) (2024-07-04)
+
+
+### Added
+
+* notice to say config migration from v0.x to v1.x will be removed in v1.16.0 ([7d428a5](https://github.com/liam8888999/ErsatzTV-Filler/commit/7d428a52c8da6b7b0633a019e99069e0178a2815))
+
+
+### Fixed
+
+* mark config change on backup restore ([e6de54a](https://github.com/liam8888999/ErsatzTV-Filler/commit/e6de54af34b3dea4595b7afa1da9b6b9c447cf43))
+* mark config change when migrating old config version to new ([25e11ca](https://github.com/liam8888999/ErsatzTV-Filler/commit/25e11cacba6524825de0a99d2e92afa30d083359))
+* update webhook for sharing themes ([dc94ee0](https://github.com/liam8888999/ErsatzTV-Filler/commit/dc94ee07602d9e2c5573ce7455a9dd61c12254ec))
+
+
+### Changed
+
+* change no password from an error to a warning ([f22c4ae](https://github.com/liam8888999/ErsatzTV-Filler/commit/f22c4ae486acd771ae177260b1f083d62c92d3d1))
+* convert values to boolean ([82edc1a](https://github.com/liam8888999/ErsatzTV-Filler/commit/82edc1acbdd70ca8f471e1e02fa775599572246b))
+
 ## [1.14.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.13.0...V1.14.0) (2024-07-01)
 
 
