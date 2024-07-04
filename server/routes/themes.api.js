@@ -154,7 +154,7 @@ let themeName;
         const options = {
             hostname: 'discord.com',
             port: 443,
-            path: '/api/webhooks/1154413704662761562/t3xJYQY0jINPasvaZx46hG9JA1vwx6n0rpVPgZuupD70xMwTyYAvKtY3VssIlCPtctbD', // Replace with your webhook ID and token
+            path: '/api/webhooks/1258432507649724559/IhV_Y0yAOVqk7rQl-1GHGA77al-dHVl8yAv1jMjr3P65TYolIvDwS-8G0RvWcGjRs2J2', // Replace with your webhook ID and token
             method: 'POST',
      headers: {
          'Content-Type': 'application/json',
