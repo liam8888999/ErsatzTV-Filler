@@ -76,10 +76,10 @@ if (config_current.booked_code.length > 0) {
   weatherprovider = 'booked.net';
   // Code for when booked_code has elements
   console.log('booked_code has elements');
-} else if (config_current.usewttrin === 'yes' || config_current.country.toLowerCase() !== 'us') {
+} else if (config_current.usewttrin === true || config_current.country.toLowerCase() !== 'us') {
   weatherprovider = 'wttr.in';
   // Code for when usewttrin is 'yes' or country is not 'us'
-  console.log('usewttrin is yes or country is not us');
+  console.log('usewttrin is true or country is not us');
 } else {
   weatherprovider = 'weatherforyou.net';
   // Code for when none of the conditions are true

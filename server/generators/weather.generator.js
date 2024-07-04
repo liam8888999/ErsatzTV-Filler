@@ -69,7 +69,7 @@ const WEATHER = async () => {
       v2 = `https://w.bookcdn.com/weather/picture/4_${city_id}_${units}_1_137AE9_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
       v3 = `https://w.bookcdn.com/weather/picture/1_${city_id}_${units}_1_137AE9_320_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
     }
-  } else if (config_current.usewttrin === 'yes' || config_current.country.toLowerCase() !== 'us') {
+  } else if (config_current.usewttrin === true || config_current.country.toLowerCase() !== 'us') {
     v1 = `https://wttr.in/${config_current.city}+${config_current.state}.png`;
     v2 = `https://v2.wttr.in/${config_current.city}+${config_current.state}.png`;
     v3 = `https://v3.wttr.in/${config_current.state}+${config_current.state}.png`;
@@ -148,7 +148,7 @@ const WEATHER = async () => {
     }).replace(/#/g, '');
     const textcolor = themecolourdecoder(contrasttextcolor)
 // Step 7: Prepare the ASS subtitle text
-    if (config_current.showweatherheader === "yes") {
+    if (config_current.showweatherheader === true) {
       textterror = `{\\c&H${textcolor}&}${config_current.weatherheader}\\N\\N\\NUnfortunately the weather filler is unavailable at this time,\\N\\NHopefully it will be back soon\\N\\NThe Current Temperature is ${TEMPWITHUNIT}\\N\\NThe Current Humidity ${humidity}\%\\N\\NIt is Currently ${weatherDescription} outside\\N\\NInformation is correct as of ${dateTimeString}\\N`
     } else {
       textterror = `{\\c&H${textcolor}&}Unfortunately the weather filler is unavailable at this time,\\N\\N  Hopefully it will be back soon\\N\\N  The Current Temperature is ${TEMPWITHUNIT}\\N\\N  The Current Humidity ${humidity}\%\\N\\N  It is Currently ${weatherDescription} outside\\N\\N  Information is correct as of ${dateTimeString}\\N`
@@ -229,7 +229,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
       const audioFile = await selectRandomAudioFile(config_current.customaudio);
       let calcHW = getImageWidthHeight(image, config_current.videoresolution);
       let audioCommand;
-      if (config_current.readweather === 'yes') {
+      if (config_current.readweather === true) {
         audioCommand = ffmpegSpeechOrMusicCommand(config_current.readweather, scriptAudioPath, await speedFactor(scriptAudioPath, config_current.weatherduration), 2);
       } else {
         audioCommand = ffmpegSpeechOrMusicCommand(config_current.readweather, audioFile);
@@ -263,7 +263,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
 
         //part2
         let fadeAudio;
-        if(config_current.readweather === 'yes') {
+        if(config_current.readweather === true) {
           fadeAudio = '';
         } else {
             fadeAudio = `-af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}"`;
@@ -290,7 +290,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
 
   try {
       await downloadimages();
-      if(config_current.readweather === 'yes') {
+      if(config_current.readweather === true) {
           const script = await creatWeatherScript();
           await createAudio(script, config_current.audiolanguage, scriptAudioPath);
       }
@@ -316,7 +316,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
   /**
    *check if weather v4 should be shuffled (add later)
    */
-//if (config_current.shuffle_v4 === "yes"){
+//if (config_current.shuffle_v4 === true){
   /**
    *add files to .txt file in random order if shuffled, on random if not shuffled
    */

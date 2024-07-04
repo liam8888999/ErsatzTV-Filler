@@ -58,7 +58,7 @@ const NEWS = async () => {
             const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
             const descriptioncolor = themecolourdecoder(current_theme.News.newstextcolour);
 
-            if (config_current.underlinenewsheader === 'yes') {
+            if (config_current.underlinenewsheader === true) {
               newsheader = `{\\r}{\\b1}{\\c&H${titlecolor}&}{\\u1}${config_current.newsheadertext}{//u0}\n\n`
             } else {
               newsheader = `{\\r}{\\b1}{\\c&H${titlecolor}&}${config_current.newsheadertext}\n\n`
@@ -68,7 +68,7 @@ const NEWS = async () => {
             newsFeed += `{\\r}{\\b1}{\\c&H${titlecolor}&}${title}.\n{\\r}{\\b0}{\\c&H${descriptioncolor}&}${description}.\n\n`;
             logger.debug(`header text: ${config_current.newsheadertext}`)
             logger.debug(`show header: ${config_current.shownewsheader}`)
-            if (config_current.shownewsheader === 'yes') {
+            if (config_current.shownewsheader === true) {
               newsFeedcontent1 = newsheader + newsFeed;
               newsFeedcontent = newsFeedcontent1.replace(/\.\./g, '\.')
             } else {
@@ -94,7 +94,7 @@ const NEWS = async () => {
     const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, 'utf8');
     const news1Content = newstempContent;
     let newsfeedarticleamount = '';
-    if (config_current.shownewsheader === 'yes') {
+    if (config_current.shownewsheader === true) {
       newsfeedarticleamount = config_current.newsarticles + 1
     } else {
       newsfeedarticleamount = config_current.newsarticles;
@@ -116,7 +116,7 @@ const NEWS = async () => {
     } else {
       intro = ''
     }
-    if (config_current.readonlynewsheadings === "yes") {
+    if (config_current.readonlynewsheadings === true) {
       const titlePatternRegextitlekeep = new RegExp(`{\\\\r}{\\\\b1}{\\\\c&H${titlecolor}&}`);
       newsFeedread1 = newsContent.split('\n').filter(line => titlePatternRegextitlekeep.test(line)).join('\n').replace(titlepatternregex, '').replace(descriptionpatternregex, '').replace(/{\\u1}/g, '').replace(/{\/\/u0}/g, '').replace(headerregex, headerreplacedregex).replace(/\./g, '\.\.').replace(/\.\.\ \.\./g, '\.\.').replace(/U\.\.S/g, 'U\.S').replace(/U\.\.K/g, 'U\.K').replace(/U\.\.N/g, 'U\.N').replace(/\[\&\#8230\;]/g, '...')
       newsFeedread = `${intro} ${newsFeedread1} ${config_current.newsreadoutro}`
@@ -127,7 +127,7 @@ const NEWS = async () => {
     logger.debug(newsFeedread)
 // Creates an "output.mp3" audio file with default English text
 
-    if (config_current.readnews === "yes") {
+    if (config_current.readnews === true) {
       await createAudio(newsFeedread, config_current.audiolanguage, path.join(NEWSDIR, `news-audio-${NEWSNUM}.mp3`));
     }
     await fs.writeFileSync(`${path.join(NEWSDIR, `news-temp-${NEWSNUM}.txt`)}`, newsContent);
@@ -198,7 +198,7 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
     logger.debug(assfile)
     ;
     let audioCommand;
-    if (config_current.readnews === 'yes') {
+    if (config_current.readnews === true) {
       audioCommand = ffmpegSpeechOrMusicCommand(config_current.readnews, newsReadFile, await speedFactor(newsReadFile, config_current.newsduration), 1);
     } else {
       audioCommand = ffmpegSpeechOrMusicCommand(config_current.readnews, audioFile);

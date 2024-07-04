@@ -31,6 +31,7 @@ const setupConfigurationFile = async () => {
   }
 
   await addKeyValuesToConfigFile();
+  await changetoBooleanInConfigFile()
   await updateVariablesChangedInConfigFile();
 }
 
@@ -59,7 +60,7 @@ async function addKeyValuesToConfigFile() {
   const keyValuesToAdd = [
     {
       key: 'shownewsheader',
-      value: 'yes',
+      value: true,
     },
     {
       key: 'newsheadertext',
@@ -75,11 +76,11 @@ async function addKeyValuesToConfigFile() {
     },
     {
       key: 'underlinenewsheader',
-      value: 'yes',
+      value: true,
     },
     {
       key: 'processchannellogo',
-      value: 'yes',
+      value: true,
     },
     {
       key: 'channellogovideofadeoutduration',
@@ -103,11 +104,11 @@ async function addKeyValuesToConfigFile() {
     },
     {
       key: 'readnews',
-      value: 'no',
+      value: false,
     },
     {
       key: 'readonlynewsheadings',
-      value: 'yes',
+      value: true,
     },
     {
       key: 'weatherheader',
@@ -115,7 +116,7 @@ async function addKeyValuesToConfigFile() {
     },
     {
       key: 'showweatherheader',
-      value: 'false',
+      value: false,
     },
     {
       key: 'newsreadintro',
@@ -139,7 +140,7 @@ async function addKeyValuesToConfigFile() {
     },
     {
       key: 'usewttrin',
-      value: 'no',
+      value: false,
     },
     {
       key: 'booked_code',
@@ -147,16 +148,16 @@ async function addKeyValuesToConfigFile() {
     },
     {
       key: 'readweather',
-      value: 'yes'
+      value: true,
     },
     {
       key: 'customweatherreaderscript',
-      value: ''
+      value: '',
     }
     ,
     {
       key: 'mergexmltvondemand',
-      value: 'yes'
+      value: true,
     }
   ];
 
@@ -209,6 +210,56 @@ async function updateLatestVersionInconfigFile() {
     await fsPromises.writeFile(filename, updatedData);
     configstatuschanged()
     logger.success('Latest version variable updated successfully.');
+  } catch (err) {
+    logger.error(err);
+  }
+}
+
+async function changetoBooleanInConfigFile() {
+  const filename = CONFIG_CONSTANTS().USER_CONFIG;
+
+  try {
+    // Read the JSON file with the 'utf8' encoding using fs.promises
+    const data = await fsPromises.readFile(filename, 'utf8');
+
+    // Parse the JSON data
+    const jsonData = JSON.parse(data);
+
+    if (typeof jsonData.latestversion === 'undefined' || jsonData.latestversion <= '1.14.0') {
+
+      // Function to convert "yes"/"no" to true/false
+function convertYesNoToBoolean(obj) {
+  for (let key in obj) {
+    if (typeof obj[key] === 'string') {
+      const lowerCaseValue = obj[key].toLowerCase();
+      if (lowerCaseValue === 'yes') {
+        obj[key] = true;
+      } else if (lowerCaseValue === 'no') {
+        obj[key] = false;
+      }
+    } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+      convertYesNoToBoolean(obj[key]);
+    }
+  }
+}
+
+// Convert the values in jsonData
+convertYesNoToBoolean(jsonData);
+
+
+      // Delete the old key    -- Error currently when key gets deleted
+      delete jsonData.cutomweathereaderscript;
+
+      // Convert the updated data back to JSON string
+      const updatedData = JSON.stringify(jsonData, null, 2);
+
+      // Write the updated JSON data back to the file using fs.promises
+      await fsPromises.writeFile(filename, updatedData);
+      configstatuschanged()
+    }
+
+
+    logger.success('Changed to using Boolean variables in config.');
   } catch (err) {
     logger.error(err);
   }

@@ -186,7 +186,7 @@
         <input type="text" id="hint" name="hint" required><br><br>
         <input type="submit" value="Register/Update Account Details">
       </form>
-      <% if (authentication === 'yes') { %>
+      <% if (authentication === true) { %>
         <br>
         <form action="/delusrpswrd" method="post">
           <input type="submit" value="Remove authentication">

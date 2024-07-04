@@ -29,7 +29,15 @@ const writeValueToConfigurationFile = async (key, value) => {
   const json = JSON.parse(data);
 
   value = value.trim();
-  value = value.toLowerCase() === 'yes' ? 'yes' : value;
+
+  // If the value is a boolean string, convert it to a boolean
+if (value.trim().toLowerCase() === 'true') {
+  value = true;
+} else if (value.trim().toLowerCase() === 'false') {
+  value = false;
+}
+
+  // value = value.toLowerCase() === 'yes' ? 'yes' : value;
   const newConfigvar = {
     ...json,
     [key]: value

@@ -37,7 +37,7 @@ const GENERATION = async () => {
       }
       vanityRunning = true;
 
-      if (config_current.processvanitycards === 'yes') {
+      if (config_current.processvanitycards === true) {
         try {
           await VANITYCARDS();
           // Add a 3-second delay here
@@ -78,7 +78,7 @@ const GENERATION = async () => {
       }
       weatherRunning = true;
 
-      if (config_current.processweather === 'yes') {
+      if (config_current.processweather === true) {
         try {
           await WEATHER();
           // Add a 3-second delay here
@@ -119,7 +119,7 @@ const GENERATION = async () => {
       }
       newsRunning = true;
 
-      if (config_current.processnews === 'yes') {
+      if (config_current.processnews === true) {
         try {
           await NEWS();
           // Add a 3-second delay here
@@ -160,7 +160,7 @@ const GENERATION = async () => {
       }
       offlineRunning = true;
 
-      if (config_current.processchanneloffline === 'yes') {
+      if (config_current.processchanneloffline === true) {
         try {
           await CHANNEL_OFFLINE();
           // Add a 3-second delay here
@@ -201,7 +201,7 @@ const GENERATION = async () => {
       }
       mergeRunning = true;
 
-      if (config_current.processxmltvmerger === 'yes' && config_current.mergexmltvondemand !== 'yes') {
+      if (config_current.processxmltvmerger === true && config_current.mergexmltvondemand !== true) {
         if (typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null') {
           try {
             await XMLTVPARSE();
@@ -245,7 +245,7 @@ const GENERATION = async () => {
       }
       channellogoRunning = true;
 
-      if (config_current.processchannellogo === 'yes') {
+      if (config_current.processchannellogo === true) {
         try {
           await CHANNEL_LOGO();
           // Add a 3-second delay here

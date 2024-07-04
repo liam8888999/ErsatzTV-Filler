@@ -31,7 +31,7 @@ const speedFactor = (file, newsduration) => {
 }
 
 const ffmpegSpeechOrMusicCommand = (useSpeech, file, factor, inputPosition) => {
-    if(useSpeech === 'yes') {
+    if(useSpeech === true) {
         return `"${file}" -filter_complex "[${inputPosition}:a]atempo=${factor},volume=${inputPosition}[a]" -map 0 -map "[a]" `;
     }
     return `"${file}" -shortest  -c:a copy `;

@@ -41,7 +41,7 @@ const loadApixmltvmergeRoutes = (app) => {
   const filePath = path.join(config_current.output, filename);
   logger.info(`XMLTVMERGE api retrieval filename: ${filePath}`)
 
-  if (config_current.mergexmltvondemand == "yes") {
+  if (config_current.mergexmltvondemand == true) {
     if (!(typeof config_current.epgfiles === 'undefined' || config_current.epgfiles === '' || config_current.epgfiles === 'null')) {
       try {
         await XMLTVPARSE();

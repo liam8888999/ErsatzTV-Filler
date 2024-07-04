@@ -70,9 +70,9 @@ if (passwordData.hint) {
 
   let authentication;
   if (!decryptedUsername && !decryptedPassword) {
-    authentication = 'no';
+    authentication = false;
   } else {
-    authentication = 'yes';
+    authentication = true;
   }
 
   return { decryptedUsername, decryptedPassword, authentication, hint };
