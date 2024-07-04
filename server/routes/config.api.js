@@ -24,6 +24,13 @@ const {
   currentTemplate
 } = require("../generators/utils/weather-templating.utils");
 const {doesFileExist, createDirectoryIfNotExists} = require("../utils/file.utils");
+const {
+  parseConfigurationFile,
+  createNewUserConfigFromDefault,
+  configChanged,
+  configUpdated,
+  configstatuschanged
+} = require("../utils/config.utils");
 
 const loadApiConfigRoutes = async (app) => {
   // Middleware to handle errors
@@ -324,6 +331,7 @@ const loadApiConfigRoutes = async (app) => {
           logger.error('Error deleting zip file:', err);
           return res.status(500).json({error: 'Failed to delete the zip file after extraction.'});
         }
+        configstatuschanged()
         logger.success(`restore successfully completed`)
         res.json({message: 'Restoration completed successfully'});
       });
