@@ -43,7 +43,7 @@
     "extract-zip": "^2.0.1",
     "fs": "^0.0.1-security",
     "google-tts-api": "^2.0.2",
-    "husky": "^9.1.1",
+    "husky": "^9.1.3",
     "image-size": "^1.1.1",
     "jimp": "^0.22.12",
     "jsonwebtoken": "^9.0.2",
