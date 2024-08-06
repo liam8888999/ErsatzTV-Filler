@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.16.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.15.0...V1.16.0) (2024-08-06)
+
+
+### Added
+
+* add v3 theme support to theme creator ([0ef90e0](https://github.com/liam8888999/ErsatzTV-Filler/commit/0ef90e07d955973598f8c86d4bbd030c2b507254))
+* message to alert v1 themes no longer valid ([6fb35b1](https://github.com/liam8888999/ErsatzTV-Filler/commit/6fb35b1c413b10fb8221e1a4387f3763116faac9))
+* support for v3 themes ([e246a08](https://github.com/liam8888999/ErsatzTV-Filler/commit/e246a08fe273eee2544253d6dce6583d06af7916))
+
 ## [1.15.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.14.0...V1.15.0) (2024-07-04)
 
 
