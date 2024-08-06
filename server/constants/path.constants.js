@@ -23,7 +23,7 @@ const serverLocation = path.dirname(parentDirName);
 
 
 // Theme Consts
-const CURRENT_THEME_VERSION = '2'
+const CURRENT_THEME_VERSION = '3'
 const THEMES_FOLDER = path.join(startUpPath, 'themes');
 
 

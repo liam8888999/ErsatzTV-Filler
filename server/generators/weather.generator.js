@@ -55,9 +55,9 @@ const WEATHER = async () => {
   // a += '<img src="https://w.bookcdn.com/weather/picture/' + e + "_" + n + "_" + booked.weather.cmetric + "_" + booked.weather.wlangid + "_" + booked.weather.color + "_" + h + "_" + booked.weather.header_color + "_" + booked.weather.text_color + "_" + booked.weather.link_color + "_" + booked.weather.border_form + "_" + booked.weather.footer_color + "_" + booked.weather.footer_text_color + "_" + booked.weather.transparent + "_6.png
 
 
-  let v1 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zone&alt=hwizone7day5&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=7`;
+  let v1 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zone&alt=hwizone7day5&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=${current_theme.Weather.weatherimagebackgroundcolour}&hwvtc=${current_theme.Weather.weatherimagetextcolour}&daysonly=2&maxdays=7`;
   let v2 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwiws&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&daysonly=0&maxdays=1`;
-  let v3 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwizandh&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=black&hwvtc=white&daysonly=2&maxdays=5`;
+  let v3 = `https://www.weatherforyou.net/fcgi-bin/hw3/hw3.cgi?config=png&forecast=zandh&alt=hwizandh&place=${config_current.city}&state=${config_current.state}&country=${config_current.country}&hwvbg=${current_theme.Weather.weatherimagebackgroundcolour}&hwvtc=${current_theme.Weather.weatherimagetextcolour}&daysonly=2&maxdays=5`;
   if (config_current.booked_code.length > 0) {
     const html = config_current.booked_code;
     const idPos = html.indexOf('cityID=');
@@ -65,9 +65,9 @@ const WEATHER = async () => {
     if (idPos > 0 && semiPos > 0) {
       const units = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 0 : 1;
       const city_id = html.substring(idPos + 7, semiPos);
-      v1 = `https://w.bookcdn.com/weather/picture/3_${city_id}_${units}_1_137AE9_430_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
-      v2 = `https://w.bookcdn.com/weather/picture/4_${city_id}_${units}_1_137AE9_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
-      v3 = `https://w.bookcdn.com/weather/picture/1_${city_id}_${units}_1_137AE9_320_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
+      v1 = `https://w.bookcdn.com/weather/picture/3_${city_id}_${units}_1_${current_theme.Weather.weatherimagebackgroundcolour}_430_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
+      v2 = `https://w.bookcdn.com/weather/picture/4_${city_id}_${units}_1_${current_theme.Weather.weatherimagebackgroundcolour}_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
+      v3 = `https://w.bookcdn.com/weather/picture/1_${city_id}_${units}_1_${current_theme.Weather.weatherimagebackgroundcolour}_320_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
     }
   } else if (config_current.usewttrin === true || config_current.country.toLowerCase() !== 'us') {
     v1 = `https://wttr.in/${config_current.city}+${config_current.state}.png`;

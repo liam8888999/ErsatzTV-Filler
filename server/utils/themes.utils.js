@@ -81,9 +81,8 @@ const themecolourdecoder = (colour) => {
      logger.debug(`Theme data original: ${themedata}`);
      logger.error(`The theme is not version ${CURRENT_THEME_VERSION}, fallback for the missing items will be used`);
      // Add the ThemeVersion property here
-     themedata.ChannelLogo = {
-      channellogobackgroundcolour: '000000'
-    };
+     themedata.Weather.weatherimagebackgroundcolour = "000000",
+     themedata.Weather.weatherimagetextcolour = "FFFFFF"
      logger.debug(`Theme data edited: ${themedata}`);
      return themedata;
    }
