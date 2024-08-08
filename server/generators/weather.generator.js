@@ -63,7 +63,7 @@ const WEATHER = async () => {
     const idPos = html.indexOf('cityID=');
     const semiPos = html.indexOf(';', idPos);
     if (idPos > 0 && semiPos > 0) {
-      const units = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 0 : 1;
+      const units = config_current.temperatureunits.toLowerCase().startsWith('f') ? 0 : 1;
       const city_id = html.substring(idPos + 7, semiPos);
       v1 = `https://w.bookcdn.com/weather/picture/3_${city_id}_${units}_1_${current_theme.Weather.weatherimagebackgroundcolour}_430_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
       v2 = `https://w.bookcdn.com/weather/picture/4_${city_id}_${units}_1_${current_theme.Weather.weatherimagebackgroundcolour}_350_ffffff_333333_08488D_1_ffffff_333333_0_6.png`;
@@ -128,11 +128,11 @@ const WEATHER = async () => {
 
     if (temperatureUnit) {
       const kelvintemp = parseFloat(currentTempC) + 273.15
-      if (temperatureUnit === 'celsius') {
+      if (temperatureUnit.toLowerCase().startsWith('c')) {
         TEMPWITHUNIT = `${currentTempC}°C`;
-      } else if (temperatureUnit === 'fahrenheit') {
+      } else if (temperatureUnit.toLowerCase().startsWith('f')) {
         TEMPWITHUNIT = `${currentTempF}°F`;
-      } else if (temperatureUnit === 'kelvin') {
+      } else if (temperatureUnit.toLowerCase().startsWith('k')) {
         TEMPWITHUNIT = `${kelvintemp}°K`;
       } else {
         // If none of the above, set a default value or handle the case accordingly
