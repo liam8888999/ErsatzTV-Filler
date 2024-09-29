@@ -52,7 +52,8 @@ const CHANNEL_OFFLINE = async () => {
         const channels = result.tv.channel;
       channels.forEach((channel) => {
         const channelId = channel.$.id;
-        const channelLogo = channel.icon && channel.icon[0].$.src;
+        const channelLogo1 = channel.icon && channel.icon[0].$.src;
+        const channelLogo = channelLogo1.split('?')[0]
 
         const filename = `${channelLogo}`
         const lastIndex = filename.lastIndexOf(".");

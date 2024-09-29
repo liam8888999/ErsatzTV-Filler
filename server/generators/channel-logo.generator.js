@@ -53,8 +53,10 @@ const CHANNEL_LOGO = async () => {
         const channels = result.tv.channel;
       channels.forEach((channel) => {
         const channelId = channel.$.id;
-        const channelLogo = channel.icon && channel.icon[0].$.src;
-
+        const channelLogo1 = channel.icon && channel.icon[0].$.src;
+        console.log(channelLogo1)
+        const channelLogo = channelLogo1.split('?')[0]
+console.log(channelLogo)
         const filename = `${channelLogo}`
         const lastIndex = filename.lastIndexOf(".");
         if (lastIndex !== -1) {
