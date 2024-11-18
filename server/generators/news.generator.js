@@ -23,6 +23,14 @@ const NEWS = async () => {
   }
   isFunctionRunning = true;
   const config_current = await retrieveCurrentConfiguration();
+
+  let output_location;
+ if (config_current.fillersubdirs) {
+   output_location = `${path.join(config_current.output, `NEWS`)}`
+ } else {
+   output_location = config_current.output
+ }
+
   const audioFile = await selectRandomAudioFile(config_current.customaudio);
   const current_theme = await retrieveCurrentTheme();
   const NEWSNUM = '1'
@@ -203,7 +211,7 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
     } else {
       audioCommand = ffmpegSpeechOrMusicCommand(config_current.readnews, audioFile);
     }
-    command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i ${audioCommand} -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -t ${config_current.newsduration} "${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}"`;
+    command = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i ${audioCommand} -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -t ${config_current.newsduration} "${path.join(output_location, `news-${NEWSNUM}.mp4`)}"`;
     logger.ffmpeg(`News ffmpeg command is ${command}`);
 
     exec(command, (error, stdout, stderr) => {
@@ -212,7 +220,7 @@ Dialogue: 0, 0:00:${startTime.toString().padStart(2, '0')}.00, 0:00:${endTime.to
 
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
         // Run another FFmpeg command here on error
-        const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the news filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} "${path.join(config_current.output, `news-${NEWSNUM}.mp4`)}"`;
+        const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the news filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.newsduration} "${path.join(output_location, `news-${NEWSNUM}.mp4`)}"`;
         logger.ffmpeg(`Running news card fallback command on error: ${commandOnError3}`);
         exec(commandOnError3, (error3, stdout3, stderr3) => {
           if (error3) {
@@ -237,7 +245,7 @@ try {
   await generateNewsFeed(config_current, audioFile, current_theme);
   await prepareNewsContent(config_current);
   await prepareSubtitleText(config_current);
-  await createDirectoryIfNotExists(config_current.output);
+  await createDirectoryIfNotExists(output_location);
   await generateNewsVideo(config_current, audioFile);
 } catch (error) {
   logger.error(error);

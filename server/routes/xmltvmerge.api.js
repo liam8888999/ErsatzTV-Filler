@@ -37,8 +37,14 @@ const loadApixmltvmergeRoutes = (app) => {
   // Define an API endpoint to retrieve a media file
   app.get('/xmltvmerge/:filename', async (req, res) => {
   const config_current = await retrieveCurrentConfiguration();
-  const { filename } = req.params;
-  const filePath = path.join(config_current.output, filename);
+  let { filename } = req.params;
+
+  if (config_current.fillersubdirs) {
+    filePath = `XmltvMerge/${filename}`
+  } else {
+    filePath = `${filename}`
+  }
+  //const filePath = `${path.join(config_current.output, filename)}`
   logger.info(`XMLTVMERGE api retrieval filename: ${filePath}`)
 
   if (config_current.mergexmltvondemand == true) {

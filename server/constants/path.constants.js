@@ -49,6 +49,7 @@ const TEMPLATE_CONSTANTS = () => {
 const DEFAULT_CONFIG = {
   "customaudio": "",
   "output": "",
+  "fillersubdirs": false,
   "city": "Austin",
   "state": "Texas",
   "country": "US",

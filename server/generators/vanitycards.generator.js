@@ -22,7 +22,12 @@ isFunctionRunning = true;
 
   createDirectoryIfNotExists(VANITYCARDDIR);
   const config_current = await retrieveCurrentConfiguration();
-
+  let output_location;
+ if (config_current.fillersubdirs) {
+   output_location = `${path.join(config_current.output, `VANITYCARDS`)}`
+ } else {
+   output_location = config_current.output
+ }
 
 
   const getVanityCard = async (filenumber) => {
@@ -100,7 +105,7 @@ const createVanityCard = async (filenumber) => {
     const audioFile = await selectRandomAudioFile(config_current.customaudio);
     // add theme information
     // part1
-    const commandvanitycard = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=white:${config_current.videoresolution} -i "${path.join(VANITYCARDDIR, 'vanitycard')}-${filenumber}.jpg" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.vanitycardduration} "${path.join(config_current.output, 'vanitycard')}-${filenumber}.mp4"`;
+    const commandvanitycard = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=white:${config_current.videoresolution} -i "${path.join(VANITYCARDDIR, 'vanitycard')}-${filenumber}.jpg" -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[1]scale=iw*1:-1[wm];[0][wm]overlay=x=(W-w)/2:y=(H-h)/2" -c:v ${config_current.ffmpegencoder} -pix_fmt yuv420p -c:a copy -t ${config_current.vanitycardduration} "${path.join(output_location, 'vanitycard')}-${filenumber}.mp4"`;
     logger.ffmpeg(`commandvanitycard is ${commandvanitycard}`);
 
     exec(commandvanitycard, (error, stdout, stderr) => {
@@ -108,7 +113,7 @@ const createVanityCard = async (filenumber) => {
         logger.error(error);
         logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
         // Run another FFmpeg command here on error
-  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=black:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the vanity card filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.vanitycardduration} "${path.join(config_current.output, 'vanitycard')}-${filenumber}.mp4"`;
+  const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=black:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the vanity card filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.vanitycardduration} "${path.join(output_location, 'vanitycard')}-${filenumber}.mp4"`;
   logger.ffmpeg(`Running vanity card fallback command on error: ${commandOnError3}`);
   exec(commandOnError3, (error3, stdout3, stderr3) => {
     if (error3) {
@@ -144,7 +149,7 @@ async function processVanityCards() {
 
 // Assuming you're in an async function or using the `async` keyword somewhere
   try {
-await createDirectoryIfNotExists(config_current.output);
+await createDirectoryIfNotExists(output_location);
 await processVanityCards();
 } catch (error) {
   logger.error(error);

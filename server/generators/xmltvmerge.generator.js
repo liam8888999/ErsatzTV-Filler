@@ -22,6 +22,12 @@ const XMLTVPARSE = async () => {
   createDirectoryIfNotExists(XMLTVMERGEDIR);
 
   const config_current = await retrieveCurrentConfiguration();
+   let output_location;
+  if (config_current.fillersubdirs) {
+    output_location = `${path.join(config_current.output, `XmltvMerge`)}`
+  } else {
+    output_location = config_current.output
+  }
   const epgFiles = config_current.epgfiles.split(" "); // Split the space-separated string
 
   const epgPromises = epgFiles.map(async (epgFile, index) => {
@@ -94,8 +100,8 @@ const XMLTVPARSE = async () => {
 
   const xmlString = xml.end({ pretty: true });
   console.log(xmlString)
-  createDirectoryIfNotExists(config_current.output);
-  fs.writeFileSync(`${path.join(config_current.output, 'mergedxmltv.xml')}`, xmlString, 'utf8');
+  createDirectoryIfNotExists(output_location);
+  fs.writeFileSync(`${path.join(output_location, 'mergedxmltv.xml')}`, xmlString, 'utf8');
 
   logger.success('XMLTV file created successfully.');
   isFunctionRunning = false;

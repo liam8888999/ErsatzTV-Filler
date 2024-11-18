@@ -24,7 +24,12 @@ const WEATHER = async () => {
   createDirectoryIfNotExists(WEATHERDIR);
   logger.info("starting weather")
 
-  const config_current = await retrieveCurrentConfiguration();
+  let output_location;
+ if (config_current.fillersubdirs) {
+   output_location = `${path.join(config_current.output, `Weather`)}`
+ } else {
+   output_location = config_current.output
+ }
   const current_theme = await retrieveCurrentTheme();
   const weatherbackgroundcolour = current_theme.Weather.weatherbackgroundcolour;
   const scriptAudioPath = path.join(WEATHERDIR, 'weather-script.mp3');
@@ -244,7 +249,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
           logger.error(error);
 
           logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
-          const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} "${path.join(config_current.output, fileName)}"`;
+          const commandOnError1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${weatherbackgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -vf "ass='${assfile}'" -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.weatherduration} "${path.join(output_location, fileName)}"`;
           logger.ffmpeg(`Running weather fallback command on error: ${commandOnError1}`);
           exec(commandOnError1, (error2, stdout2, stderr2) => {
             if (error2) {
@@ -268,7 +273,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
         } else {
             fadeAudio = `-af "afade=t=in:st=0:d=${config_current.weatheraudiofadeinduration},afade=t=out:st=${weatherCalculationsResult.weatheraudiofadeoutstart}:d=${config_current.weatheraudiofadeoutduration}"`;
         }
-        const commandPart2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}-i "${path.join(WEATHERDIR, fileName)}" -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" ${fadeAudio} -c:v ${config_current.ffmpegencoder} "${path.join(config_current.output, fileName)}"`;
+        const commandPart2 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}-i "${path.join(WEATHERDIR, fileName)}" -vf "fade=t=in:st=0:d=${config_current.weathervideofadeinduration},fade=t=out:st=${weatherCalculationsResult.weathervideofadeoutstart}:d=${config_current.weathervideofadeoutduration}" ${fadeAudio} -c:v ${config_current.ffmpegencoder} "${path.join(output_location, fileName)}"`;
         logger.ffmpeg(`ffmpeg weather commandPart2 is ${commandPart2} for ${fileName}`);
         exec(commandPart2, (error, stdout, stderr) => {
           if (error) {
@@ -295,7 +300,7 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
           await createAudio(script, config_current.audiolanguage, scriptAudioPath);
       }
 
-      await createDirectoryIfNotExists(config_current.output);
+      await createDirectoryIfNotExists(output_location);
       await createWeather(path.join(WEATHERDIR, 'v1.png'), 'weather-v1.mp4');
       await createWeather(path.join(WEATHERDIR, 'v2.png'), 'weather-v2.mp4');
       await createWeather(path.join(WEATHERDIR, 'v3.png'), 'weather-v3.mp4');

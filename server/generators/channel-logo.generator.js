@@ -30,6 +30,13 @@ const CHANNEL_LOGO = async () => {
   createDirectoryIfNotExists(CHANNEL_LOGODIR);
   const config_current = await retrieveCurrentConfiguration();
 
+  let output_location;
+ if (config_current.fillersubdirs) {
+   output_location = `${path.join(config_current.output, `CHANNELLOGO`)}`
+ } else {
+   output_location = config_current.output
+ }
+
   // Function to split XMLTV by channel
   // Moved to XMLTV.utils
 
@@ -54,9 +61,7 @@ const CHANNEL_LOGO = async () => {
       channels.forEach((channel) => {
         const channelId = channel.$.id;
         const channelLogo1 = channel.icon && channel.icon[0].$.src;
-        console.log(channelLogo1)
         const channelLogo = channelLogo1.split('?')[0]
-console.log(channelLogo)
         const filename = `${channelLogo}`
         const lastIndex = filename.lastIndexOf(".");
         if (lastIndex !== -1) {
@@ -107,7 +112,7 @@ console.log(channelLogo)
 
               logger.error('If this symptom persists please check your ffmpeg version is at least 6.0 and has libass compiled in');
               // Run another FFmpeg command here on error
-              const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the channel-logo filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.channellogoduration} "${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}"`;
+              const commandOnError3 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}${hwacceldevice}-f lavfi -i color=${backgroundcolour}:${config_current.videoresolution} -stream_loop -1 -i "${audioFile}" -shortest -filter_complex "[0:v]drawtext=text='Unfortunately the channel-logo filler is unavailable at this time, Hopefully it will be back soon':x=(W-tw)/2:y=(H-th)/2:fontsize=24:fontcolor=white[bg]" -map "[bg]" -map 1:a -c:v ${config_current.ffmpegencoder} -c:a copy -t ${config_current.channellogoduration} "${path.join(output_location, `${eachxmltvfile}-logo.mp4`)}"`;
               logger.ffmpeg(`Running channel-logo fallback command on error: ${commandOnError3}`);
               exec(commandOnError3, (error3, stdout3, stderr3) => {
               if (error3) {
@@ -125,7 +130,7 @@ console.log(channelLogo)
             logger.success('channel-logo v1 part 1 created successfully.');
 
             //part2
-            const commandv1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}-i "${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}" -vf "fade=t=in:st=0:d=${config_current.channellogovideofadeinduration},fade=t=out:st=${channellogovideofadeoutstart}:d=${config_current.channellogovideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.channellogoaudiofadeinduration},afade=t=out:st=${channellogoaudiofadeoutstart}:d=${config_current.channellogoaudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} "${path.join(config_current.output, `${eachxmltvfile}-logo.mp4`)}"`;
+            const commandv1 = `${config_current.customffmpeg || FFMPEGCOMMAND}${hwaccel}-i "${path.join(CHANNEL_LOGODIR, `${eachxmltvfile}-logo-working.mp4`)}" -vf "fade=t=in:st=0:d=${config_current.channellogovideofadeinduration},fade=t=out:st=${channellogovideofadeoutstart}:d=${config_current.channellogovideofadeoutduration}" -af "afade=t=in:st=0:d=${config_current.channellogoaudiofadeinduration},afade=t=out:st=${channellogoaudiofadeoutstart}:d=${config_current.channellogoaudiofadeoutduration}" -c:v ${config_current.ffmpegencoder} "${path.join(output_location, `${eachxmltvfile}-logo.mp4`)}"`;
           logger.ffmpeg(`ffmpeg channel-logo commandv1 is ${commandv1}`);
             exec(commandv1, (error, stdout, stderr) => {
               if (error) {
@@ -193,7 +198,7 @@ console.log(channelLogo)
   try {
 
     await splitXMLTVByChannel(CHANNEL_LOGODIR);
-    await createDirectoryIfNotExists(config_current.output);
+    await createDirectoryIfNotExists(output_location);
     await runnersT();
   } catch (error) {
     // Handle the connection error
