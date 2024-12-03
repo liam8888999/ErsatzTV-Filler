@@ -24,6 +24,8 @@ const WEATHER = async () => {
   createDirectoryIfNotExists(WEATHERDIR);
   logger.info("starting weather")
 
+  const config_current = await retrieveCurrentConfiguration();
+
   let output_location;
  if (config_current.fillersubdirs) {
    output_location = `${path.join(config_current.output, `Weather`)}`
