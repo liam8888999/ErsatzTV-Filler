@@ -12,7 +12,9 @@
     "release-minor": "release-it --increment minor --verbose",
     "release-major": "release-it --increment major --verbose",
     "release-patch": "release-it --increment patch --verbose",
-    "build": "pkg package.json"
+    "build": "pkg package.json",
+    "prepare": "husky",
+    "commit-lint": "--no -- commitlint --edit"
   },
   "repository": {
     "type": "git",
@@ -25,8 +27,6 @@
   },
   "homepage": "https://github.com/liam8888999/ErsatzTV-Filler#readme",
   "dependencies": {
-    "@commitlint/cli": "^19.6.0",
-    "@commitlint/config-conventional": "^19.6.0",
     "archiver": "^7.0.1",
     "axios": "^1.7.8",
     "bcryptjs": "^2.4.3",
@@ -43,7 +43,6 @@
     "extract-zip": "^2.0.1",
     "fs": "^0.0.1-security",
     "google-tts-api": "^2.0.2",
-    "husky": "^9.1.7",
     "image-size": "^1.1.1",
     "jimp": "^0.22.12",
     "jsonwebtoken": "^9.0.2",
@@ -136,6 +135,8 @@
     }
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
     "@release-it/conventional-changelog": "^9.0.3",
     "archiver": "^7.0.1",
     "bcryptjs": "^2.4.3",
