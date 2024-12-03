@@ -113,8 +113,6 @@ const DEFAULT_CONFIG = {
   "channellogointerval": "10",
   "channellogoduration": "30",
 }
-
-/** DIR CONSTS */
 const CONFIG_DIR = path.join(startUpPath, 'config');
 const USER_CONFIG = path.join(CONFIG_DIR, 'config.json');
 const PASSWORD = path.join(CONFIG_DIR, 'password.json');
