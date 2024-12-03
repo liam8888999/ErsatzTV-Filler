@@ -1,17 +1,11 @@
 # Changelog
 
-## <small>1.17.1 (2024-12-03)</small>
+## 1.17.1 (2024-12-03)
 
-* chore: fix changelog ([f4cfc71](https://github.com/liam8888999/ErsatzTV-Filler/commit/f4cfc71))
-* chore(deps): bump @commitlint/cli from 19.5.0 to 19.6.0 ([cca56b1](https://github.com/liam8888999/ErsatzTV-Filler/commit/cca56b1))
-* chore(deps): bump @commitlint/config-conventional from 19.5.0 to 19.6.0 ([6ae61d4](https://github.com/liam8888999/ErsatzTV-Filler/commit/6ae61d4))
-* chore(deps): bump axios from 1.7.7 to 1.7.8 ([3ebb640](https://github.com/liam8888999/ErsatzTV-Filler/commit/3ebb640))
-* chore(deps): bump dotenv from 16.4.5 to 16.4.6 ([42ea1f5](https://github.com/liam8888999/ErsatzTV-Filler/commit/42ea1f5))
-* chore(deps): bump husky from 9.1.6 to 9.1.7 ([f9f76cb](https://github.com/liam8888999/ErsatzTV-Filler/commit/f9f76cb))
-* chore(deps): bump marked from 15.0.1 to 15.0.2 ([313fd98](https://github.com/liam8888999/ErsatzTV-Filler/commit/313fd98))
-* chore(deps): bump marked from 15.0.2 to 15.0.3 ([9ef626c](https://github.com/liam8888999/ErsatzTV-Filler/commit/9ef626c))
-* fixed: fix for undefined variable in weather filler ([9929d64](https://github.com/liam8888999/ErsatzTV-Filler/commit/9929d64))
-* Update weather.generator.js ([529ee8b](https://github.com/liam8888999/ErsatzTV-Filler/commit/529ee8b))
+### Fixed
+
+* fix for undefined variable in weather filler ([9929d64](https://github.com/liam8888999/ErsatzTV-Filler/commit/9929d64))
+
 
 ## 1.17.0 (2024-11-18)
 
