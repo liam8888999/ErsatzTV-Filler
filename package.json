@@ -44,7 +44,7 @@
     "fs": "^0.0.1-security",
     "google-tts-api": "^2.0.2",
     "husky": "^9.1.7",
-    "image-size": "^1.2.0",
+    "image-size": "^1.2.1",
     "jimp": "^0.22.12",
     "jsonwebtoken": "^9.0.2",
     "marked": "^15.0.7",
