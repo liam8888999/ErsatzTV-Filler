@@ -35,7 +35,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18.20.2 # Choose the Node.js version you want to use
+          node-version: 22.16.0 # Choose the Node.js version you want to use
 
       - name: Install Dependencies
         run: npm ci --legacy-peer-deps # Replace with your package manager (e.g., yarn)
