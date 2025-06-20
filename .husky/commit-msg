@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PWD/node_modules/.bin:$PATH"
+
+npx --no-install commitlint --edit "$1"

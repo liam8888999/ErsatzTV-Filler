@@ -12,7 +12,8 @@
     "release-minor": "release-it --increment minor --verbose",
     "release-major": "release-it --increment major --verbose",
     "release-patch": "release-it --increment patch --verbose",
-    "build": "pkg package.json"
+    "build": "pkg package.json",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -43,7 +44,6 @@
     "extract-zip": "^2.0.1",
     "fs": "^0.0.1-security",
     "google-tts-api": "^2.0.2",
-    "husky": "^9.1.7",
     "image-size": "^2.0.2",
     "jimp": "^0.22.12",
     "jsonwebtoken": "^9.0.2",
@@ -146,6 +146,7 @@
     "express": "^5.1.0",
     "express-session": "^1.18.1",
     "fs": "^0.0.1-security",
+    "husky": "^9.1.7",
     "jimp": "^0.22.12",
     "jsonwebtoken": "^9.0.2",
     "moment-timezone": "^0.6.0",
