@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.17.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.2...V1.17.3) (2025-06-21)
+## [1.17.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.1...V1.17.3) (2025-06-21)
 
 ### Fixed
 
