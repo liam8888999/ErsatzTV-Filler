@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.17.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.1...V1.17.2) (2025-06-21)
+
+### Fixed
+
+* fix for unrecognised dynamic channel logos from etv ([352fbe5](https://github.com/liam8888999/ErsatzTV-Filler/commit/352fbe50254eba005015e2599e37b0b0056449fa))
+
 ## 1.17.1 (2024-12-03)
 
 ### Fixed
