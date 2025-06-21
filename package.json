@@ -82,9 +82,6 @@
       "node18-macos-x64"
     ]
   },
-  "overrides": {
-    "conventional-changelog-conventionalcommits": "8.0.0"
-  },
   "release-it": {
     "git": {
       "commitMessage": "chore: release v${version}",
