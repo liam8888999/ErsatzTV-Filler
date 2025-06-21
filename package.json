@@ -128,8 +128,7 @@
             {
               "type": "test",
               "hidden": true
-            },
-            {}
+            }
           ]
         }
       }
