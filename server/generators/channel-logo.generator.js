@@ -65,11 +65,11 @@ const CHANNEL_LOGO = async () => {
         const filename = `${channelLogo}`
         const lastIndex = filename.lastIndexOf(".");
         if (lastIndex !== -1) {
-          fileimageExtension = filename.slice(lastIndex + 1);
+          fileimageExtension = "jpg"//filename.slice(lastIndex + 1);
         } else {
           logger.error("No file extension found.");
         }
-        downloadImage(`${channelLogo}`, `${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}`)
+        downloadImage(`${channelLogo1}`, `${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}`)
     .then(() => {
       logger.success
       const convertimage = `${path.join(CHANNEL_LOGODIR, eachxmltvfile)}.${fileimageExtension}`
