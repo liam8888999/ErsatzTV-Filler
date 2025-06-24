@@ -30,19 +30,93 @@
     <div id="tab1" class="tab" style="display: block;">
       <br>
       <center><u><h2>General Settings</h2></u></center>
-      <% if(CONFIG_AVAILABLE){ %>
+      <% if (CONFIG_AVAILABLE) { %>
+        <% const fillerlocationkeys = [
+          'output', 'fillersubdirs', 'customaudio',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const fillerconfigkeys = [
+          'videolength', 'videoresolution', 'audiolanguage',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const locationconfigkeys = [
+          'city', 'state', 'country',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const generalconfigkeys = [
+          'webport'
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const ersatztvconfigkeys = [
+          'ersatztv',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+
+        <center>  <i><h4>General config</h4></i> </center>
         <form method="post" action="/config" id="config-form">
           <div id="variables">
-            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-              <% if(key !== 'theme' && !['mergexmltvondemand', 'latestversion', 'customweatherreaderscript', 'temperatureunits', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme', 'processweather', 'usewttrin', 'readweather', 'booked_code', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
+            <% generalconfigkeys.forEach(function(key) { %>
+              <% if (CURRENT_CONFIG[key] !== undefined) { %>
                 <%- include(text_input, {
-                key,
-                label: CURRENT_CONFIG[key]
+                  key,
+                  label: CURRENT_CONFIG[key]
                 }) %>
               <% } %>
             <% }); %>
           </div>
         </form>
+              <center>  <i><h4>ErsatzTV config</h4></i> </center>
+        <form method="post" action="/config" id="config-form">
+          <div id="variables">
+            <% ersatztvconfigkeys.forEach(function(key) { %>
+              <% if (CURRENT_CONFIG[key] !== undefined) { %>
+                <%- include(text_input, {
+                  key,
+                  label: CURRENT_CONFIG[key]
+                }) %>
+              <% } %>
+            <% }); %>
+          </div>
+        </form>
+        <center>  <i><h4>Location config</h4></i> </center>
+  <form method="post" action="/config" id="config-form">
+    <div id="variables">
+      <% locationconfigkeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+    </div>
+  </form>
+  <center>  <i><h4>Filler Directory config</h4></i> </center>
+<form method="post" action="/config" id="config-form">
+<div id="variables">
+<% fillerlocationkeys.forEach(function(key) { %>
+  <% if (CURRENT_CONFIG[key] !== undefined) { %>
+    <%- include(text_input, {
+      key,
+      label: CURRENT_CONFIG[key]
+    }) %>
+  <% } %>
+<% }); %>
+</div>
+</form>
+<center>  <i><h4>Filler config</h4></i> </center>
+<form method="post" action="/config" id="config-form">
+<div id="variables">
+<% fillerconfigkeys.forEach(function(key) { %>
+<% if (CURRENT_CONFIG[key] !== undefined) { %>
+  <%- include(text_input, {
+    key,
+    label: CURRENT_CONFIG[key]
+  }) %>
+<% } %>
+<% }); %>
+</div>
+</form>
       <% }else{ %>
         <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
