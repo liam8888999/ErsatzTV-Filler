@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.17.5](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.4...V1.17.5) (2025-06-26)
+
+### Fixed
+
+* change themes webhook url and reenable sharing ([2223432](https://github.com/liam8888999/ErsatzTV-Filler/commit/2223432f3b8f51a1715ded29284a57ab51c2f52a))
+
 ## [1.17.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.3...V1.17.4) (2025-06-26)
 
 ### Added
