@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.17.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.3...V1.17.4) (2025-06-26)
+
+### Added
+
+* option to generate or not generate individual weather filler types ([2cc76f9](https://github.com/liam8888999/ErsatzTV-Filler/commit/2cc76f9e8b2902c0ac04f9e8d5b474a2dae4772d))
+
+### Fixed
+
+* change generate_weathervx string in ui ([5214321](https://github.com/liam8888999/ErsatzTV-Filler/commit/52143211c401f5cdf7491178db74f04df2f230d2))
+
+### Removed
+
+* utility to update v0.x config files to v1.x config file ([6cfd15e](https://github.com/liam8888999/ErsatzTV-Filler/commit/6cfd15e95d3a83786bb658b0239a2cddf1bad95b))
+
+### Changed
+
+* update background workings of config page and ui ([2eb7ba8](https://github.com/liam8888999/ErsatzTV-Filler/commit/2eb7ba84f244d0b2ac4dd99efe35469e4a130c45))
+* update working of general config page to allow more customisation and features ([20e9572](https://github.com/liam8888999/ErsatzTV-Filler/commit/20e957207e13680bea2fe3d591cb9be2ce42305a))
+
 ## [1.17.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.1...V1.17.3) (2025-06-21)
 
 ### Fixed
