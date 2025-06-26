@@ -124,19 +124,58 @@
     <div id="tab2" class="tab">
       <br>
       <center><u><h2>Weather Settings</h2></u></center>
-      <% if(CONFIG_AVAILABLE){ %>
-        <form method="post" action="/config" id="config-form">
-          <div id="variables">
-            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-              <% if(key !== 'theme' && !['fillersubdirs', 'mergexmltvondemand', 'latestversion', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processchanneloffline', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'ersatztv'].includes(key)){ %>
-                <%- include(text_input, {
-                key,
-                label: CURRENT_CONFIG[key]
-                }) %>
-              <% } %>
-            <% }); %>
-          </div>
-        </form>
+      <% if (CONFIG_AVAILABLE) { %>
+        <% const weatherprocesskeys = [
+          'processweather', 'generate_weatherv4', 'weatherinterval',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const weatherfillerkeys = [
+          'usewttrin', 'readweather', 'customweatherreaderscript', 'booked_code', 'showweatherheader', 'weatherheader', 'temperatureunits',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const advancedweatherfillerkeys = [
+          'weatherduration', 'weatheraudiofadeinduration', 'weatheraudiofadeoutduration', 'weathervideofadeinduration', 'weathervideofadeoutduration',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <center>  <i><h4>General Weather config</h4></i> </center>
+  <form method="post" action="/config" id="config-form">
+    <div id="variables">
+      <% weatherprocesskeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+    </div>
+  </form>
+  <center>  <i><h4>Weather Filler config</h4></i> </center>
+<form method="post" action="/config" id="config-form">
+<div id="variables">
+<% weatherfillerkeys.forEach(function(key) { %>
+<% if (CURRENT_CONFIG[key] !== undefined) { %>
+  <%- include(text_input, {
+    key,
+    label: CURRENT_CONFIG[key]
+  }) %>
+<% } %>
+<% }); %>
+</div>
+</form>
+          <center>  <i><h4>Advanced Weather Filler config</h4></i> </center>
+  <form method="post" action="/config" id="config-form">
+    <div id="variables">
+      <% advancedweatherfillerkeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+    </div>
+  </form>
       <% }else{ %>
         <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
@@ -144,61 +183,110 @@
     <div id="tab3" class="tab">
       <br>
       <center><u><h2>News Settings</h2></u></center>
-      <% if(CONFIG_AVAILABLE){ %>
-        <form method="post" action="/config" id="config-form">
-          <div id="variables">
-            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-              <% if(key !== 'theme' && !['fillersubdirs', 'mergexmltvondemand', 'latestversion', 'customweatherreaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'weatherheader', 'showweatherheader', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'weatherduration', 'vanitycardduration', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'fontfile', 'webtheme', 'webport', 'processweather', 'usewttrin', 'booked_code', 'processchanneloffline', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'weatheraudiofadeinduration', 'weatheraudiofadeoutduration', 'weathervideofadeinduration', 'weathervideofadeoutduration', 'generate_weatherv4', 'videolength', 'ersatztv'].includes(key)){ %>
-                <%- include(text_input, {
-                key,
-                label: CURRENT_CONFIG[key]
-                }) %>
-              <% } %>
-            <% }); %>
-          </div>
-        </form>
+      <% if (CONFIG_AVAILABLE) { %>
+        <% const newsprocesskeys = [
+          'processnews', 'newsinterval', 'newsfeed',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const newsfillerkeys = [
+          'newsarticles', 'shownewsheader', 'newsheadertext', 'underlinenewsheader', 'readnews', 'newsreadintro', 'newsreadoutro', 'readonlynewsheadings',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const advancednewsfillerkeys = [
+          'newsduration', 'newsaudiofadeinduration', 'newsaudiofadeoutduration', 'newsvideofadeinduration', 'newsvideofadeoutduration',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <center>  <i><h4>General News config</h4></i> </center>
+  <form method="post" action="/config" id="config-form">
+    <div id="variables">
+      <% newsprocesskeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+    </div>
+  </form>
+  <center>  <i><h4>News Filler config</h4></i> </center>
+<form method="post" action="/config" id="config-form">
+<div id="variables">
+<% newsfillerkeys.forEach(function(key) { %>
+<% if (CURRENT_CONFIG[key] !== undefined) { %>
+  <%- include(text_input, {
+    key,
+    label: CURRENT_CONFIG[key]
+  }) %>
+<% } %>
+<% }); %>
+</div>
+</form>
+          <center>  <i><h4>Advanced News Filler config</h4></i> </center>
+  <form method="post" action="/config" id="config-form">
+    <div id="variables">
+      <% advancednewsfillerkeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+    </div>
+  </form>
       <% }else{ %>
         <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
     </div>
     <div id="tab4" class="tab">
-      <br>
-      <center><u><h2>Channel Offline Settings</h2></u></center>
-      <% if(CONFIG_AVAILABLE){ %>
-        <form method="post" action="/config" id="config-form">
-          <div id="variables">
-            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-              <% if(key !== 'theme' && !['fillersubdirs', 'mergexmltvondemand', 'latestversion', 'customweatherreaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processweather', 'usewttrin', 'booked_code', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'ersatztv'].includes(key)){ %>
-                <%- include(text_input, {
-                key,
-                label: CURRENT_CONFIG[key]
-                }) %>
-              <% } %>
-            <% }); %>
-          </div>
-        </form>
-      <% }else{ %>
-        <h1> Error loading configuration file... please check the server logs! </h1>
-      <% } %>
-    </div>
+  <br>
+  <center><u><h2>Channel Offline Settings</h2></u></center>
+  <% if (CONFIG_AVAILABLE) { %>
+    <% const offlineprocesskeys = [
+      'processchanneloffline', 'offlineinterval',
+      // Add any other keys you want to appear in this specific order
+    ]; %>
+    <center>  <i><h4>General Channel Offline config</h4></i> </center>
+<form method="post" action="/config" id="config-form">
+<div id="variables">
+  <% offlineprocesskeys.forEach(function(key) { %>
+    <% if (CURRENT_CONFIG[key] !== undefined) { %>
+      <%- include(text_input, {
+        key,
+        label: CURRENT_CONFIG[key]
+      }) %>
+    <% } %>
+  <% }); %>
+</div>
+</form>
+    <% }else{ %>
+      <h1> Error loading configuration file... please check the server logs! </h1>
+    <% } %>
+  </div>
     <div id="tab5" class="tab">
       <br>
       <center><u><h2>XMLTV Merge Settings</h2></u></center>
       <center><a href="/xmltvmerge/mergedxmltv.xml" class="button">XMLTVMERGE File LINK</a></center>
       <center><p>please list epg locations as a list with a space inbetween each, for example: 1.epg 2.epg
           3.epg</p></center>
-      <% if(CONFIG_AVAILABLE){ %>
+          <% if (CONFIG_AVAILABLE) { %>
+            <% const mergeprocesskeys = [
+              'mergexmltvondemand', 'processxmltvmerger', 'epgfiles', 'xmltvmergeinterval',
+              // Add any other keys you want to appear in this specific order
+            ]; %>
+            <center>  <i><h4>General XMLTVMERGE config</h4></i> </center>
         <form method="post" action="/config" id="config-form">
-          <div id="variables">
-            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-              <% if(key !== 'theme' && !['fillersubdirs', 'latestversion', 'customweatherreaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processchanneloffline', 'newsarticles', 'fontfile', 'webtheme', 'webport', 'processnews', 'processweather', 'usewttrin', 'booked_code', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'xmltv', 'videoresolution', 'log_location', 'log_days', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'ersatztv'].includes(key)){ %>
-                <%- include(text_input, {
+        <div id="variables">
+          <% mergeprocesskeys.forEach(function(key) { %>
+            <% if (CURRENT_CONFIG[key] !== undefined) { %>
+              <%- include(text_input, {
                 key,
                 label: CURRENT_CONFIG[key]
-                }) %>
-              <% } %>
-            <% }); %>
-          </div>
+              }) %>
+            <% } %>
+          <% }); %>
+        </div>
         </form>
       <% }else{ %>
         <h1> Error loading configuration file... please check the server logs! </h1>
@@ -207,19 +295,41 @@
     <div id="tab6" class="tab">
       <br>
       <center><u><h2>Vanity Card Settings</h2></u></center>
-      <% if(CONFIG_AVAILABLE){ %>
-        <form method="post" action="/config" id="config-form">
-          <div id="variables">
-            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-              <% if(key !== 'theme' && !['fillersubdirs', 'mergexmltvondemand', 'latestversion', 'customweatherreaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'xmltv', 'videoresolution', 'customaudio', 'output', 'city', 'country', 'state', 'videolength', 'log_location', 'log_days', 'webport', 'fontfile', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme', 'processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'ersatztv'].includes(key)){ %>
-                <%- include(text_input, {
-                key,
-                label: CURRENT_CONFIG[key]
-                }) %>
-              <% } %>
-            <% }); %>
-          </div>
-        </form>
+      <% if (CONFIG_AVAILABLE) { %>
+        <% const vanityprocesskeys = [
+          'processvanitycards', 'vanityinterval',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const vanityfillerkeys = [
+          'amountvanitycards', 'vanitycardduration',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <center>  <i><h4>General Vanity Card config</h4></i> </center>
+      <form method="post" action="/config" id="config-form">
+      <div id="variables">
+      <% vanityprocesskeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+      </div>
+      </form>
+      <center>  <i><h4>Vanity Card Filler config</h4></i> </center>
+    <form method="post" action="/config" id="config-form">
+    <div id="variables">
+    <% vanityfillerkeys.forEach(function(key) { %>
+      <% if (CURRENT_CONFIG[key] !== undefined) { %>
+        <%- include(text_input, {
+          key,
+          label: CURRENT_CONFIG[key]
+        }) %>
+      <% } %>
+    <% }); %>
+    </div>
+    </form>
       <% }else{ %>
         <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
@@ -227,19 +337,41 @@
     <div id="tab7" class="tab">
       <br>
       <center><u><h2>Channel Logo Settings</h2></u></center>
-      <% if(CONFIG_AVAILABLE){ %>
-        <form method="post" action="/config" id="config-form">
-          <div id="variables">
-            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-              <% if(key !== 'theme' && !['fillersubdirs', 'mergexmltvondemand', 'latestversion', 'customweatherreaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'amountvanitycards', 'vanityinterval', 'processvanitycards', 'vanitycardduration', 'underlinenewsheader', 'weatherduration', 'shownewsheader', 'newsheadertext', 'customffmpeg', 'hwaccel', 'hwaccel_device', 'ffmpegencoder', 'xmltvmergeinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'xmltv', 'videoresolution', 'customaudio', 'output', 'city', 'country', 'state', 'videolength', 'log_location', 'log_days', 'webport', 'fontfile', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme', 'processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration', 'ersatztv'].includes(key)){ %>
-                <%- include(text_input, {
-                key,
-                label: CURRENT_CONFIG[key]
-                }) %>
-              <% } %>
-            <% }); %>
-          </div>
-        </form>
+      <% if (CONFIG_AVAILABLE) { %>
+        <% const chanlogoprocesskeys = [
+          'processchannellogo', 'channellogoduration',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <% const advancedchanlogofillerkeys = [
+          'channellogoduration', 'channellogoaudiofadeinduration', 'channellogoaudiofadeoutduration', 'channellogovideofadeinduration', 'channellogovideofadeoutduration',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <center>  <i><h4>General Channel Logo config</h4></i> </center>
+  <form method="post" action="/config" id="config-form">
+    <div id="variables">
+      <% chanlogoprocesskeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+    </div>
+  </form>
+          <center>  <i><h4>Advanced Channel Logo Filler config</h4></i> </center>
+  <form method="post" action="/config" id="config-form">
+    <div id="variables">
+      <% advancedchanlogofillerkeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+    </div>
+  </form>
       <% }else{ %>
         <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
@@ -403,19 +535,24 @@
           things may break unexpectedly **</p></center>
 
       <br>
-      <% if(CONFIG_AVAILABLE){ %>
-        <form method="post" action="/config" id="config-form">
-          <div id="variables">
-            <% Object.keys(CURRENT_CONFIG).forEach(function(key){ %>
-              <% if(key !== 'theme' && !['fillersubdirs', 'mergexmltvondemand', 'latestversion', 'customweatherreaderscript', 'usewttrin', 'readweather', 'booked_code', 'temperatureunits', 'audiolanguage', 'webport', 'ersatztv', 'xmltv', 'videoresolution', 'state', 'city', 'country', 'output', 'customaudio', 'videolength', 'newsreadintro', 'newsreadoutro', 'weatherheader', 'showweatherheader', 'readnews', 'readonlynewsheadings', 'processchannellogo', 'channellogovideofadeoutduration', 'channellogovideofadeinduration', 'channellogoaudiofadeoutduration', 'channellogoaudiofadeinduration', 'channellogointerval', 'channellogoduration', 'underlinenewsheader', 'weatherduration', 'vanitycardduration', 'shownewsheader', 'newsheadertext', 'xmltvmergeinterval', 'vanityinterval', 'weatherinterval', 'newsinterval', 'offlineinterval', 'processvanitycards', 'amountvanitycards', 'processxmltvmerger', 'epgfiles', 'newsarticles', 'webtheme', 'processweather', 'processnews', 'processchanneloffline', 'generate_weatherv4', 'weathervideofadeoutduration', 'weathervideofadeinduration', 'weatheraudiofadeoutduration', 'weatheraudiofadeinduration', 'newsvideofadeoutduration', 'newsvideofadeinduration', 'newsaudiofadeoutduration', 'newsaudiofadeinduration', 'newsfeed', 'newsfeed1', 'newsfeed2', 'textspeed', 'newsduration'].includes(key)){ %>
-                <%- include(text_input, {
-                key,
-                label: CURRENT_CONFIG[key]
-                }) %>
-              <% } %>
-            <% }); %>
-          </div>
-        </form>
+      <% if (CONFIG_AVAILABLE) { %>
+        <% const advancedconfigkeys = [
+          'customffmpeg', 'ffmpegencoder', 'hwaccel', 'hwaccel_device',
+          // Add any other keys you want to appear in this specific order
+        ]; %>
+        <center>  <i><h4>Advanced FFMPEG config</h4></i> </center>
+    <form method="post" action="/config" id="config-form">
+    <div id="variables">
+      <% advancedconfigkeys.forEach(function(key) { %>
+        <% if (CURRENT_CONFIG[key] !== undefined) { %>
+          <%- include(text_input, {
+            key,
+            label: CURRENT_CONFIG[key]
+          }) %>
+        <% } %>
+      <% }); %>
+    </div>
+    </form>
       <% }else{ %>
         <h1> Error loading configuration file... please check the server logs! </h1>
       <% } %>
