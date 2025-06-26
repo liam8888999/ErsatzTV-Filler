@@ -159,6 +159,18 @@ async function addKeyValuesToConfigFile() {
       value: true,
     }  ,
     {
+      key: 'generate_weatherv1',
+      value: true,
+    }  ,
+    {
+      key: 'generate_weatherv2',
+      value: true,
+    }  ,
+    {
+      key: 'generate_weatherv3',
+      value: true,
+    }  ,
+    {
       key: 'fillersubdirs',
       value: false,
     }

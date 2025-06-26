@@ -303,9 +303,15 @@ Style: Default, Arial, 32, &H00000000, &H00000000, &H00000000, &H00000000, 0, 0,
       }
 
       await createDirectoryIfNotExists(output_location);
+      if(config_current.generate_weatherv1 === true) {
       await createWeather(path.join(WEATHERDIR, 'v1.png'), 'weather-v1.mp4');
+    }
+    if(config_current.generate_weatherv2 === true) {
       await createWeather(path.join(WEATHERDIR, 'v2.png'), 'weather-v2.mp4');
+    }
+    if(config_current.generate_weatherv3 === true) {
       await createWeather(path.join(WEATHERDIR, 'v3.png'), 'weather-v3.mp4');
+    }
   } catch (error) {
       logger.error(error);
         isFunctionRunning = false;
