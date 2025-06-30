@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.17.6](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.5...V1.17.6) (2025-06-30)
+
+### Fixed
+
+* small weather bug fix ([7b4fa8f](https://github.com/liam8888999/ErsatzTV-Filler/commit/7b4fa8f98ecd803efc6baa7a77c7baf61a6ea898))
+
 ## [1.17.5](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.4...V1.17.5) (2025-06-26)
 
 ### Fixed
