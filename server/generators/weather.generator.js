@@ -102,7 +102,8 @@ const WEATHER = async () => {
       .then(logger.success)
       .catch(logger.error);
     if (config_current.readweather) {
-      await downloadImage(`https://wttr.in/${config_current.city}+${config_current.state}?format=j2`, `${path.join(WEATHERDIR, 'weather2.json')}`)
+      await new Promise(resolve => setTimeout(resolve, 1500));  // 1-second delay
+        await downloadImage(`https://wttr.in/${config_current.city}+${config_current.state}?format=j2`, `${path.join(WEATHERDIR, 'weather2.json')}`)
         .then(logger.success)
         .catch(logger.error);
     }
