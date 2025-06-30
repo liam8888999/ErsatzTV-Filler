@@ -36,7 +36,7 @@
     "contrast-color": "^1.0.1",
     "cookie-parser": "^1.4.7",
     "cron-job-manager": "^2.3.1",
-    "dotenv": "^17.0.0",
+    "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "epg-parser": "^0.3.1",
     "express": "^5.1.0",
