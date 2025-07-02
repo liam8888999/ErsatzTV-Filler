@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.17.7](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.6...V1.17.7) (2025-07-02)
+
+### Fixed
+
+* fix build and re-release ([50eba85](https://github.com/liam8888999/ErsatzTV-Filler/commit/50eba852b32f56e43eb86f9494b3304489d07169))
+
 ## [1.17.6](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.5...V1.17.6) (2025-06-30) [PULLED]
 
 This release is pulled due to a failed build.
