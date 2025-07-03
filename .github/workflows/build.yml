@@ -2,7 +2,7 @@ name: Build Packages on Push
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "weather-debug" ]
 
 jobs:
   build:
