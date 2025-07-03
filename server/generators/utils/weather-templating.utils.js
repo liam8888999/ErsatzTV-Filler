@@ -6,7 +6,7 @@ const {WEATHERDIR, DEFAULT_WEATHER_SCRIPT} = require("../../constants/path.const
 const Mustache = require("mustache");
 
 //Thinking of future expansion, first of all a collection of templates that can be selected
-//purposefully or randomly. 
+//purposefully or randomly.
 const currentTemplate = async () => {
   const config_current = await retrieveCurrentConfiguration();
   let script;
@@ -14,6 +14,7 @@ const currentTemplate = async () => {
   if (config_current.customweatherreaderscript.length > 0) {
     script = `${config_current.customweatherreaderscript}`
   }
+    logger.debug(`Weather Templating Script is: ${script}`)
   return script;
 }
 
@@ -29,6 +30,7 @@ const weatherTemplateReplacement = async (script) => {
       logger.error(error);
     });
   const outputData = weatherTemplateData(weatherData, config_current);
+    logger.debug(`Output Data: ${outputData}`)
   return Mustache.render(script, outputData);
 }
 
@@ -41,14 +43,21 @@ function weatherTemplateData(inputJSON, config_current) {
   };
   let values;
   let speed = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Miles' : 'Kmph';
+    logger.debug(`Speed: ${speed}`)
   let degree = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'F' : 'C';
+    logger.debug(`Degree: ${degree}`)
   let depth = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Inches' : 'mm';
+    logger.debug(`Depth: ${depth}`)
 
   //output some units if people want to use them
   weatherData.units.temperature = config_current.temperatureunits;
+    logger.debug(`WeatherData.units.temperature: ${weatherData.units.temperature}`)
   weatherData.units.speed = speed;
+    logger.debug(`WeatherData.units.speed: ${weatherData.units.speed}`)
   weatherData.units.depth = depth;
+    logger.debug(`WeatherData.units.depth: ${weatherData.units.depth}`)
   weatherData.header = config_current.weatherheader;
+    logger.debug(`WeatherData.header: ${weatherData.header}`)
 
   for (let section in inputJSON) {
     switch (section) {

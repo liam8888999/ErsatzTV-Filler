@@ -46,6 +46,7 @@ logger.info(`Selected Path: ${selectedPath}`)
 
   // Generate a random number from 0 to length-1
   const randomIndex = randomNumber(fileList.length);
+  logger.debug(`Random Index: ${randomIndex}`)
 
   const chosenFile = fileList[randomIndex];
 

@@ -133,6 +133,7 @@ const WEATHER = async () => {
 
     let TEMPWITHUNIT;
     let temperatureUnit = config_current.temperatureunits?.toLowerCase();
+      logger.debug(`temperatureUnit: ${temperatureUnit}`)
 
     if (temperatureUnit) {
       const kelvintemp = parseFloat(currentTempC) + 273.15
@@ -149,7 +150,7 @@ const WEATHER = async () => {
     } else {
       TEMPWITHUNIT = `${currentTempC}°C or ${currentTempF}°F`;
     }
-    console.log(TEMPWITHUNIT)
+    logger.debug(`TEMPWITHUNIT: ${TEMPWITHUNIT}`)
     const contrasttextcolor = contrastColor({
       bgColor: `${weatherbackgroundcolour}`,
       threshold: 140

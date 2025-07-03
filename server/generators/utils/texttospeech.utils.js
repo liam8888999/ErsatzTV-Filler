@@ -5,9 +5,11 @@ const mp3Duration = require("mp3-duration");
 const createAudio = (newsFeedread, audiolanguage, filePath) => {
     return new Promise((resolve) => {
         audiolanguage = audiolanguage || 'en';
+        logger.debug(`Audio Language: ${audiolanguage}`)
         googleTTS.getAllAudioBase64(newsFeedread, {lang: `${audiolanguage}`}).then((results) => {
             const buffers = results.map(results => Buffer.from(results.base64, 'base64'));
             const finalBuffer = Buffer.concat(buffers);
+            logger.debug(`Final Buffer: ${finalBuffer}`)
             fs.writeFileSync(filePath, finalBuffer);
             logger.success(`Audio file ${filePath} created successfully`);
         })
