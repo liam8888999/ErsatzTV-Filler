@@ -42,11 +42,11 @@ function weatherTemplateData(inputJSON, config_current) {
     units: {}
   };
   let values;
-  let speed = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Miles' : 'Kmph';
+  let speed = config_current.temperatureunits.toLowerCase().startsWith('f') ? 'Miles' : 'Kmph';
     logger.debug(`Speed: ${speed}`)
-  let degree = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'F' : 'C';
+  let degree = config_current.temperatureunits.toLowerCase().startsWith('f') ? 'F' : 'C';
     logger.debug(`Degree: ${degree}`)
-  let depth = config_current.temperatureunits.toLowerCase() === 'fahrenheit' ? 'Inches' : 'mm';
+  let depth = config_current.temperatureunits.toLowerCase().startsWith('f') ? 'Inches' : 'mm';
     logger.debug(`Depth: ${depth}`)
 
   //output some units if people want to use them
