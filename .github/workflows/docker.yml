@@ -42,7 +42,7 @@ jobs:
         run: npm ci --legacy-peer-deps # Replace with your package manager (e.g., yarn)
 
       - name: Install pkg
-        run: npm install -g pkg
+        run: npm install -g @yao-pkg/pkg
 
       - name: Build Package with pkg
         run: pkg package.json # Modify this command as needed
