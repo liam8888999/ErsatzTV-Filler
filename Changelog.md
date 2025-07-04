@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.17.9](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.8...V1.17.9) (2025-07-04)
+
+### Fixed
+
+* make temperatureunits setting more forgiving ([b191991](https://github.com/liam8888999/ErsatzTV-Filler/commit/b1919918d60a3813e7ffdbd4827b2d3f936b5118))
+
 ## [1.17.8](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.7...V1.17.8) (2025-07-04)
 
 ### Added
