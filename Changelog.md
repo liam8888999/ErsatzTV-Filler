@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.17.8](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.7...V1.17.8) (2025-07-04)
+
+### Added
+
+* begin adding enhanced debug logging ([cfb1464](https://github.com/liam8888999/ErsatzTV-Filler/commit/cfb1464a0c00899649d5b8b6716a2f914f268c3d))
+
+### Fixed
+
+* fix build process (i hope) ([9393c2c](https://github.com/liam8888999/ErsatzTV-Filler/commit/9393c2cb090064b34cac823818c1f7564c1feb29))
+* remove unworking log variable ([0386d6e](https://github.com/liam8888999/ErsatzTV-Filler/commit/0386d6ec47ed05dfdf92d2974cbb6faccc4c3482))
+
 ## [1.17.7](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.6...V1.17.7) (2025-07-02)
 
 ### Fixed
