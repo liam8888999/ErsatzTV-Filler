@@ -48,7 +48,7 @@ jobs:
           fi
 
       - name: Install pkg
-        run: npm install -g pkg
+        run: npm install -g @yao-pkg/pkg
 
       - name: Run npm run build
         run: npm run build --if-present

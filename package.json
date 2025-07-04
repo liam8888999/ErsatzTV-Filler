@@ -1,6 +1,6 @@
 {
   "name": "ersatztv-filler",
-  "version": "1.17.7",
+  "version": "1.17.8",
   "description": "Currently this script  generates weather forecast, news and channel currently offline filler for ErsatzTV or similar programs.",
   "main": "server/app.js",
   "bin": {
@@ -77,9 +77,9 @@
       "./node_modules/axios/dist/node/axios.cjs"
     ],
     "targets": [
-      "node18-linux-x64",
-      "node18-win-x64",
-      "node18-macos-x64"
+      "node20-linux-x64",
+      "node20-win-x64",
+      "node20-macos-x64"
     ]
   },
   "release-it": {

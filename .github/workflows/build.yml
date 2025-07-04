@@ -39,7 +39,7 @@ jobs:
         run: npm ci --legacy-peer-deps # Replace with your package manager (e.g., yarn)
 
       - name: Install pkg
-        run: npm install -g pkg
+        run: npm install -g @yao-pkg/pkg
 
       - name: create working dir
         run: mkdir builds # Modify this command as needed
