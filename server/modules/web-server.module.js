@@ -12,6 +12,7 @@ const { authentificationPageRoutes } = require("../routes/authentification.route
 const { loadApiConfigRoutes } = require("../routes/config.api");
 const { loadApiThemeRoutes } = require("../routes/themes.api")
 const { loadApirunRoutes } = require("../routes/run.api");
+const { loadApistreamRoutes } = require("../routes/stream.api");
 const { loadApihealthRoutes } = require("../routes/health.api");
 const { loadApimediaRoutes } = require("../routes/media.api");
 const { loadApilogsRoutes } = require("../routes/logs.api");
@@ -36,6 +37,7 @@ const createWebServer = () => {
     loadApimediaRoutes(app);
     loadApilogsRoutes(app);
     loadApixmltvmergeRoutes(app);
+    loadApistreamRoutes(app);
     createDirectoryIfNotExists(WORKDIR);
 
     // Log system information

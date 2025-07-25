@@ -143,15 +143,20 @@ const RESOURCESPATH = path.join(startUpPath, 'resources');
 const FFMPEGPATH = path.join(RESOURCESPATH, 'ffmpeg');
 const FFMPEGPATHINTERNAL = path.join(serverLocation, 'ffmpeg');
 let FFMPEGCOMMAND;
+let FFMPEGSTREAMCOMMAND;
 
 if (os.platform() === 'win32') {
-  FFMPEGCOMMAND = `"${path.join(FFMPEGPATH, 'ffmpeg-windows.exe')}" -y`;
+  FFMPEGSTREAMCOMMAND = `${path.join(FFMPEGPATH, 'ffmpeg-windows.exe')}`;
+  FFMPEGCOMMAND = `"${FFMPEGSTREAMCOMMAND}" -y`;
 } else if (os.platform() === 'linux') {
-  FFMPEGCOMMAND = `"${path.join(FFMPEGPATH, 'ffmpeg-linux')}" -y`; // Specify the Linux command
+  FFMPEGSTREAMCOMMAND = `${path.join(FFMPEGPATH, 'ffmpeg-linux')}`;
+  FFMPEGCOMMAND = `"${FFMPEGSTREAMCOMMAND}" -y`; // Specify the Linux command
 } else if (os.platform() === 'darwin') {
-  FFMPEGCOMMAND = `"${path.join(FFMPEGPATH, 'ffmpeg-darwin')}" -y`; // Specify the macOS/Darwin command
+  FFMPEGSTREAMCOMMAND = `${path.join(FFMPEGPATH, 'ffmpeg-darwin')}`;
+  FFMPEGCOMMAND = `"${FFMPEGSTREAMCOMMAND}" -y`; // Specify the macOS/Darwin command
 } else {
   // Handle other platforms or provide a default value
+  FFMPEGSTREAMCOMMAND = `ffmpeg`;
   FFMPEGCOMMAND = "ffmpeg -y"
     logger.warn("OS unsupported trying safe fallback of ffmpeg -y")
 }
@@ -217,6 +222,7 @@ module.exports = {
     WEATHERDIR,
     NEWSDIR,
     CHANNEL_OFFLINEDIR,
+    FFMPEGSTREAMCOMMAND,
     FFMPEGCOMMAND,
     XMLTVMERGEDIR,
     README,
