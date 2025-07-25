@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.18.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.9...V1.18.0) (2025-07-25)
+
+### Added
+
+* very very very basic support for live stream of news ([e944c9b](https://github.com/liam8888999/ErsatzTV-Filler/commit/e944c9b80223a83b980e67d0a9148cb73dade21e))
+
 ## [1.17.9](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.8...V1.17.9) (2025-07-04)
 
 ### Fixed
