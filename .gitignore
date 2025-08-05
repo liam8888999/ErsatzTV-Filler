@@ -18,3 +18,4 @@ test/*
 config/password.json
 /resources
 themes/*
+*.mp4
