@@ -35,8 +35,9 @@ const loadApistreamRoutes = (app) => {
   });
 
 // stream
-app.get('/live/news/1', async (req, res) => {
+app.get('/live/news/:filenum', async (req, res) => {
   const config_current = await retrieveCurrentConfiguration();
+  const { filenum } = req.params;
 logger.info("live streaming news")
 
   console.log('Client connected, starting FFmpeg stream');
@@ -54,7 +55,7 @@ logger.info("live streaming news")
 
  const ffmpeg = spawn(ffmpegBinary, [
    '-stream_loop', '-1',
-   '-i', path.join(output_location, 'news-1.mp4'),
+   '-i', path.join(output_location, `news-${filenum}.mp4`),
    '-c', 'copy', // no re-encoding
    '-f', 'mp4',
    '-movflags', 'frag_keyframe+empty_moov+default_base_moof',
