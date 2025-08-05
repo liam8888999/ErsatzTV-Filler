@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.19.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.18.0...V1.19.0) (2025-08-05)
+
+### Added
+
+* channeloffline streaming endpoint at /live/channeloffline/channelid ([403e891](https://github.com/liam8888999/ErsatzTV-Filler/commit/403e891b987044d13d413dafe87a93ad0c4bbad1))
+* streaming endpoint for channel logos at /live/channellogo/channelid ([7668eb9](https://github.com/liam8888999/ErsatzTV-Filler/commit/7668eb991fada077a1c5576dc1e42f0197bcc312))
+* support for streaming weather at the /live/weather endpoint ([ba9c7ca](https://github.com/liam8888999/ErsatzTV-Filler/commit/ba9c7ca581a18d6af8278a0b3d99eeaeb7cf2c81))
+* vanity card live stream endpoint /live/vanitycard/video number ([4c28f41](https://github.com/liam8888999/ErsatzTV-Filler/commit/4c28f41052789d9d6b69c1d128e8b100dd9b6f02))
+
+### Fixed
+
+* give videos proper title metadata ([01c75d0](https://github.com/liam8888999/ErsatzTV-Filler/commit/01c75d0c72ba8ea63bae1514b2c2427af5845d39))
+
+### Changed
+
+* add support for multiple versions of the news filler via the new streaming api ([9718981](https://github.com/liam8888999/ErsatzTV-Filler/commit/9718981bfd3cbe0d4f72ecd5d988a03cc71d071b))
+
 ## [1.18.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.17.9...V1.18.0) (2025-07-25)
 
 ### Added
