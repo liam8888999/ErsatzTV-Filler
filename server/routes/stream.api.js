@@ -77,7 +77,47 @@ logger.info("live streaming news")
   });
 });
 
+app.get('/live/weather/:filenum', async (req, res) => {
+  const config_current = await retrieveCurrentConfiguration();
+  const { filenum } = req.params;
+logger.info("live streaming news")
 
+  console.log('Client connected, starting FFmpeg stream');
+
+  res.setHeader('Content-Type', 'video/mp4');
+
+  let output_location;
+ if (config_current.fillersubdirs) {
+   output_location = `${path.join(config_current.output, `Weather`)}`
+ } else {
+   output_location = config_current.output
+ }
+
+ const ffmpegBinary = config_current.customffmpeg || FFMPEGSTREAMCOMMAND;
+
+ const ffmpeg = spawn(ffmpegBinary, [
+   '-stream_loop', '-1',
+   '-i', path.join(output_location, `weather-v${filenum}.mp4`),
+   '-c', 'copy', // no re-encoding
+   '-f', 'mp4',
+   '-movflags', 'frag_keyframe+empty_moov+default_base_moof',
+   'pipe:1'
+ ]);
+
+  // Pipe FFmpeg output to HTTP response
+  ffmpeg.stdout.pipe(res);
+
+  // Handle FFmpeg errors
+  ffmpeg.stderr.on('data', (data) => {
+    console.error(`FFmpeg stderr: ${data}`);
+  });
+
+  // Clean up when client disconnects
+  req.on('close', () => {
+    console.log('Client disconnected, killing FFmpeg');
+    ffmpeg.kill('SIGINT');
+  });
+});
 
 
 }
