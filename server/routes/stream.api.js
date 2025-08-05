@@ -56,6 +56,7 @@ logger.info("live streaming news")
  const ffmpeg = spawn(ffmpegBinary, [
    '-stream_loop', '-1',
    '-i', path.join(output_location, `news-${filenum}.mp4`),
+   '-metadata', `title=news-${filenum}`,
    '-c', 'copy', // no re-encoding
    '-f', 'mp4',
    '-movflags', 'frag_keyframe+empty_moov+default_base_moof',
@@ -98,6 +99,7 @@ logger.info("live streaming news")
  const ffmpeg = spawn(ffmpegBinary, [
    '-stream_loop', '-1',
    '-i', path.join(output_location, `weather-v${filenum}.mp4`),
+   '-metadata', `title=weather-v${filenum}`,
    '-c', 'copy', // no re-encoding
    '-f', 'mp4',
    '-movflags', 'frag_keyframe+empty_moov+default_base_moof',
