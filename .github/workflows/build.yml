@@ -15,17 +15,20 @@ jobs:
             target: node22-linux-x64
             outfile: ersatztv-filler-linux
             ffmpegurl: "https://github.com/liam8888999/FFMPEGreleases/releases/download/FFMPEG/ffmpeg-linux"
+            ffmpegfile: ffmpeg-linux
             ext: ""
           - os: macos-latest
             target: node22-macos-x64
             outfile: ersatztv-filler-macos
             ext: ""
             ffmpegurl: "https://github.com/liam8888999/FFMPEGreleases/releases/download/FFMPEG/ffmpeg-darwin"
+            ffmpegfile: ffmpeg-darwin
           - os: windows-latest
             target: node22-win-x64
             outfile: ersatztv-filler-win
             ext: ".exe"
             ffmpegurl: "https://github.com/liam8888999/FFMPEGreleases/releases/download/FFMPEG/ffmpeg-windows.exe"
+            ffmpegfile: ffmpeg-windown.exe
 
     steps:
       - name: Checkout code (fetch tags)
@@ -63,7 +66,7 @@ jobs:
         if: runner.os != 'Windows'
         shell: bash
         run: |
-          chmod +x "ffmpeg/*" || true
+          chmod +x "ffmpeg/${{ matrix.ffmpegfile }}" || true
 
       - name: Show version
         run: echo "Version is ${{ env.VERSION }}"
