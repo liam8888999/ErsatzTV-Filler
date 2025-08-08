@@ -91,7 +91,14 @@ jobs:
           Compress-Archive -Path "${{ matrix.outfile }}${{ matrix.ext }}","README.md","Changelog.md" -DestinationPath "builds\\${{ matrix.outfile }}-${{ env.VERSION }}.zip" -Force
 
       - name: List build outputs
-        run: ls -la builds || true
+        if: runner.os != 'Windows'
+        run: ls -la builds
+
+      - name: List build outputs (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: Get-ChildItem -Force builds
+
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
