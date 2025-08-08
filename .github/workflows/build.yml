@@ -12,18 +12,23 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            target: linux
+            target: node22-linux-x64
+            outfile: ersatztv-filler-linux
             ext: ""
           - os: macos-latest
-            target: macos
+            target: node22-macos-x64
+            outfile: ersatztv-filler-macos
             ext: ""
           - os: windows-latest
-            target: win
+            target: node22-win-x64
+            outfile: ersatztv-filler-win
             ext: ".exe"
 
     steps:
-      - name: Checkout code
+      - name: Checkout code (fetch tags)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Get latest Git tag
         id: get_tag
@@ -31,7 +36,7 @@ jobs:
         run: |
           tag=$(git describe --tags --abbrev=0 --always)
           echo "TAG=${tag}" >> $GITHUB_ENV
-          echo ${tag}
+          echo "${tag}"
 
       - name: Set VERSION variable
         shell: bash
@@ -40,6 +45,7 @@ jobs:
           if [[ "$tag" == "none" ]]; then
             tag="${{ github.sha }}"
           fi
+          # strip leading V if present
           echo "VERSION=${tag#V}" >> $GITHUB_ENV
 
       - name: Show version
@@ -57,16 +63,38 @@ jobs:
         run: npm install -g @yao-pkg/pkg
 
       - name: Build binary with pkg
-        run: pkg package.json --targets node22-${{ matrix.target }} --output ersatztv-filler-${{ matrix.target }}${{ matrix.ext }}
+        run: |
+          echo "Building target: ${{ matrix.target }}"
+          pkg package.json --targets ${{ matrix.target }} --output "${{ matrix.outfile }}${{ matrix.ext }}"
 
-      - name: Create zip
+      - name: Make binary executable (linux / mac)
+        if: runner.os != 'Windows'
         shell: bash
         run: |
-          mkdir builds
-          7z e builds/ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip ersatztv-filler-${{ matrix.target }}${{ matrix.ext }} README.md Changelog.md -r
+          chmod +x "${{ matrix.outfile }}${{ matrix.ext }}" || true
+
+      - name: Create builds directory (all OSes)
+        run: |
+          mkdir -p builds
+
+      - name: Create ZIP (linux / mac)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          zip -j "builds/${{ matrix.outfile }}-${{ env.VERSION }}.zip" "${{ matrix.outfile }}${{ matrix.ext }}" README.md Changelog.md
+
+      - name: Create ZIP (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path builds | Out-Null
+          Compress-Archive -Path "${{ matrix.outfile }}${{ matrix.ext }}","README.md","Changelog.md" -DestinationPath "builds\\${{ matrix.outfile }}-${{ env.VERSION }}.zip" -Force
+
+      - name: List build outputs
+        run: ls -la builds || true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip
-          path: builds/ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip
+          name: ersatztv-filler-${{ matrix.outfile }}-${{ env.VERSION }}.zip
+          path: builds/${{ matrix.outfile }}-${{ env.VERSION }}.zip
