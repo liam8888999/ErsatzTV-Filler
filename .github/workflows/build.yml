@@ -52,6 +52,13 @@ jobs:
           # strip leading V if present
           echo "VERSION=${tag#V}" >> $GITHUB_ENV
 
+      - name: Download ffmpeg
+        uses: suisei-cn/actions-download-file@v1.3.0
+        id: downloadffmpeg
+        with:
+          url: "${{ matrix.ffmpegurl }}"
+          target: ffmpeg/
+
       - name: Show version
         run: echo "Version is ${{ env.VERSION }}"
 
