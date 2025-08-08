@@ -2,11 +2,24 @@ name: Build Packages on Push
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: linux
+            ext: ""
+          - os: macos-latest
+            target: macos
+            ext: ""
+          - os: windows-latest
+            target: win
+            ext: ".exe"
 
     steps:
       - name: Checkout code
@@ -14,12 +27,14 @@ jobs:
 
       - name: Get latest Git tag
         id: get_tag
+        shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0 --always)
           echo "TAG=${tag}" >> $GITHUB_ENV
           echo ${tag}
 
       - name: Set VERSION variable
+        shell: bash
         run: |
           tag="${TAG:-none}"
           if [[ "$tag" == "none" ]]; then
@@ -33,42 +48,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 22.16.0 # Choose the Node.js version you want to use
+          node-version: 22.16.0
 
       - name: Install Dependencies
-        run: npm ci --legacy-peer-deps # Replace with your package manager (e.g., yarn)
+        run: npm ci --legacy-peer-deps
 
       - name: Install pkg
         run: npm install -g @yao-pkg/pkg
 
-      - name: create working dir
-        run: mkdir builds # Modify this command as needed
+      - name: Build binary with pkg
+        run: pkg package.json --targets node22-${{ matrix.target }} --output ersatztv-filler-${{ matrix.target }}${{ matrix.ext }}
 
-      - name: Build Package with pkg
-        run: pkg package.json # Modify this command as needed
-        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
-
-      - name: create zip
+      - name: Create zip
         run: |
-          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-win.exe /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
-          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-macos /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
-          zip -j /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-${{ env.VERSION }}.zip /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/ersatztv-filler-linux /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/README.md /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/Changelog.md
-        working-directory: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler
+          mkdir builds
+          zip -j builds/ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip ersatztv-filler-${{ matrix.target }}${{ matrix.ext }} README.md Changelog.md
 
-      - name: Upload Package 1
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ersatztv-filler-windows-${{ env.VERSION }}.zip
-          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-windows-${{ env.VERSION }}.zip
-
-      - name: Upload Package 2
-        uses: actions/upload-artifact@v4
-        with:
-          name: ersatztv-filler-linux-${{ env.VERSION }}.zip
-          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-linux-${{ env.VERSION }}.zip
-
-      - name: Upload Package 3
-        uses: actions/upload-artifact@v4
-        with:
-          name: ersatztv-filler-macos-${{ env.VERSION }}.zip
-          path: /home/runner/work/ErsatzTV-Filler/ErsatzTV-Filler/builds/ersatztv-filler-macos-${{ env.VERSION }}.zip
+          name: ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip
+          path: builds/ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip
