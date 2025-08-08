@@ -106,7 +106,7 @@ jobs:
           name: ersatztv-filler-${{ matrix.outfile }}-${{ env.VERSION }}.zip
           path: builds/${{ matrix.outfile }}-${{ env.VERSION }}.zip
 
-       - name: Upload Artifacts to Release
+      - name: Upload Artifacts to Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
