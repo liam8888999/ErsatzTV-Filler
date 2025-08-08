@@ -7,6 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: node22-linux-x64
+            outfile: ersatztv-filler-linux
+            ffmpegurl: "https://github.com/liam8888999/FFMPEGreleases/releases/download/FFMPEG/ffmpeg-linux"
+            ffmpegfile: ffmpeg-linux
+            ext: ""
 
     steps:
       - name: Checkout code
@@ -28,6 +37,19 @@ jobs:
             tag="${{ github.sha }}"
           fi
           echo "VERSION=${tag#V}" >> $GITHUB_ENV
+
+      - name: Download ffmpeg
+        uses: suisei-cn/actions-download-file@v1.3.0
+        id: downloadffmpeg
+        with:
+          url: "${{ matrix.ffmpegurl }}"
+          target: ffmpeg/
+
+      - name: Make ffmpeg binary executable (linux / mac)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          chmod +x "ffmpeg/${{ matrix.ffmpegfile }}" || true
 
       - name: Show version
         run: echo "Version is ${{ env.VERSION }}"
