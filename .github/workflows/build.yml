@@ -14,12 +14,15 @@ jobs:
           - os: ubuntu-latest
             target: linux
             ext: ""
+            zipcommand: "zip -j"
           - os: macos-latest
             target: macos
             ext: ""
+            zipcommand: "zip -j"
           - os: windows-latest
             target: win
             ext: ".exe"
+            zipcommand: "7z e"
 
     steps:
       - name: Checkout code
@@ -62,7 +65,7 @@ jobs:
       - name: Create zip
         run: |
           mkdir builds
-          zip -j builds/ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip ersatztv-filler-${{ matrix.target }}${{ matrix.ext }} README.md Changelog.md
+          ${{ matrix.zipcommand }} builds/ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip ersatztv-filler-${{ matrix.target }}${{ matrix.ext }} README.md Changelog.md
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
