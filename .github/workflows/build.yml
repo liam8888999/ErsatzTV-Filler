@@ -59,6 +59,12 @@ jobs:
           url: "${{ matrix.ffmpegurl }}"
           target: ffmpeg/
 
+      - name: Make ffmpeg binary executable (linux / mac)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          chmod +x "ffmpeg/*" || true
+
       - name: Show version
         run: echo "Version is ${{ env.VERSION }}"
 
