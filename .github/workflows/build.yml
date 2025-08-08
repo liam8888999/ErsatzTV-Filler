@@ -63,6 +63,7 @@ jobs:
         run: pkg package.json --targets node22-${{ matrix.target }} --output ersatztv-filler-${{ matrix.target }}${{ matrix.ext }}
 
       - name: Create zip
+        shell: bash
         run: |
           mkdir builds
           ${{ matrix.zipcommand }} builds/ersatztv-filler-${{ matrix.target }}-${{ env.VERSION }}.zip ersatztv-filler-${{ matrix.target }}${{ matrix.ext }} README.md Changelog.md
