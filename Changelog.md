@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.19.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.0...V1.19.1) (2025-08-08)
+
 ## [1.19.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.18.0...V1.19.0) (2025-08-05)
 
 ### Added
