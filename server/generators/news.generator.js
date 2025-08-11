@@ -98,15 +98,17 @@ const NEWS = async () => {
 
 
 // Step 6: Prepare the news content
-  const prepareNewsContent = async (config_current) => {
-    const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, 'utf8');
-    const news1Content = newstempContent;
-    let newsfeedarticleamount = '';
-    if (config_current.shownewsheader === true) {
-      newsfeedarticleamount = config_current.newsarticles + 1
-    } else {
-      newsfeedarticleamount = config_current.newsarticles;
-    }
+const prepareNewsContent = async (config_current) => {
+  const newstempContent = await fs.readFileSync(`${path.join(NEWSDIR, `newstemp-${NEWSNUM}.txt`)}`, 'utf8');
+  const news1Content = newstempContent;
+
+  // Initialize as number
+  let newsfeedarticleamount = Number(config_current.newsarticles);
+
+  // Add 1 if header should be shown
+  if (config_current.shownewsheader === true) {
+    newsfeedarticleamount = newsfeedarticleamount + 1;
+  }
     const news2Content = news1Content.split('\n\n').slice(0, newsfeedarticleamount).join('\n\n');
     const newsContent = news2Content.replace(/%/g, '\\%').replace(/&lt;p&gt;/g, '').replace(/&lt;\/p&gt;/g, '').replace(/&lt;br&gt;/g, '').replace(/<p>/g, '').replace(/<\/p>/g, '').replace(/<\/br>/g, '').replace(/<br>/g, '').replace(/<a\b[^>]*>.*?<\/a>/gi, '').replace(/&#160;/g, ' ').replace(/&#8217;/g, '\'');;
     const titlecolor = themecolourdecoder(current_theme.News.newstitlecolour);
