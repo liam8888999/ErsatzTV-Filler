@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.19.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.1...V1.19.2) (2025-08-11)
+
+### Added
+
+* create filler via stream api if it doesnt exist ([cb56a05](https://github.com/liam8888999/ErsatzTV-Filler/commit/cb56a051dbbf80ec1664030c7d0bd964a3ca3acf))
+
+### Fixed
+
+* use correct number of articles in news feed ([8a0fa72](https://github.com/liam8888999/ErsatzTV-Filler/commit/8a0fa72843383fea96a69e8bf3ab84b027783475))
+
+### Changed
+
+* adjust console log level ([89a260e](https://github.com/liam8888999/ErsatzTV-Filler/commit/89a260ecd23706e5dff8def5122314a460c5f3dc))
+
 ## [1.19.1](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.0...V1.19.1) (2025-08-08)
 
 ## [1.19.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.18.0...V1.19.0) (2025-08-05)
