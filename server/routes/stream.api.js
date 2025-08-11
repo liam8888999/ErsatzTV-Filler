@@ -12,6 +12,7 @@ const { retrieveCurrentConfiguration } = require("../modules/config-loader.modul
 const { spawn } = require('child_process');
 const {NEWSDIR, FFMPEGSTREAMCOMMAND} = require("../constants/path.constants");
 const path = require('path');
+const {doesFileExist} = require("../utils/file.utils");
 
 const loadApistreamRoutes = (app) => {
 
@@ -49,6 +50,13 @@ logger.info("live streaming news")
    output_location = `${path.join(config_current.output, `NEWS`)}`
  } else {
    output_location = config_current.output
+ }
+
+ const HAVE_FILE = await doesFileExist(path.join(output_location, `news-${filenum}.mp4`));
+ if (!HAVE_FILE) {
+   logger.warn("NEWS FILE DOES NOT EXIST. CREATING NOW");
+   const port = await config_current.webport;
+   await downloadImage(`http://127.0.0.1:${port}/api/run/news`)
  }
 
  const ffmpegBinary = config_current.customffmpeg || FFMPEGSTREAMCOMMAND;
@@ -94,6 +102,13 @@ logger.info("live streaming weather")
    output_location = config_current.output
  }
 
+ const HAVE_FILE = await doesFileExist(path.join(output_location, `weather-v${filenum}.mp4`));
+ if (!HAVE_FILE) {
+   logger.warn("WEATHER FILE DOES NOT EXIST. CREATING NOW");
+   const port = await config_current.webport;
+   await downloadImage(`http://127.0.0.1:${port}/api/run/weather`)
+ }
+
  const ffmpegBinary = config_current.customffmpeg || FFMPEGSTREAMCOMMAND;
 
  const ffmpeg = spawn(ffmpegBinary, [
@@ -135,6 +150,13 @@ logger.info("live streaming Vanity Card")
    output_location = `${path.join(config_current.output, `VANITYCARDS`)}`
  } else {
    output_location = config_current.output
+ }
+
+ const HAVE_FILE = await doesFileExist(path.join(output_location, `vanitycard-${filenum}.mp4`));
+ if (!HAVE_FILE) {
+   logger.warn("VANITY CARD FILE DOES NOT EXIST. CREATING NOW");
+   const port = await config_current.webport;
+   await downloadImage(`http://127.0.0.1:${port}/api/run/vanitycard`)
  }
 
  const ffmpegBinary = config_current.customffmpeg || FFMPEGSTREAMCOMMAND;
@@ -180,6 +202,13 @@ logger.info("live streaming Channel Offline")
    output_location = config_current.output
  }
 
+ const HAVE_FILE = await doesFileExist(path.join(output_location, `${chanid}.mp4`));
+ if (!HAVE_FILE) {
+   logger.warn("CHANNEL OFFLINE FILE DOES NOT EXIST. CREATING NOW");
+   const port = await config_current.webport;
+   await downloadImage(`http://127.0.0.1:${port}/api/run/channel-offline`)
+ }
+
  const ffmpegBinary = config_current.customffmpeg || FFMPEGSTREAMCOMMAND;
 
  const ffmpeg = spawn(ffmpegBinary, [
@@ -221,6 +250,13 @@ logger.info("live streaming Channel Logo")
    output_location = `${path.join(config_current.output, `CHANNELLOGO`)}`
  } else {
    output_location = config_current.output
+ }
+
+ const HAVE_FILE = await doesFileExist(path.join(output_location, `${chanid}-logo.mp4`));
+ if (!HAVE_FILE) {
+   logger.warn("CHANNEL LOGO FILE DOES NOT EXIST. CREATING NOW");
+   const port = await config_current.webport;
+   await downloadImage(`http://127.0.0.1:${port}/api/run/channellogo`)
  }
 
  const ffmpegBinary = config_current.customffmpeg || FFMPEGSTREAMCOMMAND;
