@@ -19,3 +19,4 @@ config/password.json
 /resources
 themes/*
 *.mp4
+/ffmpeg
