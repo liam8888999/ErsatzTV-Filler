@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.19.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.2...V1.19.3) (2025-08-21)
+
+### Changed
+
+* fix ffmpeg and add theme contributors ([5b8447e](https://github.com/liam8888999/ErsatzTV-Filler/commit/5b8447e9a03dfe887d6a841f828c28d18fd075bf))
+
 ## [1.19.2](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.1...V1.19.2) (2025-08-11)
 
 ### Added
