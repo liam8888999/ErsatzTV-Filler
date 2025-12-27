@@ -135,7 +135,7 @@
     }
   },
   "devDependencies": {
-    "@release-it/conventional-changelog": "^10.0.1",
+    "@release-it/conventional-changelog": "^10.0.4",
     "archiver": "^7.0.1",
     "bcryptjs": "^3.0.2",
     "body-parser": "^2.2.0",
