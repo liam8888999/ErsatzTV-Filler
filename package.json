@@ -32,7 +32,7 @@
     "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",
     "body-parser": "^2.2.0",
-    "cheerio": "^1.1.2",
+    "cheerio": "^1.2.0",
     "contrast-color": "^1.0.1",
     "cookie-parser": "^1.4.7",
     "cron-job-manager": "^2.3.1",
