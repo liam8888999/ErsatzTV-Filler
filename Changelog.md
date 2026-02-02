@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.19.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.3...V1.19.4) (2026-02-02)
+
+### Changed
+
+* update etv logo in nav bar ([79dfc7f](https://github.com/liam8888999/ErsatzTV-Filler/commit/79dfc7f2256df68a5e29963c13a4b3238c9a8b91))
+
 ## [1.19.3](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.2...V1.19.3) (2025-08-21)
 
 ### Changed
