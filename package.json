@@ -160,5 +160,8 @@
     "xml2js": "^0.6.2",
     "xmlbuilder": "^15.1.1",
     "xmlbuilder2": "^4.0.3"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true
   }
 }
