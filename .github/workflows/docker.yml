@@ -11,7 +11,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            target: node22-linux-x64
+            target: node24-linux-x64
             outfile: ersatztv-filler-linux
             ffmpegurl: "https://github.com/liam8888999/FFMPEGreleases/releases/download/FFMPEG/ffmpeg-linux"
             ffmpegfile: ffmpeg-linux
@@ -58,7 +58,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 22.16.0 # Choose the Node.js version you want to use
+          node-version: 24.21.0 # Choose the Node.js version you want to use
 
       - name: Install Dependencies
         run: npm ci --legacy-peer-deps # Replace with your package manager (e.g., yarn)

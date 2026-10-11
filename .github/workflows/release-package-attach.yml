@@ -12,19 +12,19 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            target: node22-linux-x64
+            target: node24-linux-x64
             outfile: ersatztv-filler-linux
             ffmpegurl: "https://github.com/liam8888999/FFMPEGreleases/releases/download/FFMPEG/ffmpeg-linux"
             ffmpegfile: ffmpeg-linux
             ext: ""
           - os: macos-latest
-            target: node22-macos-x64
+            target: node24-macos-x64
             outfile: ersatztv-filler-macos
             ext: ""
             ffmpegurl: "https://github.com/liam8888999/FFMPEGreleases/releases/download/FFMPEG/ffmpeg-darwin"
             ffmpegfile: ffmpeg-darwin
           - os: windows-latest
-            target: node22-win-x64
+            target: node24-win-x64
             outfile: ersatztv-filler-win
             ext: ".exe"
             ffmpegurl: "https://github.com/liam8888999/FFMPEGreleases/releases/download/FFMPEG/ffmpeg-windows.exe"
@@ -74,7 +74,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 22.16.0
+          node-version: 24.21.0
 
       - name: Install Dependencies
         run: npm ci --legacy-peer-deps
