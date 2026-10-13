@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.20.0](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.4...V1.20.0) (2026-10-13)
+
+* bump node version for pkg ([cb4d835](https://github.com/liam8888999/ErsatzTV-Filler/commit/cb4d83568f97783a3fa0a417b8587c0fc618a734))
+* **deps-dev:** bump engine.io from 6.6.2 to 6.6.11 ([9b29278](https://github.com/liam8888999/ErsatzTV-Filler/commit/9b292787edc996c65e5b0f009039c81907646ab5))
+* **deps-dev:** bump express-session from 1.18.2 to 1.19.0 ([2b9f93b](https://github.com/liam8888999/ErsatzTV-Filler/commit/2b9f93be1bcb5a7d1fb4234c89841c59184e3af2))
+* **deps-dev:** bump handlebars from 4.7.8 to 4.7.10 ([449b4f6](https://github.com/liam8888999/ErsatzTV-Filler/commit/449b4f6e395ee54be0dd0305728852098a9dd6b4))
+* **deps-dev:** bump lodash from 4.17.23 to 4.18.1 ([9eb4ba5](https://github.com/liam8888999/ErsatzTV-Filler/commit/9eb4ba5265f9c6dea6bdc942962fb13c9bfc09b2))
+* **deps-dev:** bump proxy-addr from 2.0.7 to 2.0.8 ([86bcfa2](https://github.com/liam8888999/ErsatzTV-Filler/commit/86bcfa26b371516721d4965b4376aa8c3e91df0f))
+* **deps-dev:** bump socket.io-parser from 4.2.4 to 4.2.7 ([bfe587b](https://github.com/liam8888999/ErsatzTV-Filler/commit/bfe587b8c7a8fcff3ae28017b461e11728fc797d))
+* **deps:** bump @commitlint/cli from 19.8.1 to 21.2.3 ([64dcf4c](https://github.com/liam8888999/ErsatzTV-Filler/commit/64dcf4c8bd4fba59de5f0546a20306d37a3ae1dd))
+* **deps:** bump @commitlint/config-conventional from 20.2.0 to 20.3.1 ([4d27571](https://github.com/liam8888999/ErsatzTV-Filler/commit/4d2757145caf0d4ca1f0441a0867e9763a21fec6))
+* **deps:** bump ajv from 8.17.1 to 8.20.0 ([a3de0a5](https://github.com/liam8888999/ErsatzTV-Filler/commit/a3de0a5238d228882e9e9a76ae284541907c40ae))
+* **deps:** bump archiver from 7.0.1 to 8.0.0 ([e82ddaa](https://github.com/liam8888999/ErsatzTV-Filler/commit/e82ddaa24a415898a8117923b707dd0cf63b7c41))
+* **deps:** bump axios from 1.13.2 to 1.20.0 ([5d04f74](https://github.com/liam8888999/ErsatzTV-Filler/commit/5d04f746fede96c86c89a7508fde18c8e8e5d734))
+* **deps:** bump basic-ftp from 5.0.5 to 5.3.0 ([f364cdd](https://github.com/liam8888999/ErsatzTV-Filler/commit/f364cddc6003efe4f673a9cb41b45a8e79d1df9d))
+* **deps:** bump brace-expansion ([71eb0a1](https://github.com/liam8888999/ErsatzTV-Filler/commit/71eb0a179205ed303d42101233cc4418d4233f6e))
+* **deps:** bump cheerio from 1.1.2 to 1.2.0 ([7c6f0ff](https://github.com/liam8888999/ErsatzTV-Filler/commit/7c6f0ff45f66a9f60455d795cfc1288821bc9ad5))
+* **deps:** bump ejs from 3.1.10 to 7.0.1 ([6fcf7fa](https://github.com/liam8888999/ErsatzTV-Filler/commit/6fcf7fada8bc1dee96fe634f94b1164dd538ce09))
+* **deps:** bump fast-uri from 3.0.6 to 3.1.8 ([91103bb](https://github.com/liam8888999/ErsatzTV-Filler/commit/91103bb8b37dd814a3d0726f2569875669d5adde))
+* **deps:** bump image-size from 2.0.2 to 2.0.3 ([a1c85f7](https://github.com/liam8888999/ErsatzTV-Filler/commit/a1c85f7089c3e28579dfaff10caa4342ecc58808))
+* **deps:** bump ip-address and socks ([ccf67be](https://github.com/liam8888999/ErsatzTV-Filler/commit/ccf67bed5da12495e480945fecc28a2884ac3fe6))
+* **deps:** bump js-yaml from 4.1.1 to 4.3.2 ([f90b1fd](https://github.com/liam8888999/ErsatzTV-Filler/commit/f90b1fdb8764891007986bb480e6da89d055a6cd))
+* **deps:** bump minimatch ([468b41a](https://github.com/liam8888999/ErsatzTV-Filler/commit/468b41a021865cb64598cba5b9144e76dd3113ce))
+* **deps:** bump moment from 2.29.4 to 2.31.0 ([e3a530b](https://github.com/liam8888999/ErsatzTV-Filler/commit/e3a530b06e11fb078d07dada218f42970cc34eb8))
+* **deps:** bump moment-timezone from 0.6.0 to 0.6.5 ([c00eeec](https://github.com/liam8888999/ErsatzTV-Filler/commit/c00eeec29d084453551d8d789cc1373870a00464))
+* **deps:** bump multer from 2.0.2 to 2.4.0 ([e2755e2](https://github.com/liam8888999/ErsatzTV-Filler/commit/e2755e24b6377bc0233b41a56cbc23e6ca772586))
+* **deps:** bump picomatch from 2.3.1 to 2.3.2 ([cd0514c](https://github.com/liam8888999/ErsatzTV-Filler/commit/cd0514cc6605d12752fbc339391f4ea2a1906150))
+* **deps:** bump qs from 6.14.1 to 6.16.0 ([c2c18b4](https://github.com/liam8888999/ErsatzTV-Filler/commit/c2c18b46e24fd8756ad25497045cfdd9a1eed501))
+* **deps:** bump undici, release-it and @release-it/conventional-changelog ([511bab7](https://github.com/liam8888999/ErsatzTV-Filler/commit/511bab7dda314fd412014049de20291d43520ff1))
+* **deps:** bump ws and socket.io-adapter ([0a472c6](https://github.com/liam8888999/ErsatzTV-Filler/commit/0a472c6959e84c614c2204a8145a063e2c6efa5d))
+* fix dependencies ([95d1e24](https://github.com/liam8888999/ErsatzTV-Filler/commit/95d1e24f6453b32306d3d64daab93fce663f0e04))
+* update dependency ([c3cfbf6](https://github.com/liam8888999/ErsatzTV-Filler/commit/c3cfbf645cb24618c6f7d4c2b814f72a0772f34b))
+* update package-lock ([14cc053](https://github.com/liam8888999/ErsatzTV-Filler/commit/14cc0533004e3c1756a5450cab19925b86d697c1))
+* update package.json ([9d4b6a4](https://github.com/liam8888999/ErsatzTV-Filler/commit/9d4b6a4641fccf3e12145531153df5d92c6266fb))
+
+### Changed
+
+* update to node 24 ([36fe8f0](https://github.com/liam8888999/ErsatzTV-Filler/commit/36fe8f04d9bf19dc7a6f3e14f45b107ee042eb3d))
+
 ## [1.19.4](https://github.com/liam8888999/ErsatzTV-Filler/compare/V1.19.3...V1.19.4) (2026-02-02)
 
 ### Changed
